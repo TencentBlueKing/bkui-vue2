@@ -1,0 +1,76 @@
+@import "./transition.css";
+
+.bk-alert {
+  position: relative;
+  font-size: 12px;
+  color: #63656e;
+  border: 1px solid;
+  border-radius: 2px;
+  word-wrap: break-word;
+  .icon-info {
+    margin-right: 8px;
+    font-size: 16px;
+  }
+  .icon-close {
+    font-size: 17px;
+  }
+}
+.bk-alert-wraper{
+  display: flex;
+  padding: 8px 10px;
+}
+.bk-alert-success {
+  border-color: #94f5a4;
+  background-color: #f2fff4;
+  .icon-info {
+    color: #2dcb56;
+  }
+}
+.bk-alert-info {
+  border-color: #c5daff;
+  background-color: #f0f8ff;
+  .icon-info {
+    color: #3a84ff;
+  }
+}
+.bk-alert-warning {
+  border-color: #ffdfac;
+  background-color: #fff4e2;
+  .icon-info {
+    color: #ff9c01;
+  }
+}
+.bk-alert-error {
+  border-color: #ffd2d2;
+  background-color: #ffeded;
+  .icon-info {
+    color: #ea3636;
+  }
+}
+.bk-alert-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+.bk-alert-title {
+  line-height: 16px;
+}
+.bk-alert-close {
+  padding: 8px 12px 0 6px;
+  margin-top: -8px;
+  margin-right: -10px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.bk-alert-leave-leave{
+  opacity: 1;
+}
+.bk-alert-leave-leave-active {
+  overflow: hidden;
+  transition: opacity .15s, height .2s;
+}
+.bk-alert-leave-leave-to{
+  opacity: 0;
+}

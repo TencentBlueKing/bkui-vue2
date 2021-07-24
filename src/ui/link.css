@@ -1,0 +1,93 @@
+$defaultColor: #63656e;
+$defaultHoverColor: #979ba5;
+$defaultDisabledColor: #dcdee5;
+
+$primaryColor: #3a84ff;
+$primaryHoverColor: #699df4;
+$primaryDisabledColor: #a3c5fd;
+
+$successColor: #2dcb56;
+$successHoverColor: #45e35f;
+$successDisabledColor: #94f5a4;
+
+$warningColor: #ff9c01;
+$warningHoverColor: #ffb848;
+$warningDisabledColor: #ffd695;
+
+$dangerColor: #ea3636;
+$dangerHoverColor: #ff5656;
+$dangerDisabledColor: #fd9c9c;
+
+.bk-link {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 20px;
+    .bk-link-icon {
+        font-size: 14px;
+        &.is-left {
+            margin-right: 4px;
+        }
+        &.is-right {
+            margin-left: 4px;
+        }
+    }
+    .bk-link-text {
+        font-size: 14px;
+    }
+    &.is-default {
+        color: $defaultColor;
+        &:hover {
+            color: $defaultHoverColor;
+        }
+        &.is-disabled {
+            color: $defaultDisabledColor;
+        }
+    }
+    &.is-primary {
+        color: $primaryColor;
+        &:hover {
+            color: $primaryHoverColor;
+        }
+        &.is-disabled {
+            color: $primaryDisabledColor;
+        }
+    }
+    &.is-success {
+        color: $successColor;
+        &:hover {
+            color: $successHoverColor;
+        }
+        &.is-disabled {
+            color: $successDisabledColor;
+        }
+    }
+    &.is-warning {
+        color: $warningColor;
+        &:hover {
+            color: $warningHoverColor;
+        }
+        &.is-disabled {
+            color: $warningDisabledColor;
+        }
+    }
+    &.is-danger {
+        color: $dangerColor;
+        &:hover {
+            color: $dangerHoverColor;
+        }
+        &.is-disabled {
+            color: $dangerDisabledColor;
+        }
+    }
+    &.is-disabled {
+        cursor: not-allowed;
+    }
+    &.has-underline {
+        text-decoration: underline;
+    }
+}
