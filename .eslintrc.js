@@ -28,7 +28,7 @@ module.exports = {
     root: true,
     parserOptions: {
         parser: 'babel-eslint',
-        sourceType: 'module',
+        sourceType: 'module'
     },
     env: {
         browser: true
