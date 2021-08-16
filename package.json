@@ -189,5 +189,9 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "vetur": {
+    "tags": "./bkui-vue2-helper/tags.json",
+    "attributes": "./bkui-vue2-helper/attributes.json"
   }
 }
