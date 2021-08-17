@@ -5,7 +5,8 @@
   "main": "dist/bk-magic-vue.min.js",
   "files": [
     "lib",
-    "dist"
+    "dist",
+    "bkui-vue2-helper"
   ],
   "scripts": {
     "dll": "node build/build-dll.js",
