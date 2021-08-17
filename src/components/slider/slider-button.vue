@@ -195,10 +195,10 @@
                             this.$parent.emitChange()
                         }
                     }, 0)
-                    this.$parent.on(window, 'mousemove', this.onDragging)
-                    this.$parent.on(window, 'touchmove', this.onDragging)
-                    this.$parent.on(window, 'mouseup', this.onDragEnd)
-                    this.$parent.on(window, 'touchend', this.onDragEnd)
+                    this.$parent.off(window, 'mousemove', this.onDragging)
+                    this.$parent.off(window, 'touchmove', this.onDragging)
+                    this.$parent.off(window, 'mouseup', this.onDragEnd)
+                    this.$parent.off(window, 'touchend', this.onDragEnd)
                 }
             }
         }
