@@ -75,23 +75,24 @@ npm run build
 ```
 
 ## BlueKing Community
-- [BK-CMDB](https://github.com/Tencent/bk-cmdb)：蓝鲸配置平台（蓝鲸CMDB）是一个面向资产及应用的企业级配置管理平台。
-- [BK-CI](https://github.com/Tencent/bk-ci)：蓝鲸持续集成平台是一个开源的持续集成和持续交付系统，可以轻松将你的研发流程呈现到你面前。
-- [BK-BCS](https://github.com/Tencent/bk-bcs)：蓝鲸容器管理平台是以容器技术为基础，为微服务业务提供编排管理的基础服务平台。
-- [BK-PaaS](https://github.com/Tencent/bk-PaaS)：蓝鲸PaaS平台是一个开放式的开发平台，让开发者可以方便快捷地创建、开发、部署和管理SaaS应用。
-- [BK-SOPS](https://github.com/Tencent/bk-sops)：标准运维（SOPS）是通过可视化的图形界面进行任务流程编排和执行的系统，是蓝鲸体系中一款轻量级的调度编排类SaaS产品。
-- [BK-JOB](https://github.com/Tencent/bk-job)：蓝鲸作业平台(Job)是一套运维脚本管理系统，具备海量任务并发处理能力。
-- [BK-BASE](https://github.com/Tencent/bk-base)：蓝鲸基础计算平台(BK-BASE)是一个专注于运维领域的的基础平台，打造一站式、低门槛的基础服务。
+- [BK-CMDB](https://github.com/Tencent/bk-cmdb)：BlueKing CMDB is an enterprise-level management platform designed for assets and applications.
+- [BK-CI](https://github.com/Tencent/bk-ci)：BlueKing Continuous Integration platform is a free, open source CI service, which allows developers to automatically create - test - release workflow, and continuously, efficiently deliver their high-quality products.
+- [BK-BCS](https://github.com/Tencent/bk-bcs)：BlueKing Container Service is a container-based basic service platform that provides management service to microservice businesses.
+- [BK-PaaS](https://github.com/Tencent/bk-PaaS)：BlueKing PaaS is an open development platform that allows developers to efficiently create, develop, set up, and manage SaaS apps.
+- [BK-SOPS](https://github.com/Tencent/bk-sops)：BlueKing SOPS is a system that features workflow arrangement and execution using a graphical interface. It's a lightweight task scheduling and arrangement SaaS product of the Blueking system.
+- [BK-JOB](https://github.com/Tencent/bk-job)：BlueKing JOB is a set of operation and maintenance script management platform with the ability to handle a large number of tasks concurrently.
+- [BK-BASE](https://github.com/Tencent/bk-base)：BlueKing BASE  is a basic computing platform focusing on the field of operation and maintenance, creating a one-stop, low-threshold basic service.
 
 ## Contributing
-对于项目感兴趣，想一起贡献并完善项目请参阅[Contributing Guide](CONTRIBUTING.md)。
 
-[腾讯开源激励计划](https://opensource.tencent.com/contribution) 鼓励开发者的参与和贡献，期待你的加入。
+For bkui-vue2 branch management, issues, and pr specifications, read the [CONTRIBUTING(In Chinese)](CONTRIBUTING.md)
+
+If you are interested in contributing, check out the [CONTRIBUTING.md], also join our [Tencent OpenSource Plan](https://opensource.tencent.com/contribution).
 
 ## FAQ
 
-请查看 [FAQ](docs/faq.md)
+[FAQ](docs/faq.md)
 
 ## License
 
-基于 MIT 协议， 详细请参考[LICENSE](LICENSE.txt)
+bkui-vue2 is based on the MIT protocol. Please refer to [LICENSE](LICENSE.txt).
