@@ -1,12 +1,3 @@
----
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
----
-
 <!--
 感谢提交issue, 在提交前, 请回答下列的问题, 以便更高效地沟通.
 

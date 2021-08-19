@@ -84,7 +84,7 @@ npm run build
 - [BK-BASE](https://github.com/Tencent/bk-base)：蓝鲸基础计算平台(BK-BASE)是一个专注于运维领域的的基础平台，打造一站式、低门槛的基础服务。
 
 ## Contributing
-对于项目感兴趣，想一起贡献并完善项目请参阅[Contributing Guide](CONTRIBUTING.md)。
+对于项目感兴趣，想一起贡献并完善项目请参阅[Contributing Guide](docs/CONTRIBUTING.md)。
 
 [腾讯开源激励计划](https://opensource.tencent.com/contribution) 鼓励开发者的参与和贡献，期待你的加入。
 
