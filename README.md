@@ -88,10 +88,6 @@ npm run build
 
 [腾讯开源激励计划](https://opensource.tencent.com/contribution) 鼓励开发者的参与和贡献，期待你的加入。
 
-## FAQ
-
-请查看 [FAQ](docs/faq.md)
-
 ## License
 
 基于 MIT 协议， 详细请参考[LICENSE](LICENSE.txt)

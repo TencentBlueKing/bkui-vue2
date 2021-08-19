@@ -89,10 +89,6 @@ For bkui-vue2 branch management, issues, and pr specifications, read the [CONTRI
 
 If you are interested in contributing, check out the [CONTRIBUTING.md], also join our [Tencent OpenSource Plan](https://opensource.tencent.com/contribution).
 
-## FAQ
-
-[FAQ](docs/faq.md)
-
 ## License
 
 bkui-vue2 is based on the MIT protocol. Please refer to [LICENSE](LICENSE.txt).
