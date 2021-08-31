@@ -4,6 +4,22 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.5 {page=#/changelog}
+###### 2021.09.02
+
+* **[add]**:
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 下拉框增加 position-fixed 属性支持
+    - support vetur intelil sence
+* **[fix]**:
+    - [Table 表格](#/table) 修复 table 组件调用 clearFilter 方法时会出现栈溢出的问题
+    - [Breadcrumb 面包屑](#/breadcrumb) 修复面包屑组件颜色问题
+    - [Cascade 级联选框](#/cascade) 修复 cascade 级联选框搜索选中第三层目录时，handleChange 里的 selectList 值为空的问题
+* **[update]**:
+    - [Slider 滑动选择器](#/slider) 滑动选择器滑动结束时应该删除绑定的事件
+    - [Tree 树](#/tree) 拖曳时，鼠标样式去掉绿色加号
+
+---
+
 ### 2.3.4 {page=#/changelog}
 ###### 2021.07.21
 
