@@ -4,11 +4,7 @@
     export default {
         components: {
             bkSpin
-        },
-        data () {
-            return {}
-        },
-        methods: {}
+        }
     }
 </script>
 <style lang="postcss">
@@ -42,14 +38,15 @@
 
 ```html
 <template>
-    <bk-spin></bk-spin>
-    <bk-spin theme="warning"></bk-spin>
-    <bk-spin theme="info"></bk-spin>
+    <div>
+        <bk-spin></bk-spin>
+        <bk-spin theme="warning"></bk-spin>
+        <bk-spin theme="info"></bk-spin>
+    </div>
 </template>
 <script>
     import { bkSpin } from '{{BASE_LIB_NAME}}'
     export default {
-        data () { },
         components: {
             bkSpin
         }
@@ -64,15 +61,16 @@
 
 ```html
 <template>
-    <bk-spin size="mini"></bk-spin>
-    <bk-spin size="small"></bk-spin>
-    <bk-spin size="normal"></bk-spin>
-    <bk-spin size="large"></bk-spin>
+    <div>
+        <bk-spin size="mini"></bk-spin>
+        <bk-spin size="small"></bk-spin>
+        <bk-spin size="normal"></bk-spin>
+        <bk-spin size="large"></bk-spin>
+    </div>
 </template>
 <script>
     import { bkSpin } from '{{BASE_LIB_NAME}}'
     export default {
-        data () { },
         components: {
             bkSpin
         }
@@ -127,17 +125,18 @@
 
 ```html
 <template>
-    <div class="test-slot-bottom">
-        <bk-spin>spin默认下边插槽内容</bk-spin>
-    </div>
-    <div class="test-slot-right">
-        <bk-spin placement="right">spin右边插槽内容</bk-spin>
+    <div>
+        <div class="test-slot-bottom">
+            <bk-spin>spin默认下边插槽内容</bk-spin>
+        </div>
+        <div class="test-slot-right">
+            <bk-spin placement="right">spin右边插槽内容</bk-spin>
+        </div>
     </div>
 </template>
 <script>
     import { bkSpin } from '{{BASE_LIB_NAME}}'
     export default {
-        data () { },
         components: {
             bkSpin
         }
