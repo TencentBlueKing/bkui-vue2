@@ -90,7 +90,6 @@
 <script>
     import { bkSpin } from '{{BASE_LIB_NAME}}'
     export default {
-        data () { },
         components: {
             bkSpin
         }
@@ -110,7 +109,6 @@
 <script>
     import { bkSpin } from '{{BASE_LIB_NAME}}'
     export default {
-        data () { },
         components: {
             bkSpin
         }
