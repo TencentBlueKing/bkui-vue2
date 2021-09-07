@@ -1,11 +1,12 @@
 {
   "name": "bk-magic-vue",
-  "version": "2.3.4",
+  "version": "2.3.6-beta.1",
   "description": "基于蓝鲸 Magicbox 和 Vue 的前端组件库",
   "main": "dist/bk-magic-vue.min.js",
   "files": [
     "lib",
-    "dist"
+    "dist",
+    "bkui-vue2-helper"
   ],
   "scripts": {
     "dll": "node build/build-dll.js",
@@ -189,5 +190,9 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "vetur": {
+    "tags": "./bkui-vue2-helper/tags.json",
+    "attributes": "./bkui-vue2-helper/attributes.json"
   }
 }
