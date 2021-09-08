@@ -608,6 +608,9 @@
                                 delete item.id
                                 delete item.name
                             } else {
+                                if (!item.id.split) {
+                                    return false
+                                }
                                 selections.push({
                                     id: item.id.split(this.separator),
                                     name: item.name,

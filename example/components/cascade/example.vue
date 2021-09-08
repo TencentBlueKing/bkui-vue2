@@ -33,6 +33,8 @@
             <bk-cascade
                 v-model="value3"
                 :check-any-level="true"
+                :filterable="true"
+                trigger="hover"
                 :list="list2"
                 class="mb40 mt5"
                 clearable
@@ -46,9 +48,11 @@
                 v-model="value2"
                 multiple
                 :check-any-level="true"
+                :filterable="true"
+                trigger="hover"
                 :list="list2"
                 class="mb40 mt5"
-                trigger="hover"
+
                 clearable
                 style="width: 250px;"
                 @change="handleChange">
@@ -62,8 +66,21 @@
                 :check-any-level="true"
                 :list="list2"
                 class="mb40 mt5"
-                :filterable="true"
                 clearable
+                style="width: 250px;"
+                @change="handleChange">
+            </bk-cascade>
+        </div>
+        <div>
+            多选
+            <bk-cascade
+                v-model="value"
+                multiple
+                :check-any-level="true"
+                :list="list2"
+                class="mb40 mt5"
+                clearable
+                :filterable="true"
                 style="width: 250px;"
                 @change="handleChange">
             </bk-cascade>
