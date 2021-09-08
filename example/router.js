@@ -602,7 +602,7 @@ const router = new VueRouter({
             component: Cascade
         }, {
             name: 'cascadeExample',
-            path: '/cascade-example',
+            path: '/cascade/example',
             component: CascadeExample
         },
         {
