@@ -10,6 +10,7 @@
 * **[add]**:
     - [Spin 加载中](#/spin) 新增 Spin 组件
     - [v-bk-copy 复制指令](#/directives?anchor=v-bk-copy) 新增复制指令
+    - [Table 表格](#/table?anchor=xu-ni-gun-dong-xuan-ran-pei-zhi) 支持虚拟滚动渲染配置
 * **[fix]**:
     - [Upload 文件上传](#/upload) 修复 upload 组件图片回填没有动态监听的问题
     - [Tab 选项卡](#/tab) 修复 `type` 配置为 `unborder-card` 时，标识选中的边框样式位置不正确的问题；修复组件 tab 一开始下划线没有，点击后才出现的问题
