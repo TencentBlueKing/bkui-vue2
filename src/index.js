@@ -126,7 +126,7 @@ import bkDivider from './components/divider'
 import bkTag from './components/tag'
 import bkResizeLayout from './components/resize-layout'
 import bkSpin from './components/spin'
-
+import bkVirtualRender from './components/virtual-render'
 const components = {
     bkFixedNavbar,
     bkTransition,
@@ -201,7 +201,8 @@ const components = {
     bkDivider,
     bkTag,
     bkResizeLayout,
-    bkSpin
+    bkSpin,
+    bkVirtualRender
 }
 
 const directives = {
@@ -334,5 +335,6 @@ export {
     bkDivider,
     bkTag,
     bkResizeLayout,
-    bkSpin
+    bkSpin,
+    bkVirtualRender
 }
