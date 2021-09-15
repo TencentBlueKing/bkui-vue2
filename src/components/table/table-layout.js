@@ -163,15 +163,14 @@ class TableLayout {
 
         const flattenColumns = this.getFlattenColumns()
         const flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number')
-
-        // 用户拖动列导致的宽度变化，不重新计算 flex 列的宽度
-        if (!this.store.isDraging) {
-            flattenColumns.forEach((column) => {
-                // Clean those columns whose width changed from flex to unflex
-                if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
-            })
-        }
-
+        
+        // todo 初始化的时候有设置 realWidth 的默认值，这个地方又重置掉逻辑（暂时没理解先注释掉）
+        //     flattenColumns.forEach((column) => {
+        //         // Clean those columns whose width changed from flex to unflex
+        //         if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
+        //     })
+        
+        // 用户拖动列导致的宽度变化，只重新计算操作列的宽度
         if (!this.store.isDraging && flexColumns.length > 0 && fit) {
             flattenColumns.forEach((column) => {
                 bodyMinWidth += column.width || column.minWidth
@@ -222,6 +221,7 @@ class TableLayout {
             flattenColumns.forEach((column) => {
                 bodyMinWidth += column.realWidth
             })
+            
             this.scrollX = bodyMinWidth > bodyWidth
 
             // 找到最后非 setting 类型的 column
