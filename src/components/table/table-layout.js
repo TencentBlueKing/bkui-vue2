@@ -164,41 +164,51 @@ class TableLayout {
         const flattenColumns = this.getFlattenColumns()
         const flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number')
 
-        flattenColumns.forEach((column) => {
-            // Clean those columns whose width changed from flex to unflex
-            if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
-        })
-
-        if (flexColumns.length > 0 && fit) {
+        // 用户拖动列导致的宽度变化，不重新计算 flex 列的宽度
+        if (!this.store.isDraging) {
             flattenColumns.forEach((column) => {
-                bodyMinWidth += column.width || column.minWidth || 80
+                // Clean those columns whose width changed from flex to unflex
+                if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
+            })
+        }
+
+        if (!this.store.isDraging && flexColumns.length > 0 && fit) {
+            flattenColumns.forEach((column) => {
+                bodyMinWidth += column.width || column.minWidth
             })
 
             const scrollYWidth = this.scrollY ? this.gutterWidth : 0
 
             if (bodyMinWidth <= bodyWidth - scrollYWidth) {
+                // 所有 column 的宽度和小于 table 的宽度
                 // DON'T HAVE SCROLL BAR
                 this.scrollX = false
 
                 const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth
 
                 if (flexColumns.length === 1) {
-                    flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth
+                    flexColumns[0].realWidth = flexColumns[0].minWidth + totalFlexWidth
                 } else {
-                    const allColumnsWidth = flexColumns.reduce((prev, column) => prev + (column.minWidth || 80), 0)
-                    const flexWidthPerPixel = totalFlexWidth / allColumnsWidth
-                    let noneFirstWidth = 0
+                    const flexWidthPerPixel = totalFlexWidth / flexColumns.length
+                    let firstWidth = flexWidthPerPixel
 
                     flexColumns.forEach((column, index) => {
                         if (index === 0) return
-                        const flexWidth = Math.floor((column.minWidth || 80) * flexWidthPerPixel)
-                        noneFirstWidth += flexWidth
-                        column.realWidth = (column.minWidth || 80) + flexWidth
+                        
+                        let flexWidth = Math.floor(column.minWidth + flexWidthPerPixel)
+                        // flex 宽度平分后超过 maxWidth
+                        if (column.maxWidth && column.maxWidth < flexWidth) {
+                            firstWidth += flexWidth - column.maxWidth
+                            flexWidth = column.maxWidth
+                        }
+                        column.realWidth = flexWidth
                     })
 
-                    flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth
+                    flexColumns[0].realWidth = flexColumns[0].minWidth + firstWidth
                 }
             } else {
+                // 所有 column 的宽度和大于 table 的宽度
+                // 所有 flex column 的宽度取最小值
                 // HAVE HORIZONTAL SCROLL BAR
                 this.scrollX = true
                 flexColumns.forEach(function (column) {
@@ -210,24 +220,44 @@ class TableLayout {
             this.table.resizeState.width = this.bodyWidth
         } else {
             flattenColumns.forEach((column) => {
-                if (!column.width && !column.minWidth) {
-                    column.realWidth = 80
-                } else {
-                    column.realWidth = column.width || column.minWidth
-                }
-
                 bodyMinWidth += column.realWidth
             })
             this.scrollX = bodyMinWidth > bodyWidth
-            /**
-             * 当所有列均被指定了宽度后，如果列宽总和小于表格宽度，则将宽度差值分配给最右一列
-             */
+
+            // 找到最后非 setting 类型的 column
+            const findLastColumnWithNotSetting = columnList => {
+                let i = columnList.length
+                while (--i) {
+                    if (columnList[i].type !== 'setting') {
+                        return columnList[i]
+                    }
+                }
+                return null
+            }
+            
             if (!this.scrollX && flattenColumns.length) {
+                // 当所有列均被指定了宽度后，如果列宽总和小于表格宽度，则将宽度差值分配给最右一列
                 const deltaWidth = bodyWidth - bodyMinWidth
-                const lastColumn = flattenColumns[flattenColumns.length - 1]
+                const lastColumn = findLastColumnWithNotSetting(flattenColumns)
                 lastColumn.realWidth = lastColumn.realWidth + deltaWidth
                 this.bodyWidth = bodyWidth
             } else {
+                // 当所有列均被指定了宽度后，如果列宽总和大于表格宽度修正最后一列的宽度
+                const lastColumn = findLastColumnWithNotSetting(flattenColumns)
+                // 最后一列的实际宽度
+                const lastRealWidth = typeof lastColumn.width !== 'number' ? lastColumn.minWidth : lastColumn.width
+
+                const preLastColumnBodyMinWidth = bodyMinWidth - lastColumn.realWidth
+
+                if (preLastColumnBodyMinWidth + lastRealWidth > bodyWidth) {
+                    lastColumn.realWidth = lastRealWidth
+                    bodyMinWidth = preLastColumnBodyMinWidth + lastRealWidth
+                } else {
+                    lastColumn.realWidth = bodyWidth - preLastColumnBodyMinWidth
+                    bodyMinWidth = preLastColumnBodyMinWidth + lastColumn.realWidth
+                }
+                
+                this.scrollX = bodyMinWidth > bodyWidth
                 this.bodyWidth = bodyMinWidth
             }
         }
@@ -252,6 +282,8 @@ class TableLayout {
 
             this.rightFixedWidth = rightFixedWidth
         }
+        // 计算完成，取消拖动状态
+        this.store.isDraging = false
 
         this.notifyObservers('columns')
     }
