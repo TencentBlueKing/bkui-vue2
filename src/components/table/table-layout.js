@@ -81,8 +81,13 @@ class TableLayout {
         if (typeof height !== 'string' && typeof height !== 'number') return
         const bodyWrapper = this.table.bodyWrapper
         if (this.table.$el && bodyWrapper) {
-            const body = bodyWrapper.querySelector('.bk-table-body')
-            this.scrollY = body.offsetHeight > this.bodyHeight
+            if (this.table.isVirtualRender) {
+                const body = bodyWrapper.querySelector('.bk-virtual-render')
+                this.scrollY = body.offsetHeight > this.bodyHeight
+            } else {
+                const body = bodyWrapper.querySelector('.bk-table-body')
+                this.scrollY = body.offsetHeight > this.bodyHeight
+            }
         }
     }
 
@@ -175,12 +180,11 @@ class TableLayout {
             })
 
             const scrollYWidth = this.scrollY ? this.gutterWidth : 0
-
             if (bodyMinWidth <= bodyWidth - scrollYWidth) {
                 // DON'T HAVE SCROLL BAR
                 this.scrollX = false
 
-                const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth
+                const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth - (this.table.isVirtualRender && this.scrollY ? 10 : 0)
 
                 if (flexColumns.length === 1) {
                     flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth

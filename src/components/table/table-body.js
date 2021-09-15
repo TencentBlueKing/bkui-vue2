@@ -144,7 +144,8 @@ export default {
                 {...{
                     scopedSlots: {
                         default: (slot) => (
-                            <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0">
+                            <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0"
+                                style={{ width: `${this.tableLayout.bodyWidth - (this.tableLayout.scrollY ? 10 : 0)}px` }}>
                                 <colgroup>
                                     {this._l(this.columns, (column) => (
                                         <col name={column.id} />
@@ -243,8 +244,7 @@ export default {
         },
 
         virtualRender () {
-            const prop = this.table.virtualRender
-            return typeof prop === 'boolean' ? prop : typeof prop === 'object' ? !prop.disabled : false
+            return this.table.isVirtualRender
         },
 
         virtualRenderOpt () {
