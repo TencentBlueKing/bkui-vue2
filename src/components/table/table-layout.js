@@ -81,8 +81,13 @@ class TableLayout {
         if (typeof height !== 'string' && typeof height !== 'number') return
         const bodyWrapper = this.table.bodyWrapper
         if (this.table.$el && bodyWrapper) {
-            const body = bodyWrapper.querySelector('.bk-table-body')
-            this.scrollY = body.offsetHeight > this.bodyHeight
+            if (this.table.isVirtualRender) {
+                const body = bodyWrapper.querySelector('.bk-virtual-render')
+                this.scrollY = body.offsetHeight > this.bodyHeight
+            } else {
+                const body = bodyWrapper.querySelector('.bk-table-body')
+                this.scrollY = body.offsetHeight > this.bodyHeight
+            }
         }
     }
 
@@ -163,28 +168,26 @@ class TableLayout {
 
         const flattenColumns = this.getFlattenColumns()
         const flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number')
-
-        // 用户拖动列导致的宽度变化，不重新计算 flex 列的宽度
-        if (!this.store.isDraging) {
-            flattenColumns.forEach((column) => {
-                // Clean those columns whose width changed from flex to unflex
-                if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
-            })
-        }
-
+        
+        // todo 初始化的时候有设置 realWidth 的默认值，这个地方又重置掉逻辑（暂时没理解先注释掉）
+        //     flattenColumns.forEach((column) => {
+        //         // Clean those columns whose width changed from flex to unflex
+        //         if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
+        //     })
+        
+        // 用户拖动列导致的宽度变化，只重新计算操作列的宽度
         if (!this.store.isDraging && flexColumns.length > 0 && fit) {
             flattenColumns.forEach((column) => {
                 bodyMinWidth += column.width || column.minWidth
             })
 
             const scrollYWidth = this.scrollY ? this.gutterWidth : 0
-
             if (bodyMinWidth <= bodyWidth - scrollYWidth) {
                 // 所有 column 的宽度和小于 table 的宽度
                 // DON'T HAVE SCROLL BAR
                 this.scrollX = false
-
-                const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth
+                const virtualScrollWidth = this.table.isVirtualRender && this.scrollY ? 10 : 0
+                const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth - virtualScrollWidth
 
                 if (flexColumns.length === 1) {
                     flexColumns[0].realWidth = flexColumns[0].minWidth + totalFlexWidth
@@ -222,6 +225,7 @@ class TableLayout {
             flattenColumns.forEach((column) => {
                 bodyMinWidth += column.realWidth
             })
+            
             this.scrollX = bodyMinWidth > bodyWidth
 
             // 找到最后非 setting 类型的 column
