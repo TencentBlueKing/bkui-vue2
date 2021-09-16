@@ -135,6 +135,7 @@ export default {
                 )
             ]
         }
+        const tableStyle = { width: `${this.tableLayout.bodyWidth - (this.tableLayout.scrollY ? 10 : 0)}px` }
         return this.virtualRender ? (
             <bk-virtual-render
                 list={this.data}
@@ -144,8 +145,7 @@ export default {
                 {...{
                     scopedSlots: {
                         default: (slot) => (
-                            <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0"
-                                style={{ width: `${this.tableLayout.bodyWidth - (this.tableLayout.scrollY ? 10 : 0)}px` }}>
+                            <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0" style={tableStyle}>
                                 <colgroup>
                                     {this._l(this.columns, (column) => (
                                         <col name={column.id} />

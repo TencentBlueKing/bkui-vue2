@@ -183,8 +183,8 @@ class TableLayout {
             if (bodyMinWidth <= bodyWidth - scrollYWidth) {
                 // DON'T HAVE SCROLL BAR
                 this.scrollX = false
-
-                const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth - (this.table.isVirtualRender && this.scrollY ? 10 : 0)
+                const virtualScrollWidth = this.table.isVirtualRender && this.scrollY ? 10 : 0
+                const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth - virtualScrollWidth
 
                 if (flexColumns.length === 1) {
                     flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth
