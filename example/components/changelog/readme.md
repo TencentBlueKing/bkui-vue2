@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.7-beta.6 {page=#/changelog}
+
+* **[fix]**:
+    - [Table 表格](#/table) 修复 table column 为空时报错
+
+---
+
 ### 2.3.7-beta.4 {page=#/changelog}
 
 * **[fix]**:
