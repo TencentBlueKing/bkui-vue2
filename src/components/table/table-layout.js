@@ -171,7 +171,7 @@ class TableLayout {
             return
         }
         const flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number')
-        
+
         // columns 从 flex 变成 unflex
         // 新增 column
         if (!this.store.isDraging) {
@@ -181,7 +181,7 @@ class TableLayout {
                 }
             })
         }
-        
+
         // 用户拖动列导致的宽度变化，只重新计算操作列的宽度
         if (!this.store.isDraging && flexColumns.length > 0 && fit) {
             flattenColumns.forEach((column) => {
@@ -204,7 +204,7 @@ class TableLayout {
 
                     flexColumns.forEach((column, index) => {
                         if (index === 0) return
-                        
+
                         let flexWidth = column.minWidth + flexWidthPerPixel
                         // flex 宽度平分后超过 maxWidth
                         if (column.maxWidth && column.maxWidth < flexWidth) {
@@ -235,7 +235,7 @@ class TableLayout {
             flattenColumns.forEach((column) => {
                 bodyMinWidth += column.realWidth
             })
-            
+
             this.scrollX = bodyMinWidth > bodyWidth
 
             // 找到最后非 setting 类型的 column
@@ -248,7 +248,7 @@ class TableLayout {
                 }
                 return null
             }
-            
+
             if (!this.scrollX && flattenColumns.length) {
                 // 当所有列均被指定了宽度后，如果列宽总和小于表格宽度，则将宽度差值分配给最右一列
                 const deltaWidth = bodyWidth - bodyMinWidth
@@ -261,9 +261,9 @@ class TableLayout {
                 const lastColumn = findLastColumnWithNotSetting(flattenColumns)
                 if (lastColumn) {
                     const lastRealWidth = typeof lastColumn.width !== 'number' ? lastColumn.minWidth : lastColumn.width
-    
+
                     const preLastColumnBodyMinWidth = bodyMinWidth - lastColumn.realWidth
-    
+
                     if (preLastColumnBodyMinWidth + lastRealWidth > bodyWidth) {
                         lastColumn.realWidth = lastRealWidth
                         bodyMinWidth = preLastColumnBodyMinWidth + lastRealWidth
@@ -272,7 +272,7 @@ class TableLayout {
                         bodyMinWidth = preLastColumnBodyMinWidth + lastColumn.realWidth
                     }
                 }
-                    
+
                 this.scrollX = bodyMinWidth > bodyWidth
                 this.bodyWidth = bodyMinWidth
             }
