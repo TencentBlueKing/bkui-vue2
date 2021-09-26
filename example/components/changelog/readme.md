@@ -4,34 +4,17 @@
 
 <div class="changelog-wrapper">
 
-### 2.3.7-beta.4 {page=#/changelog}
-
-* **[fix]**:
-    - [Swiper 轮播图](#/swiper) 修复动态设置 list/pics 属性时没有更新尺寸的问题
-
----
-
-### 2.3.7-beta.3 {page=#/changelog}
-
-* **[fix]**:
-    - [Table 表格](#/table) 修复 table-column 宽度计算的问题；修复 Table 虚拟滚动自适应宽度样式问题
-
----
-
-### 2.3.7-beta.2 {page=#/changelog}
+### 2.3.7 {page=#/changelog}
+###### 2021.09.23
 
 * **[add]**:
+    - [TagInput 标签输入框](#/tag) 增加 clear 按钮在 hover 才显示的交互
     - [Dialog 对话框](#/dialog) 增加 dialog 关闭时逻辑 beforeClose
 * **[fix]**:
-    - [Table 表格](#/table) 修复 table-column 宽度计算的问题
+    - [Table 表格](#/table) 修复 table-column 宽度计算的问题；修复 Table 虚拟滚动自适应宽度样式问题
+    - [Swiper 轮播图](#/swiper) 修复动态设置 list/pics 属性时没有更新尺寸的问题
     - [Form 表单](#/form) 表单验证问题修复
     - [TimePicker 时间选择器](#/time-picker) 修复禁止选择的时间，滚动可以选择的问题
-
----
-
-### 2.3.7-beta.1 {page=#/changelog}
-
-* **[fix]**:
     - 导出 bkVirtualRender 组件以及 css
 
 ---

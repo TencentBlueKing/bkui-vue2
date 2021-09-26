@@ -171,13 +171,17 @@ class TableLayout {
             return
         }
         const flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number')
-        
-        // todo 初始化的时候有设置 realWidth 的默认值，这个地方又重置掉逻辑（暂时没理解先注释掉）
-        //     flattenColumns.forEach((column) => {
-        //         // Clean those columns whose width changed from flex to unflex
-        //         if (typeof column.width === 'number' && column.realWidth) column.realWidth = null
-        //     })
-        
+
+        // columns 从 flex 变成 unflex
+        // 新增 column
+        if (!this.store.isDraging) {
+            flattenColumns.forEach((column) => {
+                if (typeof column.width === 'number') {
+                    column.realWidth = column.width
+                }
+            })
+        }
+
         // 用户拖动列导致的宽度变化，只重新计算操作列的宽度
         if (!this.store.isDraging && flexColumns.length > 0 && fit) {
             flattenColumns.forEach((column) => {
@@ -195,18 +199,21 @@ class TableLayout {
                 if (flexColumns.length === 1) {
                     flexColumns[0].realWidth = flexColumns[0].minWidth + totalFlexWidth
                 } else {
-                    const flexWidthPerPixel = totalFlexWidth / flexColumns.length
-                    let firstWidth = flexWidthPerPixel
+                    const flexWidthPerPixel = Math.floor(totalFlexWidth / flexColumns.length)
+                    let firstWidth = totalFlexWidth
 
                     flexColumns.forEach((column, index) => {
                         if (index === 0) return
-                        
-                        let flexWidth = Math.floor(column.minWidth + flexWidthPerPixel)
+
+                        let flexWidth = column.minWidth + flexWidthPerPixel
                         // flex 宽度平分后超过 maxWidth
                         if (column.maxWidth && column.maxWidth < flexWidth) {
-                            firstWidth += flexWidth - column.maxWidth
                             flexWidth = column.maxWidth
+                            firstWidth -= column.maxWidth - column.minWidth
+                        } else {
+                            firstWidth -= flexWidthPerPixel
                         }
+
                         column.realWidth = flexWidth
                     })
 
@@ -228,7 +235,7 @@ class TableLayout {
             flattenColumns.forEach((column) => {
                 bodyMinWidth += column.realWidth
             })
-            
+
             this.scrollX = bodyMinWidth > bodyWidth
 
             // 找到最后非 setting 类型的 column
@@ -241,7 +248,7 @@ class TableLayout {
                 }
                 return null
             }
-            
+
             if (!this.scrollX && flattenColumns.length) {
                 // 当所有列均被指定了宽度后，如果列宽总和小于表格宽度，则将宽度差值分配给最右一列
                 const deltaWidth = bodyWidth - bodyMinWidth
@@ -254,9 +261,9 @@ class TableLayout {
                 const lastColumn = findLastColumnWithNotSetting(flattenColumns)
                 if (lastColumn) {
                     const lastRealWidth = typeof lastColumn.width !== 'number' ? lastColumn.minWidth : lastColumn.width
-    
+
                     const preLastColumnBodyMinWidth = bodyMinWidth - lastColumn.realWidth
-    
+
                     if (preLastColumnBodyMinWidth + lastRealWidth > bodyWidth) {
                         lastColumn.realWidth = lastRealWidth
                         bodyMinWidth = preLastColumnBodyMinWidth + lastRealWidth
@@ -265,7 +272,7 @@ class TableLayout {
                         bodyMinWidth = preLastColumnBodyMinWidth + lastColumn.realWidth
                     }
                 }
-                    
+
                 this.scrollX = bodyMinWidth > bodyWidth
                 this.bodyWidth = bodyMinWidth
             }
@@ -291,6 +298,7 @@ class TableLayout {
 
             this.rightFixedWidth = rightFixedWidth
         }
+
         // 计算完成，取消拖动状态
         this.store.isDraging = false
 
