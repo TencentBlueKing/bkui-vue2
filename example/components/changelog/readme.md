@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.8-beta.1 {page=#/changelog}
+
+* **[add]**:
+    - [Tab 选项卡](#/tab) 新增 [ActiveBar 样式配置](#/tab?anchor=activebar-yang-shi)
+
+---
+
 ### 2.3.7 {page=#/changelog}
 ###### 2021.09.23
 
