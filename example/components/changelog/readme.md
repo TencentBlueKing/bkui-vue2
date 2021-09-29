@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.8-beta.2 {page=#/changelog}
+
+* **[add]**:
+    - [Card 卡片](#/card) card 的 header-slot 支持传入 disableHeaderStyle 禁用行高
+
+---
+
 ### 2.3.8-beta.1 {page=#/changelog}
 
 * **[add]**:
