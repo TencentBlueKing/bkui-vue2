@@ -4,6 +4,14 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.8-beta.3 {page=#/changelog}
+
+* **[fix]**:
+    - [Button 基础按钮](#/button) 修复 button 组件在 text=true 时 theme 失效的问题
+    - 修复表单内 SearchSelect 查询选择器, Select 下拉选框无法正常校验的问题
+
+---
+
 ### 2.3.8-beta.2 {page=#/changelog}
 
 * **[add]**:
