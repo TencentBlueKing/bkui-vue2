@@ -160,7 +160,10 @@
             },
             themeType () {
                 if (this.text) {
-                    return 'primary'
+                    // 兼容之前文字按钮均为 primary 的情况
+                    if (this.theme === 'default') {
+                        return 'primary'
+                    }
                 }
                 return this.theme
             },
