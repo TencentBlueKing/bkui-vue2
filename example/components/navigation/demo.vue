@@ -37,6 +37,8 @@
             :default-open="false"
             :navigation-type="curNav.nav"
             :need-menu="curNav.needMenu"
+            :theme-color="themeColor['item-default-bg-color'] || undefined"
+            class=""
             @toggle="handleToggle">
             <template slot="header">
                 <div class="monitor-navigation-header">
@@ -67,6 +69,18 @@
                             :name="option.name">
                         </bk-option>
                     </bk-select>
+                    <bk-popover theme="light navigation-message" placement="bottom" :arrow="false" offset="0, 5" trigger="mouseenter" :tippy-options="{ 'hideOnClick': false }">
+                        <div class="header-mind" :class="{ 'is-left': curNav.nav === 'left-right' }">
+                            <i class="bk-icon icon-chinese lang-icon" />
+                        </div>
+                        <template slot="content">
+                            <ul class="monitor-navigation-admin">
+                                <li class="nav-item" v-for="langItem in lang.list" :key="langItem.id">
+                                    <i :class="`bk-icon icon-${langItem.id} lang-icon`" />{{langItem.name}}
+                                </li>
+                            </ul>
+                        </template>
+                    </bk-popover>
                     <bk-popover theme="light navigation-message" :arrow="false" offset="-150, 5" trigger="mouseenter" :tippy-options="{ 'hideOnClick': false }">
                         <div class="header-mind" :class="{ 'is-left': curNav.nav === 'left-right' }">
                             <svg style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +128,8 @@
                     @select="handleSelect"
                     :default-active="nav.id"
                     :before-nav-change="beforeNavChange"
-                    :toggle-active="nav.toggle">
+                    :toggle-active="nav.toggle"
+                    v-bind="themeColor">
                     <bk-navigation-menu-group
                         v-for="item in nav.list"
                         :key="item.name"
@@ -384,6 +399,22 @@
                         '退出'
                     ]
                 },
+                lang: {
+                    list: [
+                        {
+                            name: '中文',
+                            id: 'chinese'
+                        },
+                        {
+                            name: 'English',
+                            id: 'english'
+                        },
+                        {
+                            name: '日本語',
+                            id: 'japanese'
+                        }
+                    ]
+                },
                 test: true
             }
         },
@@ -393,6 +424,23 @@
             },
             curHeaderNav () {
                 return this.header.list[this.header.active] || {}
+            },
+            themeColor () {
+                return this.curNav.nav === 'top-bottom' ? {
+                    'item-hover-bg-color': '#3a4561',
+                    'item-hover-color': '#FFFFFF',
+                    'item-active-bg-color': '#0083FF',
+                    'item-active-color': '#FFFFFF',
+                    'item-default-bg-color': '#2C354D',
+                    'item-default-color': '#acb5c6',
+                    'item-default-icon-color': '#acb5c6',
+                    'item-child-icon-default-color': '#acb5c6;',
+                    'item-child-icon-hover-color': '#acb5c6;',
+                    'item-active-icon-color': '#FFFFFF',
+                    'item-hover-icon-color': '#FFFFFF',
+                    'item-child-icon-active-color': '#FFFFFF',
+                    'sub-menu-open-bg-color': '#000000'
+                } : {}
             }
         },
         mounted () {
@@ -498,8 +546,12 @@
             flex: 0 0 32px;
             display: flex;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 16px;
             list-style: none;
+            .lang-icon {
+                font-size: 20px;
+                margin-right: 6px;
+            }
             &:hover {
                 color: $itemHoverColor;
                 cursor: pointer;
@@ -585,6 +637,9 @@
                }
                &:hover {
                    @mixin icon-hover-mixin;
+                }
+                .lang-icon {
+                    font-size: 20px;
                 }
             }
             .header-help {
