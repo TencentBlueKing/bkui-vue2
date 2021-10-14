@@ -45,17 +45,18 @@ const Loading = function (options = {}) {
         }
     }
 
+    options.type = 'fixed'
     options.opacity = options.opacity || 0.9
     options.color = options.color || '#ffffff'
     instance = new LoadingConstructor({
-        data: options
+        propsData: options
     })
 
     if (isVNode(instance.title)) {
-        instance.$slots.default = [instance.title]
+        instance.$slots.title = [instance.title]
         instance.title = null
     } else {
-        delete instance.$slots.default
+        delete instance.$slots.title
     }
 
     instance.viewmodel = instance.$mount()

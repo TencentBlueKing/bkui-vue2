@@ -138,6 +138,10 @@ export default {
                 {
                     id: 'fixedNavbar',
                     name: 'FixedNavbar 悬浮导航'
+                },
+                {
+                    'id': 'affix',
+                    'name': 'Affix 图钉'
                 }
             ]
         },
@@ -337,6 +341,10 @@ export default {
                 {
                     id: 'card',
                     name: 'Card 卡片'
+                },
+                {
+                    id: 'spin',
+                    name: 'Spin 加载中'
                 }
             ]
         },

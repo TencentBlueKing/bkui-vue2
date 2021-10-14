@@ -32,6 +32,7 @@
 
 import './ui/common.css'
 
+import bkAffix from './components/affix'
 import bkFixedNavbar from './components/fixed-navbar'
 import bkTransition from './components/transition'
 import bkAlert from './components/alert'
@@ -107,6 +108,7 @@ import bkNavigationMenuGroup from './components/navigation-menu-group'
 import bkLink from './components/link'
 
 import bkOverflowTips from './directives/overflow-tips'
+import bkCopy from './directives/copy'
 
 import locale from './locale'
 import lang from './locale/lang'
@@ -124,8 +126,10 @@ import bkDivider from './components/divider'
 
 import bkTag from './components/tag'
 import bkResizeLayout from './components/resize-layout'
-
+import bkSpin from './components/spin'
+import bkVirtualRender from './components/virtual-render'
 const components = {
+    bkAffix,
     bkFixedNavbar,
     bkTransition,
     bkAlert,
@@ -198,14 +202,17 @@ const components = {
     bkBreadcrumbItem,
     bkDivider,
     bkTag,
-    bkResizeLayout
+    bkResizeLayout,
+    bkSpin,
+    bkVirtualRender
 }
 
 const directives = {
     bkClickoutside,
     bkTooltips,
     bkLoading,
-    bkOverflowTips
+    bkOverflowTips,
+    bkCopy
 }
 
 export function install (Vue, opts = {}) {
@@ -247,6 +254,7 @@ export default bkMagic
 
 // 组件单独抛出，方便 import { bkBadge } from 'bk-magic-vue' 这样引用
 export {
+    bkAffix,
     bkFixedNavbar,
     bkTransition,
     bkAlert,
@@ -319,6 +327,7 @@ export {
     bkBigTree,
     bkLink,
     bkOverflowTips,
+    bkCopy,
     bkCascade,
     bkVersionDetail,
     bkCard,
@@ -328,5 +337,7 @@ export {
     bkBreadcrumbItem,
     bkDivider,
     bkTag,
-    bkResizeLayout
+    bkResizeLayout,
+    bkSpin,
+    bkVirtualRender
 }

@@ -192,6 +192,13 @@
                     }
                     return true
                 }
+            },
+            activeBar: {
+                type: Object,
+                default: () => ({
+                    position: 'bottom',
+                    height: '2px'
+                })
             }
         },
         data () {
@@ -223,7 +230,9 @@
                     left: 0,
                     width: 0,
                     height: 0,
-                    transform: ''
+                    transform: '',
+                    top: '',
+                    bottom: ''
                 }
             }
         },
@@ -273,6 +282,8 @@
                     return {
                         transform: `translateX(${this.scrollState.offset}px)`,
                         height: `${this.labelHeight}px`,
+                        '--activeBarTop': this.activeBarStyle.top,
+                        '--activeBarBottom': this.activeBarStyle.bottom,
                         '--activeBarLeft': this.activeBarStyle.left,
                         '--activeBarWidth': this.activeBarStyle.width,
                         '--activeBarHeight': this.activeBarStyle.height,
@@ -466,20 +477,41 @@
                     // const index = this.visiblePanels.findIndex(item => item.name === active)
                     const panel = this.$refs.tabLabel.find(item => {
                         if (item && item.$el) {
-                            return item.$el.dataset.name === active
+                            // number类型数据添加到dom会转成字符串
+                            const newActive = Object.prototype.toString.call(active) === '[object Number]' ? active + '' : active
+                            return item.$el.dataset.name === newActive
                         }
                     })
                     if (panel) {
                         const tabLabel = panel.$el
                         const tabLabelRect = tabLabel.getBoundingClientRect()
                         if (!this.isSidePosition) {
+                            // 说明 tab 的父容器是 display none 的，获取不到高宽
+                            if (tabLabelRect.width === 0 && tabLabelRect.height === 0) {
+                                tabLabel.classList.add('simulate-border-bottom')
+                            } else {
+                                tabLabel.classList.remove('simulate-border-bottom')
+                            }
+
                             this.activeBarStyle.width = `${tabLabelRect.width - 24}px`
-                            this.activeBarStyle.height = '2px'
+                            this.activeBarStyle.height = this.activeBar.height
                             this.activeBarStyle.transform = `translateX(${tabLabel.offsetLeft + 12}px)`
                             this.activeBarStyle.left = 0
+                            if (this.activeBar.position === 'top') {
+                                this.activeBarStyle.top = '0px'
+                                this.activeBarStyle.bottom = 'auto'
+                            } else {
+                                this.activeBarStyle.top = 'auto'
+                                this.activeBarStyle.bottom = '0px'
+                            }
                         } else {
-                            this.activeBarStyle.width = '2px'
-                            this.activeBarStyle.height = `${tabLabelRect.height}px`
+                            if (tabLabelRect.width === 0 && tabLabelRect.height === 0) {
+                                tabLabel.classList.add('simulate-border-right')
+                            } else {
+                                tabLabel.classList.remove('simulate-border-right')
+                            }
+                            this.activeBarStyle.width = this.activeBar.height
+                            this.activeBarStyle.height = `${tabLabelRect.height || 50}px`
                             this.activeBarStyle.transform = `translateY(${tabLabel.offsetTop}px)`
                             if (this.tabPosition === 'right') {
                                 this.activeBarStyle.left = 0

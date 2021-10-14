@@ -392,7 +392,11 @@
                 }
             },
             cellAttributes: [Function, Object],
-            headerCellAttributes: [Function, Object]
+            headerCellAttributes: [Function, Object],
+            virtualRender: {
+                type: [Object, Boolean],
+                default: false
+            }
         },
         data () {
             const store = new TableStore(this, {
@@ -542,6 +546,10 @@
             },
             showSelectionCount () {
                 return this.store.states._columns.some(column => column.type === 'selection')
+            },
+            isVirtualRender () {
+                const prop = this.virtualRender
+                return typeof prop === 'boolean' ? prop : typeof prop === 'object' ? !prop.disabled : false
             }
         },
         watch: {
@@ -584,6 +592,7 @@
             this.tableId = 'bk-table-' + tableIdSeed++
             this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
         },
+        
         mounted () {
             this.bindEvents()
             this.store.updateColumns()

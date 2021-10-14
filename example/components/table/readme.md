@@ -27,6 +27,9 @@
             }, {
                 id: 'create_time',
                 label: '创建时间'
+            }, {
+                id: 'desc',
+                label: '描述'
             }]
             return {
                 size: 'small',
@@ -100,6 +103,13 @@
                         ]
                     }
                 ],
+                longData: new Array(100).fill('').map((item, index) => ({
+                    ip: '192.168.0.1',
+                    source: 'QQ' + index,
+                    status: '创建中',
+                    create_time: '2018-05-25 15:02:24',
+                    desc: 'Table 的高度，默认为自动高度。如果 height 为 Number 类型，单位 px；如果 height 为 String 类型，则这个高度会设置为 Table 的 style.height 的值，Table 的高度会受控于外部样式。'
+                })),
                 pagination: {
                     current: 1,
                     count: 500,
@@ -108,7 +118,7 @@
                 setting: {
                     max: 3,
                     fields: settingFields,
-                    selectedFields: settingFields.slice(0, 3),
+                    selectedFields: settingFields.slice(0, 4),
                     size: 'small'
                 }
             }
@@ -802,7 +812,7 @@
                 setting: {
                     max: 3,
                     fields: settingFields,
-                    selectedFields: settingFields.slice(0, 3),
+                    selectedFields: settingFields.slice(0, 4),
                     size: 'small'
                 }
             }
@@ -957,6 +967,72 @@ export default {
 :::
 
 
+
+### 虚拟滚动渲染配置 {page=#/table}
+
+:::demo 通过配置`bk-table`的`virtual-render`属性开启内置虚拟滚动
+
+```html
+<template>
+    <div>
+        <bk-table style="margin-top: 15px;"
+            :data="longData"
+            :virtual-render="true"
+            height="200px">
+            <bk-table-column
+                v-for="field in setting.fields"
+                :key="field.id"
+                :label="field.label"
+                :prop="field.id">
+            </bk-table-column>
+        </bk-table>
+    </div>
+</template>
+<script>
+    import { bkTable, bkTableColumn, bkTableSettingContent } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTable,
+            bkTableColumn,
+            bkTableSettingContent
+        },
+        data () {
+            return {
+                longData: new Array(100).fill('').map((item, index) => ({
+                    ip: '192.168.0.1',
+                    source: 'QQ' + index,
+                    status: '创建中',
+                    create_time: '2018-05-25 15:02:24',
+                    desc: 'Table 的高度，默认为自动高度。如果 height 为 Number 类型，单位 px；如果 height 为 String 类型，则这个高度会设置为 Table 的 style.height 的值，Table 的高度会受控于外部样式。'
+                })),
+                setting: {
+                    fields: [{
+                                id: 'ip',
+                                label: '名称/内网IP',
+                                disabled: true
+                            }, {
+                                id: 'source',
+                                label: '来源'
+                            }, {
+                                id: 'status',
+                                label: '状态'
+                            }, {
+                                id: 'create_time',
+                                label: '创建时间'
+                            }, {
+                                id: 'desc',
+                                label: '描述'
+                            }]
+                }
+            }
+        }
+    }
+</script>
+```
+:::
+
+
 ### bk-table 属性 {page=#/table}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
@@ -996,6 +1072,19 @@ export default {
 | pagination | Table 的分页。`current` 属性表示当前页码,`count` 属性表示数据总量 | Object | —— | —— |
 | auto-scroll-to-top | Table 分页变化时，表格是否自动滚动到顶部 | Boolean | —— | false |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-table` 上 | String | —— | —— |
+| virtual-render | 内置的虚拟滚动配置 | Boolean, Object | false / true / { virtual-render 配置 } | false |
+
+### virtual-render 配置 {page=#/table}
+`virtual-render`支持简单配置 `true / false` 直接启用 / 禁用，如果需要进一步配置更多，请参考下面配置说明
+
+`因为虚拟滚动需要根据lineHeight计算行高和渲染区域内的行数据，目前只支持每行行高固定的场景，所以针对内部折叠的Table目前无法支持虚拟滚动`
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+|------|------|------|------|------|
+| disabled | 是否禁用 | Boolean | true / false | undefined |
+| height | 虚拟滚动区域高度，如果 height 为 Number 类型，单位 px；如果 height 为 String 类型，则这个高度会设置为 style.height 的值 | String / Number | —— | table.body.height |
+| width | 虚拟滚动区域宽度，如果 width 为 Number 类型，单位 px；如果 width 为 String 类型，则这个高度会设置为 style.width 的值 | String / Number | —— | table.body.width |
+| lineHeight | 虚拟滚动区域每行高度，如果 lineHeight 为 Number 类型，单位 px；如果 lineHeight 为 String 类型，则这个高度会设置为 style.height 的值 | String / Number | —— | table.body.row.height |
 
 ### bk-table 事件 {page=#/table}
 | 事件名称 | 说明 | 回调参数 |
