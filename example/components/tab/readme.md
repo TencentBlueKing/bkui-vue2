@@ -28,7 +28,8 @@
                 activeBar2: {
                     position: 'bottom',
                     height: '2px'
-                }
+                },
+                addShowNextRight: false
             }
         },
         methods: {
@@ -61,6 +62,9 @@
                 console.log('sortChange')
                 console.log(draggingIndex, dropIndex)
             },
+            handleScrollShowChange (v) {
+                this.addShowNextRight = v;
+            }
         }
     }
 </script>
@@ -590,7 +594,7 @@ export default {
 
 ### 自定义新增按钮 {page=#/tab}
 
-:::demo 配置 `addable` 属性可动态添加选项卡；配置 `closable` 可以动态删除选项卡
+:::demo 通过插槽自定义新增按钮
 
 ```html
 <template>
@@ -598,9 +602,10 @@ export default {
         :active.sync="active"
         :type="'border-card'"
         @close-panel="closePanel"
-        :add-show-next-right="false">
+        :add-show-next-right="addShowNextRight"
+        @scroll-show-change="handleScrollShowChange">
         <template slot="add">
-            <div @click="addPanel" style="padding: 0 10px">新增</div>
+            <div @click="addPanel" style="padding: 0 10px">{{addShowNextRight ? 'xinzeng' : '新增'}}</div>
         </template>
         <bk-tab-panel
             v-for="(panel, index) in panels"
@@ -627,7 +632,8 @@ export default {
                 ],
                 active: 'mission',
                 type: ['card', 'border-card', 'unborder-card', 'vertical-card'],
-                currentType: 'card'
+                currentType: 'card',
+                addShowNextRight: false
             }
         },
         methods: {
@@ -642,6 +648,9 @@ export default {
             },
             closePanel (index, panel) {
                 this.panels.splice(index, 1)
+            },
+            handleScrollShowChange (v) {
+                this.addShowNextRight = v;
             }
         }
     }

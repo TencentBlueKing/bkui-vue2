@@ -228,6 +228,11 @@ $headerColor: $newBlackColor2;
             right: 0;
             border-bottom: $border;
             border-left: $border;
+            &.next-right {
+                right: 24px;
+                box-shadow: -10px 0 10px rgb(0 0 0 / .05);
+                border-right: 0;
+            }
         }
         .bk-tab-scroll-controller.next {
             right: 42px;

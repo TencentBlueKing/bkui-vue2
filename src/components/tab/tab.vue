@@ -83,7 +83,11 @@
                         @mouseleave.native.passive="handleClearHoverTimer(panel)">
                     </li>
                 </ul>
-                <i class="bk-tab-add-controller bk-icon icon-plus" :class="visiblePanels.length ? '' : 'left-border'"
+                <i class="bk-tab-add-controller bk-icon icon-plus"
+                    :class="{
+                        'left-border': !visiblePanels.length,
+                        'next-right': addShowNextRight
+                    }"
                     :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
                     v-if="addable && !isSidePosition && !hasAddBtnSlot"
                     ref="addController"
@@ -112,8 +116,8 @@
                         :style="{
                             height: `${labelHeight - 1}px`,
                             lineHeight: `${labelHeight}px`,
-                            right: hasAddBtnSlot
-                                ? `${addShowNextRight ? 0 : addCustomRect.width}px`
+                            right: (hasAddBtnSlot || addable)
+                                ? `${addShowNextRight ? 0 : (addCustomRect.width || 40)}px`
                                 : undefined
                         }"
                         ref="nextController"
@@ -356,6 +360,12 @@
             },
             tabPosition () {
                 this.updateActiveBarPosition(this.localActive)
+            },
+            addShowNextRight () {
+                this.resizeHandler()
+            },
+            'scrollState.show' (isShow) {
+                this.$emit('scroll-show-change', isShow)
             }
         },
         created () {
