@@ -588,6 +588,67 @@ export default {
 ```
 :::
 
+### 自定义新增按钮 {page=#/tab}
+
+:::demo 配置 `addable` 属性可动态添加选项卡；配置 `closable` 可以动态删除选项卡
+
+```html
+<template>
+    <bk-tab closable
+        :active.sync="active"
+        :type="'border-card'"
+        @close-panel="closePanel"
+        :add-show-next-right="false">
+        <template slot="add">
+            <div @click="addPanel" style="padding: 0 10px">新增</div>
+        </template>
+        <bk-tab-panel
+            v-for="(panel, index) in panels"
+            v-bind="panel"
+            :key="index">
+        </bk-tab-panel>
+    </bk-tab>
+</template>
+<script>
+    import { bkTab, bkTabPanel } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTab,
+            bkTabPanel
+        },
+        data () {
+            return {
+                panels: [
+                    { name: 'mission', label: '任务报表', count: 10 },
+                    { name: 'config', label: '加速配置', count: 20 },
+                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'deleted', label: '已归档加速任务', count: 40 }
+                ],
+                active: 'mission',
+                type: ['card', 'border-card', 'unborder-card', 'vertical-card'],
+                currentType: 'card'
+            }
+        },
+        methods: {
+            addPanel () {
+                const name = Math.random()
+                this.panels.push({
+                    name,
+                    label: '新标签页',
+                    count: 50
+                })
+                this.active = name
+            },
+            closePanel (index, panel) {
+                this.panels.splice(index, 1)
+            }
+        }
+    }
+</script>
+```
+:::
+
 :::exampleLink [更多示例](#/tabExample)
 
 ### bk-tab 选项卡属性 {page=#/tab}
