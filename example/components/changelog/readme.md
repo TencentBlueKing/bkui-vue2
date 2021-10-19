@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.9-beta.1 {page=#/changelog}
+
+* **[fix]**:
+    - [Upload 文件上传](#/upload) bugfix: 修复upload组件文字显示问题; 修复button类型回填问题
+
+---
+
 ### 2.3.8 {page=#/changelog}
 ###### 2021.10.14
 

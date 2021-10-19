@@ -17,7 +17,10 @@
                     }
                 ],
                 file2: [
-                    {"name":"r_project_page.csv","url":"https://power-backend-1252002024.cos.ap-guangzhou.myqcloud.com/20211018101752r_project_page.csv"}
+                    {
+                        name: 'r_project_page.csv',
+                        url: 'https://power-backend-1252002024.cos.ap-guangzhou.myqcloud.com/20211018101752r_project_page.csv'
+                    }
                 ]
             }
         },
@@ -282,6 +285,16 @@
     export default {
         components: {
             bkUpload
+        },
+        data () {
+            return {
+                file2: [
+                    {
+                        name: 'r_project_page.csv',
+                        url: 'https://power-backend-1252002024.cos.ap-guangzhou.myqcloud.com/20211018101752r_project_page.csv'
+                    }
+                ]
+            }
         },
         methods: {
             handleRes (response) {
