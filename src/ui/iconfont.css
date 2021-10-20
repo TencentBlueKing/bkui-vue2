@@ -1,26 +1,26 @@
 @font-face {
 	font-family: "bk";
 	src: url("fonts/iconcool.svg#iconcool") format("svg"),
-	url("fonts/iconcool.ttf") format("truetype"),
-	url("fonts/iconcool.woff") format("woff"),
-	url("fonts/iconcool.eot?#iefix") format("embedded-opentype");
-	font-weight: normal;
-	font-style: normal;
+url("fonts/iconcool.ttf") format("truetype"),
+url("fonts/iconcool.woff") format("woff"),
+url("fonts/iconcool.eot?#iefix") format("embedded-opentype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 .bk-icon {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: 'bk' !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	text-align: center;
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bk' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  text-align: center;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-angle-double-down:before {
@@ -781,4 +781,13 @@
 }
 .icon-normalized:before {
 	content: "\e205";
+}
+.icon-chinese:before {
+	content: "\e206";
+}
+.icon-english:before {
+	content: "\e207";
+}
+.icon-japanese:before {
+	content: "\e208";
 }

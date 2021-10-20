@@ -95,7 +95,6 @@
     .file-wrapper {
         position: relative;
         font-size: 14px;
-        background-color: #fff;
         input[type=file] {
             width: 100%;
             height: 100%;
@@ -296,6 +295,7 @@
                     display: inline-block;
                     font-size: 12px;
                     max-width: 250px;
+                    line-height: 16px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;

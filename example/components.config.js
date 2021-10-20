@@ -138,6 +138,10 @@ export default {
                 {
                     id: 'fixedNavbar',
                     name: 'FixedNavbar 悬浮导航'
+                },
+                {
+                    'id': 'affix',
+                    'name': 'Affix 图钉'
                 }
             ]
         },
