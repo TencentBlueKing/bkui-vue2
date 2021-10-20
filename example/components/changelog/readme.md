@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.9-beta.2 {page=#/changelog}
+
+* **[fix]**:
+    - [Table 表格](#/table) 表格宽度计算
+
+---
+
 ### 2.3.9-beta.1 {page=#/changelog}
 
 * **[fix]**:
