@@ -56,7 +56,7 @@
             :on-show="handleDropdownShow"
             :on-hide="handleDropdownHide"
             :tippy-options="popoverOptions">
-            <template v-if="multiple">
+            <template v-if="multiple && showDelete">
                 <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
                     <span v-for="(item, index) in multipleSelectedList"
                         :key="index"
@@ -201,6 +201,10 @@
             multiple: {
                 type: Boolean,
                 default: false
+            },
+            showDelete: {
+                type: Boolean,
+                default: true
             },
             separator: {
                 type: String,
