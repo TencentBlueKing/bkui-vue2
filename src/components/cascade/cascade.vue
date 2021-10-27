@@ -602,7 +602,7 @@
 
                         if (this.checkAnyLevel) {
                             selections.push({
-                                id: item.id.split(this.separator),
+                                id: String(item.id).split(this.separator),
                                 name: item.name,
                                 disabled: !!item.disabled,
                                 isSelected: !!item.isSelected
