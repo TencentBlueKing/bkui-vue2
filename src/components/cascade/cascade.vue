@@ -56,17 +56,22 @@
             :on-show="handleDropdownShow"
             :on-hide="handleDropdownHide"
             :tippy-options="popoverOptions">
-            <template v-if="multiple && showDelete">
-                <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
-                    <span v-for="(item, index) in multipleSelectedList"
-                        :key="index"
-                        class="bk-cascade-tag-item">
-                        <span class="bk-cascade-item-name">{{item.name}}</span>
-                        <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
-                            <i class="bk-icon icon-close"></i>
-                        </a>
-                    </span>
+            <template v-if="multiple">
+                <div class="bk-cascade-name" :title="selectedName" v-if="!showDelete">
+                    <span>{{selectedName}}</span>
                 </div>
+                <section v-else>
+                    <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
+                        <span v-for="(item, index) in multipleSelectedList"
+                            :key="index"
+                            class="bk-cascade-tag-item">
+                            <span class="bk-cascade-item-name">{{item.name}}</span>
+                            <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
+                                <i class="bk-icon icon-close"></i>
+                            </a>
+                        </span>
+                    </div>
+                </section>
                 <div class="bk-cascade-name" v-if="filterable">
                     <input
                         class="bk-cascade-search-input"
