@@ -260,9 +260,9 @@ class TableLayout {
                     console.log('from print table last column > ', lastColumn)
                     if (lastColumn) {
                         const lastRealWidth = typeof lastColumn.width !== 'number' ? lastColumn.minWidth : lastColumn.width
-    
+
                         const preLastColumnBodyMinWidth = bodyMinWidth - lastColumn.realWidth
-    
+
                         if (preLastColumnBodyMinWidth + lastRealWidth > bodyWidth) {
                             lastColumn.realWidth = lastRealWidth
                             bodyMinWidth = preLastColumnBodyMinWidth + lastRealWidth
@@ -271,7 +271,7 @@ class TableLayout {
                             bodyMinWidth = preLastColumnBodyMinWidth + lastColumn.realWidth
                         }
                     }
-    
+
                     this.scrollX = bodyMinWidth > bodyWidth
                     this.bodyWidth = bodyMinWidth
                 }
