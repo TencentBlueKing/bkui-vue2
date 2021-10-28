@@ -4,6 +4,20 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.9 {page=#/changelog}
+
+* **[add]**:
+    - [Tab 选项卡](#/tab) 新增[自定义新增按钮](#/tab?anchor=zi-ding-yi-xin-zeng-an-niu) #88
+    - [Cascade 级联选框](#/cascade) 新增 `limit-one-line` 属性，支持只显示一行
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 修复 Pagination 紧凑效果 鼠标移到最后一个出现显示异常的问题 #95
+    - [Cascade 级联选框](#/cascade) 修复设置 scroll-width 在第二级以后不生效的问题
+    - 修复 [DropdownMenu 下拉菜单], [Select 下拉选框], [DatePicker 日期选择器] 下拉间距不统一的问题 #98
+* **[update]**:
+    - [Slider 滑动选择器](#/slider) 滑动选择器输入框样式优化 #100
+
+---
+
 ### 2.3.9-beta.2 {page=#/changelog}
 
 * **[fix]**:
@@ -14,7 +28,7 @@
 ### 2.3.9-beta.1 {page=#/changelog}
 
 * **[fix]**:
-    - [Upload 文件上传](#/upload) bugfix: 修复upload组件文字显示问题; 修复button类型回填问题
+    - [Upload 文件上传](#/upload) 修复 upload 组件文字显示问题; 修复 button 类型回填问题
 
 ---
 
