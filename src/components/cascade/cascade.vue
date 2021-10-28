@@ -57,16 +57,21 @@
             :on-hide="handleDropdownHide"
             :tippy-options="popoverOptions">
             <template v-if="multiple">
-                <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
-                    <span v-for="(item, index) in multipleSelectedList"
-                        :key="index"
-                        class="bk-cascade-tag-item">
-                        <span class="bk-cascade-item-name">{{item.name}}</span>
-                        <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
-                            <i class="bk-icon icon-close"></i>
-                        </a>
-                    </span>
+                <div class="bk-cascade-name" :title="selectedName" v-if="limitOneLine">
+                    <span>{{selectedName}}</span>
                 </div>
+                <section v-else>
+                    <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
+                        <span v-for="(item, index) in multipleSelectedList"
+                            :key="index"
+                            class="bk-cascade-tag-item">
+                            <span class="bk-cascade-item-name">{{item.name}}</span>
+                            <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
+                                <i class="bk-icon icon-close"></i>
+                            </a>
+                        </span>
+                    </div>
+                </section>
                 <div class="bk-cascade-name" v-if="filterable">
                     <input
                         class="bk-cascade-search-input"
@@ -89,7 +94,7 @@
                 <span v-else>{{selectedName}}</span>
             </div>
             <div slot="content"
-                class="bk-cascade-dropdown-content"
+                :class="['bk-cascade-dropdown-content',extPopoverCls]"
                 v-show="!disabled"
                 :style="{
                     width: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? defaultWidth : (scrollWidth * popoverWidth + 2)) + 'px'
@@ -202,6 +207,10 @@
                 type: Boolean,
                 default: false
             },
+            limitOneLine: {
+                type: Boolean,
+                default: false
+            },
             separator: {
                 type: String,
                 default: ' / '
@@ -230,6 +239,10 @@
             options: {
                 type: Object,
                 default: () => ({})
+            },
+            extPopoverCls: {
+                type: String,
+                default: ''
             }
         },
         data () {
@@ -594,7 +607,7 @@
 
                         if (this.checkAnyLevel) {
                             selections.push({
-                                id: item.id.split(this.separator),
+                                id: String(item.id).split(this.separator),
                                 name: item.name,
                                 disabled: !!item.disabled,
                                 isSelected: !!item.isSelected
