@@ -260,6 +260,7 @@
         :list="list"
         clearable
         style="width: 250px;"
+        :ext-popover-cls="'custom-cls'"
         @change="handleChange">
     </bk-cascade>
     <script>
