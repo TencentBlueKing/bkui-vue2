@@ -12,7 +12,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -147,7 +147,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -195,7 +195,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -245,7 +245,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -298,7 +298,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -349,7 +349,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -409,7 +409,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -472,7 +472,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -649,7 +649,7 @@ export default {
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
