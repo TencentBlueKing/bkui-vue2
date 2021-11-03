@@ -12,7 +12,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -111,7 +111,7 @@
             margin-top: 8px;
             background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10); 
+            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
         }
     }
 </style>
@@ -119,6 +119,8 @@
 [[toc]]
 
 ## Tab 选项卡
+
+<!-- :::exampleLink [更多示例](#/tabExample) -->
 
 ### 基础用法 {page=#/tab}
 
@@ -147,7 +149,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -195,7 +197,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -245,7 +247,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -298,7 +300,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -349,7 +351,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -409,7 +411,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -472,7 +474,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -649,7 +651,7 @@ export default {
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -683,7 +685,7 @@ export default {
         padding: 0 10px;
         div {
             color: #3a84ff;
-            font-size: 14px; 
+            font-size: 14px;
         }
         .range {
             width: 30px;
@@ -694,14 +696,12 @@ export default {
             margin-top: 8px;
             background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10); 
+            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
         }
     }
 </style>
 ```
 :::
-
-:::exampleLink [更多示例](#/tabExample)
 
 ### bk-tab 选项卡属性 {page=#/tab}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |

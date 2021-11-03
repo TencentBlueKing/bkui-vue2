@@ -4,6 +4,16 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.10-beta.1 {page=#/changelog}
+
+* **[add]**:
+    - [Progress 进度条](#/progress) 添加 fixed 小数点位数配置
+    - [Notify 通知提示](#/notify) 支持[使用HTML方式渲染Message内容](#/notify?anchor=shi-yonghtml-fang-shi-xuan-ranmessage-nei-rong) [#137](https://github.com/TencentBlueKing/bkui-vue2/issues/137)
+* **[fix]**:
+    - [Tab 选项卡](#/tab) 修复文档单词拼写错误
+
+---
+
 ### 2.3.9 {page=#/changelog}
 ###### 2021.10.28
 
