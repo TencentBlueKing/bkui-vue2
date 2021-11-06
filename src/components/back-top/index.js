@@ -32,7 +32,7 @@
 
 import bkBackTop from './back-top.vue'
 import setInstaller from '@/utils/component-installer.js'
- 
+
 setInstaller(bkBackTop)
- 
+
 export default bkBackTop

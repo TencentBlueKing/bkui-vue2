@@ -4,6 +4,16 @@
 
 <div class="changelog-wrapper">
 
+### 2.3.10-beta.2 {page=#/changelog}
+
+* **[add]**:
+    - [BackTop 返回顶部](#/back-top) 新增返回顶部组件 [#144](https://github.com/TencentBlueKing/bkui-vue2/issues/144)
+    - [Input 输入框](#/input) 新增 [hover 时才显示 clear 按钮](#/input?anchor=hover-shi-cai-xian-shi-clear-an-niu) [#20](https://github.com/TencentBlueKing/bkui-vue2/issues/20)
+* **[update]**:
+    - [Table 表格](#/table) 样式优化
+
+---
+
 ### 2.3.10-beta.1 {page=#/changelog}
 
 * **[add]**:
