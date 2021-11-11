@@ -33,6 +33,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+const Affix = () => import(/* webpackChunkName: 'affix' */'./components/affix/readme.md')
 const Install = () => import(/* webpackChunkName: 'install' */'./components/install/readme.md')
 const Start = () => import(/* webpackChunkName: 'start' */'./components/start/readme.md')
 const Config = () => import(/* webpackChunkName: 'config' */'./components/config/readme.md')
@@ -134,9 +135,20 @@ const Tag = () => import(/* webpackChunkName: 'tag' */'./components/tag/readme.m
 const ResizeLayout = () => import(/* webpackChunkName: 'resize' */'./components/resize-layout/readme.md')
 const FixedNavbar = () => import(/* webpackChunkName: 'fixed-narbar' */'./components/fixed-navbar/readme.md')
 const Spin = () => import(/* webpackChunkName: 'spin' */'./components/spin/readme.md')
+const BackTop = () => import(/* webpackChunkName: 'back-top' */'./components/back-top/readme.md')
 const router = new VueRouter({
     // mode: 'history',
     routes: [
+        {
+            name: 'backTop',
+            path: '/back-top',
+            component: BackTop
+        },
+        {
+            name: 'affix',
+            path: '/affix',
+            component: Affix
+        },
         {
             name: 'fixedNavbar',
             path: '/fixed-navbar',
@@ -648,7 +660,7 @@ const router = new VueRouter({
             name: 'spin',
             path: '/spin',
             component: Spin
-        },
+        }
     ]
 })
 
