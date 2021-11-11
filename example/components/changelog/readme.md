@@ -14,6 +14,7 @@
     - [Notify 通知提示](#/notify) 支持[使用HTML方式渲染Message内容](#/notify?anchor=shi-yonghtml-fang-shi-xuan-ranmessage-nei-rong) [#137](https://github.com/TencentBlueKing/bkui-vue2/issues/137)
 * **[fix]**:
     - [Tab 选项卡](#/tab) 修复文档单词拼写错误
+    - [Tree 树](#/tree) 修复 checkbox 选中状态模糊样式问题
 * **[update]**:
     - [Table 表格](#/table) 样式优化
 
