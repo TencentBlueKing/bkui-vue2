@@ -12,6 +12,7 @@
     - [Input 输入框](#/input) 新增 [hover 时才显示 clear 按钮](#/input?anchor=hover-shi-cai-xian-shi-clear-an-niu) [#20](https://github.com/TencentBlueKing/bkui-vue2/issues/20)
     - [Progress 进度条](#/progress) 添加 fixed 小数点位数配置
     - [Notify 通知提示](#/notify) 支持[使用HTML方式渲染Message内容](#/notify?anchor=shi-yonghtml-fang-shi-xuan-ranmessage-nei-rong) [#137](https://github.com/TencentBlueKing/bkui-vue2/issues/137)
+    - [Message 消息提示](#/message) 修复 message 位置计算的问题
 * **[fix]**:
     - [Tab 选项卡](#/tab) 修复文档单词拼写错误
     - [Tree 树](#/tree) 修复 checkbox 选中状态模糊样式问题
