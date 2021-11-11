@@ -12,7 +12,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -120,6 +120,8 @@
 
 ## Tab 选项卡
 
+<!-- :::exampleLink [更多示例](#/tabExample) -->
+
 ### 基础用法 {page=#/tab}
 
 :::demo 通过配置 `active` 属性，设置默认显示子面板
@@ -147,7 +149,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -195,7 +197,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -245,7 +247,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -298,7 +300,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -349,7 +351,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -409,7 +411,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -472,7 +474,7 @@
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission'
@@ -649,7 +651,7 @@ export default {
                 panels: [
                     { name: 'mission', label: '任务报表', count: 10 },
                     { name: 'config', label: '加速配置', count: 20 },
-                    { name: 'hisitory', label: '历史版本', count: 30 },
+                    { name: 'history', label: '历史版本', count: 30 },
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
@@ -700,8 +702,6 @@ export default {
 </style>
 ```
 :::
-
-:::exampleLink [更多示例](#/tabExample)
 
 ### bk-tab 选项卡属性 {page=#/tab}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
