@@ -33,7 +33,11 @@
                 <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
             </template>
             <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
-            <slot name="group-extend"></slot>
+            <template v-if="showSelectAll">
+                <span class="btn-check-all">
+                    <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @change="handleSelectAll"></bk-checkbox>
+                </span>
+            </template>
         </div>
         <ul class="bk-group-options" v-show="!isLocalCollapse">
             <slot></slot>
@@ -42,8 +46,10 @@
 </template>
 
 <script>
+    import bkCheckbox from '@/components/checkbox'
     export default {
         name: 'bk-option-group',
+        components: { bkCheckbox },
         props: {
             name: {
                 type: String,
@@ -70,6 +76,12 @@
             readonly: {
                 type: Boolean,
                 default: false
+            },
+
+            /** 是否支持支持分组全选 */
+            showSelectAll: {
+                type: Boolean,
+                default: false
             }
         },
         provide () {
@@ -81,10 +93,20 @@
         data () {
             return {
                 options: [],
+                selectedAll: false,
                 isLocalCollapse: false
             }
         },
         computed: {
+            indeterminate () {
+                return !this.isSelectAllItems && !this.isEmpty
+            },
+            isSelectAllItems () {
+                return Array.prototype.every.call(this.options, option => option.isSelected)
+            },
+            isEmpty () {
+                return Array.prototype.every.call(this.options, option => !option.isSelected)
+            },
             showPrefixOpt () {
                 return !!this.showCollapse
             },
@@ -111,6 +133,13 @@
             }
         },
         methods: {
+            handleSelectAll () {
+                if (this.isSelectAllItems) {
+                    Array.prototype.forEach.call(this.options, option => this.select.unselectOption(option))
+                } else {
+                    Array.prototype.forEach.call(this.options, option => this.select.selectOption(option))
+                }
+            },
             handleGroupNameClick () {
                 if (this.showCollapse && !this.readonly) {
                     this.isLocalCollapse = !this.isLocalCollapse
