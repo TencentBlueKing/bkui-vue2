@@ -405,6 +405,7 @@
                 :name="group.name"
                 :key="index"
                 :show-collapse="true"
+                :show-select-all="true"
                 :is-collapse.sync="group.isCollapse"
                 @collapse="handleGroupCollapse">
                 <bk-option v-for="option in group.children"

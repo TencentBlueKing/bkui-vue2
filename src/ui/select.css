@@ -239,6 +239,9 @@ $disabledColor: #c4c6cc;
                 disabled: inline-block;
                 right: 14px;
                 top: 2px;
+                .bk-form-checkbox {
+                    margin-right: 0!important;
+                }
             }
         }
     }

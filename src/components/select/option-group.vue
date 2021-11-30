@@ -35,7 +35,7 @@
             <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
             <template v-if="showSelectAll">
                 <span class="btn-check-all">
-                    <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @change="handleSelectAll"></bk-checkbox>
+                    <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @click.native="handleCheckAllClick" @change="handleSelectAll"></bk-checkbox>
                 </span>
             </template>
         </div>
@@ -133,6 +133,11 @@
             }
         },
         methods: {
+            handleCheckAllClick (e) {
+                e.stopPropagation()
+                e.stopImmediatePropagation()
+                e.preventDefault()
+            },
             handleSelectAll () {
                 if (this.isSelectAllItems) {
                     Array.prototype.forEach.call(this.options, option => this.select.unselectOption(option))
