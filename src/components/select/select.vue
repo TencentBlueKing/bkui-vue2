@@ -63,10 +63,10 @@
             theme="light bk-select-dropdown"
             animation="slide-toggle"
             :offset="-1"
-            :distance="12"
+            :distance="popoverDistance"
             :on-show="handleDropdownShow"
             :on-hide="handleDropdownHide"
-            :tippy-options="popoverOptions">
+            :tippy-options="renderPopoverOptions">
             <i :class="['bk-select-prefix-icon', prefixIcon]" v-if="prefixIcon"></i>
             <slot name="trigger" v-bind="$props">
                 <bk-select-tag v-if="multiple && displayTag"
@@ -103,7 +103,12 @@
                             ref="selectAllOption"
                             v-if="multiple && showSelectAll && !searchValue">
                         </bk-option-all>
-                        <bk-virtual-scroll ref="virtualScroll" :item-height="itemHeight" class="bk-virtual-select" :style="{ height: scrollHeight + 'px', width: '100%' }" v-if="enableVirtualScroll">
+                        <bk-virtual-scroll ref="virtualScroll"
+                            :item-height="itemHeight"
+                            class="bk-virtual-select"
+                            :style="{ height: scrollHeight + 'px', width: '100%' }"
+                            @virtual-scroll-scroll-bar-mouse="virtualScrollScrollBarMouse"
+                            v-if="enableVirtualScroll">
                             <template slot-scope="item">
                                 <virtual-option :item="item.data" :render-func="virtualScrollRender"></virtual-option>
                             </template>
@@ -138,6 +143,8 @@
     import pinyin from '@/utils/pinyin'
     import bkVirtualScroll from '@/components/virtual-scroll'
     import virtualOption from './virtual-option'
+    import { dropdownMarginBottom } from '@/ui/variable'
+
     export default {
         name: 'bk-select',
         components: {
@@ -295,7 +302,9 @@
                 searchTimer: null,
                 searchLoading: false,
                 // 是否自动更新selectOptions（嵌套tree-select时需要在value变化时更新selectOptions）
-                autoUpdate: false
+                autoUpdate: false,
+                renderPopoverOptions: {},
+                popoverDistance: 10 + parseInt(dropdownMarginBottom)
             }
         },
         computed: {
@@ -400,6 +409,7 @@
                 }
                 this.$emit('input', value)
                 this.$emit('change', value, oldValue)
+                this.dispatch('bk-form-item', 'form-change')
             },
             list: {
                 handler (val) {
@@ -433,6 +443,12 @@
                     this.selectedOptions = []
                     this.selected = []
                 }
+            },
+            popoverOptions: {
+                handler (v) {
+                    this.renderPopoverOptions = Object.assign({}, v)
+                },
+                immediate: true
             }
         },
         created () {
@@ -446,6 +462,15 @@
             this.showOnInit && this.show()
         },
         methods: {
+            /**
+             * 监听 virtual-scroll 的 virtual-scroll-scroll-bar-mouse 事件
+             */
+            virtualScrollScrollBarMouse (idx) {
+                const renderPopoverOptions = Object.assign({}, this.renderPopoverOptions)
+                renderPopoverOptions.hideOnClick = idx !== 'down'
+                this.renderPopoverOptions = Object.assign({}, renderPopoverOptions)
+            },
+
             showVirtualScroll () {
                 const list = this.options.filter(option => !option.unmatched)
                 if (this.$refs.virtualScroll && this.enableVirtualScroll) this.$refs.virtualScroll.setListData(list)

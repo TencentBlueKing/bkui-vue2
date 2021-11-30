@@ -98,6 +98,37 @@
 ```
 :::
 
+### hover 时才显示 clear 按钮{page=#/input}
+
+::: demo 配置`show-clear-only-hover`为true时，清除按钮在hover时才会显示
+``` html
+<template>
+    <div class="input-demo">
+        <bk-input :clearable="true" v-model="value" :show-clear-only-hover="true"></bk-input>
+    </div>
+</template>
+<script>
+    import { bkInput } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkInput
+        },
+        data () {
+            return {
+                value: ''
+            }
+        }
+    }
+</script>
+<style lang="postcss">
+    .input-demo {
+        width: 500px;
+    }
+</style>
+```
+:::
+
 ### 14px 字号 {page=#/input}
 
 ::: demo 通过配置 `font-size` 属性为 `medium` 来设置文本框的字号为 `14px`
@@ -132,12 +163,12 @@
 
 ### 数字输入框 {page=#/input}
 
-::: demo 通过配置 `type` 属性为 `number` 来设置数字类型输入，通过设置 `max`，`min` 设置最大最小值, 设置 `precision` 保留小数位(初始值会被四舍五入，例如：numberInputValue=4.5，precision=0时，值会被四舍五入为5)
+::: demo 通过配置 `type` 属性为 `number` 来设置数字类型输入，通过设置 `max`，`min` 设置最大最小值, 设置 `precision` 保留小数位(初始值会被四舍五入，例如：numberInputValue=4.5，precision=0时，值会被四舍五入为5)。**数字输入框时，`clearable` 配置不生效。**
 
 ``` html
 <template>
     <div class="input-demo">
-        <bk-input :clearable="true" type="number" :max="1000"  :min="-1000" :precision="precision" v-model="numberInputValue"></bk-input>
+        <bk-input type="number" :max="1000" :min="-1000" :precision="precision" v-model="numberInputValue"></bk-input>
     </div>
 </template>
 <script>
@@ -641,7 +672,7 @@
 | placeholder | 空白提示 | String | ——  | —— |
 | disabled | 是否禁用 | Boolean | true / false | false |
 | readonly | 是否只读 | Boolean | true / false | false |
-| clearable | 是否可清除 | Boolean | true / false | false |
+| clearable | 是否可清除。**数字输入框时，此配置不生效** | Boolean | true / false | false |
 | maxlength | 最大输入长度 | Number | —— | —— |
 | minlength | 最小输入长度 | Number | —— | —— |
 | size | 输入框尺寸，只在 type!="textarea" 时有效，字号可通过 font-size 属性覆盖 | String | `large`（38px 14号字）<br>`small`（26px 12字号） | —— |
@@ -656,6 +687,7 @@
 | native-attributes | Html input标签原生属性设置 | Object | —— | —— |
 | show-word-limit | 是否显示输入字数统计，只在 `type = "text"` 或 `type = "textarea"` 时有效 | Boolean | true / false | —— |
 | behavior | 简约风格设置(simplicity:简约 normal:正常 type=textarea时不生效) | String | 'normal'/'simplicity' | normal |
+| show-clear-only-hover | 是否在只有 hover 的时候才显示 clear 清除按钮 | Boolean | —— | false |
 
 ### 事件 {page=#/input}
 
