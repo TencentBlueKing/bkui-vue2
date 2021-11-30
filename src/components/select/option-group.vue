@@ -33,6 +33,7 @@
                 <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
             </template>
             <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
+            <slot name="group-extend"></slot>
         </div>
         <ul class="bk-group-options" v-show="!isLocalCollapse">
             <slot></slot>
