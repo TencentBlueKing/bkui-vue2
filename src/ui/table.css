@@ -584,6 +584,14 @@ td.bk-table-column-expand {
     }
 }
 
+.bk-table-bottom-loading {
+    position: absolute;
+    bottom: 44px;
+    height: 42px;
+    width: calc(100% - 1px);
+    z-index: 100;
+}
+
 .bk-table-pagination-wrapper {
     padding: 15px;
     margin-top: -1px;
