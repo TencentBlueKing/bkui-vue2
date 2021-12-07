@@ -87,6 +87,12 @@
                 :data-transfer="transfer"
                 :transfer="transfer"
                 v-transfer-dom>
+                <template v-if="hasHeader">
+                    <div class="bk-date-picker-top-wrapper" :class="headerSlotCls">
+                        <slot name="header">
+                        </slot>
+                    </div>
+                </template>
                 <!-- eslint-disable-next-line vue/require-component-is -->
                 <component
                     :is="panel"
@@ -290,6 +296,10 @@
                 type: Number,
                 default: -1
             },
+            headerSlotCls: {
+                type: String,
+                default: ''
+            },
             footerSlotCls: {
                 type: String,
                 default: ''
@@ -425,7 +435,11 @@
             },
 
             hasFooter () {
-                return !!this.$slots.footer
+                return !!this.$slots.footer || !!this.$scopedSlots.footer
+            },
+
+            hasHeader () {
+                return !!this.$slots.header || !!this.$scopedSlots.header
             },
 
             allowCrossDayProp () {
