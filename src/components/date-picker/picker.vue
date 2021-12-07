@@ -116,7 +116,11 @@
                     @pick-success="onPickSuccess"
                     @pick-click="disableClickOutSide = true"
                     @selection-mode-change="onSelectionModeChange"
-                ></component>
+                >
+                    <div slot="shortcuts" v-if="$slots.shortcuts || $scopedSlots.shortcuts">
+                        <slot name="shortcuts"></slot>
+                    </div>
+                </component>
                 <template v-if="hasFooter">
                     <div class="bk-date-picker-footer-wrapper" :class="footerSlotCls">
                         <slot name="footer">
