@@ -280,6 +280,12 @@
             @open-change="openChangeTest"
             @shortcut-change="shortcutChange"
             @pick-success="pickSuccessTest"></bk-date-picker>
+        <p class="mb5">快捷选项插槽</p>
+        <bk-date-picker
+            :value="initDateTimeRange"
+            :type="'datetimerange'">
+            <div slot="shortcuts">自定义插槽</div>
+        </bk-date-picker>
     </div>
 </template>
 <script>
@@ -623,3 +629,4 @@
 | trigger | 可用该插槽配合`open`属性，自定义日期选择器的展示 |
 | footer | 可用该插槽，自定义日期选择器 footer 的展示 |
 | header | 可用该插槽，自定义日期选择器 header 的展示 |
+| shortcuts | datetimerange、daterange类型可用该插槽，自定义时间范围选择器快捷选项区域的展示 |

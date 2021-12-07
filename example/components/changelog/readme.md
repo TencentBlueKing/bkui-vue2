@@ -4,6 +4,22 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.0 {page=#/changelog}
+###### 2021.12.11
+
+* **[add]**:
+    - [Select 下拉选框](#/select) 支持[分组全选](#/select?anchor=fen-zu--quan-xuan)
+    - [SearchSelect 查询选择器](#/searchselect) 新增 overflow 下 tag 加入 +num 显示
+    - [Table 表格](#/table) 新增[底部加载](#/table?anchor=di-bu-jia-zai)
+    - [Big Tree 大树](#/big-tree) 增加 [size 选项](#/big-tree?anchor=shu-de-chi-cun)
+    - [DatePicker 日期选择器](#/date-picker) 新增 `header` slot
+* **[fix]**:
+    - [Loading 加载](#/loading) 修复 z-index 的默认值 0 导致不传参时层级错误问题
+    - [Select 下拉选框](#/select) 修复 ziindex 设置不生效问题
+    - [TagInput 标签输入框](#/tag) tag-input 修复单选在多个 search-key 下出错的问题
+
+---
+
 ### 2.3.10 {page=#/changelog}
 ###### 2021.11.11
 
