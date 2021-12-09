@@ -754,10 +754,10 @@
             },
             doLayout () {
                 if (this.$destroyed) return
-                this.layout.updateColumnsWidth()
                 if (this.shouldUpdateHeight) {
                     this.layout.updateElsHeight()
                 }
+                this.layout.updateColumnsWidth()
             },
             sort (prop, order) {
                 this.store.commit('sort', { prop, order })
