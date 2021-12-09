@@ -13,10 +13,13 @@
     - [Table 表格](#/table) 新增[底部加载](#/table?anchor=di-bu-jia-zai)
     - [Big Tree 大树](#/big-tree) 增加 [size 选项](#/big-tree?anchor=shu-de-chi-cun)
     - [DatePicker 日期选择器](#/date-picker) 新增 `header` slot
+    - [Breadcrumb 面包屑](#/breadcrumb) [支持返回配置以及前置插槽](#/breadcrumb?anchor=zhi-chi-fan-hui-pei-zhi-yi-ji-qian-zhi-cha-cao)
 * **[fix]**:
     - [Loading 加载](#/loading) 修复 z-index 的默认值 0 导致不传参时层级错误问题
     - [Select 下拉选框](#/select) 修复 ziindex 设置不生效问题
     - [TagInput 标签输入框](#/tag) tag-input 修复单选在多个 search-key 下出错的问题
+    - [Table 表格](#/table) 修复 table 组件在 dialog 中高度失效问题；修复 table 组件开启 tooltip 后快速滚动列表 tooltip 不能及时消失的问题
+    - [Cascade 级联选框](#/cascade) 修复级联菜单多选情况下动态加载的问题；修复级联菜单宽度小时，tag 上删除按钮样式错乱的问题
 
 ---
 
