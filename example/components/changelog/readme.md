@@ -5,7 +5,7 @@
 <div class="changelog-wrapper">
 
 ### 2.4.0 {page=#/changelog}
-###### 2021.12.11
+###### 2021.12.10
 
 * **[add]**:
     - [Select 下拉选框](#/select) 支持[分组全选](#/select?anchor=fen-zu--quan-xuan)
