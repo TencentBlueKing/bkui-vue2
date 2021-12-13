@@ -353,8 +353,7 @@
 
             // 弹框的 z-index
             zIndex: {
-                type: Number,
-                default: 1000
+                type: Number
             },
 
             // 用于 info-box
@@ -600,7 +599,7 @@
                             }, 0)
                         }
 
-                        this.dialogIndex = this.getLocalZIndex()
+                        this.dialogIndex = this.zIndex !== undefined ? this.zIndex : this.getLocalZIndex()
                         // 简单 hack，之后重构
                         if (this.showMask) {
                             const options = {
