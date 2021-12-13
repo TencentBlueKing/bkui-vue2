@@ -558,6 +558,7 @@
 | on-close | 点击取消时触发的回调方法，参数是`Dialog`的`this对象` | Function | —— | —— |
 | confirm-fn | 点击确认时触发的回调方法，参数是`Dialog`的`this对象` | Function | —— | —— |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-dialog-wrapper`上 | String | —— | —— |
+| z-index | 配置自定义层级 | Number | —— | —— |
 
 
 ### 事件 {page=#/dialog}
