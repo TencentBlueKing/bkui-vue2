@@ -104,6 +104,12 @@
                 </bk-tab>
             </bk-dialog>
         </div>
+        <div class="example-item">
+            <bk-button type="default" @click="customZIndex">自定义zIndex</bk-button>
+            <bk-dialog v-model="customZIndexShow" :z-index="999">
+                custom-zIndex
+            </bk-dialog>
+        </div>
     </section>
 </template>
 
@@ -127,6 +133,7 @@
                 ddd: false,
                 cccShow: false,
                 tabPosShow: false,
+                customZIndexShow: false,
                 panels2: [
                     { name: 'mission', label: '任务报表任务报表任务报表任务报表', count: 10 },
                     { name: 'config', label: '加速配置2', count: 20 },
@@ -150,6 +157,9 @@
             },
             tabPosClick () {
                 this.tabPosShow = true
+            },
+            customZIndex () {
+                this.customZIndexShow = true
             }
         }
     }
