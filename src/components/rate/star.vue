@@ -53,61 +53,61 @@
 </template>
 
 <script>
-    export default {
-        name: 'bk-star',
-        props: {
-            rate: {
-                type: Number,
-                default: 0
-            },
-            width: {
-                type: Number,
-                default: 15
-            },
-            height: {
-                type: Number,
-                default: 16
-            },
-            edit: {
-                type: Boolean,
-                default: true
-            },
-            hoverRate: {
-                type: Number,
-                default: 0
-            },
-            tooltips: {
-                type: Array,
-                default: () => ([])
-            },
-            maxStars: {
-                type: Number,
-                default: 5
-            }
-        },
-
-        computed: {
-            displayRate () {
-                return this.hoverRate || this.rate
-            }
-        },
-
-        methods: {
-            chooseRate (index) {
-                if (!this.edit) return
-
-                const rate = index + 1
-                this.$emit('chooseRate', rate)
-            },
-
-            changeHover (index) {
-                if (!this.edit) return
-
-                const rate = index + 1
-                this.$emit('changeHover', rate)
-            }
-        }
+export default {
+  name: 'bk-star',
+  props: {
+    rate: {
+      type: Number,
+      default: 0
+    },
+    width: {
+      type: Number,
+      default: 15
+    },
+    height: {
+      type: Number,
+      default: 16
+    },
+    edit: {
+      type: Boolean,
+      default: true
+    },
+    hoverRate: {
+      type: Number,
+      default: 0
+    },
+    tooltips: {
+      type: Array,
+      default: () => ([])
+    },
+    maxStars: {
+      type: Number,
+      default: 5
     }
+  },
+
+  computed: {
+    displayRate () {
+      return this.hoverRate || this.rate
+    }
+  },
+
+  methods: {
+    chooseRate (index) {
+      if (!this.edit) return
+
+      const rate = index + 1
+      this.$emit('chooseRate', rate)
+    },
+
+    changeHover (index) {
+      if (!this.edit) return
+
+      const rate = index + 1
+      this.$emit('changeHover', rate)
+    }
+  }
+}
 </script>
 
 <style>

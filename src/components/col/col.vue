@@ -33,58 +33,58 @@
 </template>
 
 <script>
-    import { formatPercentage } from '@/utils/util'
+import { formatPercentage } from '@/utils/util'
 
-    export default {
-        name: 'bk-col',
-        props: {
-            // 栅格的占位格数，可选值为 0~24 的整数，为 0 时，则为 col 相当于 width: 100%
-            span: {
-                type: Number,
-                default: 1
-            },
-            // 栅格的偏移
-            offset: {
-                type: Number,
-                default: 0
-            },
-            // 栅格向左移动格数
-            pull: {
-                type: Number,
-                default: 0
-            },
-            // 栅格向右移动格数
-            push: {
-                type: Number,
-                default: 0
-            }
-        },
-        provide () {
-            const { flex, gutter, realSpan } = this
-            return { flex, gutter, col: realSpan }
-        },
-        inject: ['col', 'gutter', 'flex'],
-        computed: {
-            realSpan () {
-                return this.span || this.col
-            },
-            width () {
-                const { col, realSpan } = this
-                return formatPercentage(realSpan / col)
-            },
-            style () {
-                const { width, gutter, col, offset, pull, push } = this
-                return {
-                    width,
-                    'padding-right': `${gutter / 2}px`,
-                    'padding-left': `${gutter / 2}px`,
-                    'margin-left': offset ? formatPercentage(offset / col) : null,
-                    'right': pull ? formatPercentage(pull / col) : null,
-                    'left': push ? formatPercentage(push / col) : null
-                }
-            }
-        }
+export default {
+  name: 'bk-col',
+  props: {
+    // 栅格的占位格数，可选值为 0~24 的整数，为 0 时，则为 col 相当于 width: 100%
+    span: {
+      type: Number,
+      default: 1
+    },
+    // 栅格的偏移
+    offset: {
+      type: Number,
+      default: 0
+    },
+    // 栅格向左移动格数
+    pull: {
+      type: Number,
+      default: 0
+    },
+    // 栅格向右移动格数
+    push: {
+      type: Number,
+      default: 0
     }
+  },
+  provide () {
+    const { flex, gutter, realSpan } = this
+    return { flex, gutter, col: realSpan }
+  },
+  inject: ['col', 'gutter', 'flex'],
+  computed: {
+    realSpan () {
+      return this.span || this.col
+    },
+    width () {
+      const { col, realSpan } = this
+      return formatPercentage(realSpan / col)
+    },
+    style () {
+      const { width, gutter, col, offset, pull, push } = this
+      return {
+        width,
+        'padding-right': `${gutter / 2}px`,
+        'padding-left': `${gutter / 2}px`,
+        'margin-left': offset ? formatPercentage(offset / col) : null,
+        'right': pull ? formatPercentage(pull / col) : null,
+        'left': push ? formatPercentage(push / col) : null
+      }
+    }
+  }
+}
 </script>
 
 <style>

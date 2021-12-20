@@ -50,21 +50,21 @@
 </template>
 
 <script>
-    export default {
-        name: 'app',
-        data () {
-            return {
-                systemCls: 'mac'
-            }
-        },
-        created () {
-            const platform = window.navigator.platform.toLowerCase()
-            if (platform.indexOf('win') === 0) {
-                this.systemCls = 'win'
-            }
-            document.body.classList.add(this.systemCls)
-        }
+export default {
+  name: 'app',
+  data () {
+    return {
+      systemCls: 'mac'
     }
+  },
+  created () {
+    const platform = window.navigator.platform.toLowerCase()
+    if (platform.indexOf('win') === 0) {
+      this.systemCls = 'win'
+    }
+    document.body.classList.add(this.systemCls)
+  }
+}
 </script>
 
 <style lang="postcss">

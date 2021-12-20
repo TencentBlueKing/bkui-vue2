@@ -48,61 +48,61 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                year: new Date().getFullYear(),
-                showBackTop: false
-            }
-        },
-        mounted () {
-            window.addEventListener('scroll', this.toggleBackTop)
-            try {
-                setTimeout(() => {
-                    window.__WPA.create({
-                        nameAccount: '800802001',
-                        customEle: document.getElementById('contact-us')
-                    })
-                }, 1000)
-            } catch (err) {
-                // do
-            }
-        },
-        destroyed () {
-            window.removeEventListener('scroll', this.toggleBackTop)
-        },
-        methods: {
-            /**
+export default {
+  data () {
+    return {
+      year: new Date().getFullYear(),
+      showBackTop: false
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.toggleBackTop)
+    try {
+      setTimeout(() => {
+        window.__WPA.create({
+          nameAccount: '800802001',
+          customEle: document.getElementById('contact-us')
+        })
+      }, 1000)
+    } catch (err) {
+      // do
+    }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.toggleBackTop)
+  },
+  methods: {
+    /**
              * 获取页面滚动高度，判断是否出现返回顶部
              */
-            toggleBackTop () {
-                let scrollTop = 0
-                let bodyScrollTop = 0
-                let documentScrollTop = 0
+    toggleBackTop () {
+      let scrollTop = 0
+      let bodyScrollTop = 0
+      let documentScrollTop = 0
 
-                if (document.body) {
-                    bodyScrollTop = document.body.scrollTop
-                }
+      if (document.body) {
+        bodyScrollTop = document.body.scrollTop
+      }
 
-                if (document.documentElement) {
-                    documentScrollTop = document.documentElement.scrollTop
-                }
+      if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop
+      }
 
-                scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
-                this.showBackTop = scrollTop > 0
-            },
+      scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
+      this.showBackTop = scrollTop > 0
+    },
 
-            /**
+    /**
              * 返回到页面顶部
              */
-            backTop () {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                })
-            }
-        }
+    backTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
+  }
+}
 </script>
 
 <style scoped lang="postcss">

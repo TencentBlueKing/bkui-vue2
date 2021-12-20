@@ -136,290 +136,290 @@
     </div>
 </template>
 <script>
-    import { toDate, initTime, formatDateLabels } from '@/utils/date'
-    import locale from 'bk-magic-vue/lib/locale'
-    import DateTable from '../base/date-table.vue'
-    import YearTable from '../base/year-table.vue'
-    import MonthTable from '../base/month-table.vue'
-    import TimePicker from './time-range.vue'
-    import Confirm from '../base/confirm.vue'
+import { toDate, initTime, formatDateLabels } from '@/utils/date'
+import locale from 'bk-magic-vue/lib/locale'
+import DateTable from '../base/date-table.vue'
+import YearTable from '../base/year-table.vue'
+import MonthTable from '../base/month-table.vue'
+import TimePicker from './time-range.vue'
+import Confirm from '../base/confirm.vue'
 
-    import DatePanelLabel from './date-panel-label.vue'
+import DatePanelLabel from './date-panel-label.vue'
 
-    import datePanelMixin from './date-panel-mixin'
-    import panelMixins from './panel-mixins'
+import datePanelMixin from './date-panel-mixin'
+import panelMixins from './panel-mixins'
 
-    const dateSorter = (a, b) => {
-        if (!a || !b) {
-            return 0
-        }
-        return a.getTime() - b.getTime()
+const dateSorter = (a, b) => {
+  if (!a || !b) {
+    return 0
+  }
+  return a.getTime() - b.getTime()
+}
+
+export default {
+  name: 'DateRangePanel',
+  components: {
+    /* eslint-disable vue/no-unused-components */
+    DateTable,
+    YearTable,
+    MonthTable,
+    /* eslint-enable vue/no-unused-components */
+    TimePicker,
+    DatePanelLabel,
+    Confirm
+  },
+  mixins: [panelMixins, datePanelMixin, locale.mixin],
+  props: {
+    clearable: {
+      type: Boolean,
+      default: true
+    },
+    splitPanels: {
+      type: Boolean,
+      default: true
+    },
+    shortcuts: {
+      type: Array,
+      default: () => []
+    },
+    shortcutClose: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    const [minDate, maxDate] = this.value.map(date => date || initTime())
+    const leftPanelDate = this.startDate ? this.startDate : minDate
 
-    export default {
-        name: 'DateRangePanel',
-        components: {
-            /* eslint-disable vue/no-unused-components */
-            DateTable,
-            YearTable,
-            MonthTable,
-            /* eslint-enable vue/no-unused-components */
-            TimePicker,
-            DatePanelLabel,
-            Confirm
-        },
-        mixins: [panelMixins, datePanelMixin, locale.mixin],
-        props: {
-            clearable: {
-                type: Boolean,
-                default: true
-            },
-            splitPanels: {
-                type: Boolean,
-                default: true
-            },
-            shortcuts: {
-                type: Array,
-                default: () => []
-            },
-            shortcutClose: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data () {
-            const [minDate, maxDate] = this.value.map(date => date || initTime())
-            const leftPanelDate = this.startDate ? this.startDate : minDate
+    return {
+      dates: this.value,
+      rangeState: { from: this.value[0], to: this.value[1], selecting: minDate && !maxDate },
+      currentView: this.selectionMode || 'range',
+      leftPickerTable: `${this.selectionMode}-table`,
+      rightPickerTable: `${this.selectionMode}-table`,
+      leftPanelDate: leftPanelDate,
+      rightPanelDate: new Date(leftPanelDate.getFullYear(), leftPanelDate.getMonth() + 1, 1),
+      // 判断 range 中，第一次选的时间是否晚于当前时间
+      upToNowEnable: false
+    }
+  },
+  computed: {
+    leftDatePanelLabel () {
+      return this.panelLabelConfig('left')
+    },
+    rightDatePanelLabel () {
+      return this.panelLabelConfig('right')
+    },
+    leftDatePanelView () {
+      return this.leftPickerTable.split('-').shift()
+    },
+    rightDatePanelView () {
+      return this.rightPickerTable.split('-').shift()
+    },
+    timeDisabled () {
+      return !(this.dates[0] && this.dates[1])
+    },
+    preSelecting () {
+      const tableType = `${this.currentView}-table`
 
-            return {
-                dates: this.value,
-                rangeState: { from: this.value[0], to: this.value[1], selecting: minDate && !maxDate },
-                currentView: this.selectionMode || 'range',
-                leftPickerTable: `${this.selectionMode}-table`,
-                rightPickerTable: `${this.selectionMode}-table`,
-                leftPanelDate: leftPanelDate,
-                rightPanelDate: new Date(leftPanelDate.getFullYear(), leftPanelDate.getMonth() + 1, 1),
-                // 判断 range 中，第一次选的时间是否晚于当前时间
-                upToNowEnable: false
-            }
-        },
-        computed: {
-            leftDatePanelLabel () {
-                return this.panelLabelConfig('left')
-            },
-            rightDatePanelLabel () {
-                return this.panelLabelConfig('right')
-            },
-            leftDatePanelView () {
-                return this.leftPickerTable.split('-').shift()
-            },
-            rightDatePanelView () {
-                return this.rightPickerTable.split('-').shift()
-            },
-            timeDisabled () {
-                return !(this.dates[0] && this.dates[1])
-            },
-            preSelecting () {
-                const tableType = `${this.currentView}-table`
+      return {
+        left: this.leftPickerTable !== tableType,
+        right: this.rightPickerTable !== tableType
+      }
+    },
+    panelPickerHandlers () {
+      return {
+        left: this.preSelecting.left ? this.handlePreSelection.bind(this, 'left') : this.handleRangePick,
+        right: this.preSelecting.right ? this.handlePreSelection.bind(this, 'right') : this.handleRangePick
+      }
+    }
+  },
+  watch: {
+    value (newVal) {
+      const minDate = newVal[0] ? toDate(newVal[0]) : null
+      const maxDate = newVal[1] ? toDate(newVal[1]) : null
+      this.dates = [minDate, maxDate].sort(dateSorter)
 
-                return {
-                    left: this.leftPickerTable !== tableType,
-                    right: this.rightPickerTable !== tableType
-                }
-            },
-            panelPickerHandlers () {
-                return {
-                    left: this.preSelecting.left ? this.handlePreSelection.bind(this, 'left') : this.handleRangePick,
-                    right: this.preSelecting.right ? this.handlePreSelection.bind(this, 'right') : this.handleRangePick
-                }
-            }
-        },
-        watch: {
-            value (newVal) {
-                const minDate = newVal[0] ? toDate(newVal[0]) : null
-                const maxDate = newVal[1] ? toDate(newVal[1]) : null
-                this.dates = [minDate, maxDate].sort(dateSorter)
+      this.rangeState = {
+        from: this.dates[0],
+        to: this.dates[1],
+        selecting: false
+      }
 
-                this.rangeState = {
-                    from: this.dates[0],
-                    to: this.dates[1],
-                    selecting: false
-                }
+      this.setPanelDates(this.startDate || this.dates[0] || new Date())
+    },
+    currentView (currentView) {
+      const leftMonth = this.leftPanelDate.getMonth()
+      const rightMonth = this.rightPanelDate.getMonth()
+      const isSameYear = this.leftPanelDate.getFullYear() === this.rightPanelDate.getFullYear()
 
-                this.setPanelDates(this.startDate || this.dates[0] || new Date())
-            },
-            currentView (currentView) {
-                const leftMonth = this.leftPanelDate.getMonth()
-                const rightMonth = this.rightPanelDate.getMonth()
-                const isSameYear = this.leftPanelDate.getFullYear() === this.rightPanelDate.getFullYear()
+      if (currentView === 'date' && isSameYear && leftMonth === rightMonth) {
+        this.changePanelDate('right', 'Month', 1)
+      }
+      if (currentView === 'month' && isSameYear) {
+        this.changePanelDate('right', 'FullYear', 1)
+      }
+      if (currentView === 'year' && isSameYear) {
+        this.changePanelDate('right', 'FullYear', 10)
+      }
 
-                if (currentView === 'date' && isSameYear && leftMonth === rightMonth) {
-                    this.changePanelDate('right', 'Month', 1)
-                }
-                if (currentView === 'month' && isSameYear) {
-                    this.changePanelDate('right', 'FullYear', 1)
-                }
-                if (currentView === 'year' && isSameYear) {
-                    this.changePanelDate('right', 'FullYear', 10)
-                }
+      if (this.currentView === 'time') {
+        this.$nextTick(() => {
+          this.$refs.timePicker.updateScroll()
+        })
+      }
+    },
+    selectionMode (type) {
+      this.currentView = type || 'range'
+    },
+    focusedDate (date) {
+      this.setPanelDates(date || new Date())
+    }
+  },
+  methods: {
+    reset () {
+      this.currentView = this.selectionMode
+      this.leftPickerTable = `${this.currentView}-table`
+      this.rightPickerTable = `${this.currentView}-table`
+    },
+    setPanelDates (leftPanelDate) {
+      this.leftPanelDate = leftPanelDate
+      const rightPanelDate = new Date(leftPanelDate.getFullYear(), leftPanelDate.getMonth() + 1, 1)
+      const splitRightPanelDate = this.dates[1] ? this.dates[1].getTime() : this.dates[1]
+      this.rightPanelDate = this.splitPanels
+        ? new Date(Math.max(splitRightPanelDate, rightPanelDate.getTime()))
+        : rightPanelDate
+    },
+    panelLabelConfig (direction) {
+      const locale = 'zh-CN'
+      const datePanelLabel = '[yyyy]-[mm]'
+      const handler = type => {
+        const fn = type === 'month' ? this.showMonthPicker : this.showYearPicker
+        return () => fn(direction)
+      }
 
-                if (this.currentView === 'time') {
-                    this.$nextTick(() => {
-                        this.$refs.timePicker.updateScroll()
-                    })
-                }
-            },
-            selectionMode (type) {
-                this.currentView = type || 'range'
-            },
-            focusedDate (date) {
-                this.setPanelDates(date || new Date())
-            }
-        },
-        methods: {
-            reset () {
-                this.currentView = this.selectionMode
-                this.leftPickerTable = `${this.currentView}-table`
-                this.rightPickerTable = `${this.currentView}-table`
-            },
-            setPanelDates (leftPanelDate) {
-                this.leftPanelDate = leftPanelDate
-                const rightPanelDate = new Date(leftPanelDate.getFullYear(), leftPanelDate.getMonth() + 1, 1)
-                const splitRightPanelDate = this.dates[1] ? this.dates[1].getTime() : this.dates[1]
-                this.rightPanelDate = this.splitPanels
-                    ? new Date(Math.max(splitRightPanelDate, rightPanelDate.getTime()))
-                    : rightPanelDate
-            },
-            panelLabelConfig (direction) {
-                const locale = 'zh-CN'
-                const datePanelLabel = '[yyyy]-[mm]'
-                const handler = type => {
-                    const fn = type === 'month' ? this.showMonthPicker : this.showYearPicker
-                    return () => fn(direction)
-                }
+      const date = this[`${direction}PanelDate`]
+      const { labels, separator } = formatDateLabels(locale, datePanelLabel, date)
 
-                const date = this[`${direction}PanelDate`]
-                const { labels, separator } = formatDateLabels(locale, datePanelLabel, date)
+      return {
+        separator: separator,
+        labels: labels.map(obj => {
+          obj.handler = handler(obj.type)
+          return obj
+        })
+      }
+    },
+    prevYear (panel) {
+      const increment = this.currentView === 'year' ? -10 : -1
+      this.changePanelDate(panel, 'FullYear', increment)
+    },
+    nextYear (panel) {
+      const increment = this.currentView === 'year' ? 10 : 1
+      this.changePanelDate(panel, 'FullYear', increment)
+    },
+    prevMonth (panel) {
+      this.changePanelDate(panel, 'Month', -1)
+    },
+    nextMonth (panel) {
+      this.changePanelDate(panel, 'Month', 1)
+    },
+    changePanelDate (panel, type, increment, updateOtherPanel = true) {
+      const current = new Date(this[`${panel}PanelDate`])
+      current[`set${type}`](current[`get${type}`]() + increment)
+      this[`${panel}PanelDate`] = current
 
-                return {
-                    separator: separator,
-                    labels: labels.map(obj => {
-                        obj.handler = handler(obj.type)
-                        return obj
-                    })
-                }
-            },
-            prevYear (panel) {
-                const increment = this.currentView === 'year' ? -10 : -1
-                this.changePanelDate(panel, 'FullYear', increment)
-            },
-            nextYear (panel) {
-                const increment = this.currentView === 'year' ? 10 : 1
-                this.changePanelDate(panel, 'FullYear', increment)
-            },
-            prevMonth (panel) {
-                this.changePanelDate(panel, 'Month', -1)
-            },
-            nextMonth (panel) {
-                this.changePanelDate(panel, 'Month', 1)
-            },
-            changePanelDate (panel, type, increment, updateOtherPanel = true) {
-                const current = new Date(this[`${panel}PanelDate`])
-                current[`set${type}`](current[`get${type}`]() + increment)
-                this[`${panel}PanelDate`] = current
+      if (!updateOtherPanel) {
+        return
+      }
 
-                if (!updateOtherPanel) {
-                    return
-                }
+      if (this.splitPanels) {
+        const otherPanel = panel === 'left' ? 'right' : 'left'
+        if (panel === 'left' && this.leftPanelDate >= this.rightPanelDate) {
+          this.changePanelDate(otherPanel, type, 1)
+        }
+        if (panel === 'right' && this.rightPanelDate <= this.leftPanelDate) {
+          this.changePanelDate(otherPanel, type, -1)
+        }
+      } else {
+        const otherPanel = panel === 'left' ? 'right' : 'left'
+        const currentDate = this[`${otherPanel}PanelDate`]
+        const temp = new Date(currentDate)
 
-                if (this.splitPanels) {
-                    const otherPanel = panel === 'left' ? 'right' : 'left'
-                    if (panel === 'left' && this.leftPanelDate >= this.rightPanelDate) {
-                        this.changePanelDate(otherPanel, type, 1)
-                    }
-                    if (panel === 'right' && this.rightPanelDate <= this.leftPanelDate) {
-                        this.changePanelDate(otherPanel, type, -1)
-                    }
-                } else {
-                    const otherPanel = panel === 'left' ? 'right' : 'left'
-                    const currentDate = this[`${otherPanel}PanelDate`]
-                    const temp = new Date(currentDate)
+        if (type === 'Month') {
+          const nextMonthLastDate = new Date(
+            temp.getFullYear(), temp.getMonth() + increment + 1, 0
+          ).getDate()
+          temp.setDate(Math.min(nextMonthLastDate, temp.getDate()))
+        }
 
-                    if (type === 'Month') {
-                        const nextMonthLastDate = new Date(
-                            temp.getFullYear(), temp.getMonth() + increment + 1, 0
-                        ).getDate()
-                        temp.setDate(Math.min(nextMonthLastDate, temp.getDate()))
-                    }
+        temp[`set${type}`](temp[`get${type}`]() + increment)
+        this[`${otherPanel}PanelDate`] = temp
+      }
+    },
+    showYearPicker (panel) {
+      this[`${panel}PickerTable`] = 'year-table'
+    },
+    showMonthPicker (panel) {
+      this[`${panel}PickerTable`] = 'month-table'
+    },
 
-                    temp[`set${type}`](temp[`get${type}`]() + increment)
-                    this[`${otherPanel}PanelDate`] = temp
-                }
-            },
-            showYearPicker (panel) {
-                this[`${panel}PickerTable`] = 'year-table'
-            },
-            showMonthPicker (panel) {
-                this[`${panel}PickerTable`] = 'month-table'
-            },
-
-            /**
+    /**
              * 点击左侧面板以及右侧面板的年视图或者月视图
              *
              * @param {string} panelPosition 左侧 panel 还是右侧 panel
              * @param {Date} value 选中的值，如果是年视图，那么就是选中年的一月一号，如果是月视图，那么就是选中月的一号
              */
-            handlePreSelection (panelPosition, value) {
-                this[`${panelPosition}PanelDate`] = value
-                const currentViewType = this[`${panelPosition}PickerTable`]
-                if (currentViewType === 'year-table') {
-                    this[`${panelPosition}PickerTable`] = 'month-table'
-                } else {
-                    this[`${panelPosition}PickerTable`] = `${this.currentView}-table`
-                }
+    handlePreSelection (panelPosition, value) {
+      this[`${panelPosition}PanelDate`] = value
+      const currentViewType = this[`${panelPosition}PickerTable`]
+      if (currentViewType === 'year-table') {
+        this[`${panelPosition}PickerTable`] = 'month-table'
+      } else {
+        this[`${panelPosition}PickerTable`] = `${this.currentView}-table`
+      }
 
-                if (!this.splitPanels) {
-                    const otherPanel = panelPosition === 'left' ? 'right' : 'left'
-                    this[`${otherPanel}PanelDate`] = value
+      if (!this.splitPanels) {
+        const otherPanel = panelPosition === 'left' ? 'right' : 'left'
+        this[`${otherPanel}PanelDate`] = value
 
-                    const increment = otherPanel === 'left' ? -1 : 1
+        const increment = otherPanel === 'left' ? -1 : 1
 
-                    this.changePanelDate(otherPanel, 'Month', increment, false)
-                }
-            },
-            handleRangePick (val, type) {
-                if (this.rangeState.selecting || this.currentView === 'time') {
-                    if (this.currentView === 'time') {
-                        this.dates = val
-                    } else {
-                        const [minDate, maxDate] = [this.rangeState.from, val].sort(dateSorter)
-                        const maxDateLastMoment = type === 'upToNow'
-                            // upToNow 时，结束的时间为当前时间
-                            ? new Date()
-                            // 结束的时间 不是 00:00:00，改为 23:59:59
-                            : new Date(new Date(new Date(maxDate.setHours(23)).setMinutes(59)).setSeconds(59))
-                        this.dates = [minDate, maxDateLastMoment]
-                        this.rangeState = {
-                            from: minDate,
-                            to: maxDateLastMoment,
-                            selecting: false
-                        }
-                    }
-                    this.handleConfirm(false, type || 'date')
-                } else {
-                    this.upToNowEnable = new Date(val).getTime() < new Date().getTime()
-                    this.rangeState = {
-                        from: val,
-                        to: null,
-                        selecting: true
-                    }
-                }
-            },
-            handleChangeRange (val) {
-                this.rangeState.to = val
-            }
+        this.changePanelDate(otherPanel, 'Month', increment, false)
+      }
+    },
+    handleRangePick (val, type) {
+      if (this.rangeState.selecting || this.currentView === 'time') {
+        if (this.currentView === 'time') {
+          this.dates = val
+        } else {
+          const [minDate, maxDate] = [this.rangeState.from, val].sort(dateSorter)
+          const maxDateLastMoment = type === 'upToNow'
+            // upToNow 时，结束的时间为当前时间
+            ? new Date()
+            // 结束的时间 不是 00:00:00，改为 23:59:59
+            : new Date(new Date(new Date(maxDate.setHours(23)).setMinutes(59)).setSeconds(59))
+          this.dates = [minDate, maxDateLastMoment]
+          this.rangeState = {
+            from: minDate,
+            to: maxDateLastMoment,
+            selecting: false
+          }
         }
+        this.handleConfirm(false, type || 'date')
+      } else {
+        this.upToNowEnable = new Date(val).getTime() < new Date().getTime()
+        this.rangeState = {
+          from: val,
+          to: null,
+          selecting: true
+        }
+      }
+    },
+    handleChangeRange (val) {
+      this.rangeState.to = val
     }
+  }
+}
 </script>
 <style>
     @import '../../../ui/date-picker.css';

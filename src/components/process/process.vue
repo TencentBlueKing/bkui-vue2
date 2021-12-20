@@ -70,7 +70,7 @@
     </div>
 </template>
 <script>
-    /**
+/**
      *  bk-process
      *  @module components/process
      *  @desc process组件
@@ -89,174 +89,174 @@
             :controllable="true">
         </bk-process>
     */
-    export default {
-        name: 'bk-process',
-        props: {
-            list: {
-                type: Array,
-                required: true
-            },
-            controllable: {
-                type: Boolean,
-                default: false
-            },
-            showSteps: {
-                type: Boolean,
-                default: false
-            },
-            curProcess: {
-                type: Number,
-                default: 0
-            },
-            displayKey: {
-                type: String,
-                required: true
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                toggleFlag: false,
-                showFlag: this.showSteps,
-                dataList: this.list,
-                controllables: this.controllable,
-                paddingBottom: 0,
-                maxBottom: 0,
-                stepsClientHeight: 32
-            }
-        },
-        watch: {
-            list: {
-                handler: function (value) {
-                    this.initToggleFlag(value)
-                    this.dataList = [...value]
-                    this.calculateMaxBottom(value)
-                },
-                deep: true
-            },
-            curProcess (newValue, oldValue) {
-                if (newValue > this.list.length + 1) {
-                    return
-                }
-                this.setParentProcessLoad(this.list)
-            }
-        },
-        created () {
-            this.setParentProcessLoad(this.list)
-        },
-        mounted () {
-            this.initToggleFlag(this.list)
-            this.calculateMaxBottom(this.list)
-            if (this.showFlag) {
-                this.paddingBottom = this.maxBottom
-            } else {
-                this.paddingBottom = 0
-            }
-        },
-        methods: {
-            /**
+export default {
+  name: 'bk-process',
+  props: {
+    list: {
+      type: Array,
+      required: true
+    },
+    controllable: {
+      type: Boolean,
+      default: false
+    },
+    showSteps: {
+      type: Boolean,
+      default: false
+    },
+    curProcess: {
+      type: Number,
+      default: 0
+    },
+    displayKey: {
+      type: String,
+      required: true
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      toggleFlag: false,
+      showFlag: this.showSteps,
+      dataList: this.list,
+      controllables: this.controllable,
+      paddingBottom: 0,
+      maxBottom: 0,
+      stepsClientHeight: 32
+    }
+  },
+  watch: {
+    list: {
+      handler: function (value) {
+        this.initToggleFlag(value)
+        this.dataList = [...value]
+        this.calculateMaxBottom(value)
+      },
+      deep: true
+    },
+    curProcess (newValue, oldValue) {
+      if (newValue > this.list.length + 1) {
+        return
+      }
+      this.setParentProcessLoad(this.list)
+    }
+  },
+  created () {
+    this.setParentProcessLoad(this.list)
+  },
+  mounted () {
+    this.initToggleFlag(this.list)
+    this.calculateMaxBottom(this.list)
+    if (this.showFlag) {
+      this.paddingBottom = this.maxBottom
+    } else {
+      this.paddingBottom = 0
+    }
+  },
+  methods: {
+    /**
              * init child process 显示按钮
              *
              * @param {Array} list process 数据源
              */
-            initToggleFlag (list) {
-                if (!list.length) {
-                    this.toggleFlag = false
-                } else {
-                    for (let i = 0; i < list.length; i++) {
-                        if (list[i].steps && list[i].steps.length) {
-                            // this.controllables = false
-                            this.toggleFlag = true
-                            break
-                        }
-                    }
-                }
-            },
+    initToggleFlag (list) {
+      if (!list.length) {
+        this.toggleFlag = false
+      } else {
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].steps && list[i].steps.length) {
+            // this.controllables = false
+            this.toggleFlag = true
+            break
+          }
+        }
+      }
+    },
 
-            /**
+    /**
              * parent process loading设置
              *
              * @param {Array} list process 数据源
              */
-            setParentProcessLoad (list) {
-                const dataList = [...list]
-                const curProcess = this.curProcess - 1 || 0
-                if (!dataList.length) {
-                    return
-                }
-                if (curProcess === dataList.length) {
-                    this.$set(dataList[curProcess - 1], 'isLoading', false)
-                } else {
-                    for (let i = 0; i < dataList.length; i++) {
-                        let loadFlag = false
-                        if (dataList[curProcess].steps && dataList[curProcess].steps.length) {
-                            const steps = dataList[curProcess].steps
-                            for (let j = 0; j < steps.length; j++) {
-                                if (steps[j]['isLoading']) {
-                                    loadFlag = true
-                                }
-                            }
-                            if (loadFlag) {
-                                if (curProcess > 0) {
-                                    this.$set(dataList[curProcess - 1], 'isLoading', false)
-                                }
-                                this.$set(dataList[curProcess], 'isLoading', true)
-                            }
-                        }
-                    }
-                }
-                this.list.splice(0, this.list.length, ...dataList)
-            },
+    setParentProcessLoad (list) {
+      const dataList = [...list]
+      const curProcess = this.curProcess - 1 || 0
+      if (!dataList.length) {
+        return
+      }
+      if (curProcess === dataList.length) {
+        this.$set(dataList[curProcess - 1], 'isLoading', false)
+      } else {
+        for (let i = 0; i < dataList.length; i++) {
+          let loadFlag = false
+          if (dataList[curProcess].steps && dataList[curProcess].steps.length) {
+            const steps = dataList[curProcess].steps
+            for (let j = 0; j < steps.length; j++) {
+              if (steps[j]['isLoading']) {
+                loadFlag = true
+              }
+            }
+            if (loadFlag) {
+              if (curProcess > 0) {
+                this.$set(dataList[curProcess - 1], 'isLoading', false)
+              }
+              this.$set(dataList[curProcess], 'isLoading', true)
+            }
+          }
+        }
+      }
+      this.list.splice(0, this.list.length, ...dataList)
+    },
 
-            /**
+    /**
              * 展开/收起 child process
              */
-            toggleProcess () {
-                this.showFlag = !this.showFlag
-                if (this.showFlag) {
-                    this.paddingBottom = this.maxBottom
-                } else {
-                    this.paddingBottom = 0
-                }
-            },
+    toggleProcess () {
+      this.showFlag = !this.showFlag
+      if (this.showFlag) {
+        this.paddingBottom = this.maxBottom
+      } else {
+        this.paddingBottom = 0
+      }
+    },
 
-            /**
+    /**
              * 计算最大 padding-bottom
              */
-            calculateMaxBottom (list) {
-                const processList = [...list]
-                const stepsLengthList = []
-                if (!processList.length) {
-                    this.maxBottom = 0
-                    return
-                }
-                processList.forEach(item => {
-                    if (item.steps) {
-                        stepsLengthList.push(item.steps.length)
-                    }
-                })
-                this.maxBottom = Math.max.apply(null, stepsLengthList) * this.stepsClientHeight
-            },
+    calculateMaxBottom (list) {
+      const processList = [...list]
+      const stepsLengthList = []
+      if (!processList.length) {
+        this.maxBottom = 0
+        return
+      }
+      processList.forEach(item => {
+        if (item.steps) {
+          stepsLengthList.push(item.steps.length)
+        }
+      })
+      this.maxBottom = Math.max.apply(null, stepsLengthList) * this.stepsClientHeight
+    },
 
-            /**
+    /**
              * 控制步骤前后跳转
              *
              * @param {Object} index 当前process 数据
              * @param {Number} index 当前process 索引
              */
-            toggle (item, index) {
-                if (!this.controllables) {
-                    return
-                }
-                this.$emit('update:curProcess', index + 1)
-                this.$emit('process-changed', index + 1, item)
-            }
-        }
+    toggle (item, index) {
+      if (!this.controllables) {
+        return
+      }
+      this.$emit('update:curProcess', index + 1)
+      this.$emit('process-changed', index + 1, item)
     }
+  }
+}
 </script>
 <style>
     @import '../../ui/process.css';

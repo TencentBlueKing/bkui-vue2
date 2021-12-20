@@ -53,7 +53,7 @@
     </transition>
 </template>
 <script>
-    /**
+/**
      *  bk-sideslider
      *  @module components/side-slider
      *  @desc 滑动侧边栏组件
@@ -71,183 +71,183 @@
           :direction="'left'">
         </bk-sideslider>
      */
-    import { addClass, removeClass } from '@/utils/util'
-    import locale from 'bk-magic-vue/lib/locale'
-    import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
-    import zIndexManager from '@/utils/z-index-manager.js'
-    import popManager from '@/utils/pop-manager.js'
-    import transferDom from '@/directives/transfer-dom'
+import { addClass, removeClass } from '@/utils/util'
+import locale from 'bk-magic-vue/lib/locale'
+import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
+import zIndexManager from '@/utils/z-index-manager.js'
+import popManager from '@/utils/pop-manager.js'
+import transferDom from '@/directives/transfer-dom'
 
-    export default {
-        name: 'bk-sideslider',
-        directives: {
-            transferDom
-        },
-        mixins: [locale.mixin],
-        props: {
-            isShow: {
-                type: Boolean,
-                default: false
-            },
-            title: {
-                type: String,
-                default: ''
-            },
-            quickClose: {
-                type: Boolean,
-                default: false
-            },
-            showMask: {
-                type: Boolean,
-                default: true
-            },
-            width: {
-                type: Number,
-                default: 400
-            },
-            beforeClose: {
-                type: Function,
-                default: (res) => {
-                    return true
-                }
-            },
-            direction: {
-                type: String,
-                default: 'right',
-                validator (value) {
-                    return [
-                        'left',
-                        'right'
-                    ].indexOf(value) > -1
-                }
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            zIndex: {
-                type: [Number, String],
-                default: 'default'
-            },
+export default {
+  name: 'bk-sideslider',
+  directives: {
+    transferDom
+  },
+  mixins: [locale.mixin],
+  props: {
+    isShow: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    quickClose: {
+      type: Boolean,
+      default: false
+    },
+    showMask: {
+      type: Boolean,
+      default: true
+    },
+    width: {
+      type: Number,
+      default: 400
+    },
+    beforeClose: {
+      type: Function,
+      default: (res) => {
+        return true
+      }
+    },
+    direction: {
+      type: String,
+      default: 'right',
+      validator (value) {
+        return [
+          'left',
+          'right'
+        ].indexOf(value) > -1
+      }
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    zIndex: {
+      type: [Number, String],
+      default: 'default'
+    },
 
-            /**
+    /**
              * 是否允许多个弹框同时存在
              *  */
-            multiInstance: {
-                type: Boolean,
-                default: true
-            },
-            transfer: {
-                type: Boolean,
-                default: false
-            },
+    multiInstance: {
+      type: Boolean,
+      default: true
+    },
+    transfer: {
+      type: Boolean,
+      default: false
+    },
 
-            appendToBody: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data () {
-            return {
-                needBorder: false,
-                localZIndex: zIndexManager.nextTickIndex(2),
-                popUid: ''
-            }
-        },
-        computed: {
-            calcDirection () {
-                return this.direction === 'left' ? 'right' : 'left'
-            }
-        },
-        watch: {
-            isShow (val) {
-                // 有动画效果，因此推迟发布事件
-                const root = document.documentElement
-                if (val) {
-                    this.localZIndex = zIndexManager.nextTickIndex(2)
-                    addClass(root, 'bk-sideslider-show')
-                    if (this.isScrollY()) {
-                        addClass(root, 'has-sideslider-padding')
-                    }
-                    if (this.showMask) {
-                        this.generatePopUid()
-                    }
-                    setTimeout(() => {
-                        this.$emit('shown')
-                    }, 200)
-                } else {
-                    removeClass(root, 'bk-sideslider-show has-sideslider-padding')
-                    if (this.popUid) {
-                        popManager.hide(this.popUid)
-                        this.popUid = ''
-                    }
-                    setTimeout(() => {
-                        this.$emit('hidden')
-                    }, 200)
-                }
-            }
-        },
-        mounted () {
-            if (this.$refs.content && this.showMask) {
-                this.generatePopUid()
-                addResizeListener(this.$refs.content, this.handleContentResize)
-            }
-        },
-        destroyed () {
-            const root = document.querySelector('html')
-            removeClass(root, 'bk-sideslider-show')
-            removeResizeListener(this.$refs.content, this.handleContentResize)
-        },
-        beforeDestroy () {
-            this.isShow && this.popUid && popManager.hide(this.popUid)
-        },
-        methods: {
-            generatePopUid () {
-                this.popUid = popManager.show('bk-sideslider', this.$el, {
-                    zIndex: this.localZIndex - 1,
-                    tplAction: (this.multiInstance && 'keepAll') || 'onlyone',
-                    appendToBody: this.transfer
-                })
-            },
-
-            isScrollY () {
-                return document.documentElement.offsetHeight > document.documentElement.clientHeight
-            },
-            show () {
-                // 监听isShow，显示组件时，将页面垂直滚动条隐藏，关闭组件时再恢复
-                const root = document.documentElement
-                addClass(root, 'bk-sideslider-show')
-                this.isShow = true
-            },
-            hide () {
-                const root = document.querySelector('html')
-                removeClass(root, 'bk-sideslider-show')
-                this.isShow = false
-            },
-            async handleClose () {
-                let shouldClose = true
-                if (typeof this.beforeClose === 'function') {
-                    shouldClose = await this.beforeClose()
-                }
-                if (shouldClose) {
-                    this.$emit('update:isShow', false)
-                    setTimeout(() => {
-                        this.$emit('animation-end')
-                    }, 250)
-                }
-            },
-            handleQuickClose () {
-                if (this.quickClose) {
-                    this.handleClose()
-                }
-            },
-            handleContentResize () {
-                const ref = this.$refs.content
-                this.needBorder = ref.scrollHeight > ref.clientHeight
-            }
-        }
+    appendToBody: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    return {
+      needBorder: false,
+      localZIndex: zIndexManager.nextTickIndex(2),
+      popUid: ''
+    }
+  },
+  computed: {
+    calcDirection () {
+      return this.direction === 'left' ? 'right' : 'left'
+    }
+  },
+  watch: {
+    isShow (val) {
+      // 有动画效果，因此推迟发布事件
+      const root = document.documentElement
+      if (val) {
+        this.localZIndex = zIndexManager.nextTickIndex(2)
+        addClass(root, 'bk-sideslider-show')
+        if (this.isScrollY()) {
+          addClass(root, 'has-sideslider-padding')
+        }
+        if (this.showMask) {
+          this.generatePopUid()
+        }
+        setTimeout(() => {
+          this.$emit('shown')
+        }, 200)
+      } else {
+        removeClass(root, 'bk-sideslider-show has-sideslider-padding')
+        if (this.popUid) {
+          popManager.hide(this.popUid)
+          this.popUid = ''
+        }
+        setTimeout(() => {
+          this.$emit('hidden')
+        }, 200)
+      }
+    }
+  },
+  mounted () {
+    if (this.$refs.content && this.showMask) {
+      this.generatePopUid()
+      addResizeListener(this.$refs.content, this.handleContentResize)
+    }
+  },
+  destroyed () {
+    const root = document.querySelector('html')
+    removeClass(root, 'bk-sideslider-show')
+    removeResizeListener(this.$refs.content, this.handleContentResize)
+  },
+  beforeDestroy () {
+    this.isShow && this.popUid && popManager.hide(this.popUid)
+  },
+  methods: {
+    generatePopUid () {
+      this.popUid = popManager.show('bk-sideslider', this.$el, {
+        zIndex: this.localZIndex - 1,
+        tplAction: (this.multiInstance && 'keepAll') || 'onlyone',
+        appendToBody: this.transfer
+      })
+    },
+
+    isScrollY () {
+      return document.documentElement.offsetHeight > document.documentElement.clientHeight
+    },
+    show () {
+      // 监听isShow，显示组件时，将页面垂直滚动条隐藏，关闭组件时再恢复
+      const root = document.documentElement
+      addClass(root, 'bk-sideslider-show')
+      this.isShow = true
+    },
+    hide () {
+      const root = document.querySelector('html')
+      removeClass(root, 'bk-sideslider-show')
+      this.isShow = false
+    },
+    async handleClose () {
+      let shouldClose = true
+      if (typeof this.beforeClose === 'function') {
+        shouldClose = await this.beforeClose()
+      }
+      if (shouldClose) {
+        this.$emit('update:isShow', false)
+        setTimeout(() => {
+          this.$emit('animation-end')
+        }, 250)
+      }
+    },
+    handleQuickClose () {
+      if (this.quickClose) {
+        this.handleClose()
+      }
+    },
+    handleContentResize () {
+      const ref = this.$refs.content
+      this.needBorder = ref.scrollHeight > ref.clientHeight
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/sideslider.css';

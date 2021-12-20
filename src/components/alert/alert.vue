@@ -45,68 +45,68 @@
     </transition>
 </template>
 <script>
-    export default {
-        name: 'bk-alert',
-        props: {
-            type: {
-                type: String,
-                default: 'info'
-            },
-            title: {
-                type: String,
-                default: ''
-            },
-            closable: {
-                type: Boolean,
-                default: false
-            },
-            closeText: {
-                type: String
-            },
-            showIcon: {
-                type: Boolean,
-                default: true
-            }
-        },
-        data () {
-            return {
-                visible: true
-            }
-        },
-        computed: {
-            typeClass () {
-                return `bk-alert-${this.type}`
-            },
-            closeClasses () {
-                const classes = {}
-                if (this.closeText) {
-                    classes['close-text'] = true
-                } else {
-                    classes['bk-icon'] = true
-                    classes['icon-close'] = true
-                }
-                return classes
-            }
-        },
-        methods: {
-            beforeLeave (el) {
-                const { height } = el.getBoundingClientRect()
-                el.style.height = `${height}px`
-            },
-            leave (el) {
-                setTimeout(() => {
-                    el.style.height = 0
-                })
-            },
-            afterLeave (el) {
-                el.style.height = ''
-            },
-            handleClose () {
-                this.visible = false
-                this.$emit('close')
-            }
-        }
+export default {
+  name: 'bk-alert',
+  props: {
+    type: {
+      type: String,
+      default: 'info'
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    closable: {
+      type: Boolean,
+      default: false
+    },
+    closeText: {
+      type: String
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
     }
+  },
+  data () {
+    return {
+      visible: true
+    }
+  },
+  computed: {
+    typeClass () {
+      return `bk-alert-${this.type}`
+    },
+    closeClasses () {
+      const classes = {}
+      if (this.closeText) {
+        classes['close-text'] = true
+      } else {
+        classes['bk-icon'] = true
+        classes['icon-close'] = true
+      }
+      return classes
+    }
+  },
+  methods: {
+    beforeLeave (el) {
+      const { height } = el.getBoundingClientRect()
+      el.style.height = `${height}px`
+    },
+    leave (el) {
+      setTimeout(() => {
+        el.style.height = 0
+      })
+    },
+    afterLeave (el) {
+      el.style.height = ''
+    },
+    handleClose () {
+      this.visible = false
+      this.$emit('close')
+    }
+  }
+}
 </script>
 <style lang='postcss'>
     @import '../../ui/alert.css';

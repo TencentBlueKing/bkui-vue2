@@ -43,43 +43,43 @@
 </template>
 
 <script>
-    import { bkDatePicker, bkButton, locale, lang } from '@'
-    // import { bkDatePicker, bkButton } from '@'
+import { bkDatePicker, bkButton, locale, lang } from '@'
+// import { bkDatePicker, bkButton } from '@'
 
-    export default {
-        components: {
-            bkDatePicker,
-            bkButton
-        },
-        data () {
-            return {
-                initDateTime: new Date(),
-                curLang: ''
-            }
-        },
-        created () {
-            // 获取语言标识
-            this.curLang = localStorage.getItem('curLang') || 'zhCN'
-            // 根据语言包标识设置组件库的语言，目前语言包支持中文和英文，对应的标识分别为 zhCN, enUS
-            locale.use(lang[this.curLang])
-        },
-        methods: {
-            back () {
-                window.location.href = '#/i18n?anchor=dan-du-shi-yong-zu-jian-ku-nei-zhi-de-yu-yan-bao-example'
-            },
-            handleClick (event) {
-                // 当前为中文时
-                if (this.curLang === 'zhCN') {
-                    // 切换英文
-                    localStorage.setItem('curLang', 'enUS')
-                } else { // 当前为英文时
-                    // 切换中文
-                    localStorage.setItem('curLang', 'zhCN')
-                }
-                this.$nextTick(() => {
-                    window.location.reload()
-                })
-            }
-        }
+export default {
+  components: {
+    bkDatePicker,
+    bkButton
+  },
+  data () {
+    return {
+      initDateTime: new Date(),
+      curLang: ''
     }
+  },
+  created () {
+    // 获取语言标识
+    this.curLang = localStorage.getItem('curLang') || 'zhCN'
+    // 根据语言包标识设置组件库的语言，目前语言包支持中文和英文，对应的标识分别为 zhCN, enUS
+    locale.use(lang[this.curLang])
+  },
+  methods: {
+    back () {
+      window.location.href = '#/i18n?anchor=dan-du-shi-yong-zu-jian-ku-nei-zhi-de-yu-yan-bao-example'
+    },
+    handleClick (event) {
+      // 当前为中文时
+      if (this.curLang === 'zhCN') {
+        // 切换英文
+        localStorage.setItem('curLang', 'enUS')
+      } else { // 当前为英文时
+        // 切换中文
+        localStorage.setItem('curLang', 'zhCN')
+      }
+      this.$nextTick(() => {
+        window.location.reload()
+      })
+    }
+  }
+}
 </script>

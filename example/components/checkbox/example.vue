@@ -60,24 +60,24 @@
 </template>
 
 <script>
-    import { bkCheckbox, bkCheckboxGroup } from '@'
+import { bkCheckbox, bkCheckboxGroup } from '@'
 
-    export default {
-        components: {
-            bkCheckbox,
-            bkCheckboxGroup
-        },
-        data () {
-            return {
-                value: ['value2', 'value4']
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            }
-        }
+export default {
+  components: {
+    bkCheckbox,
+    bkCheckboxGroup
+  },
+  data () {
+    return {
+      value: ['value2', 'value4']
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
+  }
+}
 </script>
 <style lang="postcss">
     .bk-form-checkbox {

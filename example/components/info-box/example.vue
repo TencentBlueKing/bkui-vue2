@@ -51,39 +51,39 @@
 </template>
 
 <script>
-    import { bkButton } from '@'
-    export default {
-        components: {
-            bkButton
-        },
-        data () {
-            return {
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            mountInBody () {
-                this.$bkInfo({
-                    title: 'mount in body'
-                })
-            },
-            mountInParent () {
-                this.$bkInfo({
-                    title: 'mount in parentNode',
-                    // container: document.querySelectorAll('.example-item')[1]
-                    container: this.$refs.vvv.$el.parentNode
-                })
-            },
-            test () {
-                // const h = this.$createElement
-                this.$bkInfo({
-                    title: '支持VNode的提示框',
-                    subHeader: 'subHeader',
-                    subTitle: 'sdsdssd'
-                })
-            }
-        }
+import { bkButton } from '@'
+export default {
+  components: {
+    bkButton
+  },
+  data () {
+    return {
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    mountInBody () {
+      this.$bkInfo({
+        title: 'mount in body'
+      })
+    },
+    mountInParent () {
+      this.$bkInfo({
+        title: 'mount in parentNode',
+        // container: document.querySelectorAll('.example-item')[1]
+        container: this.$refs.vvv.$el.parentNode
+      })
+    },
+    test () {
+      // const h = this.$createElement
+      this.$bkInfo({
+        title: '支持VNode的提示框',
+        subHeader: 'subHeader',
+        subTitle: 'sdsdssd'
+      })
+    }
+  }
+}
 </script>

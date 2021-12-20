@@ -58,157 +58,157 @@
     </section>
 </template>
 <script>
-    import { bkProcess, bkButton } from '@'
-    export default {
-        components: {
-            bkProcess,
-            bkButton
-        },
-        data () {
-            return {
-                process: 1,
-                processCopy: 1,
-                listCopy: [
-                    {
-                        content: '创建应用',
-                        steps: [
-                            {
-                                content: '创建应用1',
-                                isLoading: true
-                            },
-                            {
-                                content: '创建应用2',
-                                isLoading: true
-                            }
-                        ]
-                    },
-                    {
-                        content: '完善资料',
-                        steps: [
-                            {
-                                content: '完善资料1',
-                                isLoading: true
-                            },
-                            {
-                                content: '完善资料2',
-                                isLoading: true
-                            }
-                        ]
-                    },
-                    {
-                        content: '下载代码',
-                        steps: [
-                            {
-                                content: '下载代码1',
-                                isLoading: false
-                            },
-                            {
-                                content: '下载代码2',
-                                isLoading: true
-                            }
-                        ]
-                    },
-                    {
-                        content: '测试部署',
-                        steps: [
-                            {
-                                content: '测试部署1',
-                                isLoading: true
-                            },
-                            {
-                                content: '测试部署2',
-                                isLoading: false
-                            }
-                        ]
-                    },
-                    {
-                        content: '开发完成',
-                        steps: [
-                            {
-                                content: '开发完成1',
-                                isLoading: true
-                            },
-                            {
-                                content: '开发完成2',
-                                isLoading: false
-                            }
-                        ]
-                    }
-                ],
-                list: [
-                    {
-                        content: '创建应用'
-                    },
-                    {
-                        content: '完善资料',
-                        isLoading: true
-                    },
-                    {
-                        content: '下载代码'
-                    },
-                    {
-                        content: '测试部署'
-                    },
-                    {
-                        content: '开发完成'
-                    }
-                ]
+import { bkProcess, bkButton } from '@'
+export default {
+  components: {
+    bkProcess,
+    bkButton
+  },
+  data () {
+    return {
+      process: 1,
+      processCopy: 1,
+      listCopy: [
+        {
+          content: '创建应用',
+          steps: [
+            {
+              content: '创建应用1',
+              isLoading: true
+            },
+            {
+              content: '创建应用2',
+              isLoading: true
             }
+          ]
         },
-        created () {},
-        methods: {
-            back () {
-                window.history.go(-1)
+        {
+          content: '完善资料',
+          steps: [
+            {
+              content: '完善资料1',
+              isLoading: true
             },
-            asyncEvent () {
-                try {
-                    setTimeout(() => {
-                        const data = [
-                            {
-                                content: '创建应用'
-                            },
-                            {
-                                content: '完善资料'
-                            },
-                            {
-                                content: '下载代码'
-                            },
-                            {
-                                content: '测试部署'
-                            },
-                            {
-                                content: '开发完成'
-                            }
-                        ]
-                        this.list = [...data]
-                    }, 1000)
-                } catch (e) {} finally {
-                    this.process = 3
-                }
-            },
-            change (index, data) {
-                console.log(index)
-                console.log(data)
-            },
-            changeCopy (index, data) {
-                console.log(index)
-                console.log(data)
-            },
-            changeList () {
-                this.listCopy = [...this.list]
-            },
-            next () {
-                this.processCopy++
-            },
-            reset () {
-                this.processCopy = 1
-            },
-            next1 () {
-                this.process++
-            },
-            reset1 () {
-                this.process = 1
+            {
+              content: '完善资料2',
+              isLoading: true
             }
+          ]
+        },
+        {
+          content: '下载代码',
+          steps: [
+            {
+              content: '下载代码1',
+              isLoading: false
+            },
+            {
+              content: '下载代码2',
+              isLoading: true
+            }
+          ]
+        },
+        {
+          content: '测试部署',
+          steps: [
+            {
+              content: '测试部署1',
+              isLoading: true
+            },
+            {
+              content: '测试部署2',
+              isLoading: false
+            }
+          ]
+        },
+        {
+          content: '开发完成',
+          steps: [
+            {
+              content: '开发完成1',
+              isLoading: true
+            },
+            {
+              content: '开发完成2',
+              isLoading: false
+            }
+          ]
         }
+      ],
+      list: [
+        {
+          content: '创建应用'
+        },
+        {
+          content: '完善资料',
+          isLoading: true
+        },
+        {
+          content: '下载代码'
+        },
+        {
+          content: '测试部署'
+        },
+        {
+          content: '开发完成'
+        }
+      ]
     }
+  },
+  created () {},
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    asyncEvent () {
+      try {
+        setTimeout(() => {
+          const data = [
+            {
+              content: '创建应用'
+            },
+            {
+              content: '完善资料'
+            },
+            {
+              content: '下载代码'
+            },
+            {
+              content: '测试部署'
+            },
+            {
+              content: '开发完成'
+            }
+          ]
+          this.list = [...data]
+        }, 1000)
+      } catch (e) {} finally {
+        this.process = 3
+      }
+    },
+    change (index, data) {
+      console.log(index)
+      console.log(data)
+    },
+    changeCopy (index, data) {
+      console.log(index)
+      console.log(data)
+    },
+    changeList () {
+      this.listCopy = [...this.list]
+    },
+    next () {
+      this.processCopy++
+    },
+    reset () {
+      this.processCopy = 1
+    },
+    next1 () {
+      this.process++
+    },
+    reset1 () {
+      this.process = 1
+    }
+  }
+}
 </script>

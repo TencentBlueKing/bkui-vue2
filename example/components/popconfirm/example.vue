@@ -51,24 +51,24 @@
 </template>
 
 <script>
-    import { bkPopconfirm } from '@'
+import { bkPopconfirm } from '@'
 
-    export default {
-        components: {
-            bkPopconfirm
-        },
-        data () {
-            return {
-                isLoading: true,
-                isDisabled: true
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            handleClick (event) {
-            }
-        }
+export default {
+  components: {
+    bkPopconfirm
+  },
+  data () {
+    return {
+      isLoading: true,
+      isDisabled: true
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    handleClick (event) {
+    }
+  }
+}
 </script>

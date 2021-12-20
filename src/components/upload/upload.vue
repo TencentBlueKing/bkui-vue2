@@ -127,7 +127,7 @@
 </template>
 
 <script>
-    /**
+/**
      * bk-upload
      * @module components/upload
      * @desc 文件上传组件
@@ -139,438 +139,438 @@
      * @param header     {string}   - 请求头
      * @param theme      {string}   - 主题，默认'draggable'，可选项：['draggable','button', 'picture']
      */
-    import locale from 'bk-magic-vue/lib/locale'
-    import defaultRequest from './request'
-    import { uuid } from '@/utils/util'
-    import bkOverflowTips from '../../directives/overflow-tips'
+import locale from 'bk-magic-vue/lib/locale'
+import defaultRequest from './request'
+import { uuid } from '@/utils/util'
+import bkOverflowTips from '../../directives/overflow-tips'
 
-    export default {
-        name: 'bk-upload',
-        directives: {
-            bkOverflowTips
-        },
-        mixins: [locale.mixin],
-        props: {
-            theme: {
-                type: String,
-                default: 'draggable'
-            },
-            files: {
-                type: Array,
-                default: () => ([])
-            },
-            name: {
-                type: String,
-                default: 'upload_file'
-            },
-            multiple: {
-                type: Boolean,
-                default: true
-            },
-            accept: {
-                type: String
-            },
-            delayTime: {
-                type: Number,
-                default: 0
-            },
-            url: {
-                required: true,
-                type: String
-            },
-            size: {
-                type: [Number, Object],
-                default: function () {
-                    return {
-                        maxFileSize: 5,
-                        maxImgSize: 1
-                    }
-                }
-            },
-            handleResCode: {
-                type: Function,
-                default: function (res) {
-                    if (res && res.code === 0) {
-                        return true
-                    }
-                    return false
-                }
-            },
-            header: [Array, Object],
-            tip: {
-                type: String,
-                default: ''
-            },
-            validateName: {
-                type: RegExp
-            },
-            withCredentials: {
-                type: Boolean,
-                default: false
-            },
-            limit: Number,
-            /**
+export default {
+  name: 'bk-upload',
+  directives: {
+    bkOverflowTips
+  },
+  mixins: [locale.mixin],
+  props: {
+    theme: {
+      type: String,
+      default: 'draggable'
+    },
+    files: {
+      type: Array,
+      default: () => ([])
+    },
+    name: {
+      type: String,
+      default: 'upload_file'
+    },
+    multiple: {
+      type: Boolean,
+      default: true
+    },
+    accept: {
+      type: String
+    },
+    delayTime: {
+      type: Number,
+      default: 0
+    },
+    url: {
+      required: true,
+      type: String
+    },
+    size: {
+      type: [Number, Object],
+      default: function () {
+        return {
+          maxFileSize: 5,
+          maxImgSize: 1
+        }
+      }
+    },
+    handleResCode: {
+      type: Function,
+      default: function (res) {
+        if (res && res.code === 0) {
+          return true
+        }
+        return false
+      }
+    },
+    header: [Array, Object],
+    tip: {
+      type: String,
+      default: ''
+    },
+    validateName: {
+      type: RegExp
+    },
+    withCredentials: {
+      type: Boolean,
+      default: false
+    },
+    limit: Number,
+    /**
              * 自定义扩展长传属性
              * 格式: { name: 'attrName', value: Object }
              */
-            formDataAttributes: {
-                type: Array,
-                default: () => []
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            customRequest: Function
-        },
-        data () {
-            // let acceptTypes = this.accept
-            // if (this.theme === 'picture' && this.accept === undefined) {
-            //     acceptTypes = 'image/png,image/jpeg,image/jpg'
-            // }
+    formDataAttributes: {
+      type: Array,
+      default: () => []
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    customRequest: Function
+  },
+  data () {
+    // let acceptTypes = this.accept
+    // if (this.theme === 'picture' && this.accept === undefined) {
+    //     acceptTypes = 'image/png,image/jpeg,image/jpg'
+    // }
 
-            return {
-                dragText: '',
-                clickText: '',
-                showDialog: true,
-                labelText: '',
-                fileList: [],
-                width: 0,
-                barEl: null,
-                fileIndex: null,
-                speed: 0,
-                total: 0,
-                unit: 'kb/s',
-                isdrag: false,
-                progress: 0
-                // acceptTypes: acceptTypes
-            }
-        },
-        computed: {
-            // 头像上传模式下，图片上传过程中不能重复上传
-            disabled () {
-                return this.theme === 'picture' && !this.multiple && this.fileList.length === 1 && this.fileList[0].status === 'running'
-            },
-
-            acceptTypes () {
-                if (this.theme === 'picture' && this.accept === undefined) {
-                    return 'image/png,image/jpeg,image/jpg'
-                }
-
-                return this.accept
-            }
-        },
-        watch: {
-            'fileIndex' (val) {
-                if (val !== null && val < this.fileList.length) {
-                    if (!this.fileList[val].done) {
-                        this.uploadFile(this.fileList[val])
-                    } else {
-                        this.fileIndex++
-                    }
-                }
-            },
-            'files': {
-                immediate: true,
-                deep: true,
-                handler (list) {
-                    this.fileList = list.map(item => {
-                        this.fileIndex++
-                        return Object.assign({
-                            status: 'done',
-                            done: true,
-                            progress: '100%',
-                            name: `image.png${uuid()}`
-                        }, item)
-                    })
-                }
-            }
-        },
-        created () {
-            this.dragText = this.t('bk.uploadFile.drag')
-            this.clickText = this.t('bk.uploadFile.click')
-            this.labelText = this.t('bk.uploadFile.uploadLabel')
-        },
-        mounted () {
-            /** 初始化拖拽上传 */
-            if (this.theme === 'draggable') {
-                const uploadEl = this.$refs.uploadel
-                uploadEl.addEventListener('dragenter', e => {
-                    this.isdrag = true
-                })
-                uploadEl.addEventListener('dragleave', e => {
-                    this.isdrag = false
-                })
-                uploadEl.addEventListener('dragend', e => {
-                    this.isdrag = false
-                })
-            }
-        },
-        methods: {
-            isImageType (fileType) {
-                return fileType ? fileType.split('/').includes('image') : false
-            },
-            getValidTypeFiles (files) {
-                return files.filter(file => {
-                    const { type, name } = file
-                    const extension = name.indexOf('.') > -1 ? `.${name.split('.').pop()}` : ''
-                    const baseType = type.replace(/\/.*$/, '')
-                    return this.acceptTypes.split(',')
-                        .map(type => type.trim())
-                        .filter(type => type)
-                        .some(acceptedType => {
-                            if (/\..+$/.test(acceptedType)) {
-                                return extension === acceptedType
-                            }
-                            if (/\/\*$/.test(acceptedType)) {
-                                return baseType === acceptedType.replace(/\/\*$/, '')
-                            }
-                            if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
-                                return type === acceptedType
-                            }
-                            return false
-                        })
-                })
-            },
-            filesize (val) {
-                const size = val / 1000
-                if (size < 1) {
-                    return `${val.toFixed(3)} KB`
-                }
-                const index = size.toString().indexOf('.')
-                return `${size.toString().slice(0, index + 2)} MB`
-            },
-            // 处理外层容器 focus 时的 enter 按键事件
-            handleWrapEnter (e) {
-                if (e.target !== e.currentTarget) {
-                    return
-                }
-                if ((e.keyCode === 13 || e.keyCode === 32) && this.$refs.uploadel) {
-                    this.$refs.uploadel.value = null
-                    this.$refs.uploadel.click()
-                }
-            },
-            selectFile (e) {
-                const originalFiles = Array.from(e.target.files)
-                const files = this.acceptTypes ? this.getValidTypeFiles(originalFiles) : originalFiles
-                if (!files.length) {
-                    e.target.value = ''
-                    return
-                }
-                if (typeof this.limit === 'number'
-                    && this.limit !== 1
-                    && (files.length + this.fileList.length) > this.limit) {
-                    e.target.value = ''
-                    this.$emit('on-exceed', e.target.files, this.fileList)
-                    return
-                }
-                const me = this
-                files.forEach((file, i) => {
-                    const fileObj = {
-                        name: file.name,
-                        originSize: file.size,
-                        size: file.size / 1000,
-                        maxFileSize: null,
-                        maxImgSize: null,
-                        type: file.type,
-                        fileHeader: '',
-                        origin: file,
-                        url: '',
-                        base64: '',
-                        status: '',
-                        done: false,
-                        responseData: '',
-                        speed: null,
-                        errorMsg: '',
-                        progress: ''
-                    }
-
-                    const index = fileObj.type.indexOf('/')
-                    const type = fileObj.type.slice(0, index)
-                    fileObj.fileHeader = type
-                    if (typeof me.size === 'number') {
-                        fileObj.maxFileSize = me.size
-                        fileObj.maxImgSize = me.size
-                    } else {
-                        fileObj.maxFileSize = me.size.maxFileSize
-                        fileObj.maxImgSize = me.size.maxImgSize
-                    }
-
-                    // accept props 是否只允许上传图片
-                    const onlyAcceptImage = !(me.accept || '').split(',').some(acc => acc.indexOf('image') < 0)
-                    if (type === 'image' || onlyAcceptImage) {
-                        me.handleImage(fileObj, file)
-                    }
-                    if (type !== 'image' && fileObj.size > (fileObj.maxFileSize * 1000)) {
-                        fileObj.errorMsg = me.t('bk.uploadFile.fileExceedMsg', {
-                            fileName: fileObj.name,
-                            size: fileObj.maxFileSize
-                        })
-                    }
-                    if (me.validateName) {
-                        if (!me.validateName.test(fileObj.name)) {
-                            fileObj.errorMsg = me.t('bk.uploadFile.invalidFileName')
-                        }
-                    }
-                    if ((me.theme === 'picture' && !me.multiple) || me.limit === 1) { // 上传文件 limit 设置为 1 或者头像上传时，只保留一条数据
-                        me.fileList = [fileObj]
-                    } else {
-                        me.fileList.push(fileObj)
-                    }
-                })
-                const len = this.fileList.length
-                const fileIndex = this.fileIndex
-                if (len - 1 === fileIndex) {
-                    this.uploadFile(this.fileList[fileIndex])
-                } else {
-                    this.fileIndex = 0
-                }
-                e.target.value = ''
-            },
-            hideFileList () {
-                if (this.delayTime) {
-                    setTimeout(() => {
-                        this.fileList = []
-                    }, this.delayTime)
-                }
-            },
-            uploadFile (fileObj) {
-                if (fileObj.errorMsg) {
-                    this.fileIndex += 1
-                    fileObj.progress = 100 + '%'
-                    this.$emit('on-error', fileObj, this.fileList)
-                    return
-                }
-                const uploadProgress = e => {
-                    if (e.lengthComputable) {
-                        const percentComplete = Math.round(e.loaded * 100 / e.total)
-                        const kb = Math.round(e.loaded / 1000)
-                        fileObj.progress = percentComplete + '%'
-                        this.speed = kb - this.total
-                        this.total = kb
-                        this.unit = 'kb/s'
-                        if (this.speed > 1000) {
-                            this.speed = Math.round(this.speed / 1000)
-                            this.unit = 'mb/s'
-                        }
-                        this.$emit('on-progress', e, fileObj, this.fileList)
-                    }
-                    fileObj.status = 'running'
-                }
-                const options = {
-                    fileName: this.name,
-                    fileObj: fileObj,
-                    fileList: this.fileList,
-                    data: this.formDataAttributes || [],
-                    withCredentials: this.withCredentials,
-                    method: 'POST',
-                    header: this.header,
-                    url: this.url,
-                    onProgress: (event) => {
-                        uploadProgress(event)
-                    },
-                    onSuccess: (reponseText, fileObj) => {
-                        this.handleSuccess(reponseText, fileObj)
-                    },
-                    onError: (fileObj, fileList, response) => {
-                        this.$emit('on-error', fileObj, fileList, response)
-                    },
-                    onDone: (fileObj) => {
-                        this.handleDone(fileObj)
-                    }
-                }
-                this.isdrag = false
-                const request = this.customRequest || defaultRequest
-                request(options)
-            },
-            handleSuccess (response, file) {
-                if (this.handleResCode(response)) {
-                    file.done = true
-                    file.responseData = response
-                    this.$emit('on-success', file, this.fileList)
-                } else {
-                    file.errorMsg = response.message || this.t('bk.uploadFile.uploadFailed')
-                    this.$emit('on-error', file, this.fileList)
-                }
-            },
-            handleDone (file) {
-                this.fileIndex += 1
-                this.unit = 'kb/s'
-                this.total = 0
-                file.status = 'done'
-                if (this.fileIndex === this.fileList.length) {
-                    this.$emit('on-done', this.fileList)
-                    this.hideFileList()
-                }
-            },
-            handleImage (fileObj, file) {
-                if (fileObj.size > (fileObj.maxImgSize * 1000)) {
-                    fileObj.errorMsg = this.t('bk.uploadFile.imageExceedMsg', { imgSize: fileObj.maxImgSize })
-                    return false
-                }
-                const reader = new FileReader()
-                reader.onload = (e) => {
-                    this.smallImage(reader.result, fileObj)
-                }
-                reader.readAsDataURL(file)
-                return true
-            },
-
-            smallImage (result, fileObj) {
-                const img = new Image()
-                const canvas = document.createElement('canvas')
-                const context = canvas.getContext('2d')
-                img.onload = () => {
-                    const originWidth = img.width
-                    const originHeight = img.height
-                    const maxWidth = this.theme === 'picture' ? 90 : 36
-                    const maxHeight = maxWidth
-                    let targetWidth = originWidth
-                    let targetHeight = originHeight
-                    if (originWidth > maxWidth || originHeight > maxHeight) {
-                        if (originWidth / originHeight > maxWidth / maxHeight) {
-                            targetWidth = maxWidth
-                            targetHeight = Math.round(maxWidth * (originHeight / originWidth))
-                        } else {
-                            targetWidth = maxWidth
-                            targetHeight = maxHeight
-                        }
-                    }
-                    canvas.width = targetWidth
-                    canvas.height = targetHeight
-                    context.clearRect(0, 0, targetWidth, targetHeight)
-                    context.drawImage(img, 0, 0, targetWidth, targetHeight)
-                    const base64 = canvas.toDataURL()
-                    fileObj['url'] = base64
-                    fileObj['base64'] = base64
-                }
-                img.src = result
-            },
-            getIcon (file) {
-                const zipType = ['application/zip', 'application/rar', 'application/tar', 'application/gz']
-                if (zipType.includes(file.type)) {
-                    return 'bk-icon icon-compressed-file'
-                }
-                return 'bk-icon icon-text-file'
-            },
-            deleteFile (index, file) {
-                if (file.xhr) {
-                    file.xhr.abort()
-                }
-                this.fileList.splice(index, 1)
-                const len = this.fileList.length
-                if (!len) {
-                    this.fileIndex = null
-                }
-                // if (index === 0 && len) {
-                //     this.fileIndex = 0
-                //     this.uploadFile(this.fileList[0])
-                // }
-                this.$emit('on-delete', file, this.fileList)
-            }
-        }
+    return {
+      dragText: '',
+      clickText: '',
+      showDialog: true,
+      labelText: '',
+      fileList: [],
+      width: 0,
+      barEl: null,
+      fileIndex: null,
+      speed: 0,
+      total: 0,
+      unit: 'kb/s',
+      isdrag: false,
+      progress: 0
+      // acceptTypes: acceptTypes
     }
+  },
+  computed: {
+    // 头像上传模式下，图片上传过程中不能重复上传
+    disabled () {
+      return this.theme === 'picture' && !this.multiple && this.fileList.length === 1 && this.fileList[0].status === 'running'
+    },
+
+    acceptTypes () {
+      if (this.theme === 'picture' && this.accept === undefined) {
+        return 'image/png,image/jpeg,image/jpg'
+      }
+
+      return this.accept
+    }
+  },
+  watch: {
+    'fileIndex' (val) {
+      if (val !== null && val < this.fileList.length) {
+        if (!this.fileList[val].done) {
+          this.uploadFile(this.fileList[val])
+        } else {
+          this.fileIndex++
+        }
+      }
+    },
+    'files': {
+      immediate: true,
+      deep: true,
+      handler (list) {
+        this.fileList = list.map(item => {
+          this.fileIndex++
+          return Object.assign({
+            status: 'done',
+            done: true,
+            progress: '100%',
+            name: `image.png${uuid()}`
+          }, item)
+        })
+      }
+    }
+  },
+  created () {
+    this.dragText = this.t('bk.uploadFile.drag')
+    this.clickText = this.t('bk.uploadFile.click')
+    this.labelText = this.t('bk.uploadFile.uploadLabel')
+  },
+  mounted () {
+    /** 初始化拖拽上传 */
+    if (this.theme === 'draggable') {
+      const uploadEl = this.$refs.uploadel
+      uploadEl.addEventListener('dragenter', e => {
+        this.isdrag = true
+      })
+      uploadEl.addEventListener('dragleave', e => {
+        this.isdrag = false
+      })
+      uploadEl.addEventListener('dragend', e => {
+        this.isdrag = false
+      })
+    }
+  },
+  methods: {
+    isImageType (fileType) {
+      return fileType ? fileType.split('/').includes('image') : false
+    },
+    getValidTypeFiles (files) {
+      return files.filter(file => {
+        const { type, name } = file
+        const extension = name.indexOf('.') > -1 ? `.${name.split('.').pop()}` : ''
+        const baseType = type.replace(/\/.*$/, '')
+        return this.acceptTypes.split(',')
+          .map(type => type.trim())
+          .filter(type => type)
+          .some(acceptedType => {
+            if (/\..+$/.test(acceptedType)) {
+              return extension === acceptedType
+            }
+            if (/\/\*$/.test(acceptedType)) {
+              return baseType === acceptedType.replace(/\/\*$/, '')
+            }
+            if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
+              return type === acceptedType
+            }
+            return false
+          })
+      })
+    },
+    filesize (val) {
+      const size = val / 1000
+      if (size < 1) {
+        return `${val.toFixed(3)} KB`
+      }
+      const index = size.toString().indexOf('.')
+      return `${size.toString().slice(0, index + 2)} MB`
+    },
+    // 处理外层容器 focus 时的 enter 按键事件
+    handleWrapEnter (e) {
+      if (e.target !== e.currentTarget) {
+        return
+      }
+      if ((e.keyCode === 13 || e.keyCode === 32) && this.$refs.uploadel) {
+        this.$refs.uploadel.value = null
+        this.$refs.uploadel.click()
+      }
+    },
+    selectFile (e) {
+      const originalFiles = Array.from(e.target.files)
+      const files = this.acceptTypes ? this.getValidTypeFiles(originalFiles) : originalFiles
+      if (!files.length) {
+        e.target.value = ''
+        return
+      }
+      if (typeof this.limit === 'number'
+        && this.limit !== 1
+        && (files.length + this.fileList.length) > this.limit) {
+        e.target.value = ''
+        this.$emit('on-exceed', e.target.files, this.fileList)
+        return
+      }
+      const me = this
+      files.forEach((file, i) => {
+        const fileObj = {
+          name: file.name,
+          originSize: file.size,
+          size: file.size / 1000,
+          maxFileSize: null,
+          maxImgSize: null,
+          type: file.type,
+          fileHeader: '',
+          origin: file,
+          url: '',
+          base64: '',
+          status: '',
+          done: false,
+          responseData: '',
+          speed: null,
+          errorMsg: '',
+          progress: ''
+        }
+
+        const index = fileObj.type.indexOf('/')
+        const type = fileObj.type.slice(0, index)
+        fileObj.fileHeader = type
+        if (typeof me.size === 'number') {
+          fileObj.maxFileSize = me.size
+          fileObj.maxImgSize = me.size
+        } else {
+          fileObj.maxFileSize = me.size.maxFileSize
+          fileObj.maxImgSize = me.size.maxImgSize
+        }
+
+        // accept props 是否只允许上传图片
+        const onlyAcceptImage = !(me.accept || '').split(',').some(acc => acc.indexOf('image') < 0)
+        if (type === 'image' || onlyAcceptImage) {
+          me.handleImage(fileObj, file)
+        }
+        if (type !== 'image' && fileObj.size > (fileObj.maxFileSize * 1000)) {
+          fileObj.errorMsg = me.t('bk.uploadFile.fileExceedMsg', {
+            fileName: fileObj.name,
+            size: fileObj.maxFileSize
+          })
+        }
+        if (me.validateName) {
+          if (!me.validateName.test(fileObj.name)) {
+            fileObj.errorMsg = me.t('bk.uploadFile.invalidFileName')
+          }
+        }
+        if ((me.theme === 'picture' && !me.multiple) || me.limit === 1) { // 上传文件 limit 设置为 1 或者头像上传时，只保留一条数据
+          me.fileList = [fileObj]
+        } else {
+          me.fileList.push(fileObj)
+        }
+      })
+      const len = this.fileList.length
+      const fileIndex = this.fileIndex
+      if (len - 1 === fileIndex) {
+        this.uploadFile(this.fileList[fileIndex])
+      } else {
+        this.fileIndex = 0
+      }
+      e.target.value = ''
+    },
+    hideFileList () {
+      if (this.delayTime) {
+        setTimeout(() => {
+          this.fileList = []
+        }, this.delayTime)
+      }
+    },
+    uploadFile (fileObj) {
+      if (fileObj.errorMsg) {
+        this.fileIndex += 1
+        fileObj.progress = 100 + '%'
+        this.$emit('on-error', fileObj, this.fileList)
+        return
+      }
+      const uploadProgress = e => {
+        if (e.lengthComputable) {
+          const percentComplete = Math.round(e.loaded * 100 / e.total)
+          const kb = Math.round(e.loaded / 1000)
+          fileObj.progress = percentComplete + '%'
+          this.speed = kb - this.total
+          this.total = kb
+          this.unit = 'kb/s'
+          if (this.speed > 1000) {
+            this.speed = Math.round(this.speed / 1000)
+            this.unit = 'mb/s'
+          }
+          this.$emit('on-progress', e, fileObj, this.fileList)
+        }
+        fileObj.status = 'running'
+      }
+      const options = {
+        fileName: this.name,
+        fileObj: fileObj,
+        fileList: this.fileList,
+        data: this.formDataAttributes || [],
+        withCredentials: this.withCredentials,
+        method: 'POST',
+        header: this.header,
+        url: this.url,
+        onProgress: (event) => {
+          uploadProgress(event)
+        },
+        onSuccess: (reponseText, fileObj) => {
+          this.handleSuccess(reponseText, fileObj)
+        },
+        onError: (fileObj, fileList, response) => {
+          this.$emit('on-error', fileObj, fileList, response)
+        },
+        onDone: (fileObj) => {
+          this.handleDone(fileObj)
+        }
+      }
+      this.isdrag = false
+      const request = this.customRequest || defaultRequest
+      request(options)
+    },
+    handleSuccess (response, file) {
+      if (this.handleResCode(response)) {
+        file.done = true
+        file.responseData = response
+        this.$emit('on-success', file, this.fileList)
+      } else {
+        file.errorMsg = response.message || this.t('bk.uploadFile.uploadFailed')
+        this.$emit('on-error', file, this.fileList)
+      }
+    },
+    handleDone (file) {
+      this.fileIndex += 1
+      this.unit = 'kb/s'
+      this.total = 0
+      file.status = 'done'
+      if (this.fileIndex === this.fileList.length) {
+        this.$emit('on-done', this.fileList)
+        this.hideFileList()
+      }
+    },
+    handleImage (fileObj, file) {
+      if (fileObj.size > (fileObj.maxImgSize * 1000)) {
+        fileObj.errorMsg = this.t('bk.uploadFile.imageExceedMsg', { imgSize: fileObj.maxImgSize })
+        return false
+      }
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.smallImage(reader.result, fileObj)
+      }
+      reader.readAsDataURL(file)
+      return true
+    },
+
+    smallImage (result, fileObj) {
+      const img = new Image()
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+      img.onload = () => {
+        const originWidth = img.width
+        const originHeight = img.height
+        const maxWidth = this.theme === 'picture' ? 90 : 36
+        const maxHeight = maxWidth
+        let targetWidth = originWidth
+        let targetHeight = originHeight
+        if (originWidth > maxWidth || originHeight > maxHeight) {
+          if (originWidth / originHeight > maxWidth / maxHeight) {
+            targetWidth = maxWidth
+            targetHeight = Math.round(maxWidth * (originHeight / originWidth))
+          } else {
+            targetWidth = maxWidth
+            targetHeight = maxHeight
+          }
+        }
+        canvas.width = targetWidth
+        canvas.height = targetHeight
+        context.clearRect(0, 0, targetWidth, targetHeight)
+        context.drawImage(img, 0, 0, targetWidth, targetHeight)
+        const base64 = canvas.toDataURL()
+        fileObj['url'] = base64
+        fileObj['base64'] = base64
+      }
+      img.src = result
+    },
+    getIcon (file) {
+      const zipType = ['application/zip', 'application/rar', 'application/tar', 'application/gz']
+      if (zipType.includes(file.type)) {
+        return 'bk-icon icon-compressed-file'
+      }
+      return 'bk-icon icon-text-file'
+    },
+    deleteFile (index, file) {
+      if (file.xhr) {
+        file.xhr.abort()
+      }
+      this.fileList.splice(index, 1)
+      const len = this.fileList.length
+      if (!len) {
+        this.fileIndex = null
+      }
+      // if (index === 0 && len) {
+      //     this.fileIndex = 0
+      //     this.uploadFile(this.fileList[0])
+      // }
+      this.$emit('on-delete', file, this.fileList)
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/upload.css';

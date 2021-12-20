@@ -65,103 +65,103 @@
     </div>
 </template>
 <script>
-    import bkPopover from '@/components/popover'
-    export default {
-        name: 'small-jump',
-        components: {
-            bkPopover
-        },
-        props: {
-            current: {
-                type: Number,
-                default: ''
-            },
-            total: {
-                type: Number,
-                default: 0
-            }
-        },
-        data () {
-            return {
-                focus: false,
-                currentPage: this.current
-            }
-        },
-        watch: {
-            current (value) {
-                this.currentPage = value
-            }
-        },
-        methods: {
-            handleInputChange (event) {
-                const $target = event.target
-                const value = Number($target.textContent)
-                // 无效值不抛出事件
-                if (!value || value < 1 || value > this.total || (value === this.current)) return
-
-                this.currentPage = value
-                this.setSelection()
-            },
-            handleBlur () {
-                if (this.currentPage !== this.current) {
-                    this.$emit('on-change', this.currentPage)
-                }
-                this.focus = false
-                this.$refs.jumpInput && (this.$refs.jumpInput.textContent = this.currentPage)
-            },
-            handleStep (step) {
-                const nextStep = this.current + step
-                if (nextStep > this.total) {
-                    return
-                }
-                if (nextStep < 1) {
-                    return
-                }
-                this.currentPage = nextStep
-                this.$emit('on-change', this.currentPage)
-            },
-            handleChangePage (value) {
-                // mousedown事件的优先级高于blur事件
-                if (value === this.current) return this.hidePopover()
-
-                this.currentPage = value
-                if (!this.focus) {
-                    this.handleBlur()
-                }
-                this.hidePopover()
-            },
-            getPopoverInstance () {
-                return this.$refs.smallJumpPopover && this.$refs.smallJumpPopover.instance
-            },
-            hidePopover () {
-                const instance = this.getPopoverInstance()
-                instance && instance.hide()
-            },
-            showPopover () {
-                const instance = this.getPopoverInstance()
-                instance && instance.show()
-            },
-            // 重置光标到末尾
-            setSelection () {
-                this.$nextTick(() => {
-                    const $input = this.$refs.jumpInput
-                    $input.focus()
-                    const range = window.getSelection()
-                    range.selectAllChildren($input)
-                    range.collapseToEnd()
-                })
-            },
-            handleKeyDown (e) {
-                // 阻止默认enter事件（keycode判断可能会被弃用）
-                if (['Enter', 'NumpadEnter'].includes(e.code)) {
-                    this.handleBlur()
-                    this.setSelection()
-                    this.focus = true
-                    this.hidePopover()
-                    e.preventDefault()
-                    return false
-                }
-            }
-        }
+import bkPopover from '@/components/popover'
+export default {
+  name: 'small-jump',
+  components: {
+    bkPopover
+  },
+  props: {
+    current: {
+      type: Number,
+      default: ''
+    },
+    total: {
+      type: Number,
+      default: 0
     }
+  },
+  data () {
+    return {
+      focus: false,
+      currentPage: this.current
+    }
+  },
+  watch: {
+    current (value) {
+      this.currentPage = value
+    }
+  },
+  methods: {
+    handleInputChange (event) {
+      const $target = event.target
+      const value = Number($target.textContent)
+      // 无效值不抛出事件
+      if (!value || value < 1 || value > this.total || (value === this.current)) return
+
+      this.currentPage = value
+      this.setSelection()
+    },
+    handleBlur () {
+      if (this.currentPage !== this.current) {
+        this.$emit('on-change', this.currentPage)
+      }
+      this.focus = false
+      this.$refs.jumpInput && (this.$refs.jumpInput.textContent = this.currentPage)
+    },
+    handleStep (step) {
+      const nextStep = this.current + step
+      if (nextStep > this.total) {
+        return
+      }
+      if (nextStep < 1) {
+        return
+      }
+      this.currentPage = nextStep
+      this.$emit('on-change', this.currentPage)
+    },
+    handleChangePage (value) {
+      // mousedown事件的优先级高于blur事件
+      if (value === this.current) return this.hidePopover()
+
+      this.currentPage = value
+      if (!this.focus) {
+        this.handleBlur()
+      }
+      this.hidePopover()
+    },
+    getPopoverInstance () {
+      return this.$refs.smallJumpPopover && this.$refs.smallJumpPopover.instance
+    },
+    hidePopover () {
+      const instance = this.getPopoverInstance()
+      instance && instance.hide()
+    },
+    showPopover () {
+      const instance = this.getPopoverInstance()
+      instance && instance.show()
+    },
+    // 重置光标到末尾
+    setSelection () {
+      this.$nextTick(() => {
+        const $input = this.$refs.jumpInput
+        $input.focus()
+        const range = window.getSelection()
+        range.selectAllChildren($input)
+        range.collapseToEnd()
+      })
+    },
+    handleKeyDown (e) {
+      // 阻止默认enter事件（keycode判断可能会被弃用）
+      if (['Enter', 'NumpadEnter'].includes(e.code)) {
+        this.handleBlur()
+        this.setSelection()
+        this.focus = true
+        this.hidePopover()
+        e.preventDefault()
+        return false
+      }
+    }
+  }
+}
 </script>

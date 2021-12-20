@@ -81,105 +81,105 @@
     </div>
 </template>
 <script>
-    import bkCheckboxGroup from '@/components/checkbox-group'
-    import bkCheckbox from '@/components/checkbox'
-    import bkLink from '@/components/link'
-    import Tippy from '@/utils/tippy'
-    import locale from 'bk-magic-vue/lib/locale'
+import bkCheckboxGroup from '@/components/checkbox-group'
+import bkCheckbox from '@/components/checkbox'
+import bkLink from '@/components/link'
+import Tippy from '@/utils/tippy'
+import locale from 'bk-magic-vue/lib/locale'
 
-    export default {
-        name: 'bk-table-filter-panel',
-        components: {
-            bkCheckboxGroup,
-            bkCheckbox,
-            bkLink
-        },
-        mixins: [locale.mixin],
-        data () {
-            return {
-                instance: null,
-                reference: null,
-                filters: [],
-                multiple: false,
-                placement: 'bottom-start',
-                method: null,
-                selected: [],
-                column: null,
-                table: null,
-                searchable: false,
-                keyword: '',
-                matchedFilters: []
-            }
-        },
-        computed: {
-            searchEmpty () {
-                return this.keyword.length && !this.matchedFilters.length
-            }
-        },
-        watch: {
-            keyword () {
-                this.setMatchedFilters()
-            }
-        },
-        mounted () {
-            this.instance = Tippy(this.reference, {
-                theme: 'light bk-table-filter-panel',
-                trigger: 'click',
-                interactive: true,
-                placement: this.placement,
-                content: this.$el,
-                onShow: () => {
-                    this.column.filterOpened = true
-                },
-                onHide: () => {
-                    this.column.filterOpened = false
-                },
-                onHidden: () => {
-                    this.keyword = ''
-                }
-            })
-        },
-        methods: {
-            setMatchedFilters () {
-                const keyword = this.keyword.toLowerCase()
-                this.matchedFilters = this.filters.filter(filter => {
-                    const index = filter.text.toString().toLowerCase().indexOf(keyword)
-                    return index > -1
-                })
-            },
-            isMatched (filter) {
-                if (!this.keyword.length) {
-                    return true
-                }
-                return this.matchedFilters.includes(filter)
-            },
-            handleConfirm () {
-                this.confirmFilter(this.selected)
-                this.instance.hide()
-            },
-            handleReset () {
-                this.selected = []
-                this.handleConfirm()
-            },
-            handleSelect (filter) {
-                if (filter.disabled) {
-                    return
-                }
-                if (this.selected.includes(filter.value)) {
-                    this.instance.hide()
-                    return
-                }
-                this.selected = [filter.value]
-                this.handleConfirm()
-            },
-            confirmFilter () {
-                this.column.filteredValue = this.selected
-                this.table.store.commit('filterChange', {
-                    column: this.column,
-                    values: this.selected
-                })
-                this.table.store.updateAllSelected()
-            }
-        }
+export default {
+  name: 'bk-table-filter-panel',
+  components: {
+    bkCheckboxGroup,
+    bkCheckbox,
+    bkLink
+  },
+  mixins: [locale.mixin],
+  data () {
+    return {
+      instance: null,
+      reference: null,
+      filters: [],
+      multiple: false,
+      placement: 'bottom-start',
+      method: null,
+      selected: [],
+      column: null,
+      table: null,
+      searchable: false,
+      keyword: '',
+      matchedFilters: []
     }
+  },
+  computed: {
+    searchEmpty () {
+      return this.keyword.length && !this.matchedFilters.length
+    }
+  },
+  watch: {
+    keyword () {
+      this.setMatchedFilters()
+    }
+  },
+  mounted () {
+    this.instance = Tippy(this.reference, {
+      theme: 'light bk-table-filter-panel',
+      trigger: 'click',
+      interactive: true,
+      placement: this.placement,
+      content: this.$el,
+      onShow: () => {
+        this.column.filterOpened = true
+      },
+      onHide: () => {
+        this.column.filterOpened = false
+      },
+      onHidden: () => {
+        this.keyword = ''
+      }
+    })
+  },
+  methods: {
+    setMatchedFilters () {
+      const keyword = this.keyword.toLowerCase()
+      this.matchedFilters = this.filters.filter(filter => {
+        const index = filter.text.toString().toLowerCase().indexOf(keyword)
+        return index > -1
+      })
+    },
+    isMatched (filter) {
+      if (!this.keyword.length) {
+        return true
+      }
+      return this.matchedFilters.includes(filter)
+    },
+    handleConfirm () {
+      this.confirmFilter(this.selected)
+      this.instance.hide()
+    },
+    handleReset () {
+      this.selected = []
+      this.handleConfirm()
+    },
+    handleSelect (filter) {
+      if (filter.disabled) {
+        return
+      }
+      if (this.selected.includes(filter.value)) {
+        this.instance.hide()
+        return
+      }
+      this.selected = [filter.value]
+      this.handleConfirm()
+    },
+    confirmFilter () {
+      this.column.filteredValue = this.selected
+      this.table.store.commit('filterChange', {
+        column: this.column,
+        values: this.selected
+      })
+      this.table.store.updateAllSelected()
+    }
+  }
+}
 </script>

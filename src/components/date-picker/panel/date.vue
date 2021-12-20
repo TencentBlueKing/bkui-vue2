@@ -90,159 +90,159 @@
     </div>
 </template>
 <script>
-    import { siblingMonth, formatDateLabels } from '@/utils/date'
+import { siblingMonth, formatDateLabels } from '@/utils/date'
 
-    import DateTable from '../base/date-table.vue'
-    import YearTable from '../base/year-table.vue'
-    import MonthTable from '../base/month-table.vue'
-    import Confirm from '../base/confirm.vue'
-    import TimePicker from './time.vue'
-    import DatePanelLabel from './date-panel-label.vue'
+import DateTable from '../base/date-table.vue'
+import YearTable from '../base/year-table.vue'
+import MonthTable from '../base/month-table.vue'
+import Confirm from '../base/confirm.vue'
+import TimePicker from './time.vue'
+import DatePanelLabel from './date-panel-label.vue'
 
-    import datePanelMixin from './date-panel-mixin'
-    import panelMixins from './panel-mixins'
+import datePanelMixin from './date-panel-mixin'
+import panelMixins from './panel-mixins'
 
-    export default {
-        name: 'DatePanel',
-        components: {
-            /* eslint-disable vue/no-unused-components */
-            DateTable,
-            YearTable,
-            MonthTable,
-            /* eslint-enable vue/no-unused-components */
-            TimePicker,
-            DatePanelLabel,
-            Confirm
-        },
-        mixins: [panelMixins, datePanelMixin],
-        props: {
-            clearable: {
-                type: Boolean,
-                default: true
-            },
-            multiple: {
-                type: Boolean,
-                default: false
-            },
-            shortcuts: {
-                type: Array,
-                default: () => []
-            },
-            shortcutClose: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data () {
-            const { selectionMode, value } = this
-            const dates = value.slice().sort()
-
-            return {
-                currentView: selectionMode || 'date',
-                pickerTable: this.getTableType(selectionMode),
-                dates: dates,
-                panelDate: this.startDate || dates[0] || new Date()
-            }
-        },
-        computed: {
-            panelPickerHandlers () {
-                return this.pickerTable === `${this.currentView}-table` ? this.handlePick : this.handlePreSelection
-            },
-            datePanelLabel () {
-                const locale = 'zh-CN'
-                const datePanelLabelStr = '[yyyy]-[mm]'
-                const date = this.panelDate
-                const { labels, separator } = formatDateLabels(locale, datePanelLabelStr, date)
-
-                const handler = type => {
-                    return () => {
-                        this.pickerTable = this.getTableType(type)
-                    }
-                }
-
-                return {
-                    separator: separator,
-                    labels: labels.map(obj => {
-                        obj.handler = handler(obj.type)
-                        return obj
-                    })
-                }
-            },
-            timeDisabled () {
-                return !this.dates[0]
-            }
-        },
-        watch: {
-            value (newVal) {
-                this.dates = newVal
-                const panelDate = this.multiple ? this.dates[this.dates.length - 1] : (this.startDate || this.dates[0])
-                this.panelDate = panelDate || new Date()
-            },
-            currentView (currentView) {
-                this.$emit('selection-mode-change', currentView)
-
-                if (this.currentView === 'time') {
-                    this.$nextTick(() => {
-                        const spinner = this.$refs.timePicker.$refs.timeSpinner
-                        spinner.updateScroll()
-                    })
-                }
-            },
-            selectionMode (type) {
-                this.currentView = type
-                this.pickerTable = this.getTableType(type)
-            },
-            focusedDate (date) {
-                const isDifferentYear = date.getFullYear() !== this.panelDate.getFullYear()
-                const isDifferentMonth = isDifferentYear || date.getMonth() !== this.panelDate.getMonth()
-                if (isDifferentYear || isDifferentMonth) {
-                    if (!this.multiple) {
-                        this.panelDate = date
-                    }
-                }
-            }
-        },
-        methods: {
-            reset () {
-                this.currentView = this.selectionMode
-                this.pickerTable = this.getTableType(this.currentView)
-            },
-            changeYear (dir) {
-                if (this.selectionMode === 'year' || this.pickerTable === 'year-table') {
-                    this.panelDate = new Date(this.panelDate.getFullYear() + dir * 10, 0, 1)
-                } else {
-                    this.panelDate = siblingMonth(this.panelDate, dir * 12)
-                }
-            },
-            getTableType (currentView) {
-                return currentView.match(/^time/) ? 'time-picker' : `${currentView}-table`
-            },
-            changeMonth (dir) {
-                this.panelDate = siblingMonth(this.panelDate, dir)
-            },
-            handlePreSelection (value) {
-                this.panelDate = value
-                if (this.pickerTable === 'year-table') {
-                    this.pickerTable = 'month-table'
-                } else {
-                    this.pickerTable = this.getTableType(this.currentView)
-                }
-            },
-            handlePick (value, type) {
-                const { selectionMode, panelDate } = this
-                if (selectionMode === 'year') {
-                    value = new Date(value.getFullYear(), 0, 1)
-                } else if (selectionMode === 'month') {
-                    value = new Date(panelDate.getFullYear(), value.getMonth(), 1)
-                } else {
-                    value = new Date(value)
-                }
-
-                this.dates = [value]
-                this.$emit('pick', value, false, type || selectionMode)
-            }
-        }
+export default {
+  name: 'DatePanel',
+  components: {
+    /* eslint-disable vue/no-unused-components */
+    DateTable,
+    YearTable,
+    MonthTable,
+    /* eslint-enable vue/no-unused-components */
+    TimePicker,
+    DatePanelLabel,
+    Confirm
+  },
+  mixins: [panelMixins, datePanelMixin],
+  props: {
+    clearable: {
+      type: Boolean,
+      default: true
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    shortcuts: {
+      type: Array,
+      default: () => []
+    },
+    shortcutClose: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    const { selectionMode, value } = this
+    const dates = value.slice().sort()
+
+    return {
+      currentView: selectionMode || 'date',
+      pickerTable: this.getTableType(selectionMode),
+      dates: dates,
+      panelDate: this.startDate || dates[0] || new Date()
+    }
+  },
+  computed: {
+    panelPickerHandlers () {
+      return this.pickerTable === `${this.currentView}-table` ? this.handlePick : this.handlePreSelection
+    },
+    datePanelLabel () {
+      const locale = 'zh-CN'
+      const datePanelLabelStr = '[yyyy]-[mm]'
+      const date = this.panelDate
+      const { labels, separator } = formatDateLabels(locale, datePanelLabelStr, date)
+
+      const handler = type => {
+        return () => {
+          this.pickerTable = this.getTableType(type)
+        }
+      }
+
+      return {
+        separator: separator,
+        labels: labels.map(obj => {
+          obj.handler = handler(obj.type)
+          return obj
+        })
+      }
+    },
+    timeDisabled () {
+      return !this.dates[0]
+    }
+  },
+  watch: {
+    value (newVal) {
+      this.dates = newVal
+      const panelDate = this.multiple ? this.dates[this.dates.length - 1] : (this.startDate || this.dates[0])
+      this.panelDate = panelDate || new Date()
+    },
+    currentView (currentView) {
+      this.$emit('selection-mode-change', currentView)
+
+      if (this.currentView === 'time') {
+        this.$nextTick(() => {
+          const spinner = this.$refs.timePicker.$refs.timeSpinner
+          spinner.updateScroll()
+        })
+      }
+    },
+    selectionMode (type) {
+      this.currentView = type
+      this.pickerTable = this.getTableType(type)
+    },
+    focusedDate (date) {
+      const isDifferentYear = date.getFullYear() !== this.panelDate.getFullYear()
+      const isDifferentMonth = isDifferentYear || date.getMonth() !== this.panelDate.getMonth()
+      if (isDifferentYear || isDifferentMonth) {
+        if (!this.multiple) {
+          this.panelDate = date
+        }
+      }
+    }
+  },
+  methods: {
+    reset () {
+      this.currentView = this.selectionMode
+      this.pickerTable = this.getTableType(this.currentView)
+    },
+    changeYear (dir) {
+      if (this.selectionMode === 'year' || this.pickerTable === 'year-table') {
+        this.panelDate = new Date(this.panelDate.getFullYear() + dir * 10, 0, 1)
+      } else {
+        this.panelDate = siblingMonth(this.panelDate, dir * 12)
+      }
+    },
+    getTableType (currentView) {
+      return currentView.match(/^time/) ? 'time-picker' : `${currentView}-table`
+    },
+    changeMonth (dir) {
+      this.panelDate = siblingMonth(this.panelDate, dir)
+    },
+    handlePreSelection (value) {
+      this.panelDate = value
+      if (this.pickerTable === 'year-table') {
+        this.pickerTable = 'month-table'
+      } else {
+        this.pickerTable = this.getTableType(this.currentView)
+      }
+    },
+    handlePick (value, type) {
+      const { selectionMode, panelDate } = this
+      if (selectionMode === 'year') {
+        value = new Date(value.getFullYear(), 0, 1)
+      } else if (selectionMode === 'month') {
+        value = new Date(panelDate.getFullYear(), value.getMonth(), 1)
+      } else {
+        value = new Date(value)
+      }
+
+      this.dates = [value]
+      this.$emit('pick', value, false, type || selectionMode)
+    }
+  }
+}
 </script>
 <style>
     @import '../../../ui/date-picker.css';

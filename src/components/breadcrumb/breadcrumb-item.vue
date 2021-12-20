@@ -41,24 +41,24 @@
     </div>
 </template>
 <script>
-    export default {
-        name: 'bk-breadcrumb-item',
-        props: {
-            to: {
-                type: [Object, String],
-                default: () => null
-            },
-            replace: {
-                type: Boolean,
-                default: false
-            }
-        },
-        methods: {
-            jump () {
-                const { to, $router } = this
-                if (!to || !$router) return
-                this.replace ? $router.replace(to) : $router.push(to)
-            }
-        }
+export default {
+  name: 'bk-breadcrumb-item',
+  props: {
+    to: {
+      type: [Object, String],
+      default: () => null
+    },
+    replace: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    jump () {
+      const { to, $router } = this
+      if (!to || !$router) return
+      this.replace ? $router.replace(to) : $router.push(to)
+    }
+  }
+}
 </script>

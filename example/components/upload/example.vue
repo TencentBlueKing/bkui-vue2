@@ -72,48 +72,48 @@
 </template>
 
 <script>
-    import { bkUpload } from '@'
+import { bkUpload } from '@'
 
-    export default {
-        components: {
-            bkUpload
-        },
-        data () {
-            return {
-                files: [
-                    {
-                        name: 'image.png',
-                        status: 'done',
-                        url: './example/static/images/preview/0.png'
-                    }
-                ]
-            }
-        },
-        methods: {
-            testSuccess (file, fileList) {
-                console.log(file, fileList, 'success')
-            },
-            testProgress (e, file, fileList) {
-                console.log(e, file, fileList, 'progress')
-            },
-            testDone () {
-                console.log('done')
-            },
-            testErr (file, fileList) {
-                console.log(file, fileList, 'error')
-            },
-            testDel (file, fileList) {
-                console.log(file, fileList, 'testDeltestDeltestDeltestDeltestDel')
-            },
-            back () {
-                window.history.go(-1)
-            },
-            handleRes (response) {
-                if (response.id) {
-                    return true
-                }
-                return false
-            }
+export default {
+  components: {
+    bkUpload
+  },
+  data () {
+    return {
+      files: [
+        {
+          name: 'image.png',
+          status: 'done',
+          url: './example/static/images/preview/0.png'
         }
+      ]
     }
+  },
+  methods: {
+    testSuccess (file, fileList) {
+      console.log(file, fileList, 'success')
+    },
+    testProgress (e, file, fileList) {
+      console.log(e, file, fileList, 'progress')
+    },
+    testDone () {
+      console.log('done')
+    },
+    testErr (file, fileList) {
+      console.log(file, fileList, 'error')
+    },
+    testDel (file, fileList) {
+      console.log(file, fileList, 'testDeltestDeltestDeltestDeltestDel')
+    },
+    back () {
+      window.history.go(-1)
+    },
+    handleRes (response) {
+      if (response.id) {
+        return true
+      }
+      return false
+    }
+  }
+}
 </script>

@@ -75,94 +75,94 @@
  * @param {Number} limit 消息提示组件同时显示的最大数目，默认不限制个数，设置为 0 时，清除所有实例
  * @param {Function} onClose 关闭回调函数
  */
-    import locale from 'bk-magic-vue/lib/locale'
+import locale from 'bk-magic-vue/lib/locale'
 
-    const ICONS = {
-        primary: 'icon-info-circle-shape',
-        error: 'icon-close-circle-shape',
-        warning: 'icon-exclamation-circle-shape',
-        success: 'icon-check-circle-shape'
+const ICONS = {
+  primary: 'icon-info-circle-shape',
+  error: 'icon-close-circle-shape',
+  warning: 'icon-exclamation-circle-shape',
+  success: 'icon-check-circle-shape'
+}
+
+export default {
+  name: 'bk-notify',
+  mixins: [locale.mixin],
+  data () {
+    return {
+      theme: 'primary',
+      icon: '',
+      title: '',
+      message: '',
+      position: 'top-right',
+      delay: 5000,
+      dismissable: true,
+      limitLine: 2,
+      showViewMore: false,
+      verticalOffset: 0,
+      horizonOffset: 0,
+      visible: false,
+      limit: 0,
+      countID: null,
+      onClose: function () {},
+      extCls: '',
+      useHTMLString: false // 是否使用html方式渲染message（存在XSS攻击风险）
     }
+  },
+  computed: {
+    themeClass () {
+      return `bk-notify-${this.theme}`
+    },
+    vDirection () {
+      return /top-/.test(this.position) ? 'top' : 'bottom'
+    },
+    hDirection () {
+      return this.position.indexOf('right') > -1 ? 'right' : 'left'
+    },
+    placementStyle () {
+      return {
+        [this.hDirection]: `${this.horizonOffset}px`,
+        [this.vDirection]: `${this.verticalOffset}px`
 
-    export default {
-        name: 'bk-notify',
-        mixins: [locale.mixin],
-        data () {
-            return {
-                theme: 'primary',
-                icon: '',
-                title: '',
-                message: '',
-                position: 'top-right',
-                delay: 5000,
-                dismissable: true,
-                limitLine: 2,
-                showViewMore: false,
-                verticalOffset: 0,
-                horizonOffset: 0,
-                visible: false,
-                limit: 0,
-                countID: null,
-                onClose: function () {},
-                extCls: '',
-                useHTMLString: false // 是否使用html方式渲染message（存在XSS攻击风险）
-            }
-        },
-        computed: {
-            themeClass () {
-                return `bk-notify-${this.theme}`
-            },
-            vDirection () {
-                return /top-/.test(this.position) ? 'top' : 'bottom'
-            },
-            hDirection () {
-                return this.position.indexOf('right') > -1 ? 'right' : 'left'
-            },
-            placementStyle () {
-                return {
-                    [this.hDirection]: `${this.horizonOffset}px`,
-                    [this.vDirection]: `${this.verticalOffset}px`
-
-                }
-            },
-            contentStyle () {
-                const contentStyle = {}
-                if (this.limitLine > 0) {
-                    contentStyle['max-height'] = `${20 * this.limitLine}px`
-                }
-                return contentStyle
-            },
-            tipsIcon () {
-                return this.icon || ICONS[this.theme]
-            }
-        },
-        mounted () {
-            this.startCountDown()
-        },
-        methods: {
-            destroyEl () {
-                this.$destroy()
-                this.$el.parentNode && this.$el.parentNode.removeChild(this.$el)
-            },
-            onClickViewMore () {
-                typeof this.onViewMoreHandler === 'function' && this.onViewMoreHandler()
-            },
-            startCountDown () {
-                if (this.delay > 0) {
-                    this.countID = setTimeout(() => {
-                        this.visible && this.close()
-                    }, this.delay)
-                }
-            },
-            stopCountDown () {
-                clearTimeout(this.countID)
-            },
-            close () {
-                this.visible = false
-                typeof this.onClose === 'function' && this.onClose()
-            }
-        }
+      }
+    },
+    contentStyle () {
+      const contentStyle = {}
+      if (this.limitLine > 0) {
+        contentStyle['max-height'] = `${20 * this.limitLine}px`
+      }
+      return contentStyle
+    },
+    tipsIcon () {
+      return this.icon || ICONS[this.theme]
     }
+  },
+  mounted () {
+    this.startCountDown()
+  },
+  methods: {
+    destroyEl () {
+      this.$destroy()
+      this.$el.parentNode && this.$el.parentNode.removeChild(this.$el)
+    },
+    onClickViewMore () {
+      typeof this.onViewMoreHandler === 'function' && this.onViewMoreHandler()
+    },
+    startCountDown () {
+      if (this.delay > 0) {
+        this.countID = setTimeout(() => {
+          this.visible && this.close()
+        }, this.delay)
+      }
+    },
+    stopCountDown () {
+      clearTimeout(this.countID)
+    },
+    close () {
+      this.visible = false
+      typeof this.onClose === 'function' && this.onClose()
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/notify.css';

@@ -65,34 +65,34 @@
     </li>
 </template>
 <script>
-    import bkCheckbox from '@/components/checkbox'
-    export default {
-        name: 'optionItem',
-        components: {
-            bkCheckbox
-        },
-        props: {
-            item: {
-                type: Object,
-                default: () => ({})
-            },
-            selectedItem: {
-                type: Object,
-                default: () => ({})
-            },
-            multiple: {
-                type: Boolean,
-                default: false
-            },
-            isRemote: {
-                type: Boolean,
-                default: false
-            }
-        },
-        methods: {
-            handleCheckItem () {
-                this.$emit('handleCheckItem', this.item)
-            }
-        }
+import bkCheckbox from '@/components/checkbox'
+export default {
+  name: 'optionItem',
+  components: {
+    bkCheckbox
+  },
+  props: {
+    item: {
+      type: Object,
+      default: () => ({})
+    },
+    selectedItem: {
+      type: Object,
+      default: () => ({})
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    isRemote: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    handleCheckItem () {
+      this.$emit('handleCheckItem', this.item)
+    }
+  }
+}
 </script>

@@ -34,9 +34,9 @@ let checkboxSeed = 0
 let groupSeed = 0
 
 export function getCheckboxName () {
-    return `bk-checkbox_${checkboxSeed++}`
+  return `bk-checkbox_${checkboxSeed++}`
 }
 
 export function getGroupName () {
-    return `bk-checkbox-group_${groupSeed++}`
+  return `bk-checkbox-group_${groupSeed++}`
 }

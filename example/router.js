@@ -137,537 +137,537 @@ const FixedNavbar = () => import(/* webpackChunkName: 'fixed-narbar' */'./compon
 const Spin = () => import(/* webpackChunkName: 'spin' */'./components/spin/readme.md')
 const BackTop = () => import(/* webpackChunkName: 'back-top' */'./components/back-top/readme.md')
 const router = new VueRouter({
-    // mode: 'history',
-    routes: [
-        {
-            name: 'backTop',
-            path: '/back-top',
-            component: BackTop
-        },
-        {
-            name: 'affix',
-            path: '/affix',
-            component: Affix
-        },
-        {
-            name: 'fixedNavbar',
-            path: '/fixed-navbar',
-            component: FixedNavbar
-        },
-        {
-            name: 'alert',
-            path: '/alert',
-            component: Alert
-        },
-        {
-            name: 'transition',
-            path: '/transition',
-            component: Transition
-        },
-        {
-            name: 'exception',
-            path: '/exception',
-            component: Exception
-        },
-        {
-            name: 'roundProgress',
-            path: '/round-progress',
-            component: Round
-        },
-        {
-            name: 'progress',
-            path: '/progress',
-            component: Progress
-        },
-        {
-            name: 'timeline',
-            path: '/timeline',
-            component: Timeline
-        },
-        {
-            name: 'treeExample',
-            path: '/tree/example',
-            component: TreeExample
-        },
-        {
-            name: 'tree',
-            path: '/tree',
-            component: Tree
-        },
-        {
-            name: 'transfer',
-            path: '/transfer',
-            component: Transfer
-        },
-        {
-            name: 'transferExample',
-            path: '/transfer/example',
-            component: TransferExample
-        },
-        {
-            name: 'changelog',
-            path: '/changelog',
-            component: Changelog
-        },
-        {
-            name: 'home',
-            path: '/',
-            component: Install,
-            alias: '/index.html',
-            children: [
-                {
-                    name: 'install',
-                    path: 'install',
-                    component: Install,
-                    alias: ''
-                }
-            ]
-        },
-        {
-            name: 'start',
-            path: '/start',
-            component: Start
-        },
-        {
-            name: 'config',
-            path: '/config',
-            component: Config
-        },
-        {
-            name: 'spec',
-            path: '/spec',
-            component: Spec
-        },
-        {
-            name: 'color',
-            path: '/color',
-            component: Color
-        },
-        {
-            name: 'colorPicker',
-            path: '/color-picker',
-            component: ColorPicker
-        },
-        {
-            name: 'colorPickerExample',
-            path: '/color-picker/example',
-            component: ColorPickerExample
-        },
-        {
-            name: 'componseFormItem',
-            path: '/compose-form-item',
-            component: ComposeFormItem
-        },
-        {
-            name: 'font',
-            path: '/font',
-            component: Font
-        },
-        {
-            name: 'icon',
-            path: '/icon',
-            component: Icon
-        },
-        {
-            name: 'button',
-            path: '/button',
-            component: Button
-        },
-        {
-            name: 'buttonExample',
-            path: '/button/example',
-            component: ButtonExample
-        },
-        {
-            name: 'animateNumber',
-            path: '/animate-number',
-            component: AnimateNumber
-        },
-        {
-            name: 'dropdownMenu',
-            path: '/dropdown-menu',
-            component: DropdownMenu
-        },
-        {
-            name: 'badge',
-            path: '/badge',
-            component: Badge
-        },
-        {
-            name: 'dialog',
-            path: '/dialog',
-            component: Dialog
-        },
-        {
-            name: 'dialogExample',
-            path: '/dialog/example',
-            component: DialogExample
-        },
-        {
-            name: 'switcher',
-            path: '/switcher',
-            component: Switcher
-        },
-        {
-            name: 'switcherExample',
-            path: '/switcher/example',
-            component: SwitcherExample
-        },
-        {
-            name: 'tag',
-            path: '/tag',
-            component: TagInput
-        },
-        {
-            name: 'tagExample',
-            path: '/tag/example',
-            component: TagInputExample
-        },
-        {
-            name: 'loading',
-            path: '/loading',
-            component: Loading
-        },
-        {
-            name: 'sideSlider',
-            path: '/sideslider',
-            component: SideSlider
-        },
-        {
-            name: 'sideSliderExample',
-            path: '/sideslider/example',
-            component: SideSliderExample
-        },
-        {
-            name: 'steps',
-            path: '/steps',
-            component: Steps
-        },
-        {
-            name: 'message',
-            path: '/message',
-            component: Message
-        },
-        {
-            name: 'notify',
-            path: '/notify',
-            component: Notify
-        },
-        {
-            name: 'tooltips',
-            path: '/tooltips',
-            component: Tooltips
-        },
-        {
-            name: 'tooltipsExample',
-            path: '/tooltips/example',
-            component: TooltipsExample
-        },
-        {
-            name: 'infoBox',
-            path: '/info-box',
-            component: InfoBox
-        },
-        {
-            name: 'infoBoxExample',
-            path: '/info-box/example',
-            component: InfoBoxExample
-        },
-        {
-            name: 'popover',
-            path: '/popover',
-            component: Popover
-        },
-        {
-            name: 'popconfirm',
-            path: '/popconfirm',
-            component: Popconfirm
-        },
-        {
-            name: 'popconfirmExample',
-            path: '/popconfirm/example',
-            component: PopconfirmExample
-        },
-        {
-            name: 'datePicker',
-            path: '/date-picker',
-            component: DatePicker
-        },
-        {
-            name: 'datePickerExample',
-            path: '/date-picker/example',
-            component: DatePickerExample
-        },
-        {
-            name: 'timePicker',
-            path: '/time-picker',
-            component: TimePicker
-        },
-        {
-            name: 'timePickerExample',
-            path: '/time-picker/example',
-            component: TimePickerExample
-        },
-        {
-            name: 'upload',
-            path: '/upload',
-            component: Upload
-        },
-        {
-            name: 'uploadExample',
-            path: '/upload/example',
-            component: UploadExample
-        },
-        {
-            name: 'pagination',
-            path: '/pagination',
-            component: Pagination
-        },
-        {
-            name: 'paginationExample',
-            path: '/pagination/example',
-            component: PaginationExample
-        },
-        {
-            name: 'i18n',
-            path: '/i18n',
-            component: I18N
-        },
-        {
-            name: 'vueI18NCustomExample',
-            path: '/i18n/vue-i18n-custom-example',
-            component: VueI18NCustomExample
-        },
-        {
-            name: 'vueI18NExample',
-            path: '/i18n/vue-i18n-example',
-            component: VueI18NExample
-        },
-        {
-            name: 'i18nExample',
-            path: '/i18n/buildin-example',
-            component: I18NBuildinExample
-        },
-        {
-            name: 'collapse',
-            path: '/collapse',
-            component: Collapse
-        },
-        {
-            name: 'process',
-            path: '/process',
-            component: Process
-        },
-        {
-            name: 'processExample',
-            path: '/process/example',
-            component: ProcessExample
-        },
-        {
-            name: 'table',
-            path: '/table',
-            component: Table
-        },
-        {
-            name: 'tableExample',
-            path: '/table/example',
-            component: TableExample
-        },
-        {
-            name: 'form',
-            path: '/form',
-            component: Form
-        },
-        {
-            name: 'input',
-            path: '/input',
-            component: Input
-        },
-        {
-            name: 'inputExample',
-            path: '/input/example',
-            component: InputExample
-        },
-        {
-            name: 'radio',
-            path: '/radio',
-            component: Radio
-        },
-        {
-            name: 'radioExample',
-            path: '/radio/example',
-            component: RadioExample
-        },
-        {
-            name: 'checkbox',
-            path: '/checkbox',
-            component: Checkbox
-        },
-        {
-            name: 'checkboxExample',
-            path: '/checkbox/example',
-            component: CheckboxExample
-        },
-        {
-            name: 'diff',
-            path: '/diff',
-            component: Diff
-        },
-        {
-            name: 'tab',
-            path: '/tab',
-            component: Tab
-        },
-        {
-            name: 'tabExample',
-            path: '/tabExample',
-            component: TabExample
-        },
-        {
-            name: 'select',
-            path: '/select',
-            component: Select
-        },
-        {
-            name: 'selectExample',
-            path: '/select/example',
-            component: SelectExample
-        },
-        {
-            name: 'slider',
-            path: '/slider',
-            component: Slider
-        },
-        {
-            name: 'grid',
-            path: '/grid',
-            component: Grid
-        },
-        {
-            name: 'gridExample',
-            path: '/grid/example',
-            component: GridExample
-        },
-        {
-            name: 'directives',
-            path: '/directives',
-            component: Directives
-        },
-        {
-            name: 'navigation',
-            path: '/navigation',
-            component: Navigation
-        },
-        {
-            name: 'navigation-example',
-            path: '/navigation/example',
-            component: NavigationExample
-        },
-        {
-            name: 'searchselect',
-            path: '/searchselect',
-            component: SearchSelect
-        },
-        {
-            name: 'searchselectExample',
-            path: '/searchselect/example',
-            component: SearchSelectExample
-        },
-        {
-            name: 'rate',
-            path: '/rate',
-            component: Rate
-        },
-        {
-            name: 'swiper',
-            path: '/swiper',
-            component: Swiper
-        },
-        {
-            name: 'bigTree',
-            path: '/big-tree',
-            component: BigTree
-        },
-        {
-            name: 'bigTreeExample',
-            path: '/big-tree/example',
-            component: BigTreeExample
-        },
-        {
-            name: 'virtualScroll',
-            path: '/virtual-scroll',
-            component: VirtualScroll
-        },
-        {
-            name: 'link',
-            path: '/link',
-            component: Link
-        },
-        {
-            name: 'linkExample',
-            path: '/link/example',
-            component: LinkExample
-        },
-        {
-            name: 'cascade',
-            path: '/cascade',
-            component: Cascade
-        }, {
-            name: 'cascadeExample',
-            path: '/cascade/example',
-            component: CascadeExample
-        },
-        {
-            name: 'zoomImage',
-            path: '/zoom-image',
-            component: ZoomImage
-        },
-        {
-            name: 'versionDetail',
-            path: '/version-detail',
-            component: VersionDetail
-        },
-        {
-            name: 'card',
-            path: '/card',
-            component: CardDetail
-        },
-        {
-            name: 'image',
-            path: '/image',
-            component: Image
-        },
-        {
-            name: 'breadcrumb',
-            path: '/breadcrumb',
-            component: Breadcrumb
-        },
-        {
-            name: 'divider',
-            path: '/divider',
-            component: Divider
-        },
-        {
-            name: 'tags',
-            path: '/tags',
-            component: Tag
-        }, {
-            name: 'resize-layout',
-            path: '/resize-layout',
-            component: ResizeLayout
-        },
-        {
-            name: 'spin',
-            path: '/spin',
-            component: Spin
+  // mode: 'history',
+  routes: [
+    {
+      name: 'backTop',
+      path: '/back-top',
+      component: BackTop
+    },
+    {
+      name: 'affix',
+      path: '/affix',
+      component: Affix
+    },
+    {
+      name: 'fixedNavbar',
+      path: '/fixed-navbar',
+      component: FixedNavbar
+    },
+    {
+      name: 'alert',
+      path: '/alert',
+      component: Alert
+    },
+    {
+      name: 'transition',
+      path: '/transition',
+      component: Transition
+    },
+    {
+      name: 'exception',
+      path: '/exception',
+      component: Exception
+    },
+    {
+      name: 'roundProgress',
+      path: '/round-progress',
+      component: Round
+    },
+    {
+      name: 'progress',
+      path: '/progress',
+      component: Progress
+    },
+    {
+      name: 'timeline',
+      path: '/timeline',
+      component: Timeline
+    },
+    {
+      name: 'treeExample',
+      path: '/tree/example',
+      component: TreeExample
+    },
+    {
+      name: 'tree',
+      path: '/tree',
+      component: Tree
+    },
+    {
+      name: 'transfer',
+      path: '/transfer',
+      component: Transfer
+    },
+    {
+      name: 'transferExample',
+      path: '/transfer/example',
+      component: TransferExample
+    },
+    {
+      name: 'changelog',
+      path: '/changelog',
+      component: Changelog
+    },
+    {
+      name: 'home',
+      path: '/',
+      component: Install,
+      alias: '/index.html',
+      children: [
+        {
+          name: 'install',
+          path: 'install',
+          component: Install,
+          alias: ''
         }
-    ]
+      ]
+    },
+    {
+      name: 'start',
+      path: '/start',
+      component: Start
+    },
+    {
+      name: 'config',
+      path: '/config',
+      component: Config
+    },
+    {
+      name: 'spec',
+      path: '/spec',
+      component: Spec
+    },
+    {
+      name: 'color',
+      path: '/color',
+      component: Color
+    },
+    {
+      name: 'colorPicker',
+      path: '/color-picker',
+      component: ColorPicker
+    },
+    {
+      name: 'colorPickerExample',
+      path: '/color-picker/example',
+      component: ColorPickerExample
+    },
+    {
+      name: 'componseFormItem',
+      path: '/compose-form-item',
+      component: ComposeFormItem
+    },
+    {
+      name: 'font',
+      path: '/font',
+      component: Font
+    },
+    {
+      name: 'icon',
+      path: '/icon',
+      component: Icon
+    },
+    {
+      name: 'button',
+      path: '/button',
+      component: Button
+    },
+    {
+      name: 'buttonExample',
+      path: '/button/example',
+      component: ButtonExample
+    },
+    {
+      name: 'animateNumber',
+      path: '/animate-number',
+      component: AnimateNumber
+    },
+    {
+      name: 'dropdownMenu',
+      path: '/dropdown-menu',
+      component: DropdownMenu
+    },
+    {
+      name: 'badge',
+      path: '/badge',
+      component: Badge
+    },
+    {
+      name: 'dialog',
+      path: '/dialog',
+      component: Dialog
+    },
+    {
+      name: 'dialogExample',
+      path: '/dialog/example',
+      component: DialogExample
+    },
+    {
+      name: 'switcher',
+      path: '/switcher',
+      component: Switcher
+    },
+    {
+      name: 'switcherExample',
+      path: '/switcher/example',
+      component: SwitcherExample
+    },
+    {
+      name: 'tag',
+      path: '/tag',
+      component: TagInput
+    },
+    {
+      name: 'tagExample',
+      path: '/tag/example',
+      component: TagInputExample
+    },
+    {
+      name: 'loading',
+      path: '/loading',
+      component: Loading
+    },
+    {
+      name: 'sideSlider',
+      path: '/sideslider',
+      component: SideSlider
+    },
+    {
+      name: 'sideSliderExample',
+      path: '/sideslider/example',
+      component: SideSliderExample
+    },
+    {
+      name: 'steps',
+      path: '/steps',
+      component: Steps
+    },
+    {
+      name: 'message',
+      path: '/message',
+      component: Message
+    },
+    {
+      name: 'notify',
+      path: '/notify',
+      component: Notify
+    },
+    {
+      name: 'tooltips',
+      path: '/tooltips',
+      component: Tooltips
+    },
+    {
+      name: 'tooltipsExample',
+      path: '/tooltips/example',
+      component: TooltipsExample
+    },
+    {
+      name: 'infoBox',
+      path: '/info-box',
+      component: InfoBox
+    },
+    {
+      name: 'infoBoxExample',
+      path: '/info-box/example',
+      component: InfoBoxExample
+    },
+    {
+      name: 'popover',
+      path: '/popover',
+      component: Popover
+    },
+    {
+      name: 'popconfirm',
+      path: '/popconfirm',
+      component: Popconfirm
+    },
+    {
+      name: 'popconfirmExample',
+      path: '/popconfirm/example',
+      component: PopconfirmExample
+    },
+    {
+      name: 'datePicker',
+      path: '/date-picker',
+      component: DatePicker
+    },
+    {
+      name: 'datePickerExample',
+      path: '/date-picker/example',
+      component: DatePickerExample
+    },
+    {
+      name: 'timePicker',
+      path: '/time-picker',
+      component: TimePicker
+    },
+    {
+      name: 'timePickerExample',
+      path: '/time-picker/example',
+      component: TimePickerExample
+    },
+    {
+      name: 'upload',
+      path: '/upload',
+      component: Upload
+    },
+    {
+      name: 'uploadExample',
+      path: '/upload/example',
+      component: UploadExample
+    },
+    {
+      name: 'pagination',
+      path: '/pagination',
+      component: Pagination
+    },
+    {
+      name: 'paginationExample',
+      path: '/pagination/example',
+      component: PaginationExample
+    },
+    {
+      name: 'i18n',
+      path: '/i18n',
+      component: I18N
+    },
+    {
+      name: 'vueI18NCustomExample',
+      path: '/i18n/vue-i18n-custom-example',
+      component: VueI18NCustomExample
+    },
+    {
+      name: 'vueI18NExample',
+      path: '/i18n/vue-i18n-example',
+      component: VueI18NExample
+    },
+    {
+      name: 'i18nExample',
+      path: '/i18n/buildin-example',
+      component: I18NBuildinExample
+    },
+    {
+      name: 'collapse',
+      path: '/collapse',
+      component: Collapse
+    },
+    {
+      name: 'process',
+      path: '/process',
+      component: Process
+    },
+    {
+      name: 'processExample',
+      path: '/process/example',
+      component: ProcessExample
+    },
+    {
+      name: 'table',
+      path: '/table',
+      component: Table
+    },
+    {
+      name: 'tableExample',
+      path: '/table/example',
+      component: TableExample
+    },
+    {
+      name: 'form',
+      path: '/form',
+      component: Form
+    },
+    {
+      name: 'input',
+      path: '/input',
+      component: Input
+    },
+    {
+      name: 'inputExample',
+      path: '/input/example',
+      component: InputExample
+    },
+    {
+      name: 'radio',
+      path: '/radio',
+      component: Radio
+    },
+    {
+      name: 'radioExample',
+      path: '/radio/example',
+      component: RadioExample
+    },
+    {
+      name: 'checkbox',
+      path: '/checkbox',
+      component: Checkbox
+    },
+    {
+      name: 'checkboxExample',
+      path: '/checkbox/example',
+      component: CheckboxExample
+    },
+    {
+      name: 'diff',
+      path: '/diff',
+      component: Diff
+    },
+    {
+      name: 'tab',
+      path: '/tab',
+      component: Tab
+    },
+    {
+      name: 'tabExample',
+      path: '/tabExample',
+      component: TabExample
+    },
+    {
+      name: 'select',
+      path: '/select',
+      component: Select
+    },
+    {
+      name: 'selectExample',
+      path: '/select/example',
+      component: SelectExample
+    },
+    {
+      name: 'slider',
+      path: '/slider',
+      component: Slider
+    },
+    {
+      name: 'grid',
+      path: '/grid',
+      component: Grid
+    },
+    {
+      name: 'gridExample',
+      path: '/grid/example',
+      component: GridExample
+    },
+    {
+      name: 'directives',
+      path: '/directives',
+      component: Directives
+    },
+    {
+      name: 'navigation',
+      path: '/navigation',
+      component: Navigation
+    },
+    {
+      name: 'navigation-example',
+      path: '/navigation/example',
+      component: NavigationExample
+    },
+    {
+      name: 'searchselect',
+      path: '/searchselect',
+      component: SearchSelect
+    },
+    {
+      name: 'searchselectExample',
+      path: '/searchselect/example',
+      component: SearchSelectExample
+    },
+    {
+      name: 'rate',
+      path: '/rate',
+      component: Rate
+    },
+    {
+      name: 'swiper',
+      path: '/swiper',
+      component: Swiper
+    },
+    {
+      name: 'bigTree',
+      path: '/big-tree',
+      component: BigTree
+    },
+    {
+      name: 'bigTreeExample',
+      path: '/big-tree/example',
+      component: BigTreeExample
+    },
+    {
+      name: 'virtualScroll',
+      path: '/virtual-scroll',
+      component: VirtualScroll
+    },
+    {
+      name: 'link',
+      path: '/link',
+      component: Link
+    },
+    {
+      name: 'linkExample',
+      path: '/link/example',
+      component: LinkExample
+    },
+    {
+      name: 'cascade',
+      path: '/cascade',
+      component: Cascade
+    }, {
+      name: 'cascadeExample',
+      path: '/cascade/example',
+      component: CascadeExample
+    },
+    {
+      name: 'zoomImage',
+      path: '/zoom-image',
+      component: ZoomImage
+    },
+    {
+      name: 'versionDetail',
+      path: '/version-detail',
+      component: VersionDetail
+    },
+    {
+      name: 'card',
+      path: '/card',
+      component: CardDetail
+    },
+    {
+      name: 'image',
+      path: '/image',
+      component: Image
+    },
+    {
+      name: 'breadcrumb',
+      path: '/breadcrumb',
+      component: Breadcrumb
+    },
+    {
+      name: 'divider',
+      path: '/divider',
+      component: Divider
+    },
+    {
+      name: 'tags',
+      path: '/tags',
+      component: Tag
+    }, {
+      name: 'resize-layout',
+      path: '/resize-layout',
+      component: ResizeLayout
+    },
+    {
+      name: 'spin',
+      path: '/spin',
+      component: Spin
+    }
+  ]
 })
 
 Vue.use(VueRouter)
 
 router.beforeEach((to, from, next) => {
-    next()
+  next()
 })
 
 router.afterEach(route => {

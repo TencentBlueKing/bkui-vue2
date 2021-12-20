@@ -148,7 +148,7 @@
 </template>
 
 <script>
-    /**
+/**
      *  bk-dialog
      *  @module components/dialog
      *  @desc 弹窗组件
@@ -179,707 +179,707 @@
             </div>
         </bk-dialog>
     */
-    import locale from 'bk-magic-vue/lib/locale'
-    import bkButton from '@/components/button'
-    import scrollbarMixins from '@/mixins/scrollbar'
-    // import { transferIndex, transferIncrease } from '@/utils/transfer-queue'
-    import { addEvent, removeEvent, findChildComponents } from '@/utils/dom'
-    import popManager from '@/utils/pop-manager.js'
-    import transferDom from '@/directives/transfer-dom'
-    import zIndex from '@/mixins/z-index'
-    import { uuid } from '@/utils/util'
+import locale from 'bk-magic-vue/lib/locale'
+import bkButton from '@/components/button'
+import scrollbarMixins from '@/mixins/scrollbar'
+// import { transferIndex, transferIncrease } from '@/utils/transfer-queue'
+import { addEvent, removeEvent, findChildComponents } from '@/utils/dom'
+import popManager from '@/utils/pop-manager.js'
+import transferDom from '@/directives/transfer-dom'
+import zIndex from '@/mixins/z-index'
+import { uuid } from '@/utils/util'
 
-    export default {
-        name: 'bk-dialog',
-        components: {
-            bkButton
-        },
-        directives: {
-            transferDom
-        },
-        mixins: [locale.mixin, scrollbarMixins, zIndex],
-        props: {
-            // 控制是否显示，用 value 便于 v-model 双向绑定
-            value: {
-                type: Boolean,
-                default: false
-            },
+export default {
+  name: 'bk-dialog',
+  components: {
+    bkButton
+  },
+  directives: {
+    transferDom
+  },
+  mixins: [locale.mixin, scrollbarMixins, zIndex],
+  props: {
+    // 控制是否显示，用 value 便于 v-model 双向绑定
+    value: {
+      type: Boolean,
+      default: false
+    },
 
-            // 对话框标题，如果使用 slot 自定义了页头，则 title 无效。info-box 会使用到
-            title: {
-                type: String
-            },
+    // 对话框标题，如果使用 slot 自定义了页头，则 title 无效。info-box 会使用到
+    title: {
+      type: String
+    },
 
-            // 确认按钮文案
-            okText: {
-                type: String
-            },
+    // 确认按钮文案
+    okText: {
+      type: String
+    },
 
-            // 取消按钮文案
-            cancelText: {
-                type: String
-            },
+    // 取消按钮文案
+    cancelText: {
+      type: String
+    },
 
-            // 按钮的 theme
-            theme: {
-                type: String,
-                default: 'primary',
-                validator (value) {
-                    if (['primary', 'warning', 'success', 'danger'].indexOf(value) < 0) {
-                        console.error(`theme property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
+    // 按钮的 theme
+    theme: {
+      type: String,
+      default: 'primary',
+      validator (value) {
+        if (['primary', 'warning', 'success', 'danger'].indexOf(value) < 0) {
+          console.error(`theme property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
 
-            // 遮罩的 transitionName
-            // maskTransitionName: {
-            //     type: String,
-            //     default: 'fade'
-            // },
+    // 遮罩的 transitionName
+    // maskTransitionName: {
+    //     type: String,
+    //     default: 'fade'
+    // },
 
-            // // 内容的 transitionName
-            // contentTransitionName: {
-            //     type: String,
-            //     default: 'ease'
-            // },
+    // // 内容的 transitionName
+    // contentTransitionName: {
+    //     type: String,
+    //     default: 'ease'
+    // },
 
-            // 设置调整浮层位置，该属性设置的是 .bk-dialog
-            position: {
-                type: Object
-            },
-            beforeClose: {
-                type: Function,
-                default: () => true
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
+    // 设置调整浮层位置，该属性设置的是 .bk-dialog
+    position: {
+      type: Object
+    },
+    beforeClose: {
+      type: Function,
+      default: () => true
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
 
-            // 对话框宽度，当屏幕尺寸小于 768px 时，宽度会变为自动 auto。当其值不大于 100 时以百分比显示，大于 100 时为像素
-            width: {
-                type: [Number, String],
-                default: 400
-            },
+    // 对话框宽度，当屏幕尺寸小于 768px 时，宽度会变为自动 auto。当其值不大于 100 时以百分比显示，大于 100 时为像素
+    width: {
+      type: [Number, String],
+      default: 400
+    },
 
-            // 是否显示遮罩
-            showMask: {
-                type: Boolean,
-                default: true
-            },
+    // 是否显示遮罩
+    showMask: {
+      type: Boolean,
+      default: true
+    },
 
-            // 是否允许点击遮罩关闭弹框
-            maskClose: {
-                type: Boolean,
-                default: true
-            },
+    // 是否允许点击遮罩关闭弹框
+    maskClose: {
+      type: Boolean,
+      default: true
+    },
 
-            // 是否显示右上角的关闭按钮，关闭后 Esc 按键也将关闭
-            closeIcon: {
-                type: Boolean,
-                default: true
-            },
+    // 是否显示右上角的关闭按钮，关闭后 Esc 按键也将关闭
+    closeIcon: {
+      type: Boolean,
+      default: true
+    },
 
-            // 是否允许 esc 按钮关闭
-            escClose: {
-                type: Boolean,
-                default: true
-            },
+    // 是否允许 esc 按钮关闭
+    escClose: {
+      type: Boolean,
+      default: true
+    },
 
-            // 是否全屏
-            fullscreen: {
-                type: Boolean,
-                default: false
-            },
+    // 是否全屏
+    fullscreen: {
+      type: Boolean,
+      default: false
+    },
 
-            // header 按钮的位置，左中右
-            headerPosition: {
-                type: String,
-                default: 'center',
-                validator (value) {
-                    if (['left', 'center'].indexOf(value) < 0) {
-                        console.error(`headerPosition property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
+    // header 按钮的位置，左中右
+    headerPosition: {
+      type: String,
+      default: 'center',
+      validator (value) {
+        if (['left', 'center'].indexOf(value) < 0) {
+          console.error(`headerPosition property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
 
-            // 显示 footer
-            showFooter: {
-                type: Boolean,
-                default: true
-            },
+    // 显示 footer
+    showFooter: {
+      type: Boolean,
+      default: true
+    },
 
-            // footer 按钮的位置，左中右
-            footerPosition: {
-                type: String,
-                default: 'right',
-                validator (value) {
-                    if (['left', 'center', 'right'].indexOf(value) < 0) {
-                        console.error(`footerPosition property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
+    // footer 按钮的位置，左中右
+    footerPosition: {
+      type: String,
+      default: 'right',
+      validator (value) {
+        if (['left', 'center', 'right'].indexOf(value) < 0) {
+          console.error(`footerPosition property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
 
-            // 是否可拖拽，如果 fullscreen 为 true，那么 draggable 配置无效
-            draggable: {
-                type: Boolean,
-                default: true
-            },
+    // 是否可拖拽，如果 fullscreen 为 true，那么 draggable 配置无效
+    draggable: {
+      type: Boolean,
+      default: true
+    },
 
-            // 页面是否可以滚动
-            scrollable: {
-                type: Boolean,
-                default: false
-            },
+    // 页面是否可以滚动
+    scrollable: {
+      type: Boolean,
+      default: false
+    },
 
-            // 点击确定按钮时，确定按钮是否显示 loading 状态，开启则需手动设置 value 来关闭对话框
-            loading: {
-                type: Boolean,
-                default: false
-            },
+    // 点击确定按钮时，确定按钮是否显示 loading 状态，开启则需手动设置 value 来关闭对话框
+    loading: {
+      type: Boolean,
+      default: false
+    },
 
-            // 点击确定按钮时，确定按钮是否显示 loading 状态，异步 confirmFn 未返回结果时自动开启 loading
-            confirmLoading: {
-                type: Boolean,
-                default: false
-            },
+    // 点击确定按钮时，确定按钮是否显示 loading 状态，异步 confirmFn 未返回结果时自动开启 loading
+    confirmLoading: {
+      type: Boolean,
+      default: false
+    },
 
-            // 弹框的 z-index
-            zIndex: {
-                type: Number
-            },
+    // 弹框的 z-index
+    zIndex: {
+      type: Number
+    },
 
-            // 用于 info-box
-            confirmFn: {
-                type: Function,
-                default: null
-            },
+    // 用于 info-box
+    confirmFn: {
+      type: Function,
+      default: null
+    },
 
-            // 用于 info-box
-            onClose: {
-                type: Function,
-                default () {}
-            },
+    // 用于 info-box
+    onClose: {
+      type: Function,
+      default () {}
+    },
 
-            // 用于 info-box
-            type: {
-                type: String,
-                default: '',
-                validator (value) {
-                    if (['', 'success', 'warning', 'danger', 'loading'].indexOf(value) < 0) {
-                        console.error(`type property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
+    // 用于 info-box
+    type: {
+      type: String,
+      default: '',
+      validator (value) {
+        if (['', 'success', 'warning', 'danger', 'loading'].indexOf(value) < 0) {
+          console.error(`type property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
 
-            // 用于 info-box
-            subTitle: {
-                type: String
-            },
+    // 用于 info-box
+    subTitle: {
+      type: String
+    },
 
-            transfer: {
-                type: Boolean,
-                default: true
-            },
+    transfer: {
+      type: Boolean,
+      default: true
+    },
 
-            autoClose: {
-                type: Boolean,
-                default: true
-            },
+    autoClose: {
+      type: Boolean,
+      default: true
+    },
 
-            renderDirective: {
-                type: String,
-                default: 'show',
-                validator (value) {
-                    if (['show', 'if'].indexOf(value) < 0) {
-                        console.error(`type render-directive is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
+    renderDirective: {
+      type: String,
+      default: 'show',
+      validator (value) {
+        if (['show', 'if'].indexOf(value) < 0) {
+          console.error(`type render-directive is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
 
-            /**
+    /**
              * 是否允许多个弹框同时存在
              *  */
-            multiInstance: {
-                type: Boolean,
-                default: true
-            },
+    multiInstance: {
+      type: Boolean,
+      default: true
+    },
 
-            /**
+    /**
              * 遮罩ZIndex是否忽略已存在的遮罩
             */
-            ignoreExistMask: {
-                type: Boolean,
-                default: true
+    ignoreExistMask: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data () {
+    return {
+      // 当前 dialog 的 index，便于点击 esc 关闭的时候关闭正确的 dialog
+      visible: this.value,
+      // 遮罩的 transitionName
+      maskTransitionName: 'fade',
+      // 内容的 transitionName
+      contentTransitionName: 'ease',
+      wrapShow: false,
+      showHead: true,
+      buttonLoading: false,
+      dragData: {
+        x: null,
+        y: null,
+        dragX: null,
+        dragY: null,
+        dragging: false
+      },
+      dialogIndex: 0,
+      popUid: '',
+      uuid: uuid()
+    }
+  },
+  computed: {
+    calcIcon () {
+      let _icon = ''
+
+      if (this.icon) {
+        return this.icon
+      }
+
+      switch (this.type) {
+        case 'success':
+          _icon = 'check-1'
+          break
+        case 'error':
+          _icon = 'close'
+          break
+        case 'warning':
+          _icon = 'exclamation'
+          break
+      }
+
+      return _icon
+    },
+    wrapStyles () {
+      return {
+        zIndex: this.transfer ? this.dialogIndex : this.dialogIndex + 1
+      }
+    },
+    mainStyles () {
+      const ret = {}
+
+      const width = parseInt(this.width, 10)
+
+      const styleWidth = this.dragData.x !== null
+        ? { top: 0 }
+        : { width: width <= 100 ? `${width}%` : `${width}px` }
+
+      Object.assign(ret, styleWidth)
+
+      if (this.position) {
+        const left = this.position.left
+        if (left !== undefined && left !== null) {
+          ret.left = `${left}px`
+        }
+
+        const top = this.position.top
+        if (top !== undefined && top !== null) {
+          ret.top = `${top}px`
+        }
+      }
+
+      return ret
+    },
+    contentStyles () {
+      const ret = {}
+
+      if (this.isDraggable) {
+        if (this.dragData.x !== null) {
+          let left = 0
+          if (this.position) {
+            if (this.position.left !== undefined && this.position.left !== null) {
+              left = this.position.left
             }
-        },
-        data () {
-            return {
-                // 当前 dialog 的 index，便于点击 esc 关闭的时候关闭正确的 dialog
-                visible: this.value,
-                // 遮罩的 transitionName
-                maskTransitionName: 'fade',
-                // 内容的 transitionName
-                contentTransitionName: 'ease',
-                wrapShow: false,
-                showHead: true,
-                buttonLoading: false,
-                dragData: {
-                    x: null,
-                    y: null,
-                    dragX: null,
-                    dragY: null,
-                    dragging: false
-                },
-                dialogIndex: 0,
-                popUid: '',
-                uuid: uuid()
+          }
+          ret.left = `${this.dragData.x - left}px`
+        }
+        if (this.dragData.y !== null) {
+          let top = 0
+          if (this.position) {
+            if (this.position.top !== undefined && this.position.top !== null) {
+              top = this.position.top
             }
-        },
-        computed: {
-            calcIcon () {
-                let _icon = ''
+          }
+          ret.top = `${this.dragData.y - top}px`
+        }
 
-                if (this.icon) {
-                    return this.icon
-                }
+        const width = parseInt(this.width, 10)
+        const styleWidth = {
+          width: width <= 100 ? `${width}%` : `${width}px`
+        }
 
-                switch (this.type) {
-                    case 'success':
-                        _icon = 'check-1'
-                        break
-                    case 'error':
-                        _icon = 'close'
-                        break
-                    case 'warning':
-                        _icon = 'exclamation'
-                        break
-                }
+        Object.assign(ret, styleWidth)
+      }
 
-                return _icon
-            },
-            wrapStyles () {
-                return {
-                    zIndex: this.transfer ? this.dialogIndex : this.dialogIndex + 1
-                }
-            },
-            mainStyles () {
-                const ret = {}
+      return ret
+    },
+    localeOkText () {
+      if (this.okText === undefined) {
+        return this.t('bk.dialog.ok')
+      }
+      return this.okText
+    },
+    localeCancelText () {
+      if (this.cancelText === undefined) {
+        return this.t('bk.dialog.cancel')
+      }
+      return this.cancelText
+    },
+    isDraggable () {
+      if (!this.fullscreen) {
+        return this.draggable
+      }
+      return false
+    },
+    isInfoBox () {
+      return this.$root.name === 'bk-info-box'
+    },
+    shouldRender () {
+      return this.renderDirective === 'show'
+    }
+  },
+  watch: {
+    value (val) {
+      this.visible = val
+    },
+    visible (val) {
+      if (val === false) {
+        this.buttonLoading = false
+        this.timer = setTimeout(() => {
+          this.wrapShow = false
+          if (this.isDraggable) {
+            this.dragData = Object.assign({}, {
+              x: null,
+              y: null,
+              dragX: null,
+              dragY: null,
+              dragging: false
+            })
+          }
+          // 遮罩消失后执行 addScrollEffect
+          this.removeScrollEffect()
+        }, 300)
+        this.showMask && popManager.hide(this.popUid)
+      } else {
+        // 遮罩出现前执行 addScrollEffect
+        this.addScrollEffect()
+        this.$nextTick(() => {
+          if (this.timer) {
+            clearTimeout(this.timer)
+          }
 
-                const width = parseInt(this.width, 10)
+          this.wrapShow = true
 
-                const styleWidth = this.dragData.x !== null
-                    ? { top: 0 }
-                    : { width: width <= 100 ? `${width}%` : `${width}px` }
+          if (!this.fullscreen) {
+            setTimeout(() => {
+              const contentNode = this.$refs.content
+              const height = parseInt(window.getComputedStyle(contentNode).height, 10)
+              if (height >= window.innerHeight) {
+                contentNode.style.marginBottom = '50px'
+              }
+            }, 0)
+          }
 
-                Object.assign(ret, styleWidth)
-
-                if (this.position) {
-                    const left = this.position.left
-                    if (left !== undefined && left !== null) {
-                        ret.left = `${left}px`
-                    }
-
-                    const top = this.position.top
-                    if (top !== undefined && top !== null) {
-                        ret.top = `${top}px`
-                    }
-                }
-
-                return ret
-            },
-            contentStyles () {
-                const ret = {}
-
-                if (this.isDraggable) {
-                    if (this.dragData.x !== null) {
-                        let left = 0
-                        if (this.position) {
-                            if (this.position.left !== undefined && this.position.left !== null) {
-                                left = this.position.left
-                            }
-                        }
-                        ret.left = `${this.dragData.x - left}px`
-                    }
-                    if (this.dragData.y !== null) {
-                        let top = 0
-                        if (this.position) {
-                            if (this.position.top !== undefined && this.position.top !== null) {
-                                top = this.position.top
-                            }
-                        }
-                        ret.top = `${this.dragData.y - top}px`
-                    }
-
-                    const width = parseInt(this.width, 10)
-                    const styleWidth = {
-                        width: width <= 100 ? `${width}%` : `${width}px`
-                    }
-
-                    Object.assign(ret, styleWidth)
-                }
-
-                return ret
-            },
-            localeOkText () {
-                if (this.okText === undefined) {
-                    return this.t('bk.dialog.ok')
-                }
-                return this.okText
-            },
-            localeCancelText () {
-                if (this.cancelText === undefined) {
-                    return this.t('bk.dialog.cancel')
-                }
-                return this.cancelText
-            },
-            isDraggable () {
-                if (!this.fullscreen) {
-                    return this.draggable
-                }
-                return false
-            },
-            isInfoBox () {
-                return this.$root.name === 'bk-info-box'
-            },
-            shouldRender () {
-                return this.renderDirective === 'show'
+          this.dialogIndex = this.zIndex !== undefined ? this.zIndex : this.getLocalZIndex()
+          // 简单 hack，之后重构
+          if (this.showMask) {
+            const options = {
+              tplAction: 'keepAll',
+              zIndex: this.dialogIndex,
+              ignoreExistMask: this.ignoreExistMask
             }
-        },
-        watch: {
-            value (val) {
-                this.visible = val
-            },
-            visible (val) {
-                if (val === false) {
-                    this.buttonLoading = false
-                    this.timer = setTimeout(() => {
-                        this.wrapShow = false
-                        if (this.isDraggable) {
-                            this.dragData = Object.assign({}, {
-                                x: null,
-                                y: null,
-                                dragX: null,
-                                dragY: null,
-                                dragging: false
-                            })
-                        }
-                        // 遮罩消失后执行 addScrollEffect
-                        this.removeScrollEffect()
-                    }, 300)
-                    this.showMask && popManager.hide(this.popUid)
-                } else {
-                    // 遮罩出现前执行 addScrollEffect
-                    this.addScrollEffect()
-                    this.$nextTick(() => {
-                        if (this.timer) {
-                            clearTimeout(this.timer)
-                        }
+            this.popUid = popManager.show(`bk-dialog-${this.uuid}`, this.$el, options)
+          }
+        })
+      }
+      this.$emit('value-change', val)
+      typeof this.stateChangeFn === 'function' && this.stateChangeFn(val)
+    },
+    loading (val) {
+      if (!val) {
+        this.buttonLoading = false
+      }
+    },
+    scrollable (val) {
+      // if (!val) {
+      //     this.addScrollEffect()
+      // } else {
+      //     this.removeScrollEffect()
+      // }
+    },
+    title (val) {
+      if (this.$slots.header === undefined) {
+        this.showHead = !!val
+      }
+    }
+  },
+  mounted () {
+    if (this.visible) {
+      this.wrapShow = true
+    }
 
-                        this.wrapShow = true
+    let showHead = true
 
-                        if (!this.fullscreen) {
-                            setTimeout(() => {
-                                const contentNode = this.$refs.content
-                                const height = parseInt(window.getComputedStyle(contentNode).height, 10)
-                                if (height >= window.innerHeight) {
-                                    contentNode.style.marginBottom = '50px'
-                                }
-                            }, 0)
-                        }
+    if (this.$slots.header === undefined && !this.title) {
+      showHead = false
+    }
 
-                        this.dialogIndex = this.zIndex !== undefined ? this.zIndex : this.getLocalZIndex()
-                        // 简单 hack，之后重构
-                        if (this.showMask) {
-                            const options = {
-                                tplAction: 'keepAll',
-                                zIndex: this.dialogIndex,
-                                ignoreExistMask: this.ignoreExistMask
-                            }
-                            this.popUid = popManager.show(`bk-dialog-${this.uuid}`, this.$el, options)
-                        }
-                    })
-                }
-                this.$emit('value-change', val)
-                typeof this.stateChangeFn === 'function' && this.stateChangeFn(val)
-            },
-            loading (val) {
-                if (!val) {
-                    this.buttonLoading = false
-                }
-            },
-            scrollable (val) {
-                // if (!val) {
-                //     this.addScrollEffect()
-                // } else {
-                //     this.removeScrollEffect()
-                // }
-            },
-            title (val) {
-                if (this.$slots.header === undefined) {
-                    this.showHead = !!val
-                }
-            }
-        },
-        mounted () {
-            if (this.visible) {
-                this.wrapShow = true
-            }
+    this.showHead = showHead
 
-            let showHead = true
-
-            if (this.$slots.header === undefined && !this.title) {
-                showHead = false
-            }
-
-            this.showHead = showHead
-
-            if (this.escClose) {
-                addEvent(document, 'keydown', this.escCloseHandler)
-            }
-        },
-        beforeDestroy () {
-            if (this.escClose) {
-                removeEvent(document, 'keydown', this.escCloseHandler)
-            }
-            this.removeScrollEffect()
-            this.visible && this.showMask && popManager.hide(this.popUid)
-        },
-        methods: {
-            /**
+    if (this.escClose) {
+      addEvent(document, 'keydown', this.escCloseHandler)
+    }
+  },
+  beforeDestroy () {
+    if (this.escClose) {
+      removeEvent(document, 'keydown', this.escCloseHandler)
+    }
+    this.removeScrollEffect()
+    this.visible && this.showMask && popManager.hide(this.popUid)
+  },
+  methods: {
+    /**
              * 获取当前 dialog 的 index，便于点击 esc 关闭的时候关闭正确的 dialog
              *
              * @return {number} index 索引
              */
-            getDialogIndex () {
-                return this.getLocalZIndex()
-            },
+    getDialogIndex () {
+      return this.getLocalZIndex()
+    },
 
-            /**
+    /**
              * mask 遮罩点击事件
              */
-            maskClickHandler () {
-                if (this.maskClose && this.showMask && this.closeIcon) {
-                    this.close()
-                }
-            },
+    maskClickHandler () {
+      if (this.maskClose && this.showMask && this.closeIcon) {
+        this.close()
+      }
+    },
 
-            /**
+    /**
              * 弹框 wrapper .bk-dialog-wrapper 的点击事件，这个层与 .bk-dialog-mask 同级，因此点击它就相当于点击了 .bk-dialog-mask
              *
              * @param {Object} e 事件对象
              */
-            wrapClickHandler (e) {
-                const classList = e.target.classList
-                if (classList.contains('bk-dialog-wrapper')) {
-                    this.maskClickHandler()
-                }
-            },
+    wrapClickHandler (e) {
+      const classList = e.target.classList
+      if (classList.contains('bk-dialog-wrapper')) {
+        this.maskClickHandler()
+      }
+    },
 
-            /**
+    /**
              * 弹框内容区 .bk-dialog-content 的点击事件
              *
              * @param {Object} e 事件对象
              */
-            contentClickHandler (e) {
-                if (this.isDraggable) {
-                    // this.dialogIndex = this.getDialogIndex()
-                }
-            },
+    contentClickHandler (e) {
+      if (this.isDraggable) {
+        // this.dialogIndex = this.getDialogIndex()
+      }
+    },
 
-            /**
+    /**
              * escClose handler
              *
              * @param {Object} e 事件对象
              */
-            escCloseHandler (e) {
-                if (this.visible && this.closeIcon) {
-                    if (e.keyCode === 27) {
-                        let first = null
-                        if (this.isInfoBox) {
-                            first = this.$root
-                        } else {
-                            const dialogs = findChildComponents(this.$root, 'bk-dialog').filter(
-                                item => item.$data.visible && item.$props.closeIcon
-                            )
+    escCloseHandler (e) {
+      if (this.visible && this.closeIcon) {
+        if (e.keyCode === 27) {
+          let first = null
+          if (this.isInfoBox) {
+            first = this.$root
+          } else {
+            const dialogs = findChildComponents(this.$root, 'bk-dialog').filter(
+              item => item.$data.visible && item.$props.closeIcon
+            )
 
-                            first = dialogs.sort((a, b) => {
-                                return a.$data.dialogIndex < b.$data.dialogIndex ? 1 : -1
-                            })[0]
-                        }
+            first = dialogs.sort((a, b) => {
+              return a.$data.dialogIndex < b.$data.dialogIndex ? 1 : -1
+            })[0]
+          }
 
-                        this.$nextTick(() => {
-                            first && first.close()
-                        })
-                    }
-                }
-            },
+          this.$nextTick(() => {
+            first && first.close()
+          })
+        }
+      }
+    },
 
-            /**
+    /**
              * 拖动开始事件回调
              *
              * @param {Object} e 事件对象
              */
-            moveStartHandler (e) {
-                if (!this.isDraggable) {
-                    return false
-                }
+    moveStartHandler (e) {
+      if (!this.isDraggable) {
+        return false
+      }
 
-                const content = this.$refs.content
-                const rect = content.getBoundingClientRect()
+      const content = this.$refs.content
+      const rect = content.getBoundingClientRect()
 
-                this.dragData.x = rect.x
-                this.dragData.y = rect.y
+      this.dragData.x = rect.x
+      this.dragData.y = rect.y
 
-                this.dragData.contentRect = rect
-                this.dragData.dialogRect = this.$el.getBoundingClientRect()
+      this.dragData.contentRect = rect
+      this.dragData.dialogRect = this.$el.getBoundingClientRect()
 
-                const distance = { x: e.clientX, y: e.clientY }
+      const distance = { x: e.clientX, y: e.clientY }
 
-                this.dragData.dragX = distance.x
-                this.dragData.dragY = distance.y
+      this.dragData.dragX = distance.x
+      this.dragData.dragY = distance.y
 
-                this.dragData.dragging = true
+      this.dragData.dragging = true
 
-                addEvent(window, 'mousemove', this.moveHandler)
-                addEvent(window, 'mouseup', this.moveEndHandler)
-            },
+      addEvent(window, 'mousemove', this.moveHandler)
+      addEvent(window, 'mouseup', this.moveEndHandler)
+    },
 
-            /**
+    /**
              * 拖动中事件回调
              *
              * @param {Object} e 事件对象
              */
-            moveHandler (e) {
-                const dragData = this.dragData
+    moveHandler (e) {
+      const dragData = this.dragData
 
-                if (!dragData.dragging) {
-                    return false
-                }
+      if (!dragData.dragging) {
+        return false
+      }
 
-                const distance = { x: e.clientX, y: e.clientY }
+      const distance = { x: e.clientX, y: e.clientY }
 
-                const diffDistance = {
-                    x: distance.x - dragData.dragX,
-                    y: distance.y - dragData.dragY
-                }
+      const diffDistance = {
+        x: distance.x - dragData.dragX,
+        y: distance.y - dragData.dragY
+      }
 
-                if (dragData.x <= 0 && diffDistance.x < 0) {
-                    dragData.x = 0
-                } else if (dragData.x + dragData.contentRect.width >= window.innerWidth && diffDistance.x > 0) {
-                    dragData.x = window.innerWidth - dragData.contentRect.width
-                } else {
-                    dragData.x += diffDistance.x
-                }
-                dragData.dragX = distance.x
+      if (dragData.x <= 0 && diffDistance.x < 0) {
+        dragData.x = 0
+      } else if (dragData.x + dragData.contentRect.width >= window.innerWidth && diffDistance.x > 0) {
+        dragData.x = window.innerWidth - dragData.contentRect.width
+      } else {
+        dragData.x += diffDistance.x
+      }
+      dragData.dragX = distance.x
 
-                if (dragData.y <= 0 && diffDistance.y < 0) {
-                    dragData.y = 0
-                } else if (dragData.y + dragData.contentRect.height >= window.innerHeight && diffDistance.y > 0) {
-                    dragData.y = window.innerHeight - dragData.contentRect.height
-                } else {
-                    dragData.y += diffDistance.y
-                }
-                dragData.dragY = distance.y
+      if (dragData.y <= 0 && diffDistance.y < 0) {
+        dragData.y = 0
+      } else if (dragData.y + dragData.contentRect.height >= window.innerHeight && diffDistance.y > 0) {
+        dragData.y = window.innerHeight - dragData.contentRect.height
+      } else {
+        dragData.y += diffDistance.y
+      }
+      dragData.dragY = distance.y
 
-                this.dragData = { ...dragData }
-            },
+      this.dragData = { ...dragData }
+    },
 
-            /**
+    /**
              * 拖动结束回调函数
              */
-            moveEndHandler () {
-                this.dragData.dragging = false
-                removeEvent(window, 'mousemove', this.moveHandler)
-                removeEvent(window, 'mouseup', this.moveEndHandler)
-            },
+    moveEndHandler () {
+      this.dragData.dragging = false
+      removeEvent(window, 'mousemove', this.moveHandler)
+      removeEvent(window, 'mouseup', this.moveEndHandler)
+    },
 
-            /**
+    /**
              *  关闭弹框
              */
-            async close () {
-                let shouldClose = true
-                if (typeof this.beforeClose === 'function') {
-                    shouldClose = await this.beforeClose()
-                }
-                if (shouldClose) {
-                    this.visible = false
-                    typeof this.onClose === 'function' && this.onClose()
-                    this.$emit('input', false)
-                    this.$emit('cancel')
-                    typeof this.cancelFn === 'function' && this.cancelFn(this)
-                }
-            },
+    async close () {
+      let shouldClose = true
+      if (typeof this.beforeClose === 'function') {
+        shouldClose = await this.beforeClose()
+      }
+      if (shouldClose) {
+        this.visible = false
+        typeof this.onClose === 'function' && this.onClose()
+        this.$emit('input', false)
+        this.$emit('cancel')
+        typeof this.cancelFn === 'function' && this.cancelFn(this)
+      }
+    },
 
-            /**
+    /**
              * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
              */
-            animationFinish () {
-                this.$emit('after-leave')
-                typeof this.afterLeaveFn === 'function' && this.afterLeaveFn(this)
-            },
+    animationFinish () {
+      this.$emit('after-leave')
+      typeof this.afterLeaveFn === 'function' && this.afterLeaveFn(this)
+    },
 
-            /**
+    /**
              * 取消按钮点击事件
              *
              * @param {Objecy} e 事件对象
              */
-            cancelHandler (e) {
-                this.close()
-            },
+    cancelHandler (e) {
+      this.close()
+    },
 
-            /**
+    /**
              * 确定按钮点击事件
              *
              * @param {Objecy} e 事件对象
              */
-            okHandler (e) {
-                // 防止在loading状态中多次触发
-                if (this.loading) return false
+    okHandler (e) {
+      // 防止在loading状态中多次触发
+      if (this.loading) return false
 
-                // 先执行confirm，用户可以在confirm里设计loading状态等处理
-                this.$emit('confirm')
+      // 先执行confirm，用户可以在confirm里设计loading状态等处理
+      this.$emit('confirm')
 
-                // 在下个tick微任务去做后续处理
-                this.$nextTick(async () => {
-                    if (this.loading) {
-                        this.buttonLoading = true
-                    } else {
-                        if (typeof this.confirmFn === 'function') { // 用于 info-box
-                            if (this.confirmLoading) {
-                                try {
-                                    this.buttonLoading = true
-                                    await this.confirmFn(this)
-                                } catch (e) {
-                                    console.warn(e)
-                                } finally {
-                                    this.buttonLoading = false
-                                }
-                            } else {
-                                this.confirmFn(this)
-                            }
-                        } else {
-                            if (this.autoClose) {
-                                this.visible = false
-                                this.$emit('input', false)
-                            }
-                        }
-                    }
-                })
+      // 在下个tick微任务去做后续处理
+      this.$nextTick(async () => {
+        if (this.loading) {
+          this.buttonLoading = true
+        } else {
+          if (typeof this.confirmFn === 'function') { // 用于 info-box
+            if (this.confirmLoading) {
+              try {
+                this.buttonLoading = true
+                await this.confirmFn(this)
+              } catch (e) {
+                console.warn(e)
+              } finally {
+                this.buttonLoading = false
+              }
+            } else {
+              this.confirmFn(this)
             }
+          } else {
+            if (this.autoClose) {
+              this.visible = false
+              this.$emit('input', false)
+            }
+          }
         }
+      })
     }
+  }
+}
 </script>
 <style>
     @import '../../ui/dialog.css';

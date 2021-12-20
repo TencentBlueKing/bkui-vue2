@@ -33,67 +33,67 @@
 </template>
 
 <script>
-    export default {
-        name: 'bk-container',
-        props: {
-            // 栅格数，默认 24
-            col: {
-                type: Number,
-                default: 24,
-                validator (value) {
-                    if (value <= 0) {
-                        console.error(`col property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
-            // 栅格间距，单位 px，左右平分
-            gutter: {
-                type: Number,
-                default: 20,
-                validator (value) {
-                    if (value < 0) {
-                        console.error(`gutter property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
-            // 栅格容器的左右外边距
-            margin: {
-                type: Number,
-                default: 20,
-                validator (value) {
-                    if (value < 0) {
-                        console.error(`margin property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
-            // 控制 row 是否使用 flex 布局
-            flex: {
-                type: Boolean,
-                default: false
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        provide () {
-            const { col, gutter, flex } = this
-            return { col, gutter, flex }
-        },
-        computed: {
-            style () {
-                const { margin } = this
-                return { 'padding-right': `${margin}px`, 'padding-left': `${margin}px` }
-            }
+export default {
+  name: 'bk-container',
+  props: {
+    // 栅格数，默认 24
+    col: {
+      type: Number,
+      default: 24,
+      validator (value) {
+        if (value <= 0) {
+          console.error(`col property is not valid: '${value}'`)
+          return false
         }
+        return true
+      }
+    },
+    // 栅格间距，单位 px，左右平分
+    gutter: {
+      type: Number,
+      default: 20,
+      validator (value) {
+        if (value < 0) {
+          console.error(`gutter property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
+    // 栅格容器的左右外边距
+    margin: {
+      type: Number,
+      default: 20,
+      validator (value) {
+        if (value < 0) {
+          console.error(`margin property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
+    // 控制 row 是否使用 flex 布局
+    flex: {
+      type: Boolean,
+      default: false
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+  provide () {
+    const { col, gutter, flex } = this
+    return { col, gutter, flex }
+  },
+  computed: {
+    style () {
+      const { margin } = this
+      return { 'padding-right': `${margin}px`, 'padding-left': `${margin}px` }
+    }
+  }
+}
 </script>
 
 <style>

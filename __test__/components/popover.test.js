@@ -34,46 +34,46 @@ import bkPopover from '@/components/popover'
 import { mount } from '@vue/test-utils'
 
 describe('Popover unit test', () => {
-    it('render the correct markup and content', () => {
-        const wrapper = mount(bkPopover, {
-            propsData: {
-                placement: 'bottom',
-                trigger: 'click'
-            },
-            slots: {
-                default: `<span>trigger</span>`,
-                content: 'content'
-            }
-        })
-        expect(wrapper.html()).toContain('<span>trigger</span>')
-        expect(wrapper.props().trigger).toBe('click')
+  it('render the correct markup and content', () => {
+    const wrapper = mount(bkPopover, {
+      propsData: {
+        placement: 'bottom',
+        trigger: 'click'
+      },
+      slots: {
+        default: `<span>trigger</span>`,
+        content: 'content'
+      }
+    })
+    expect(wrapper.html()).toContain('<span>trigger</span>')
+    expect(wrapper.props().trigger).toBe('click')
 
-        wrapper.vm.$refs.reference.click()
-        setTimeout(() => {
-            expect(wrapper.vm.instance.popover.querySelector('.bk-tooltip-content').textContent).toBe('content')
-            expect(wrapper.vm.instance.popover.getAttribute('x-placement')).toBe('bottom')
-            expect(wrapper.emmited().show).toBeTruthy()
+    wrapper.vm.$refs.reference.click()
+    setTimeout(() => {
+      expect(wrapper.vm.instance.popover.querySelector('.bk-tooltip-content').textContent).toBe('content')
+      expect(wrapper.vm.instance.popover.getAttribute('x-placement')).toBe('bottom')
+      expect(wrapper.emmited().show).toBeTruthy()
 
-            wrapper.vm.$refs.reference.blur()
-            setTimeout(() => {
-                expect(wrapper.emmited().hide).toBeTruthy()
-            })
-        }, 500)
+      wrapper.vm.$refs.reference.blur()
+      setTimeout(() => {
+        expect(wrapper.emmited().hide).toBeTruthy()
+      })
+    }, 500)
+  })
+
+  it('render the correct markup and content', () => {
+    const wrapper = mount(bkPopover, {
+      propsData: {
+        always: true
+      },
+      slots: {
+        default: `<span>trigger</span>`,
+        content: 'content'
+      }
     })
 
-    it('render the correct markup and content', () => {
-        const wrapper = mount(bkPopover, {
-            propsData: {
-                always: true
-            },
-            slots: {
-                default: `<span>trigger</span>`,
-                content: 'content'
-            }
-        })
-
-        expect(wrapper.vm.instance.props.showOnInit).toBe(true)
-        expect(wrapper.vm.instance.props.hideOnClick).toBe(false)
-        expect(wrapper.vm.instance.props.trigger).toBe('manual')
-    })
+    expect(wrapper.vm.instance.props.showOnInit).toBe(true)
+    expect(wrapper.vm.instance.props.hideOnClick).toBe(false)
+    expect(wrapper.vm.instance.props.trigger).toBe('manual')
+  })
 })

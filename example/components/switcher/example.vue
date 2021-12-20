@@ -60,29 +60,29 @@
 </template>
 
 <script>
-    import { bkSwitcher } from '@'
-    export default {
-        components: {
-            bkSwitcher
-        },
-        data () {
-            return {
-                isSelected: true,
-                isDisabled: true,
-                isOutline: true,
-                isSquare: true,
-                showText: true
-            }
-        },
-        created () {
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            change (val) {
-                alert(val)
-            }
-        }
+import { bkSwitcher } from '@'
+export default {
+  components: {
+    bkSwitcher
+  },
+  data () {
+    return {
+      isSelected: true,
+      isDisabled: true,
+      isOutline: true,
+      isSquare: true,
+      showText: true
     }
+  },
+  created () {
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    change (val) {
+      alert(val)
+    }
+  }
+}
 </script>

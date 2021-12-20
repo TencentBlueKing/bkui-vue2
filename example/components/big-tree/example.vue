@@ -41,53 +41,53 @@
 </template>
 
 <script>
-    import { bkBigTree, bkInput } from '@'
-    let seed = 0
-    export default {
-        components: {
-            bkBigTree,
-            // eslint-disable-next-line vue/no-unused-components
-            bkInput
-        },
-        data () {
-            return {
-                filter: '',
-                hasLine: false,
-                data: this.getNodes(null, 2, 3)
-            }
-        },
-        methods: {
-            getNodes (parent, childCount, deep) {
-                const nodes = []
-                for (let i = 0; i < childCount; i++) {
-                    const node = {
-                        id: `node-${seed}`,
-                        level: parent ? parent.level + 1 : 0,
-                        name: `node-${seed++}`
-                    }
-                    if (node.level < deep) {
-                        node.children = this.getNodes(node, childCount, deep)
-                    }
-                    nodes.push(node)
-                }
-                return nodes
-            },
-            lazyMethod () {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        const random = Math.random()
-                        resolve({
-                            data: {
-                                id: random,
-                                name: random
-                            }
-                        })
-                    }, 10)
-                })
-            },
-            lazyDisabled (node) {
-                return typeof node.data.id === 'number' ? node.data.id > 0.5 : false
-            }
-        }
+import { bkBigTree, bkInput } from '@'
+let seed = 0
+export default {
+  components: {
+    bkBigTree,
+    // eslint-disable-next-line vue/no-unused-components
+    bkInput
+  },
+  data () {
+    return {
+      filter: '',
+      hasLine: false,
+      data: this.getNodes(null, 2, 3)
     }
+  },
+  methods: {
+    getNodes (parent, childCount, deep) {
+      const nodes = []
+      for (let i = 0; i < childCount; i++) {
+        const node = {
+          id: `node-${seed}`,
+          level: parent ? parent.level + 1 : 0,
+          name: `node-${seed++}`
+        }
+        if (node.level < deep) {
+          node.children = this.getNodes(node, childCount, deep)
+        }
+        nodes.push(node)
+      }
+      return nodes
+    },
+    lazyMethod () {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const random = Math.random()
+          resolve({
+            data: {
+              id: random,
+              name: random
+            }
+          })
+        }, 10)
+      })
+    },
+    lazyDisabled (node) {
+      return typeof node.data.id === 'number' ? node.data.id > 0.5 : false
+    }
+  }
+}
 </script>

@@ -36,46 +36,46 @@
 </template>
 
 <script>
-    import CollapseTransition from '@/utils/transition'
+import CollapseTransition from '@/utils/transition'
 
-    export default {
-        name: 'bk-transition',
-        components: {
-            CollapseTransition
-        },
-        props: {
-            name: {
-                type: String,
-                default: ''
-            },
-            durationTime: {
-                type: String,
-                default: '.3s'
-            },
-            durationType: {
-                type: String,
-                default: 'linear'
-            }
-        },
-        computed: {
-            transitionName () {
-                return this.isCollapse ? '' : this.name
-            },
-            isCollapse () {
-                return this.name === 'collapse'
-            }
-        },
-        mounted () {
-            const slot = this.getSlot()
-            slot.elm.style.transitionDuration = this.durationTime
-            slot.elm.style.transitionTimingFunction = this.durationType
-        },
-        methods: {
-            getSlot () {
-                return this.$slots.default[0]
-            }
-        }
+export default {
+  name: 'bk-transition',
+  components: {
+    CollapseTransition
+  },
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    durationTime: {
+      type: String,
+      default: '.3s'
+    },
+    durationType: {
+      type: String,
+      default: 'linear'
     }
+  },
+  computed: {
+    transitionName () {
+      return this.isCollapse ? '' : this.name
+    },
+    isCollapse () {
+      return this.name === 'collapse'
+    }
+  },
+  mounted () {
+    const slot = this.getSlot()
+    slot.elm.style.transitionDuration = this.durationTime
+    slot.elm.style.transitionTimingFunction = this.durationType
+  },
+  methods: {
+    getSlot () {
+      return this.$slots.default[0]
+    }
+  }
+}
 </script>
 
 <style>

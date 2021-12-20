@@ -49,64 +49,64 @@
 </template>
 
 <script>
-    export default {
-        name: 'bk-option',
-        props: {
-            id: {
-                type: [String, Number],
-                required: true
-            },
-            name: {
-                type: [String, Number],
-                required: true
-            },
-            disabled: Boolean
-        },
-        inject: ['select', 'optionGroup'],
-        data () {
-            return {
-                unmatched: false,
-                isHighlight: false // todo: 解决性能问题，暂时关闭键盘上下键选择的功能
-            }
-        },
-        computed: {
-            isSelected () {
-                if (this.select.multiple && Array.isArray(this.select.selected)) {
-                    return this.select.selected.includes(this.id)
-                }
-                return this.select.selected === this.id
-            },
-            lowerName () {
-                return String(this.name).toLowerCase()
-            }
-        },
-        created () {
-            this.select.registerOption(this)
-            if (this.optionGroup) {
-                this.optionGroup.registerOption(this)
-            }
-        },
-        beforeDestroy () {
-            this.select.removeOption(this)
-            if (this.optionGroup) {
-                this.optionGroup.removeOption(this)
-            }
-        },
-        methods: {
-            handleOptionClick () {
-                if (this.disabled) {
-                    return false
-                }
-                const select = this.select
-                if (this.isSelected && select.multiple) {
-                    select.unselectOption(this)
-                } else if (!this.isSelected) {
-                    select.selectOption(this)
-                }
-                if (!select.multiple) {
-                    select.close()
-                }
-            }
-        }
+export default {
+  name: 'bk-option',
+  props: {
+    id: {
+      type: [String, Number],
+      required: true
+    },
+    name: {
+      type: [String, Number],
+      required: true
+    },
+    disabled: Boolean
+  },
+  inject: ['select', 'optionGroup'],
+  data () {
+    return {
+      unmatched: false,
+      isHighlight: false // todo: 解决性能问题，暂时关闭键盘上下键选择的功能
     }
+  },
+  computed: {
+    isSelected () {
+      if (this.select.multiple && Array.isArray(this.select.selected)) {
+        return this.select.selected.includes(this.id)
+      }
+      return this.select.selected === this.id
+    },
+    lowerName () {
+      return String(this.name).toLowerCase()
+    }
+  },
+  created () {
+    this.select.registerOption(this)
+    if (this.optionGroup) {
+      this.optionGroup.registerOption(this)
+    }
+  },
+  beforeDestroy () {
+    this.select.removeOption(this)
+    if (this.optionGroup) {
+      this.optionGroup.removeOption(this)
+    }
+  },
+  methods: {
+    handleOptionClick () {
+      if (this.disabled) {
+        return false
+      }
+      const select = this.select
+      if (this.isSelected && select.multiple) {
+        select.unselectOption(this)
+      } else if (!this.isSelected) {
+        select.selectOption(this)
+      }
+      if (!select.multiple) {
+        select.close()
+      }
+    }
+  }
+}
 </script>

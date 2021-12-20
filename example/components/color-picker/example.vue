@@ -42,21 +42,21 @@
 </template>
 
 <script>
-    import { bkColorPicker } from '@'
+import { bkColorPicker } from '@'
 
-    export default {
-        components: {
-            bkColorPicker
-        },
-        data () {
-            return {
-                color: ''
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            }
-        }
+export default {
+  components: {
+    bkColorPicker
+  },
+  data () {
+    return {
+      color: ''
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
+  }
+}
 </script>

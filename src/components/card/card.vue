@@ -56,120 +56,120 @@
     </section>
 </template>
 <script>
-    import bkInput from '../input/input.vue'
-    export default {
-        name: 'bk-card',
-        components: {
-            bkInput
-        },
-        props: {
-            /** 卡片标题 */
-            title: {
-                type: String,
-                default: ''
-            },
-            /** 是否显示头部 */
-            showHead: {
-                type: Boolean,
-                default: true
-            },
-            /** 是否显示底部 */
-            showFoot: {
-                type: Boolean,
-                default: false
-            },
-            /** 是否可编辑标题 */
-            isEdit: {
-                type: Boolean,
-                default: false
-            },
-            /** 是否支持展开&收起 */
-            isCollapse: {
-                type: Boolean,
-                default: false
-            },
-            /** 支持自定义展开 & 收起的icon */
-            collapseIcons: {
-                type: Array,
-                default: () => (['icon-angle-up-line', 'icon-angle-down-line'])
-            },
-            /** 展开 & 收起icon的位置 */
-            position: {
-                type: String,
-                default: 'left'
-            },
-            /** 边框 */
-            border: {
-                type: Boolean,
-                default: true
-            },
-            /** 默认展开 & 收起状态 */
-            collapseStatus: {
-                type: Boolean,
-                default: true
-            },
-            /** 是否禁用card-header默认line-height样式 */
-            disableHeaderStyle: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data () {
-            return {
-                /** 展开&收起的状态 */
-                collapseActive: true,
-                /** 是否显示编辑框 */
-                showInput: true,
-                renderTitle: ''
-            }
-        },
-        computed: {
-            /** 展开 & 收起展示的icon */
-            collapseIcon () {
-                return this.collapseIcons[Number(this.collapseActive)]
-            },
-            /** 卡片头部class */
-            collapseClass () {
-                return this.isCollapse ? `bk-card-head bk-card-head-${this.position}` : 'bk-card-head'
-            }
-        },
-        watch: {
-            title: {
-                immediate: true,
-                handler (value) {
-                    this.renderTitle = value
-                }
-            },
-            collapseStatus: {
-                immediate: true,
-                handler (value) {
-                    this.collapseActive = value
-                }
-            }
-        },
-        methods: {
-            /** 点击展开&收起 */
-            handleCollapse () {
-                if (!this.isCollapse) {
-                    return
-                }
-                this.collapseActive = !this.collapseActive
-                this.$emit('update:collapseStatus', this.collapseActive)
-            },
-            /** 点击编辑按钮 */
-            clickEdit () {
-                this.showInput = !this.showInput
-                this.$nextTick(() => {
-                    this.$refs.titleInputComp && this.$refs.titleInputComp.focus()
-                })
-            },
-            /** 保存编辑的title */
-            saveEdit () {
-                this.showInput = true
-                this.$emit('edit', this.renderTitle)
-            }
-        }
+import bkInput from '../input/input.vue'
+export default {
+  name: 'bk-card',
+  components: {
+    bkInput
+  },
+  props: {
+    /** 卡片标题 */
+    title: {
+      type: String,
+      default: ''
+    },
+    /** 是否显示头部 */
+    showHead: {
+      type: Boolean,
+      default: true
+    },
+    /** 是否显示底部 */
+    showFoot: {
+      type: Boolean,
+      default: false
+    },
+    /** 是否可编辑标题 */
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    /** 是否支持展开&收起 */
+    isCollapse: {
+      type: Boolean,
+      default: false
+    },
+    /** 支持自定义展开 & 收起的icon */
+    collapseIcons: {
+      type: Array,
+      default: () => (['icon-angle-up-line', 'icon-angle-down-line'])
+    },
+    /** 展开 & 收起icon的位置 */
+    position: {
+      type: String,
+      default: 'left'
+    },
+    /** 边框 */
+    border: {
+      type: Boolean,
+      default: true
+    },
+    /** 默认展开 & 收起状态 */
+    collapseStatus: {
+      type: Boolean,
+      default: true
+    },
+    /** 是否禁用card-header默认line-height样式 */
+    disableHeaderStyle: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    return {
+      /** 展开&收起的状态 */
+      collapseActive: true,
+      /** 是否显示编辑框 */
+      showInput: true,
+      renderTitle: ''
+    }
+  },
+  computed: {
+    /** 展开 & 收起展示的icon */
+    collapseIcon () {
+      return this.collapseIcons[Number(this.collapseActive)]
+    },
+    /** 卡片头部class */
+    collapseClass () {
+      return this.isCollapse ? `bk-card-head bk-card-head-${this.position}` : 'bk-card-head'
+    }
+  },
+  watch: {
+    title: {
+      immediate: true,
+      handler (value) {
+        this.renderTitle = value
+      }
+    },
+    collapseStatus: {
+      immediate: true,
+      handler (value) {
+        this.collapseActive = value
+      }
+    }
+  },
+  methods: {
+    /** 点击展开&收起 */
+    handleCollapse () {
+      if (!this.isCollapse) {
+        return
+      }
+      this.collapseActive = !this.collapseActive
+      this.$emit('update:collapseStatus', this.collapseActive)
+    },
+    /** 点击编辑按钮 */
+    clickEdit () {
+      this.showInput = !this.showInput
+      this.$nextTick(() => {
+        this.$refs.titleInputComp && this.$refs.titleInputComp.focus()
+      })
+    },
+    /** 保存编辑的title */
+    saveEdit () {
+      this.showInput = true
+      this.$emit('edit', this.renderTitle)
+    }
+  }
+}
 </script>
 <style lang='postcss'>
     @import '../../ui/card.css';

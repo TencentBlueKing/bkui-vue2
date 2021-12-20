@@ -300,28 +300,28 @@
 </template>
 
 <script>
-    import { bkContainer, bkCol, bkRow } from '@'
+import { bkContainer, bkCol, bkRow } from '@'
 
-    export default {
-        components: {
-            bkContainer,
-            bkCol,
-            bkRow
-        },
-        data () {
-            return {
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            handleClick (event) {
-                console.log(event)
-                alert('button clicked!')
-            }
-        }
+export default {
+  components: {
+    bkContainer,
+    bkCol,
+    bkRow
+  },
+  data () {
+    return {
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    handleClick (event) {
+      console.log(event)
+      alert('button clicked!')
+    }
+  }
+}
 </script>
 
 <style lang="postcss">

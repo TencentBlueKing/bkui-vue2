@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    /**
+/**
      * bk-divider
      *
      * @module components/divider
@@ -47,62 +47,62 @@
      * @param direction {string} [type=default] - 分割线方向
      * @param position {string} - 分割线 内容位置
      */
-    export default {
-        name: 'bk-divider',
-        props: {
-            direction: {
-                type: String,
-                default: 'horizontal',
-                validator (val) {
-                    return ['horizontal', 'vertical'].indexOf(val) !== -1
-                }
-            },
-            align: {
-                type: String,
-                default: 'center',
-                validator (val) {
-                    return ['left', 'center', 'right'].indexOf(val) !== -1
-                }
-            },
-            color: {
-                type: String,
-                default: '#dcdee5'
-            },
-            width: {
-                type: Number,
-                default: 1
-            },
-            type: {
-                type: String,
-                default: 'solid'
-            }
-        },
-        data () {
-            return {}
-        },
-        computed: {
-            style () {
-                if (this.direction === 'vertical') {
-                    return {
-                        display: 'inline-block',
-                        width: 0,
-                        height: '1em',
-                        margin: '0 8px',
-                        verticalAlign: 'middle',
-                        borderRight: `${this.width}px ${this.type} ${this.color}`
-                    }
-                }
-                return {
-                    display: 'block',
-                    width: '100%',
-                    height: 0,
-                    margin: '1em 0',
-                    verticalAlign: 'middle',
-                    borderBottom: `${this.width}px ${this.type} ${this.color}`
-                }
-            }
-        }
+export default {
+  name: 'bk-divider',
+  props: {
+    direction: {
+      type: String,
+      default: 'horizontal',
+      validator (val) {
+        return ['horizontal', 'vertical'].indexOf(val) !== -1
+      }
+    },
+    align: {
+      type: String,
+      default: 'center',
+      validator (val) {
+        return ['left', 'center', 'right'].indexOf(val) !== -1
+      }
+    },
+    color: {
+      type: String,
+      default: '#dcdee5'
+    },
+    width: {
+      type: Number,
+      default: 1
+    },
+    type: {
+      type: String,
+      default: 'solid'
     }
+  },
+  data () {
+    return {}
+  },
+  computed: {
+    style () {
+      if (this.direction === 'vertical') {
+        return {
+          display: 'inline-block',
+          width: 0,
+          height: '1em',
+          margin: '0 8px',
+          verticalAlign: 'middle',
+          borderRight: `${this.width}px ${this.type} ${this.color}`
+        }
+      }
+      return {
+        display: 'block',
+        width: '100%',
+        height: 0,
+        margin: '1em 0',
+        verticalAlign: 'middle',
+        borderBottom: `${this.width}px ${this.type} ${this.color}`
+      }
+    }
+  }
+}
 
 </script>
 <style>

@@ -42,66 +42,66 @@
     </div>
 </template>
 <script>
-    import Vue from 'vue'
-    import VueI18n from 'vue-i18n'
-    import { bkDatePicker, bkButton, locale, lang } from '@'
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import { bkDatePicker, bkButton, locale, lang } from '@'
 
-    Vue.use(VueI18n)
+Vue.use(VueI18n)
 
-    // 设置 bk-magic-vue 的语言包到 VueI18n 中
-    const messages = {
-        zhCN: Object.assign(lang.zhCN),
-        enUS: Object.assign(lang.enUS)
+// 设置 bk-magic-vue 的语言包到 VueI18n 中
+const messages = {
+  zhCN: Object.assign(lang.zhCN),
+  enUS: Object.assign(lang.enUS)
+}
+
+// 获取当前的语言
+const curLocale = localStorage.getItem('curLang') || 'zhCN'
+
+// 实例化 VueI18n 对象
+const i18n = new VueI18n({
+  locale: curLocale,
+  fallbackLocale: 'zhCN',
+  messages,
+  missing (locale, path) {
+    const parsedPath = i18n._path.parsePath(path)
+    return parsedPath[parsedPath.length - 1]
+  }
+})
+
+// 设置 bk-magic-vue 中 i18n 的处理函数，这句的意思是把 bk-magic-vue 中 i18n 的处理设置为 vue-i18n 的处理。
+// 如果和 vue-i18n 一起使用，那么这一句是必须的。
+locale.i18n((key, value) => i18n.t(key, value))
+
+export default {
+  components: {
+    bkDatePicker,
+    bkButton
+  },
+  data () {
+    return {
+      initDateTime: new Date(),
+      curLang: ''
     }
-
-    // 获取当前的语言
-    const curLocale = localStorage.getItem('curLang') || 'zhCN'
-
-    // 实例化 VueI18n 对象
-    const i18n = new VueI18n({
-        locale: curLocale,
-        fallbackLocale: 'zhCN',
-        messages,
-        missing (locale, path) {
-            const parsedPath = i18n._path.parsePath(path)
-            return parsedPath[parsedPath.length - 1]
-        }
-    })
-
-    // 设置 bk-magic-vue 中 i18n 的处理函数，这句的意思是把 bk-magic-vue 中 i18n 的处理设置为 vue-i18n 的处理。
-    // 如果和 vue-i18n 一起使用，那么这一句是必须的。
-    locale.i18n((key, value) => i18n.t(key, value))
-
-    export default {
-        components: {
-            bkDatePicker,
-            bkButton
-        },
-        data () {
-            return {
-                initDateTime: new Date(),
-                curLang: ''
-            }
-        },
-        created () {
-            // 获取语言标识
-            this.curLang = localStorage.getItem('curLang') || 'zhCN'
-        },
-        methods: {
-            back () {
-                window.location.href = '#/i18n?anchor=jie-he-vue-i18n-at-6-shi-yong-vue-i18n-example'
-            },
-            handleClick (event) {
-                // 当前为中文时
-                if (this.curLang === 'zhCN') {
-                    localStorage.setItem('curLang', 'enUS')
-                } else { // 当前为英文时
-                    localStorage.setItem('curLang', 'zhCN')
-                }
-                this.$nextTick(() => {
-                    window.location.reload()
-                })
-            }
-        }
+  },
+  created () {
+    // 获取语言标识
+    this.curLang = localStorage.getItem('curLang') || 'zhCN'
+  },
+  methods: {
+    back () {
+      window.location.href = '#/i18n?anchor=jie-he-vue-i18n-at-6-shi-yong-vue-i18n-example'
+    },
+    handleClick (event) {
+      // 当前为中文时
+      if (this.curLang === 'zhCN') {
+        localStorage.setItem('curLang', 'enUS')
+      } else { // 当前为英文时
+        localStorage.setItem('curLang', 'zhCN')
+      }
+      this.$nextTick(() => {
+        window.location.reload()
+      })
     }
+  }
+}
 </script>

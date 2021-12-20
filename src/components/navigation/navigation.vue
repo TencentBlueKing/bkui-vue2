@@ -107,130 +107,130 @@
 </template>
 
 <script>
-    import { t } from 'bk-magic-vue/lib/locale'
-    import NavigationMenuTitle from './navigation-menu-title'
-    export default {
-        name: 'bk-navigation',
-        components: {
-            NavigationMenuTitle
-        },
-        props: {
-            navWidth: {
-                type: [Number, String],
-                default: 60
-            },
-            hoverWidth: {
-                type: [Number, String],
-                default: 260
-            },
-            sideTitle: {
-                type: String,
-                default: ''
-            },
-            headerTitle: {
-                type: String,
-                default: ''
-            },
-            hoverLeaveDelay: {
-                type: [Number, String],
-                default: 0
-            },
-            hoverEnterDelay: {
-                type: [Number, String],
-                default: 100
-            },
-            defaultOpen: Boolean,
-            headThemeColor: {
-                type: String,
-                default: '#182132'
-            },
-            themeColor: {
-                type: String,
-                default: '#182132'
-            },
-            headHeight: {
-                type: [Number, String],
-                default: 52
-            },
-            navigationType: {
-                type: String,
-                default: 'left-right',
-                validator (v) {
-                    return ['top-bottom', 'left-right'].includes(v)
-                }
-            },
-            needMenu: {
-                type: Boolean,
-                default: true
-            }
-        },
-        provide () {
-            return {
-                rootNavigation: this
-            }
-        },
-        data () {
-            return {
-                defaultHeaderTitle: '',
-                nav: {
-                    click: false,
-                    hover: false,
-                    delay: false,
-                    timer: null,
-                    enterTimer: null
-                }
-            }
-        },
-        computed: {
-            defaultThemeColor: {
-                get () {
-                    const defTheme = ['#182132', '#FFFFFF']
-                    return !defTheme.includes(this.themeColor) ? this.themeColor : defTheme[+(this.navigationType === 'top-bottom')]
-                }
-            }
-        },
-        created () {
-            this.defaultHeaderTitle = this.headerTitle || t('bk.navigation.headerTitle')
-            if (this.defaultOpen) {
-                this.nav.click = !this.nav.click
-                this.nav.hover = this.nav.click
-                this.$emit('toggle', this.nav.hover)
-            }
-        },
-        beforeDestroy () {
-            this.nav.timer && window.clearTimeout(this.nav.timer)
-        },
-        methods: {
-            handleMouseOver (e) {
-                if (!this.nav.click) {
-                    this.nav.enterTimer = setTimeout(() => {
-                        this.nav.hover = true
-                        this.nav.enterTimer && window.clearTimeout(this.nav.enterTimer)
-                        this.nav.timer && window.clearTimeout(this.nav.timer)
-                        this.$emit('hover', this.nav.hover)
-                        this.$emit('toggle', this.nav.hover)
-                    }, this.hoverEnterDelay)
-                }
-            },
-            handleMouseLeave (e) {
-                if (!this.nav.click) {
-                    this.nav.enterTimer && window.clearTimeout(this.nav.enterTimer)
-                    this.nav.timer = setTimeout(() => {
-                        this.nav.hover = false
-                        window.clearTimeout(this.nav.timer)
-                        this.$emit('leave', this.nav.hover)
-                        this.$emit('toggle', this.nav.hover)
-                    }, this.hoverLeaveDelay)
-                }
-            },
-            handleClick () {
-                this.nav.click = !this.nav.click
-                this.nav.hover = this.nav.click
-                this.$emit('toggle', this.nav.hover)
-                this.$emit('toggle-click', this.nav.hover)
-            }
-        }
+import { t } from 'bk-magic-vue/lib/locale'
+import NavigationMenuTitle from './navigation-menu-title'
+export default {
+  name: 'bk-navigation',
+  components: {
+    NavigationMenuTitle
+  },
+  props: {
+    navWidth: {
+      type: [Number, String],
+      default: 60
+    },
+    hoverWidth: {
+      type: [Number, String],
+      default: 260
+    },
+    sideTitle: {
+      type: String,
+      default: ''
+    },
+    headerTitle: {
+      type: String,
+      default: ''
+    },
+    hoverLeaveDelay: {
+      type: [Number, String],
+      default: 0
+    },
+    hoverEnterDelay: {
+      type: [Number, String],
+      default: 100
+    },
+    defaultOpen: Boolean,
+    headThemeColor: {
+      type: String,
+      default: '#182132'
+    },
+    themeColor: {
+      type: String,
+      default: '#182132'
+    },
+    headHeight: {
+      type: [Number, String],
+      default: 52
+    },
+    navigationType: {
+      type: String,
+      default: 'left-right',
+      validator (v) {
+        return ['top-bottom', 'left-right'].includes(v)
+      }
+    },
+    needMenu: {
+      type: Boolean,
+      default: true
     }
+  },
+  provide () {
+    return {
+      rootNavigation: this
+    }
+  },
+  data () {
+    return {
+      defaultHeaderTitle: '',
+      nav: {
+        click: false,
+        hover: false,
+        delay: false,
+        timer: null,
+        enterTimer: null
+      }
+    }
+  },
+  computed: {
+    defaultThemeColor: {
+      get () {
+        const defTheme = ['#182132', '#FFFFFF']
+        return !defTheme.includes(this.themeColor) ? this.themeColor : defTheme[+(this.navigationType === 'top-bottom')]
+      }
+    }
+  },
+  created () {
+    this.defaultHeaderTitle = this.headerTitle || t('bk.navigation.headerTitle')
+    if (this.defaultOpen) {
+      this.nav.click = !this.nav.click
+      this.nav.hover = this.nav.click
+      this.$emit('toggle', this.nav.hover)
+    }
+  },
+  beforeDestroy () {
+    this.nav.timer && window.clearTimeout(this.nav.timer)
+  },
+  methods: {
+    handleMouseOver (e) {
+      if (!this.nav.click) {
+        this.nav.enterTimer = setTimeout(() => {
+          this.nav.hover = true
+          this.nav.enterTimer && window.clearTimeout(this.nav.enterTimer)
+          this.nav.timer && window.clearTimeout(this.nav.timer)
+          this.$emit('hover', this.nav.hover)
+          this.$emit('toggle', this.nav.hover)
+        }, this.hoverEnterDelay)
+      }
+    },
+    handleMouseLeave (e) {
+      if (!this.nav.click) {
+        this.nav.enterTimer && window.clearTimeout(this.nav.enterTimer)
+        this.nav.timer = setTimeout(() => {
+          this.nav.hover = false
+          window.clearTimeout(this.nav.timer)
+          this.$emit('leave', this.nav.hover)
+          this.$emit('toggle', this.nav.hover)
+        }, this.hoverLeaveDelay)
+      }
+    },
+    handleClick () {
+      this.nav.click = !this.nav.click
+      this.nav.hover = this.nav.click
+      this.$emit('toggle', this.nav.hover)
+      this.$emit('toggle-click', this.nav.hover)
+    }
+  }
+}
 </script>
 
 <style>

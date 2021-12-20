@@ -276,497 +276,497 @@
 </template>
 
 <script>
-    import { debounce } from 'throttle-debounce'
-    import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
-    import Mousewheel from '@/directives/mousewheel'
-    import Bkloading from '@/components/loading/directive'
-    import TableStore from './table-store'
-    import TableLayout from './table-layout'
-    import TableBody from './table-body'
-    import TableHeader from './table-header'
-    import TableFooter from './table-footer'
-    import BkPagination from '../pagination'
-    import locale from 'bk-magic-vue/lib/locale'
+import { debounce } from 'throttle-debounce'
+import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
+import Mousewheel from '@/directives/mousewheel'
+import Bkloading from '@/components/loading/directive'
+import TableStore from './table-store'
+import TableLayout from './table-layout'
+import TableBody from './table-body'
+import TableHeader from './table-header'
+import TableFooter from './table-footer'
+import BkPagination from '../pagination'
+import locale from 'bk-magic-vue/lib/locale'
 
-    let tableIdSeed = 1
+let tableIdSeed = 1
 
-    export default {
-        name: 'bk-table',
-        components: {
-            TableHeader,
-            TableFooter,
-            TableBody,
-            BkPagination
-        },
-        directives: {
-            Mousewheel,
-            Bkloading
-        },
-        mixins: [locale.mixin],
-        props: {
-            data: {
-                type: Array,
-                default: function () {
-                    return []
-                }
-            },
-            size: {
-                type: String,
-                default: 'small',
-                validator (val) {
-                    return ['small', 'medium', 'large'].includes(val)
-                }
-            },
-            height: [String, Number],
-            maxHeight: [String, Number],
-            fit: {
-                type: Boolean,
-                default: true
-            },
-            stripe: Boolean,
-            border: Boolean,
-            outerBorder: {
-                type: Boolean,
-                default: true
-            },
-            rowBorder: {
-                type: Boolean,
-                default: true
-            },
-            colBorder: Boolean,
-            rowKey: [String, Function],
-            context: {
-                type: Object,
-                default: () => ({})
-            },
-            showHeader: {
-                type: Boolean,
-                default: true
-            },
-            showSummary: Boolean,
-            sumText: String,
-            summaryMethod: Function,
-            rowClassName: [String, Function],
-            rowStyle: [Object, Function],
-            cellClassName: [String, Function],
-            cellStyle: [Object, Function],
-            headerBorder: {
-                type: Boolean,
-                default: false
-            },
-            headerRowClassName: [String, Function],
-            headerRowStyle: [Object, Function],
-            headerCellClassName: [String, Function],
-            headerCellStyle: [Object, Function],
-            highlightCurrentRow: Boolean,
-            currentRowKey: [String, Number],
-            emptyText: String,
-            emptyBlockClassName: String,
-            expandRowKeys: Array,
-            defaultExpandAll: Boolean,
-            defaultSort: Object,
-            spanMethod: Function,
-            selectOnIndeterminate: {
-                type: Boolean,
-                default: true
-            },
-            pagination: Object,
-            showPaginationInfo: {
-                type: Boolean,
-                default: true
-            },
-            // 分页变化时，表格是否自动滚动到顶部
-            autoScrollToTop: {
-                type: Boolean,
-                default: false
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            setting: {
-                type: Object,
-                default: () => ({
-                    columns: []
-                }),
-                validator (setting) {
-                    return Array.isArray(setting.columns)
-                }
-            },
-            cellAttributes: [Function, Object],
-            headerCellAttributes: [Function, Object],
-            virtualRender: {
-                type: [Object, Boolean],
-                default: false
-            },
-            scrollLoading: {
-                type: Object,
-                default: () => ({
-                    size: 'mini',
-                    isLoading: false
-                })
-            }
-        },
-        data () {
-            const store = new TableStore(this, {
-                rowKey: this.rowKey,
-                defaultExpandAll: this.defaultExpandAll,
-                selectOnIndeterminate: this.selectOnIndeterminate
-            })
-            const layout = new TableLayout({
-                store,
-                table: this,
-                fit: this.fit,
-                showHeader: this.showHeader
-            })
-            return {
-                layout,
-                store,
-                isHidden: false,
-                renderExpanded: null,
-                resizeProxyVisible: false,
-                resizeState: {
-                    width: null,
-                    height: null
-                },
-                // 是否拥有多级表头
-                isGroup: false,
-                scrollPosition: 'left',
-                scrollThrottle: false // 滚动节流，是否进入
-            }
-        },
-        computed: {
-            curLang () {
-                const l = locale.getCurLang().bk.lang
-                if (['zh', 'cn', 'zh-CN', 'zh-cn', 'zhCN', 'zhcn', 'zh-TW', 'zh-tw', 'zhTW', 'zhtw'].indexOf(l) > -1) {
-                    return 'cn'
-                }
-                return 'en'
-            },
-            tableSize () {
-                return this.size
-            },
-            tableBorder () {
-                return this.border || (this.rowBorder && this.colBorder)
-            },
-            tableRowBorder () {
-                return this.border || this.rowBorder
-            },
-            tableColBorder () {
-                return this.border || this.colBorder
-            },
-            bodyWrapper () {
-                return this.$refs.bodyWrapper
-            },
-            shouldUpdateHeight () {
-                return this.height
-                    || this.maxHeight
-                    || this.fixedColumns.length > 0
-                    || this.rightFixedColumns.length > 0
-            },
-            selection () {
-                return this.store.states.selection
-            },
-            columns () {
-                return this.store.states.columns
-            },
-            tableData () {
-                return this.store.states.data
-            },
-            fixedColumns () {
-                return this.store.states.fixedColumns
-            },
-            rightFixedColumns () {
-                return this.store.states.rightFixedColumns
-            },
-            notOnlySetting () {
-                return this.rightFixedColumns.some(column => column.type !== 'setting')
-            },
-            bodyWidth () {
-                const { bodyWidth, scrollY, gutterWidth } = this.layout
-                return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : ''
-            },
-            bodyHeight () {
-                if (this.height) {
-                    return {
-                        height: this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
-                    }
-                } else if (this.maxHeight) {
-                    return {
-                        'max-height': (this.showHeader
-                            ? this.maxHeight - this.layout.headerHeight - this.layout.footerHeight - this.layout.paginationHeight
-                            : this.maxHeight - this.layout.footerHeight - this.layout.paginationHeight) + 'px'
-                    }
-                }
-                return {}
-            },
-            fixedBodyHeight () {
-                if (this.height) {
-                    return {
-                        height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight + 'px' : ''
-                    }
-                } else if (this.maxHeight) {
-                    let maxHeight = this.layout.scrollX ? this.maxHeight - this.layout.gutterWidth : this.maxHeight
-                    if (this.showHeader) {
-                        maxHeight -= this.layout.headerHeight
-                    }
-                    maxHeight -= this.layout.footerHeight
-                    maxHeight -= this.layout.paginationHeight
-                    return {
-                        'max-height': maxHeight + 'px'
-                    }
-                }
-                return {}
-            },
-            fixedHeight () {
-                if (this.maxHeight) {
-                    if (this.showSummary) {
-                        return {
-                            bottom: this.layout.paginationHeight + 'px'
-                        }
-                    }
-                    return {
-                        bottom: (
-                            (this.layout.scrollX && this.data.length)
-                                ? this.layout.gutterWidth + this.layout.paginationHeight
-                                : this.layout.paginationHeight
-                        ) + 'px'
-                    }
-                } else {
-                    if (this.showSummary) {
-                        return {
-                            height: this.layout.tableHeight ? this.layout.tableHeight + 'px' : ''
-                        }
-                    }
-                    return {
-                        height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
-                    }
-                }
-            },
-            rightFixedHeight () {
-                if (this.notOnlySetting) {
-                    return this.fixedHeight
-                }
-                return {
-                    height: this.layout.headerHeight + 'px'
-                }
-            },
-            showPagination () {
-                return this.data.length && this.pagination && this.pagination.count > 0
-            },
-            showSelectionCount () {
-                return this.store.states._columns.some(column => column.type === 'selection')
-            },
-            isVirtualRender () {
-                const prop = this.virtualRender
-                return typeof prop === 'boolean' ? prop : typeof prop === 'object' ? !prop.disabled : false
-            }
-        },
-        watch: {
-            height: {
-                immediate: true,
-                handler (value) {
-                    this.layout.setHeight(value)
-                }
-            },
-            maxHeight: {
-                immediate: true,
-                handler (value) {
-                    this.layout.setMaxHeight(value)
-                }
-            },
-            currentRowKey (newVal) {
-                this.store.setCurrentRowKey(newVal)
-            },
-            data: {
-                immediate: true,
-                handler (value) {
-                    this.store.commit('setData', value)
-                    if (this.$ready) {
-                        this.$nextTick(() => {
-                            this.doLayout()
-                        })
-                    }
-                }
-            },
-            expandRowKeys: {
-                immediate: true,
-                handler (newVal) {
-                    if (newVal) {
-                        this.store.setExpandRowKeys(newVal)
-                    }
-                }
-            }
-        },
-        created () {
-            this.tableId = 'bk-table-' + tableIdSeed++
-            this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
-        },
-        mounted () {
-            this.bindEvents()
-            this.store.updateColumns()
-            this.doLayout()
-
-            this.resizeState = {
-                width: this.$el.offsetWidth,
-                height: this.$el.offsetHeight
-            }
-
-            // init filters
-            this.store.states.columns.forEach(column => {
-                if (column.filteredValue && column.filteredValue.length) {
-                    this.store.commit('filterChange', {
-                        column,
-                        values: column.filteredValue,
-                        silent: true
-                    })
-                }
-            })
-            this.$ready = true
-        },
-        beforeDestroy () {
-            this.$destroyed = true
-            if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener)
-        },
-        methods: {
-            setCurrentRow (row) {
-                this.store.commit('setCurrentRow', row)
-            },
-            toggleRowSelection (row, selected) {
-                this.store.toggleRowSelection(row, selected)
-                this.store.updateAllSelected()
-            },
-            toggleRowExpansion (row, expanded) {
-                this.store.toggleRowExpansion(row, expanded)
-            },
-            clearSelection () {
-                this.store.clearSelection()
-            },
-            clearFilter () {
-                this.store.clearFilter()
-            },
-            clearSort () {
-                this.store.clearSort()
-            },
-            handleMouseLeave () {
-                this.store.commit('setHoverRow', null)
-                if (this.hoverState) this.hoverState = null
-            },
-            updateScrollY () {
-                this.layout.updateScrollY()
-                this.layout.updateColumnsWidth()
-            },
-            handleFixedMousewheel (event, data) {
-                const bodyWrapper = this.bodyWrapper
-                if (Math.abs(data.spinY) > 0) {
-                    const currentScrollTop = bodyWrapper.scrollTop
-                    if (data.pixelY < 0 && currentScrollTop !== 0) {
-                        event.preventDefault()
-                    }
-                    if (data.pixelY > 0 && bodyWrapper.scrollHeight - bodyWrapper.clientHeight > currentScrollTop) {
-                        event.preventDefault()
-                    }
-                    bodyWrapper.scrollTop += Math.ceil(data.pixelY / 5)
-                } else {
-                    bodyWrapper.scrollLeft += Math.ceil(data.pixelX / 5)
-                }
-            },
-            handleHeaderFooterMousewheel (event, data) {
-                const { pixelX, pixelY } = data
-                if (Math.abs(pixelX) >= Math.abs(pixelY)) {
-                    event.preventDefault()
-                    this.bodyWrapper.scrollLeft += data.pixelX / 5
-                }
-            },
-            handlePageChange (page) {
-                this.autoScrollToTop && this.scrollToTop()
-                this.$emit('page-change', page)
-            },
-            handlePageLimitChange (currentLimit, prevLimit) {
-                this.autoScrollToTop && this.scrollToTop()
-                this.$emit('page-limit-change', currentLimit, prevLimit)
-            },
-            // 表格滚动到顶部
-            scrollToTop () {
-                this.$refs.bodyWrapper.scrollTo({
-                    top: 0
-                })
-            },
-            bindEvents () {
-                const { headerWrapper, footerWrapper, tableHeader, bodyWrapper } = this.$refs
-                const refs = this.$refs
-                const self = this
-                this.bodyWrapper.addEventListener('scroll', function () {
-                    if (headerWrapper) {
-                        headerWrapper.scrollLeft = this.scrollLeft
-                        Object.values(tableHeader.filterPanels).forEach(filterPanel => {
-                            filterPanel.instance && filterPanel.instance.hide(0)
-                        })
-                    }
-                    if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft
-                    if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop
-                    if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop
-                    const maxScrollLeftPosition = this.scrollWidth - this.offsetWidth - 1
-                    const scrollLeft = this.scrollLeft
-                    if (scrollLeft >= maxScrollLeftPosition) {
-                        self.scrollPosition = 'right'
-                    } else if (scrollLeft === 0) {
-                        self.scrollPosition = 'left'
-                    } else {
-                        self.scrollPosition = 'middle'
-                    }
-                    if (self.scrollLoading.isLoading) return
-                    if (this.scrollThrottle) return
-                    this.scrollThrottle = true
-                    setTimeout(() => {
-                        this.scrollThrottle = false
-                        if ((bodyWrapper.scrollHeight - bodyWrapper.offsetHeight - bodyWrapper.scrollTop) < 40) {
-                            self.$emit('scroll-end')
-                        }
-                    }, 500)
-                })
-                if (this.fit) {
-                    addResizeListener(this.$el, this.resizeListener)
-                }
-            },
-            resizeListener () {
-                if (!this.$ready) return
-                let shouldUpdateLayout = false
-                const el = this.$el
-                const { width: oldWidth, height: oldHeight } = this.resizeState
-
-                const width = el.offsetWidth
-                if (oldWidth !== width) {
-                    shouldUpdateLayout = true
-                }
-
-                const height = el.offsetHeight
-                if ((this.height || this.shouldUpdateHeight) && oldHeight !== height) {
-                    shouldUpdateLayout = true
-                }
-
-                if (shouldUpdateLayout) {
-                    this.resizeState.width = width
-                    this.resizeState.height = height
-                    this.doLayout()
-                }
-            },
-            doLayout () {
-                if (this.$destroyed) return
-                if (this.shouldUpdateHeight) {
-                    this.layout.updateElsHeight()
-                }
-                this.layout.updateColumnsWidth()
-            },
-            sort (prop, order) {
-                this.store.commit('sort', { prop, order })
-            },
-            toggleAllSelection () {
-                this.store.commit('toggleAllSelection')
-            }
-        }
+export default {
+  name: 'bk-table',
+  components: {
+    TableHeader,
+    TableFooter,
+    TableBody,
+    BkPagination
+  },
+  directives: {
+    Mousewheel,
+    Bkloading
+  },
+  mixins: [locale.mixin],
+  props: {
+    data: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    size: {
+      type: String,
+      default: 'small',
+      validator (val) {
+        return ['small', 'medium', 'large'].includes(val)
+      }
+    },
+    height: [String, Number],
+    maxHeight: [String, Number],
+    fit: {
+      type: Boolean,
+      default: true
+    },
+    stripe: Boolean,
+    border: Boolean,
+    outerBorder: {
+      type: Boolean,
+      default: true
+    },
+    rowBorder: {
+      type: Boolean,
+      default: true
+    },
+    colBorder: Boolean,
+    rowKey: [String, Function],
+    context: {
+      type: Object,
+      default: () => ({})
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
+    showSummary: Boolean,
+    sumText: String,
+    summaryMethod: Function,
+    rowClassName: [String, Function],
+    rowStyle: [Object, Function],
+    cellClassName: [String, Function],
+    cellStyle: [Object, Function],
+    headerBorder: {
+      type: Boolean,
+      default: false
+    },
+    headerRowClassName: [String, Function],
+    headerRowStyle: [Object, Function],
+    headerCellClassName: [String, Function],
+    headerCellStyle: [Object, Function],
+    highlightCurrentRow: Boolean,
+    currentRowKey: [String, Number],
+    emptyText: String,
+    emptyBlockClassName: String,
+    expandRowKeys: Array,
+    defaultExpandAll: Boolean,
+    defaultSort: Object,
+    spanMethod: Function,
+    selectOnIndeterminate: {
+      type: Boolean,
+      default: true
+    },
+    pagination: Object,
+    showPaginationInfo: {
+      type: Boolean,
+      default: true
+    },
+    // 分页变化时，表格是否自动滚动到顶部
+    autoScrollToTop: {
+      type: Boolean,
+      default: false
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    setting: {
+      type: Object,
+      default: () => ({
+        columns: []
+      }),
+      validator (setting) {
+        return Array.isArray(setting.columns)
+      }
+    },
+    cellAttributes: [Function, Object],
+    headerCellAttributes: [Function, Object],
+    virtualRender: {
+      type: [Object, Boolean],
+      default: false
+    },
+    scrollLoading: {
+      type: Object,
+      default: () => ({
+        size: 'mini',
+        isLoading: false
+      })
     }
+  },
+  data () {
+    const store = new TableStore(this, {
+      rowKey: this.rowKey,
+      defaultExpandAll: this.defaultExpandAll,
+      selectOnIndeterminate: this.selectOnIndeterminate
+    })
+    const layout = new TableLayout({
+      store,
+      table: this,
+      fit: this.fit,
+      showHeader: this.showHeader
+    })
+    return {
+      layout,
+      store,
+      isHidden: false,
+      renderExpanded: null,
+      resizeProxyVisible: false,
+      resizeState: {
+        width: null,
+        height: null
+      },
+      // 是否拥有多级表头
+      isGroup: false,
+      scrollPosition: 'left',
+      scrollThrottle: false // 滚动节流，是否进入
+    }
+  },
+  computed: {
+    curLang () {
+      const l = locale.getCurLang().bk.lang
+      if (['zh', 'cn', 'zh-CN', 'zh-cn', 'zhCN', 'zhcn', 'zh-TW', 'zh-tw', 'zhTW', 'zhtw'].indexOf(l) > -1) {
+        return 'cn'
+      }
+      return 'en'
+    },
+    tableSize () {
+      return this.size
+    },
+    tableBorder () {
+      return this.border || (this.rowBorder && this.colBorder)
+    },
+    tableRowBorder () {
+      return this.border || this.rowBorder
+    },
+    tableColBorder () {
+      return this.border || this.colBorder
+    },
+    bodyWrapper () {
+      return this.$refs.bodyWrapper
+    },
+    shouldUpdateHeight () {
+      return this.height
+        || this.maxHeight
+        || this.fixedColumns.length > 0
+        || this.rightFixedColumns.length > 0
+    },
+    selection () {
+      return this.store.states.selection
+    },
+    columns () {
+      return this.store.states.columns
+    },
+    tableData () {
+      return this.store.states.data
+    },
+    fixedColumns () {
+      return this.store.states.fixedColumns
+    },
+    rightFixedColumns () {
+      return this.store.states.rightFixedColumns
+    },
+    notOnlySetting () {
+      return this.rightFixedColumns.some(column => column.type !== 'setting')
+    },
+    bodyWidth () {
+      const { bodyWidth, scrollY, gutterWidth } = this.layout
+      return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : ''
+    },
+    bodyHeight () {
+      if (this.height) {
+        return {
+          height: this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
+        }
+      } else if (this.maxHeight) {
+        return {
+          'max-height': (this.showHeader
+            ? this.maxHeight - this.layout.headerHeight - this.layout.footerHeight - this.layout.paginationHeight
+            : this.maxHeight - this.layout.footerHeight - this.layout.paginationHeight) + 'px'
+        }
+      }
+      return {}
+    },
+    fixedBodyHeight () {
+      if (this.height) {
+        return {
+          height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight + 'px' : ''
+        }
+      } else if (this.maxHeight) {
+        let maxHeight = this.layout.scrollX ? this.maxHeight - this.layout.gutterWidth : this.maxHeight
+        if (this.showHeader) {
+          maxHeight -= this.layout.headerHeight
+        }
+        maxHeight -= this.layout.footerHeight
+        maxHeight -= this.layout.paginationHeight
+        return {
+          'max-height': maxHeight + 'px'
+        }
+      }
+      return {}
+    },
+    fixedHeight () {
+      if (this.maxHeight) {
+        if (this.showSummary) {
+          return {
+            bottom: this.layout.paginationHeight + 'px'
+          }
+        }
+        return {
+          bottom: (
+            (this.layout.scrollX && this.data.length)
+              ? this.layout.gutterWidth + this.layout.paginationHeight
+              : this.layout.paginationHeight
+          ) + 'px'
+        }
+      } else {
+        if (this.showSummary) {
+          return {
+            height: this.layout.tableHeight ? this.layout.tableHeight + 'px' : ''
+          }
+        }
+        return {
+          height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
+        }
+      }
+    },
+    rightFixedHeight () {
+      if (this.notOnlySetting) {
+        return this.fixedHeight
+      }
+      return {
+        height: this.layout.headerHeight + 'px'
+      }
+    },
+    showPagination () {
+      return this.data.length && this.pagination && this.pagination.count > 0
+    },
+    showSelectionCount () {
+      return this.store.states._columns.some(column => column.type === 'selection')
+    },
+    isVirtualRender () {
+      const prop = this.virtualRender
+      return typeof prop === 'boolean' ? prop : typeof prop === 'object' ? !prop.disabled : false
+    }
+  },
+  watch: {
+    height: {
+      immediate: true,
+      handler (value) {
+        this.layout.setHeight(value)
+      }
+    },
+    maxHeight: {
+      immediate: true,
+      handler (value) {
+        this.layout.setMaxHeight(value)
+      }
+    },
+    currentRowKey (newVal) {
+      this.store.setCurrentRowKey(newVal)
+    },
+    data: {
+      immediate: true,
+      handler (value) {
+        this.store.commit('setData', value)
+        if (this.$ready) {
+          this.$nextTick(() => {
+            this.doLayout()
+          })
+        }
+      }
+    },
+    expandRowKeys: {
+      immediate: true,
+      handler (newVal) {
+        if (newVal) {
+          this.store.setExpandRowKeys(newVal)
+        }
+      }
+    }
+  },
+  created () {
+    this.tableId = 'bk-table-' + tableIdSeed++
+    this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
+  },
+  mounted () {
+    this.bindEvents()
+    this.store.updateColumns()
+    this.doLayout()
+
+    this.resizeState = {
+      width: this.$el.offsetWidth,
+      height: this.$el.offsetHeight
+    }
+
+    // init filters
+    this.store.states.columns.forEach(column => {
+      if (column.filteredValue && column.filteredValue.length) {
+        this.store.commit('filterChange', {
+          column,
+          values: column.filteredValue,
+          silent: true
+        })
+      }
+    })
+    this.$ready = true
+  },
+  beforeDestroy () {
+    this.$destroyed = true
+    if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener)
+  },
+  methods: {
+    setCurrentRow (row) {
+      this.store.commit('setCurrentRow', row)
+    },
+    toggleRowSelection (row, selected) {
+      this.store.toggleRowSelection(row, selected)
+      this.store.updateAllSelected()
+    },
+    toggleRowExpansion (row, expanded) {
+      this.store.toggleRowExpansion(row, expanded)
+    },
+    clearSelection () {
+      this.store.clearSelection()
+    },
+    clearFilter () {
+      this.store.clearFilter()
+    },
+    clearSort () {
+      this.store.clearSort()
+    },
+    handleMouseLeave () {
+      this.store.commit('setHoverRow', null)
+      if (this.hoverState) this.hoverState = null
+    },
+    updateScrollY () {
+      this.layout.updateScrollY()
+      this.layout.updateColumnsWidth()
+    },
+    handleFixedMousewheel (event, data) {
+      const bodyWrapper = this.bodyWrapper
+      if (Math.abs(data.spinY) > 0) {
+        const currentScrollTop = bodyWrapper.scrollTop
+        if (data.pixelY < 0 && currentScrollTop !== 0) {
+          event.preventDefault()
+        }
+        if (data.pixelY > 0 && bodyWrapper.scrollHeight - bodyWrapper.clientHeight > currentScrollTop) {
+          event.preventDefault()
+        }
+        bodyWrapper.scrollTop += Math.ceil(data.pixelY / 5)
+      } else {
+        bodyWrapper.scrollLeft += Math.ceil(data.pixelX / 5)
+      }
+    },
+    handleHeaderFooterMousewheel (event, data) {
+      const { pixelX, pixelY } = data
+      if (Math.abs(pixelX) >= Math.abs(pixelY)) {
+        event.preventDefault()
+        this.bodyWrapper.scrollLeft += data.pixelX / 5
+      }
+    },
+    handlePageChange (page) {
+      this.autoScrollToTop && this.scrollToTop()
+      this.$emit('page-change', page)
+    },
+    handlePageLimitChange (currentLimit, prevLimit) {
+      this.autoScrollToTop && this.scrollToTop()
+      this.$emit('page-limit-change', currentLimit, prevLimit)
+    },
+    // 表格滚动到顶部
+    scrollToTop () {
+      this.$refs.bodyWrapper.scrollTo({
+        top: 0
+      })
+    },
+    bindEvents () {
+      const { headerWrapper, footerWrapper, tableHeader, bodyWrapper } = this.$refs
+      const refs = this.$refs
+      const self = this
+      this.bodyWrapper.addEventListener('scroll', function () {
+        if (headerWrapper) {
+          headerWrapper.scrollLeft = this.scrollLeft
+          Object.values(tableHeader.filterPanels).forEach(filterPanel => {
+            filterPanel.instance && filterPanel.instance.hide(0)
+          })
+        }
+        if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft
+        if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop
+        if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop
+        const maxScrollLeftPosition = this.scrollWidth - this.offsetWidth - 1
+        const scrollLeft = this.scrollLeft
+        if (scrollLeft >= maxScrollLeftPosition) {
+          self.scrollPosition = 'right'
+        } else if (scrollLeft === 0) {
+          self.scrollPosition = 'left'
+        } else {
+          self.scrollPosition = 'middle'
+        }
+        if (self.scrollLoading.isLoading) return
+        if (this.scrollThrottle) return
+        this.scrollThrottle = true
+        setTimeout(() => {
+          this.scrollThrottle = false
+          if ((bodyWrapper.scrollHeight - bodyWrapper.offsetHeight - bodyWrapper.scrollTop) < 40) {
+            self.$emit('scroll-end')
+          }
+        }, 500)
+      })
+      if (this.fit) {
+        addResizeListener(this.$el, this.resizeListener)
+      }
+    },
+    resizeListener () {
+      if (!this.$ready) return
+      let shouldUpdateLayout = false
+      const el = this.$el
+      const { width: oldWidth, height: oldHeight } = this.resizeState
+
+      const width = el.offsetWidth
+      if (oldWidth !== width) {
+        shouldUpdateLayout = true
+      }
+
+      const height = el.offsetHeight
+      if ((this.height || this.shouldUpdateHeight) && oldHeight !== height) {
+        shouldUpdateLayout = true
+      }
+
+      if (shouldUpdateLayout) {
+        this.resizeState.width = width
+        this.resizeState.height = height
+        this.doLayout()
+      }
+    },
+    doLayout () {
+      if (this.$destroyed) return
+      if (this.shouldUpdateHeight) {
+        this.layout.updateElsHeight()
+      }
+      this.layout.updateColumnsWidth()
+    },
+    sort (prop, order) {
+      this.store.commit('sort', { prop, order })
+    },
+    toggleAllSelection () {
+      this.store.commit('toggleAllSelection')
+    }
+  }
+}
 </script>
 
 <style>

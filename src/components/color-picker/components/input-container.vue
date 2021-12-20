@@ -38,24 +38,24 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            info: {
-                type: Object,
-                required: true
-            }
-        },
-        methods: {
-            handleTab (e) {
-                if (this.info.key === 'a') {
-                    this.$emit('tab', e)
-                }
-            },
-            handleInput (e) {
-                const { key } = this.info
-                const value = e.target.value
-                this.$emit('input', key, value)
-            }
-        }
+export default {
+  props: {
+    info: {
+      type: Object,
+      required: true
     }
+  },
+  methods: {
+    handleTab (e) {
+      if (this.info.key === 'a') {
+        this.$emit('tab', e)
+      }
+    },
+    handleInput (e) {
+      const { key } = this.info
+      const value = e.target.value
+      this.$emit('input', key, value)
+    }
+  }
+}
 </script>

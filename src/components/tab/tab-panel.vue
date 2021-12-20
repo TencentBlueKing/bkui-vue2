@@ -33,66 +33,66 @@
 </template>
 
 <script>
-    export default {
-        name: 'bk-tab-panel',
-        props: {
-            name: {
-                type: [String, Number],
-                required: true
-            },
-            label: {
-                type: String,
-                required: false
-            },
-            closable: {
-                type: Boolean,
-                default: undefined
-            },
-            visible: {
-                type: Boolean,
-                default: true
-            },
-            disabled: Boolean,
-            sortable: {
-                type: Boolean,
-                default: true
-            },
-            renderDirective: {
-                type: String,
-                default: 'show',
-                validator (val) {
-                    return ['if', 'show'].includes(val)
-                }
-            },
-            renderLabel: Function
-        },
-        computed: {
-            tabInstance () {
-                let parent = this.$parent
-                while (parent && !parent.isTab) {
-                    parent = parent.$parent
-                }
-                return parent
-            },
-            shouldRender () {
-                const directive = this.renderDirective
-                return directive === 'show' || (this.active && directive === 'if')
-            },
-            active () {
-                return this.tabInstance.localActive === this.name
-            }
-        },
-        created () {
-            if (this.tabInstance.isTab) {
-                this.tabInstance.registerPanel(this)
-            } else {
-                console.error('"bk-tab-panel"\'s parent element must be "bk-tab"')
-            }
-        },
-        beforeDestroy () {
-            if (this.tabInstance.isTab) {
-                this.tabInstance.deletePanel(this)
-            }
-        }
+export default {
+  name: 'bk-tab-panel',
+  props: {
+    name: {
+      type: [String, Number],
+      required: true
+    },
+    label: {
+      type: String,
+      required: false
+    },
+    closable: {
+      type: Boolean,
+      default: undefined
+    },
+    visible: {
+      type: Boolean,
+      default: true
+    },
+    disabled: Boolean,
+    sortable: {
+      type: Boolean,
+      default: true
+    },
+    renderDirective: {
+      type: String,
+      default: 'show',
+      validator (val) {
+        return ['if', 'show'].includes(val)
+      }
+    },
+    renderLabel: Function
+  },
+  computed: {
+    tabInstance () {
+      let parent = this.$parent
+      while (parent && !parent.isTab) {
+        parent = parent.$parent
+      }
+      return parent
+    },
+    shouldRender () {
+      const directive = this.renderDirective
+      return directive === 'show' || (this.active && directive === 'if')
+    },
+    active () {
+      return this.tabInstance.localActive === this.name
     }
+  },
+  created () {
+    if (this.tabInstance.isTab) {
+      this.tabInstance.registerPanel(this)
+    } else {
+      console.error('"bk-tab-panel"\'s parent element must be "bk-tab"')
+    }
+  },
+  beforeDestroy () {
+    if (this.tabInstance.isTab) {
+      this.tabInstance.deletePanel(this)
+    }
+  }
+}
 </script>

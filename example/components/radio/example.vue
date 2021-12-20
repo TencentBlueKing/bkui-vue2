@@ -60,24 +60,24 @@
 </template>
 
 <script>
-    import { bkRadio, bkRadioGroup } from '@'
+import { bkRadio, bkRadioGroup } from '@'
 
-    export default {
-        components: {
-            bkRadio,
-            bkRadioGroup
-        },
-        data () {
-            return {
-                value: 'value2'
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            }
-        }
+export default {
+  components: {
+    bkRadio,
+    bkRadioGroup
+  },
+  data () {
+    return {
+      value: 'value2'
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
+  }
+}
 </script>
 <style lang="postcss">
     .bk-form-radio {

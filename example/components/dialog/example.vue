@@ -114,53 +114,53 @@
 </template>
 
 <script>
-    import { bkButton, bkDialog, bkTab, bkTabPanel } from '@'
-    export default {
-        components: {
-            bkButton,
-            bkDialog,
-            bkTab,
-            bkTabPanel
-        },
-        data () {
-            return {
-                visiable1: false,
-                visiable2: false,
-                dialog1: false,
-                dialog2: false,
-                nestedDialog1: false,
-                nestedDialog2: false,
-                ddd: false,
-                cccShow: false,
-                tabPosShow: false,
-                customZIndexShow: false,
-                panels2: [
-                    { name: 'mission', label: '任务报表任务报表任务报表任务报表', count: 10 },
-                    { name: 'config', label: '加速配置2', count: 20 },
-                    { name: 'history', label: '历史版本2', count: 30 },
-                    { name: 'deleted', label: '已归档加速任务2', count: 40 }
-                ],
-                active: 'mission'
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-
-            aaa () {
-                this.ddd = true
-            },
-
-            ccc () {
-                this.cccShow = true
-            },
-            tabPosClick () {
-                this.tabPosShow = true
-            },
-            customZIndex () {
-                this.customZIndexShow = true
-            }
-        }
+import { bkButton, bkDialog, bkTab, bkTabPanel } from '@'
+export default {
+  components: {
+    bkButton,
+    bkDialog,
+    bkTab,
+    bkTabPanel
+  },
+  data () {
+    return {
+      visiable1: false,
+      visiable2: false,
+      dialog1: false,
+      dialog2: false,
+      nestedDialog1: false,
+      nestedDialog2: false,
+      ddd: false,
+      cccShow: false,
+      tabPosShow: false,
+      customZIndexShow: false,
+      panels2: [
+        { name: 'mission', label: '任务报表任务报表任务报表任务报表', count: 10 },
+        { name: 'config', label: '加速配置2', count: 20 },
+        { name: 'history', label: '历史版本2', count: 30 },
+        { name: 'deleted', label: '已归档加速任务2', count: 40 }
+      ],
+      active: 'mission'
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+
+    aaa () {
+      this.ddd = true
+    },
+
+    ccc () {
+      this.cccShow = true
+    },
+    tabPosClick () {
+      this.tabPosShow = true
+    },
+    customZIndex () {
+      this.customZIndexShow = true
+    }
+  }
+}
 </script>

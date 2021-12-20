@@ -56,88 +56,88 @@
     </ul>
 </template>
 <script>
-    import { isVNode } from '@/utils/dom'
+import { isVNode } from '@/utils/dom'
 
-    export default {
-        name: 'bk-timeline',
-        components: {
-            vnodeIcon: {
-                functional: true,
-                render: (h, ctx) => {
-                    return ctx.props.icon
-                }
-            }
-        },
-        props: {
-            list: {
-                type: Array,
-                required: true
-            },
-            titleAble: {
-                type: Boolean,
-                default: false
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                colorReg: /default|primary|warning|success|danger/
-            }
-        },
-        methods: {
-            toggle (item) {
-                this.$emit('select', item)
-            },
-            makeClass (item) {
-                const classPrefix = 'bk-timeline-item-'
-                const classNames = [{
-                    [`${classPrefix}filled`]: item.filled,
-                    [`${classPrefix}custom-icon`]: this.isCustomIcon(item.icon)
-                }]
-                const dotColors = ['blue', 'red', 'green', 'yellow', 'gray']
-
-                if (item.size) {
-                    classNames.push(`${classPrefix}${item.size}`)
-                }
-
-                if (dotColors.includes(item.color)) {
-                    classNames.push(`${classPrefix}${item.color}`)
-                }
-
-                if (item.type && this.colorReg.test(item.type)) {
-                    classNames.push(`${classPrefix}${item.type}`)
-                }
-
-                return classNames
-            },
-            isNode (data) {
-                if (isVNode(data.content)) {
-                    return true
-                } else {
-                    return false
-                }
-            },
-            nodeContent (data, index) {
-                this.$slots[`nodeContent${index}`] = [data.content]
-            },
-            isBuiltinIcon (icon) {
-                return typeof icon === 'string'
-            },
-            isVNodeIcon (icon) {
-                return isVNode(icon)
-            },
-            isCustomIcon (icon) {
-                return this.isBuiltinIcon(icon) || this.isVNodeIcon(icon)
-            },
-            computedTitle (str) {
-                return this.titleAble ? str.replace(/<[^>]+>/g, '') : ''
-            }
-        }
+export default {
+  name: 'bk-timeline',
+  components: {
+    vnodeIcon: {
+      functional: true,
+      render: (h, ctx) => {
+        return ctx.props.icon
+      }
     }
+  },
+  props: {
+    list: {
+      type: Array,
+      required: true
+    },
+    titleAble: {
+      type: Boolean,
+      default: false
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      colorReg: /default|primary|warning|success|danger/
+    }
+  },
+  methods: {
+    toggle (item) {
+      this.$emit('select', item)
+    },
+    makeClass (item) {
+      const classPrefix = 'bk-timeline-item-'
+      const classNames = [{
+        [`${classPrefix}filled`]: item.filled,
+        [`${classPrefix}custom-icon`]: this.isCustomIcon(item.icon)
+      }]
+      const dotColors = ['blue', 'red', 'green', 'yellow', 'gray']
+
+      if (item.size) {
+        classNames.push(`${classPrefix}${item.size}`)
+      }
+
+      if (dotColors.includes(item.color)) {
+        classNames.push(`${classPrefix}${item.color}`)
+      }
+
+      if (item.type && this.colorReg.test(item.type)) {
+        classNames.push(`${classPrefix}${item.type}`)
+      }
+
+      return classNames
+    },
+    isNode (data) {
+      if (isVNode(data.content)) {
+        return true
+      } else {
+        return false
+      }
+    },
+    nodeContent (data, index) {
+      this.$slots[`nodeContent${index}`] = [data.content]
+    },
+    isBuiltinIcon (icon) {
+      return typeof icon === 'string'
+    },
+    isVNodeIcon (icon) {
+      return isVNode(icon)
+    },
+    isCustomIcon (icon) {
+      return this.isBuiltinIcon(icon) || this.isVNodeIcon(icon)
+    },
+    computedTitle (str) {
+      return this.titleAble ? str.replace(/<[^>]+>/g, '') : ''
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/timeline.css';

@@ -144,289 +144,289 @@
 </template>
 
 <script>
-    import { bkNavigation, bkNavigationMenu, bkNavigationMenuItem, bkNavigationMenuGroup, bkSelect, bkOption, bkPopover, bkButton } from '@'
-    export default {
-        name: 'monitor-navigation',
-        components: {
-            bkNavigation,
-            bkNavigationMenu,
-            bkNavigationMenuItem,
-            bkNavigationMenuGroup,
-            bkSelect,
-            bkOption,
-            bkPopover,
-            bkButton
+import { bkNavigation, bkNavigationMenu, bkNavigationMenuItem, bkNavigationMenuGroup, bkSelect, bkOption, bkPopover, bkButton } from '@'
+export default {
+  name: 'monitor-navigation',
+  components: {
+    bkNavigation,
+    bkNavigationMenu,
+    bkNavigationMenuItem,
+    bkNavigationMenuGroup,
+    bkSelect,
+    bkOption,
+    bkPopover,
+    bkButton
+  },
+  data () {
+    return {
+      navActive: 0,
+      navMap: [
+        {
+          nav: 'left-right',
+          needMenu: true,
+          name: '左右结构导航'
         },
-        data () {
-            return {
-                navActive: 0,
-                navMap: [
-                    {
-                        nav: 'left-right',
-                        needMenu: true,
-                        name: '左右结构导航'
-                    },
-                    {
-                        nav: 'top-bottom',
-                        needMenu: true,
-                        name: '上下结构导航'
-                    },
-                    {
-                        nav: 'top-bottom',
-                        needMenu: false,
-                        name: '上下结构无侧栏导航'
-                    }
-                ],
-                nav: {
-                    list2: [
-                        {
-                            name: '计算资源',
-                            children: [
-                                {
-                                    name: '集群',
-                                    href: '/#/navigation/example',
-                                    icon: 'icon-tree-application-shape'
-                                },
-                                {
-                                    name: '节点',
-                                    href: '/',
-                                    icon: 'icon-tree-application-shape'
-                                },
-                                {
-                                    name: '服务',
-                                    href: '/',
-                                    icon: 'icon-tree-application-shape'
-                                }
-                            ]
-                        },
-                        {
-                            name: '配置',
-                            children: [
-                                {
-                                    name: '模板集',
-                                    href: '/#/navigation/example',
-                                    active: true,
-                                    icon: 'icon-tree-application-shape'
-                                },
-                                {
-                                    name: '变量管理',
-                                    title: true,
-                                    href: '/3',
-                                    icon: 'icon-tree-application-shape'
-                                },
-                                {
-                                    name: 'Metric管理',
-                                    title: true,
-                                    href: '/4',
-                                    icon: 'icon-tree-application-shape'
-                                }
-                            ]
-                        },
-                        {
-                            name: '其他配置',
-                            children: [
-                                {
-                                    name: '模板设置',
-                                    active: true,
-                                    icon: 'icon-tree-application-shape',
-                                    children: [
-                                        {
-                                            name: '测试页一'
-                                        },
-                                        {
-                                            name: '测试页二'
-                                        },
-                                        {
-                                            name: '测试页三'
-                                        }
-                                    ]
-                                },
-                                {
-                                    name: '应用配置',
-                                    title: true,
-                                    href: '/3',
-                                    icon: 'icon-tree-application-shape'
-                                },
-                                {
-                                    name: '网络',
-                                    title: true,
-                                    href: '/4',
-                                    icon: 'icon-tree-application-shape'
-                                }
-                            ]
-                        }
-                    ],
-                    navId: '集群',
-                    toggle: false,
-                    submenuActive: false,
-                    title: '蓝鲸测试平台'
-                },
-                header: {
-                    list: [
-                        {
-                            name: '作业平台',
-                            id: 1,
-                            show: true
-                        },
-                        {
-                            name: '配置平台',
-                            id: 2,
-                            show: true
-                        },
-                        {
-                            name: '监控平台',
-                            id: 3,
-                            show: true,
-                            navList: [
-                                {
-                                    name: '插件管理',
-                                    id: 1
-                                },
-                                {
-                                    name: '采集配置',
-                                    id: 2
-                                },
-                                {
-                                    name: '策略配置',
-                                    id: 3
-                                },
-                                {
-                                    name: '事件中心',
-                                    id: 4
-                                }
-                            ],
-                            navActive: 2
-                        },
-                        {
-                            name: '蓝盾平台',
-                            id: 4,
-                            show: true
-                        }
-                    ],
-                    selectList: [
-                        {
-                            name: '英雄联盟',
-                            id: 1
-                        },
-                        {
-                            name: '和平精英',
-                            id: 2
-                        },
-                        {
-                            name: '王者荣耀',
-                            id: 3
-                        }
-                    ],
-                    active: 2,
-                    bizId: 1
-                },
-                message: {
-                    list: [
-                        {
-                            message: '你的“20181212112308”单据已通过',
-                            date: '刚刚'
-                        },
-                        {
-                            message: '你的“20181212112308”单据被驳回',
-                            date: '45分钟前'
-                        },
-                        {
-                            message: '你的“20181212112308”单据部分被驳回',
-                            date: '3天前'
-                        },
-                        {
-                            message: '你的“20181212112308”单据部分被驳回',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'jinnyyang 提醒了你',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”“蓝鲸作业平台”',
-                            date: '12月14日'
-                        },
-                        {
-                            message: '你的“20181212112308”单据部分被驳回',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'jinnyyang 提醒了你',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”的权限申请。',
-                            date: '12月14日'
-                        }
-                    ]
-                },
-                user: {
-                    list: [
-                        '项目管理',
-                        '权限中心',
-                        '退出'
-                    ]
-                },
-                lang: {
-                    list: [
-                        {
-                            name: '中文',
-                            id: 'chinese'
-                        },
-                        {
-                            name: 'English',
-                            id: 'english'
-                        },
-                        {
-                            name: '日本語',
-                            id: 'japanese'
-                        }
-                    ]
-                }
-            }
+        {
+          nav: 'top-bottom',
+          needMenu: true,
+          name: '上下结构导航'
         },
-        computed: {
-            curNav () {
-                return this.navMap[this.navActive]
-            },
-            curHeaderNav () {
-                return this.header.list[this.header.active] || {}
-            },
-            themeColor () {
-                return this.curNav.nav === 'top-bottom' ? {
-                    'item-hover-bg-color': '#3a4561',
-                    'item-hover-color': '#FFFFFF',
-                    'item-active-bg-color': '#0083FF',
-                    'item-active-color': '#FFFFFF',
-                    'item-default-bg-color': '#2C354D',
-                    'item-default-color': '#acb5c6',
-                    'item-default-icon-color': '#acb5c6',
-                    'item-child-icon-default-color': '#acb5c6;',
-                    'item-child-icon-hover-color': '#acb5c6;',
-                    'item-active-icon-color': '#FFFFFF',
-                    'item-hover-icon-color': '#FFFFFF',
-                    'item-child-icon-active-color': '#FFFFFF',
-                    'sub-menu-open-bg-color': '#272F45'
-                } : {}
-            }
-        },
-        methods: {
-            handleNavSelect (id, item) {
-                this.nav.navId = id
-                console.info(`你选择了${id}`)
-            },
-            handleToggle (v) {
-                this.nav.toggle = v
-            },
-            beforeNavChange (newId, oldId) {
-                console.info(newId, oldId)
-                return true
-            },
-            handleChangeNav () {
-                this.navActive = (this.navActive + 1) % 3
-            }
+        {
+          nav: 'top-bottom',
+          needMenu: false,
+          name: '上下结构无侧栏导航'
         }
+      ],
+      nav: {
+        list2: [
+          {
+            name: '计算资源',
+            children: [
+              {
+                name: '集群',
+                href: '/#/navigation/example',
+                icon: 'icon-tree-application-shape'
+              },
+              {
+                name: '节点',
+                href: '/',
+                icon: 'icon-tree-application-shape'
+              },
+              {
+                name: '服务',
+                href: '/',
+                icon: 'icon-tree-application-shape'
+              }
+            ]
+          },
+          {
+            name: '配置',
+            children: [
+              {
+                name: '模板集',
+                href: '/#/navigation/example',
+                active: true,
+                icon: 'icon-tree-application-shape'
+              },
+              {
+                name: '变量管理',
+                title: true,
+                href: '/3',
+                icon: 'icon-tree-application-shape'
+              },
+              {
+                name: 'Metric管理',
+                title: true,
+                href: '/4',
+                icon: 'icon-tree-application-shape'
+              }
+            ]
+          },
+          {
+            name: '其他配置',
+            children: [
+              {
+                name: '模板设置',
+                active: true,
+                icon: 'icon-tree-application-shape',
+                children: [
+                  {
+                    name: '测试页一'
+                  },
+                  {
+                    name: '测试页二'
+                  },
+                  {
+                    name: '测试页三'
+                  }
+                ]
+              },
+              {
+                name: '应用配置',
+                title: true,
+                href: '/3',
+                icon: 'icon-tree-application-shape'
+              },
+              {
+                name: '网络',
+                title: true,
+                href: '/4',
+                icon: 'icon-tree-application-shape'
+              }
+            ]
+          }
+        ],
+        navId: '集群',
+        toggle: false,
+        submenuActive: false,
+        title: '蓝鲸测试平台'
+      },
+      header: {
+        list: [
+          {
+            name: '作业平台',
+            id: 1,
+            show: true
+          },
+          {
+            name: '配置平台',
+            id: 2,
+            show: true
+          },
+          {
+            name: '监控平台',
+            id: 3,
+            show: true,
+            navList: [
+              {
+                name: '插件管理',
+                id: 1
+              },
+              {
+                name: '采集配置',
+                id: 2
+              },
+              {
+                name: '策略配置',
+                id: 3
+              },
+              {
+                name: '事件中心',
+                id: 4
+              }
+            ],
+            navActive: 2
+          },
+          {
+            name: '蓝盾平台',
+            id: 4,
+            show: true
+          }
+        ],
+        selectList: [
+          {
+            name: '英雄联盟',
+            id: 1
+          },
+          {
+            name: '和平精英',
+            id: 2
+          },
+          {
+            name: '王者荣耀',
+            id: 3
+          }
+        ],
+        active: 2,
+        bizId: 1
+      },
+      message: {
+        list: [
+          {
+            message: '你的“20181212112308”单据已通过',
+            date: '刚刚'
+          },
+          {
+            message: '你的“20181212112308”单据被驳回',
+            date: '45分钟前'
+          },
+          {
+            message: '你的“20181212112308”单据部分被驳回',
+            date: '3天前'
+          },
+          {
+            message: '你的“20181212112308”单据部分被驳回',
+            date: '12月14日'
+          },
+          {
+            message: 'jinnyyang 提醒了你',
+            date: '12月14日'
+          },
+          {
+            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”“蓝鲸作业平台”',
+            date: '12月14日'
+          },
+          {
+            message: '你的“20181212112308”单据部分被驳回',
+            date: '12月14日'
+          },
+          {
+            message: 'jinnyyang 提醒了你',
+            date: '12月14日'
+          },
+          {
+            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”的权限申请。',
+            date: '12月14日'
+          }
+        ]
+      },
+      user: {
+        list: [
+          '项目管理',
+          '权限中心',
+          '退出'
+        ]
+      },
+      lang: {
+        list: [
+          {
+            name: '中文',
+            id: 'chinese'
+          },
+          {
+            name: 'English',
+            id: 'english'
+          },
+          {
+            name: '日本語',
+            id: 'japanese'
+          }
+        ]
+      }
     }
+  },
+  computed: {
+    curNav () {
+      return this.navMap[this.navActive]
+    },
+    curHeaderNav () {
+      return this.header.list[this.header.active] || {}
+    },
+    themeColor () {
+      return this.curNav.nav === 'top-bottom' ? {
+        'item-hover-bg-color': '#3a4561',
+        'item-hover-color': '#FFFFFF',
+        'item-active-bg-color': '#0083FF',
+        'item-active-color': '#FFFFFF',
+        'item-default-bg-color': '#2C354D',
+        'item-default-color': '#acb5c6',
+        'item-default-icon-color': '#acb5c6',
+        'item-child-icon-default-color': '#acb5c6;',
+        'item-child-icon-hover-color': '#acb5c6;',
+        'item-active-icon-color': '#FFFFFF',
+        'item-hover-icon-color': '#FFFFFF',
+        'item-child-icon-active-color': '#FFFFFF',
+        'sub-menu-open-bg-color': '#272F45'
+      } : {}
+    }
+  },
+  methods: {
+    handleNavSelect (id, item) {
+      this.nav.navId = id
+      console.info(`你选择了${id}`)
+    },
+    handleToggle (v) {
+      this.nav.toggle = v
+    },
+    beforeNavChange (newId, oldId) {
+      console.info(newId, oldId)
+      return true
+    },
+    handleChangeNav () {
+      this.navActive = (this.navActive + 1) % 3
+    }
+  }
+}
 </script>
 
 <style>

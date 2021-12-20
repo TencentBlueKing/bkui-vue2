@@ -46,121 +46,121 @@
 </template>
 
 <script>
-    import bkCheckbox from '@/components/checkbox'
-    export default {
-        name: 'bk-option-group',
-        components: { bkCheckbox },
-        props: {
-            name: {
-                type: String,
-                required: true
-            },
-            showCount: {
-                type: Boolean,
-                default: true
-            },
+import bkCheckbox from '@/components/checkbox'
+export default {
+  name: 'bk-option-group',
+  components: { bkCheckbox },
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    showCount: {
+      type: Boolean,
+      default: true
+    },
 
-            /** 是否显示展开\收起操作 */
-            showCollapse: {
-                type: Boolean,
-                default: false
-            },
+    /** 是否显示展开\收起操作 */
+    showCollapse: {
+      type: Boolean,
+      default: false
+    },
 
-            /** 是否收起 */
-            isCollapse: {
-                type: Boolean,
-                default: false
-            },
+    /** 是否收起 */
+    isCollapse: {
+      type: Boolean,
+      default: false
+    },
 
-            /** 展开\收起是否只读展示 */
-            readonly: {
-                type: Boolean,
-                default: false
-            },
+    /** 展开\收起是否只读展示 */
+    readonly: {
+      type: Boolean,
+      default: false
+    },
 
-            /** 是否支持支持分组全选 */
-            showSelectAll: {
-                type: Boolean,
-                default: false
-            }
-        },
-        provide () {
-            return {
-                optionGroup: this
-            }
-        },
-        inject: ['select'],
-        data () {
-            return {
-                options: [],
-                selectedAll: false,
-                isLocalCollapse: false
-            }
-        },
-        computed: {
-            indeterminate () {
-                return !this.isSelectAllItems && !this.isEmpty
-            },
-            isSelectAllItems () {
-                return Array.prototype.every.call(this.options, option => option.isSelected)
-            },
-            isEmpty () {
-                return Array.prototype.every.call(this.options, option => !option.isSelected)
-            },
-            showPrefixOpt () {
-                return !!this.showCollapse
-            },
-            prefixOptionText () {
-                return this.isLocalCollapse ? '+' : '-'
-            },
-            unmatchedCount () {
-                return this.options.filter(option => option.unmatched).length
-            },
-            visible () {
-                const optionCount = this.options.length
-                if (!optionCount) {
-                    return true
-                }
-                return optionCount !== this.unmatchedCount
-            }
-        },
-        watch: {
-            isCollapse: {
-                immediate: true,
-                handler (isColl) {
-                    this.isLocalCollapse = isColl
-                }
-            }
-        },
-        methods: {
-            handleCheckAllClick (e) {
-                e.stopPropagation()
-                e.stopImmediatePropagation()
-                e.preventDefault()
-            },
-            handleSelectAll () {
-                if (this.isSelectAllItems) {
-                    Array.prototype.forEach.call(this.options, option => this.select.unselectOption(option))
-                } else {
-                    Array.prototype.forEach.call(this.options, option => this.select.selectOption(option))
-                }
-            },
-            handleGroupNameClick () {
-                if (this.showCollapse && !this.readonly) {
-                    this.isLocalCollapse = !this.isLocalCollapse
-                    this.$emit('collapse', this.isLocalCollapse)
-                    this.$emit('update:isCollapse', this.isLocalCollapse)
-                }
-            },
-            registerOption (option) {
-                this.options.push(option)
-            },
-            removeOption (option) {
-                const index = this.options.indexOf(option)
-                if (index > -1) {
-                    this.options.splice(index, 1)
-                }
-            }
-        }
+    /** 是否支持支持分组全选 */
+    showSelectAll: {
+      type: Boolean,
+      default: false
     }
+  },
+  provide () {
+    return {
+      optionGroup: this
+    }
+  },
+  inject: ['select'],
+  data () {
+    return {
+      options: [],
+      selectedAll: false,
+      isLocalCollapse: false
+    }
+  },
+  computed: {
+    indeterminate () {
+      return !this.isSelectAllItems && !this.isEmpty
+    },
+    isSelectAllItems () {
+      return Array.prototype.every.call(this.options, option => option.isSelected)
+    },
+    isEmpty () {
+      return Array.prototype.every.call(this.options, option => !option.isSelected)
+    },
+    showPrefixOpt () {
+      return !!this.showCollapse
+    },
+    prefixOptionText () {
+      return this.isLocalCollapse ? '+' : '-'
+    },
+    unmatchedCount () {
+      return this.options.filter(option => option.unmatched).length
+    },
+    visible () {
+      const optionCount = this.options.length
+      if (!optionCount) {
+        return true
+      }
+      return optionCount !== this.unmatchedCount
+    }
+  },
+  watch: {
+    isCollapse: {
+      immediate: true,
+      handler (isColl) {
+        this.isLocalCollapse = isColl
+      }
+    }
+  },
+  methods: {
+    handleCheckAllClick (e) {
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      e.preventDefault()
+    },
+    handleSelectAll () {
+      if (this.isSelectAllItems) {
+        Array.prototype.forEach.call(this.options, option => this.select.unselectOption(option))
+      } else {
+        Array.prototype.forEach.call(this.options, option => this.select.selectOption(option))
+      }
+    },
+    handleGroupNameClick () {
+      if (this.showCollapse && !this.readonly) {
+        this.isLocalCollapse = !this.isLocalCollapse
+        this.$emit('collapse', this.isLocalCollapse)
+        this.$emit('update:isCollapse', this.isLocalCollapse)
+      }
+    },
+    registerOption (option) {
+      this.options.push(option)
+    },
+    removeOption (option) {
+      const index = this.options.indexOf(option)
+      if (index > -1) {
+        this.options.splice(index, 1)
+      }
+    }
+  }
+}
 </script>

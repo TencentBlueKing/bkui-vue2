@@ -33,24 +33,24 @@
     </div>
 </template>
 <script>
-    import { bkButton } from '@'
-    import Single from './single'
+import { bkButton } from '@'
+import Single from './single'
 
-    export default {
-        components: {
-            bkButton,
-            Single
-        },
-        data () {
-            return {
-                isShow: false
-            }
-        },
-        methods: {
-            toggle () {
-                this.isShow = !this.isShow
-                console.error(this.isShow)
-            }
-        }
+export default {
+  components: {
+    bkButton,
+    Single
+  },
+  data () {
+    return {
+      isShow: false
     }
+  },
+  methods: {
+    toggle () {
+      this.isShow = !this.isShow
+      console.error(this.isShow)
+    }
+  }
+}
 </script>

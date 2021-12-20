@@ -50,94 +50,94 @@
 </template>
 
 <script>
-    import locale from 'bk-magic-vue/lib/locale'
-    import bkPopover from '@/components/popover'
-    export default {
-        name: 'bk-popconfirm',
-        components: {
-            bkPopover
-        },
-        mixins: [locale.mixin],
-        props: {
-            tirgger: {
-                type: String,
-                default: 'mouseenter focus'
-            },
-            title: {
-                type: String
-            },
-            content: {
-                type: String
-            },
-            theme: {
-                type: String,
-                default: 'light-border'
-            },
-            confirmText: {
-                type: String
-            },
-            cancelText: {
-                type: String
-            },
-            confirmButtonIsText: {
-                type: Boolean,
-                default: false
-            },
-            cancelButtonIsText: {
-                type: Boolean,
-                default: false
-            },
-            // 外部设置的 class name
-            // extCls: {
-            //     type: String,
-            //     default: ''
-            // },
-            // 外部设置的 popover class name
-            extPopoverCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {}
-        },
-        computed: {
-            localeOkText () {
-                if (this.confirmText === undefined) {
-                    return this.t('bk.dialog.ok')
-                }
-                return this.confirmText
-            },
-            localeCancelText () {
-                if (this.cancelText === undefined) {
-                    return this.t('bk.dialog.cancel')
-                }
-                return this.cancelText
-            },
-            isTiny () {
-                return !this.$slots['content'] && !this.title && !this.content
-            },
-            isSimple () {
-                return !this.$slots['content'] && !this.title
-            },
-            confirmButtonType () {
-                return this.isTiny || this.confirmButtonIsText ? 'text' : 'button'
-            },
-            cancelButtonType () {
-                return this.isTiny || this.cancelButtonIsText ? 'text' : 'button'
-            }
-        },
-        methods: {
-            confirm () {
-                this.$refs['popover'].hideHandler()
-                this.$emit('confirm')
-            },
-            cancel () {
-                this.$refs['popover'].hideHandler()
-                this.$emit('cancel')
-            }
-        }
+import locale from 'bk-magic-vue/lib/locale'
+import bkPopover from '@/components/popover'
+export default {
+  name: 'bk-popconfirm',
+  components: {
+    bkPopover
+  },
+  mixins: [locale.mixin],
+  props: {
+    tirgger: {
+      type: String,
+      default: 'mouseenter focus'
+    },
+    title: {
+      type: String
+    },
+    content: {
+      type: String
+    },
+    theme: {
+      type: String,
+      default: 'light-border'
+    },
+    confirmText: {
+      type: String
+    },
+    cancelText: {
+      type: String
+    },
+    confirmButtonIsText: {
+      type: Boolean,
+      default: false
+    },
+    cancelButtonIsText: {
+      type: Boolean,
+      default: false
+    },
+    // 外部设置的 class name
+    // extCls: {
+    //     type: String,
+    //     default: ''
+    // },
+    // 外部设置的 popover class name
+    extPopoverCls: {
+      type: String,
+      default: ''
     }
+  },
+  data () {
+    return {}
+  },
+  computed: {
+    localeOkText () {
+      if (this.confirmText === undefined) {
+        return this.t('bk.dialog.ok')
+      }
+      return this.confirmText
+    },
+    localeCancelText () {
+      if (this.cancelText === undefined) {
+        return this.t('bk.dialog.cancel')
+      }
+      return this.cancelText
+    },
+    isTiny () {
+      return !this.$slots['content'] && !this.title && !this.content
+    },
+    isSimple () {
+      return !this.$slots['content'] && !this.title
+    },
+    confirmButtonType () {
+      return this.isTiny || this.confirmButtonIsText ? 'text' : 'button'
+    },
+    cancelButtonType () {
+      return this.isTiny || this.cancelButtonIsText ? 'text' : 'button'
+    }
+  },
+  methods: {
+    confirm () {
+      this.$refs['popover'].hideHandler()
+      this.$emit('confirm')
+    },
+    cancel () {
+      this.$refs['popover'].hideHandler()
+      this.$emit('cancel')
+    }
+  }
+}
 </script>
 
 <style>

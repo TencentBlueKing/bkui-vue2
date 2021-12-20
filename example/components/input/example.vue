@@ -50,50 +50,50 @@
 </template>
 
 <script>
-    import { bkInput } from '@'
-    export default {
-        components: {
-            bkInput
-        },
-        data () {
-            return {
-                value: ''
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            handleChange (value, event) {
-                console.log('change', value, event)
-            },
-            handleInput (value, event) {
-                console.log('input', value, event)
-            },
-            handleEnter (value, event) {
-                console.log('enter', value, event)
-            },
-            handleKeyup (value, event) {
-                console.log('keyup', value, event)
-            },
-            handleKeypress (value, event) {
-                console.log('keypress', value, event)
-            },
-            handleKeydown (value, event) {
-                console.log('keydown', value, event)
-            },
-            handleFocus (value, event) {
-                console.log('focus', value, event)
-            },
-            handleBlur (value, event) {
-                console.log('blur', value, event)
-            },
-            handlePaste (value, event) {
-                console.log('paste', value, event)
-            },
-            handleClear (value, event) {
-                console.log('clear', value, event)
-            }
-        }
+import { bkInput } from '@'
+export default {
+  components: {
+    bkInput
+  },
+  data () {
+    return {
+      value: ''
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    handleChange (value, event) {
+      console.log('change', value, event)
+    },
+    handleInput (value, event) {
+      console.log('input', value, event)
+    },
+    handleEnter (value, event) {
+      console.log('enter', value, event)
+    },
+    handleKeyup (value, event) {
+      console.log('keyup', value, event)
+    },
+    handleKeypress (value, event) {
+      console.log('keypress', value, event)
+    },
+    handleKeydown (value, event) {
+      console.log('keydown', value, event)
+    },
+    handleFocus (value, event) {
+      console.log('focus', value, event)
+    },
+    handleBlur (value, event) {
+      console.log('blur', value, event)
+    },
+    handlePaste (value, event) {
+      console.log('paste', value, event)
+    },
+    handleClear (value, event) {
+      console.log('clear', value, event)
+    }
+  }
+}
 </script>

@@ -156,38 +156,38 @@
 </template>
 
 <script>
-    import { bkTimePicker } from '@'
+import { bkTimePicker } from '@'
 
-    export default {
-        components: {
-            bkTimePicker
-        },
-        data () {
-            return {
-                open: false,
-                initVal: '25-12-57'
-            }
-        },
-        created () {
-            setTimeout(() => {
-                this.open = false
-            }, 3000)
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            refresh () {
-                this.initVal = new Date()
-            },
-            change (time) {
-                console.warn(time)
-            },
-            openChange (state) {
-                console.warn(state)
-            }
-        }
+export default {
+  components: {
+    bkTimePicker
+  },
+  data () {
+    return {
+      open: false,
+      initVal: '25-12-57'
     }
+  },
+  created () {
+    setTimeout(() => {
+      this.open = false
+    }, 3000)
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    refresh () {
+      this.initVal = new Date()
+    },
+    change (time) {
+      console.warn(time)
+    },
+    openChange (state) {
+      console.warn(state)
+    }
+  }
+}
 </script>
 <style lang="postcss">
     .custom-cls {

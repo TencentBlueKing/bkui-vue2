@@ -44,103 +44,103 @@
     </bk-table>
 </template>
 <script>
-    import { bkTable, bkTableColumn } from '@'
-    export default {
-        components: {
-            bkTable,
-            bkTableColumn
-        },
-        data () {
-            return {
-                dateFilters: [
-                    { text: '2016-05-01', value: '2016-05-01' },
-                    { text: '2016-05-02', value: '2016-05-02' },
-                    { text: '2016-05-03', value: '2016-05-03' },
-                    { text: '2016-05-04', value: '2016-05-04' }
-                ],
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    tag: '家'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄',
-                    tag: '公司'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄',
-                    tag: '家'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    tag: '公司'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    tag: '公司'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    tag: '公司'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    tag: '公司'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    tag: '公司'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    tag: '公司'
-                }],
-                pagination: {
-                    current: 1,
-                    count: 100,
-                    limit: 10,
-                    small: false
-                }
-            }
-        },
-        methods: {
-            resetDateFilter () {
-                this.$refs.filterTable.clearFilter('date')
-            },
-            clearFilter () {
-                this.$refs.filterTable.clearFilter()
-            },
-            formatter (row, column) {
-                return row.address
-            },
-            filterTag (value, row) {
-                return row.tag === value
-            },
-            filterHandler (value, row, column) {
-                const property = column['property']
-                return row[property] === value
-            },
-            beforeExpand ({ row, $index }) {
-                return !!$index
-            },
-            handlePageChange (page) {
-                this.pagination.current = page
-            },
-            handlePageLimitChange (limit) {
-                this.pagination.current = 1
-                this.pagination.limit = limit
-            }
-        }
+import { bkTable, bkTableColumn } from '@'
+export default {
+  components: {
+    bkTable,
+    bkTableColumn
+  },
+  data () {
+    return {
+      dateFilters: [
+        { text: '2016-05-01', value: '2016-05-01' },
+        { text: '2016-05-02', value: '2016-05-02' },
+        { text: '2016-05-03', value: '2016-05-03' },
+        { text: '2016-05-04', value: '2016-05-04' }
+      ],
+      tableData: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+        tag: '家'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1517 弄',
+        tag: '公司'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1519 弄',
+        tag: '家'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄',
+        tag: '公司'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄',
+        tag: '公司'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄',
+        tag: '公司'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄',
+        tag: '公司'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄',
+        tag: '公司'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄',
+        tag: '公司'
+      }],
+      pagination: {
+        current: 1,
+        count: 100,
+        limit: 10,
+        small: false
+      }
     }
+  },
+  methods: {
+    resetDateFilter () {
+      this.$refs.filterTable.clearFilter('date')
+    },
+    clearFilter () {
+      this.$refs.filterTable.clearFilter()
+    },
+    formatter (row, column) {
+      return row.address
+    },
+    filterTag (value, row) {
+      return row.tag === value
+    },
+    filterHandler (value, row, column) {
+      const property = column['property']
+      return row[property] === value
+    },
+    beforeExpand ({ row, $index }) {
+      return !!$index
+    },
+    handlePageChange (page) {
+      this.pagination.current = page
+    },
+    handlePageLimitChange (limit) {
+      this.pagination.current = 1
+      this.pagination.limit = limit
+    }
+  }
+}
 </script>
 <style lang="postcss">
     .my-table {

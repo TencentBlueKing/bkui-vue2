@@ -35,20 +35,20 @@ const { resolve, basename, extname, relative } = require('path')
 
 const vueFiles = {}
 ;(function walkVue (filePath) {
-    const dirList = readdirSync(filePath)
-    dirList.forEach(item => {
-        if (statSync(filePath + '/' + item).isDirectory()) {
-            walkVue(filePath + '/' + item)
-        } else {
-            const ext = extname(item)
-            if (ext === '.vue' || ext === '.js') {
-                if (!vueFiles[basename(filePath)]) {
-                    vueFiles[basename(filePath)] = []
-                }
-                vueFiles[basename(filePath)].push(relative('.', filePath + '/' + item))
-            }
+  const dirList = readdirSync(filePath)
+  dirList.forEach(item => {
+    if (statSync(filePath + '/' + item).isDirectory()) {
+      walkVue(filePath + '/' + item)
+    } else {
+      const ext = extname(item)
+      if (ext === '.vue' || ext === '.js') {
+        if (!vueFiles[basename(filePath)]) {
+          vueFiles[basename(filePath)] = []
         }
-    })
+        vueFiles[basename(filePath)].push(relative('.', filePath + '/' + item))
+      }
+    }
+  })
 })(resolve(__dirname, '../src'))
 
 const JS_COMMENT_REG = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg
@@ -60,18 +60,18 @@ const ret = {}
 let match = null
 
 Object.keys(vueFiles).forEach(key => {
-    ret[key] = {}
-    vueFiles[key].forEach(file => {
-        if (!ret[key][file]) {
-            ret[key][file] = []
-        }
-        const content = readFileSync(resolve(file), 'UTF-8')
-        const noCommentContent = content.replace(JS_COMMENT_REG, '').replace(HTML_COMMENT_REG, '')
-        // eslint-disable-next-line no-cond-assign
-        while (match = CHINESE_REG.exec(noCommentContent)) {
-            ret[key][file].push(match[0])
-        }
-    })
+  ret[key] = {}
+  vueFiles[key].forEach(file => {
+    if (!ret[key][file]) {
+      ret[key][file] = []
+    }
+    const content = readFileSync(resolve(file), 'UTF-8')
+    const noCommentContent = content.replace(JS_COMMENT_REG, '').replace(HTML_COMMENT_REG, '')
+    // eslint-disable-next-line no-cond-assign
+    while (match = CHINESE_REG.exec(noCommentContent)) {
+      ret[key][file].push(match[0])
+    }
+  })
 })
 
 const retFileName = 'extract-chinese.json'

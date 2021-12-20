@@ -33,21 +33,21 @@
 </template>
 
 <script>
-    export default {
-        name: 'bk-row',
-        provide () {
-            const { col, gutter, flex } = this
-            return { col, gutter, flex }
-        },
-        inject: ['col', 'gutter', 'flex'],
-        computed: {
-            style () {
-                const { flex, gutter } = this
-                const o = flex ? { display: ['-webkit-box', '-ms-flexbox', 'flex'] } : {}
-                return { ...o, 'margin-right': `-${gutter / 2}px`, 'margin-left': `-${gutter / 2}px` }
-            }
-        }
+export default {
+  name: 'bk-row',
+  provide () {
+    const { col, gutter, flex } = this
+    return { col, gutter, flex }
+  },
+  inject: ['col', 'gutter', 'flex'],
+  computed: {
+    style () {
+      const { flex, gutter } = this
+      const o = flex ? { display: ['-webkit-box', '-ms-flexbox', 'flex'] } : {}
+      return { ...o, 'margin-right': `-${gutter / 2}px`, 'margin-left': `-${gutter / 2}px` }
     }
+  }
+}
 </script>
 
 <style>

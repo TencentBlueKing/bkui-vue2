@@ -39,17 +39,17 @@
     </div>
 </template>
 <script>
-    export default {
-        name: 'navigation-menu-title',
-        props: {
-            sideTitle: {
-                type: String,
-                default: ''
-            },
-            navigationType: {
-                type: String,
-                default: 'left-right'
-            }
-        }
+export default {
+  name: 'navigation-menu-title',
+  props: {
+    sideTitle: {
+      type: String,
+      default: ''
+    },
+    navigationType: {
+      type: String,
+      default: 'left-right'
     }
+  }
+}
 </script>

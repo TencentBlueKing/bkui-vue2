@@ -35,12 +35,12 @@ import bkTableColumn from '@/components/table-column'
 import { mount } from '@vue/test-utils'
 
 describe('Table basic use unit test', () => {
-    const wrapper = mount({
-        components: {
-            bkTable,
-            bkTableColumn
-        },
-        template: `
+  const wrapper = mount({
+    components: {
+      bkTable,
+      bkTableColumn
+    },
+    template: `
             <div>
                 <bk-table style="width: 500px;" :data="data">
                     <bk-table-column prop="id" label="ID"></bk-table-column>
@@ -50,49 +50,49 @@ describe('Table basic use unit test', () => {
                 </bk-table>
             </div>
         `,
-        data () {
-            return {
-                data: [{
-                    id: 'a',
-                    name: 'A'
-                }, {
-                    id: 'b',
-                    name: 'B'
-                }]
-            }
-        }
-    })
+    data () {
+      return {
+        data: [{
+          id: 'a',
+          name: 'A'
+        }, {
+          id: 'b',
+          name: 'B'
+        }]
+      }
+    }
+  })
 
-    it('render the correct markup and content', () => {
-        const rows = wrapper.vm.$el.querySelectorAll('.bk-table-body-wrapper tr')
-        expect(rows.length).toBe(2)
+  it('render the correct markup and content', () => {
+    const rows = wrapper.vm.$el.querySelectorAll('.bk-table-body-wrapper tr')
+    expect(rows.length).toBe(2)
 
-        const customCell = rows[0].querySelector('td:nth-child(2)')
-        expect(customCell.innerHTML).toContain('<div class="cell">Aa</div>')
+    const customCell = rows[0].querySelector('td:nth-child(2)')
+    expect(customCell.innerHTML).toContain('<div class="cell">Aa</div>')
 
-        expect(wrapper.find('.bk-table-body-wrapper').exists()).toBe(true)
-        expect(wrapper.find('.bk-table-pagination-wrapper').exists()).toBe(false)
-    })
+    expect(wrapper.find('.bk-table-body-wrapper').exists()).toBe(true)
+    expect(wrapper.find('.bk-table-pagination-wrapper').exists()).toBe(false)
+  })
 
-    it('emit the correct events', () => {
-        const table = wrapper.find('.bk-table')
-        const column = wrapper.vm.$el.querySelectorAll('.bk-table-body-wrapper td')[0]
-        column.click()
-        expect(table.emittedByOrder().map(e => e.name)).toEqual(['current-change', 'cell-click', 'row-click'])
+  it('emit the correct events', () => {
+    const table = wrapper.find('.bk-table')
+    const column = wrapper.vm.$el.querySelectorAll('.bk-table-body-wrapper td')[0]
+    column.click()
+    expect(table.emittedByOrder().map(e => e.name)).toEqual(['current-change', 'cell-click', 'row-click'])
 
-        const headerColumn = wrapper.vm.$el.querySelectorAll('.bk-table-header-wrapper th')[0]
-        headerColumn.click()
-        expect(table.emitted()['header-click']).toBeTruthy()
-    })
+    const headerColumn = wrapper.vm.$el.querySelectorAll('.bk-table-header-wrapper th')[0]
+    headerColumn.click()
+    expect(table.emitted()['header-click']).toBeTruthy()
+  })
 })
 
 describe('Table with selection unit test', () => {
-    const wrapper = mount({
-        components: {
-            bkTable,
-            bkTableColumn
-        },
-        template: `
+  const wrapper = mount({
+    components: {
+      bkTable,
+      bkTableColumn
+    },
+    template: `
             <div>
                 <bk-table style="width: 500px;" :data="data" @selection-change="handleSelectionChange">
                     <bk-table-column type="selection"></bk-table-column>
@@ -101,31 +101,31 @@ describe('Table with selection unit test', () => {
                 </bk-table>
             </div>
         `,
-        data () {
-            return {
-                data: [{
-                    id: 'a',
-                    name: 'A'
-                }, {
-                    id: 'b',
-                    name: 'B'
-                }],
-                selection: []
-            }
-        },
-        methods: {
-            handleSelectionChange (selection) {
-                this.selection = selection
-            }
-        }
-    })
+    data () {
+      return {
+        data: [{
+          id: 'a',
+          name: 'A'
+        }, {
+          id: 'b',
+          name: 'B'
+        }],
+        selection: []
+      }
+    },
+    methods: {
+      handleSelectionChange (selection) {
+        this.selection = selection
+      }
+    }
+  })
 
-    it('emit the correct events', () => {
-        const headerCheckbox = wrapper.find('.bk-table-header .bk-form-checkbox')
-        headerCheckbox.trigger('click')
-        setTimeout(() => {
-            expect(wrapper.find('.bk-table').emitted()['selection-change']).toBeTruthy()
-            expect(wrapper.vm.selection.map(row => row.id)).toEqual(['a', 'b'])
-        }, 100)
-    })
+  it('emit the correct events', () => {
+    const headerCheckbox = wrapper.find('.bk-table-header .bk-form-checkbox')
+    headerCheckbox.trigger('click')
+    setTimeout(() => {
+      expect(wrapper.find('.bk-table').emitted()['selection-change']).toBeTruthy()
+      expect(wrapper.vm.selection.map(row => row.id)).toEqual(['a', 'b'])
+    }, 100)
+  })
 })

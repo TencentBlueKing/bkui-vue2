@@ -36,34 +36,34 @@ import Button from '@/components/button'
 import { mountComponent } from '../helpers'
 
 describe('Dialog', () => {
-    it('render the correct markup and content', () => {
-        const dialogWrapper = mountComponent(Dialog, {
-            propsData: {
-                value: true,
-                title: '这是标题',
-                okText: '确定按钮'
-            },
-            slots: {
-                default: '这是弹框内容'
-            }
-        })
-
-        expect(dialogWrapper.name()).toBe('bk-dialog')
-        expect(dialogWrapper.html()).toContain('<div class="bk-dialog-body">这是弹框内容</div>')
-        expect(dialogWrapper.find('.bk-dialog-header-inner').text()).toBe('这是标题')
-        expect(dialogWrapper.findAll('button').at(0).text()).toBe('确定按钮')
-        expect(dialogWrapper.findAll('button').at(1).classes('bk-default')).toBe(true)
+  it('render the correct markup and content', () => {
+    const dialogWrapper = mountComponent(Dialog, {
+      propsData: {
+        value: true,
+        title: '这是标题',
+        okText: '确定按钮'
+      },
+      slots: {
+        default: '这是弹框内容'
+      }
     })
 
-    it('v-model is correct', () => {
-        const parentWrapper = mountComponent({
-            data () {
-                return {
-                    isShow: false
-                }
-            },
-            components: { 'bk-button': Button, 'bk-dialog': Dialog },
-            template: `
+    expect(dialogWrapper.name()).toBe('bk-dialog')
+    expect(dialogWrapper.html()).toContain('<div class="bk-dialog-body">这是弹框内容</div>')
+    expect(dialogWrapper.find('.bk-dialog-header-inner').text()).toBe('这是标题')
+    expect(dialogWrapper.findAll('button').at(0).text()).toBe('确定按钮')
+    expect(dialogWrapper.findAll('button').at(1).classes('bk-default')).toBe(true)
+  })
+
+  it('v-model is correct', () => {
+    const parentWrapper = mountComponent({
+      data () {
+        return {
+          isShow: false
+        }
+      },
+      components: { 'bk-button': Button, 'bk-dialog': Dialog },
+      template: `
                 <div>
                     <bk-button theme="primary" @click="isShow = !isShow">primary</bk-button>
                     <bk-dialog v-model="isShow" title="这是标题" :render-directive="'if'">
@@ -71,110 +71,110 @@ describe('Dialog', () => {
                     </bk-dialog>
                 </div>
             `
-        })
-
-        expect(parentWrapper.vm.isShow).toBe(false)
-        expect(parentWrapper.find('.bk-dialog-mask').exists()).toBe(false)
-        expect(parentWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(true)
-
-        parentWrapper.find('button').trigger('click')
-
-        expect(parentWrapper.find('.bk-dialog-mask').exists()).toBe(true)
-        expect(parentWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(false)
-        expect(parentWrapper.find('.bk-dialog-header-inner').text()).toBe('这是标题')
     })
 
-    it('dont\'t show mask and fullscreen', () => {
-        const dialogWrapper = mountComponent(Dialog, {
-            propsData: {
-                value: true,
-                title: '这是标题',
-                okText: '确定按钮',
-                showMask: false,
-                fullscreen: true
-            }
-        })
+    expect(parentWrapper.vm.isShow).toBe(false)
+    expect(parentWrapper.find('.bk-dialog-mask').exists()).toBe(false)
+    expect(parentWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(true)
 
-        expect(dialogWrapper.find('.bk-dialog-fullscreen').exists()).toBe(true)
-        expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(false)
+    parentWrapper.find('button').trigger('click')
+
+    expect(parentWrapper.find('.bk-dialog-mask').exists()).toBe(true)
+    expect(parentWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(false)
+    expect(parentWrapper.find('.bk-dialog-header-inner').text()).toBe('这是标题')
+  })
+
+  it('dont\'t show mask and fullscreen', () => {
+    const dialogWrapper = mountComponent(Dialog, {
+      propsData: {
+        value: true,
+        title: '这是标题',
+        okText: '确定按钮',
+        showMask: false,
+        fullscreen: true
+      }
     })
 
-    it('maskClose props is correct', () => {
-        const dialogWrapper = mountComponent(Dialog, {
-            propsData: {
-                value: true,
-                renderDirective: 'if',
-                title: '这是标题',
-                okText: '确定按钮',
-                maskClose: false
-            }
-        })
+    expect(dialogWrapper.find('.bk-dialog-fullscreen').exists()).toBe(true)
+    expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(false)
+  })
 
-        expect(dialogWrapper.vm.value).toBe(true)
-        expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(true)
-        expect(dialogWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(false)
-        expect(dialogWrapper.find('.bk-dialog-header-inner').text()).toBe('这是标题')
-        expect(dialogWrapper.find('i.bk-dialog-close').exists()).toBe(true)
-
-        dialogWrapper.find('.bk-dialog-mask').trigger('click')
-
-        expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(true)
-        expect(dialogWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(false)
-
-        dialogWrapper.setProps({ maskClose: true })
-
-        dialogWrapper.find('.bk-dialog-mask').trigger('click')
-
-        expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(false)
-        expect(dialogWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(true)
+  it('maskClose props is correct', () => {
+    const dialogWrapper = mountComponent(Dialog, {
+      propsData: {
+        value: true,
+        renderDirective: 'if',
+        title: '这是标题',
+        okText: '确定按钮',
+        maskClose: false
+      }
     })
 
-    it('emit confirm event is correct', done => {
-        Vue.config.errorHandler = done
-        const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
+    expect(dialogWrapper.vm.value).toBe(true)
+    expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(true)
+    expect(dialogWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(false)
+    expect(dialogWrapper.find('.bk-dialog-header-inner').text()).toBe('这是标题')
+    expect(dialogWrapper.find('i.bk-dialog-close').exists()).toBe(true)
 
-        try {
-            const dialogWrapper = mountComponent(Dialog, {
-                propsData: {
-                    value: true,
-                    renderDirective: 'if',
-                    title: '这是标题',
-                    okText: '确定按钮'
-                }
-            })
+    dialogWrapper.find('.bk-dialog-mask').trigger('click')
 
-            dialogWrapper.find('.bk-primary').trigger('click')
+    expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(true)
+    expect(dialogWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(false)
 
-            expect(dialogWrapper.emitted('confirm')).toBeTruthy()
+    dialogWrapper.setProps({ maskClose: true })
 
-            Vue.nextTick(() => {
-                expect(dialogWrapper.vm.$data.visible).toBe(false)
-                expect(dialogWrapper.emittedByOrder().map(e => e.name)).toEqual(['confirm', 'value-change', 'input'])
-                done()
-            })
-        } catch (error) {
-            // error.message
-            console.warn(error)
-        } finally {
-            spy.mockRestore()
+    dialogWrapper.find('.bk-dialog-mask').trigger('click')
+
+    expect(dialogWrapper.find('.bk-dialog-mask').exists()).toBe(false)
+    expect(dialogWrapper.find('.bk-dialog-wrapper').isEmpty()).toBe(true)
+  })
+
+  it('emit confirm event is correct', done => {
+    Vue.config.errorHandler = done
+    const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
+
+    try {
+      const dialogWrapper = mountComponent(Dialog, {
+        propsData: {
+          value: true,
+          renderDirective: 'if',
+          title: '这是标题',
+          okText: '确定按钮'
         }
-    })
+      })
 
-    it('emit cancel event is correct', () => {
-        const dialogWrapper = mountComponent(Dialog, {
-            propsData: {
-                value: true,
-                renderDirective: 'if',
-                title: '这是标题',
-                okText: '确定按钮'
-            }
-        })
+      dialogWrapper.find('.bk-primary').trigger('click')
 
-        dialogWrapper.find('.bk-dialog-close').trigger('click')
+      expect(dialogWrapper.emitted('confirm')).toBeTruthy()
 
-        expect(dialogWrapper.emitted('cancel')).toBeTruthy()
-
+      Vue.nextTick(() => {
         expect(dialogWrapper.vm.$data.visible).toBe(false)
-        expect(dialogWrapper.emittedByOrder().map(e => e.name)).toEqual(['value-change', 'input', 'cancel'])
+        expect(dialogWrapper.emittedByOrder().map(e => e.name)).toEqual(['confirm', 'value-change', 'input'])
+        done()
+      })
+    } catch (error) {
+      // error.message
+      console.warn(error)
+    } finally {
+      spy.mockRestore()
+    }
+  })
+
+  it('emit cancel event is correct', () => {
+    const dialogWrapper = mountComponent(Dialog, {
+      propsData: {
+        value: true,
+        renderDirective: 'if',
+        title: '这是标题',
+        okText: '确定按钮'
+      }
     })
+
+    dialogWrapper.find('.bk-dialog-close').trigger('click')
+
+    expect(dialogWrapper.emitted('cancel')).toBeTruthy()
+
+    expect(dialogWrapper.vm.$data.visible).toBe(false)
+    expect(dialogWrapper.emittedByOrder().map(e => e.name)).toEqual(['value-change', 'input', 'cancel'])
+  })
 })

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    /**
+/**
      * bk-checkbox-group
      * @module components/checkbox
      * @desc 单选框组合
@@ -44,58 +44,58 @@
             v-model="value">
         </bk-checkbox>
      */
-    import { getGroupName } from './checkbox-name.js'
+import { getGroupName } from './checkbox-name.js'
 
-    export default {
-        name: 'bk-checkbox-group',
-        props: {
-            value: {
-                type: Array,
-                default () {
-                    return []
-                }
-            },
-            name: {
-                type: [String, Number],
-                default () {
-                    return getGroupName()
-                }
-            }
-        },
-        data () {
-            return {
-                checkboxItems: [],
-                isCheckboxGroup: true,
-                localValue: [...this.value]
-            }
-        },
-        watch: {
-            value (value) {
-                this.localValue = [...value]
-            }
-        },
-        created () {
-            this.$on('checkbox-item-add', item => {
-                if (item) {
-                    this.checkboxItems.push(item)
-                }
-                return false
-            })
-        },
-        methods: {
-            handleChange (checked, value) {
-                const oldValue = [...this.localValue]
-                const localValue = []
-                this.checkboxItems.forEach(checkbox => {
-                    const params = checkbox.getValue()
-                    if (params.isChecked) {
-                        localValue.push(params.value)
-                    }
-                })
-                this.localValue = localValue
-                this.$emit('input', this.localValue)
-                this.$emit('change', this.localValue, oldValue)
-            }
-        }
+export default {
+  name: 'bk-checkbox-group',
+  props: {
+    value: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    name: {
+      type: [String, Number],
+      default () {
+        return getGroupName()
+      }
     }
+  },
+  data () {
+    return {
+      checkboxItems: [],
+      isCheckboxGroup: true,
+      localValue: [...this.value]
+    }
+  },
+  watch: {
+    value (value) {
+      this.localValue = [...value]
+    }
+  },
+  created () {
+    this.$on('checkbox-item-add', item => {
+      if (item) {
+        this.checkboxItems.push(item)
+      }
+      return false
+    })
+  },
+  methods: {
+    handleChange (checked, value) {
+      const oldValue = [...this.localValue]
+      const localValue = []
+      this.checkboxItems.forEach(checkbox => {
+        const params = checkbox.getValue()
+        if (params.isChecked) {
+          localValue.push(params.value)
+        }
+      })
+      this.localValue = localValue
+      this.$emit('input', this.localValue)
+      this.$emit('change', this.localValue, oldValue)
+    }
+  }
+}
 </script>

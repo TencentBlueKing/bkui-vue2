@@ -46,38 +46,38 @@
 </template>
 
 <script>
-    export default {
-        name: 'bk-link',
-        props: {
-            disabled: Boolean,
-            underline: Boolean,
-            href: {
-                type: String,
-                default: null
-            },
-            icon: String,
-            iconPlacement: {
-                type: String,
-                default: 'left'
-            },
-            theme: {
-                type: String,
-                default: 'default',
-                validator (val) {
-                    return ['default', 'primary', 'success', 'warning', 'danger'].includes(val)
-                }
-            }
-        },
-        methods: {
-            handleClick (event) {
-                if (this.disabled) {
-                    event.preventDefault()
-                    return false
-                }
-                this.$emit('click', event)
-            }
-        }
+export default {
+  name: 'bk-link',
+  props: {
+    disabled: Boolean,
+    underline: Boolean,
+    href: {
+      type: String,
+      default: null
+    },
+    icon: String,
+    iconPlacement: {
+      type: String,
+      default: 'left'
+    },
+    theme: {
+      type: String,
+      default: 'default',
+      validator (val) {
+        return ['default', 'primary', 'success', 'warning', 'danger'].includes(val)
+      }
     }
+  },
+  methods: {
+    handleClick (event) {
+      if (this.disabled) {
+        event.preventDefault()
+        return false
+      }
+      this.$emit('click', event)
+    }
+  }
+}
 </script>
 
 <style lang="postcss">

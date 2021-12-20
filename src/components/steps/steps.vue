@@ -66,7 +66,7 @@
 </template>
 
 <script>
-    /**
+/**
      *  bk-steps
      *  @module components/steps
      *  @desc 步骤条组件
@@ -82,177 +82,177 @@
             controllable>
         </bk-steps>
      */
-    import locale from 'bk-magic-vue/lib/locale'
+import locale from 'bk-magic-vue/lib/locale'
 
-    export default {
-        name: 'bk-steps',
-        mixins: [locale.mixin],
-        props: {
-            steps: {
-                type: Array,
-                default: () => []
-            },
-            curStep: {
-                type: Number,
-                default: 1
-            },
-            controllable: {
-                type: Boolean,
-                default: false
-            },
-            direction: {
-                type: String,
-                default: 'horizontal',
-                validator (val) {
-                    return ['horizontal', 'vertical'].includes(val)
-                }
-            },
-            status: {
-                type: String,
-                default: '',
-                validator (val) {
-                    return ['', 'error', 'loading'].includes(val)
-                }
-            },
-            lineType: {
-                type: String,
-                default: 'dashed',
-                validator (val) {
-                    return ['dashed', 'solid'].includes(val)
-                }
-            },
-            size: {
-                type: String,
-                default: '',
-                validator (val) {
-                    return ['', 'small'].includes(val)
-                }
-            },
-            theme: {
-                type: String,
-                default: 'primary'
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            beforeChange: {
-                type: Function,
-                default: null
-            }
-        },
-        data () {
-            return {
-                defaultSteps: [],
-                currentStatus: this.status
-            }
-        },
-        computed: {
-            wrapperCls () {
-                const wrapperCls = [
-                    'bk-steps',
-                    `bk-steps-${this.direction}`,
-                    `bk-steps-${this.lineType}`,
-                    `bk-steps-${this.theme}`
-                ]
-
-                if (this.size) {
-                    wrapperCls.push(`bk-steps-${this.size}`)
-                }
-
-                return wrapperCls
-            }
-        },
-        watch: {
-            status (val) {
-                this.currentStatus = val
-            },
-
-            steps: {
-                handler (val) {
-                    this.updateSteps(val)
-                },
-                deep: true
-            }
-        },
-        created () {
-            this.defaultSteps.splice(0, this.defaultSteps.length, ...[
-                {
-                    title: this.t('bk.steps.step1'),
-                    icon: 1
-                },
-                {
-                    title: this.t('bk.steps.step2'),
-                    icon: 2
-                },
-                {
-                    title: this.t('bk.steps.step3'),
-                    icon: 3
-                }
-            ])
-            if (this.steps && this.steps.length) {
-                this.updateSteps(this.steps)
-            }
-        },
-        methods: {
-            updateSteps (steps) {
-                const defaultSteps = []
-                steps.forEach(step => {
-                    if (typeof step === 'string') {
-                        defaultSteps.push(step)
-                    } else {
-                        defaultSteps.push({
-                            title: step.title,
-                            icon: step.icon,
-                            description: step.description,
-                            status: step.status
-                        })
-                    }
-                })
-                this.defaultSteps.splice(0, this.defaultSteps.length, ...defaultSteps)
-            },
-            iconType (step) {
-                const icon = step.icon
-
-                if (icon) {
-                    return typeof icon === 'string'
-                }
-                return typeof step === 'string'
-            },
-            isIcon (step) {
-                return step.icon ? step.icon : step
-            },
-            isCurrent (index) {
-                return this.curStep === (index + 1)
-            },
-            isDone (index) {
-                return this.curStep > (index + 1) || this.defaultSteps[index].status === 'done'
-            },
-            isLoadingStatus (step) {
-                return step.status === 'loading'
-            },
-            isErrorStatus (step) {
-                return step.status === 'error'
-            },
-            async jumpTo (index) {
-                try {
-                    if (this.controllable && index !== this.curStep) {
-                        if (typeof this.beforeChange === 'function') {
-                            await new Promise(async (resolve, reject) => {
-                                const confirmed = await this.beforeChange(index)
-                                confirmed ? resolve(confirmed) : reject(confirmed)
-                            })
-                        }
-                        this.$emit('update:curStep', index)
-                        this.$emit('step-changed', index)
-                    }
-                } catch (e) {
-                    console.warn(e)
-                }
-            }
-        }
+export default {
+  name: 'bk-steps',
+  mixins: [locale.mixin],
+  props: {
+    steps: {
+      type: Array,
+      default: () => []
+    },
+    curStep: {
+      type: Number,
+      default: 1
+    },
+    controllable: {
+      type: Boolean,
+      default: false
+    },
+    direction: {
+      type: String,
+      default: 'horizontal',
+      validator (val) {
+        return ['horizontal', 'vertical'].includes(val)
+      }
+    },
+    status: {
+      type: String,
+      default: '',
+      validator (val) {
+        return ['', 'error', 'loading'].includes(val)
+      }
+    },
+    lineType: {
+      type: String,
+      default: 'dashed',
+      validator (val) {
+        return ['dashed', 'solid'].includes(val)
+      }
+    },
+    size: {
+      type: String,
+      default: '',
+      validator (val) {
+        return ['', 'small'].includes(val)
+      }
+    },
+    theme: {
+      type: String,
+      default: 'primary'
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    beforeChange: {
+      type: Function,
+      default: null
     }
+  },
+  data () {
+    return {
+      defaultSteps: [],
+      currentStatus: this.status
+    }
+  },
+  computed: {
+    wrapperCls () {
+      const wrapperCls = [
+        'bk-steps',
+        `bk-steps-${this.direction}`,
+        `bk-steps-${this.lineType}`,
+        `bk-steps-${this.theme}`
+      ]
+
+      if (this.size) {
+        wrapperCls.push(`bk-steps-${this.size}`)
+      }
+
+      return wrapperCls
+    }
+  },
+  watch: {
+    status (val) {
+      this.currentStatus = val
+    },
+
+    steps: {
+      handler (val) {
+        this.updateSteps(val)
+      },
+      deep: true
+    }
+  },
+  created () {
+    this.defaultSteps.splice(0, this.defaultSteps.length, ...[
+      {
+        title: this.t('bk.steps.step1'),
+        icon: 1
+      },
+      {
+        title: this.t('bk.steps.step2'),
+        icon: 2
+      },
+      {
+        title: this.t('bk.steps.step3'),
+        icon: 3
+      }
+    ])
+    if (this.steps && this.steps.length) {
+      this.updateSteps(this.steps)
+    }
+  },
+  methods: {
+    updateSteps (steps) {
+      const defaultSteps = []
+      steps.forEach(step => {
+        if (typeof step === 'string') {
+          defaultSteps.push(step)
+        } else {
+          defaultSteps.push({
+            title: step.title,
+            icon: step.icon,
+            description: step.description,
+            status: step.status
+          })
+        }
+      })
+      this.defaultSteps.splice(0, this.defaultSteps.length, ...defaultSteps)
+    },
+    iconType (step) {
+      const icon = step.icon
+
+      if (icon) {
+        return typeof icon === 'string'
+      }
+      return typeof step === 'string'
+    },
+    isIcon (step) {
+      return step.icon ? step.icon : step
+    },
+    isCurrent (index) {
+      return this.curStep === (index + 1)
+    },
+    isDone (index) {
+      return this.curStep > (index + 1) || this.defaultSteps[index].status === 'done'
+    },
+    isLoadingStatus (step) {
+      return step.status === 'loading'
+    },
+    isErrorStatus (step) {
+      return step.status === 'error'
+    },
+    async jumpTo (index) {
+      try {
+        if (this.controllable && index !== this.curStep) {
+          if (typeof this.beforeChange === 'function') {
+            await new Promise(async (resolve, reject) => {
+              const confirmed = await this.beforeChange(index)
+              confirmed ? resolve(confirmed) : reject(confirmed)
+            })
+          }
+          this.$emit('update:curStep', index)
+          this.$emit('step-changed', index)
+        }
+      } catch (e) {
+        console.warn(e)
+      }
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/steps.css';

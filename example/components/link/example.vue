@@ -34,13 +34,13 @@
 </template>
 
 <script>
-    import { bkLink } from '@'
-    export default {
-        components: {
-            bkLink
-        },
-        data () {
-            return {}
-        }
-    }
+import { bkLink } from '@'
+export default {
+  components: {
+    bkLink
+  },
+  data () {
+    return {}
+  }
+}
 </script>

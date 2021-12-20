@@ -39,40 +39,40 @@
 </template>
 
 <script>
-    import zIndexManager from '@/utils/z-index-manager.js'
-    export default {
-        name: 'bk-fixed-navbar',
-        props: {
-            navItems: {
-                type: Array,
-                default: () => []
-            },
-            extCls: {
-                type: String,
-                default: ''
-            },
-            position: {
-                type: String,
-                default: 'middle'
-            }
-        },
-        data () {
-            return {
-                localZIndex: zIndexManager.nextTickIndex(2)
-            }
-        },
-        computed: {
-            navConfig () {
-                const config = this.navItems.map(item => {
-                    return Object.assign({
-                        tooltip: { disabled: true },
-                        action: () => {}
-                    }, item)
-                })
-                return config
-            }
-        }
+import zIndexManager from '@/utils/z-index-manager.js'
+export default {
+  name: 'bk-fixed-navbar',
+  props: {
+    navItems: {
+      type: Array,
+      default: () => []
+    },
+    extCls: {
+      type: String,
+      default: ''
+    },
+    position: {
+      type: String,
+      default: 'middle'
     }
+  },
+  data () {
+    return {
+      localZIndex: zIndexManager.nextTickIndex(2)
+    }
+  },
+  computed: {
+    navConfig () {
+      const config = this.navItems.map(item => {
+        return Object.assign({
+          tooltip: { disabled: true },
+          action: () => {}
+        }, item)
+      })
+      return config
+    }
+  }
+}
 </script>
 <style>
 @import '../../ui/fixed-navbar.css';

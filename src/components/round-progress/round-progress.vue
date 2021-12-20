@@ -61,87 +61,87 @@
     </div>
 </template>
 <script>
-    export default {
-        name: 'bk-round-progress',
-        props: {
-            config: {
-                type: Object,
-                default () {
-                    return {
-                        strokeWidth: 5,
-                        bgColor: 'gray',
-                        activeColor: 'green',
-                        index: 0
-                    }
-                }
-            },
-            percent: {
-                type: Number,
-                default: 0
-            },
-            title: {
-                type: String
-            },
-            content: {
-                type: [String, Number],
-                default: ''
-            },
-            titleStyle: {
-                type: Object,
-                default () {
-                    return {
-                        fontSize: '16px'
-                    }
-                }
-            },
-            numShow: {
-                type: Boolean,
-                default: true
-            },
-            numUnit: {
-                type: String,
-                default: '%'
-            },
-            numStyle: {
-                type: Object,
-                default () {
-                    return {
-                        fontSize: '16px'
-                    }
-                }
-            },
-            // 已改为 width 字段，保留该字段以兼容之前代码
-            radius: {
-                type: String,
-                default: '100px'
-            },
-            width: {
-                type: String,
-                default: ''
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                dashArray: Math.PI * 100
-            }
-        },
-        computed: {
-            dashOffset () {
-                return this.percentFixed > 1 ? false : (1 - this.percentFixed) * this.dashArray
-            },
-            percentFixed () {
-                return Number(this.percent.toFixed(2))
-            },
-            diameter () {
-                return this.width || this.radius
-            }
+export default {
+  name: 'bk-round-progress',
+  props: {
+    config: {
+      type: Object,
+      default () {
+        return {
+          strokeWidth: 5,
+          bgColor: 'gray',
+          activeColor: 'green',
+          index: 0
         }
+      }
+    },
+    percent: {
+      type: Number,
+      default: 0
+    },
+    title: {
+      type: String
+    },
+    content: {
+      type: [String, Number],
+      default: ''
+    },
+    titleStyle: {
+      type: Object,
+      default () {
+        return {
+          fontSize: '16px'
+        }
+      }
+    },
+    numShow: {
+      type: Boolean,
+      default: true
+    },
+    numUnit: {
+      type: String,
+      default: '%'
+    },
+    numStyle: {
+      type: Object,
+      default () {
+        return {
+          fontSize: '16px'
+        }
+      }
+    },
+    // 已改为 width 字段，保留该字段以兼容之前代码
+    radius: {
+      type: String,
+      default: '100px'
+    },
+    width: {
+      type: String,
+      default: ''
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+  data () {
+    return {
+      dashArray: Math.PI * 100
+    }
+  },
+  computed: {
+    dashOffset () {
+      return this.percentFixed > 1 ? false : (1 - this.percentFixed) * this.dashArray
+    },
+    percentFixed () {
+      return Number(this.percent.toFixed(2))
+    },
+    diameter () {
+      return this.width || this.radius
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/round-progress.css';

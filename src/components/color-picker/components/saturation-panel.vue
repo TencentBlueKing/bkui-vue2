@@ -44,93 +44,93 @@
 </template>
 
 <script>
-    import { clamp, getTouches } from '../utils'
+import { clamp, getTouches } from '../utils'
 
-    export default {
-        props: {
-            colorObj: {
-                type: Object,
-                required: true
-            }
-        },
-        computed: {
-            backgroundStyle () {
-                return { background: `hsl(${this.colorObj.hsv.h}, 100%, 50%)` }
-            },
-            pointerStyle () {
-                return { top: `${(1 - this.colorObj.hsv.v) * 100}%`, left: `${this.colorObj.hsv.s * 100}%` }
-            }
-        },
-        methods: {
-            handleMouseDown (e) {
-                this.$el.focus()
-                this.handlePointChange(e)
-                window.addEventListener('mousemove', this.handlePointChange, { passive: true })
-                window.addEventListener('mouseup', this.handleMouseUp)
-            },
-            handleMouseUp () {
-                window.removeEventListener('mousemove', this.handlePointChange)
-                window.removeEventListener('mouseup', this.handleMouseUp)
-            },
-            handleArrowKeydown (e) {
-                const { clientWidth, clientHeight } = this.$refs.container
-                let left = this.colorObj.hsv.s * clientWidth
-                let top = (1 - this.colorObj.hsv.v) * clientHeight
-                const step = 10
-                switch (e.code) {
-                    case 'ArrowLeft':
-                        e.preventDefault()
-                        left = clamp(left - step, 0, clientWidth)
-                        break
-                    case 'ArrowRight':
-                        e.preventDefault()
-                        left = clamp(left + step, 0, clientWidth)
-                        break
-                    case 'ArrowUp':
-                        e.preventDefault()
-                        top = clamp(top - step, 0, clientHeight)
-                        break
-                    case 'ArrowDown':
-                        e.preventDefault()
-                        top = clamp(top + step, 0, clientHeight)
-                        break
-                    default:
-                        return
-                }
-                this.handlePointChange(null, left, top)
-            },
-            /**
+export default {
+  props: {
+    colorObj: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    backgroundStyle () {
+      return { background: `hsl(${this.colorObj.hsv.h}, 100%, 50%)` }
+    },
+    pointerStyle () {
+      return { top: `${(1 - this.colorObj.hsv.v) * 100}%`, left: `${this.colorObj.hsv.s * 100}%` }
+    }
+  },
+  methods: {
+    handleMouseDown (e) {
+      this.$el.focus()
+      this.handlePointChange(e)
+      window.addEventListener('mousemove', this.handlePointChange, { passive: true })
+      window.addEventListener('mouseup', this.handleMouseUp)
+    },
+    handleMouseUp () {
+      window.removeEventListener('mousemove', this.handlePointChange)
+      window.removeEventListener('mouseup', this.handleMouseUp)
+    },
+    handleArrowKeydown (e) {
+      const { clientWidth, clientHeight } = this.$refs.container
+      let left = this.colorObj.hsv.s * clientWidth
+      let top = (1 - this.colorObj.hsv.v) * clientHeight
+      const step = 10
+      switch (e.code) {
+        case 'ArrowLeft':
+          e.preventDefault()
+          left = clamp(left - step, 0, clientWidth)
+          break
+        case 'ArrowRight':
+          e.preventDefault()
+          left = clamp(left + step, 0, clientWidth)
+          break
+        case 'ArrowUp':
+          e.preventDefault()
+          top = clamp(top - step, 0, clientHeight)
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          top = clamp(top + step, 0, clientHeight)
+          break
+        default:
+          return
+      }
+      this.handlePointChange(null, left, top)
+    },
+    /**
              * 饱和度面板变化
              * @param {MouseEvent|null} e - 鼠标滑动事件
              * @param {Number} [appointedLeft] - 键盘事件对应坐标，如果有就优先使用
              * @param {Number} [appointedTop] - 键盘事件对应坐标，如果有就优先使用
              */
-            handlePointChange (e, appointedLeft, appointedTop) {
-                const { clientWidth, clientHeight } = this.$refs.container
-                const left = appointedLeft !== undefined ? appointedLeft : this.getLeft(e)
-                const top = appointedTop !== undefined ? appointedTop : this.getTop(e)
-                const saturation = left / clientWidth
-                const bright = 1 - top / clientHeight
+    handlePointChange (e, appointedLeft, appointedTop) {
+      const { clientWidth, clientHeight } = this.$refs.container
+      const left = appointedLeft !== undefined ? appointedLeft : this.getLeft(e)
+      const top = appointedTop !== undefined ? appointedTop : this.getTop(e)
+      const saturation = left / clientWidth
+      const bright = 1 - top / clientHeight
 
-                this.changeColor(this.colorObj.hsv.h, saturation, bright, this.colorObj.hsv.a)
-            },
-            getLeft (e) {
-                const { container } = this.$refs
-                const xOffset = container.getBoundingClientRect().left + window.pageXOffset
-                const pageX = e.pageX || getTouches(e, 'PageX')
+      this.changeColor(this.colorObj.hsv.h, saturation, bright, this.colorObj.hsv.a)
+    },
+    getLeft (e) {
+      const { container } = this.$refs
+      const xOffset = container.getBoundingClientRect().left + window.pageXOffset
+      const pageX = e.pageX || getTouches(e, 'PageX')
 
-                return clamp(pageX - xOffset, 0, container.clientWidth)
-            },
-            getTop (e) {
-                const { container } = this.$refs
-                const yOffset = container.getBoundingClientRect().top + window.pageYOffset
-                const pageY = e.pageY || getTouches(e, 'PageY')
+      return clamp(pageX - xOffset, 0, container.clientWidth)
+    },
+    getTop (e) {
+      const { container } = this.$refs
+      const yOffset = container.getBoundingClientRect().top + window.pageYOffset
+      const pageY = e.pageY || getTouches(e, 'PageY')
 
-                return clamp(pageY - yOffset, 0, container.clientHeight)
-            },
-            changeColor (h, s, v, a) {
-                this.$emit('change', { h, s, v, a })
-            }
-        }
+      return clamp(pageY - yOffset, 0, container.clientHeight)
+    },
+    changeColor (h, s, v, a) {
+      this.$emit('change', { h, s, v, a })
     }
+  }
+}
 </script>

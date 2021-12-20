@@ -37,24 +37,24 @@
     </bk-breadcrumb>
 </template>
 <script>
-    import { bkBreadcrumb, bkBreadcrumbItem, bkInput } from '@'
+import { bkBreadcrumb, bkBreadcrumbItem, bkInput } from '@'
 
-    export default {
-        components: {
-            bkInput,
-            bkBreadcrumb,
-            bkBreadcrumbItem
-        },
-        data () {
-            return {
-                list: [
-                    { title: '首页', link: { path: 'home' } },
-                    { title: '活动管理', link: { path: 'home' } },
-                    { title: '活动列表', link: { path: 'home' } },
-                    { title: '活动详情', link: null }
-                ],
-                separator: '/'
-            }
-        }
+export default {
+  components: {
+    bkInput,
+    bkBreadcrumb,
+    bkBreadcrumbItem
+  },
+  data () {
+    return {
+      list: [
+        { title: '首页', link: { path: 'home' } },
+        { title: '活动管理', link: { path: 'home' } },
+        { title: '活动列表', link: { path: 'home' } },
+        { title: '活动详情', link: null }
+      ],
+      separator: '/'
     }
+  }
+}
 </script>

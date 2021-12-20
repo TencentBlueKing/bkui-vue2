@@ -34,83 +34,83 @@ import bkBigTree from '@/components/big-tree'
 import { mount } from '@vue/test-utils'
 
 const getNodes = (parent, childCount, deep) => {
-    const nodes = []
-    for (let i = 0; i < childCount; i++) {
-        const node = {
-            id: parent ? `${parent.id}-${i}` : `${i}`,
-            level: parent ? parent.level + 1 : 0,
-            name: parent ? `${parent.name}-${i}` : `node-${i}`
-        }
-        if (node.level < deep) {
-            node.children = getNodes(node, 2, deep)
-        }
-        nodes.push(node)
+  const nodes = []
+  for (let i = 0; i < childCount; i++) {
+    const node = {
+      id: parent ? `${parent.id}-${i}` : `${i}`,
+      level: parent ? parent.level + 1 : 0,
+      name: parent ? `${parent.name}-${i}` : `node-${i}`
     }
-    return nodes
+    if (node.level < deep) {
+      node.children = getNodes(node, 2, deep)
+    }
+    nodes.push(node)
+  }
+  return nodes
 }
 
 const getNode = (wrapper, id) => {
-    return wrapper.vm.getNodeById(id)
+  return wrapper.vm.getNodeById(id)
 }
 
 const getNodeCheckbox = (wrapper, id) => {
-    return getNode(wrapper, id).vNode.$el.querySelector('.node-checkbox')
+  return getNode(wrapper, id).vNode.$el.querySelector('.node-checkbox')
 }
 
 describe('Big-tree unit test', () => {
-    const selectChange = jest.fn()
-    const checkChange = jest.fn()
-    const expandChange = jest.fn()
-    const disableChange = jest.fn()
-    const wrapper = mount(bkBigTree, {
-        propsData: {
-            data: getNodes(null, 20, 2),
-            defaultExpandedNodes: ['0-0'],
-            defaultCheckedNodes: ['0-0-0', '1'],
-            defaultDisabledNodes: ['0-1', '1-1-1'],
-            showCheckbox: true,
-            selectable: true
-        },
-        listeners: {
-            'select-change': selectChange,
-            'check-change': checkChange,
-            'expand-change': expandChange,
-            'disable-change': disableChange
-        }
-    })
+  const selectChange = jest.fn()
+  const checkChange = jest.fn()
+  const expandChange = jest.fn()
+  const disableChange = jest.fn()
+  const wrapper = mount(bkBigTree, {
+    propsData: {
+      data: getNodes(null, 20, 2),
+      defaultExpandedNodes: ['0-0'],
+      defaultCheckedNodes: ['0-0-0', '1'],
+      defaultDisabledNodes: ['0-1', '1-1-1'],
+      showCheckbox: true,
+      selectable: true
+    },
+    listeners: {
+      'select-change': selectChange,
+      'check-change': checkChange,
+      'expand-change': expandChange,
+      'disable-change': disableChange
+    }
+  })
 
-    it('render the correct content', () => {
-        const nodes = wrapper.vm.nodes
-        expect(nodes.length).toBe(140)
+  it('render the correct content', () => {
+    const nodes = wrapper.vm.nodes
+    expect(nodes.length).toBe(140)
 
-        const expandedNodes = nodes.filter(node => node.expanded)
-        expect(expandedNodes.map(node => node.id)).toEqual(['0', '0-0'])
+    const expandedNodes = nodes.filter(node => node.expanded)
+    expect(expandedNodes.map(node => node.id)).toEqual(['0', '0-0'])
 
-        const checkedNodes = nodes.filter(node => node.checked)
-        expect(checkedNodes.map(node => node.id)).toEqual(['0-0-0', '1', '1-0', '1-0-0', '1-0-1', '1-1', '1-1-0', '1-1-1'])
+    const checkedNodes = nodes.filter(node => node.checked)
+    expect(checkedNodes.map(node => node.id)).toEqual(['0-0-0', '1', '1-0', '1-0-0', '1-0-1', '1-1', '1-1-0', '1-1-1'])
 
-        const indeterminateNodes = nodes.filter(node => node.indeterminate)
-        expect(indeterminateNodes.map(node => node.id)).toEqual(['0', '0-0'])
+    const indeterminateNodes = nodes.filter(node => node.indeterminate)
+    expect(indeterminateNodes.map(node => node.id)).toEqual(['0', '0-0'])
 
-        const disabledNodes = nodes.filter(node => node.disabled)
-        expect(disabledNodes.map(node => node.id)).toEqual(['0-1', '0-1-0', '0-1-1', '1-1-1'])
-    })
+    const disabledNodes = nodes.filter(node => node.disabled)
+    expect(disabledNodes.map(node => node.id)).toEqual(['0-1', '0-1-0', '0-1-1', '1-1-1'])
+  })
 
-    it('emit the correct events', () => {
-        getNodeCheckbox(wrapper, '0-1').click()
-        expect(checkChange).not.toBeCalled()
+  it('emit the correct events', () => {
+    getNodeCheckbox(wrapper, '0-1').click()
+    expect(checkChange).not.toBeCalled()
 
-        getNode(wrapper, '0-1').vNode.$el.click()
-        expect(selectChange).not.toBeCalled()
-        expect(expandChange).not.toBeCalled()
+    getNode(wrapper, '0-1').vNode.$el.click()
+    expect(selectChange).not.toBeCalled()
+    expect(expandChange).not.toBeCalled()
 
-        getNodeCheckbox(wrapper, '1').click()
-        expect(wrapper.emitted()['check-change']).toBeTruthy()
-        expect(checkChange).toBeCalled()
+    getNodeCheckbox(wrapper, '1').click()
+    expect(wrapper.emitted()['check-change']).toBeTruthy()
+    expect(checkChange).toBeCalled()
 
-        getNode(wrapper, '1').vNode.$el.click()
-        expect(wrapper.emitted()['select-change']).toBeTruthy()
-        expect(selectChange).toBeCalled()
-        expect(expandChange).toBeCalled()
-    })
+    getNode(wrapper, '1').vNode.$el.click()
+    expect(wrapper.emitted()['select-change']).toBeTruthy()
+    expect(selectChange).toBeCalled()
+    expect(expandChange).toBeCalled()
+  })
 })

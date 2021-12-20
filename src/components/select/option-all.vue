@@ -44,47 +44,47 @@
 </template>
 
 <script>
-    import locale from 'bk-magic-vue/lib/locale'
+import locale from 'bk-magic-vue/lib/locale'
 
-    export default {
-        name: 'bk-option-all',
-        mixins: [locale.mixin],
-        inject: ['select'],
-        data () {
-            return {
-                enabledOptions: []
-            }
-        },
-        computed: {
-            disabled () {
-                return !this.enabledOptions.length
-            },
-            isAllSelected () {
-                return !this.enabledOptions.some(option => !option.isSelected)
-            }
-        },
-        watch: {
-            'select.options': {
-                immediate: true,
-                handler (options) {
-                    this.setEnabledOptions()
-                }
-            }
-        },
-        methods: {
-            setEnabledOptions () {
-                this.enabledOptions = this.select.options.filter(option => !option.disabled)
-            },
-            handleOptionClick () {
-                if (this.disabled) {
-                    return false
-                }
-                if (this.isAllSelected) {
-                    this.select.reset()
-                } else {
-                    this.select.selectAll()
-                }
-            }
-        }
+export default {
+  name: 'bk-option-all',
+  mixins: [locale.mixin],
+  inject: ['select'],
+  data () {
+    return {
+      enabledOptions: []
     }
+  },
+  computed: {
+    disabled () {
+      return !this.enabledOptions.length
+    },
+    isAllSelected () {
+      return !this.enabledOptions.some(option => !option.isSelected)
+    }
+  },
+  watch: {
+    'select.options': {
+      immediate: true,
+      handler (options) {
+        this.setEnabledOptions()
+      }
+    }
+  },
+  methods: {
+    setEnabledOptions () {
+      this.enabledOptions = this.select.options.filter(option => !option.disabled)
+    },
+    handleOptionClick () {
+      if (this.disabled) {
+        return false
+      }
+      if (this.isAllSelected) {
+        this.select.reset()
+      } else {
+        this.select.selectAll()
+      }
+    }
+  }
+}
 </script>

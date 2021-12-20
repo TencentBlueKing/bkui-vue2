@@ -40,51 +40,51 @@
 </template>
 
 <script>
-    import { bkButton, bkSelect, bkOption } from '@'
-    export default {
-        components: {
-            bkSelect,
-            bkOption,
-            bkButton
-        },
-        data () {
-            const options = Array(30).fill(0).map((_, index) => {
-                return {
-                    id: index,
-                    name: 'Option-' + index
-                }
-            })
-            return {
-                value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                old: options,
-                options: options,
-                multiple: true
-            }
-        },
-        methods: {
-            add () {
-                this.options.unshift({
-                    id: 'option',
-                    name: 'option'
-                })
-            },
-            remote (keyword) {
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        if (keyword) {
-                            this.options = Array(25).fill(0).map((_, index) => {
-                                return {
-                                    id: index * 25,
-                                    name: index * 25
-                                }
-                            })
-                        } else {
-                            this.options = this.old
-                        }
-                        resolve()
-                    }, 1000)
-                })
-            }
-        }
+import { bkButton, bkSelect, bkOption } from '@'
+export default {
+  components: {
+    bkSelect,
+    bkOption,
+    bkButton
+  },
+  data () {
+    const options = Array(30).fill(0).map((_, index) => {
+      return {
+        id: index,
+        name: 'Option-' + index
+      }
+    })
+    return {
+      value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      old: options,
+      options: options,
+      multiple: true
     }
+  },
+  methods: {
+    add () {
+      this.options.unshift({
+        id: 'option',
+        name: 'option'
+      })
+    },
+    remote (keyword) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (keyword) {
+            this.options = Array(25).fill(0).map((_, index) => {
+              return {
+                id: index * 25,
+                name: index * 25
+              }
+            })
+          } else {
+            this.options = this.old
+          }
+          resolve()
+        }, 1000)
+      })
+    }
+  }
+}
 </script>

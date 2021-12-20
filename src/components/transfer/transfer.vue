@@ -111,7 +111,7 @@
 </template>
 
 <script>
-    /**
+/**
      *  bk-transfer
      *  @module components/transfer
      *  @desc 穿梭框组件
@@ -137,482 +137,482 @@
     </bk-transfer>
     */
 
-    import locale from 'bk-magic-vue/lib/locale'
-    import { isEmpty } from '@/utils/util'
-    import bkInput from '../input'
-    import bkOverflowTips from '../../directives/overflow-tips'
+import locale from 'bk-magic-vue/lib/locale'
+import { isEmpty } from '@/utils/util'
+import bkInput from '../input'
+import bkOverflowTips from '../../directives/overflow-tips'
 
-    export default {
-        name: 'bk-transfer',
-        components: {
-            bkInput
-        },
-        directives: {
-            bkOverflowTips
-        },
-        mixins: [locale.mixin],
-        props: {
-            title: {
-                type: Array,
-                default: () => []
-            },
-            emptyContent: {
-                type: Array,
-                default: () => []
-            },
-            displayKey: {
-                type: String,
-                default: 'value'
-            },
-            settingKey: {
-                type: String,
-                default: 'id'
-            },
-            sortKey: {
-                type: String,
-                default: ''
-            },
-            sourceList: {
-                type: Array,
-                default () {
-                    return []
-                }
-            },
-            targetList: {
-                type: Array,
-                default () {
-                    return []
-                }
-            },
-            hasHeader: {
-                type: Boolean,
-                default: false
-            },
-            sortable: {
-                type: Boolean,
-                default: false
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            searchPlaceholder: {
-                type: String,
-                default: ''
-            },
-            searchable: {
-                type: Boolean,
-                default: false
-            },
-            showOverflowTips: Boolean
-        },
-        data () {
-            return {
-                dataList: [],
-                hasSelectedList: [],
-                sortList: [],
-                leftHoverIndex: -1,
-                rightHoverIndex: -1,
-                slot: {},
-                sortCode: this.sortKey,
-                isSortFlag: this.sortable,
-                keyword: ''
-            }
-        },
-        computed: {
-            typeFlag () {
-                if (!this.sourceList || !Array.isArray(this.sourceList)) {
-                    return 'empty'
-                }
-                const str = this.sourceList.toString()
-                if (str.indexOf('[object Object]') !== -1) {
-                    return true
-                }
-                return false
-            },
+export default {
+  name: 'bk-transfer',
+  components: {
+    bkInput
+  },
+  directives: {
+    bkOverflowTips
+  },
+  mixins: [locale.mixin],
+  props: {
+    title: {
+      type: Array,
+      default: () => []
+    },
+    emptyContent: {
+      type: Array,
+      default: () => []
+    },
+    displayKey: {
+      type: String,
+      default: 'value'
+    },
+    settingKey: {
+      type: String,
+      default: 'id'
+    },
+    sortKey: {
+      type: String,
+      default: ''
+    },
+    sourceList: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    targetList: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    hasHeader: {
+      type: Boolean,
+      default: false
+    },
+    sortable: {
+      type: Boolean,
+      default: false
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    searchPlaceholder: {
+      type: String,
+      default: ''
+    },
+    searchable: {
+      type: Boolean,
+      default: false
+    },
+    showOverflowTips: Boolean
+  },
+  data () {
+    return {
+      dataList: [],
+      hasSelectedList: [],
+      sortList: [],
+      leftHoverIndex: -1,
+      rightHoverIndex: -1,
+      slot: {},
+      sortCode: this.sortKey,
+      isSortFlag: this.sortable,
+      keyword: ''
+    }
+  },
+  computed: {
+    typeFlag () {
+      if (!this.sourceList || !Array.isArray(this.sourceList)) {
+        return 'empty'
+      }
+      const str = this.sourceList.toString()
+      if (str.indexOf('[object Object]') !== -1) {
+        return true
+      }
+      return false
+    },
 
-            displayDataList () {
-                // 搜索
-                if (this.keyword) {
-                    const displayCode = this.displayCode
+    displayDataList () {
+      // 搜索
+      if (this.keyword) {
+        const displayCode = this.displayCode
 
-                    return this.dataList.filter(item => {
-                        return !isEmpty(item[displayCode]) && String(item[displayCode]).indexOf(this.keyword) > -1
-                    })
-                }
-                return this.dataList
-            },
-            displayCode () {
-                // 普通数组
-                if (!this.typeFlag) {
-                    return 'value'
-                }
-                return this.displayKey
-            },
-            settingCode () {
-                // 普通数组
-                if (!this.typeFlag) {
-                    return 'index'
-                }
-                return this.settingKey
-            }
-        },
-        watch: {
-            sourceList: {
-                handler: function (value) {
-                    if (this.typeFlag !== 'empty') {
-                        this.initData()
-                        this.initSort()
-                    }
-                },
-                deep: true
-            },
-            targetList: {
-                handler: function (value) {
-                    this.initData()
-                    this.initSort()
-                },
-                deep: true
-            },
-            displayCode (value) {
-                this.initData()
-            },
-            settingCode (value) {
-                this.initData()
-            },
-            sortKey (value) {
-                this.sortCode = value
-                this.initSort()
-            },
-            sortable (value) {
-                this.isSortFlag = value
-                this.initSort()
-            }
-        },
-        created () {
-            if (this.typeFlag !== 'empty') {
-                if (!this.typeFlag) {
-                    this.generalInit()
-                } else {
-                    this.init()
-                }
-                this.initSort()
-            }
-            this.slot = Object.assign({}, this.$slots)
-        },
-        methods: {
-            /**
+        return this.dataList.filter(item => {
+          return !isEmpty(item[displayCode]) && String(item[displayCode]).indexOf(this.keyword) > -1
+        })
+      }
+      return this.dataList
+    },
+    displayCode () {
+      // 普通数组
+      if (!this.typeFlag) {
+        return 'value'
+      }
+      return this.displayKey
+    },
+    settingCode () {
+      // 普通数组
+      if (!this.typeFlag) {
+        return 'index'
+      }
+      return this.settingKey
+    }
+  },
+  watch: {
+    sourceList: {
+      handler: function (value) {
+        if (this.typeFlag !== 'empty') {
+          this.initData()
+          this.initSort()
+        }
+      },
+      deep: true
+    },
+    targetList: {
+      handler: function (value) {
+        this.initData()
+        this.initSort()
+      },
+      deep: true
+    },
+    displayCode (value) {
+      this.initData()
+    },
+    settingCode (value) {
+      this.initData()
+    },
+    sortKey (value) {
+      this.sortCode = value
+      this.initSort()
+    },
+    sortable (value) {
+      this.isSortFlag = value
+      this.initSort()
+    }
+  },
+  created () {
+    if (this.typeFlag !== 'empty') {
+      if (!this.typeFlag) {
+        this.generalInit()
+      } else {
+        this.init()
+      }
+      this.initSort()
+    }
+    this.slot = Object.assign({}, this.$slots)
+  },
+  methods: {
+    /**
              * 数据改变初始化
              */
-            initData () {
-                if (this.typeFlag !== 'empty') {
-                    if (!this.typeFlag) {
-                        this.generalInit()
-                    } else {
-                        this.init()
-                    }
-                }
-            },
+    initData () {
+      if (this.typeFlag !== 'empty') {
+        if (!this.typeFlag) {
+          this.generalInit()
+        } else {
+          this.init()
+        }
+      }
+    },
 
-            /**
+    /**
              * 普通数组数据初始化
              */
-            generalInit () {
-                if (!this.targetList.length || this.targetList.length > this.sourceList.length) {
-                    const list = []
-                    for (let i = 0; i < this.sourceList.length; i++) {
-                        list.push({
-                            index: i,
-                            value: this.sourceList[i]
-                        })
-                    }
-                    this.dataList = [...list]
-                    this.hasSelectedList.splice(0, this.hasSelectedList.length, ...[])
-                    this.$emit('change', this.dataList, [], [])
-                } else {
-                    const list = []
-                    const valueList = []
-                    for (let i = 0; i < this.sourceList.length; i++) {
-                        list.push({
-                            index: i,
-                            value: this.sourceList[i]
-                        })
-                    }
-                    for (let j = 0; j < list.length; j++) {
-                        for (let k = 0; k < this.targetList.length; k++) {
-                            if (list[j].value === this.targetList[k]) {
-                                valueList.push(list[j])
-                            }
-                        }
-                    }
-                    this.hasSelectedList = [...valueList]
-                    const result = list.filter(item1 => {
-                        return valueList.every(item2 => {
-                            return item2['index'] !== item1['index']
-                        })
-                    })
-                    this.dataList = [...result]
-                    this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
-                }
-            },
+    generalInit () {
+      if (!this.targetList.length || this.targetList.length > this.sourceList.length) {
+        const list = []
+        for (let i = 0; i < this.sourceList.length; i++) {
+          list.push({
+            index: i,
+            value: this.sourceList[i]
+          })
+        }
+        this.dataList = [...list]
+        this.hasSelectedList.splice(0, this.hasSelectedList.length, ...[])
+        this.$emit('change', this.dataList, [], [])
+      } else {
+        const list = []
+        const valueList = []
+        for (let i = 0; i < this.sourceList.length; i++) {
+          list.push({
+            index: i,
+            value: this.sourceList[i]
+          })
+        }
+        for (let j = 0; j < list.length; j++) {
+          for (let k = 0; k < this.targetList.length; k++) {
+            if (list[j].value === this.targetList[k]) {
+              valueList.push(list[j])
+            }
+          }
+        }
+        this.hasSelectedList = [...valueList]
+        const result = list.filter(item1 => {
+          return valueList.every(item2 => {
+            return item2['index'] !== item1['index']
+          })
+        })
+        this.dataList = [...result]
+        this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
+      }
+    },
 
-            /**
+    /**
              * 对象数组数据初始化
              */
-            init () {
-                if (!this.targetList.length || this.targetList.length > this.sourceList.length) {
-                    this.dataList = [...this.sourceList]
-                    this.hasSelectedList = []
-                    this.$emit('change', this.dataList, [], [])
-                } else {
-                    const result = this.sourceList.filter(item1 => {
-                        return this.targetList.every(item2 => {
-                            return item2 !== item1[this.settingCode]
-                        })
-                    })
-                    const hasTempList = []
-                    this.sourceList.forEach(item1 => {
-                        this.targetList.forEach(item2 => {
-                            if (item1[this.settingCode] === item2) {
-                                hasTempList.push(item1)
-                            }
-                        })
-                    })
-                    this.hasSelectedList = [...hasTempList]
-                    this.dataList = [...result]
-                    const list = [...this.sourceListHandler(this.hasSelectedList)]
-                    this.$emit('change', this.dataList, this.hasSelectedList, list)
-                }
-            },
+    init () {
+      if (!this.targetList.length || this.targetList.length > this.sourceList.length) {
+        this.dataList = [...this.sourceList]
+        this.hasSelectedList = []
+        this.$emit('change', this.dataList, [], [])
+      } else {
+        const result = this.sourceList.filter(item1 => {
+          return this.targetList.every(item2 => {
+            return item2 !== item1[this.settingCode]
+          })
+        })
+        const hasTempList = []
+        this.sourceList.forEach(item1 => {
+          this.targetList.forEach(item2 => {
+            if (item1[this.settingCode] === item2) {
+              hasTempList.push(item1)
+            }
+          })
+        })
+        this.hasSelectedList = [...hasTempList]
+        this.dataList = [...result]
+        const list = [...this.sourceListHandler(this.hasSelectedList)]
+        this.$emit('change', this.dataList, this.hasSelectedList, list)
+      }
+    },
 
-            /**
+    /**
              * 普通数组数据处理
              */
-            generalListHandler (list) {
-                const templateList = []
-                if (!list.length) {
-                    return []
-                } else {
-                    const dataList = [...list]
-                    dataList.forEach(item => {
-                        templateList.push(item.value)
-                    })
-                    return templateList
-                }
-            },
+    generalListHandler (list) {
+      const templateList = []
+      if (!list.length) {
+        return []
+      } else {
+        const dataList = [...list]
+        dataList.forEach(item => {
+          templateList.push(item.value)
+        })
+        return templateList
+      }
+    },
 
-            /**
+    /**
              * 对象数组数据处理
              */
-            sourceListHandler (list) {
-                const templateList = []
-                if (!list.length) {
-                    return []
-                } else {
-                    const dataList = [...list]
-                    dataList.forEach(item => {
-                        for (const key in item) {
-                            if (key === this.settingCode) {
-                                templateList.push(item[key])
-                            }
-                        }
-                    })
-                    return templateList
-                }
-            },
+    sourceListHandler (list) {
+      const templateList = []
+      if (!list.length) {
+        return []
+      } else {
+        const dataList = [...list]
+        dataList.forEach(item => {
+          for (const key in item) {
+            if (key === this.settingCode) {
+              templateList.push(item[key])
+            }
+          }
+        })
+        return templateList
+      }
+    },
 
-            /**
+    /**
              * 初始化排序
              */
-            initSort () {
-                let templateList = []
-                if (!this.typeFlag) {
-                    if (this.isSortFlag) {
-                        this.sortCode = 'index'
-                    } else {
-                        this.sortCode = ''
-                    }
-                    for (let k = 0; k < this.sourceList.length; k++) {
-                        templateList.push({
-                            index: k,
-                            value: this.sourceList[k]
-                        })
-                    }
-                } else {
-                    if (!this.isSortFlag) {
-                        this.sortCode = ''
-                    }
-                    templateList = [...this.sourceList]
-                }
-                if (this.sortCode) {
-                    const arr = []
-                    templateList.forEach(item => {
-                        arr.push(item[this.sortCode])
-                    })
-                    this.sortList = [...arr]
-                    if (this.sortList.length === this.sourceList.length) {
-                        const list = [...this.dataList]
-                        this.dataList = [...this.sortDataList(list, this.sortCode, this.sortList)]
-                    }
-                }
-            },
+    initSort () {
+      let templateList = []
+      if (!this.typeFlag) {
+        if (this.isSortFlag) {
+          this.sortCode = 'index'
+        } else {
+          this.sortCode = ''
+        }
+        for (let k = 0; k < this.sourceList.length; k++) {
+          templateList.push({
+            index: k,
+            value: this.sourceList[k]
+          })
+        }
+      } else {
+        if (!this.isSortFlag) {
+          this.sortCode = ''
+        }
+        templateList = [...this.sourceList]
+      }
+      if (this.sortCode) {
+        const arr = []
+        templateList.forEach(item => {
+          arr.push(item[this.sortCode])
+        })
+        this.sortList = [...arr]
+        if (this.sortList.length === this.sourceList.length) {
+          const list = [...this.dataList]
+          this.dataList = [...this.sortDataList(list, this.sortCode, this.sortList)]
+        }
+      }
+    },
 
-            /**
+    /**
              * 排序处理
              */
-            sortDataList (list, key, sortList) {
-                const arr = sortList
-                return list.sort((a, b) => arr.indexOf(a[key]) - arr.indexOf(b[key]) >= 0)
-            },
+    sortDataList (list, key, sortList) {
+      const arr = sortList
+      return list.sort((a, b) => arr.indexOf(a[key]) - arr.indexOf(b[key]) >= 0)
+    },
 
-            removeFromDataList (removeItem) {
-                // 从左边部列表中删除
-                this.dataList = this.dataList.filter(item => {
-                    return item[this.settingCode] !== removeItem[this.settingCode]
-                })
-            },
+    removeFromDataList (removeItem) {
+      // 从左边部列表中删除
+      this.dataList = this.dataList.filter(item => {
+        return item[this.settingCode] !== removeItem[this.settingCode]
+      })
+    },
 
-            /**
+    /**
              * 全部添加到右侧穿梭框
              */
-            allToRight () {
-                this.leftHoverIndex = -1
-                const displayDataList = this.displayDataList
-                const hasSelectedList = this.hasSelectedList
+    allToRight () {
+      this.leftHoverIndex = -1
+      const displayDataList = this.displayDataList
+      const hasSelectedList = this.hasSelectedList
 
-                // 遍历左边列表（包括搜索后的列表）
-                displayDataList.forEach(transferItem => {
-                    hasSelectedList.push(transferItem)
-                    this.removeFromDataList(transferItem)
-                })
+      // 遍历左边列表（包括搜索后的列表）
+      displayDataList.forEach(transferItem => {
+        hasSelectedList.push(transferItem)
+        this.removeFromDataList(transferItem)
+      })
 
-                if (this.sortList.length === this.sourceList.length) {
-                    this.hasSelectedList = [...this.sortDataList(hasSelectedList, this.sortCode, this.sortList)]
-                } else {
-                    this.hasSelectedList = [...hasSelectedList]
-                }
+      if (this.sortList.length === this.sourceList.length) {
+        this.hasSelectedList = [...this.sortDataList(hasSelectedList, this.sortCode, this.sortList)]
+      } else {
+        this.hasSelectedList = [...hasSelectedList]
+      }
 
-                // while (displayDataList.length) {
-                // }
-                if (!this.typeFlag) {
-                    this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
-                } else {
-                    const list = [...this.sourceListHandler(this.hasSelectedList)]
-                    this.$emit('change', this.dataList, this.hasSelectedList, list)
-                }
-            },
+      // while (displayDataList.length) {
+      // }
+      if (!this.typeFlag) {
+        this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
+      } else {
+        const list = [...this.sourceListHandler(this.hasSelectedList)]
+        this.$emit('change', this.dataList, this.hasSelectedList, list)
+      }
+    },
 
-            /**
+    /**
              * 全部移除到左侧穿梭框
              */
-            allToLeft () {
-                this.rightHoverIndex = -1
-                const hasSelectedList = this.hasSelectedList
-                const dataList = this.dataList
-                while (hasSelectedList.length) {
-                    const transferItem = hasSelectedList.shift()
-                    dataList.push(transferItem)
-                    if (this.sortList.length === this.sourceList.length) {
-                        this.dataList = [...this.sortDataList(dataList, this.sortCode, this.sortList)]
-                    } else {
-                        this.dataList = [...dataList]
-                    }
-                }
-                if (!this.typeFlag) {
-                    this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
-                } else {
-                    const list = [...this.sourceListHandler(this.hasSelectedList)]
-                    this.$emit('change', this.dataList, this.hasSelectedList, list)
-                }
-            },
+    allToLeft () {
+      this.rightHoverIndex = -1
+      const hasSelectedList = this.hasSelectedList
+      const dataList = this.dataList
+      while (hasSelectedList.length) {
+        const transferItem = hasSelectedList.shift()
+        dataList.push(transferItem)
+        if (this.sortList.length === this.sourceList.length) {
+          this.dataList = [...this.sortDataList(dataList, this.sortCode, this.sortList)]
+        } else {
+          this.dataList = [...dataList]
+        }
+      }
+      if (!this.typeFlag) {
+        this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
+      } else {
+        const list = [...this.sourceListHandler(this.hasSelectedList)]
+        this.$emit('change', this.dataList, this.hasSelectedList, list)
+      }
+    },
 
-            /**
+    /**
              * 左侧穿梭框 点击 事件
              *
              * @param {number} index item 的索引
              */
-            leftClick (index) {
-                this.leftHoverIndex = -1
-                const transferItem = this.displayDataList[index]
-                const hasSelectedList = this.hasSelectedList
-                hasSelectedList.push(transferItem)
+    leftClick (index) {
+      this.leftHoverIndex = -1
+      const transferItem = this.displayDataList[index]
+      const hasSelectedList = this.hasSelectedList
+      hasSelectedList.push(transferItem)
 
-                this.removeFromDataList(transferItem)
+      this.removeFromDataList(transferItem)
 
-                if (this.sortList.length === this.sourceList.length) {
-                    this.hasSelectedList = [...this.sortDataList(hasSelectedList, this.sortCode, this.sortList)]
-                } else {
-                    this.hasSelectedList = [...hasSelectedList]
-                }
-                if (!this.typeFlag) {
-                    this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
-                } else {
-                    const list = [...this.sourceListHandler(this.hasSelectedList)]
-                    this.$emit('change', this.dataList, this.hasSelectedList, list)
-                }
-            },
+      if (this.sortList.length === this.sourceList.length) {
+        this.hasSelectedList = [...this.sortDataList(hasSelectedList, this.sortCode, this.sortList)]
+      } else {
+        this.hasSelectedList = [...hasSelectedList]
+      }
+      if (!this.typeFlag) {
+        this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
+      } else {
+        const list = [...this.sourceListHandler(this.hasSelectedList)]
+        this.$emit('change', this.dataList, this.hasSelectedList, list)
+      }
+    },
 
-            /**
+    /**
              * 右侧穿梭框 点击 事件
              *
              * @param {number} index item 的索引
              */
-            rightClick (index) {
-                this.rightHoverIndex = -1
-                const transferItem = this.hasSelectedList.splice(index, 1)[0]
-                const dataList = this.dataList
-                dataList.push(transferItem)
-                if (this.sortList.length === this.sourceList.length) {
-                    this.dataList = [...this.sortDataList(dataList, this.sortCode, this.sortList)]
-                } else {
-                    this.dataList = [...dataList]
-                }
-                if (!this.typeFlag) {
-                    this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
-                } else {
-                    const list = [...this.sourceListHandler(this.hasSelectedList)]
-                    this.$emit('change', this.dataList, this.hasSelectedList, list)
-                }
-            },
+    rightClick (index) {
+      this.rightHoverIndex = -1
+      const transferItem = this.hasSelectedList.splice(index, 1)[0]
+      const dataList = this.dataList
+      dataList.push(transferItem)
+      if (this.sortList.length === this.sourceList.length) {
+        this.dataList = [...this.sortDataList(dataList, this.sortCode, this.sortList)]
+      } else {
+        this.dataList = [...dataList]
+      }
+      if (!this.typeFlag) {
+        this.$emit('change', this.dataList, [...this.generalListHandler(this.hasSelectedList)], [])
+      } else {
+        const list = [...this.sourceListHandler(this.hasSelectedList)]
+        this.$emit('change', this.dataList, this.hasSelectedList, list)
+      }
+    },
 
-            /**
+    /**
              * 左侧穿梭框 mouseover 事件
              *
              * @param {number} index hover 的索引
              */
-            leftMouseover (index) {
-                this.leftHoverIndex = index
-            },
+    leftMouseover (index) {
+      this.leftHoverIndex = index
+    },
 
-            /**
+    /**
              * 左侧穿梭框 mouseleave 事件
              *
              * @param {number} index hover 的索引
              */
-            leftMouseleave (index) {
-                this.leftHoverIndex = -1
-            },
+    leftMouseleave (index) {
+      this.leftHoverIndex = -1
+    },
 
-            /**
+    /**
              * 右侧穿梭框 mouseover 事件
              *
              * @param {number} index hover 的索引
              */
-            rightMouseover (index) {
-                this.rightHoverIndex = index
-            },
+    rightMouseover (index) {
+      this.rightHoverIndex = index
+    },
 
-            /**
+    /**
              * 右侧穿梭框 mouseleave 事件
              *
              * @param {number} index hover 的索引
              */
-            rightMouseleave (index) {
-                this.rightHoverIndex = -1
-            }
-        }
+    rightMouseleave (index) {
+      this.rightHoverIndex = -1
     }
+  }
+}
 </script>
 
 <style>

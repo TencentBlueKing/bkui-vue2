@@ -34,62 +34,62 @@
     </div>
 </template>
 <script>
-    import emitter from '@/mixins/emitter'
-    import locale from 'bk-magic-vue/lib/locale'
+import emitter from '@/mixins/emitter'
+import locale from 'bk-magic-vue/lib/locale'
 
-    export default {
-        mixins: [emitter, locale.mixin],
-        props: {
-            showTime: {
-                type: Boolean,
-                default: false
-            },
-            isTime: {
-                type: Boolean,
-                default: false
-            },
-            timeDisabled: {
-                type: Boolean,
-                default: false
-            },
-            clearable: {
-                type: Boolean,
-                default: true
-            }
-        },
-        computed: {
-            labels () {
-                return {
-                    time: this.isTime ? this.t('bk.datePicker.selectDate') : this.t('bk.datePicker.selectTime'),
-                    clear: this.t('bk.datePicker.clear'),
-                    ok: this.t('bk.datePicker.ok')
-                }
-            }
-        },
-        methods: {
-            handleClear () {
-                this.$emit('pick-clear')
-            },
-            handleSuccess () {
-                this.$emit('pick-success')
-            },
-            handleToggleTime () {
-                if (this.timeDisabled) {
-                    return
-                }
-                this.$emit('pick-toggle-time')
-                this.dispatch('bk-date-picker', 'focus-input')
-            },
-            handleTab (e) {
-                const tabbables = [...this.$el.children]
-                const expectedFocus = tabbables[e.shiftKey ? 'shift' : 'pop']()
-
-                if (document.activeElement === expectedFocus) {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    this.dispatch('bk-date-picker', 'focus-input')
-                }
-            }
-        }
+export default {
+  mixins: [emitter, locale.mixin],
+  props: {
+    showTime: {
+      type: Boolean,
+      default: false
+    },
+    isTime: {
+      type: Boolean,
+      default: false
+    },
+    timeDisabled: {
+      type: Boolean,
+      default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: true
     }
+  },
+  computed: {
+    labels () {
+      return {
+        time: this.isTime ? this.t('bk.datePicker.selectDate') : this.t('bk.datePicker.selectTime'),
+        clear: this.t('bk.datePicker.clear'),
+        ok: this.t('bk.datePicker.ok')
+      }
+    }
+  },
+  methods: {
+    handleClear () {
+      this.$emit('pick-clear')
+    },
+    handleSuccess () {
+      this.$emit('pick-success')
+    },
+    handleToggleTime () {
+      if (this.timeDisabled) {
+        return
+      }
+      this.$emit('pick-toggle-time')
+      this.dispatch('bk-date-picker', 'focus-input')
+    },
+    handleTab (e) {
+      const tabbables = [...this.$el.children]
+      const expectedFocus = tabbables[e.shiftKey ? 'shift' : 'pop']()
+
+      if (document.activeElement === expectedFocus) {
+        e.preventDefault()
+        e.stopPropagation()
+        this.dispatch('bk-date-picker', 'focus-input')
+      }
+    }
+  }
+}
 </script>

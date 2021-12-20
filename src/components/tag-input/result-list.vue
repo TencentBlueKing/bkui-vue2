@@ -47,46 +47,46 @@
 </template>
 
 <script>
-    import Render from './render'
+import Render from './render'
 
-    export default {
-        components: [Render],
-        props: {
-            renderList: {
-                type: Array,
-                default () {
-                    return []
-                }
-            },
-            contentMaxHeight: {
-                type: Number,
-                default: 300
-            },
-            focusIndex: {
-                type: [Number, String]
-            },
-            displayKey: {
-                type: String,
-                default: 'name'
-            },
-            showScrollLoading: {
-                type: [Boolean],
-                default: false
-            },
-            tpl: Function
-        },
-        methods: {
-            // 更新样式
-            activeClass (i) {
-                return {
-                    'bk-selector-selected': i === this.focusIndex
-                }
-            },
-            handleSelect (data, type) {
-                this.$emit('item-select', data, type)
-            }
-        }
+export default {
+  components: [Render],
+  props: {
+    renderList: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    contentMaxHeight: {
+      type: Number,
+      default: 300
+    },
+    focusIndex: {
+      type: [Number, String]
+    },
+    displayKey: {
+      type: String,
+      default: 'name'
+    },
+    showScrollLoading: {
+      type: [Boolean],
+      default: false
+    },
+    tpl: Function
+  },
+  methods: {
+    // 更新样式
+    activeClass (i) {
+      return {
+        'bk-selector-selected': i === this.focusIndex
+      }
+    },
+    handleSelect (data, type) {
+      this.$emit('item-select', data, type)
     }
+  }
+}
 </script>
 
 <style lang="postcss">

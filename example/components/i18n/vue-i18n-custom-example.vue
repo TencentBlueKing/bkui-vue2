@@ -50,84 +50,84 @@
     </div>
 </template>
 <script>
-    import Vue from 'vue'
-    import VueI18n from 'vue-i18n'
-    import { bkInput, bkDatePicker, bkButton, locale, lang } from '@'
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import { bkInput, bkDatePicker, bkButton, locale, lang } from '@'
 
-    Vue.use(VueI18n)
+Vue.use(VueI18n)
 
-    const cn = {
-        testName: {
-            word1: '单词1',
-            word2: '{key1} 是 {key2}'
-        }
+const cn = {
+  testName: {
+    word1: '单词1',
+    word2: '{key1} 是 {key2}'
+  }
+}
+
+const en = {
+  testName: {
+    word1: 'word1',
+    word2: '{key1} is {key2}'
+  }
+}
+
+// 把自己项目的语言包与 bk-magic 的语言包合并
+const messages = {
+  zhCN: Object.assign(lang.zhCN, cn),
+  enUS: Object.assign(lang.enUS, en)
+}
+
+// 获取当前的语言
+const curLocale = localStorage.getItem('curLang') || 'zhCN'
+
+// 实例化 VueI18n 对象
+const i18n = new VueI18n({
+  locale: curLocale,
+  fallbackLocale: 'zhCN',
+  messages,
+  missing (locale, path) {
+    const parsedPath = i18n._path.parsePath(path)
+    return parsedPath[parsedPath.length - 1]
+  }
+})
+
+// 设置 bk-magic-vue 中 i18n 的处理函数，这句的意思是把 bk-magic-vue 中 i18n 的处理设置为 vue-i18n 的处理。
+// 如果和 vue-i18n 一起使用，那么这一句是必须的。
+locale.i18n((key, value) => i18n.t(key, value))
+
+export default {
+  components: {
+    bkDatePicker,
+    bkButton,
+    bkInput
+  },
+  mixins: [locale.mixin],
+  data () {
+    return {
+      initDateTime: new Date(),
+      curLang: '',
+      value: ''
     }
-
-    const en = {
-        testName: {
-            word1: 'word1',
-            word2: '{key1} is {key2}'
-        }
+  },
+  created () {
+    // 获取语言标识
+    this.curLang = localStorage.getItem('curLang') || 'zhCN'
+  },
+  methods: {
+    back () {
+      window.location.href = '#/i18n?anchor=shi-yong-bk-magic-vue-yi-ji-vue-i18n-at-6'
+        + '-lai-zhi-chi-ye-wu-xiang-mu-de-guo-ji-hua-vue-i18n-custom-example'
+    },
+    handleClick (event) {
+      // 当前为中文时
+      if (this.curLang === 'zhCN') {
+        localStorage.setItem('curLang', 'enUS')
+      } else { // 当前为英文时
+        localStorage.setItem('curLang', 'zhCN')
+      }
+      this.$nextTick(() => {
+        window.location.reload()
+      })
     }
-
-    // 把自己项目的语言包与 bk-magic 的语言包合并
-    const messages = {
-        zhCN: Object.assign(lang.zhCN, cn),
-        enUS: Object.assign(lang.enUS, en)
-    }
-
-    // 获取当前的语言
-    const curLocale = localStorage.getItem('curLang') || 'zhCN'
-
-    // 实例化 VueI18n 对象
-    const i18n = new VueI18n({
-        locale: curLocale,
-        fallbackLocale: 'zhCN',
-        messages,
-        missing (locale, path) {
-            const parsedPath = i18n._path.parsePath(path)
-            return parsedPath[parsedPath.length - 1]
-        }
-    })
-
-    // 设置 bk-magic-vue 中 i18n 的处理函数，这句的意思是把 bk-magic-vue 中 i18n 的处理设置为 vue-i18n 的处理。
-    // 如果和 vue-i18n 一起使用，那么这一句是必须的。
-    locale.i18n((key, value) => i18n.t(key, value))
-
-    export default {
-        components: {
-            bkDatePicker,
-            bkButton,
-            bkInput
-        },
-        mixins: [locale.mixin],
-        data () {
-            return {
-                initDateTime: new Date(),
-                curLang: '',
-                value: ''
-            }
-        },
-        created () {
-            // 获取语言标识
-            this.curLang = localStorage.getItem('curLang') || 'zhCN'
-        },
-        methods: {
-            back () {
-                window.location.href = '#/i18n?anchor=shi-yong-bk-magic-vue-yi-ji-vue-i18n-at-6'
-                    + '-lai-zhi-chi-ye-wu-xiang-mu-de-guo-ji-hua-vue-i18n-custom-example'
-            },
-            handleClick (event) {
-                // 当前为中文时
-                if (this.curLang === 'zhCN') {
-                    localStorage.setItem('curLang', 'enUS')
-                } else { // 当前为英文时
-                    localStorage.setItem('curLang', 'zhCN')
-                }
-                this.$nextTick(() => {
-                    window.location.reload()
-                })
-            }
-        }
-    }
+  }
+}
 </script>

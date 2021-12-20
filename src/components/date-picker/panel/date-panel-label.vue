@@ -37,23 +37,23 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            datePanelLabel: Object,
-            currentView: String
-        },
-        data () {
-            return {
-                cls: 'bk-date-picker-header-label'
-            }
-        },
-        computed: {
-            showLabelFirst () {
-                return this.datePanelLabel.labels[0].type === 'year' || this.currentView === 'date'
-            },
-            showLabelSecond () {
-                return this.datePanelLabel.labels[1].type === 'year' || this.currentView === 'date'
-            }
-        }
+export default {
+  props: {
+    datePanelLabel: Object,
+    currentView: String
+  },
+  data () {
+    return {
+      cls: 'bk-date-picker-header-label'
     }
+  },
+  computed: {
+    showLabelFirst () {
+      return this.datePanelLabel.labels[0].type === 'year' || this.currentView === 'date'
+    },
+    showLabelSecond () {
+      return this.datePanelLabel.labels[1].type === 'year' || this.currentView === 'date'
+    }
+  }
+}
 </script>

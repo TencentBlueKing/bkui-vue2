@@ -40,49 +40,49 @@
     </bk-tag-input>
 </template>
 <script>
-    import { bkTagInput } from '@'
+import { bkTagInput } from '@'
 
-    export default {
-        components: {
-            bkTagInput
-        },
-        data () {
-            return {
-                placeholder: '请输入城市',
-                allowCreate: true,
-                hasDeleteIcon: true,
-                tag1: [],
-                list: [
-                    // { id: 'shenzhen', name: '深圳' },
-                    // { id: 'guangzhou', name: '广州' },
-                    // { id: 'beijing', name: '北京' },
-                    // { id: 'shanghai', name: '上海' },
-                    // { id: 'hangzhou', name: '杭州' },
-                    // { id: 'nanjing', name: '南京' },
-                    // { id: 'chognqing', name: '重庆' },
-                    // { id: 'taibei', name: '台北' },
-                    // { id: 'haikou', name: '海口' }
-                ]
-            }
-        },
-        methods: {
-            filterCallback (val, searchKey, data) {
-                return [
-                    { id: 'sss', name: val + '--sss' },
-                    { id: 'kkk', name: val + '--kkk' }
-                ]
-                // return new Promise((resolve, reject) => {
-                //     setTimeout(() => {
-                //         resolve([
-                //             { id: 'sadas', name: val + '--dd深圳' },
-                //             { id: 'kkk', name: val + '--ee广州' }
-                //         ])
-                //     }, 1000)
-                // })
-            },
-            change (tags) {
-                console.error(tags)
-            }
-        }
+export default {
+  components: {
+    bkTagInput
+  },
+  data () {
+    return {
+      placeholder: '请输入城市',
+      allowCreate: true,
+      hasDeleteIcon: true,
+      tag1: [],
+      list: [
+        // { id: 'shenzhen', name: '深圳' },
+        // { id: 'guangzhou', name: '广州' },
+        // { id: 'beijing', name: '北京' },
+        // { id: 'shanghai', name: '上海' },
+        // { id: 'hangzhou', name: '杭州' },
+        // { id: 'nanjing', name: '南京' },
+        // { id: 'chognqing', name: '重庆' },
+        // { id: 'taibei', name: '台北' },
+        // { id: 'haikou', name: '海口' }
+      ]
     }
+  },
+  methods: {
+    filterCallback (val, searchKey, data) {
+      return [
+        { id: 'sss', name: val + '--sss' },
+        { id: 'kkk', name: val + '--kkk' }
+      ]
+      // return new Promise((resolve, reject) => {
+      //     setTimeout(() => {
+      //         resolve([
+      //             { id: 'sadas', name: val + '--dd深圳' },
+      //             { id: 'kkk', name: val + '--ee广州' }
+      //         ])
+      //     }, 1000)
+      // })
+    },
+    change (tags) {
+      console.error(tags)
+    }
+  }
+}
 </script>

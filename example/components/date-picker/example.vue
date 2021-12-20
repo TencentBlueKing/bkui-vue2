@@ -188,160 +188,160 @@
 </template>
 
 <script>
-    import { bkDatePicker, bkDialog, bkButton, bkSelect, bkOption, bkTimePicker } from '@'
-    export default {
-        components: {
-            bkDatePicker,
-            bkDialog,
-            bkButton,
-            bkSelect,
-            bkOption,
-            bkTimePicker
-        },
-        data () {
-            return {
-                datetimerangeInitVal: [new Date(), new Date()],
-                open: false,
-                initVal: '25-12-57',
-                options1: {
-                    // 小于今天的都不能选
-                    disabledDate (date) {
-                        return date && date.valueOf() < Date.now() - 86400
-                    }
-                },
-                options2: {
-                    disabledDate (date) {
-                        return date.getDate() === 14
-                        // return date.getMonth() === 6
-                    }
-                },
-                shortcuts1: [
-                    {
-                        text: '最近24小时',
-                        value () {
-                            return new Date()
-                        },
-                        onClick: picker => {
-                            console.error(picker)
-                        }
-                    },
-                    {
-                        text: '昨天',
-                        value () {
-                            const date = new Date()
-                            date.setTime(date.getTime() - 3600 * 1000 * 24)
-                            return date
-                        },
-                        onClick: picker => {
-                            console.error(picker)
-                        }
-                    },
-                    {
-                        text: '7天前',
-                        value () {
-                            const date = new Date()
-                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
-                            return date
-                        },
-                        onClick: picker => {
-                            console.error(picker)
-                        }
-                    }
-                ],
-                shortcuts2: [
-                    {
-                        text: '最近24小时',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            return [start, end]
-                        },
-                        onClick: picker => {
-                            console.error(picker)
-                        }
-                    },
-                    {
-                        text: '近7天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-                            return [start, end]
-                        }
-                    },
-                    {
-                        text: '近15天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
-                            return [start, end]
-                        }
-                    },
-                    {
-                        text: '近30天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-                            return [start, end]
-                        }
-                    }
-                ],
-                value: '',
-                dialogConfig: {
-                    visiable: false,
-                    width: 480,
-                    headerPosition: 'left'
-                },
-                initTime: '12:12:12',
-                selectValue: '',
-                list: [
-                    { id: 1, name: '爬山' },
-                    { id: 2, name: '跑步' },
-                    { id: 3, name: '打球' },
-                    { id: 4, name: '跳舞' },
-                    { id: 5, name: '健身' },
-                    { id: 6, name: '骑车' },
-                    { id: 7, name: 'k8s' },
-                    { id: 8, name: 'K8S' },
-                    { id: 9, name: 'mesos' },
-                    { id: 10, name: 'MESOS' }
-                ]
-            }
-        },
-        created () {
-            setTimeout(() => {
-                this.open = false
-            }, 3000)
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            refresh () {
-                this.initVal = new Date()
-            },
-            handleClick () {
-                this.open = !this.open
-            },
-            handleChange (date) {
-                console.error('handleChange', date)
-                this.value = date
-            },
-            handleClear () {
-                console.error('handleClear')
-                this.open = false
-            },
-            handleOk () {
-                console.error('handleOK')
-                this.open = false
-            },
-            handleOpenChange (isOpen) {
-                console.error(isOpen)
-            }
+import { bkDatePicker, bkDialog, bkButton, bkSelect, bkOption, bkTimePicker } from '@'
+export default {
+  components: {
+    bkDatePicker,
+    bkDialog,
+    bkButton,
+    bkSelect,
+    bkOption,
+    bkTimePicker
+  },
+  data () {
+    return {
+      datetimerangeInitVal: [new Date(), new Date()],
+      open: false,
+      initVal: '25-12-57',
+      options1: {
+        // 小于今天的都不能选
+        disabledDate (date) {
+          return date && date.valueOf() < Date.now() - 86400
         }
+      },
+      options2: {
+        disabledDate (date) {
+          return date.getDate() === 14
+          // return date.getMonth() === 6
+        }
+      },
+      shortcuts1: [
+        {
+          text: '最近24小时',
+          value () {
+            return new Date()
+          },
+          onClick: picker => {
+            console.error(picker)
+          }
+        },
+        {
+          text: '昨天',
+          value () {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24)
+            return date
+          },
+          onClick: picker => {
+            console.error(picker)
+          }
+        },
+        {
+          text: '7天前',
+          value () {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+            return date
+          },
+          onClick: picker => {
+            console.error(picker)
+          }
+        }
+      ],
+      shortcuts2: [
+        {
+          text: '最近24小时',
+          value () {
+            const end = new Date()
+            const start = new Date()
+            return [start, end]
+          },
+          onClick: picker => {
+            console.error(picker)
+          }
+        },
+        {
+          text: '近7天',
+          value () {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            return [start, end]
+          }
+        },
+        {
+          text: '近15天',
+          value () {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
+            return [start, end]
+          }
+        },
+        {
+          text: '近30天',
+          value () {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            return [start, end]
+          }
+        }
+      ],
+      value: '',
+      dialogConfig: {
+        visiable: false,
+        width: 480,
+        headerPosition: 'left'
+      },
+      initTime: '12:12:12',
+      selectValue: '',
+      list: [
+        { id: 1, name: '爬山' },
+        { id: 2, name: '跑步' },
+        { id: 3, name: '打球' },
+        { id: 4, name: '跳舞' },
+        { id: 5, name: '健身' },
+        { id: 6, name: '骑车' },
+        { id: 7, name: 'k8s' },
+        { id: 8, name: 'K8S' },
+        { id: 9, name: 'mesos' },
+        { id: 10, name: 'MESOS' }
+      ]
     }
+  },
+  created () {
+    setTimeout(() => {
+      this.open = false
+    }, 3000)
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    refresh () {
+      this.initVal = new Date()
+    },
+    handleClick () {
+      this.open = !this.open
+    },
+    handleChange (date) {
+      console.error('handleChange', date)
+      this.value = date
+    },
+    handleClear () {
+      console.error('handleClear')
+      this.open = false
+    },
+    handleOk () {
+      console.error('handleOK')
+      this.open = false
+    },
+    handleOpenChange (isOpen) {
+      console.error(isOpen)
+    }
+  }
+}
 </script>
 <style lang="postcss">
     .custom-cls {

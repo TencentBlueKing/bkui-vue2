@@ -128,26 +128,26 @@
 </template>
 
 <script>
-    import { bkButton } from '@'
+import { bkButton } from '@'
 
-    export default {
-        components: {
-            bkButton
-        },
-        data () {
-            return {
-                isLoading: true,
-                isDisabled: true
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            handleClick (event) {
-                console.log(event)
-                alert('button clicked!')
-            }
-        }
+export default {
+  components: {
+    bkButton
+  },
+  data () {
+    return {
+      isLoading: true,
+      isDisabled: true
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    handleClick (event) {
+      console.log(event)
+      alert('button clicked!')
+    }
+  }
+}
 </script>

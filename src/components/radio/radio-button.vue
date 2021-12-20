@@ -48,8 +48,8 @@
 </template>
 
 <script>
-    import mixin from './mixin'
-    /**
+import mixin from './mixin'
+/**
     * bk-radio-button
     * @module components/radio
     * @desc 单选框
@@ -68,50 +68,50 @@
             </bk-radio-button>
         </bk-radio-group>
     */
-    export default {
-        name: 'bk-radio-button',
-        mixins: [mixin],
-        props: {
-            name: {
-                type: [String]
-            },
-            value: {
-                type: [String, Number, Boolean],
-                default: undefined
-            },
-            trueValue: {
-                type: [String, Number, Boolean],
-                default: true
-            },
-            falseValue: {
-                type: [String, Number, Boolean],
-                default: false
-            },
-            label: {
-                type: [String, Number]
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            }
-        },
-        watch: {
-            value (val) {
-                if (val === this.localTrueValue || val === this.falseValue) {
-                    this.updateValue()
-                }
-            }
-        },
-        methods: {
-            updateValue () {
-                if (this.parent) {
-                    this.current = this.parent.value
-                } else {
-                    this.current = this.value
-                }
-            }
-        }
+export default {
+  name: 'bk-radio-button',
+  mixins: [mixin],
+  props: {
+    name: {
+      type: [String]
+    },
+    value: {
+      type: [String, Number, Boolean],
+      default: undefined
+    },
+    trueValue: {
+      type: [String, Number, Boolean],
+      default: true
+    },
+    falseValue: {
+      type: [String, Number, Boolean],
+      default: false
+    },
+    label: {
+      type: [String, Number]
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
+  },
+  watch: {
+    value (val) {
+      if (val === this.localTrueValue || val === this.falseValue) {
+        this.updateValue()
+      }
+    }
+  },
+  methods: {
+    updateValue () {
+      if (this.parent) {
+        this.current = this.parent.value
+      } else {
+        this.current = this.value
+      }
+    }
+  }
+}
 </script>
 
 <style>

@@ -40,34 +40,34 @@
 </template>
 
 <script>
-    import { bkPagination } from '@'
+import { bkPagination } from '@'
 
-    export default {
-        components: {
-            bkPagination
-        },
-        data () {
-            return {
-                defaultPaging: {
-                    current: 5,
-                    limit: 10,
-                    count: 300
-                },
-                small: true
-            }
-        },
-        mounted () {
-            setTimeout(() => {
-                this.defaultPaging.current = 10
-            }, 5000)
-        },
-        methods: {
-            handlePageChange (page) {
-                console.log(page)
-            },
-            handleLimitChange (limit) {
-                console.log(limit)
-            }
-        }
+export default {
+  components: {
+    bkPagination
+  },
+  data () {
+    return {
+      defaultPaging: {
+        current: 5,
+        limit: 10,
+        count: 300
+      },
+      small: true
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.defaultPaging.current = 10
+    }, 5000)
+  },
+  methods: {
+    handlePageChange (page) {
+      console.log(page)
+    },
+    handleLimitChange (limit) {
+      console.log(limit)
+    }
+  }
+}
 </script>

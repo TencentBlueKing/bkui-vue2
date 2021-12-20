@@ -44,7 +44,7 @@
 </template>
 
 <script>
-    /**
+/**
      * bk-progress
      *
      * @module components/progress
@@ -59,101 +59,101 @@
      * @param title-style {Object} {fontSize: '16px'} - 设置title的样式
      *
     */
-    export default {
-        name: 'bk-progress',
-        props: {
-            theme: {
-                type: String,
-                default: 'primary',
-                validator (value) {
-                    if (['primary', 'warning', 'success', 'danger'].indexOf(value) < 0) {
-                        console.error(`theme property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
-            percent: {
-                type: Number,
-                default: 0,
-                validator: val => val >= 0 && val <= 1
-            },
-            size: {
-                type: String,
-                default: 'normal',
-                validator (value) {
-                    if (['small', 'normal', 'large'].indexOf(value) < 0) {
-                        console.error(`size property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
-            strokeWidth: {
-                type: Number
-            },
-            textInside: {
-                type: Boolean,
-                default: false
-            },
-            color: {
-                type: String,
-                default: ''
-            },
-            showText: {
-                type: Boolean,
-                default: true
-            },
-            titleStyle: {
-                type: Object,
-                default () {
-                    return {
-                        fontSize: '16px',
-                        verticalAlign: 'middle'
-                    }
-                }
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            // 精确到小数点位数
-            fixed: {
-                type: Number,
-                default: 0,
-                validator: val => val >= 0 && val <= 20
-            }
-        },
-        data () {
-            return {
-                percentStyle: {
-                    lineHeight: this.strokeWidth + `px`,
-                    height: this.strokeWidth + 'px'
-                }
-            }
-        },
-        computed: {
-            themeType () {
-                if (this.text) {
-                    return 'primary'
-                }
-                return this.theme
-            },
-            barStyle () {
-                const style = {}
-                style.width = this.percentFixed + '%'
-                style.backgroundColor = this.color
-                return style
-            },
-            percentFixed () {
-                return Number(this.percent * 100).toFixed(this.fixed)
-            },
-            progressTextSize () {
-                return 12 + this.strokeWidth * 0.4
-            }
+export default {
+  name: 'bk-progress',
+  props: {
+    theme: {
+      type: String,
+      default: 'primary',
+      validator (value) {
+        if (['primary', 'warning', 'success', 'danger'].indexOf(value) < 0) {
+          console.error(`theme property is not valid: '${value}'`)
+          return false
         }
+        return true
+      }
+    },
+    percent: {
+      type: Number,
+      default: 0,
+      validator: val => val >= 0 && val <= 1
+    },
+    size: {
+      type: String,
+      default: 'normal',
+      validator (value) {
+        if (['small', 'normal', 'large'].indexOf(value) < 0) {
+          console.error(`size property is not valid: '${value}'`)
+          return false
+        }
+        return true
+      }
+    },
+    strokeWidth: {
+      type: Number
+    },
+    textInside: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    showText: {
+      type: Boolean,
+      default: true
+    },
+    titleStyle: {
+      type: Object,
+      default () {
+        return {
+          fontSize: '16px',
+          verticalAlign: 'middle'
+        }
+      }
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    // 精确到小数点位数
+    fixed: {
+      type: Number,
+      default: 0,
+      validator: val => val >= 0 && val <= 20
     }
+  },
+  data () {
+    return {
+      percentStyle: {
+        lineHeight: this.strokeWidth + `px`,
+        height: this.strokeWidth + 'px'
+      }
+    }
+  },
+  computed: {
+    themeType () {
+      if (this.text) {
+        return 'primary'
+      }
+      return this.theme
+    },
+    barStyle () {
+      const style = {}
+      style.width = this.percentFixed + '%'
+      style.backgroundColor = this.color
+      return style
+    },
+    percentFixed () {
+      return Number(this.percent * 100).toFixed(this.fixed)
+    },
+    progressTextSize () {
+      return 12 + this.strokeWidth * 0.4
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/progress.css';
