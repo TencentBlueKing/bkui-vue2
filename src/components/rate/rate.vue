@@ -27,36 +27,36 @@
 -->
 
 <template>
-    <p class="bk-score-group" :class="extCls">
-        <template v-if="edit">
-            <bk-star :rate="rate"
-                :hover-rate="hoverRate"
-                :width="width"
-                :height="height"
-                :tooltips="tooltips"
-                @chooseRate="chooseRate"
-                @changeHover="changeHover"
-                @mouseleave.native="changeHover(0)"
-            ></bk-star>
-        </template>
+  <p class="bk-score-group" :class="extCls">
+    <template v-if="edit">
+      <bk-star :rate="rate"
+        :hover-rate="hoverRate"
+        :width="width"
+        :height="height"
+        :tooltips="tooltips"
+        @chooseRate="chooseRate"
+        @changeHover="changeHover"
+        @mouseleave.native="changeHover(0)"
+      ></bk-star>
+    </template>
 
-        <template v-else>
-            <bk-star :rate="5"
-                :width="width"
-                :height="height"
-                :style="{ width: starWidth }"
-                class="bk-score-real"
-                :edit="false"
-                :tooltips="tooltips"
-            ></bk-star>
-            <bk-star :rate="0"
-                :width="width"
-                :height="height"
-                :edit="false"
-                :tooltips="tooltips"
-            ></bk-star>
-        </template>
-    </p>
+    <template v-else>
+      <bk-star :rate="5"
+        :width="width"
+        :height="height"
+        :style="{ width: starWidth }"
+        class="bk-score-real"
+        :edit="false"
+        :tooltips="tooltips"
+      ></bk-star>
+      <bk-star :rate="0"
+        :width="width"
+        :height="height"
+        :edit="false"
+        :tooltips="tooltips"
+      ></bk-star>
+    </template>
+  </p>
 </template>
 
 <script>

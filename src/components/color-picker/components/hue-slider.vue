@@ -27,15 +27,15 @@
 -->
 
 <template>
-    <div ref="container"
-        tabindex="0"
-        class="bk-color-picker-hue"
-        @keydown="handleArrowKeydown"
-        @mousedown.stop="handleMouseDown">
-        <div class="bk-color-picker-hue-pointer" :style="pointerStyle">
-            <div class="bk-color-picker-hue-rectangle"></div>
-        </div>
+  <div ref="container"
+    tabindex="0"
+    class="bk-color-picker-hue"
+    @keydown="handleArrowKeydown"
+    @mousedown.stop="handleMouseDown">
+    <div class="bk-color-picker-hue-pointer" :style="pointerStyle">
+      <div class="bk-color-picker-hue-rectangle"></div>
     </div>
+  </div>
 </template>
 
 <script>

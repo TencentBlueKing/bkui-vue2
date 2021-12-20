@@ -27,45 +27,45 @@
 -->
 
 <template>
-    <div :class="['bk-form-item', { 'is-required': required, 'is-error': validator.state === 'error', 'is-checking': isChecking }, extCls]">
-        <label :class="['bk-label', { 'has-desc': !!desc && descType === 'border' }]" :style="labelStyle" v-if="label">
-            <template v-if="desc">
-                <span class="bk-label-text" v-bk-tooltips="desc" v-if="descType === 'border'">{{label}}</span>
-                <span class="bk-label-text" v-else>
-                    {{label}}
-                    <i :class="`bk-icon ${descIcon}`" v-bk-tooltips="desc"></i>
-                </span>
-            </template>
-            <template v-else>
-                <span class="bk-label-text">{{label}}</span>
-            </template>
-        </label>
-        <div class="bk-form-content" :style="contentStyle">
-            <slot></slot>
-            <template v-if="isChecking">
-                <div class="bk-spin-loading bk-spin-loading-primary bk-spin-loading-mini tooltips-icon" v-if="isChecking" :style="{ right: `${iconOffset}px` }">
-                    <div class="rotate rotate1"></div>
-                    <div class="rotate rotate2"></div>
-                    <div class="rotate rotate3"></div>
-                    <div class="rotate rotate4"></div>
-                    <div class="rotate rotate5"></div>
-                    <div class="rotate rotate6"></div>
-                    <div class="rotate rotate7"></div>
-                    <div class="rotate rotate8"></div>
-                </div>
-            </template>
-            <template v-else-if="validator.content">
-                <i
-                    class="bk-icon icon-exclamation-circle-shape tooltips-icon"
-                    v-bk-tooltips.top-end="validator"
-                    :style="{ right: `${iconOffset}px` }"
-                    v-if="errorDisplayType === 'tooltips'">
-                </i>
-                <p class="form-error-tip" v-else>{{validator.content}}</p>
-            </template>
-            <slot name="tip"></slot>
+  <div :class="['bk-form-item', { 'is-required': required, 'is-error': validator.state === 'error', 'is-checking': isChecking }, extCls]">
+    <label :class="['bk-label', { 'has-desc': !!desc && descType === 'border' }]" :style="labelStyle" v-if="label">
+      <template v-if="desc">
+        <span class="bk-label-text" v-bk-tooltips="desc" v-if="descType === 'border'">{{label}}</span>
+        <span class="bk-label-text" v-else>
+          {{label}}
+          <i :class="`bk-icon ${descIcon}`" v-bk-tooltips="desc"></i>
+        </span>
+      </template>
+      <template v-else>
+        <span class="bk-label-text">{{label}}</span>
+      </template>
+    </label>
+    <div class="bk-form-content" :style="contentStyle">
+      <slot></slot>
+      <template v-if="isChecking">
+        <div class="bk-spin-loading bk-spin-loading-primary bk-spin-loading-mini tooltips-icon" v-if="isChecking" :style="{ right: `${iconOffset}px` }">
+          <div class="rotate rotate1"></div>
+          <div class="rotate rotate2"></div>
+          <div class="rotate rotate3"></div>
+          <div class="rotate rotate4"></div>
+          <div class="rotate rotate5"></div>
+          <div class="rotate rotate6"></div>
+          <div class="rotate rotate7"></div>
+          <div class="rotate rotate8"></div>
         </div>
+      </template>
+      <template v-else-if="validator.content">
+        <i
+          class="bk-icon icon-exclamation-circle-shape tooltips-icon"
+          v-bk-tooltips.top-end="validator"
+          :style="{ right: `${iconOffset}px` }"
+          v-if="errorDisplayType === 'tooltips'">
+        </i>
+        <p class="form-error-tip" v-else>{{validator.content}}</p>
+      </template>
+      <slot name="tip"></slot>
     </div>
+  </div>
 </template>
 
 <script>

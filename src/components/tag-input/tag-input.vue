@@ -27,83 +27,83 @@
 -->
 
 <template>
-    <div class="bk-tag-selector" :class="extCls" @click="focusInputer($event)" ref="bkTagSelector" @mouseenter="mouseEnterHandler" @mouseleave="hover = false">
-        <div :class="['bk-tag-input', { 'active': isEdit, 'disabled': disabled }]">
-            <ul class="tag-list" :class="!localTagList.length ? 'no-item' : ''" ref="tagList" :style="{ 'margin-left': `${leftSpace}px` }">
-                <li
-                    class="key-node"
-                    v-for="(tag, index) in localTagList"
-                    :key="tag[saveKey] !== undefined ? tag[saveKey] : index"
-                    @click="selectTag($event, tag)"
-                    v-bk-tooltips.light="{ boundary: 'window', content: tag[tooltipKey], disabled: !tooltipKey }">
-                    <tag-render :node="tag" :display-key="displayKey" :tpl="tagTpl" />
-                    <i class="bk-icon icon-close remove-key" @click.stop="handlerTagRemove(tag, index)" v-if="!disabled && hasDeleteIcon"></i>
-                </li>
-                <li ref="staffInput" id="staffInput" class="staff-input" v-show="isEdit" role="input">
-                    <input
-                        type="text"
-                        class="input"
-                        ref="input"
-                        v-model="curInputValue"
-                        v-if="!disabled"
-                        @input="handleInput"
-                        @focus="handleFocus"
-                        @paste="handlePaste"
-                        @blur="handleBlur(curInputValue)"
-                        @keydown="handleKeydown">
-                </li>
-            </ul>
-            <p class="placeholder" v-show="!isEdit && !localTagList.length && !curInputValue.length">{{defaultPlaceholder}}</p>
-            <i class="bk-icon icon-close-circle-shape clear-icon"
-                v-if="isShowClear"
-                @click.stop="handlerClear"></i>
-        </div>
-        <bk-popover
-            class="bk-select-dropdown"
-            placement="bottom-start"
-            ref="tagInputDropdown"
-            trigger="manual"
-            theme="light bk-select-dropdown">
-            <div class="bk-tag-popover-trigger"></div>
-            <div slot="content">
-                <div class="bk-selector-list" v-if="showList" :style="{ 'width': `${popoverWidth}px` }">
-                    <template v-if="useGroup">
-                        <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul" v-show="Object.keys(resultList).length">
-                            <li v-for="(group, key) in resultList"
-                                class="bk-selector-group-item"
-                                :key="key">
-                                <span class="group-name">{{group.name}} ({{group.children.length}})</span>
-                                <ul class="bk-selector-group-list-item">
-                                    <li v-for="(data, index) in group.children"
-                                        :class="['bk-selector-list-item', { disabled: data.disabled }, activeClass(data,index)]"
-                                        :key="index"
-                                        @mousedown="handlerResultSelect(data, 'select')">
-                                        <list-render :node="data" :display-key="displayKey" :tpl="tpl" :search-key="searchKey" :search-keyword="curInputValue" />
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="bk-selector-list-item" v-if="showScrollLoading">
-                                <div class="loading" v-bkloading="{ isLoading: true, size: 'mini', theme: 'black' }"></div>
-                            </li>
-                        </ul>
-                    </template>
-                    <template v-else>
-                        <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul" v-show="resultList.length">
-                            <li v-for="(data, index) in resultList"
-                                :class="['bk-selector-list-item', { disabled: data.disabled }, activeClass(data, index)]"
-                                :key="index"
-                                @click="handlerResultSelect(data, 'select')">
-                                <list-render :node="data" :display-key="displayKey" :tpl="tpl" :search-key="searchKey" :search-keyword="curInputValue" />
-                            </li>
-                            <li class="bk-selector-list-item" v-if="showScrollLoading">
-                                <div class="loading" v-bkloading="{ isLoading: true, size: 'mini', theme: 'black' }"></div>
-                            </li>
-                        </ul>
-                    </template>
-                </div>
-            </div>
-        </bk-popover>
+  <div class="bk-tag-selector" :class="extCls" @click="focusInputer($event)" ref="bkTagSelector" @mouseenter="mouseEnterHandler" @mouseleave="hover = false">
+    <div :class="['bk-tag-input', { 'active': isEdit, 'disabled': disabled }]">
+      <ul class="tag-list" :class="!localTagList.length ? 'no-item' : ''" ref="tagList" :style="{ 'margin-left': `${leftSpace}px` }">
+        <li
+          class="key-node"
+          v-for="(tag, index) in localTagList"
+          :key="tag[saveKey] !== undefined ? tag[saveKey] : index"
+          @click="selectTag($event, tag)"
+          v-bk-tooltips.light="{ boundary: 'window', content: tag[tooltipKey], disabled: !tooltipKey }">
+          <tag-render :node="tag" :display-key="displayKey" :tpl="tagTpl" />
+          <i class="bk-icon icon-close remove-key" @click.stop="handlerTagRemove(tag, index)" v-if="!disabled && hasDeleteIcon"></i>
+        </li>
+        <li ref="staffInput" id="staffInput" class="staff-input" v-show="isEdit" role="input">
+          <input
+            type="text"
+            class="input"
+            ref="input"
+            v-model="curInputValue"
+            v-if="!disabled"
+            @input="handleInput"
+            @focus="handleFocus"
+            @paste="handlePaste"
+            @blur="handleBlur(curInputValue)"
+            @keydown="handleKeydown">
+        </li>
+      </ul>
+      <p class="placeholder" v-show="!isEdit && !localTagList.length && !curInputValue.length">{{defaultPlaceholder}}</p>
+      <i class="bk-icon icon-close-circle-shape clear-icon"
+        v-if="isShowClear"
+        @click.stop="handlerClear"></i>
     </div>
+    <bk-popover
+      class="bk-select-dropdown"
+      placement="bottom-start"
+      ref="tagInputDropdown"
+      trigger="manual"
+      theme="light bk-select-dropdown">
+      <div class="bk-tag-popover-trigger"></div>
+      <div slot="content">
+        <div class="bk-selector-list" v-if="showList" :style="{ 'width': `${popoverWidth}px` }">
+          <template v-if="useGroup">
+            <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul" v-show="Object.keys(resultList).length">
+              <li v-for="(group, key) in resultList"
+                class="bk-selector-group-item"
+                :key="key">
+                <span class="group-name">{{group.name}} ({{group.children.length}})</span>
+                <ul class="bk-selector-group-list-item">
+                  <li v-for="(data, index) in group.children"
+                    :class="['bk-selector-list-item', { disabled: data.disabled }, activeClass(data,index)]"
+                    :key="index"
+                    @mousedown="handlerResultSelect(data, 'select')">
+                    <list-render :node="data" :display-key="displayKey" :tpl="tpl" :search-key="searchKey" :search-keyword="curInputValue" />
+                  </li>
+                </ul>
+              </li>
+              <li class="bk-selector-list-item" v-if="showScrollLoading">
+                <div class="loading" v-bkloading="{ isLoading: true, size: 'mini', theme: 'black' }"></div>
+              </li>
+            </ul>
+          </template>
+          <template v-else>
+            <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul" v-show="resultList.length">
+              <li v-for="(data, index) in resultList"
+                :class="['bk-selector-list-item', { disabled: data.disabled }, activeClass(data, index)]"
+                :key="index"
+                @click="handlerResultSelect(data, 'select')">
+                <list-render :node="data" :display-key="displayKey" :tpl="tpl" :search-key="searchKey" :search-keyword="curInputValue" />
+              </li>
+              <li class="bk-selector-list-item" v-if="showScrollLoading">
+                <div class="loading" v-bkloading="{ isLoading: true, size: 'mini', theme: 'black' }"></div>
+              </li>
+            </ul>
+          </template>
+        </div>
+      </div>
+    </bk-popover>
+  </div>
 </template>
 
 <script>

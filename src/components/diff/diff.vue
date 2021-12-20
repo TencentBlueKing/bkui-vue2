@@ -27,9 +27,9 @@
 -->
 
 <template>
-    <div class="bk-diff" :class="classes" ref="html">
-        <div v-highlight v-html="html" />
-    </div>
+  <div class="bk-diff" :class="classes" ref="html">
+    <div v-highlight v-html="html" />
+  </div>
 </template>
 
 <script>

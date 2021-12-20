@@ -27,22 +27,22 @@
 -->
 
 <template>
-    <a
-        :class="[
-            'bk-link',
-            `is-${theme}`,
-            disabled && 'is-disabled',
-            underline && !disabled && 'has-underline'
-        ]"
-        :href="href"
-        v-bind="$attrs"
-        @click="handleClick">
-        <i :class="['bk-link-icon is-left', icon]" v-if="icon && iconPlacement === 'left'"></i>
-        <span class="bk-link-text" v-if="$slots.default">
-            <slot></slot>
-        </span>
-        <i :class="['bk-link-icon is-right', icon]" v-if="icon && iconPlacement === 'right'"></i>
-    </a>
+  <a
+    :class="[
+      'bk-link',
+      `is-${theme}`,
+      disabled && 'is-disabled',
+      underline && !disabled && 'has-underline'
+    ]"
+    :href="href"
+    v-bind="$attrs"
+    @click="handleClick">
+    <i :class="['bk-link-icon is-left', icon]" v-if="icon && iconPlacement === 'left'"></i>
+    <span class="bk-link-text" v-if="$slots.default">
+      <slot></slot>
+    </span>
+    <i :class="['bk-link-icon is-right', icon]" v-if="icon && iconPlacement === 'right'"></i>
+  </a>
 </template>
 
 <script>

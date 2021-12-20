@@ -27,26 +27,26 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Input 输入框更多示例
-        </h2>
-        <div class="example-item">
-            <bk-input v-model="value" :clearable="true"
-                @change="handleChange"
-                @enter="handleEnter"
-                @keyup="handleKeyup"
-                @keypress="handleKeypress"
-                @keydown="handleKeydown"
-                @focus="handleFocus"
-                @blur="handleBlur"
-                @paste="handlePaste"
-                @clear="handleClear"
-                @input="handleInput">
-            </bk-input>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Input 输入框更多示例
+    </h2>
+    <div class="example-item">
+      <bk-input v-model="value" :clearable="true"
+        @change="handleChange"
+        @enter="handleEnter"
+        @keyup="handleKeyup"
+        @keypress="handleKeypress"
+        @keydown="handleKeydown"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @paste="handlePaste"
+        @clear="handleClear"
+        @input="handleInput">
+      </bk-input>
+    </div>
+  </section>
 </template>
 
 <script>

@@ -27,54 +27,54 @@
 -->
 
 <template>
-    <div ref="reference"
-        tabindex="0"
-        :class="['bk-color-picker', extCls, {
-            [`bk-color-picker-${size}`]: size,
-            'bk-color-picker-show-dropdown': showDropdown,
-            'bk-color-picker-show-value': showValue,
-            'bk-color-picker-disabled': disabled || readonly
-        }]"
-        @keydown="handleTriggerKeydown"
-        @click="toggleDropdown"
-        v-clickoutside="closeDropdown">
-        <div class="bk-color-picker-color">
-            <!-- 如果传入的色值为空字符串或者没有传值默认白色背景 + 中间一个叉 -->
-            <span :class="['bk-color-picker-color-square', !colorStr && 'bk-color-picker-empty']"
-                :style="{ background: colorStr || '#FFF' }"></span>
-        </div>
-        <div class="bk-color-picker-text" v-if="showValue">
-            <span>{{ colorStr }}</span>
-        </div>
-        <div class="bk-color-picker-icon">
-            <span class="bk-icon icon-angle-down"></span>
-        </div>
-        <transition name="transition-drop">
-            <DatePickerDropdown v-show="showDropdown"
-                v-transfer-dom
-                :transfer="transfer"
-                :data-transfer="transfer"
-                style="padding: 0;cursor: default;"
-                ref="drop">
-                <div class="bk-color-picker-dropdown" @click.stop @mousedown.stop @keydown="handleDropdownKeydown">
-                    <!-- 饱和度面板 -->
-                    <SaturationPanel ref="saturationPanel" :color-obj="colorObj" @change="handleColorChange"></SaturationPanel>
-                    <!-- 色彩条 -->
-                    <HueSlider :color-obj="colorObj" @change="handleColorChange"></HueSlider>
-                    <!-- 色彩值 -->
-                    <ColorInput :color-obj="colorObj" @tab="handleTabInput" @change="handleColorChange"></ColorInput>
-                    <!-- 预设值 -->
-                    <div class="bk-color-picker-recommend-container" v-if="isRenderRecommend">
-                        <RecommendColors :color-obj="colorObj"
-                            :recommend="recommend"
-                            @tab="handleTabRecommend"
-                            @change="handleColorChange"
-                        ></RecommendColors>
-                    </div>
-                </div>
-            </DatePickerDropdown>
-        </transition>
+  <div ref="reference"
+    tabindex="0"
+    :class="['bk-color-picker', extCls, {
+      [`bk-color-picker-${size}`]: size,
+      'bk-color-picker-show-dropdown': showDropdown,
+      'bk-color-picker-show-value': showValue,
+      'bk-color-picker-disabled': disabled || readonly
+    }]"
+    @keydown="handleTriggerKeydown"
+    @click="toggleDropdown"
+    v-clickoutside="closeDropdown">
+    <div class="bk-color-picker-color">
+      <!-- 如果传入的色值为空字符串或者没有传值默认白色背景 + 中间一个叉 -->
+      <span :class="['bk-color-picker-color-square', !colorStr && 'bk-color-picker-empty']"
+        :style="{ background: colorStr || '#FFF' }"></span>
     </div>
+    <div class="bk-color-picker-text" v-if="showValue">
+      <span>{{ colorStr }}</span>
+    </div>
+    <div class="bk-color-picker-icon">
+      <span class="bk-icon icon-angle-down"></span>
+    </div>
+    <transition name="transition-drop">
+      <DatePickerDropdown v-show="showDropdown"
+        v-transfer-dom
+        :transfer="transfer"
+        :data-transfer="transfer"
+        style="padding: 0;cursor: default;"
+        ref="drop">
+        <div class="bk-color-picker-dropdown" @click.stop @mousedown.stop @keydown="handleDropdownKeydown">
+          <!-- 饱和度面板 -->
+          <SaturationPanel ref="saturationPanel" :color-obj="colorObj" @change="handleColorChange"></SaturationPanel>
+          <!-- 色彩条 -->
+          <HueSlider :color-obj="colorObj" @change="handleColorChange"></HueSlider>
+          <!-- 色彩值 -->
+          <ColorInput :color-obj="colorObj" @tab="handleTabInput" @change="handleColorChange"></ColorInput>
+          <!-- 预设值 -->
+          <div class="bk-color-picker-recommend-container" v-if="isRenderRecommend">
+            <RecommendColors :color-obj="colorObj"
+              :recommend="recommend"
+              @tab="handleTabRecommend"
+              @change="handleColorChange"
+            ></RecommendColors>
+          </div>
+        </div>
+      </DatePickerDropdown>
+    </transition>
+  </div>
 </template>
 
 <script>

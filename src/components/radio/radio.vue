@@ -27,22 +27,22 @@
 -->
 
 <template>
-    <label class="bk-form-radio" :class="extCls"
-        :tabindex="disabled ? false : 0"
-        @keydown.enter.prevent="handlerChange">
-        <input
-            type="radio"
-            :name="groupName"
-            :checked="selected"
-            :key="current"
-            :disabled="disabled"
-            :class="{
-                'is-checked': checked || selected
-            }"
-            tabindex="-1"
-            @change="handlerChange" />
-        <div class="bk-radio-text"><slot>{{label}}</slot></div>
-    </label>
+  <label class="bk-form-radio" :class="extCls"
+    :tabindex="disabled ? false : 0"
+    @keydown.enter.prevent="handlerChange">
+    <input
+      type="radio"
+      :name="groupName"
+      :checked="selected"
+      :key="current"
+      :disabled="disabled"
+      :class="{
+        'is-checked': checked || selected
+      }"
+      tabindex="-1"
+      @change="handlerChange" />
+    <div class="bk-radio-text"><slot>{{label}}</slot></div>
+  </label>
 </template>
 
 <script>

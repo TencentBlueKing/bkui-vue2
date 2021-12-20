@@ -27,58 +27,58 @@
 -->
 
 <template>
-    <div class="bk-table-filter-panel"
-        :class="{ multiple }">
-        <div class="panel-search" v-if="searchable">
-            <i class="panel-search-icon bk-icon icon-search"></i>
-            <input type="text"
-                class="panel-search-input"
-                v-model.trim="keyword"
-                :placeholder="t('bk.table.filter.placeholder')">
-        </div>
-        <template v-if="multiple">
-            <bk-checkbox-group class="panel-checkbox-group"
-                v-show="!searchEmpty"
-                v-model="selected">
-                <bk-checkbox class="panel-checkbox"
-                    v-for="filter in filters"
-                    v-show="isMatched(filter)"
-                    :key="filter.value"
-                    :value="filter.value"
-                    :disabled="!!filter.disabled">
-                    {{filter.text}}
-                </bk-checkbox>
-            </bk-checkbox-group>
-            <div class="panel-options" v-show="!searchEmpty">
-                <bk-link class="panel-options-link" theme="primary" @click="handleConfirm">{{t('bk.table.confirm')}}</bk-link>
-                <bk-link class="panel-options-link" theme="primary" @click="handleReset">{{t('bk.table.reset')}}</bk-link>
-            </div>
-        </template>
-        <template v-else>
-            <ul class="panel-list" v-show="!searchEmpty">
-                <li class="panel-item"
-                    :class="{
-                        'is-selected': selected.length === 0,
-                        'is-hidden': !!keyword.length
-                    }"
-                    @click="handleReset">
-                    {{t('bk.table.all')}}
-                </li>
-                <li class="panel-item"
-                    v-for="filter in filters"
-                    :key="filter.value"
-                    :class="{
-                        'is-selected': selected.includes(filter.value),
-                        'is-disabled': !!filter.disabled,
-                        'is-hidden': !isMatched(filter)
-                    }"
-                    @click="handleSelect(filter)">
-                    {{filter.text}}
-                </li>
-            </ul>
-        </template>
-        <p class="panel-empty" v-if="searchEmpty">{{t('bk.table.filter.empty')}}</p>
+  <div class="bk-table-filter-panel"
+    :class="{ multiple }">
+    <div class="panel-search" v-if="searchable">
+      <i class="panel-search-icon bk-icon icon-search"></i>
+      <input type="text"
+        class="panel-search-input"
+        v-model.trim="keyword"
+        :placeholder="t('bk.table.filter.placeholder')">
     </div>
+    <template v-if="multiple">
+      <bk-checkbox-group class="panel-checkbox-group"
+        v-show="!searchEmpty"
+        v-model="selected">
+        <bk-checkbox class="panel-checkbox"
+          v-for="filter in filters"
+          v-show="isMatched(filter)"
+          :key="filter.value"
+          :value="filter.value"
+          :disabled="!!filter.disabled">
+          {{filter.text}}
+        </bk-checkbox>
+      </bk-checkbox-group>
+      <div class="panel-options" v-show="!searchEmpty">
+        <bk-link class="panel-options-link" theme="primary" @click="handleConfirm">{{t('bk.table.confirm')}}</bk-link>
+        <bk-link class="panel-options-link" theme="primary" @click="handleReset">{{t('bk.table.reset')}}</bk-link>
+      </div>
+    </template>
+    <template v-else>
+      <ul class="panel-list" v-show="!searchEmpty">
+        <li class="panel-item"
+          :class="{
+            'is-selected': selected.length === 0,
+            'is-hidden': !!keyword.length
+          }"
+          @click="handleReset">
+          {{t('bk.table.all')}}
+        </li>
+        <li class="panel-item"
+          v-for="filter in filters"
+          :key="filter.value"
+          :class="{
+            'is-selected': selected.includes(filter.value),
+            'is-disabled': !!filter.disabled,
+            'is-hidden': !isMatched(filter)
+          }"
+          @click="handleSelect(filter)">
+          {{filter.text}}
+        </li>
+      </ul>
+    </template>
+    <p class="panel-empty" v-if="searchEmpty">{{t('bk.table.filter.empty')}}</p>
+  </div>
 </template>
 <script>
 import bkCheckboxGroup from '@/components/checkbox-group'

@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <section>
-        <bk-select searchable :multiple="multiple" v-model="value" :remote-method="remote" :display-tag="true" :tag-fixed-height="false">
-            <bk-option v-for="option in options"
-                :key="option.id"
-                v-bind="option">
-            </bk-option>
-        </bk-select>
-        <div style="border: 1px solid #333; margin-top: 5px;"></div>
-        <bk-button @click="multiple = !multiple">111</bk-button>
-    </section>
+  <section>
+    <bk-select searchable :multiple="multiple" v-model="value" :remote-method="remote" :display-tag="true" :tag-fixed-height="false">
+      <bk-option v-for="option in options"
+        :key="option.id"
+        v-bind="option">
+      </bk-option>
+    </bk-select>
+    <div style="border: 1px solid #333; margin-top: 5px;"></div>
+    <bk-button @click="multiple = !multiple">111</bk-button>
+  </section>
 </template>
 
 <script>

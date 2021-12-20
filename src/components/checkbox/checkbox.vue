@@ -27,17 +27,17 @@
 -->
 
 <template>
-    <label
-        class="bk-form-checkbox"
-        :class="[{ 'is-disabled': disabled, 'is-indeterminate': indeterminate, 'is-checked': selected }, extCls]"
-        @click="handleClick"
-        @keydown.enter.prevent="handleClick">
-        <span class="bk-checkbox" :tabindex="disabled ? false : 0"></span>
-        <input type="hidden" :name="name" :value="label === undefined ? localValue : label">
-        <span class="bk-checkbox-text" v-if="$slots.default">
-            <slot></slot>
-        </span>
-    </label>
+  <label
+    class="bk-form-checkbox"
+    :class="[{ 'is-disabled': disabled, 'is-indeterminate': indeterminate, 'is-checked': selected }, extCls]"
+    @click="handleClick"
+    @keydown.enter.prevent="handleClick">
+    <span class="bk-checkbox" :tabindex="disabled ? false : 0"></span>
+    <input type="hidden" :name="name" :value="label === undefined ? localValue : label">
+    <span class="bk-checkbox-text" v-if="$slots.default">
+      <slot></slot>
+    </span>
+  </label>
 </template>
 
 <script>

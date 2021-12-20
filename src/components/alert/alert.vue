@@ -27,22 +27,22 @@
 -->
 
 <template>
-    <transition name="bk-alert-leave" @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
-        <div v-if="visible" class="bk-alert" :class="typeClass">
-            <div class="bk-alert-wraper">
-                <i v-if="showIcon" class="bk-icon icon-info" />
-                <div class="bk-alert-content">
-                    <div class="bk-alert-title">
-                        <slot name="title">
-                            {{ title }}
-                        </slot>
-                    </div>
-                    <div class="bk-alert-description"></div>
-                </div>
-                <span v-if="closable" class="bk-alert-close" :class="closeClasses" @click="handleClose">{{ closeText }}</span>
-            </div>
+  <transition name="bk-alert-leave" @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
+    <div v-if="visible" class="bk-alert" :class="typeClass">
+      <div class="bk-alert-wraper">
+        <i v-if="showIcon" class="bk-icon icon-info" />
+        <div class="bk-alert-content">
+          <div class="bk-alert-title">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </div>
+          <div class="bk-alert-description"></div>
         </div>
-    </transition>
+        <span v-if="closable" class="bk-alert-close" :class="closeClasses" @click="handleClose">{{ closeText }}</span>
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
 export default {

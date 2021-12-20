@@ -27,21 +27,21 @@
 -->
 
 <template>
-    <bk-table class="my-table" ref="filterTable" :data="tableData" style="width: 100%"
-        auto-scroll-to-top
-        :max-height="400"
-        :pagination="pagination"
-        @page-change="handlePageChange"
-        @page-limit-change="handlePageLimitChange">
-        <bk-table-column type="expand" width="30" :before-expand-change="beforeExpand"></bk-table-column>
-        <bk-table-column prop="date" label="日期" sortable width="180" column-key="date"
-            :filters="dateFilters" :filter-method="filterHandler">
-        </bk-table-column>
-        <bk-table-column prop="name" label="姓名" width="180">
-        </bk-table-column>
-        <bk-table-column prop="address" label="地址" :formatter="formatter">
-        </bk-table-column>
-    </bk-table>
+  <bk-table class="my-table" ref="filterTable" :data="tableData" style="width: 100%"
+    auto-scroll-to-top
+    :max-height="400"
+    :pagination="pagination"
+    @page-change="handlePageChange"
+    @page-limit-change="handlePageLimitChange">
+    <bk-table-column type="expand" width="30" :before-expand-change="beforeExpand"></bk-table-column>
+    <bk-table-column prop="date" label="日期" sortable width="180" column-key="date"
+      :filters="dateFilters" :filter-method="filterHandler">
+    </bk-table-column>
+    <bk-table-column prop="name" label="姓名" width="180">
+    </bk-table-column>
+    <bk-table-column prop="address" label="地址" :formatter="formatter">
+    </bk-table-column>
+  </bk-table>
 </template>
 <script>
 import { bkTable, bkTableColumn } from '@'

@@ -27,27 +27,27 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Popconfirm 弹出确认框更多示例
-        </h2>
-        <div class="example-item">
-            <p>
-                <span class="bk-text-minor">基本</span>
-            </p>
-            <bk-popconfirm placement="right" :ext-cls="'asadsadsads'" :ext-popover-cls="'ext-popover-cls'">
-                <div slot="content">
-                    <div>
-                        <i class="bk-icon icon-info-circle-shape pr5" style="color: red;"></i>
-                        显示多行信息
-                    </div>
-                    <div>可以自定义自己想要的样式和内容</div>
-                </div>
-                <i class="bk-icon icon-info-circle-shape"></i>
-            </bk-popconfirm>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Popconfirm 弹出确认框更多示例
+    </h2>
+    <div class="example-item">
+      <p>
+        <span class="bk-text-minor">基本</span>
+      </p>
+      <bk-popconfirm placement="right" :ext-cls="'asadsadsads'" :ext-popover-cls="'ext-popover-cls'">
+        <div slot="content">
+          <div>
+            <i class="bk-icon icon-info-circle-shape pr5" style="color: red;"></i>
+            显示多行信息
+          </div>
+          <div>可以自定义自己想要的样式和内容</div>
         </div>
-    </section>
+        <i class="bk-icon icon-info-circle-shape"></i>
+      </bk-popconfirm>
+    </div>
+  </section>
 </template>
 
 <script>

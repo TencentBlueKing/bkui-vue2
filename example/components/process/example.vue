@@ -27,35 +27,35 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Process 更多示例
-        </h2>
-        <div class="example-item">
-            <bk-button type="primary" v-if="process <= list.length" @click="next1" style="margin-top: 20px; margin-bottom: 20px;">{{process === list.length ? '完成' : '下一步' }}</bk-button>
-            <bk-button type="primary" @click="reset1" style="margin-top: 20px; margin-bottom: 20px;" v-else>重置</bk-button>
-            <bk-process
-                :list="list"
-                :cur-process.sync="process"
-                :display-key="'content'"
-                @process-changed="change"
-                :controllable="true">
-            </bk-process>
-        </div>
-        <div class="example-item">
-            <bk-button type="primary" v-if="processCopy <= listCopy.length" @click="next" style="margin-top: 20px; margin-bottom: 20px;">{{processCopy === listCopy.length ? '完成' : '下一步' }}</bk-button>
-            <bk-button type="primary" @click="reset" style="margin-top: 20px; margin-bottom: 20px;" v-else>重置</bk-button>
-            <bk-process
-                :list="listCopy"
-                :cur-process.sync="processCopy"
-                :show-steps="true"
-                :display-key="'content'"
-                @process-changed="changeCopy"
-                :controllable="true"
-            ></bk-process>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Process 更多示例
+    </h2>
+    <div class="example-item">
+      <bk-button type="primary" v-if="process <= list.length" @click="next1" style="margin-top: 20px; margin-bottom: 20px;">{{process === list.length ? '完成' : '下一步' }}</bk-button>
+      <bk-button type="primary" @click="reset1" style="margin-top: 20px; margin-bottom: 20px;" v-else>重置</bk-button>
+      <bk-process
+        :list="list"
+        :cur-process.sync="process"
+        :display-key="'content'"
+        @process-changed="change"
+        :controllable="true">
+      </bk-process>
+    </div>
+    <div class="example-item">
+      <bk-button type="primary" v-if="processCopy <= listCopy.length" @click="next" style="margin-top: 20px; margin-bottom: 20px;">{{processCopy === listCopy.length ? '完成' : '下一步' }}</bk-button>
+      <bk-button type="primary" @click="reset" style="margin-top: 20px; margin-bottom: 20px;" v-else>重置</bk-button>
+      <bk-process
+        :list="listCopy"
+        :cur-process.sync="processCopy"
+        :show-steps="true"
+        :display-key="'content'"
+        @process-changed="changeCopy"
+        :controllable="true"
+      ></bk-process>
+    </div>
+  </section>
 </template>
 <script>
 import { bkProcess, bkButton } from '@'

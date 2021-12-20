@@ -27,7 +27,7 @@
 -->
 
 <template>
-    <div class="bk-date-picker-dropdown" :class="[className, extPopoverCls]" :style="styles"><slot></slot></div>
+  <div class="bk-date-picker-dropdown" :class="[className, extPopoverCls]" :style="styles"><slot></slot></div>
 </template>
 
 <script>

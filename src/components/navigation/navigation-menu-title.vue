@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <div class="bk-navigation-title" v-bind="$attrs" :style="{ borderBottomWidth: navigationType === 'left-right' ? '0' : '1px' }">
-        <slot>
-            <span class="title-icon">
-                <slot name="side-icon">
-                    <i class="bk-icon icon-rtx"></i>
-                </slot>
-            </span>
-            <span class="title-desc">{{sideTitle}}</span>
+  <div class="bk-navigation-title" v-bind="$attrs" :style="{ borderBottomWidth: navigationType === 'left-right' ? '0' : '1px' }">
+    <slot>
+      <span class="title-icon">
+        <slot name="side-icon">
+          <i class="bk-icon icon-rtx"></i>
         </slot>
-    </div>
+      </span>
+      <span class="title-desc">{{sideTitle}}</span>
+    </slot>
+  </div>
 </template>
 <script>
 export default {

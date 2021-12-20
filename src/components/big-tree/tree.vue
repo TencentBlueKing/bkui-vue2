@@ -27,35 +27,35 @@
 -->
 
 <template>
-    <div
-        :style="{ height: treeHeight }"
-        :class="['bk-big-tree', extCls, { 'with-virtual-scroll': !!height }, { 'bk-big-tree--small': size === 'small' }]">
-        <!-- 虚拟滚动 -->
-        <bk-virtual-scroll
-            :item-height="nodeHeight"
-            ref="virtualScroll"
-            v-if="height">
-            <tree-item slot-scope="{ data: node }"
-                :node="node" :id="`bk-big-tree-${id}-node-${node.id}`">
-                <slot :node="node" :data="node.data"></slot>
-            </tree-item>
-        </bk-virtual-scroll>
-        <!-- 非虚拟滚动 -->
-        <template v-for="node in nodes" v-else>
-            <tree-item
-                :node="node"
-                :ref="node.id"
-                :key="node.id">
-                <slot :node="node" :data="node.data"></slot>
-            </tree-item>
-        </template>
+  <div
+    :style="{ height: treeHeight }"
+    :class="['bk-big-tree', extCls, { 'with-virtual-scroll': !!height }, { 'bk-big-tree--small': size === 'small' }]">
+    <!-- 虚拟滚动 -->
+    <bk-virtual-scroll
+      :item-height="nodeHeight"
+      ref="virtualScroll"
+      v-if="height">
+      <tree-item slot-scope="{ data: node }"
+        :node="node" :id="`bk-big-tree-${id}-node-${node.id}`">
+        <slot :node="node" :data="node.data"></slot>
+      </tree-item>
+    </bk-virtual-scroll>
+    <!-- 非虚拟滚动 -->
+    <template v-for="node in nodes" v-else>
+      <tree-item
+        :node="node"
+        :ref="node.id"
+        :key="node.id">
+        <slot :node="node" :data="node.data"></slot>
+      </tree-item>
+    </template>
 
-        <div class="bk-big-tree-empty" v-if="($slots.empty || useDefaultEmpty) && isSearchEmpty">
-            <slot name="empty">
-                {{t('bk.bigTree.emptyText')}}
-            </slot>
-        </div>
+    <div class="bk-big-tree-empty" v-if="($slots.empty || useDefaultEmpty) && isSearchEmpty">
+      <slot name="empty">
+        {{t('bk.bigTree.emptyText')}}
+      </slot>
     </div>
+  </div>
 </template>
 
 <script>

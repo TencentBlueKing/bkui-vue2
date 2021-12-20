@@ -27,11 +27,11 @@
 -->
 
 <template>
-    <div class="bk-picker-confirm" @keydown.tab.capture="handleTab">
-        <a href="javascript: void(0);" class="bk-picker-confirm-time" :disabled="timeDisabled" v-if="showTime" @click="handleToggleTime">{{labels.time}}</a>
-        <a href="javascript: void(0);" v-if="clearable" @click="handleClear" @keydown="handleClear">{{labels.clear}}</a>
-        <a href="javascript: void(0);" class="confirm" @click="handleSuccess" @keydown.enter="handleSuccess">{{labels.ok}}</a>
-    </div>
+  <div class="bk-picker-confirm" @keydown.tab.capture="handleTab">
+    <a href="javascript: void(0);" class="bk-picker-confirm-time" :disabled="timeDisabled" v-if="showTime" @click="handleToggleTime">{{labels.time}}</a>
+    <a href="javascript: void(0);" v-if="clearable" @click="handleClear" @keydown="handleClear">{{labels.clear}}</a>
+    <a href="javascript: void(0);" class="confirm" @click="handleSuccess" @keydown.enter="handleSuccess">{{labels.ok}}</a>
+  </div>
 </template>
 <script>
 import emitter from '@/mixins/emitter'

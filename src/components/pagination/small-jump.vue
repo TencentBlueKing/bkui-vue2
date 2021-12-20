@@ -27,42 +27,42 @@
 -->
 
 <template>
-    <div class="bk-page-small-jump">
-        <div class="btn-pre" @click="handleStep(-1)" :class="{ disable: current === 1 }">
-            <i class="bk-icon icon-left-shape" />
-        </div>
-        <bk-popover ref="smallJumpPopover"
-            trigger="manual"
-            placement="bottom-start"
-            theme="light bk-select-dropdown"
-            animation="slide-toggle"
-            :offset="-1"
-            :distance="12">
-            <div :class="['jump-input-wrapper', { 'focus': focus }]" @click.prevent="showPopover">
-                <span class="jump-input"
-                    ref="jumpInput"
-                    contenteditable
-                    v-text="current"
-                    @input="handleInputChange"
-                    @blur="handleBlur"
-                    @focus="() => focus = true"
-                    @keydown="handleKeyDown" />
-                <span :class="['page-total', { 'focus': focus }]">/ {{ total }}</span>
-            </div>
-            <div slot="content">
-                <ul class="small-jump-options">
-                    <li :class="['small-jump-option', { 'is-selected': current === index }]"
-                        v-for="index in total" :key="index"
-                        @mousedown="handleChangePage(index)">
-                        {{index}}
-                    </li>
-                </ul>
-            </div>
-        </bk-popover>
-        <div class="btn-next" @click="handleStep(1)" :class="{ disable: current === total }">
-            <i class="bk-icon icon-right-shape" />
-        </div>
+  <div class="bk-page-small-jump">
+    <div class="btn-pre" @click="handleStep(-1)" :class="{ disable: current === 1 }">
+      <i class="bk-icon icon-left-shape" />
     </div>
+    <bk-popover ref="smallJumpPopover"
+      trigger="manual"
+      placement="bottom-start"
+      theme="light bk-select-dropdown"
+      animation="slide-toggle"
+      :offset="-1"
+      :distance="12">
+      <div :class="['jump-input-wrapper', { 'focus': focus }]" @click.prevent="showPopover">
+        <span class="jump-input"
+          ref="jumpInput"
+          contenteditable
+          v-text="current"
+          @input="handleInputChange"
+          @blur="handleBlur"
+          @focus="() => focus = true"
+          @keydown="handleKeyDown" />
+        <span :class="['page-total', { 'focus': focus }]">/ {{ total }}</span>
+      </div>
+      <div slot="content">
+        <ul class="small-jump-options">
+          <li :class="['small-jump-option', { 'is-selected': current === index }]"
+            v-for="index in total" :key="index"
+            @mousedown="handleChangePage(index)">
+            {{index}}
+          </li>
+        </ul>
+      </div>
+    </bk-popover>
+    <div class="btn-next" @click="handleStep(1)" :class="{ disable: current === total }">
+      <i class="bk-icon icon-right-shape" />
+    </div>
+  </div>
 </template>
 <script>
 import bkPopover from '@/components/popover'

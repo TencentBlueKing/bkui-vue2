@@ -27,53 +27,53 @@
 -->
 
 <template>
-    <bk-dialog
-        :value="dialog.show"
-        :width="dialog.width"
-        :show-footer="false"
-        draggable
-        ext-cls="version-detail-dialog"
-        @value-change="handleValueChange">
-        <template>
-            <div class="bk-version" v-bkloading="{ isLoading: loading }">
-                <div class="bk-version-left"
-                    data-tag="resizeTarget"
-                    :style="{ 'flex-basis': left.width + 'px', width: left.width + 'px', height: dialog.height + 'px' }">
-                    <div class="left-fill fill-top"></div>
-                    <ul class="left-list" ref="leftList">
-                        <li class="left-list-item"
-                            :class="{ 'item-active': index === active, 'border-after': index !== active }"
-                            v-for="(item,index) in versionList"
-                            :key="index"
-                            @click="index !== active && handleItemClick(index)">
-                            <slot name="item" :version="{ item, index }">
-                                <span class="item-title" v-bk-overflow-tips="{ content: item[versionTitleName], placement: 'right' }">{{item[versionTitleName]}}</span>
-                                <span class="item-date">{{item[versionSubTitleName]}}</span>
-                                <span v-if="item[versionTitleName] === currentVersion" class="item-current"> {{ '当前版本' }} </span>
-                            </slot>
-                        </li>
-                        <li class="left-list-loading border-after"
-                            v-if="!finished"
-                            v-bkloading="{ isLoading: left.loading, size: 'mini', theme: 'default' }">
-                        </li>
-                        <li class="left-list-fill border-after"></li>
-                    </ul>
-                    <div class="left-fill fill-bottom"></div>
-                    <div class="resize-line"
-                        @mousedown="handleMouseDown"
-                        @mousemove="handleMouseMove"
-                        @mouseout="handleMouseOut">
-                        <div class="drag-content"></div>
-                    </div>
-                </div>
-                <div class="bk-version-right" :style="{ height: dialog.height + 'px' }">
-                    <slot :detail="versionDetail">
-                        {{versionDetail}}
-                    </slot>
-                </div>
-            </div>
-        </template>
-    </bk-dialog>
+  <bk-dialog
+    :value="dialog.show"
+    :width="dialog.width"
+    :show-footer="false"
+    draggable
+    ext-cls="version-detail-dialog"
+    @value-change="handleValueChange">
+    <template>
+      <div class="bk-version" v-bkloading="{ isLoading: loading }">
+        <div class="bk-version-left"
+          data-tag="resizeTarget"
+          :style="{ 'flex-basis': left.width + 'px', width: left.width + 'px', height: dialog.height + 'px' }">
+          <div class="left-fill fill-top"></div>
+          <ul class="left-list" ref="leftList">
+            <li class="left-list-item"
+              :class="{ 'item-active': index === active, 'border-after': index !== active }"
+              v-for="(item,index) in versionList"
+              :key="index"
+              @click="index !== active && handleItemClick(index)">
+              <slot name="item" :version="{ item, index }">
+                <span class="item-title" v-bk-overflow-tips="{ content: item[versionTitleName], placement: 'right' }">{{item[versionTitleName]}}</span>
+                <span class="item-date">{{item[versionSubTitleName]}}</span>
+                <span v-if="item[versionTitleName] === currentVersion" class="item-current"> {{ '当前版本' }} </span>
+              </slot>
+            </li>
+            <li class="left-list-loading border-after"
+              v-if="!finished"
+              v-bkloading="{ isLoading: left.loading, size: 'mini', theme: 'default' }">
+            </li>
+            <li class="left-list-fill border-after"></li>
+          </ul>
+          <div class="left-fill fill-bottom"></div>
+          <div class="resize-line"
+            @mousedown="handleMouseDown"
+            @mousemove="handleMouseMove"
+            @mouseout="handleMouseOut">
+            <div class="drag-content"></div>
+          </div>
+        </div>
+        <div class="bk-version-right" :style="{ height: dialog.height + 'px' }">
+          <slot :detail="versionDetail">
+            {{versionDetail}}
+          </slot>
+        </div>
+      </div>
+    </template>
+  </bk-dialog>
 </template>
 <script>
 import bkOverflowTips from '../../directives/overflow-tips'

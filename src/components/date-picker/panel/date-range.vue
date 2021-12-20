@@ -27,113 +27,113 @@
 -->
 
 <template>
-    <div class="bk-picker-panel-body-wrapper bk-date-picker-with-range" :class="[shortcuts.length || $slots.shortcuts ? 'bk-picker-panel-with-sidebar' : '']" @mousedown.prevent>
-        <div class="bk-picker-panel-body" :class="showTime ? 'bk-picker-panel-body-time' : 'bk-picker-panel-body-date'">
-            <!-- left panel -->
-            <div class="bk-picker-panel-content bk-picker-panel-content-left" v-show="!isTime" style="width: 261px;">
-                <div class="bk-date-picker-header" v-show="currentView !== 'time'">
-                    <span :class="iconBtnCls('prev', '-double')" @click="prevYear('left')"><i class="bk-icon icon-angle-double-left"></i></span>
-                    <span :class="iconBtnCls('prev')" v-if="leftPickerTable === 'date-table'" @click="prevMonth('left')" v-show="currentView === 'date'">
-                        <i class="bk-icon icon-angle-left"></i>
-                    </span>
-                    <date-panel-label :date-panel-label="leftDatePanelLabel" :current-view="leftDatePanelView"></date-panel-label>
-                    <span :class="iconBtnCls('next', '-double')" v-if="splitPanels || leftPickerTable !== 'date-table'" @click="nextYear('left')">
-                        <i class="bk-icon icon-angle-double-right"></i>
-                    </span>
-                    <span :class="iconBtnCls('next')" v-if="splitPanels && leftPickerTable === 'date-table'" @click="nextMonth('left')" v-show="currentView === 'date'">
-                        <i class="bk-icon icon-angle-right"></i>
-                    </span>
-                </div>
-                <!-- eslint-disable-next-line vue/require-component-is -->
-                <component
-                    :is="leftPickerTable"
-                    ref="leftYearTable"
-                    v-if="currentView !== 'time'"
-                    selection-mode="range"
-                    :table-date="leftPanelDate"
-                    :disabled-date="disabledDate"
-                    :range-state="rangeState"
-                    :value="preSelecting.left ? [dates[0]] : dates"
-                    :focused-date="focusedDate"
-                    @change-range="handleChangeRange"
-                    @pick="panelPickerHandlers.left"
-                    @pick-click="handlePickClick"
-                ></component>
-            </div>
-
-            <!-- right panel -->
-            <div class="bk-picker-panel-content bk-picker-panel-content-right" v-show="!isTime" style="width: 261px;">
-                <div class="bk-date-picker-header" v-show="currentView !== 'time'">
-                    <span :class="iconBtnCls('prev', '-double')" v-if="splitPanels || rightPickerTable !== 'date-table'" @click="prevYear('right')">
-                        <i class="bk-icon icon-angle-double-left"></i>
-                    </span>
-                    <span :class="iconBtnCls('prev')" v-if="splitPanels && rightPickerTable === 'date-table'" @click="prevMonth('right')" v-show="currentView === 'date'">
-                        <i class="bk-icon icon-angle-left"></i>
-                    </span>
-                    <date-panel-label :date-panel-label="rightDatePanelLabel" :current-view="rightDatePanelView"></date-panel-label>
-
-                    <template v-if="upToNow">
-                        <span href="javascript: void(0);" v-if="(rangeState.selecting || currentView === 'time') && upToNowEnable" class="up-to-now"
-                            @click="handleRangePick(new Date(), 'upToNow')">
-                            {{t('bk.datePicker.toNow')}}
-                        </span>
-                        <span href="javascript: void(0);" v-else class="up-to-now disabled">
-                            {{t('bk.datePicker.toNow')}}
-                        </span>
-                    </template>
-                    <!-- <span v-if="upToNow">{{t('bk.datePicker.toNow')}}</span> -->
-                    <span :class="iconBtnCls('next', '-double')" @click="nextYear('right')"><i class="bk-icon icon-angle-double-right"></i></span>
-                    <span :class="iconBtnCls('next')" v-if="rightPickerTable === 'date-table'" @click="nextMonth('right')" v-show="currentView === 'date'">
-                        <i class="bk-icon icon-angle-right"></i>
-                    </span>
-                </div>
-                <!-- eslint-disable-next-line vue/require-component-is -->
-                <component
-                    :is="rightPickerTable"
-                    ref="rightYearTable"
-                    v-if="currentView !== 'time'"
-                    selection-mode="range"
-                    :table-date="rightPanelDate"
-                    :range-state="rangeState"
-                    :disabled-date="disabledDate"
-                    :value="preSelecting.right ? [dates[dates.length - 1]] : dates"
-                    :focused-date="focusedDate"
-                    @change-range="handleChangeRange"
-                    @pick="panelPickerHandlers.right"
-                    @pick-click="handlePickClick">
-                </component>
-            </div>
-
-            <div class="bk-picker-panel-content" v-show="isTime">
-                <time-picker
-                    ref="timePicker"
-                    v-if="currentView === 'time'"
-                    :value="dates"
-                    :format="format"
-                    :time-disabled="timeDisabled"
-                    v-bind="timePickerOptions"
-                    @pick="handleRangePick"
-                    @pick-click="handlePickClick"
-                    @pick-clear="handlePickClear"
-                    @pick-success="handlePickSuccess"
-                    @pick-toggle-time="handleToggleTime"
-                ></time-picker>
-            </div>
-            <Confirm
-                v-if="confirm"
-                :clearable="clearable"
-                :show-time="showTime"
-                :is-time="isTime"
-                :time-disabled="timeDisabled"
-                @pick-toggle-time="handleToggleTime"
-                @pick-clear="handlePickClear"
-                @pick-success="handlePickSuccess"></Confirm>
+  <div class="bk-picker-panel-body-wrapper bk-date-picker-with-range" :class="[shortcuts.length || $slots.shortcuts ? 'bk-picker-panel-with-sidebar' : '']" @mousedown.prevent>
+    <div class="bk-picker-panel-body" :class="showTime ? 'bk-picker-panel-body-time' : 'bk-picker-panel-body-date'">
+      <!-- left panel -->
+      <div class="bk-picker-panel-content bk-picker-panel-content-left" v-show="!isTime" style="width: 261px;">
+        <div class="bk-date-picker-header" v-show="currentView !== 'time'">
+          <span :class="iconBtnCls('prev', '-double')" @click="prevYear('left')"><i class="bk-icon icon-angle-double-left"></i></span>
+          <span :class="iconBtnCls('prev')" v-if="leftPickerTable === 'date-table'" @click="prevMonth('left')" v-show="currentView === 'date'">
+            <i class="bk-icon icon-angle-left"></i>
+          </span>
+          <date-panel-label :date-panel-label="leftDatePanelLabel" :current-view="leftDatePanelView"></date-panel-label>
+          <span :class="iconBtnCls('next', '-double')" v-if="splitPanels || leftPickerTable !== 'date-table'" @click="nextYear('left')">
+            <i class="bk-icon icon-angle-double-right"></i>
+          </span>
+          <span :class="iconBtnCls('next')" v-if="splitPanels && leftPickerTable === 'date-table'" @click="nextMonth('left')" v-show="currentView === 'date'">
+            <i class="bk-icon icon-angle-right"></i>
+          </span>
         </div>
-        <div class="bk-picker-panel-sidebar" v-if="shortcuts.length || $slots.shortcuts">
-            <slot v-if="$slots.shortcuts" name="shortcuts"></slot>
-            <div v-else class="bk-picker-panel-shortcut" v-for="(shortcut, index) in shortcuts" :key="index" @click="handleShortcutClick(shortcut)">{{shortcut.text}}</div>
+        <!-- eslint-disable-next-line vue/require-component-is -->
+        <component
+          :is="leftPickerTable"
+          ref="leftYearTable"
+          v-if="currentView !== 'time'"
+          selection-mode="range"
+          :table-date="leftPanelDate"
+          :disabled-date="disabledDate"
+          :range-state="rangeState"
+          :value="preSelecting.left ? [dates[0]] : dates"
+          :focused-date="focusedDate"
+          @change-range="handleChangeRange"
+          @pick="panelPickerHandlers.left"
+          @pick-click="handlePickClick"
+        ></component>
+      </div>
+
+      <!-- right panel -->
+      <div class="bk-picker-panel-content bk-picker-panel-content-right" v-show="!isTime" style="width: 261px;">
+        <div class="bk-date-picker-header" v-show="currentView !== 'time'">
+          <span :class="iconBtnCls('prev', '-double')" v-if="splitPanels || rightPickerTable !== 'date-table'" @click="prevYear('right')">
+            <i class="bk-icon icon-angle-double-left"></i>
+          </span>
+          <span :class="iconBtnCls('prev')" v-if="splitPanels && rightPickerTable === 'date-table'" @click="prevMonth('right')" v-show="currentView === 'date'">
+            <i class="bk-icon icon-angle-left"></i>
+          </span>
+          <date-panel-label :date-panel-label="rightDatePanelLabel" :current-view="rightDatePanelView"></date-panel-label>
+
+          <template v-if="upToNow">
+            <span href="javascript: void(0);" v-if="(rangeState.selecting || currentView === 'time') && upToNowEnable" class="up-to-now"
+              @click="handleRangePick(new Date(), 'upToNow')">
+              {{t('bk.datePicker.toNow')}}
+            </span>
+            <span href="javascript: void(0);" v-else class="up-to-now disabled">
+              {{t('bk.datePicker.toNow')}}
+            </span>
+          </template>
+          <!-- <span v-if="upToNow">{{t('bk.datePicker.toNow')}}</span> -->
+          <span :class="iconBtnCls('next', '-double')" @click="nextYear('right')"><i class="bk-icon icon-angle-double-right"></i></span>
+          <span :class="iconBtnCls('next')" v-if="rightPickerTable === 'date-table'" @click="nextMonth('right')" v-show="currentView === 'date'">
+            <i class="bk-icon icon-angle-right"></i>
+          </span>
         </div>
+        <!-- eslint-disable-next-line vue/require-component-is -->
+        <component
+          :is="rightPickerTable"
+          ref="rightYearTable"
+          v-if="currentView !== 'time'"
+          selection-mode="range"
+          :table-date="rightPanelDate"
+          :range-state="rangeState"
+          :disabled-date="disabledDate"
+          :value="preSelecting.right ? [dates[dates.length - 1]] : dates"
+          :focused-date="focusedDate"
+          @change-range="handleChangeRange"
+          @pick="panelPickerHandlers.right"
+          @pick-click="handlePickClick">
+        </component>
+      </div>
+
+      <div class="bk-picker-panel-content" v-show="isTime">
+        <time-picker
+          ref="timePicker"
+          v-if="currentView === 'time'"
+          :value="dates"
+          :format="format"
+          :time-disabled="timeDisabled"
+          v-bind="timePickerOptions"
+          @pick="handleRangePick"
+          @pick-click="handlePickClick"
+          @pick-clear="handlePickClear"
+          @pick-success="handlePickSuccess"
+          @pick-toggle-time="handleToggleTime"
+        ></time-picker>
+      </div>
+      <Confirm
+        v-if="confirm"
+        :clearable="clearable"
+        :show-time="showTime"
+        :is-time="isTime"
+        :time-disabled="timeDisabled"
+        @pick-toggle-time="handleToggleTime"
+        @pick-clear="handlePickClear"
+        @pick-success="handlePickSuccess"></Confirm>
     </div>
+    <div class="bk-picker-panel-sidebar" v-if="shortcuts.length || $slots.shortcuts">
+      <slot v-if="$slots.shortcuts" name="shortcuts"></slot>
+      <div v-else class="bk-picker-panel-shortcut" v-for="(shortcut, index) in shortcuts" :key="index" @click="handleShortcutClick(shortcut)">{{shortcut.text}}</div>
+    </div>
+  </div>
 </template>
 <script>
 import { toDate, initTime, formatDateLabels } from '@/utils/date'

@@ -27,42 +27,42 @@
 -->
 
 <template>
-    <div :class="[wrapperCls, extCls]">
-        <div class="bk-step" v-for="(step, index) in defaultSteps" :key="index"
-            :class="{
-                'bk-step-no-content': !step.title,
-                done: isDone(index),
-                current: isCurrent(index),
-                [`bk-step-${currentStatus}`]: currentStatus && isCurrent(index)
-            }">
-            <span class="bk-step-indicator"
-                :class="'bk-step-' + (iconType(step) ? 'icon' : 'number')"
-                :style="{ cursor: controllable ? 'pointer' : '' }"
-                @click="jumpTo(index + 1)">
-                <!-- loading状态图标 -->
-                <i class="bk-icon icon-circle-4-1 icon-loading" v-if="(isCurrent(index) && currentStatus === 'loading') || isLoadingStatus(step)"></i>
+  <div :class="[wrapperCls, extCls]">
+    <div class="bk-step" v-for="(step, index) in defaultSteps" :key="index"
+      :class="{
+        'bk-step-no-content': !step.title,
+        done: isDone(index),
+        current: isCurrent(index),
+        [`bk-step-${currentStatus}`]: currentStatus && isCurrent(index)
+      }">
+      <span class="bk-step-indicator"
+        :class="'bk-step-' + (iconType(step) ? 'icon' : 'number')"
+        :style="{ cursor: controllable ? 'pointer' : '' }"
+        @click="jumpTo(index + 1)">
+        <!-- loading状态图标 -->
+        <i class="bk-icon icon-circle-4-1 icon-loading" v-if="(isCurrent(index) && currentStatus === 'loading') || isLoadingStatus(step)"></i>
 
-                <!-- 配置的图标 -->
-                <i class="bk-icon" v-else-if="iconType(step)" :class="'icon-' + isIcon(step)"></i>
+        <!-- 配置的图标 -->
+        <i class="bk-icon" v-else-if="iconType(step)" :class="'icon-' + isIcon(step)"></i>
 
-                <!-- 非icon时的完成与错误状态使用图标代替数字显示 -->
-                <i class="bk-icon icon-close icon-error" v-else-if="(isCurrent(index) && currentStatus === 'error') || isErrorStatus(step)"></i>
-                <i class="bk-icon icon-check-1 icon-finish" v-else-if="isDone(index)"></i>
+        <!-- 非icon时的完成与错误状态使用图标代替数字显示 -->
+        <i class="bk-icon icon-close icon-error" v-else-if="(isCurrent(index) && currentStatus === 'error') || isErrorStatus(step)"></i>
+        <i class="bk-icon icon-check-1 icon-finish" v-else-if="isDone(index)"></i>
 
-                <span class="number" v-else>
-                    {{isIcon(step)}}
-                </span>
-            </span>
-            <div class="bk-step-content" v-if="step.title">
-                <div class="bk-step-title" :style="{ cursor: controllable ? 'pointer' : '' }" @click="jumpTo(index + 1)">
-                    {{step.title}}
-                </div>
-                <div class="bk-step-description" v-if="step.description" :title="step.description">
-                    {{step.description}}
-                </div>
-            </div>
+        <span class="number" v-else>
+          {{isIcon(step)}}
+        </span>
+      </span>
+      <div class="bk-step-content" v-if="step.title">
+        <div class="bk-step-title" :style="{ cursor: controllable ? 'pointer' : '' }" @click="jumpTo(index + 1)">
+          {{step.title}}
         </div>
+        <div class="bk-step-description" v-if="step.description" :title="step.description">
+          {{step.description}}
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

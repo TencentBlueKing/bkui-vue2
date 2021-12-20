@@ -27,164 +27,164 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            DatePicker 时间选择器更多示例
-        </h2>
-        <div class="example-item">
-            <bk-button @click="dialogConfig.visiable = true" class="mr10">
-                弹框
-            </bk-button>
-            <bk-dialog v-model="dialogConfig.visiable" title="填写名称"
-                :header-position="dialogConfig.headerPosition"
-                :width="dialogConfig.width">
-                <bk-date-picker :start-date="new Date(1991, 4, 14)"></bk-date-picker>
-                <bk-time-picker v-model="initTime" :placeholder="'选择时间'"></bk-time-picker>
-                <bk-select v-model="selectValue" style="width: 250px;" searchable>
-                    <bk-option v-for="(option, index) in list"
-                        :key="index"
-                        :id="option.id"
-                        :name="option.name">
-                    </bk-option>
-                </bk-select>
-            </bk-dialog>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">基本使用</span></p>
-                <bk-date-picker :start-date="new Date(1991, 4, 14)"></bk-date-picker>
-                <!-- <bk-date-picker :value="['2016-01-01', '2016-02-15']" :type="'daterange'" @on-change></bk-date-picker> -->
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">transfer</span></p>
-                <bk-date-picker :transfer="true"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">datetime</span></p>
-                <bk-date-picker :type="'datetime'"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">datetimerange</span></p>
-                <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">daterange</span></p>
-                <bk-date-picker :type="'daterange'"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">快捷方式 daterange</span></p>
-                <bk-date-picker :shortcuts="shortcuts2" :type="'daterange'"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">快捷方式 datetime</span></p>
-                <bk-date-picker :shortcuts="shortcuts1" :type="'datetime'" :time-picker-options="{ steps: [1, 10, 10] }"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">快捷方式 datetime（快捷方式关闭弹层）</span></p>
-                <bk-date-picker :shortcuts="shortcuts1" :type="'datetime'" :shortcut-close="true"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">快捷方式 datetimerange</span></p>
-                <bk-date-picker :shortcuts="shortcuts2" :type="'datetimerange'"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">快捷方式 datetimerange（快捷方式关闭弹层）</span></p>
-                <bk-date-picker :shortcuts="shortcuts2" :type="'datetimerange'" :shortcut-close="true"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">不可选日期1</span></p>
-                <!-- <bk-date-picker :options="options1" :type="'year'"></bk-date-picker> -->
-                <bk-date-picker :options="options1"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">不可选日期2</span></p>
-                <!-- <bk-date-picker :options="options2" :type="'month'"></bk-date-picker> -->
-                <bk-date-picker :options="options2"></bk-date-picker>
-            </div>
-        </div>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      DatePicker 时间选择器更多示例
+    </h2>
+    <div class="example-item">
+      <bk-button @click="dialogConfig.visiable = true" class="mr10">
+        弹框
+      </bk-button>
+      <bk-dialog v-model="dialogConfig.visiable" title="填写名称"
+        :header-position="dialogConfig.headerPosition"
+        :width="dialogConfig.width">
+        <bk-date-picker :start-date="new Date(1991, 4, 14)"></bk-date-picker>
+        <bk-time-picker v-model="initTime" :placeholder="'选择时间'"></bk-time-picker>
+        <bk-select v-model="selectValue" style="width: 250px;" searchable>
+          <bk-option v-for="(option, index) in list"
+            :key="index"
+            :id="option.id"
+            :name="option.name">
+          </bk-option>
+        </bk-select>
+      </bk-dialog>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">基本使用</span></p>
+        <bk-date-picker :start-date="new Date(1991, 4, 14)"></bk-date-picker>
+        <!-- <bk-date-picker :value="['2016-01-01', '2016-02-15']" :type="'daterange'" @on-change></bk-date-picker> -->
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">transfer</span></p>
+        <bk-date-picker :transfer="true"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">datetime</span></p>
+        <bk-date-picker :type="'datetime'"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">datetimerange</span></p>
+        <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">daterange</span></p>
+        <bk-date-picker :type="'daterange'"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">快捷方式 daterange</span></p>
+        <bk-date-picker :shortcuts="shortcuts2" :type="'daterange'"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">快捷方式 datetime</span></p>
+        <bk-date-picker :shortcuts="shortcuts1" :type="'datetime'" :time-picker-options="{ steps: [1, 10, 10] }"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">快捷方式 datetime（快捷方式关闭弹层）</span></p>
+        <bk-date-picker :shortcuts="shortcuts1" :type="'datetime'" :shortcut-close="true"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">快捷方式 datetimerange</span></p>
+        <bk-date-picker :shortcuts="shortcuts2" :type="'datetimerange'"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">快捷方式 datetimerange（快捷方式关闭弹层）</span></p>
+        <bk-date-picker :shortcuts="shortcuts2" :type="'datetimerange'" :shortcut-close="true"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">不可选日期1</span></p>
+        <!-- <bk-date-picker :options="options1" :type="'year'"></bk-date-picker> -->
+        <bk-date-picker :options="options1"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">不可选日期2</span></p>
+        <!-- <bk-date-picker :options="options2" :type="'month'"></bk-date-picker> -->
+        <bk-date-picker :options="options2"></bk-date-picker>
+      </div>
+    </div>
 
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">format1</span></p>
-                <bk-date-picker :format="'MM-dd.yy dddd'"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">自定义样式</span></p>
-                <bk-date-picker class="custom-cls"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">选择多个日期</span></p>
-                <!-- multiple 只支持 date，不支持 datetime -->
-                <bk-date-picker multiple></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">禁用</span></p>
-                <bk-date-picker :disabled="true" :value="'2019-01-01'"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">只读</span></p>
-                <bk-date-picker :readonly="true" :value="'2019-01-01'"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">自定义出现位置</span></p>
-                <bk-date-picker :placement="'right-start'"></bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">placeholder</span></p>
-                <bk-date-picker :placeholder="'请输入时间'"></bk-date-picker>
-            </div>
-        </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">format1</span></p>
+        <bk-date-picker :format="'MM-dd.yy dddd'"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">自定义样式</span></p>
+        <bk-date-picker class="custom-cls"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">选择多个日期</span></p>
+        <!-- multiple 只支持 date，不支持 datetime -->
+        <bk-date-picker multiple></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">禁用</span></p>
+        <bk-date-picker :disabled="true" :value="'2019-01-01'"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">只读</span></p>
+        <bk-date-picker :readonly="true" :value="'2019-01-01'"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">自定义出现位置</span></p>
+        <bk-date-picker :placement="'right-start'"></bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">placeholder</span></p>
+        <bk-date-picker :placeholder="'请输入时间'"></bk-date-picker>
+      </div>
+    </div>
 
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">placeholder</span></p>
-                <bk-date-picker :open="open" :value="value"
-                    @change="handleChange"
-                    @clear="handleClear"
-                    @pick-success="handleOk"
-                    @open-change="handleOpenChange"
-                >
-                    <a slot="trigger" href="javascript:void(0)" @click="handleClick">
-                        <template v-if="value === ''">Select date</template>
-                        <template v-else>{{value}}</template>
-                    </a>
-                </bk-date-picker>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">datetimerange</span></p>
-                <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal" :time-picker-options="{
-                    disabledHours: [1, 5, 10],
-                    disabledMinutes: [0, 10, 20]
-                }"></bk-date-picker>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">快捷选择区域插槽</span></p>
-                <bk-date-picker
-                    :value="value"
-                    :placement="'top-start'"
-                    :type="'datetimerange'">
-                    <div slot="shortcuts">自定义插槽</div>
-                </bk-date-picker>
-            </div>
-        </div>
-    </section>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">placeholder</span></p>
+        <bk-date-picker :open="open" :value="value"
+          @change="handleChange"
+          @clear="handleClear"
+          @pick-success="handleOk"
+          @open-change="handleOpenChange"
+        >
+          <a slot="trigger" href="javascript:void(0)" @click="handleClick">
+            <template v-if="value === ''">Select date</template>
+            <template v-else>{{value}}</template>
+          </a>
+        </bk-date-picker>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">datetimerange</span></p>
+        <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal" :time-picker-options="{
+          disabledHours: [1, 5, 10],
+          disabledMinutes: [0, 10, 20]
+        }"></bk-date-picker>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">快捷选择区域插槽</span></p>
+        <bk-date-picker
+          :value="value"
+          :placement="'top-start'"
+          :type="'datetimerange'">
+          <div slot="shortcuts">自定义插槽</div>
+        </bk-date-picker>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

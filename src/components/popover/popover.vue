@@ -27,14 +27,14 @@
 -->
 
 <template>
-    <div class="bk-tooltip">
-        <div class="bk-tooltip-content" ref="html">
-            <slot name="content">{{content}}</slot>
-        </div>
-        <div ref="reference" class="bk-tooltip-ref" tabindex="-1">
-            <slot></slot>
-        </div>
+  <div class="bk-tooltip">
+    <div class="bk-tooltip-content" ref="html">
+      <slot name="content">{{content}}</slot>
     </div>
+    <div ref="reference" class="bk-tooltip-ref" tabindex="-1">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script>

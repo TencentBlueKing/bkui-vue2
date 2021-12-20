@@ -27,23 +27,23 @@
 -->
 
 <template>
-    <div class="demo-block" :class="[blockClass, { 'hover': hovering }]" @mouseenter="hovering = true" @mouseleave="hovering = false">
-        <slot name="source"></slot>
-        <div class="description">
-            <div class="slot-wrapper">
-                <slot v-if="$slots.default"></slot>
-            </div>
-            <div class="trigger-wrapper">
-                <bk-button :text="true" title="primary" @click="toggle($event)">
-                    {{isExpanded ? '隐藏' : '显示'}}代码
-                </bk-button>
-            </div>
-        </div>
-        <div class="meta" ref="meta">
-            <span @click="codeCopy($event, 'demo')" class="code-copy bk-icon icon-script-files" title="复制代码"></span>
-            <slot name="highlight"></slot>
-        </div>
+  <div class="demo-block" :class="[blockClass, { 'hover': hovering }]" @mouseenter="hovering = true" @mouseleave="hovering = false">
+    <slot name="source"></slot>
+    <div class="description">
+      <div class="slot-wrapper">
+        <slot v-if="$slots.default"></slot>
+      </div>
+      <div class="trigger-wrapper">
+        <bk-button :text="true" title="primary" @click="toggle($event)">
+          {{isExpanded ? '隐藏' : '显示'}}代码
+        </bk-button>
+      </div>
     </div>
+    <div class="meta" ref="meta">
+      <span @click="codeCopy($event, 'demo')" class="code-copy bk-icon icon-script-files" title="复制代码"></span>
+      <slot name="highlight"></slot>
+    </div>
+  </div>
 </template>
 
 <script>

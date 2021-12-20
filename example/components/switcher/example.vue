@@ -27,36 +27,36 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Switch 时间选择器更多示例
-        </h2>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">带文字</span></p>
-                <bk-switcher v-model="isSelected" :show-text="showText"></bk-switcher>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">自定义文字</span></p>
-                <bk-switcher v-model="isSelected" :show-text="showText" :on-text="'开'" :off-text="'关'"></bk-switcher>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="inner">
-                <p><span class="bk-text-minor">回调事件</span></p>
-                <bk-switcher v-model="isSelected" :show-text="showText" @change="change"></bk-switcher>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">方形 outline</span></p>
-                <bk-switcher v-model="isSelected" :is-outline="true" :is-square="true" :show-text="true"></bk-switcher>
-            </div>
-            <div class="inner">
-                <p><span class="bk-text-minor">方形</span></p>
-                <bk-switcher v-model="isSelected" :is-outline="false" :is-square="true" :show-text="true"></bk-switcher>
-            </div>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Switch 时间选择器更多示例
+    </h2>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">带文字</span></p>
+        <bk-switcher v-model="isSelected" :show-text="showText"></bk-switcher>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">自定义文字</span></p>
+        <bk-switcher v-model="isSelected" :show-text="showText" :on-text="'开'" :off-text="'关'"></bk-switcher>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="inner">
+        <p><span class="bk-text-minor">回调事件</span></p>
+        <bk-switcher v-model="isSelected" :show-text="showText" @change="change"></bk-switcher>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">方形 outline</span></p>
+        <bk-switcher v-model="isSelected" :is-outline="true" :is-square="true" :show-text="true"></bk-switcher>
+      </div>
+      <div class="inner">
+        <p><span class="bk-text-minor">方形</span></p>
+        <bk-switcher v-model="isSelected" :is-outline="false" :is-square="true" :show-text="true"></bk-switcher>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

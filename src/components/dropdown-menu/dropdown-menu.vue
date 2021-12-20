@@ -27,28 +27,28 @@
 -->
 
 <template>
-    <div class="bk-dropdown-menu"
-        :class="[disabled ? 'disabled' : '',positionFixed ? '' : 'bk-dropdown-full-width', fontSizeCls, extCls]"
-        v-clickoutside="handleClickoutside"
-        tabindex="0"
-        @keydown.enter.prevent="handleMouseover"
-        @keydown.esc.stop.prevent="handleMouseout"
-        @click="handleClick"
-        @mouseover="handleMouseover"
-        @mouseout="handleMouseout">
-        <div class="bk-dropdown-trigger" ref="refDropTrigger">
-            <slot name="dropdown-trigger"></slot>
-        </div>
-        <div ref="refDropContent" :class="[
-            'bk-dropdown-content', {
-                'is-show': isShow,
-                'right-align': align === 'right',
-                'center-align': align === 'center',
-                'left-align': align === 'left'
-            }]">
-            <slot name="dropdown-content"></slot>
-        </div>
+  <div class="bk-dropdown-menu"
+    :class="[disabled ? 'disabled' : '',positionFixed ? '' : 'bk-dropdown-full-width', fontSizeCls, extCls]"
+    v-clickoutside="handleClickoutside"
+    tabindex="0"
+    @keydown.enter.prevent="handleMouseover"
+    @keydown.esc.stop.prevent="handleMouseout"
+    @click="handleClick"
+    @mouseover="handleMouseover"
+    @mouseout="handleMouseout">
+    <div class="bk-dropdown-trigger" ref="refDropTrigger">
+      <slot name="dropdown-trigger"></slot>
     </div>
+    <div ref="refDropContent" :class="[
+      'bk-dropdown-content', {
+        'is-show': isShow,
+        'right-align': align === 'right',
+        'center-align': align === 'center',
+        'left-align': align === 'left'
+      }]">
+      <slot name="dropdown-content"></slot>
+    </div>
+  </div>
 </template>
 
 <script>

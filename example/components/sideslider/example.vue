@@ -27,10 +27,10 @@
 -->
 
 <template>
-    <div>
-        <bk-button :type="'primary'" @click="toggle">默认配置</bk-button>
-        <Single v-if="isShow" :show="isShow"></Single>
-    </div>
+  <div>
+    <bk-button :type="'primary'" @click="toggle">默认配置</bk-button>
+    <Single v-if="isShow" :show="isShow"></Single>
+  </div>
 </template>
 <script>
 import { bkButton } from '@'

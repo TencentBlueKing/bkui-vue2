@@ -27,30 +27,30 @@
 -->
 
 <template>
-    <section :class="[extCls, 'bk-zoom-image']">
-        <img :src="src" class="bk-real-image" @click="imgSrc = src">
-        <transition name="fade">
-            <section v-if="imgSrc"
-                class="bk-full-screen"
-                @mousemove="mouseMove"
-                @mouseup="mouseUp"
-            >
-                <img ref="screenImg"
-                    :src="imgSrc"
-                    @mousewheel.prevent="scrollImage"
-                    @DOMMouseScroll.prevent="scrollImage"
-                    @mousedown="mouseDown"
-                    :class="[{ 'bk-zoom-init': isInit }, 'bk-full-image']"
-                    :style="{
-                        width: `${width}px`,
-                        height: `${height}px`,
-                        top: `${top}px`,
-                        left: `${left}px`
-                    }"
-                >
-            </section>
-        </transition>
-    </section>
+  <section :class="[extCls, 'bk-zoom-image']">
+    <img :src="src" class="bk-real-image" @click="imgSrc = src">
+    <transition name="fade">
+      <section v-if="imgSrc"
+        class="bk-full-screen"
+        @mousemove="mouseMove"
+        @mouseup="mouseUp"
+      >
+        <img ref="screenImg"
+          :src="imgSrc"
+          @mousewheel.prevent="scrollImage"
+          @DOMMouseScroll.prevent="scrollImage"
+          @mousedown="mouseDown"
+          :class="[{ 'bk-zoom-init': isInit }, 'bk-full-image']"
+          :style="{
+            width: `${width}px`,
+            height: `${height}px`,
+            top: `${top}px`,
+            left: `${left}px`
+          }"
+        >
+      </section>
+    </transition>
+  </section>
 </template>
 
 <script>

@@ -27,26 +27,26 @@
 -->
 
 <template>
-    <div>
-        <bk-version-detail
-            :current-version="2"
-            :finished="finished"
-            :show.sync="show"
-            :version-list="versionList"
-            :version-detail="versionDetail"
-            :get-version-detail="handleGetVersionDetail"
-            :get-version-list="handleGetVersionList">
-            <template slot-scope="content">
-                <div v-if="content.detail">
-                    <h1>【{{content.detail}}】版本更新明细</h1>
-                    <p v-for="(detial, index) in currentDetailList" :key="index">
-                        {{detial}}
-                    </p>
-                </div>
-            </template>
-        </bk-version-detail>
-        <bk-button @click="show = !show" theme="primary">点击查看日志详情</bk-button>
-    </div>
+  <div>
+    <bk-version-detail
+      :current-version="2"
+      :finished="finished"
+      :show.sync="show"
+      :version-list="versionList"
+      :version-detail="versionDetail"
+      :get-version-detail="handleGetVersionDetail"
+      :get-version-list="handleGetVersionList">
+      <template slot-scope="content">
+        <div v-if="content.detail">
+          <h1>【{{content.detail}}】版本更新明细</h1>
+          <p v-for="(detial, index) in currentDetailList" :key="index">
+            {{detial}}
+          </p>
+        </div>
+      </template>
+    </bk-version-detail>
+    <bk-button @click="show = !show" theme="primary">点击查看日志详情</bk-button>
+  </div>
 </template>
 <script>
 import { bkVersionDetail, bkButton } from '@'

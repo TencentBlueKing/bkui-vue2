@@ -27,14 +27,14 @@
 -->
 
 <template>
-    <div class="bk-date-picker-cells">
-        <div class="bk-date-picker-cells-header">
-            <span v-for="day in headerDays" :key="day">{{day}}</span>
-        </div>
-        <span :class="getCellCls(cell)" v-for="(cell, i) in cells" :key="String(cell.date) + i" @click="handleClick(cell, $event)" @mouseenter="handleMouseMove(cell)">
-            <em>{{cell.desc}}</em>
-        </span>
+  <div class="bk-date-picker-cells">
+    <div class="bk-date-picker-cells-header">
+      <span v-for="day in headerDays" :key="day">{{day}}</span>
     </div>
+    <span :class="getCellCls(cell)" v-for="(cell, i) in cells" :key="String(cell.date) + i" @click="handleClick(cell, $event)" @mouseenter="handleMouseMove(cell)">
+      <em>{{cell.desc}}</em>
+    </span>
+  </div>
 </template>
 <script>
 import jsCalendar from 'js-calendar'

@@ -27,17 +27,17 @@
 -->
 
 <template>
-    <bk-tag-input
-        v-model="tag1"
-        :placeholder="placeholder"
-        :list="list"
-        :display-key="'name'"
-        :search-key="'id'"
-        :allow-create="allowCreate"
-        :has-delete-icon="hasDeleteIcon"
-        :filter-callback="filterCallback"
-        @change="change">
-    </bk-tag-input>
+  <bk-tag-input
+    v-model="tag1"
+    :placeholder="placeholder"
+    :list="list"
+    :display-key="'name'"
+    :search-key="'id'"
+    :allow-create="allowCreate"
+    :has-delete-icon="hasDeleteIcon"
+    :filter-callback="filterCallback"
+    @change="change">
+  </bk-tag-input>
 </template>
 <script>
 import { bkTagInput } from '@'

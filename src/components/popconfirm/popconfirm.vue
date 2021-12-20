@@ -27,26 +27,26 @@
 -->
 
 <template>
-    <bk-popover
-        ref="popover"
-        size="regular"
-        v-bind="$attrs"
-        :theme="theme">
-        <div slot="content" class="bk-popconfirm-content" :class="[extPopoverCls, { 'popconfirm-more': !isTiny }]">
-            <div v-if="!isTiny" class="popconfirm-content">
-                <slot name="content">
-                    <div v-if="title" class="title">{{title}}</div>
-                    <div v-if="content" class="content" :class="{ 'is-simple': isSimple }">{{content}}</div>
-                </slot>
-            </div>
-            <div class="popconfirm-operate">
-                <button v-if="localeOkText" :type="confirmButtonType" @click="confirm" class="default-operate-button primary">{{localeOkText}}</button>
-                <span v-if="isTiny" class="popconfirm-split"></span>
-                <button v-if="localeCancelText" :type="cancelButtonType" @click="cancel" class="default-operate-button">{{localeCancelText}}</button>
-            </div>
-        </div>
-        <slot></slot>
-    </bk-popover>
+  <bk-popover
+    ref="popover"
+    size="regular"
+    v-bind="$attrs"
+    :theme="theme">
+    <div slot="content" class="bk-popconfirm-content" :class="[extPopoverCls, { 'popconfirm-more': !isTiny }]">
+      <div v-if="!isTiny" class="popconfirm-content">
+        <slot name="content">
+          <div v-if="title" class="title">{{title}}</div>
+          <div v-if="content" class="content" :class="{ 'is-simple': isSimple }">{{content}}</div>
+        </slot>
+      </div>
+      <div class="popconfirm-operate">
+        <button v-if="localeOkText" :type="confirmButtonType" @click="confirm" class="default-operate-button primary">{{localeOkText}}</button>
+        <span v-if="isTiny" class="popconfirm-split"></span>
+        <button v-if="localeCancelText" :type="cancelButtonType" @click="cancel" class="default-operate-button">{{localeCancelText}}</button>
+      </div>
+    </div>
+    <slot></slot>
+  </bk-popover>
 </template>
 
 <script>

@@ -27,19 +27,19 @@
 -->
 
 <template>
-    <div :class="['bk-slider-button', vertical ? 'vertical' : 'horizontal', { 'grabbing': dragging }]"
-        ref="button"
-        tabindex="0"
-        :style="wrapperStyle"
-        v-bk-tooltips="tip"
-        @click.stop
-        @mousedown="onButtonDown"
-        @touchstart="onButtonDown">
-        <div :class="['slider-button', { 'slider-button-disable': disable }]"></div>
-        <div v-if="showButtonLabel && !showIntervalLabel" :class="['slider-button-label', vertical ? 'vertical' : 'horizontal']">
-            {{buttonLabel}}
-        </div>
+  <div :class="['bk-slider-button', vertical ? 'vertical' : 'horizontal', { 'grabbing': dragging }]"
+    ref="button"
+    tabindex="0"
+    :style="wrapperStyle"
+    v-bk-tooltips="tip"
+    @click.stop
+    @mousedown="onButtonDown"
+    @touchstart="onButtonDown">
+    <div :class="['slider-button', { 'slider-button-disable': disable }]"></div>
+    <div v-if="showButtonLabel && !showIntervalLabel" :class="['slider-button-label', vertical ? 'vertical' : 'horizontal']">
+      {{buttonLabel}}
     </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue'

@@ -27,40 +27,40 @@
 -->
 
 <template>
-    <section class="bk-swiper-home" :class="extCls" ref="swiper" v-if="sourceList.length">
-        <hgroup :style="{ width: `${swiperMainWith}px`, transform: `translateX(${imageTransfer}px)` }"
-            :class="[{ 'bk-transition': isTransition }, 'bk-swiper-main']"
-            @mousedown="moveStart"
-            @mousemove="moving"
-            @mouseup="moveEnd"
-            @mouseout="moveEnd"
-            @transitionend="transitionend"
-        >
-            <h3 class="bk-swiper-card" v-for="(pic, index) in dataList" :key="index" :style="{ 'width': `${realWidth}px` }">
-                <slot :data="pic">
-                    <span @click="goToLink(pic.link)"
-                        :class="[{ 'bk-swiper-link': pic.link }, pic.class, 'bk-swiper-img']"
-                        :style="{ 'background-image': `url(${pic.url})`, 'background-color': pic.color }"
-                    >
-                    </span>
-                </slot>
-            </h3>
-        </hgroup>
-        <ul class="bk-swiper-index">
-            <li v-for="(pic, index) in sourceList"
-                :key="index"
-                :class="{ 'bk-current-index': currentIndex === index + 1 }"
-                @mouseover="changeIndex(index + 1)"
-            >
-            </li>
-        </ul>
-        <span class="bk-swiper-nav bk-nav-prev" @click="changeIndex(currentIndex - 1)">
-            <i class="bk-swiper-nav-icon"></i>
-        </span>
-        <span class="bk-swiper-nav bk-nav-next" @click="changeIndex(currentIndex + 1)">
-            <i class="bk-swiper-nav-icon"></i>
-        </span>
-    </section>
+  <section class="bk-swiper-home" :class="extCls" ref="swiper" v-if="sourceList.length">
+    <hgroup :style="{ width: `${swiperMainWith}px`, transform: `translateX(${imageTransfer}px)` }"
+      :class="[{ 'bk-transition': isTransition }, 'bk-swiper-main']"
+      @mousedown="moveStart"
+      @mousemove="moving"
+      @mouseup="moveEnd"
+      @mouseout="moveEnd"
+      @transitionend="transitionend"
+    >
+      <h3 class="bk-swiper-card" v-for="(pic, index) in dataList" :key="index" :style="{ 'width': `${realWidth}px` }">
+        <slot :data="pic">
+          <span @click="goToLink(pic.link)"
+            :class="[{ 'bk-swiper-link': pic.link }, pic.class, 'bk-swiper-img']"
+            :style="{ 'background-image': `url(${pic.url})`, 'background-color': pic.color }"
+          >
+          </span>
+        </slot>
+      </h3>
+    </hgroup>
+    <ul class="bk-swiper-index">
+      <li v-for="(pic, index) in sourceList"
+        :key="index"
+        :class="{ 'bk-current-index': currentIndex === index + 1 }"
+        @mouseover="changeIndex(index + 1)"
+      >
+      </li>
+    </ul>
+    <span class="bk-swiper-nav bk-nav-prev" @click="changeIndex(currentIndex - 1)">
+      <i class="bk-swiper-nav-icon"></i>
+    </span>
+    <span class="bk-swiper-nav bk-nav-next" @click="changeIndex(currentIndex + 1)">
+      <i class="bk-swiper-nav-icon"></i>
+    </span>
+  </section>
 </template>
 
 <script>

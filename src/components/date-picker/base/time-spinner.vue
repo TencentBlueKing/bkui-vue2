@@ -27,28 +27,28 @@
 -->
 
 <template>
-    <div class="bk-time-picker-cells" :class="showSeconds ? 'bk-time-picker-cells-with-seconds' : ''">
-        <div class="bk-time-picker-cells-title-wrapper">
-            <div class="bk-time-picker-cells-title" :class="focusedColumn === 0 ? 'active' : ''" :style="styles">{{t('bk.datePicker.hour')}}</div>
-            <div class="bk-time-picker-cells-title" :class="focusedColumn === 1 ? 'active' : ''" :style="styles">{{t('bk.datePicker.min')}}</div>
-            <div class="bk-time-picker-cells-title" :class="focusedColumn === 2 ? 'active' : ''" v-show="showSeconds" :style="styles">{{t('bk.datePicker.sec')}}</div>
-        </div>
-        <div class="bk-time-picker-cells-list" ref="hours" :style="styles">
-            <ul class="bk-time-picker-cells-ul">
-                <li :class="getCellCls(item)" v-for="(item, index) in hoursList" :key="index" v-show="!item.hide" @click="handleClick('hours', item)">{{padTime(item.text)}}</li>
-            </ul>
-        </div>
-        <div class="bk-time-picker-cells-list" ref="minutes" :style="styles">
-            <ul class="bk-time-picker-cells-ul">
-                <li :class="getCellCls(item)" v-for="(item, index) in minutesList" :key="index" v-show="!item.hide" @click="handleClick('minutes', item)">{{padTime(item.text)}}</li>
-            </ul>
-        </div>
-        <div class="bk-time-picker-cells-list" v-show="showSeconds" ref="seconds" :style="styles">
-            <ul class="bk-time-picker-cells-ul">
-                <li :class="getCellCls(item)" v-for="(item, index) in secondsList" :key="index" v-show="!item.hide" @click="handleClick('seconds', item)">{{padTime(item.text)}}</li>
-            </ul>
-        </div>
+  <div class="bk-time-picker-cells" :class="showSeconds ? 'bk-time-picker-cells-with-seconds' : ''">
+    <div class="bk-time-picker-cells-title-wrapper">
+      <div class="bk-time-picker-cells-title" :class="focusedColumn === 0 ? 'active' : ''" :style="styles">{{t('bk.datePicker.hour')}}</div>
+      <div class="bk-time-picker-cells-title" :class="focusedColumn === 1 ? 'active' : ''" :style="styles">{{t('bk.datePicker.min')}}</div>
+      <div class="bk-time-picker-cells-title" :class="focusedColumn === 2 ? 'active' : ''" v-show="showSeconds" :style="styles">{{t('bk.datePicker.sec')}}</div>
     </div>
+    <div class="bk-time-picker-cells-list" ref="hours" :style="styles">
+      <ul class="bk-time-picker-cells-ul">
+        <li :class="getCellCls(item)" v-for="(item, index) in hoursList" :key="index" v-show="!item.hide" @click="handleClick('hours', item)">{{padTime(item.text)}}</li>
+      </ul>
+    </div>
+    <div class="bk-time-picker-cells-list" ref="minutes" :style="styles">
+      <ul class="bk-time-picker-cells-ul">
+        <li :class="getCellCls(item)" v-for="(item, index) in minutesList" :key="index" v-show="!item.hide" @click="handleClick('minutes', item)">{{padTime(item.text)}}</li>
+      </ul>
+    </div>
+    <div class="bk-time-picker-cells-list" v-show="showSeconds" ref="seconds" :style="styles">
+      <ul class="bk-time-picker-cells-ul">
+        <li :class="getCellCls(item)" v-for="(item, index) in secondsList" :key="index" v-show="!item.hide" @click="handleClick('seconds', item)">{{padTime(item.text)}}</li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>

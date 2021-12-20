@@ -27,50 +27,50 @@
 -->
 
 <template>
-    <div v-if="hasChild"
-        class="navigation-sbmenu"
-        :disabled="disabled"
-        :group="group"
-        :class="{ 'is-disabled': disabled }">
-        <div class="navigation-sbmenu-title"
-            @mouseover.self="handleMouseHover(!disabled)"
-            @mouseleave.self="handleMouseHover(false)"
-            @click.stop.prevent="handleSbmenuClick"
-            :style="{ background: menuActiveBgColor }">
-            <span v-if="icon" class="bk-icon navigation-sbmenu-title-icon" :class="icon" :style="{ color: menuActiveIconColor }"></span>
-            <span class="navigation-sbmenu-title-content" :style="{ color: menuActiveColor }">
-                <slot></slot>
-            </span>
-            <span class="navigation-sbmenu-title-arrow" :style="{ transform: collapse ? 'rotate(90deg)' : 'rotate(0deg)', color: menuActiveColor }">
-                <svg class="bk-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M6.19 13.44l-1.13-1.13 4.13-4.12-4.13-4.13 1.13-1.12 5.25 5.25-5.25 5.25z"></path></svg>
-            </span>
-        </div>
-        <transition :css="false"
-            @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
-            @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
-            <div v-show="collapse" class="navigation-sbmenu-content">
-                <slot name="child"></slot>
-            </div>
-        </transition>
+  <div v-if="hasChild"
+    class="navigation-sbmenu"
+    :disabled="disabled"
+    :group="group"
+    :class="{ 'is-disabled': disabled }">
+    <div class="navigation-sbmenu-title"
+      @mouseover.self="handleMouseHover(!disabled)"
+      @mouseleave.self="handleMouseHover(false)"
+      @click.stop.prevent="handleSbmenuClick"
+      :style="{ background: menuActiveBgColor }">
+      <span v-if="icon" class="bk-icon navigation-sbmenu-title-icon" :class="icon" :style="{ color: menuActiveIconColor }"></span>
+      <span class="navigation-sbmenu-title-content" :style="{ color: menuActiveColor }">
+        <slot></slot>
+      </span>
+      <span class="navigation-sbmenu-title-arrow" :style="{ transform: collapse ? 'rotate(90deg)' : 'rotate(0deg)', color: menuActiveColor }">
+        <svg class="bk-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M6.19 13.44l-1.13-1.13 4.13-4.12-4.13-4.13 1.13-1.12 5.25 5.25-5.25 5.25z"></path></svg>
+      </span>
     </div>
-    <!-- eslint-disable vue/valid-template-root, vue/space-infix-ops -->
-    <a v-else
-        :group="group"
-        class="navigation-menu-item"
-        :class="{ 'is-disabled': disabled, 'group-theme': rootMenu.navigationType !== 'left-right' }"
-        :disabled="disabled"
-        :style="{ background: activeBgColor, color: activeColor }"
-        @click.stop="handleClick($event)"
-        @mouseover.self="!title && handleMouseHover(!disabled)"
-        @mouseleave.self="handleMouseHover(false)">
-        <span v-if="icon" :class="icon" class="bk-icon navigation-menu-item-icon" :style="{ color: activeIconColor }"></span>
-        <span v-else-if="parentMenu && parentMenu.hasChild" class="navigation-menu-item-default">
-            <i class="navigation-menu-item-default-icon" :style="{ backgroundColor: activeChildIconColor }"></i>
-        </span>
-        <span class="navigation-menu-item-name" :style="{ color: activeColor }">
-            <slot></slot>
-        </span>
-    </a>
+    <transition :css="false"
+      @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
+      @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
+      <div v-show="collapse" class="navigation-sbmenu-content">
+        <slot name="child"></slot>
+      </div>
+    </transition>
+  </div>
+  <!-- eslint-disable vue/valid-template-root, vue/space-infix-ops -->
+  <a v-else
+    :group="group"
+    class="navigation-menu-item"
+    :class="{ 'is-disabled': disabled, 'group-theme': rootMenu.navigationType !== 'left-right' }"
+    :disabled="disabled"
+    :style="{ background: activeBgColor, color: activeColor }"
+    @click.stop="handleClick($event)"
+    @mouseover.self="!title && handleMouseHover(!disabled)"
+    @mouseleave.self="handleMouseHover(false)">
+    <span v-if="icon" :class="icon" class="bk-icon navigation-menu-item-icon" :style="{ color: activeIconColor }"></span>
+    <span v-else-if="parentMenu && parentMenu.hasChild" class="navigation-menu-item-default">
+      <i class="navigation-menu-item-default-icon" :style="{ backgroundColor: activeChildIconColor }"></i>
+    </span>
+    <span class="navigation-menu-item-name" :style="{ color: activeColor }">
+      <slot></slot>
+    </span>
+  </a>
 </template>
 
 <script>

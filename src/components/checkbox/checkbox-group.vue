@@ -27,9 +27,9 @@
 -->
 
 <template>
-    <div class="bk-form-control" :name="name">
-        <slot></slot>
-    </div>
+  <div class="bk-form-control" :name="name">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

@@ -27,110 +27,110 @@
 -->
 
 <template>
-    <div class="bk-select"
-        :class="[{
-            'is-focus': focus,
-            'is-disabled': disabled,
-            'is-readonly': readonly,
-            'is-loading': loading,
-            'is-unselected': isUnselected,
-            'is-default-trigger': !$scopedSlots.trigger,
-            'has-prefix-icon': !!prefixIcon,
-            'only-bottom-border': behavior === 'simplicity'
-        }, wrapperCls, fontSizeCls, extCls]"
-        :data-placeholder="localPlaceholder"
-        tabindex="0"
-        ref="bkSelect"
-        @keydown.enter.prevent="show"
-        @keydown.tab="close"
-        @keydown.esc.stop.prevent="close">
-        <template v-if="!$scopedSlots.trigger">
-            <template v-if="loading">
-                <img class="bk-select-loading" src="../../ui/images/spinner.svg">
-            </template>
-            <template v-else>
-                <i class="bk-select-clear bk-icon icon-close-circle-shape"
-                    v-if="clearable && !isUnselected && !disabled && !readonly"
-                    @click.prevent.stop="reset">
-                </i>
-                <i class="bk-select-angle bk-icon icon-angle-down"></i>
-            </template>
+  <div class="bk-select"
+    :class="[{
+      'is-focus': focus,
+      'is-disabled': disabled,
+      'is-readonly': readonly,
+      'is-loading': loading,
+      'is-unselected': isUnselected,
+      'is-default-trigger': !$scopedSlots.trigger,
+      'has-prefix-icon': !!prefixIcon,
+      'only-bottom-border': behavior === 'simplicity'
+    }, wrapperCls, fontSizeCls, extCls]"
+    :data-placeholder="localPlaceholder"
+    tabindex="0"
+    ref="bkSelect"
+    @keydown.enter.prevent="show"
+    @keydown.tab="close"
+    @keydown.esc.stop.prevent="close">
+    <template v-if="!$scopedSlots.trigger">
+      <template v-if="loading">
+        <img class="bk-select-loading" src="../../ui/images/spinner.svg">
+      </template>
+      <template v-else>
+        <i class="bk-select-clear bk-icon icon-close-circle-shape"
+          v-if="clearable && !isUnselected && !disabled && !readonly"
+          @click.prevent.stop="reset">
+        </i>
+        <i class="bk-select-angle bk-icon icon-angle-down"></i>
+      </template>
+    </template>
+    <bk-popover class="bk-select-dropdown"
+      ref="selectDropdown"
+      trigger="click"
+      placement="bottom-start"
+      theme="light bk-select-dropdown"
+      animation="slide-toggle"
+      :offset="-1"
+      :distance="popoverDistance"
+      :z-index="zIndex"
+      :on-show="handleDropdownShow"
+      :on-hide="handleDropdownHide"
+      :tippy-options="renderPopoverOptions">
+      <i :class="['bk-select-prefix-icon', prefixIcon]" v-if="prefixIcon"></i>
+      <slot name="trigger" v-bind="$props">
+        <bk-select-tag v-if="multiple && displayTag"
+          :width-limit="isTagWidthLimit"></bk-select-tag>
+        <div class="bk-select-name" v-else
+          :class="fontSizeCls"
+          :title="selectedName">
+          {{selectedName}}
+        </div>
+      </slot>
+      <div slot="content" class="bk-select-dropdown-content"
+        :class="[popoverCls, extPopoverCls]"
+        :style="popoverStyle">
+        <div class="bk-select-search-wrapper" v-if="searchable">
+          <i class="left-icon bk-icon icon-search"></i>
+          <input class="bk-select-search-input"
+            :class="fontSizeCls"
+            ref="searchInput"
+            type="text"
+            :placeholder="localSearchPlaceholder"
+            v-model="searchValue"
+            @keydown.tab="handleClose"
+            @keydown.esc.stop.prevent="handleClose">
+        </div>
+        <div class="bk-options-wrapper"
+          v-bkloading="{ isLoading: searchLoading }"
+          :style="{ maxHeight: scrollHeight + 'px' }">
+          <ul class="bk-options" ref="optionList"
+            :class="{
+              'bk-options-single': !multiple
+            }"
+            :style="{ maxHeight: scrollHeight + 'px' }">
+            <bk-option-all
+              ref="selectAllOption"
+              v-if="multiple && showSelectAll && !searchValue">
+            </bk-option-all>
+            <bk-virtual-scroll ref="virtualScroll"
+              :item-height="itemHeight"
+              class="bk-virtual-select"
+              :style="{ height: scrollHeight + 'px', width: '100%' }"
+              @virtual-scroll-scroll-bar-mouse="virtualScrollScrollBarMouse"
+              v-if="enableVirtualScroll">
+              <template slot-scope="item">
+                <virtual-option :item="item.data" :render-func="virtualScrollRender"></virtual-option>
+              </template>
+            </bk-virtual-scroll>
+            <slot v-else></slot>
+          </ul>
+        </div>
+        <template v-if="showEmpty">
+          <div class="bk-select-empty" :class="fontSizeCls" v-if="!options.length">
+            {{ emptyText || t('bk.select.dataEmpty') }}
+          </div>
+          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="searchable && unmatchedCount === options.length">
+            {{ emptyText || t('bk.select.searchEmpty') }}
+          </div>
         </template>
-        <bk-popover class="bk-select-dropdown"
-            ref="selectDropdown"
-            trigger="click"
-            placement="bottom-start"
-            theme="light bk-select-dropdown"
-            animation="slide-toggle"
-            :offset="-1"
-            :distance="popoverDistance"
-            :z-index="zIndex"
-            :on-show="handleDropdownShow"
-            :on-hide="handleDropdownHide"
-            :tippy-options="renderPopoverOptions">
-            <i :class="['bk-select-prefix-icon', prefixIcon]" v-if="prefixIcon"></i>
-            <slot name="trigger" v-bind="$props">
-                <bk-select-tag v-if="multiple && displayTag"
-                    :width-limit="isTagWidthLimit"></bk-select-tag>
-                <div class="bk-select-name" v-else
-                    :class="fontSizeCls"
-                    :title="selectedName">
-                    {{selectedName}}
-                </div>
-            </slot>
-            <div slot="content" class="bk-select-dropdown-content"
-                :class="[popoverCls, extPopoverCls]"
-                :style="popoverStyle">
-                <div class="bk-select-search-wrapper" v-if="searchable">
-                    <i class="left-icon bk-icon icon-search"></i>
-                    <input class="bk-select-search-input"
-                        :class="fontSizeCls"
-                        ref="searchInput"
-                        type="text"
-                        :placeholder="localSearchPlaceholder"
-                        v-model="searchValue"
-                        @keydown.tab="handleClose"
-                        @keydown.esc.stop.prevent="handleClose">
-                </div>
-                <div class="bk-options-wrapper"
-                    v-bkloading="{ isLoading: searchLoading }"
-                    :style="{ maxHeight: scrollHeight + 'px' }">
-                    <ul class="bk-options" ref="optionList"
-                        :class="{
-                            'bk-options-single': !multiple
-                        }"
-                        :style="{ maxHeight: scrollHeight + 'px' }">
-                        <bk-option-all
-                            ref="selectAllOption"
-                            v-if="multiple && showSelectAll && !searchValue">
-                        </bk-option-all>
-                        <bk-virtual-scroll ref="virtualScroll"
-                            :item-height="itemHeight"
-                            class="bk-virtual-select"
-                            :style="{ height: scrollHeight + 'px', width: '100%' }"
-                            @virtual-scroll-scroll-bar-mouse="virtualScrollScrollBarMouse"
-                            v-if="enableVirtualScroll">
-                            <template slot-scope="item">
-                                <virtual-option :item="item.data" :render-func="virtualScrollRender"></virtual-option>
-                            </template>
-                        </bk-virtual-scroll>
-                        <slot v-else></slot>
-                    </ul>
-                </div>
-                <template v-if="showEmpty">
-                    <div class="bk-select-empty" :class="fontSizeCls" v-if="!options.length">
-                        {{ emptyText || t('bk.select.dataEmpty') }}
-                    </div>
-                    <div class="bk-select-empty" :class="fontSizeCls" v-else-if="searchable && unmatchedCount === options.length">
-                        {{ emptyText || t('bk.select.searchEmpty') }}
-                    </div>
-                </template>
-                <div class="bk-select-extension" :class="fontSizeCls" v-if="$slots.extension">
-                    <slot name="extension"></slot>
-                </div>
-            </div>
-        </bk-popover>
-    </div>
+        <div class="bk-select-extension" :class="fontSizeCls" v-if="$slots.extension">
+          <slot name="extension"></slot>
+        </div>
+      </div>
+    </bk-popover>
+  </div>
 </template>
 
 <script>

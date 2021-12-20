@@ -27,14 +27,14 @@
 -->
 
 <template>
-    <div class="bk-divider" :style="style">
-        <div
-            v-if="direction === 'horizontal'"
-            :class="['bk-divider-info', `bk-divider-info-${align}`]"
-        >
-            <slot />
-        </div>
+  <div class="bk-divider" :style="style">
+    <div
+      v-if="direction === 'horizontal'"
+      :class="['bk-divider-info', `bk-divider-info-${align}`]"
+    >
+      <slot />
     </div>
+  </div>
 </template>
 
 <script>

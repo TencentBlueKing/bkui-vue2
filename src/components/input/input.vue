@@ -27,90 +27,90 @@
 -->
 
 <template>
-    <div :class="[wrapperClass, fontSizeCls, extCls]" @mouseenter="hover = true" @mouseleave="hover = false">
-        <div class="control-icon left-icon" v-if="leftIcon" @click="handlerLeftIcon">
-            <i :class="['bk-icon', leftIcon]"></i>
-        </div>
-        <div class="group-box group-prepend" v-if="prepend">
-            <slot name="prepend"></slot>
-        </div>
-        <template v-if="inputType === 'textarea'">
-            <div class="bk-textarea-wrapper">
-                <textarea
-                    ref="textarea"
-                    :class="[
-                        'bk-form-textarea',
-                        { 'textarea-maxlength': maxlength }
-                    ]"
-                    :style="computedStyle"
-                    v-bind="bindAttribute"
-                    @keyup.enter="handlerEnter"
-                    @keypress="handlerKeypress"
-                    @keydown="handlerKeydown"
-                    @focus="handlerFocus"
-                    @blur="handlerBlur"
-                    @input="handlerInput"
-                    @paste="handlerPaste"
-                ></textarea>
-                <template v-if="showInputWordLimit">
-                    <p class="bk-limit-box">
-                        <span class="strong">{{ (curValue && curValue.length) || 0 }}</span
-                        >/<span>{{ maxlength }}</span>
-                    </p>
-                </template>
-            </div>
-        </template>
-        <template v-else>
-            <div :class="[`bk-input-${type}`]">
-                <input
-                    ref="input"
-                    :class="['bk-form-input', inputSizeCls, { 'only-bottom-border': behavior === 'simplicity' }]"
-                    :style="computedStyle"
-                    v-bind="bindAttribute"
-                    @keyup.enter="handlerEnter"
-                    @keyup="handlerKeyup"
-                    @keypress="handlerKeypress"
-                    @keydown="handlerKeydown"
-                    @focus="handlerFocus"
-                    @blur="handlerBlur"
-                    @input="handlerInput"
-                    @paste="handlerPaste"
-                />
-                <template v-if="/^number$/i.test(type) && !disabled && !readonly">
-                    <span class="input-number-option" v-if="showControls">
-                        <span
-                            @click="handleNumberAdd"
-                            class="number-option-item bk-icon icon-angle-up"
-                        ></span>
-                        <span
-                            @click="handleNumberDelete"
-                            class="number-option-item bk-icon icon-angle-down"
-                        ></span>
-                    </span>
-                </template>
-            </div>
-        </template>
-
-        <div class="group-box group-append" v-if="append">
-            <slot name="append"></slot>
-        </div>
-        <div class="control-icon right-icon" :style="rightIconStyle" v-if="!/^number$/i.test(type)" @click="handlerRightIcon" ref="rightIconArea">
-            <i @click="togglePass" v-if="showPwdVisable" :class="[
-                'bk-icon',
-                inputType === 'password'
-                    ? inputPasswordIcon[0]
-                    : inputPasswordIcon[1]
-            ]"></i>
-            <i @click.stop.prevent="handlerClear" class="bk-icon icon-close-circle-shape clear-icon ml5" v-if="showClearIcon"></i>
-            <i :class="['bk-icon', rightIcon]" v-else-if="rightIcon"></i>
-            <template v-if="type === 'text'">
-                <p class="bk-limit-box ml5" style="position: static" v-show="showInputWordLimit">
-                    <span class="strong">{{ (curValue && curValue.length) || 0 }}</span
-                    >/<span>{{ maxlength }}</span>
-                </p>
-            </template>
-        </div>
+  <div :class="[wrapperClass, fontSizeCls, extCls]" @mouseenter="hover = true" @mouseleave="hover = false">
+    <div class="control-icon left-icon" v-if="leftIcon" @click="handlerLeftIcon">
+      <i :class="['bk-icon', leftIcon]"></i>
     </div>
+    <div class="group-box group-prepend" v-if="prepend">
+      <slot name="prepend"></slot>
+    </div>
+    <template v-if="inputType === 'textarea'">
+      <div class="bk-textarea-wrapper">
+        <textarea
+          ref="textarea"
+          :class="[
+            'bk-form-textarea',
+            { 'textarea-maxlength': maxlength }
+          ]"
+          :style="computedStyle"
+          v-bind="bindAttribute"
+          @keyup.enter="handlerEnter"
+          @keypress="handlerKeypress"
+          @keydown="handlerKeydown"
+          @focus="handlerFocus"
+          @blur="handlerBlur"
+          @input="handlerInput"
+          @paste="handlerPaste"
+        ></textarea>
+        <template v-if="showInputWordLimit">
+          <p class="bk-limit-box">
+            <span class="strong">{{ (curValue && curValue.length) || 0 }}</span
+            >/<span>{{ maxlength }}</span>
+          </p>
+        </template>
+      </div>
+    </template>
+    <template v-else>
+      <div :class="[`bk-input-${type}`]">
+        <input
+          ref="input"
+          :class="['bk-form-input', inputSizeCls, { 'only-bottom-border': behavior === 'simplicity' }]"
+          :style="computedStyle"
+          v-bind="bindAttribute"
+          @keyup.enter="handlerEnter"
+          @keyup="handlerKeyup"
+          @keypress="handlerKeypress"
+          @keydown="handlerKeydown"
+          @focus="handlerFocus"
+          @blur="handlerBlur"
+          @input="handlerInput"
+          @paste="handlerPaste"
+        />
+        <template v-if="/^number$/i.test(type) && !disabled && !readonly">
+          <span class="input-number-option" v-if="showControls">
+            <span
+              @click="handleNumberAdd"
+              class="number-option-item bk-icon icon-angle-up"
+            ></span>
+            <span
+              @click="handleNumberDelete"
+              class="number-option-item bk-icon icon-angle-down"
+            ></span>
+          </span>
+        </template>
+      </div>
+    </template>
+
+    <div class="group-box group-append" v-if="append">
+      <slot name="append"></slot>
+    </div>
+    <div class="control-icon right-icon" :style="rightIconStyle" v-if="!/^number$/i.test(type)" @click="handlerRightIcon" ref="rightIconArea">
+      <i @click="togglePass" v-if="showPwdVisable" :class="[
+        'bk-icon',
+        inputType === 'password'
+          ? inputPasswordIcon[0]
+          : inputPasswordIcon[1]
+      ]"></i>
+      <i @click.stop.prevent="handlerClear" class="bk-icon icon-close-circle-shape clear-icon ml5" v-if="showClearIcon"></i>
+      <i :class="['bk-icon', rightIcon]" v-else-if="rightIcon"></i>
+      <template v-if="type === 'text'">
+        <p class="bk-limit-box ml5" style="position: static" v-show="showInputWordLimit">
+          <span class="strong">{{ (curValue && curValue.length) || 0 }}</span
+          >/<span>{{ maxlength }}</span>
+        </p>
+      </template>
+    </div>
+  </div>
 </template>
 
 <script>

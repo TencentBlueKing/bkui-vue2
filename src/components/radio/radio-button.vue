@@ -27,24 +27,24 @@
 -->
 
 <template>
-    <label class="bk-form-radio-button"
-        :class="{ 'disabled': disabled }"
-        :tabindex="disabled ? false : 0"
-        @keydown.enter.prevent="handlerChange">
-        <input
-            class="bk-radio-button-input"
-            type="radio"
-            :name="groupName"
-            :checked="selected"
-            :key="current"
-            :disabled="disabled"
-            :tabindex="-1"
-            :class="{
-                'is-checked': selected
-            }"
-            @change="handlerChange" />
-        <div class="bk-radio-button-text"><slot>{{label}}</slot></div>
-    </label>
+  <label class="bk-form-radio-button"
+    :class="{ 'disabled': disabled }"
+    :tabindex="disabled ? false : 0"
+    @keydown.enter.prevent="handlerChange">
+    <input
+      class="bk-radio-button-input"
+      type="radio"
+      :name="groupName"
+      :checked="selected"
+      :key="current"
+      :disabled="disabled"
+      :tabindex="-1"
+      :class="{
+        'is-checked': selected
+      }"
+      @change="handlerChange" />
+    <div class="bk-radio-button-text"><slot>{{label}}</slot></div>
+  </label>
 </template>
 
 <script>

@@ -27,25 +27,25 @@
 -->
 
 <template>
-    <li class="bk-option"
-        :class="{
-            'is-selected': isSelected,
-            'is-disabled': disabled,
-            'is-highlight': isHighlight
-        }"
-        v-show="!unmatched"
-        @click="handleOptionClick">
-        <div class="bk-option-content">
-            <slot>
-                <div class="bk-option-content-default" :title="name">
-                    <i class="bk-option-icon bk-icon icon-check-1" v-if="select.multiple && isSelected"></i>
-                    <span class="bk-option-name" :class="select.fontSizeCls">
-                        {{name}}
-                    </span>
-                </div>
-            </slot>
+  <li class="bk-option"
+    :class="{
+      'is-selected': isSelected,
+      'is-disabled': disabled,
+      'is-highlight': isHighlight
+    }"
+    v-show="!unmatched"
+    @click="handleOptionClick">
+    <div class="bk-option-content">
+      <slot>
+        <div class="bk-option-content-default" :title="name">
+          <i class="bk-option-icon bk-icon icon-check-1" v-if="select.multiple && isSelected"></i>
+          <span class="bk-option-name" :class="select.fontSizeCls">
+            {{name}}
+          </span>
         </div>
-    </li>
+      </slot>
+    </div>
+  </li>
 </template>
 
 <script>

@@ -27,7 +27,7 @@
 -->
 
 <template>
-    <span :class="extCls">{{formatValue}}</span>
+  <span :class="extCls">{{formatValue}}</span>
 </template>
 
 <script>

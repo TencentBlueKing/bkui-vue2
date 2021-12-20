@@ -27,25 +27,25 @@
 -->
 
 <template>
-    <div class="bk-select-tag-container"
-        :class="{
-            'is-fixed-height': select.collapseTag,
-            'is-focus': select.focus,
-            'is-available': !select.disabled && !select.readonly,
-            'is-disabled': select.disabled,
-            'is-readonly': select.readonly,
-            'is-large-size': select.size === 'large',
-            'is-small-size': select.size === 'small',
-            'has-prefix-icon': !!select.prefixIcon
-        }">
-        <div class="bk-select-tag"
-            :class="{ 'width-limit-tag': select.isTagWidthLimit }"
-            v-for="option in select.selectedOptions"
-            :key="option.id">
-            <span>{{option.name}}</span>
-            <i class="bk-icon icon-close" @click="handleRemoveSelected($event, option)"></i>
-        </div>
+  <div class="bk-select-tag-container"
+    :class="{
+      'is-fixed-height': select.collapseTag,
+      'is-focus': select.focus,
+      'is-available': !select.disabled && !select.readonly,
+      'is-disabled': select.disabled,
+      'is-readonly': select.readonly,
+      'is-large-size': select.size === 'large',
+      'is-small-size': select.size === 'small',
+      'has-prefix-icon': !!select.prefixIcon
+    }">
+    <div class="bk-select-tag"
+      :class="{ 'width-limit-tag': select.isTagWidthLimit }"
+      v-for="option in select.selectedOptions"
+      :key="option.id">
+      <span>{{option.name}}</span>
+      <i class="bk-icon icon-close" @click="handleRemoveSelected($event, option)"></i>
     </div>
+  </div>
 </template>
 
 <script>

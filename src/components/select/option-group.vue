@@ -27,22 +27,22 @@
 -->
 
 <template>
-    <li class="bk-option-group" v-show="visible">
-        <div class="bk-option-group-name" :class="[select.fontSizeCls, showCollapse && !readonly ? 'is-collapse' : '']" @click="handleGroupNameClick">
-            <template v-if="showPrefixOpt">
-                <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
-            </template>
-            <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
-            <template v-if="showSelectAll">
-                <span class="btn-check-all">
-                    <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @click.native="handleCheckAllClick" @change="handleSelectAll"></bk-checkbox>
-                </span>
-            </template>
-        </div>
-        <ul class="bk-group-options" v-show="!isLocalCollapse">
-            <slot></slot>
-        </ul>
-    </li>
+  <li class="bk-option-group" v-show="visible">
+    <div class="bk-option-group-name" :class="[select.fontSizeCls, showCollapse && !readonly ? 'is-collapse' : '']" @click="handleGroupNameClick">
+      <template v-if="showPrefixOpt">
+        <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
+      </template>
+      <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
+      <template v-if="showSelectAll">
+        <span class="btn-check-all">
+          <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @click.native="handleCheckAllClick" @change="handleSelectAll"></bk-checkbox>
+        </span>
+      </template>
+    </div>
+    <ul class="bk-group-options" v-show="!isLocalCollapse">
+      <slot></slot>
+    </ul>
+  </li>
 </template>
 
 <script>

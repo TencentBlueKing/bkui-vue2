@@ -27,124 +27,124 @@
 -->
 
 <template>
-    <div style="position: absolute; top: -100000px; left: -100000px;" :data-transfer="transfer" v-transfer-dom>
-        <div
-            ref="dialog_wrapper"
-            class="bk-dialog-wrapper"
-            :class="[showMask ? '' : 'bk-dialog-no-mask', wrapShow ? '' : 'bk-dialog-hidden', extCls]"
-            :style="wrapStyles"
-            @mousedown.stop="wrapClickHandler">
-            <transition :name="contentTransitionName" @after-leave="animationFinish">
-                <!-- info-box -->
-                <template v-if="isInfoBox">
-                    <div class="bk-dialog bk-info-box" :style="[mainStyles]" v-show="visible">
-                        <div :class="[
-                            'bk-dialog-content',
-                            isDraggable ? 'bk-dialog-content-drag' : '',
-                            (isDraggable && dragData.dragging) ? 'bk-dialog-content-dragging' : ''
-                        ]" ref="content" :style="[contentStyles]" @click="contentClickHandler">
-                            <div class="bk-dialog-tool" @mousedown.left="moveStartHandler">
-                                <slot name="tools"></slot>
-                            </div>
-                            <template v-if="type">
-                                <div class="bk-dialog-type-body" :class="type === 'loading' ? 'loading' : ''">
-                                    <slot name="type-body">
-                                        <template v-if="type === 'loading'">
-                                            <img src="../../ui/images/default_loading.png" alt="loading" class="bk-dialog-loading">
-                                        </template>
-                                        <template v-else>
-                                            <i class="bk-icon bk-dialog-mark" :class="['bk-dialog-' + type, 'icon-' + calcIcon]"></i>
-                                        </template>
-                                    </slot>
-                                </div>
-                                <div class="bk-dialog-type-header" v-if="title || $slots['type-header']"
-                                    :class="[type === 'loading' ? 'loading' : '', subTitle || $slots['type-sub-header'] ? 'has-sub-header' : '']">
-                                    <div class="header">
-                                        <slot name="type-header">{{title}}</slot>
-                                    </div>
-                                </div>
-                                <div class="bk-dialog-type-sub-header" :class="type === 'loading' ? 'loading' : ''" v-if="subTitle || $slots['type-sub-header']">
-                                    <div class="header">
-                                        <slot name="type-sub-header">{{subTitle}}</slot>
-                                    </div>
-                                </div>
-                                <div class="bk-dialog-footer" v-if="showFooter">
-                                    <slot name="footer">
-                                        <div class="footer-wrapper">
-                                            <bk-button type="button" name="confirm" :loading="buttonLoading" :theme="theme" @click.native="okHandler">
-                                                {{localeOkText}}
-                                            </bk-button>
-                                            <bk-button type="button" name="cancel" :disabled="buttonLoading" @click.native="cancelHandler">
-                                                {{localeCancelText}}
-                                            </bk-button>
-                                        </div>
-                                    </slot>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <div class="bk-dialog-header" v-if="showHead">
-                                    <slot name="header"><div class="bk-dialog-header-inner">{{title}}</div></slot>
-                                </div>
-                                <div class="bk-dialog-sub-header" :class="(subTitle || $slots['sub-header']) ? 'has-sub' : ''">
-                                    <slot name="sub-header"><div class="bk-dialog-header-inner">{{subTitle}}</div></slot>
-                                </div>
-                                <div class="bk-dialog-footer" v-if="showFooter">
-                                    <slot name="footer">
-                                        <div class="footer-wrapper">
-                                            <bk-button type="button" name="confirm" :loading="buttonLoading" :theme="theme" @click.native="okHandler">
-                                                {{localeOkText}}
-                                            </bk-button>
-                                            <bk-button type="button" name="cancel" :disabled="buttonLoading" @click.native="cancelHandler">
-                                                {{localeCancelText}}
-                                            </bk-button>
-                                        </div>
-                                    </slot>
-                                </div>
-                            </template>
-                            <i class="bk-dialog-close bk-icon icon-close" v-if="closeIcon" @click.stop="cancelHandler"></i>
-                        </div>
+  <div style="position: absolute; top: -100000px; left: -100000px;" :data-transfer="transfer" v-transfer-dom>
+    <div
+      ref="dialog_wrapper"
+      class="bk-dialog-wrapper"
+      :class="[showMask ? '' : 'bk-dialog-no-mask', wrapShow ? '' : 'bk-dialog-hidden', extCls]"
+      :style="wrapStyles"
+      @mousedown.stop="wrapClickHandler">
+      <transition :name="contentTransitionName" @after-leave="animationFinish">
+        <!-- info-box -->
+        <template v-if="isInfoBox">
+          <div class="bk-dialog bk-info-box" :style="[mainStyles]" v-show="visible">
+            <div :class="[
+              'bk-dialog-content',
+              isDraggable ? 'bk-dialog-content-drag' : '',
+              (isDraggable && dragData.dragging) ? 'bk-dialog-content-dragging' : ''
+            ]" ref="content" :style="[contentStyles]" @click="contentClickHandler">
+              <div class="bk-dialog-tool" @mousedown.left="moveStartHandler">
+                <slot name="tools"></slot>
+              </div>
+              <template v-if="type">
+                <div class="bk-dialog-type-body" :class="type === 'loading' ? 'loading' : ''">
+                  <slot name="type-body">
+                    <template v-if="type === 'loading'">
+                      <img src="../../ui/images/default_loading.png" alt="loading" class="bk-dialog-loading">
+                    </template>
+                    <template v-else>
+                      <i class="bk-icon bk-dialog-mark" :class="['bk-dialog-' + type, 'icon-' + calcIcon]"></i>
+                    </template>
+                  </slot>
+                </div>
+                <div class="bk-dialog-type-header" v-if="title || $slots['type-header']"
+                  :class="[type === 'loading' ? 'loading' : '', subTitle || $slots['type-sub-header'] ? 'has-sub-header' : '']">
+                  <div class="header">
+                    <slot name="type-header">{{title}}</slot>
+                  </div>
+                </div>
+                <div class="bk-dialog-type-sub-header" :class="type === 'loading' ? 'loading' : ''" v-if="subTitle || $slots['type-sub-header']">
+                  <div class="header">
+                    <slot name="type-sub-header">{{subTitle}}</slot>
+                  </div>
+                </div>
+                <div class="bk-dialog-footer" v-if="showFooter">
+                  <slot name="footer">
+                    <div class="footer-wrapper">
+                      <bk-button type="button" name="confirm" :loading="buttonLoading" :theme="theme" @click.native="okHandler">
+                        {{localeOkText}}
+                      </bk-button>
+                      <bk-button type="button" name="cancel" :disabled="buttonLoading" @click.native="cancelHandler">
+                        {{localeCancelText}}
+                      </bk-button>
                     </div>
-                </template>
-                <!-- dialog -->
-                <template v-else>
-                    <div :class="[
-                        'bk-dialog',
-                        fullscreen ? 'bk-dialog-fullscreen' : '',
-                        (fullscreen && !showHead) ? 'bk-dialog-fullscreen-no-header' : '',
-                        (fullscreen && !showFooter) ? 'bk-dialog-fullscreen-no-footer' : ''
-                    ]" :style="[mainStyles]" v-if="shouldRender || visible" v-show="visible">
-                        <div :class="[
-                            'bk-dialog-content',
-                            showMask ? '' : 'bk-dialog-content-no-mask',
-                            isDraggable ? 'bk-dialog-content-drag' : '',
-                            (isDraggable && dragData.dragging) ? 'bk-dialog-content-dragging' : ''
-                        ]" ref="content" :style="[contentStyles]" @click="contentClickHandler">
-                            <div class="bk-dialog-tool" @mousedown.left="moveStartHandler">
-                                <slot name="tools"></slot>
-                            </div>
-                            <div :class="{ 'bk-dialog-header': true, 'header-on-left': headerPosition === 'left' }" v-if="showHead" :style="{ textAlign: headerPosition }">
-                                <slot name="header"><div :class="{ 'bk-dialog-header-inner': true, 'header-center': headerPosition === 'center' }">{{title}}</div></slot>
-                            </div>
-                            <div class="bk-dialog-body"><slot></slot></div>
-                            <div class="bk-dialog-footer" :style="{ textAlign: footerPosition }" v-if="showFooter">
-                                <slot name="footer">
-                                    <div class="footer-wrapper">
-                                        <bk-button type="button" name="confirm" :loading="buttonLoading" :theme="theme" @click.native="okHandler">
-                                            {{localeOkText}}
-                                        </bk-button>
-                                        <bk-button type="button" name="cancel" :disabled="buttonLoading" @click.native="cancelHandler">
-                                            {{localeCancelText}}
-                                        </bk-button>
-                                    </div>
-                                </slot>
-                            </div>
-                            <i class="bk-dialog-close bk-icon icon-close" v-if="closeIcon" @click.stop="cancelHandler"></i>
-                        </div>
+                  </slot>
+                </div>
+              </template>
+              <template v-else>
+                <div class="bk-dialog-header" v-if="showHead">
+                  <slot name="header"><div class="bk-dialog-header-inner">{{title}}</div></slot>
+                </div>
+                <div class="bk-dialog-sub-header" :class="(subTitle || $slots['sub-header']) ? 'has-sub' : ''">
+                  <slot name="sub-header"><div class="bk-dialog-header-inner">{{subTitle}}</div></slot>
+                </div>
+                <div class="bk-dialog-footer" v-if="showFooter">
+                  <slot name="footer">
+                    <div class="footer-wrapper">
+                      <bk-button type="button" name="confirm" :loading="buttonLoading" :theme="theme" @click.native="okHandler">
+                        {{localeOkText}}
+                      </bk-button>
+                      <bk-button type="button" name="cancel" :disabled="buttonLoading" @click.native="cancelHandler">
+                        {{localeCancelText}}
+                      </bk-button>
                     </div>
-                </template>
-            </transition>
-        </div>
+                  </slot>
+                </div>
+              </template>
+              <i class="bk-dialog-close bk-icon icon-close" v-if="closeIcon" @click.stop="cancelHandler"></i>
+            </div>
+          </div>
+        </template>
+        <!-- dialog -->
+        <template v-else>
+          <div :class="[
+            'bk-dialog',
+            fullscreen ? 'bk-dialog-fullscreen' : '',
+            (fullscreen && !showHead) ? 'bk-dialog-fullscreen-no-header' : '',
+            (fullscreen && !showFooter) ? 'bk-dialog-fullscreen-no-footer' : ''
+          ]" :style="[mainStyles]" v-if="shouldRender || visible" v-show="visible">
+            <div :class="[
+              'bk-dialog-content',
+              showMask ? '' : 'bk-dialog-content-no-mask',
+              isDraggable ? 'bk-dialog-content-drag' : '',
+              (isDraggable && dragData.dragging) ? 'bk-dialog-content-dragging' : ''
+            ]" ref="content" :style="[contentStyles]" @click="contentClickHandler">
+              <div class="bk-dialog-tool" @mousedown.left="moveStartHandler">
+                <slot name="tools"></slot>
+              </div>
+              <div :class="{ 'bk-dialog-header': true, 'header-on-left': headerPosition === 'left' }" v-if="showHead" :style="{ textAlign: headerPosition }">
+                <slot name="header"><div :class="{ 'bk-dialog-header-inner': true, 'header-center': headerPosition === 'center' }">{{title}}</div></slot>
+              </div>
+              <div class="bk-dialog-body"><slot></slot></div>
+              <div class="bk-dialog-footer" :style="{ textAlign: footerPosition }" v-if="showFooter">
+                <slot name="footer">
+                  <div class="footer-wrapper">
+                    <bk-button type="button" name="confirm" :loading="buttonLoading" :theme="theme" @click.native="okHandler">
+                      {{localeOkText}}
+                    </bk-button>
+                    <bk-button type="button" name="cancel" :disabled="buttonLoading" @click.native="cancelHandler">
+                      {{localeCancelText}}
+                    </bk-button>
+                  </div>
+                </slot>
+              </div>
+              <i class="bk-dialog-close bk-icon icon-close" v-if="closeIcon" @click.stop="cancelHandler"></i>
+            </div>
+          </div>
+        </template>
+      </transition>
     </div>
+  </div>
 </template>
 
 <script>

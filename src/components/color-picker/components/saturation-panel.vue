@@ -27,20 +27,20 @@
 -->
 
 <template>
-    <div ref="container"
-        tabindex="0"
-        class="bk-color-picker-saturation"
-        :style="backgroundStyle"
-        @keydown="handleArrowKeydown"
-        @mousedown.stop="handleMouseDown">
-        <!-- 从左到右饱和度 saturation 增大 -->
-        <div class="bk-color-picker-saturation-white"></div>
-        <!-- 从上到下明度 value(brightness) 减小 -->
-        <div class="bk-color-picker-saturation-black"></div>
-        <div class="bk-color-picker-pointer" :style="pointerStyle">
-            <div class="bk-color-picker-circle"></div>
-        </div>
+  <div ref="container"
+    tabindex="0"
+    class="bk-color-picker-saturation"
+    :style="backgroundStyle"
+    @keydown="handleArrowKeydown"
+    @mousedown.stop="handleMouseDown">
+    <!-- 从左到右饱和度 saturation 增大 -->
+    <div class="bk-color-picker-saturation-white"></div>
+    <!-- 从上到下明度 value(brightness) 减小 -->
+    <div class="bk-color-picker-saturation-black"></div>
+    <div class="bk-color-picker-pointer" :style="pointerStyle">
+      <div class="bk-color-picker-circle"></div>
     </div>
+  </div>
 </template>
 
 <script>

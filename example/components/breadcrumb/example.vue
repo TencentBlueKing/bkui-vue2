@@ -27,14 +27,14 @@
 -->
 
 <template>
-    <bk-breadcrumb>
-        <bk-breadcrumb-item v-for="(item,index) in list" :key="index" :to="item.link">{{item.title}}</bk-breadcrumb-item>
-        <bk-breadcrumb-item>
-            <template>
-                <bk-input></bk-input>
-            </template>
-        </bk-breadcrumb-item>
-    </bk-breadcrumb>
+  <bk-breadcrumb>
+    <bk-breadcrumb-item v-for="(item,index) in list" :key="index" :to="item.link">{{item.title}}</bk-breadcrumb-item>
+    <bk-breadcrumb-item>
+      <template>
+        <bk-input></bk-input>
+      </template>
+    </bk-breadcrumb-item>
+  </bk-breadcrumb>
 </template>
 <script>
 import { bkBreadcrumb, bkBreadcrumbItem, bkInput } from '@'

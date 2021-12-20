@@ -27,115 +27,115 @@
 -->
 
 <template>
-    <div class="bk-date-picker" :class="[type === 'datetimerange' ? 'long' : '', longWidthCls, extCls]" v-clickoutside="handleClose">
-        <div ref="reference" class="bk-date-picker-rel">
-            <slot name="trigger">
-                <span class="icon-wrapper" :class="disabled ? 'disabled' : ''"
-                    @click="handleIconClick"
-                    @mouseenter="handleInputMouseenter"
-                    @mouseleave="handleInputMouseleave">
-                    <svg class="picker-icon" v-if="type === 'time' || type === 'timerange'" x="0px" y="0px" viewBox="0 0 1024 1024">
-                        <g id="time">
-                            <path fill="#c4c6cc" d="M512,128c51.9,0,102.2,10.1,149.5,30.2c45.7,19.3,86.8,47,122.1,82.3s63,76.4,82.3,122.1
+  <div class="bk-date-picker" :class="[type === 'datetimerange' ? 'long' : '', longWidthCls, extCls]" v-clickoutside="handleClose">
+    <div ref="reference" class="bk-date-picker-rel">
+      <slot name="trigger">
+        <span class="icon-wrapper" :class="disabled ? 'disabled' : ''"
+          @click="handleIconClick"
+          @mouseenter="handleInputMouseenter"
+          @mouseleave="handleInputMouseleave">
+          <svg class="picker-icon" v-if="type === 'time' || type === 'timerange'" x="0px" y="0px" viewBox="0 0 1024 1024">
+            <g id="time">
+              <path fill="#c4c6cc" d="M512,128c51.9,0,102.2,10.1,149.5,30.2c45.7,19.3,86.8,47,122.1,82.3s63,76.4,82.3,122.1
                                 c20,47.3,30.2,97.6,30.2,149.5S886,614.3,865.9,661.6c-19.3,45.7-47,86.8-82.3,122.1s-76.4,63-122.1,82.3
                                 c-47.3,20-97.6,30.2-149.5,30.2S409.8,886.1,362.5,866c-45.7-19.3-86.8-47-122.1-82.3s-63-76.4-82.3-122.1
                                 c-20-47.3-30.2-97.6-30.2-149.5s10.1-102.2,30.2-149.5c19.3-45.7,47-86.8,82.3-122.1s76.4-63,122.1-82.3
                                 C409.8,138.1,460.1,128,512,128 M512,64C264.6,64,64,264.6,64,512s200.6,448,448,448s448-200.6,448-448S759.4,64,512,64L512,64z"
-                            />
-                            <polygon fill="#c4c6cc" points="512,512 512,256 448,256 448,512 448,576 512,576 768,576 768,512" />
-                        </g>
-                    </svg>
-                    <svg v-else class="picker-icon" x="0px" y="0px" viewBox="0 0 1024 1024">
-                        <g id="date">
-                            <path fill="#c4c6cc" d="M896,128h-96v64h64v112H160V192h64v-64h-96c-17.7,0-32,14.3-32,32v736c0,17.7,14.3,32,32,32h768
+              />
+              <polygon fill="#c4c6cc" points="512,512 512,256 448,256 448,512 448,576 512,576 768,576 768,512" />
+            </g>
+          </svg>
+          <svg v-else class="picker-icon" x="0px" y="0px" viewBox="0 0 1024 1024">
+            <g id="date">
+              <path fill="#c4c6cc" d="M896,128h-96v64h64v112H160V192h64v-64h-96c-17.7,0-32,14.3-32,32v736c0,17.7,14.3,32,32,32h768
                                 c17.7,0,32-14.3,32-32V160C928,142.3,913.7,128,896,128z M160,864V368h704v496H160z" />
-                            <rect x="416" y="128" fill="#c4c6cc" width="192" height="64" />
-                            <rect x="288" y="96" fill="#c4c6cc" width="64" height="128" />
-                            <rect x="672" y="96" fill="#c4c6cc" width="64" height="128" />
-                            <polygon fill="#c4c6cc" points="403.7,514.4 557.1,514.4 557.1,515.3 420.1,765.5 483.5,765.5 620.3,504.3 620.3,466.5 403.7,466.5" />
-                        </g>
-                    </svg>
-                </span>
-                <input type="text"
-                    :key="forceInputRerender"
-                    :readonly="localReadonly"
-                    :disabled="disabled"
-                    :placeholder="placeholder"
-                    :value="displayValue"
-                    class="bk-date-picker-editor"
-                    :class="[readonly ? 'readonly' : '', fontSizeCls, { 'only-bottom-border': behavior === 'simplicity' }]"
-                    ref="input"
-                    @focus="handleFocus"
-                    @blur="handleBlur"
-                    @click="handleFocus"
-                    @change="handleInputChange"
-                    @keydown="handleKeydown"
-                    @mouseenter="handleInputMouseenter"
-                    @mouseleave="handleInputMouseleave"
-                />
-                <i class="bk-icon icon-close-circle-shape clear-action" v-if="clearable && showClose" @click="handleClear"></i>
-            </slot>
-        </div>
-        <transition name="transition-drop">
-            <DatePickerDropdown
-                @click.native="handleTransferClick"
-                v-show="opened"
-                :class="transfer ? 'bk-date-picker-transfer' : ''"
-                :placement="placement"
-                ref="drop"
-                :ext-popover-cls="extPopoverCls"
-                :data-transfer="transfer"
-                :transfer="transfer"
-                v-transfer-dom>
-                <template v-if="hasHeader">
-                    <div class="bk-date-picker-top-wrapper" :class="headerSlotCls">
-                        <slot name="header">
-                        </slot>
-                    </div>
-                </template>
-                <!-- eslint-disable-next-line vue/require-component-is -->
-                <component
-                    :is="panel"
-                    ref="pickerPanel"
-                    :clearable="clearable"
-                    :visible="visible"
-                    :show-time="type === 'datetime' || type === 'datetimerange'"
-                    :confirm="isConfirm"
-                    :selection-mode="selectionMode"
-                    :steps="steps"
-                    :format="format"
-                    :value="internalValue"
-                    :start-date="startDate"
-                    :split-panels="splitPanels"
-                    :shortcuts="shortcuts"
-                    :picker-type="type"
-                    :multiple="multiple"
-                    :focused-date="focusedDate"
-                    :width="type === 'time' || type === 'timerange' ? width : 261"
-                    :time-picker-options="timePickerOptions"
-                    :shortcut-close="shortcutClose"
-                    :up-to-now="upToNow"
-                    :allow-cross-day="allowCrossDayProp"
-                    v-bind="ownPickerProps"
-                    @pick="onPick"
-                    @pick-clear="handleClear"
-                    @pick-success="onPickSuccess"
-                    @pick-click="disableClickOutSide = true"
-                    @selection-mode-change="onSelectionModeChange"
-                >
-                    <div slot="shortcuts" v-if="$slots.shortcuts || $scopedSlots.shortcuts">
-                        <slot name="shortcuts"></slot>
-                    </div>
-                </component>
-                <template v-if="hasFooter">
-                    <div class="bk-date-picker-footer-wrapper" :class="footerSlotCls">
-                        <slot name="footer">
-                        </slot>
-                    </div>
-                </template>
-            </DatePickerDropdown>
-        </transition>
+              <rect x="416" y="128" fill="#c4c6cc" width="192" height="64" />
+              <rect x="288" y="96" fill="#c4c6cc" width="64" height="128" />
+              <rect x="672" y="96" fill="#c4c6cc" width="64" height="128" />
+              <polygon fill="#c4c6cc" points="403.7,514.4 557.1,514.4 557.1,515.3 420.1,765.5 483.5,765.5 620.3,504.3 620.3,466.5 403.7,466.5" />
+            </g>
+          </svg>
+        </span>
+        <input type="text"
+          :key="forceInputRerender"
+          :readonly="localReadonly"
+          :disabled="disabled"
+          :placeholder="placeholder"
+          :value="displayValue"
+          class="bk-date-picker-editor"
+          :class="[readonly ? 'readonly' : '', fontSizeCls, { 'only-bottom-border': behavior === 'simplicity' }]"
+          ref="input"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @click="handleFocus"
+          @change="handleInputChange"
+          @keydown="handleKeydown"
+          @mouseenter="handleInputMouseenter"
+          @mouseleave="handleInputMouseleave"
+        />
+        <i class="bk-icon icon-close-circle-shape clear-action" v-if="clearable && showClose" @click="handleClear"></i>
+      </slot>
     </div>
+    <transition name="transition-drop">
+      <DatePickerDropdown
+        @click.native="handleTransferClick"
+        v-show="opened"
+        :class="transfer ? 'bk-date-picker-transfer' : ''"
+        :placement="placement"
+        ref="drop"
+        :ext-popover-cls="extPopoverCls"
+        :data-transfer="transfer"
+        :transfer="transfer"
+        v-transfer-dom>
+        <template v-if="hasHeader">
+          <div class="bk-date-picker-top-wrapper" :class="headerSlotCls">
+            <slot name="header">
+            </slot>
+          </div>
+        </template>
+        <!-- eslint-disable-next-line vue/require-component-is -->
+        <component
+          :is="panel"
+          ref="pickerPanel"
+          :clearable="clearable"
+          :visible="visible"
+          :show-time="type === 'datetime' || type === 'datetimerange'"
+          :confirm="isConfirm"
+          :selection-mode="selectionMode"
+          :steps="steps"
+          :format="format"
+          :value="internalValue"
+          :start-date="startDate"
+          :split-panels="splitPanels"
+          :shortcuts="shortcuts"
+          :picker-type="type"
+          :multiple="multiple"
+          :focused-date="focusedDate"
+          :width="type === 'time' || type === 'timerange' ? width : 261"
+          :time-picker-options="timePickerOptions"
+          :shortcut-close="shortcutClose"
+          :up-to-now="upToNow"
+          :allow-cross-day="allowCrossDayProp"
+          v-bind="ownPickerProps"
+          @pick="onPick"
+          @pick-clear="handleClear"
+          @pick-success="onPickSuccess"
+          @pick-click="disableClickOutSide = true"
+          @selection-mode-change="onSelectionModeChange"
+        >
+          <div slot="shortcuts" v-if="$slots.shortcuts || $scopedSlots.shortcuts">
+            <slot name="shortcuts"></slot>
+          </div>
+        </component>
+        <template v-if="hasFooter">
+          <div class="bk-date-picker-footer-wrapper" :class="footerSlotCls">
+            <slot name="footer">
+            </slot>
+          </div>
+        </template>
+      </DatePickerDropdown>
+    </transition>
+  </div>
 </template>
 
 <script>

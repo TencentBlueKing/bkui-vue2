@@ -27,71 +27,71 @@
 -->
 
 <template>
-    <div class="search-select-wrap" :class="extCls" :style="{ 'z-index': wrapZindex }" v-bind="$attrs">
-        <div ref="wrap"
-            class="bk-search-select"
-            :class="{ 'is-focus': input.focus }"
-            @click="handleWrapClick">
-            <div class="search-prefix">
-                <slot name="prefix"></slot>
+  <div class="search-select-wrap" :class="extCls" :style="{ 'z-index': wrapZindex }" v-bind="$attrs">
+    <div ref="wrap"
+      class="bk-search-select"
+      :class="{ 'is-focus': input.focus }"
+      @click="handleWrapClick">
+      <div class="search-prefix">
+        <slot name="prefix"></slot>
+      </div>
+      <div class="search-input" :style="{ maxHeight: (shrink ? (input.focus ? maxHeight : minHeight) : maxHeight) + 'px' }">
+        <template v-for="(item,index) in chip.list">
+          <div
+            class="search-input-chip"
+            :key="`${index}_pre_key`"
+            v-if="overflow.chipIndex >= 0 ? index < overflow.chipIndex : index >= 0">
+            <span class="chip-name">
+              {{item[displayKey] + (item.values && item.values.length ? explainCode + (item.condition ? item.condition[displayKey] : '') + item.values.map(v => v[displayKey]).join(splitCode) : '')}}
+            </span>
+            <span class="chip-clear bk-icon icon-close" @click="handleClear(index,item)"></span>
+          </div>
+        </template>
+        <div v-if="chip.list.length && overflow.chipIndex >= 0" class="search-input-chip overflow-chip" style="padding-right: 8px;">+{{chip.list.length - overflow.chipIndex}}</div>
+        <template v-if="chip.list.length && overflow.chipIndex >= 0">
+          <template v-for="(item,index) in chip.list">
+            <div
+              class="search-input-chip hidden-chip"
+              :key="`${index}_next_key`"
+              v-if="index >= overflow.chipIndex">
+              <span class="chip-name">
+                {{item[displayKey] + (item.values && item.values.length ? explainCode + (item.condition ? item.condition[displayKey] : '') + item.values.map(v => v[displayKey]).join(splitCode) : '')}}
+              </span>
+              <span class="chip-clear bk-icon icon-close" @click="handleClear(index,item)"></span>
             </div>
-            <div class="search-input" :style="{ maxHeight: (shrink ? (input.focus ? maxHeight : minHeight) : maxHeight) + 'px' }">
-                <template v-for="(item,index) in chip.list">
-                    <div
-                        class="search-input-chip"
-                        :key="`${index}_pre_key`"
-                        v-if="overflow.chipIndex >= 0 ? index < overflow.chipIndex : index >= 0">
-                        <span class="chip-name">
-                            {{item[displayKey] + (item.values && item.values.length ? explainCode + (item.condition ? item.condition[displayKey] : '') + item.values.map(v => v[displayKey]).join(splitCode) : '')}}
-                        </span>
-                        <span class="chip-clear bk-icon icon-close" @click="handleClear(index,item)"></span>
-                    </div>
-                </template>
-                <div v-if="chip.list.length && overflow.chipIndex >= 0" class="search-input-chip overflow-chip" style="padding-right: 8px;">+{{chip.list.length - overflow.chipIndex}}</div>
-                <template v-if="chip.list.length && overflow.chipIndex >= 0">
-                    <template v-for="(item,index) in chip.list">
-                        <div
-                            class="search-input-chip hidden-chip"
-                            :key="`${index}_next_key`"
-                            v-if="index >= overflow.chipIndex">
-                            <span class="chip-name">
-                                {{item[displayKey] + (item.values && item.values.length ? explainCode + (item.condition ? item.condition[displayKey] : '') + item.values.map(v => v[displayKey]).join(splitCode) : '')}}
-                            </span>
-                            <span class="chip-clear bk-icon icon-close" @click="handleClear(index,item)"></span>
-                        </div>
-                    </template>
-                </template>
-                <div class="search-input-input">
-                    <div
-                        ref="input"
-                        class="div-input"
-                        :class="{ 'input-before': !chip.list.length && !input.value.length, 'input-after': showItemPlaceholder }"
-                        contenteditable="plaintext-only"
-                        :data-placeholder="defaultPlaceholder"
-                        :data-tips="curItem.placeholder || ''"
-                        spellcheck="false"
-                        @click="handleInputClick"
-                        v-clickoutside="handleInputOutSide"
-                        @focus="handleInputFocus"
-                        @cut="handleInputCut"
-                        @input="handleInputChange"
-                        @keydown="handleInputKeyup">
-                    </div>
-                </div>
-            </div>
-            <div class="search-nextfix">
-                <i v-if="clearable && (chip.list.length || input.value.length)" class="search-clear bk-icon icon-close-circle-shape" @click.self="handleClearAll"></i>
-                <slot name="nextfix">
-                    <i @click.self="handleClickSearch" class="bk-icon icon-search search-nextfix-icon" :class="{ 'is-focus': input.focus }"></i>
-                </slot>
-            </div>
+          </template>
+        </template>
+        <div class="search-input-input">
+          <div
+            ref="input"
+            class="div-input"
+            :class="{ 'input-before': !chip.list.length && !input.value.length, 'input-after': showItemPlaceholder }"
+            contenteditable="plaintext-only"
+            :data-placeholder="defaultPlaceholder"
+            :data-tips="curItem.placeholder || ''"
+            spellcheck="false"
+            @click="handleInputClick"
+            v-clickoutside="handleInputOutSide"
+            @focus="handleInputFocus"
+            @cut="handleInputCut"
+            @input="handleInputChange"
+            @keydown="handleInputKeyup">
+          </div>
         </div>
-        <div class="bk-select-tips" v-if="validateStr.length">
-            <slot name="validate">
-                <i class="bk-icon icon-exclamation-circle-shape select-tips"></i>{{validateStr || ''}}
-            </slot>
-        </div>
+      </div>
+      <div class="search-nextfix">
+        <i v-if="clearable && (chip.list.length || input.value.length)" class="search-clear bk-icon icon-close-circle-shape" @click.self="handleClearAll"></i>
+        <slot name="nextfix">
+          <i @click.self="handleClickSearch" class="bk-icon icon-search search-nextfix-icon" :class="{ 'is-focus': input.focus }"></i>
+        </slot>
+      </div>
     </div>
+    <div class="bk-select-tips" v-if="validateStr.length">
+      <slot name="validate">
+        <i class="bk-icon icon-exclamation-circle-shape select-tips"></i>{{validateStr || ''}}
+      </slot>
+    </div>
+  </div>
 </template>
 
 <script>

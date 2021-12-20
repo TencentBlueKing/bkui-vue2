@@ -27,9 +27,9 @@
 -->
 
 <template>
-    <div class="bk-grid-row" :style="style">
-        <slot />
-    </div>
+  <div class="bk-grid-row" :style="style">
+    <slot />
+  </div>
 </template>
 
 <script>

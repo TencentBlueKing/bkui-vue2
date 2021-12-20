@@ -27,23 +27,23 @@
 -->
 
 <template>
-    <div class="bk-selector-list">
-        <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
-            <li v-for="(data, index) in renderList"
-                class="bk-selector-list-item"
-                :class="activeClass(index)"
-                :key="index"
-                @click="handleSelect(data, 'select')">
-                <!-- <Render :node="data" :display-key="displayKey" :tpl="tpl" /> -->
-                <div class="bk-selector-node">
-                    <span class="text">{{data[displayKey]}}{{focusIndex}}</span>
-                </div>
-            </li>
-            <li class="bk-selector-list-item" v-if="showScrollLoading">
-                <div class="loading" v-bkloading="{ isLoading: true }"></div>
-            </li>
-        </ul>
-    </div>
+  <div class="bk-selector-list">
+    <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
+      <li v-for="(data, index) in renderList"
+        class="bk-selector-list-item"
+        :class="activeClass(index)"
+        :key="index"
+        @click="handleSelect(data, 'select')">
+        <!-- <Render :node="data" :display-key="displayKey" :tpl="tpl" /> -->
+        <div class="bk-selector-node">
+          <span class="text">{{data[displayKey]}}{{focusIndex}}</span>
+        </div>
+      </li>
+      <li class="bk-selector-list-item" v-if="showScrollLoading">
+        <div class="loading" v-bkloading="{ isLoading: true }"></div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

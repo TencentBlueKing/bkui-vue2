@@ -27,48 +27,48 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Upload 文件上传更多示例
-        </h2>
-        <div class="example-item">
-            <bk-upload
-                :files="files"
-                :tip="'只允许上传JPG、PNG、JPEG、ZIP的文件'"
-                :with-credentials="true"
-                :handle-res-code="handleRes"
-                :header="[{ name: 'Access-Control-Allow-Origin', value: '*' }]"
-                @on-success="testSuccess"
-                @on-progress="testProgress"
-                @on-done="testDone"
-                @on-error="testErr"
-                @on-delete="testDel"
-                :multiple="true"
-                :url="'https://jsonplaceholder.typicode.com/posts/'"
-            ></bk-upload>
-        </div>
-        <div class="mt50">
-            <bk-upload
-                :files="files"
-                :handle-res-code="handleRes"
-                :theme="'picture'"
-                :multiple="true"
-                :with-credentials="true"
-                :url="'https://jsonplaceholder.typicode.com/posts/'"
-            ></bk-upload>
-        </div>
-        <div class="mt50">
-            <bk-upload
-                :files="files"
-                :handle-res-code="handleRes"
-                :theme="'picture'"
-                :multiple="false"
-                :with-credentials="true"
-                :url="'https://jsonplaceholder.typicode.com/posts/'"
-            ></bk-upload>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Upload 文件上传更多示例
+    </h2>
+    <div class="example-item">
+      <bk-upload
+        :files="files"
+        :tip="'只允许上传JPG、PNG、JPEG、ZIP的文件'"
+        :with-credentials="true"
+        :handle-res-code="handleRes"
+        :header="[{ name: 'Access-Control-Allow-Origin', value: '*' }]"
+        @on-success="testSuccess"
+        @on-progress="testProgress"
+        @on-done="testDone"
+        @on-error="testErr"
+        @on-delete="testDel"
+        :multiple="true"
+        :url="'https://jsonplaceholder.typicode.com/posts/'"
+      ></bk-upload>
+    </div>
+    <div class="mt50">
+      <bk-upload
+        :files="files"
+        :handle-res-code="handleRes"
+        :theme="'picture'"
+        :multiple="true"
+        :with-credentials="true"
+        :url="'https://jsonplaceholder.typicode.com/posts/'"
+      ></bk-upload>
+    </div>
+    <div class="mt50">
+      <bk-upload
+        :files="files"
+        :handle-res-code="handleRes"
+        :theme="'picture'"
+        :multiple="false"
+        :with-credentials="true"
+        :url="'https://jsonplaceholder.typicode.com/posts/'"
+      ></bk-upload>
+    </div>
+  </section>
 </template>
 
 <script>

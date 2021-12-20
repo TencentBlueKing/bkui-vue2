@@ -27,33 +27,33 @@
 -->
 
 <template>
-    <ul class="bk-timeline" :class="extCls">
-        <li
-            class="bk-timeline-dot"
-            :class="makeClass(item)"
-            v-for="(item, index) in list"
-            :key="index">
-            <div class="bk-timeline-icon" v-if="isCustomIcon(item.icon)">
-                <span class="bk-timeline-icon-inner">
-                    <i :class="['bk-icon', `icon-${item.icon}`]" v-if="isBuiltinIcon(item.icon)"></i>
-                    <vnode-icon :icon="item.icon" v-else-if="isVNodeIcon(item.icon)" />
-                </span>
-            </div>
-            <div class="bk-timeline-section">
-                <slot :name="`title${index}`" v-bind="item">
-                    <div :class="['bk-timeline-title', { 'has-event': !!$listeners['select'] }]" v-if="item.tag !== ''" @click="toggle(item)" v-html="item.tag"></div>
-                </slot>
-                <div class="bk-timeline-content" v-if="item.content">
-                    <template v-if="isNode(item)">
-                        <slot :name="'nodeContent' + index">{{nodeContent(item, index)}}</slot>
-                    </template>
-                    <template v-else>
-                        <div v-html="item.content" :title="computedTitle(item.content)"></div>
-                    </template>
-                </div>
-            </div>
-        </li>
-    </ul>
+  <ul class="bk-timeline" :class="extCls">
+    <li
+      class="bk-timeline-dot"
+      :class="makeClass(item)"
+      v-for="(item, index) in list"
+      :key="index">
+      <div class="bk-timeline-icon" v-if="isCustomIcon(item.icon)">
+        <span class="bk-timeline-icon-inner">
+          <i :class="['bk-icon', `icon-${item.icon}`]" v-if="isBuiltinIcon(item.icon)"></i>
+          <vnode-icon :icon="item.icon" v-else-if="isVNodeIcon(item.icon)" />
+        </span>
+      </div>
+      <div class="bk-timeline-section">
+        <slot :name="`title${index}`" v-bind="item">
+          <div :class="['bk-timeline-title', { 'has-event': !!$listeners['select'] }]" v-if="item.tag !== ''" @click="toggle(item)" v-html="item.tag"></div>
+        </slot>
+        <div class="bk-timeline-content" v-if="item.content">
+          <template v-if="isNode(item)">
+            <slot :name="'nodeContent' + index">{{nodeContent(item, index)}}</slot>
+          </template>
+          <template v-else>
+            <div v-html="item.content" :title="computedTitle(item.content)"></div>
+          </template>
+        </div>
+      </div>
+    </li>
+  </ul>
 </template>
 <script>
 import { isVNode } from '@/utils/dom'

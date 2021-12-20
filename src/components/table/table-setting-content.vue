@@ -27,71 +27,71 @@
 -->
 
 <template>
-    <div class="bk-table-setting-content">
-        <h2 class="content-title">{{t('bk.table.setting.title')}}</h2>
-        <div class="content-scroller">
-            <div class="content-fields clearfix">
-                <p class="setting-title">
-                    {{t('bk.table.setting.fields.title')}}
-                    <span class="setting-subtitle"
-                        v-if="limit"
-                        :class="{ 'is-limit': reachLimit }">
-                        {{t('bk.table.setting.fields.subtitle', { max: limit })}}
-                    </span>
-                    <bk-checkbox class="fr setting-checkbox" v-else
-                        :checked="allSelected"
-                        @click.native="handleSelectAll">
-                        {{t('bk.table.setting.fields.selectAll')}}
-                    </bk-checkbox>
-                </p>
-                <bk-checkbox-group v-model="localSelected" class="fields-group">
-                    <template v-for="field in fields">
-                        <span class="fields-checkbox-wrapper" :key="field[valueKey]">
-                            <bk-checkbox class="fields-checkbox"
-                                :disabled="field.hasOwnProperty('disabled') ? !!field.disabled : false"
-                                :value="field[valueKey]"
-                                :title="field[labelKey]">
-                                {{field[labelKey]}}
-                            </bk-checkbox>
-                        </span>
-                    </template>
-                </bk-checkbox-group>
-            </div>
-            <div class="content-line-height">
-                <p class="setting-title">
-                    {{t('bk.table.setting.lineHeight.title')}}
-                </p>
-                <div class="bk-button-group link-button-group">
-                    <bk-button
-                        size="small"
-                        :class="['link-button', { 'is-selected': currentSize === 'small' }]"
-                        @click="setSize('small')">
-                        {{t('bk.table.setting.lineHeight.small')}}
-                    </bk-button>
-                    <bk-button
-                        size="small"
-                        :class="['link-button', { 'is-selected': currentSize === 'medium' }]"
-                        @click="setSize('medium')">
-                        {{t('bk.table.setting.lineHeight.medium')}}
-                    </bk-button>
-                    <bk-button
-                        size="small"
-                        :class="['link-button', { 'is-selected': currentSize === 'large' }]"
-                        @click="setSize('large')">
-                        {{t('bk.table.setting.lineHeight.large')}}
-                    </bk-button>
-                </div>
-            </div>
+  <div class="bk-table-setting-content">
+    <h2 class="content-title">{{t('bk.table.setting.title')}}</h2>
+    <div class="content-scroller">
+      <div class="content-fields clearfix">
+        <p class="setting-title">
+          {{t('bk.table.setting.fields.title')}}
+          <span class="setting-subtitle"
+            v-if="limit"
+            :class="{ 'is-limit': reachLimit }">
+            {{t('bk.table.setting.fields.subtitle', { max: limit })}}
+          </span>
+          <bk-checkbox class="fr setting-checkbox" v-else
+            :checked="allSelected"
+            @click.native="handleSelectAll">
+            {{t('bk.table.setting.fields.selectAll')}}
+          </bk-checkbox>
+        </p>
+        <bk-checkbox-group v-model="localSelected" class="fields-group">
+          <template v-for="field in fields">
+            <span class="fields-checkbox-wrapper" :key="field[valueKey]">
+              <bk-checkbox class="fields-checkbox"
+                :disabled="field.hasOwnProperty('disabled') ? !!field.disabled : false"
+                :value="field[valueKey]"
+                :title="field[labelKey]">
+                {{field[labelKey]}}
+              </bk-checkbox>
+            </span>
+          </template>
+        </bk-checkbox-group>
+      </div>
+      <div class="content-line-height">
+        <p class="setting-title">
+          {{t('bk.table.setting.lineHeight.title')}}
+        </p>
+        <div class="bk-button-group link-button-group">
+          <bk-button
+            size="small"
+            :class="['link-button', { 'is-selected': currentSize === 'small' }]"
+            @click="setSize('small')">
+            {{t('bk.table.setting.lineHeight.small')}}
+          </bk-button>
+          <bk-button
+            size="small"
+            :class="['link-button', { 'is-selected': currentSize === 'medium' }]"
+            @click="setSize('medium')">
+            {{t('bk.table.setting.lineHeight.medium')}}
+          </bk-button>
+          <bk-button
+            size="small"
+            :class="['link-button', { 'is-selected': currentSize === 'large' }]"
+            @click="setSize('large')">
+            {{t('bk.table.setting.lineHeight.large')}}
+          </bk-button>
         </div>
-        <div class="content-options">
-            <bk-button class="mr10" theme="primary"
-                :disabled="reachLimit"
-                @click="handleConfirm">
-                {{t('bk.table.setting.options.ok')}}
-            </bk-button>
-            <bk-button theme="default" @click="handleCancel">{{t('bk.table.setting.options.cancel')}}</bk-button>
-        </div>
+      </div>
     </div>
+    <div class="content-options">
+      <bk-button class="mr10" theme="primary"
+        :disabled="reachLimit"
+        @click="handleConfirm">
+        {{t('bk.table.setting.options.ok')}}
+      </bk-button>
+      <bk-button theme="default" @click="handleCancel">{{t('bk.table.setting.options.cancel')}}</bk-button>
+    </div>
+  </div>
 </template>
 
 <script>

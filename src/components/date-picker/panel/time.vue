@@ -27,26 +27,26 @@
 -->
 
 <template>
-    <div class="bk-picker-panel-body-wrapper" @mousedown.prevent>
-        <div class="bk-picker-panel-body" :style="{ width: `${width}px` }">
-            <div class="bk-time-picker-header" v-if="showDate">{{visibleDate}}</div>
-            <div class="bk-picker-panel-content">
-                <time-spinner
-                    ref="timeSpinner"
-                    :show-seconds="showSeconds"
-                    :steps="steps"
-                    :hours="timeSlots[0]"
-                    :minutes="timeSlots[1]"
-                    :seconds="timeSlots[2]"
-                    :disabled-hours="disabledHMS.disabledHours"
-                    :disabled-minutes="disabledHMS.disabledMinutes"
-                    :disabled-seconds="disabledHMS.disabledSeconds"
-                    :hide-disabled-options="hideDisabledOptions"
-                    @change="handleChange"
-                    @pick-click="handlePickClick"></time-spinner>
-            </div>
-        </div>
+  <div class="bk-picker-panel-body-wrapper" @mousedown.prevent>
+    <div class="bk-picker-panel-body" :style="{ width: `${width}px` }">
+      <div class="bk-time-picker-header" v-if="showDate">{{visibleDate}}</div>
+      <div class="bk-picker-panel-content">
+        <time-spinner
+          ref="timeSpinner"
+          :show-seconds="showSeconds"
+          :steps="steps"
+          :hours="timeSlots[0]"
+          :minutes="timeSlots[1]"
+          :seconds="timeSlots[2]"
+          :disabled-hours="disabledHMS.disabledHours"
+          :disabled-minutes="disabledHMS.disabledMinutes"
+          :disabled-seconds="disabledHMS.disabledSeconds"
+          :hide-disabled-options="hideDisabledOptions"
+          @change="handleChange"
+          @pick-click="handlePickClick"></time-spinner>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

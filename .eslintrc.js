@@ -259,7 +259,7 @@ module.exports = {
     'vue/html-end-tags': 'error',
 
     // https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/html-indent.md
-    'vue/html-indent': ['error', 4, {
+    'vue/html-indent': ['error', 2, {
       'attribute': 1,
       'baseIndent': 1,
       'closeBracket': 0,

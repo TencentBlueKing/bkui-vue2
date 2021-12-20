@@ -27,17 +27,17 @@
 -->
 
 <template>
-    <div class="bk-color-picker-input">
-        <div class="bk-color-picker-input-hex">
-            <InputContainer :info="hex" @input="handleInput"></InputContainer>
-        </div>
-        <div class="bk-color-picker-input-rgba">
-            <InputContainer :info="r" @input="handleInput"></InputContainer>
-            <InputContainer :info="g" @input="handleInput"></InputContainer>
-            <InputContainer :info="b" @input="handleInput"></InputContainer>
-            <InputContainer :info="a" @input="handleInput" @tab="handleAlphaTab"></InputContainer>
-        </div>
+  <div class="bk-color-picker-input">
+    <div class="bk-color-picker-input-hex">
+      <InputContainer :info="hex" @input="handleInput"></InputContainer>
     </div>
+    <div class="bk-color-picker-input-rgba">
+      <InputContainer :info="r" @input="handleInput"></InputContainer>
+      <InputContainer :info="g" @input="handleInput"></InputContainer>
+      <InputContainer :info="b" @input="handleInput"></InputContainer>
+      <InputContainer :info="a" @input="handleInput" @tab="handleAlphaTab"></InputContainer>
+    </div>
+  </div>
 </template>
 
 <script>

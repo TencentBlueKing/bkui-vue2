@@ -27,11 +27,11 @@
 -->
 
 <template>
-    <div class="bk-date-picker-cells bk-date-picker-cells-month">
-        <span :class="getCellCls(cell)" v-for="(cell, index) in cells" :key="index" @click="handleClick(cell)" @mouseenter="handleMouseMove(cell)">
-            <em>{{cell.text}}</em>
-        </span>
-    </div>
+  <div class="bk-date-picker-cells bk-date-picker-cells-month">
+    <span :class="getCellCls(cell)" v-for="(cell, index) in cells" :key="index" @click="handleClick(cell)" @mouseenter="handleMouseMove(cell)">
+      <em>{{cell.text}}</em>
+    </span>
+  </div>
 </template>
 <script>
 import { clearHours } from '@/utils/date'

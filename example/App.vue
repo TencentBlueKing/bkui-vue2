@@ -27,26 +27,26 @@
 -->
 
 <template>
-    <div id="app">
-        <app-header
-            :root-domain="'tencent.com'"
-            :login-url="'https://login.bk.tencent.com'"
-            :avatar-host="'https://q1.qlogo.cn'"
-            :less-code-url="'https://github.com/Tencent/bk-PaaS/blob/lesscode-master/paas-ce/lesscode/README.md'"
-            :design-url="'https://bkdesign.bk.tencent.com/'"
-            :region="'tencent'">
-        </app-header>
-        <div class="app-container">
-            <div class="app-side-nav">
-                <side-nav></side-nav>
-            </div>
-            <div class="placeholder"></div>
-            <div class="app-content">
-                <router-view></router-view>
-            </div>
-        </div>
-        <app-footer></app-footer>
+  <div id="app">
+    <app-header
+      :root-domain="'tencent.com'"
+      :login-url="'https://login.bk.tencent.com'"
+      :avatar-host="'https://q1.qlogo.cn'"
+      :less-code-url="'https://github.com/Tencent/bk-PaaS/blob/lesscode-master/paas-ce/lesscode/README.md'"
+      :design-url="'https://bkdesign.bk.tencent.com/'"
+      :region="'tencent'">
+    </app-header>
+    <div class="app-container">
+      <div class="app-side-nav">
+        <side-nav></side-nav>
+      </div>
+      <div class="placeholder"></div>
+      <div class="app-content">
+        <router-view></router-view>
+      </div>
     </div>
+    <app-footer></app-footer>
+  </div>
 </template>
 
 <script>

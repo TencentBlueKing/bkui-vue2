@@ -1,14 +1,14 @@
 <template>
-    <transition name="bk-fade-in-linear">
-        <div class="bk-back-to-top"
-            v-if="visible"
-            :style="positionStyle"
-            @click="scrollTop">
-            <slot>
-                <i class="bk-icon icon-angle-up-line"></i>
-            </slot>
-        </div>
-    </transition>
+  <transition name="bk-fade-in-linear">
+    <div class="bk-back-to-top"
+      v-if="visible"
+      :style="positionStyle"
+      @click="scrollTop">
+      <slot>
+        <i class="bk-icon icon-angle-up-line"></i>
+      </slot>
+    </div>
+  </transition>
 </template>
 
 <script>

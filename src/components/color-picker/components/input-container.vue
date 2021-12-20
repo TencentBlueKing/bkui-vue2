@@ -27,14 +27,14 @@
 -->
 
 <template>
-    <div class="bk-color-picker-input-part">
-        <input :type="info.name === 'HEX' ? 'text' : 'number'"
-            :class="['bk-color-picker-input-value', info.error && 'error']"
-            :value="info.value"
-            @keydown.tab="handleTab"
-            @input="handleInput">
-        <span class="bk-color-picker-input-text">{{info.name}}</span>
-    </div>
+  <div class="bk-color-picker-input-part">
+    <input :type="info.name === 'HEX' ? 'text' : 'number'"
+      :class="['bk-color-picker-input-value', info.error && 'error']"
+      :value="info.value"
+      @keydown.tab="handleTab"
+      @input="handleInput">
+    <span class="bk-color-picker-input-text">{{info.name}}</span>
+  </div>
 </template>
 
 <script>

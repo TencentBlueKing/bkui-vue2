@@ -27,75 +27,75 @@
 -->
 
 <template>
-    <div class="bk-loading bk-default-loading" :class="extCls" v-if="type === 'default'"
-        :style="{
-            position: 'relative'
-        }">
-        <div class="bk-loading-body">
-            <slot></slot>
-        </div>
-        <transition name="fade" :duration="{ enter: duration }" @after-leave="animationFinish">
-            <div class="bk-loading-wrapper" v-show="isShow"
-                :style="{
-                    zIndex,
-                    backgroundColor: bgColor
-                }">
-                <div :class="computedClass">
-                    <template v-if="isSpin">
-                        <div class="rotate rotate1"></div>
-                        <div class="rotate rotate2"></div>
-                        <div class="rotate rotate3"></div>
-                        <div class="rotate rotate4"></div>
-                        <div class="rotate rotate5"></div>
-                        <div class="rotate rotate6"></div>
-                        <div class="rotate rotate7"></div>
-                        <div class="rotate rotate8"></div>
-                    </template>
-                    <template v-else>
-                        <div class="point point1"></div>
-                        <div class="point point2"></div>
-                        <div class="point point3"></div>
-                        <div class="point point4"></div>
-                    </template>
-                </div>
-                <div class="bk-loading-title">
-                    <slot name="title">{{title}}</slot>
-                </div>
-            </div>
-        </transition>
+  <div class="bk-loading bk-default-loading" :class="extCls" v-if="type === 'default'"
+    :style="{
+      position: 'relative'
+    }">
+    <div class="bk-loading-body">
+      <slot></slot>
     </div>
-    <transition name="fade" :duration="{ enter: duration }" @after-leave="animationFinish" v-else>
-        <div class="bk-loading" :class="extCls" v-show="isShow"
-            :style="{
-                position: type,
-                zIndex,
-                backgroundColor: bgColor
-            }">
-            <div class="bk-loading-wrapper">
-                <div :class="computedClass">
-                    <template v-if="isSpin">
-                        <div class="rotate rotate1"></div>
-                        <div class="rotate rotate2"></div>
-                        <div class="rotate rotate3"></div>
-                        <div class="rotate rotate4"></div>
-                        <div class="rotate rotate5"></div>
-                        <div class="rotate rotate6"></div>
-                        <div class="rotate rotate7"></div>
-                        <div class="rotate rotate8"></div>
-                    </template>
-                    <template v-else>
-                        <div class="point point1"></div>
-                        <div class="point point2"></div>
-                        <div class="point point3"></div>
-                        <div class="point point4"></div>
-                    </template>
-                </div>
-                <div class="bk-loading-title">
-                    <slot name="title">{{title}}</slot>
-                </div>
-            </div>
+    <transition name="fade" :duration="{ enter: duration }" @after-leave="animationFinish">
+      <div class="bk-loading-wrapper" v-show="isShow"
+        :style="{
+          zIndex,
+          backgroundColor: bgColor
+        }">
+        <div :class="computedClass">
+          <template v-if="isSpin">
+            <div class="rotate rotate1"></div>
+            <div class="rotate rotate2"></div>
+            <div class="rotate rotate3"></div>
+            <div class="rotate rotate4"></div>
+            <div class="rotate rotate5"></div>
+            <div class="rotate rotate6"></div>
+            <div class="rotate rotate7"></div>
+            <div class="rotate rotate8"></div>
+          </template>
+          <template v-else>
+            <div class="point point1"></div>
+            <div class="point point2"></div>
+            <div class="point point3"></div>
+            <div class="point point4"></div>
+          </template>
         </div>
+        <div class="bk-loading-title">
+          <slot name="title">{{title}}</slot>
+        </div>
+      </div>
     </transition>
+  </div>
+  <transition name="fade" :duration="{ enter: duration }" @after-leave="animationFinish" v-else>
+    <div class="bk-loading" :class="extCls" v-show="isShow"
+      :style="{
+        position: type,
+        zIndex,
+        backgroundColor: bgColor
+      }">
+      <div class="bk-loading-wrapper">
+        <div :class="computedClass">
+          <template v-if="isSpin">
+            <div class="rotate rotate1"></div>
+            <div class="rotate rotate2"></div>
+            <div class="rotate rotate3"></div>
+            <div class="rotate rotate4"></div>
+            <div class="rotate rotate5"></div>
+            <div class="rotate rotate6"></div>
+            <div class="rotate rotate7"></div>
+            <div class="rotate rotate8"></div>
+          </template>
+          <template v-else>
+            <div class="point point1"></div>
+            <div class="point point2"></div>
+            <div class="point point3"></div>
+            <div class="point point4"></div>
+          </template>
+        </div>
+        <div class="bk-loading-title">
+          <slot name="title">{{title}}</slot>
+        </div>
+      </div>
+    </div>
+  </transition>
 
 </template>
 <script>

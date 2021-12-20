@@ -27,51 +27,51 @@
 -->
 
 <template>
-    <div class="bk-cascade-panel">
-        <ul v-if="list.length"
-            class="bk-cascade-panel-ul"
-            :class="{ 'bk-cascade-border': childrenList && childrenList.length }"
-            :style="{
-                width: scrollWidth + 'px'
-            }">
-            <option-item
-                v-for="(item, index) in list"
-                :key="index"
-                :item="item"
-                :selected-item="selectedItem"
-                :multiple="multiple"
-                :is-remote="isRemote"
-                @click.native.stop="cascadeClick(item)"
-                @mouseenter.native.stop="cascadeHover(item)"
-                @handleCheckItem="handleCheckItem">
-                <template slot="prepend" slot-scope="{ node }">
-                    <slot name="prepend" :node="node"></slot>
-                </template>
-            </option-item>
-        </ul>
-        <ul v-else
-            class="bk-cascade-panel-ul"
-            style="width: 100%">
-            <li class="bk-option-none">
-                <span>{{ t('bk.select.dataEmpty') }}</span>
-            </li>
-        </ul>
-        <bk-caspanel
-            v-if="childrenList && childrenList.length"
-            :list="childrenList"
-            :trigger="trigger"
-            :scroll-width="scrollWidth"
-            :disabled="disabled"
-            :multiple="multiple"
-            :check-any-level="checkAnyLevel"
-            :is-remote="isRemote"
-            :remote-method="remoteMethod"
-            @updateSelectedList="updateSelectedList">
-            <template slot="prepend" slot-scope="{ node }">
-                <slot name="prepend" :node="node"></slot>
-            </template>
-        </bk-caspanel>
-    </div>
+  <div class="bk-cascade-panel">
+    <ul v-if="list.length"
+      class="bk-cascade-panel-ul"
+      :class="{ 'bk-cascade-border': childrenList && childrenList.length }"
+      :style="{
+        width: scrollWidth + 'px'
+      }">
+      <option-item
+        v-for="(item, index) in list"
+        :key="index"
+        :item="item"
+        :selected-item="selectedItem"
+        :multiple="multiple"
+        :is-remote="isRemote"
+        @click.native.stop="cascadeClick(item)"
+        @mouseenter.native.stop="cascadeHover(item)"
+        @handleCheckItem="handleCheckItem">
+        <template slot="prepend" slot-scope="{ node }">
+          <slot name="prepend" :node="node"></slot>
+        </template>
+      </option-item>
+    </ul>
+    <ul v-else
+      class="bk-cascade-panel-ul"
+      style="width: 100%">
+      <li class="bk-option-none">
+        <span>{{ t('bk.select.dataEmpty') }}</span>
+      </li>
+    </ul>
+    <bk-caspanel
+      v-if="childrenList && childrenList.length"
+      :list="childrenList"
+      :trigger="trigger"
+      :scroll-width="scrollWidth"
+      :disabled="disabled"
+      :multiple="multiple"
+      :check-any-level="checkAnyLevel"
+      :is-remote="isRemote"
+      :remote-method="remoteMethod"
+      @updateSelectedList="updateSelectedList">
+      <template slot="prepend" slot-scope="{ node }">
+        <slot name="prepend" :node="node"></slot>
+      </template>
+    </bk-caspanel>
+  </div>
 </template>
 <script>
 import optionItem from './option-item.vue'

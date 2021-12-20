@@ -27,34 +27,34 @@
 -->
 
 <template>
-    <div :class="[
-        extCls,
-        'bk-resize-layout',
-        `bk-resize-layout-${placement}`,
-        {
-            'bk-resize-layout-collapsed': collapsed,
-            'bk-resize-layout-border': border
-        }
-    ]">
-        <aside class="bk-resize-layout-aside" ref="aside" :style="computedAsideStyle">
-            <div class="bk-resize-layout-aside-content" v-show="asideContentVisible">
-                <slot name="aside"></slot>
-            </div>
-            <i class="bk-resize-trigger"
-                v-show="!disabled && (!collapsed || autoMinimize)"
-                :style="computedTriggerStyle"
-                @mousedown.left="handleMousedown($event)">
-            </i>
-            <i :class="['bk-resize-proxy', placement]" ref="resizeProxy" v-show="!collapsed || autoMinimize"></i>
-            <slot name="collapse-trigger" v-if="collapsible">
-                <i class="bk-resize-collapse bk-icon icon-angle-left" @click="setCollapse"></i>
-            </slot>
-        </aside>
-        <main class="bk-resize-layout-main">
-            <slot name="main"></slot>
-        </main>
-        <div class="bk-resize-mask" ref="resizeMask"></div>
-    </div>
+  <div :class="[
+    extCls,
+    'bk-resize-layout',
+    `bk-resize-layout-${placement}`,
+    {
+      'bk-resize-layout-collapsed': collapsed,
+      'bk-resize-layout-border': border
+    }
+  ]">
+    <aside class="bk-resize-layout-aside" ref="aside" :style="computedAsideStyle">
+      <div class="bk-resize-layout-aside-content" v-show="asideContentVisible">
+        <slot name="aside"></slot>
+      </div>
+      <i class="bk-resize-trigger"
+        v-show="!disabled && (!collapsed || autoMinimize)"
+        :style="computedTriggerStyle"
+        @mousedown.left="handleMousedown($event)">
+      </i>
+      <i :class="['bk-resize-proxy', placement]" ref="resizeProxy" v-show="!collapsed || autoMinimize"></i>
+      <slot name="collapse-trigger" v-if="collapsible">
+        <i class="bk-resize-collapse bk-icon icon-angle-left" @click="setCollapse"></i>
+      </slot>
+    </aside>
+    <main class="bk-resize-layout-main">
+      <slot name="main"></slot>
+    </main>
+    <div class="bk-resize-mask" ref="resizeMask"></div>
+  </div>
 </template>
 
 <script>

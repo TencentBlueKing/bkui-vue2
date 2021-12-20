@@ -27,103 +27,103 @@
 -->
 
 <template>
-    <div :class="['bk-upload', theme, extCls]">
-        <!--多图上传，预览-->
-        <template v-if="theme === 'picture' && multiple && fileList.length">
-            <div :class="{ fail: file.errorMsg }" class="pic-item" v-for="(file, index) in fileList" :key="index">
-                <img :src="file.url">
-                <div class="uploading-status" v-if="file.status === 'running'">
-                    <span>{{ t('bk.uploadFile.uploading') }}</span>
-                    <div class="progress-bar-wrapper">
-                        <div class="progress-bar uploading" :style="{ width: fileList[0].progress }"></div>
-                    </div>
-                </div>
-                <div class="mask" v-if="file.done || file.errorMsg">
-                    <div class="fail-tips" v-if="file.errorMsg" v-bk-tooltips.top="file.errorMsg"></div>
-                    <i class="bk-icon icon-close delete-file" @click="deleteFile(index, file)"></i>
-                </div>
+  <div :class="['bk-upload', theme, extCls]">
+    <!--多图上传，预览-->
+    <template v-if="theme === 'picture' && multiple && fileList.length">
+      <div :class="{ fail: file.errorMsg }" class="pic-item" v-for="(file, index) in fileList" :key="index">
+        <img :src="file.url">
+        <div class="uploading-status" v-if="file.status === 'running'">
+          <span>{{ t('bk.uploadFile.uploading') }}</span>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar uploading" :style="{ width: fileList[0].progress }"></div>
+          </div>
+        </div>
+        <div class="mask" v-if="file.done || file.errorMsg">
+          <div class="fail-tips" v-if="file.errorMsg" v-bk-tooltips.top="file.errorMsg"></div>
+          <i class="bk-icon icon-close delete-file" @click="deleteFile(index, file)"></i>
+        </div>
+      </div>
+    </template>
+    <div
+      class="file-wrapper"
+      tabindex="0"
+      :class="{ 'isdrag': isdrag }"
+      :bk-lableName="labelText"
+      v-bk-tooltips="{
+        disabled: theme !== 'picture' || multiple || fileList.length === 0 || fileList.length > 1 || !fileList[0].errorMsg,
+        content: fileList.length && fileList[0].errorMsg
+      }"
+      @keydown="handleWrapEnter">
+      <div v-if="theme === 'draggable'">
+        <i class="bk-icon upload-icon icon-upload-cloud"></i>
+        <p class="text-area">
+          <span class="drop-upload">{{dragText}}</span>
+          <span class="click-upload">{{clickText}}</span>
+        </p>
+      </div>
+      <div v-if="theme === 'picture'" class="picture-btn">
+        <template>
+          <div v-if="multiple || fileList.length === 0" class="upload-btn">
+            <i class="bk-icon icon-plus-line"></i>
+            <div>{{ t('bk.uploadFile.click') }}</div>
+          </div>
+          <div v-else :class="{ fail: !multiple && fileList.length && fileList[0].errorMsg }" class="pic-item">
+            <div class="uploading-status" v-if="fileList[0].status === 'running'">
+              <span>{{ t('bk.uploadFile.uploading') }}</span>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar uploading" :style="{ width: fileList[0].progress }"></div>
+              </div>
             </div>
+            <div class="fail-status" v-if="fileList[0].errorMsg" v-bk-tooltips.top="fileList[0].errorMsg">
+              <i class="bk-icon icon-image error-pic"></i>
+              <div class="reupload">{{ t('bk.uploadFile.reupload') }}</div>
+              <i class="bk-icon icon-close delete-file error" @click="deleteFile(0, fileList[0])"></i>
+            </div>
+            <div class="uploaded-status" v-if="fileList[0].status === 'done' && !fileList[0].errorMsg">
+              <img :src="fileList[0].url">
+              <div class="mask">
+                {{ t('bk.uploadFile.replace') }}
+                <i class="bk-icon icon-close delete-file" @click="deleteFile(0, fileList[0])"></i>
+              </div>
+            </div>
+          </div>
         </template>
-        <div
-            class="file-wrapper"
-            tabindex="0"
-            :class="{ 'isdrag': isdrag }"
-            :bk-lableName="labelText"
-            v-bk-tooltips="{
-                disabled: theme !== 'picture' || multiple || fileList.length === 0 || fileList.length > 1 || !fileList[0].errorMsg,
-                content: fileList.length && fileList[0].errorMsg
-            }"
-            @keydown="handleWrapEnter">
-            <div v-if="theme === 'draggable'">
-                <i class="bk-icon upload-icon icon-upload-cloud"></i>
-                <p class="text-area">
-                    <span class="drop-upload">{{dragText}}</span>
-                    <span class="click-upload">{{clickText}}</span>
-                </p>
-            </div>
-            <div v-if="theme === 'picture'" class="picture-btn">
-                <template>
-                    <div v-if="multiple || fileList.length === 0" class="upload-btn">
-                        <i class="bk-icon icon-plus-line"></i>
-                        <div>{{ t('bk.uploadFile.click') }}</div>
-                    </div>
-                    <div v-else :class="{ fail: !multiple && fileList.length && fileList[0].errorMsg }" class="pic-item">
-                        <div class="uploading-status" v-if="fileList[0].status === 'running'">
-                            <span>{{ t('bk.uploadFile.uploading') }}</span>
-                            <div class="progress-bar-wrapper">
-                                <div class="progress-bar uploading" :style="{ width: fileList[0].progress }"></div>
-                            </div>
-                        </div>
-                        <div class="fail-status" v-if="fileList[0].errorMsg" v-bk-tooltips.top="fileList[0].errorMsg">
-                            <i class="bk-icon icon-image error-pic"></i>
-                            <div class="reupload">{{ t('bk.uploadFile.reupload') }}</div>
-                            <i class="bk-icon icon-close delete-file error" @click="deleteFile(0, fileList[0])"></i>
-                        </div>
-                        <div class="uploaded-status" v-if="fileList[0].status === 'done' && !fileList[0].errorMsg">
-                            <img :src="fileList[0].url">
-                            <div class="mask">
-                                {{ t('bk.uploadFile.replace') }}
-                                <i class="bk-icon icon-close delete-file" @click="deleteFile(0, fileList[0])"></i>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
-            <input ref="uploadel" tabindex="-1" @change="selectFile" :accept="acceptTypes" :multiple="multiple" :disabled="disabled" type="file">
-        </div>
-        <p class="tip" v-if="tip">{{tip}}</p>
-        <div class="all-file" v-if="fileList.length && theme !== 'picture'">
-            <div v-for="(file, index) in fileList" :key="index">
-                <div :class="{ 'file-item-fail': file.errorMsg }" class="file-item">
-                    <div class="file-icon">
-                        <img v-if="isImageType(file.type)" :src="file.url">
-                        <i v-else :class="getIcon(file)"></i>
-                    </div>
-                    <!-- <i v-if="!file.done" class="bk-icon icon-close close-upload" @click="deleteFile(index, file)"></i> -->
-                    <i class="bk-icon icon-close close-upload" @click="deleteFile(index, file)"></i>
-                    <div class="file-info">
-                        <div class="file-name"><span>{{file.name}}</span></div>
-                        <div class="file-message">
-                            <span class="upload-speed" v-show="!file.done && file.status === 'running'">{{speed}}{{unit}}</span>
-                            <span class="file-size" v-show="!file.done">{{filesize(file.size)}}</span>
-                            <span class="file-size done" v-show="file.done">{{t('bk.uploadFile.uploadDone')}}</span>
-                        </div>
-                        <p v-if="file.errorMsg" v-bk-overflow-tips class="error-msg">{{file.errorMsg}}</p>
-                        <div v-else class="progress-bar-wrapper">
-                            <div
-                                :class="{
-                                    'success': file.done,
-                                    'uploading': file.status === 'running' && !file.errorMsg
-                                }"
-                                class="progress-bar"
-                                :style="{ width: file.progress }">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+      <input ref="uploadel" tabindex="-1" @change="selectFile" :accept="acceptTypes" :multiple="multiple" :disabled="disabled" type="file">
     </div>
+    <p class="tip" v-if="tip">{{tip}}</p>
+    <div class="all-file" v-if="fileList.length && theme !== 'picture'">
+      <div v-for="(file, index) in fileList" :key="index">
+        <div :class="{ 'file-item-fail': file.errorMsg }" class="file-item">
+          <div class="file-icon">
+            <img v-if="isImageType(file.type)" :src="file.url">
+            <i v-else :class="getIcon(file)"></i>
+          </div>
+          <!-- <i v-if="!file.done" class="bk-icon icon-close close-upload" @click="deleteFile(index, file)"></i> -->
+          <i class="bk-icon icon-close close-upload" @click="deleteFile(index, file)"></i>
+          <div class="file-info">
+            <div class="file-name"><span>{{file.name}}</span></div>
+            <div class="file-message">
+              <span class="upload-speed" v-show="!file.done && file.status === 'running'">{{speed}}{{unit}}</span>
+              <span class="file-size" v-show="!file.done">{{filesize(file.size)}}</span>
+              <span class="file-size done" v-show="file.done">{{t('bk.uploadFile.uploadDone')}}</span>
+            </div>
+            <p v-if="file.errorMsg" v-bk-overflow-tips class="error-msg">{{file.errorMsg}}</p>
+            <div v-else class="progress-bar-wrapper">
+              <div
+                :class="{
+                  'success': file.done,
+                  'uploading': file.status === 'running' && !file.errorMsg
+                }"
+                class="progress-bar"
+                :style="{ width: file.progress }">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

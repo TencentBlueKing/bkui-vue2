@@ -27,14 +27,14 @@
 -->
 
 <template>
-    <div class="bk-exception" :class="extCls">
-        <div class="bk-exception-img" :class="scene + '-img'">
-            <img class="exception-image" :src="images[type]" :alt="type" />
-        </div>
-        <div class="bk-exception-text" :class="scene + '-text'">
-            <slot>{{tipText[type]}}</slot>
-        </div>
+  <div class="bk-exception" :class="extCls">
+    <div class="bk-exception-img" :class="scene + '-img'">
+      <img class="exception-image" :src="images[type]" :alt="type" />
     </div>
+    <div class="bk-exception-text" :class="scene + '-text'">
+      <slot>{{tipText[type]}}</slot>
+    </div>
+  </div>
 </template>
 <script>
 import Building from '@/ui/images/exceptions/building.svg'

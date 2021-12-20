@@ -27,99 +27,99 @@
 -->
 
 <template>
-    <div v-if="total > 0" :class="[
-        'bk-page',
-        `bk-page-align-${align}`,
-        {
-            'bk-page-compact': type === 'compact',
-            'bk-page-small': size === 'small'
-        },
-        extCls
-    ]">
-        <pagination-total-count v-if="showTotalCount" />
-        <div v-if="showLimit" :class="['bk-page-count',`bk-page-count-${realityLocation}`, small && 'bk-page-count-small']">
-            <template v-if="curLang === 'cn'">
-                <span>每页</span>
-                <bk-select placeholder="页数"
-                    :clearable="false"
-                    :size="small ? 'small' : ''"
-                    :class="{ 'page-select-small': small && !toggle }"
-                    v-model="realityLimit"
-                    @toggle="(value) => toggle = value">
-                    <bk-option v-for="(p, index) in limitListTmp"
-                        :key="index"
-                        :id="p.id"
-                        :name="p.count">
-                    </bk-option>
-                </bk-select>
-                <span>条</span>
-            </template>
-            <template v-else>
-                <bk-select placeholder="page"
-                    :clearable="false"
-                    v-model="realityLimit">
-                    <bk-option v-for="(p, index) in limitListTmp"
-                        :key="index"
-                        :id="p.id"
-                        :name="`${p.count}/page`">
-                    </bk-option>
-                </bk-select>
-            </template>
-        </div>
-        <pagination-selection-count v-if="showSelectionCount" />
-        <ul v-if="!small" class="bk-page-list">
-            <!-- 上一页 -->
-            <li class="page-item" :class="{ disabled: current === 1 }" @click="prevPage">
-                <a href="javascript:void(0);" class="page-button">
-                    <i class="bk-icon icon-angle-left"></i>
-                </a>
-            </li>
-            <!-- 第一页 -->
-            <li class="page-item" v-show="renderList[0] > 1" @click="jumpToPage(1)">
-                <a href="javascript:void(0);" class="page-button">1</a>
-            </li>
-            <!-- 展开较前的页码 -->
-            <li v-show="renderList[0] > 2 && current > 3"
-                :class="[
-                    'page-item',
-                    {
-                        'page-omit': type !== 'compact'
-                    }
-                ]" @click="prevGroup">
-                <span class="page-button">...</span>
-            </li>
-            <!-- 渲染主要页码列表 -->
-            <li class="page-item" v-for="(item, index) in renderList" :key="index" :class="{ 'cur-page': item === current }" @click="jumpToPage(item)">
-                <a href="javascript:void(0);" class="page-button">{{ item }}</a>
-            </li>
-            <!-- 展开较后的页码 -->
-            <li v-show="renderList[renderList.length - 1] < total - 1"
-                :class="[
-                    'page-item',
-                    {
-                        'page-omit': type !== 'compact'
-                    }
-                ]" @click="nextGroup">
-                <span class="page-button">...</span>
-            </li>
-            <!-- 最后一页 -->
-            <li class="page-item"
-                v-show="renderList[renderList.length - 1] !== total"
-                :class="{
-                    'cur-page': current === total
-                }"
-                @click="jumpToPage(total)">
-                <a href="javascript:void(0);" class="page-button">{{ total }}</a>
-            </li>
-            <!-- 下一页 -->
-            <li class="page-item" :class="{ disabled: current === total }" @click="nextPage">
-                <a href="javascript:void(0);" class="page-button">
-                    <i class="bk-icon icon-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-        <small-jump v-else :current="current" :total="total" @on-change="jumpToPage" />
+  <div v-if="total > 0" :class="[
+    'bk-page',
+    `bk-page-align-${align}`,
+    {
+      'bk-page-compact': type === 'compact',
+      'bk-page-small': size === 'small'
+    },
+    extCls
+  ]">
+    <pagination-total-count v-if="showTotalCount" />
+    <div v-if="showLimit" :class="['bk-page-count',`bk-page-count-${realityLocation}`, small && 'bk-page-count-small']">
+      <template v-if="curLang === 'cn'">
+        <span>每页</span>
+        <bk-select placeholder="页数"
+          :clearable="false"
+          :size="small ? 'small' : ''"
+          :class="{ 'page-select-small': small && !toggle }"
+          v-model="realityLimit"
+          @toggle="(value) => toggle = value">
+          <bk-option v-for="(p, index) in limitListTmp"
+            :key="index"
+            :id="p.id"
+            :name="p.count">
+          </bk-option>
+        </bk-select>
+        <span>条</span>
+      </template>
+      <template v-else>
+        <bk-select placeholder="page"
+          :clearable="false"
+          v-model="realityLimit">
+          <bk-option v-for="(p, index) in limitListTmp"
+            :key="index"
+            :id="p.id"
+            :name="`${p.count}/page`">
+          </bk-option>
+        </bk-select>
+      </template>
     </div>
+    <pagination-selection-count v-if="showSelectionCount" />
+    <ul v-if="!small" class="bk-page-list">
+      <!-- 上一页 -->
+      <li class="page-item" :class="{ disabled: current === 1 }" @click="prevPage">
+        <a href="javascript:void(0);" class="page-button">
+          <i class="bk-icon icon-angle-left"></i>
+        </a>
+      </li>
+      <!-- 第一页 -->
+      <li class="page-item" v-show="renderList[0] > 1" @click="jumpToPage(1)">
+        <a href="javascript:void(0);" class="page-button">1</a>
+      </li>
+      <!-- 展开较前的页码 -->
+      <li v-show="renderList[0] > 2 && current > 3"
+        :class="[
+          'page-item',
+          {
+            'page-omit': type !== 'compact'
+          }
+        ]" @click="prevGroup">
+        <span class="page-button">...</span>
+      </li>
+      <!-- 渲染主要页码列表 -->
+      <li class="page-item" v-for="(item, index) in renderList" :key="index" :class="{ 'cur-page': item === current }" @click="jumpToPage(item)">
+        <a href="javascript:void(0);" class="page-button">{{ item }}</a>
+      </li>
+      <!-- 展开较后的页码 -->
+      <li v-show="renderList[renderList.length - 1] < total - 1"
+        :class="[
+          'page-item',
+          {
+            'page-omit': type !== 'compact'
+          }
+        ]" @click="nextGroup">
+        <span class="page-button">...</span>
+      </li>
+      <!-- 最后一页 -->
+      <li class="page-item"
+        v-show="renderList[renderList.length - 1] !== total"
+        :class="{
+          'cur-page': current === total
+        }"
+        @click="jumpToPage(total)">
+        <a href="javascript:void(0);" class="page-button">{{ total }}</a>
+      </li>
+      <!-- 下一页 -->
+      <li class="page-item" :class="{ disabled: current === total }" @click="nextPage">
+        <a href="javascript:void(0);" class="page-button">
+          <i class="bk-icon icon-angle-right"></i>
+        </a>
+      </li>
+    </ul>
+    <small-jump v-else :current="current" :total="total" @on-change="jumpToPage" />
+  </div>
 </template>
 <script>
 /**

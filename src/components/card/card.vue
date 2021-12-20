@@ -27,33 +27,33 @@
 -->
 
 <template>
-    <section :class="['bk-card', { 'bk-card-border-none': !border }]">
-        <div :class="[collapseClass, { 'collapse': collapseActive }, { 'no-line-height': disableHeaderStyle }]" v-if="showHead" @click="handleCollapse">
-            <i :class="`bk-icon bk-card-head-icon ${collapseIcon}`" v-if="isCollapse"></i>
-            <slot name="header">
-                <template v-if="showInput">
-                    <span class="title" :title="renderTitle">{{ renderTitle }}</span>
-                    <span class="card-edit">
-                        <i class="bk-icon icon-edit-line" v-if="isEdit" @click="clickEdit"></i>
-                    </span>
-                </template>
-                <bk-input v-else
-                    ref="titleInputComp"
-                    v-model="renderTitle"
-                    ext-cls="bk-card-input"
-                    @blur="saveEdit"
-                    @enter="saveEdit" />
-            </slot>
-        </div>
-        <template v-if="collapseActive">
-            <div class="bk-card-body">
-                <slot></slot>
-            </div>
-            <div class="bk-card-foot" v-if="showFoot">
-                <slot name="footer"></slot>
-            </div>
+  <section :class="['bk-card', { 'bk-card-border-none': !border }]">
+    <div :class="[collapseClass, { 'collapse': collapseActive }, { 'no-line-height': disableHeaderStyle }]" v-if="showHead" @click="handleCollapse">
+      <i :class="`bk-icon bk-card-head-icon ${collapseIcon}`" v-if="isCollapse"></i>
+      <slot name="header">
+        <template v-if="showInput">
+          <span class="title" :title="renderTitle">{{ renderTitle }}</span>
+          <span class="card-edit">
+            <i class="bk-icon icon-edit-line" v-if="isEdit" @click="clickEdit"></i>
+          </span>
         </template>
-    </section>
+        <bk-input v-else
+          ref="titleInputComp"
+          v-model="renderTitle"
+          ext-cls="bk-card-input"
+          @blur="saveEdit"
+          @enter="saveEdit" />
+      </slot>
+    </div>
+    <template v-if="collapseActive">
+      <div class="bk-card-body">
+        <slot></slot>
+      </div>
+      <div class="bk-card-foot" v-if="showFoot">
+        <slot name="footer"></slot>
+      </div>
+    </template>
+  </section>
 </template>
 <script>
 import bkInput from '../input/input.vue'

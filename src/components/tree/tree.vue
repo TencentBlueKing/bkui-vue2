@@ -27,73 +27,73 @@
 -->
 
 <template>
-    <ul class="bk-tree" :class="[{ 'bk-has-border-tree': isBorder }, extCls]">
-        <li v-for="(item, index) in shownData"
-            @drop="drop(item, $event)"
-            @dragover="dragover($event)"
-            :key="item[nodeKey] ? item[nodeKey] : item.name"
-            :class="{
-                'leaf': isLeaf(item),
-                'tree-first-node': !parent && index === 0,
-                'tree-only-node': !parent && shownData.length === 1,
-                'tree-second-node': !parent && index === 1,
-                'single': !multiple
-            }">
-            <div class="tree-drag-node"
-                :draggable="draggable" @dragstart="drag(item, $event)">
-                <span
-                    @click="expandNode(item)"
-                    v-if="!item.parent || item.children && item.children.length || item.async"
-                    :class="['bk-icon', 'tree-expanded-icon', item.expanded ? 'icon-down-shape' : 'icon-right-shape']">
-                </span>
-                <label :class="['bk-form-checkbox', { 'bk-form-checkbox--indeterminate': item.halfcheck }, { 'bk-form-checkbox--checked': item.checked }, { 'bk-form-checkbox--disabled': item.disabled }]" v-if="multiple">
-                    <input type="checkbox"
-                        v-if="multiple"
-                        :disabled="item.disabled"
-                        v-model="item.checked"
-                        @change.stop="changeCheckStatus(item, $event)">
-                </label>
-                <div class="tree-node" @click="triggerExpand(item)">
-                    <span class="node-icon" v-if="isShowIcon">
-                        <i class="bk-icon" :class="setNodeIcon(item)"></i>
-                    </span>
-                    <div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-primary loading" v-if="item.loading && item.expanded">
-                        <div class="rotate rotate1"></div>
-                        <div class="rotate rotate2"></div>
-                        <div class="rotate rotate3"></div>
-                        <div class="rotate rotate4"></div>
-                        <div class="rotate rotate5"></div>
-                        <div class="rotate rotate6"></div>
-                        <div class="rotate rotate7"></div>
-                        <div class="rotate rotate8"></div>
-                    </div>
-                    <Render :node="item" :tpl="tpl" />
-                </div>
-            </div>
-            <collapse-transition>
-                <bk-tree v-if="!isLeaf(item)"
-                    @dropTreeChecked="nodeCheckStatusChange"
-                    @async-load-nodes="asyncLoadNodes"
-                    @on-expanded="onExpanded"
-                    @on-click="onClick"
-                    @on-check="onCheck"
-                    @on-broadcast-check="onBroadcastCheck"
-                    @on-drag-node="onDragNode"
-                    :drag-after-expanded="dragAfterExpanded"
-                    :draggable="draggable"
-                    :drag-sort="dragSort"
-                    v-show="item.expanded"
-                    :tpl="tpl"
-                    :data="item.children"
-                    :halfcheck="halfcheck"
-                    :parent="item"
-                    :is-delete-root="isDeleteRoot"
-                    :multiple="multiple"
-                    :show-icon="showIcon">
-                </bk-tree>
-            </collapse-transition>
-        </li>
-    </ul>
+  <ul class="bk-tree" :class="[{ 'bk-has-border-tree': isBorder }, extCls]">
+    <li v-for="(item, index) in shownData"
+      @drop="drop(item, $event)"
+      @dragover="dragover($event)"
+      :key="item[nodeKey] ? item[nodeKey] : item.name"
+      :class="{
+        'leaf': isLeaf(item),
+        'tree-first-node': !parent && index === 0,
+        'tree-only-node': !parent && shownData.length === 1,
+        'tree-second-node': !parent && index === 1,
+        'single': !multiple
+      }">
+      <div class="tree-drag-node"
+        :draggable="draggable" @dragstart="drag(item, $event)">
+        <span
+          @click="expandNode(item)"
+          v-if="!item.parent || item.children && item.children.length || item.async"
+          :class="['bk-icon', 'tree-expanded-icon', item.expanded ? 'icon-down-shape' : 'icon-right-shape']">
+        </span>
+        <label :class="['bk-form-checkbox', { 'bk-form-checkbox--indeterminate': item.halfcheck }, { 'bk-form-checkbox--checked': item.checked }, { 'bk-form-checkbox--disabled': item.disabled }]" v-if="multiple">
+          <input type="checkbox"
+            v-if="multiple"
+            :disabled="item.disabled"
+            v-model="item.checked"
+            @change.stop="changeCheckStatus(item, $event)">
+        </label>
+        <div class="tree-node" @click="triggerExpand(item)">
+          <span class="node-icon" v-if="isShowIcon">
+            <i class="bk-icon" :class="setNodeIcon(item)"></i>
+          </span>
+          <div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-primary loading" v-if="item.loading && item.expanded">
+            <div class="rotate rotate1"></div>
+            <div class="rotate rotate2"></div>
+            <div class="rotate rotate3"></div>
+            <div class="rotate rotate4"></div>
+            <div class="rotate rotate5"></div>
+            <div class="rotate rotate6"></div>
+            <div class="rotate rotate7"></div>
+            <div class="rotate rotate8"></div>
+          </div>
+          <Render :node="item" :tpl="tpl" />
+        </div>
+      </div>
+      <collapse-transition>
+        <bk-tree v-if="!isLeaf(item)"
+          @dropTreeChecked="nodeCheckStatusChange"
+          @async-load-nodes="asyncLoadNodes"
+          @on-expanded="onExpanded"
+          @on-click="onClick"
+          @on-check="onCheck"
+          @on-broadcast-check="onBroadcastCheck"
+          @on-drag-node="onDragNode"
+          :drag-after-expanded="dragAfterExpanded"
+          :draggable="draggable"
+          :drag-sort="dragSort"
+          v-show="item.expanded"
+          :tpl="tpl"
+          :data="item.children"
+          :halfcheck="halfcheck"
+          :parent="item"
+          :is-delete-root="isDeleteRoot"
+          :multiple="multiple"
+          :show-icon="showIcon">
+        </bk-tree>
+      </collapse-transition>
+    </li>
+  </ul>
 </template>
 
 <script>

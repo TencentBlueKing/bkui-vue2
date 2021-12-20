@@ -27,11 +27,11 @@
 -->
 
 <template>
-    <div ref="root">
-        <div ref="point" :class="{ 'bk-affix': affix }" :style="styles">
-            <slot></slot>
-        </div>
+  <div ref="root">
+    <div ref="point" :class="{ 'bk-affix': affix }" :style="styles">
+      <slot></slot>
     </div>
+  </div>
 </template>
 <script>
 /**

@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <div :class="classObject" @click="change" tabindex="0" @keydown.enter.prevent="change">
-        <input type="checkbox" :disabled="disabled" tabindex="-1">
-        <label class="switcher-label" v-show="showText">
-            <span class="switcher-text on-text">{{onText}}</span>
-            <span class="switcher-text off-text">{{offText}}</span>
-        </label>
-        <template v-if="isLoading">
-            <img class="bk-switcher-loading" src="../../ui/images/spinner.svg">
-        </template>
-    </div>
+  <div :class="classObject" @click="change" tabindex="0" @keydown.enter.prevent="change">
+    <input type="checkbox" :disabled="disabled" tabindex="-1">
+    <label class="switcher-label" v-show="showText">
+      <span class="switcher-text on-text">{{onText}}</span>
+      <span class="switcher-text off-text">{{offText}}</span>
+    </label>
+    <template v-if="isLoading">
+      <img class="bk-switcher-loading" src="../../ui/images/spinner.svg">
+    </template>
+  </div>
 </template>
 <script>
 /**

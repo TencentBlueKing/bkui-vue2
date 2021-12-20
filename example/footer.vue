@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <div class="magic-footer">
-        <div class="magic-copyright">
-            <p>
-                <a href="javascript:void(0);" id="contact-us" class="link magic-contact">
-                    <img src="./img/qq.png" style="width:17px;">QQ交谈
-                </a>
-                Copyright © 2012-<span id="cur_year">{{year}}</span> Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
-            </p>
-        </div>
-        <!-- <div class="magic-button">
+  <div class="magic-footer">
+    <div class="magic-copyright">
+      <p>
+        <a href="javascript:void(0);" id="contact-us" class="link magic-contact">
+          <img src="./img/qq.png" style="width:17px;">QQ交谈
+        </a>
+        Copyright © 2012-<span id="cur_year">{{year}}</span> Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
+      </p>
+    </div>
+    <!-- <div class="magic-button">
             <a href="javascript:void(0);" class="magic-top" v-show="showBackTop" @click="backTop">
                 <img src="./img/back_top.png" alt="返回顶部" />
             </a>
@@ -44,7 +44,7 @@
                 <img src="./img/feedback.png" alt="反馈" />
             </a>
         </div> -->
-    </div>
+  </div>
 </template>
 
 <script>

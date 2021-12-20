@@ -27,25 +27,25 @@
 -->
 
 <template>
-    <!-- eslint-disable vue/space-infix-ops -->
-    <div tabindex="0" class="bk-color-picker-recommend"
-        @focus="isFocused = true"
-        @blur="isFocused = false"
-        @keydown="handleKeydown">
-        <div v-for="(color, index) in colors"
-            :key="color + index"
-            :style="{ background: color || '#fff' }"
-            :class="{
-                'bk-color-picker-recommend-color': true,
-                'bk-color-picker-recommend-selected-color': isFocused && selectedIndex === index,
-                'bk-color-picker-empty': color === ''
-            }"
-            @click="selectColor(index)">
-            <div class="bk-color-picker-pointer" v-show="selectedIndex === index">
-                <div class="bk-color-picker-circle"></div>
-            </div>
-        </div>
+  <!-- eslint-disable vue/space-infix-ops -->
+  <div tabindex="0" class="bk-color-picker-recommend"
+    @focus="isFocused = true"
+    @blur="isFocused = false"
+    @keydown="handleKeydown">
+    <div v-for="(color, index) in colors"
+      :key="color + index"
+      :style="{ background: color || '#fff' }"
+      :class="{
+        'bk-color-picker-recommend-color': true,
+        'bk-color-picker-recommend-selected-color': isFocused && selectedIndex === index,
+        'bk-color-picker-empty': color === ''
+      }"
+      @click="selectColor(index)">
+      <div class="bk-color-picker-pointer" v-show="selectedIndex === index">
+        <div class="bk-color-picker-circle"></div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

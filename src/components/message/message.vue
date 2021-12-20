@@ -27,31 +27,31 @@
 -->
 
 <template>
-    <transition name="vertical-move" @after-leave="destroyEl" @enter="setShowCopyText">
-        <div
-            :class="['bk-message', themeClass, extCls]"
-            :style="verticalStyle"
-            v-show="visible"
-            @mouseenter="stopCountDown"
-            @mouseleave="startCountDown">
-            <div class="bk-message-icon">
-                <i :class="['bk-icon', tipsIcon]"></i>
-            </div>
-            <div :class="['bk-message-content', { 'multi-ellipsis': multiEllipsis, 'ellipsis': singleEllipsis }]"
-                :style="ellipsisStyle"
-                ref="content">
-                <slot>{{message}}</slot>
-            </div>
-            <div :class="['bk-message-copy', { 'copied': copied }]"
-                v-if="showCopyText"
-                @click="copyContent">
-                {{localeCopyText}}
-            </div>
-            <div class="bk-message-close" v-if="dismissable">
-                <i :class="['bk-icon icon-close', showCopyText ? 'ml10' : 'ml30']" @click.stop="close"></i>
-            </div>
-        </div>
-    </transition>
+  <transition name="vertical-move" @after-leave="destroyEl" @enter="setShowCopyText">
+    <div
+      :class="['bk-message', themeClass, extCls]"
+      :style="verticalStyle"
+      v-show="visible"
+      @mouseenter="stopCountDown"
+      @mouseleave="startCountDown">
+      <div class="bk-message-icon">
+        <i :class="['bk-icon', tipsIcon]"></i>
+      </div>
+      <div :class="['bk-message-content', { 'multi-ellipsis': multiEllipsis, 'ellipsis': singleEllipsis }]"
+        :style="ellipsisStyle"
+        ref="content">
+        <slot>{{message}}</slot>
+      </div>
+      <div :class="['bk-message-copy', { 'copied': copied }]"
+        v-if="showCopyText"
+        @click="copyContent">
+        {{localeCopyText}}
+      </div>
+      <div class="bk-message-close" v-if="dismissable">
+        <i :class="['bk-icon icon-close', showCopyText ? 'ml10' : 'ml30']" @click.stop="close"></i>
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
 /**

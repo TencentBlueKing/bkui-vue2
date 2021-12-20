@@ -27,12 +27,12 @@
 -->
 
 <template>
-    <div>
-        <bk-search-select
-            :data="demo7.data"
-            v-model="values">
-        </bk-search-select>
-    </div>
+  <div>
+    <bk-search-select
+      :data="demo7.data"
+      v-model="values">
+    </bk-search-select>
+  </div>
 </template>
 
 <script>

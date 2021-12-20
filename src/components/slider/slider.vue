@@ -27,75 +27,75 @@
 -->
 
 <template>
-    <div :class="['bk-slider', extCls]">
-        <slot name="start"></slot>
-        <div class="bk-slider-runway"
-            ref="slider"
-            :style="runwayStyle"
-            @click.stop="setButtonPos">
-            <div :class="['bk-slider-bar', vertical ? 'vertical' : 'horizontal', { 'disable': disable }]" :style="barStyle"></div>
-            <template v-if="showInterval">
-                <div :class="['bk-slider-interval', { 'vertical': vertical }]" :style="getIntervalStyle(item)"
-                    v-for="(item, index) in intervals" :key="index">
-                </div>
-            </template>
-            <template v-if="customContent">
-                <div :class="['bk-slider-interval', { 'vertical': vertical }]" :style="getIntervalStyle(item.percent)"
-                    v-for="(item, index) in customList" :key="index">
-                </div>
-            </template>
-            <template v-if="showBetweenLabel || showIntervalLabel || showCustomLabel">
-                <div :class="['bk-slider-labels', vertical ? 'vertical' : 'horizontal']">
-                    <template v-if="showBetweenLabel">
-                        <div class="label-start"
-                            :style="[{ opacity: showButtonLabel ? [firstValue, secondValue].includes(vertical ? maxValue : minValue) ? '0' : '1' : '1' }]">
-                            {{minValue}}{{intervalLabelUnit}}
-                        </div>
-                        <div class="label-end"
-                            :style="[{ opacity: showButtonLabel ? [firstValue, secondValue].includes(vertical ? minValue : maxValue) ? '0' : '1' : '1' }]">
-                            {{maxValue}}{{intervalLabelUnit}}
-                        </div>
-                    </template>
-                    <template v-else-if="showIntervalLabel">
-                        <div :class="['bk-slider-label', vertical ? 'vertical' : 'horizontal']" :style="getIntervalStyle(item.stepWidth)"
-                            v-for="(item, index) in intervalLabels" :key="index">
-                            {{item.stepLabel}}
-                        </div>
-                    </template>
-                    <template v-else-if="showCustomLabel">
-                        <div :class="['bk-slider-label', vertical ? 'vertical' : 'horizontal']" :style="getIntervalStyle(item.percent)"
-                            v-for="(item, index) in customList" :key="index">
-                            {{item.label}}
-                        </div>
-                    </template>
-                </div>
-            </template>
-            <slider-button :vertical="vertical" v-model="firstValue" ref="firstbutton"></slider-button>
-            <slider-button v-if="range" :vertical="vertical" v-model="secondValue" ref="secondbutton"></slider-button>
+  <div :class="['bk-slider', extCls]">
+    <slot name="start"></slot>
+    <div class="bk-slider-runway"
+      ref="slider"
+      :style="runwayStyle"
+      @click.stop="setButtonPos">
+      <div :class="['bk-slider-bar', vertical ? 'vertical' : 'horizontal', { 'disable': disable }]" :style="barStyle"></div>
+      <template v-if="showInterval">
+        <div :class="['bk-slider-interval', { 'vertical': vertical }]" :style="getIntervalStyle(item)"
+          v-for="(item, index) in intervals" :key="index">
         </div>
-        <div v-if="showInput && !vertical" class="bk-slider-input">
-            <div class="input-item" :style="{ width: getInputWidth(firstInput) }">
-                <bk-input type="number" v-model="firstInput"
-                    :max="maxValue"
-                    :min="minValue"
-                    @change="firstInputChange"
-                    @enter="firstInputChange"
-                    @blur="firstInputChange"></bk-input>
+      </template>
+      <template v-if="customContent">
+        <div :class="['bk-slider-interval', { 'vertical': vertical }]" :style="getIntervalStyle(item.percent)"
+          v-for="(item, index) in customList" :key="index">
+        </div>
+      </template>
+      <template v-if="showBetweenLabel || showIntervalLabel || showCustomLabel">
+        <div :class="['bk-slider-labels', vertical ? 'vertical' : 'horizontal']">
+          <template v-if="showBetweenLabel">
+            <div class="label-start"
+              :style="[{ opacity: showButtonLabel ? [firstValue, secondValue].includes(vertical ? maxValue : minValue) ? '0' : '1' : '1' }]">
+              {{minValue}}{{intervalLabelUnit}}
             </div>
-            <template v-if="showSecondInput && secondValue">
-                <div class="input-center">～</div>
-                <div class="input-item" :style="{ width: getInputWidth(secondInput) }">
-                    <bk-input type="number" v-model="secondInput"
-                        :max="maxValue"
-                        :min="minValue"
-                        @change="secondInputChange"
-                        @enter="secondInputChange"
-                        @blur="secondInputChange"></bk-input>
-                </div>
-            </template>
+            <div class="label-end"
+              :style="[{ opacity: showButtonLabel ? [firstValue, secondValue].includes(vertical ? minValue : maxValue) ? '0' : '1' : '1' }]">
+              {{maxValue}}{{intervalLabelUnit}}
+            </div>
+          </template>
+          <template v-else-if="showIntervalLabel">
+            <div :class="['bk-slider-label', vertical ? 'vertical' : 'horizontal']" :style="getIntervalStyle(item.stepWidth)"
+              v-for="(item, index) in intervalLabels" :key="index">
+              {{item.stepLabel}}
+            </div>
+          </template>
+          <template v-else-if="showCustomLabel">
+            <div :class="['bk-slider-label', vertical ? 'vertical' : 'horizontal']" :style="getIntervalStyle(item.percent)"
+              v-for="(item, index) in customList" :key="index">
+              {{item.label}}
+            </div>
+          </template>
         </div>
-        <slot name="end"></slot>
+      </template>
+      <slider-button :vertical="vertical" v-model="firstValue" ref="firstbutton"></slider-button>
+      <slider-button v-if="range" :vertical="vertical" v-model="secondValue" ref="secondbutton"></slider-button>
     </div>
+    <div v-if="showInput && !vertical" class="bk-slider-input">
+      <div class="input-item" :style="{ width: getInputWidth(firstInput) }">
+        <bk-input type="number" v-model="firstInput"
+          :max="maxValue"
+          :min="minValue"
+          @change="firstInputChange"
+          @enter="firstInputChange"
+          @blur="firstInputChange"></bk-input>
+      </div>
+      <template v-if="showSecondInput && secondValue">
+        <div class="input-center">～</div>
+        <div class="input-item" :style="{ width: getInputWidth(secondInput) }">
+          <bk-input type="number" v-model="secondInput"
+            :max="maxValue"
+            :min="minValue"
+            @change="secondInputChange"
+            @enter="secondInputChange"
+            @blur="secondInputChange"></bk-input>
+        </div>
+      </template>
+    </div>
+    <slot name="end"></slot>
+  </div>
 </template>
 <script>
 import bkInput from '@/components/input'

@@ -27,9 +27,9 @@
 -->
 
 <template>
-    <div class="bk-collapse" :class="extCls">
-        <slot></slot>
-    </div>
+  <div class="bk-collapse" :class="extCls">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

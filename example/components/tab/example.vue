@@ -1,28 +1,28 @@
 <template>
+  <div>
     <div>
-        <div>
-            <bk-tab :sortable="true" @sort-change="sortChange" sort-type="jump" :active.sync="active" type="unborder-card">
-                <bk-tab-panel
-                    v-for="(panel, index) in panels"
-                    v-bind="panel"
+      <bk-tab :sortable="true" @sort-change="sortChange" sort-type="jump" :active.sync="active" type="unborder-card">
+        <bk-tab-panel
+          v-for="(panel, index) in panels"
+          v-bind="panel"
 
-                    :key="index">
-                    <div>{{panel.label}}-{{panel.count}}</div>
-                </bk-tab-panel>
-                <bk-tab-panel :name="'unsortable'" :label="'unsortable'" :sortable="false">unsortable</bk-tab-panel>
-            </bk-tab>
-        </div>
-        <div style="margin-top: 50px;">
-            <bk-tab :active.sync="active" :sortable="true">
-                <bk-tab-panel
-                    v-for="(panel, index) in panels2"
-                    v-bind="panel"
-                    :key="index">
-                    <div>{{panel.label}}-{{panel.count}}</div>
-                </bk-tab-panel>
-            </bk-tab>
-        </div>
+          :key="index">
+          <div>{{panel.label}}-{{panel.count}}</div>
+        </bk-tab-panel>
+        <bk-tab-panel :name="'unsortable'" :label="'unsortable'" :sortable="false">unsortable</bk-tab-panel>
+      </bk-tab>
     </div>
+    <div style="margin-top: 50px;">
+      <bk-tab :active.sync="active" :sortable="true">
+        <bk-tab-panel
+          v-for="(panel, index) in panels2"
+          v-bind="panel"
+          :key="index">
+          <div>{{panel.label}}-{{panel.count}}</div>
+        </bk-tab-panel>
+      </bk-tab>
+    </div>
+  </div>
 </template>
 <script>
 import { bkTab, bkTabPanel } from '@'

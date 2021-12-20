@@ -27,112 +27,112 @@
 -->
 
 <template>
-    <div :style="tabStyle"
-        :class="['bk-tab', tabPosition === 'top' ? `bk-tab-${type}` : `position-${tabPosition}`, extCls]">
-        <div class="bk-tab-header"
-            :style="headerStyle"
-            ref="tabHeader"
-            v-show="showHeader">
-            <div :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
-                class="bk-tab-header-setting"
-                :class="{
-                    'has-setting': $slots.setting
-                }">
-                <slot name="setting"></slot>
-            </div>
-            <div class="bk-tab-label-wrapper"
-                ref="labelWrapper"
-                :class="{
-                    'has-scroller': scrollState.show && !isSidePosition,
-                    'has-add': (addable || hasAddBtnSlot) && !isSidePosition
-                }"
-                :style="{
-                    padding: scrollState.show && !isSidePosition ? `0 ${addCustomRect.width + 24}px 0 24px` : undefined
-                }">
-                <ul ref="labelList"
-                    :class="['bk-tab-label-list', { 'bk-tab-label-list-has-bar': hasActiveBar }]"
-                    :style="tabLabelListStyle">
-                    <li class="bk-tab-label-item"
-                        v-for="(panel, index) in visiblePanels"
-                        is="bk-tab-label"
-                        ref="tabLabel"
-                        :data-name="panel.name"
-                        :style="{ lineHeight: `${labelHeight}px` }"
-                        :class="{
-                            active: panel.name === localActive,
-                            'is-first': index === 0,
-                            'is-last': index === (visiblePanels.length - 1),
-                            'is-disabled': panel.disabled,
-                            'is-dragging': dragStartIndex === index,
-                            'is-dragenter': dragenterIndex === index && (index !== dragStartIndex && panel.sortable),
-                            'is-unsortable': dragenterIndex === index && !panel.sortable
-                        }"
-                        :draggable="sortable && panel.sortable"
-                        @dragstart.native="dragStart(index,$event)"
-                        @dragenter.native.prevent="dragenter(index,$event)"
-                        @dragleave.native.prevent
-                        @dragover.native.prevent
-                        @dragend.native.prevent="dragend(index,$event)"
-                        @drop.native.prevent="drop(index,$event)"
-                        :panel="panel"
-                        :index="index"
-                        :closable="closable"
-                        :is-side-position="isSidePosition"
-                        :key="panel.name + index"
-                        @mouseenter.native.passive="handleLabelHover(panel)"
-                        @mouseleave.native.passive="handleClearHoverTimer(panel)">
-                    </li>
-                </ul>
-                <i class="bk-tab-add-controller bk-icon icon-plus"
-                    :class="{
-                        'left-border': !visiblePanels.length,
-                        'next-right': addShowNextRight
-                    }"
-                    :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
-                    v-if="addable && !isSidePosition && !hasAddBtnSlot"
-                    ref="addController"
-                    @click="handleAddPanel">
-                </i>
-                <div class="bk-tab-add-custom"
-                    :class="{ 'next-right': addShowNextRight }"
-                    ref="addCustom"
-                    :style="{
-                        height: `${(scrollState.show && !isSidePosition) ? labelHeight - 1 : labelHeight - 2}px`,
-                        lineHeight: `${labelHeight}px`
-                    }"
-                    v-if="hasAddBtnSlot">
-                    <slot name="add"></slot>
-                </div>
-                <template v-if="scrollState.show">
-                    <i class="bk-tab-scroll-controller prev bk-icon icon-angle-left"
-                        :style="{ height: `${labelHeight - 1}px`, lineHeight: `${labelHeight}px` }"
-                        ref="prevController"
-                        :class="{
-                            'disabled': scrollState.position === 'left'
-                        }"
-                        @click="stepToPrev">
-                    </i>
-                    <i class="bk-tab-scroll-controller next bk-icon icon-angle-right"
-                        :style="{
-                            height: `${labelHeight - 1}px`,
-                            lineHeight: `${labelHeight}px`,
-                            right: (hasAddBtnSlot || addable)
-                                ? `${addShowNextRight ? 0 : (addCustomRect.width || 40)}px`
-                                : undefined
-                        }"
-                        ref="nextController"
-                        :class="{
-                            'disabled': scrollState.position === 'right'
-                        }"
-                        @click="stepToNext">
-                    </i>
-                </template>
-            </div>
+  <div :style="tabStyle"
+    :class="['bk-tab', tabPosition === 'top' ? `bk-tab-${type}` : `position-${tabPosition}`, extCls]">
+    <div class="bk-tab-header"
+      :style="headerStyle"
+      ref="tabHeader"
+      v-show="showHeader">
+      <div :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
+        class="bk-tab-header-setting"
+        :class="{
+          'has-setting': $slots.setting
+        }">
+        <slot name="setting"></slot>
+      </div>
+      <div class="bk-tab-label-wrapper"
+        ref="labelWrapper"
+        :class="{
+          'has-scroller': scrollState.show && !isSidePosition,
+          'has-add': (addable || hasAddBtnSlot) && !isSidePosition
+        }"
+        :style="{
+          padding: scrollState.show && !isSidePosition ? `0 ${addCustomRect.width + 24}px 0 24px` : undefined
+        }">
+        <ul ref="labelList"
+          :class="['bk-tab-label-list', { 'bk-tab-label-list-has-bar': hasActiveBar }]"
+          :style="tabLabelListStyle">
+          <li class="bk-tab-label-item"
+            v-for="(panel, index) in visiblePanels"
+            is="bk-tab-label"
+            ref="tabLabel"
+            :data-name="panel.name"
+            :style="{ lineHeight: `${labelHeight}px` }"
+            :class="{
+              active: panel.name === localActive,
+              'is-first': index === 0,
+              'is-last': index === (visiblePanels.length - 1),
+              'is-disabled': panel.disabled,
+              'is-dragging': dragStartIndex === index,
+              'is-dragenter': dragenterIndex === index && (index !== dragStartIndex && panel.sortable),
+              'is-unsortable': dragenterIndex === index && !panel.sortable
+            }"
+            :draggable="sortable && panel.sortable"
+            @dragstart.native="dragStart(index,$event)"
+            @dragenter.native.prevent="dragenter(index,$event)"
+            @dragleave.native.prevent
+            @dragover.native.prevent
+            @dragend.native.prevent="dragend(index,$event)"
+            @drop.native.prevent="drop(index,$event)"
+            :panel="panel"
+            :index="index"
+            :closable="closable"
+            :is-side-position="isSidePosition"
+            :key="panel.name + index"
+            @mouseenter.native.passive="handleLabelHover(panel)"
+            @mouseleave.native.passive="handleClearHoverTimer(panel)">
+          </li>
+        </ul>
+        <i class="bk-tab-add-controller bk-icon icon-plus"
+          :class="{
+            'left-border': !visiblePanels.length,
+            'next-right': addShowNextRight
+          }"
+          :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
+          v-if="addable && !isSidePosition && !hasAddBtnSlot"
+          ref="addController"
+          @click="handleAddPanel">
+        </i>
+        <div class="bk-tab-add-custom"
+          :class="{ 'next-right': addShowNextRight }"
+          ref="addCustom"
+          :style="{
+            height: `${(scrollState.show && !isSidePosition) ? labelHeight - 1 : labelHeight - 2}px`,
+            lineHeight: `${labelHeight}px`
+          }"
+          v-if="hasAddBtnSlot">
+          <slot name="add"></slot>
         </div>
-        <div class="bk-tab-section" ref="tabSection">
-            <slot></slot>
-        </div>
+        <template v-if="scrollState.show">
+          <i class="bk-tab-scroll-controller prev bk-icon icon-angle-left"
+            :style="{ height: `${labelHeight - 1}px`, lineHeight: `${labelHeight}px` }"
+            ref="prevController"
+            :class="{
+              'disabled': scrollState.position === 'left'
+            }"
+            @click="stepToPrev">
+          </i>
+          <i class="bk-tab-scroll-controller next bk-icon icon-angle-right"
+            :style="{
+              height: `${labelHeight - 1}px`,
+              lineHeight: `${labelHeight}px`,
+              right: (hasAddBtnSlot || addable)
+                ? `${addShowNextRight ? 0 : (addCustomRect.width || 40)}px`
+                : undefined
+            }"
+            ref="nextController"
+            :class="{
+              'disabled': scrollState.position === 'right'
+            }"
+            @click="stepToNext">
+          </i>
+        </template>
+      </div>
     </div>
+    <div class="bk-tab-section" ref="tabSection">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script>

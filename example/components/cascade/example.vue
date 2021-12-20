@@ -27,65 +27,65 @@
 -->
 
 <template>
+  <div>
     <div>
-        <div>
-            单选
-            <bk-cascade
-                v-model="value3"
-                :check-any-level="true"
-                :filterable="true"
-                trigger="hover"
-                :list="list2"
-                class="mb40 mt5"
-                clearable
-                style="width: 250px;"
-                @change="handleChange">
-            </bk-cascade>
-        </div>
-        <div>
-            多选
-            <bk-cascade
-                v-model="value2"
-                multiple
-                :check-any-level="true"
-                :filterable="true"
-                trigger="hover"
-                :list="list2"
-                class="mb40 mt5"
-
-                clearable
-                style="width: 250px;"
-                @change="handleChange">
-            </bk-cascade>
-        </div>
-        <div>
-            多选
-            <bk-cascade
-                v-model="value"
-                multiple
-                :check-any-level="true"
-                :list="list2"
-                class="mb40 mt5"
-                clearable
-                style="width: 250px;"
-                @change="handleChange">
-            </bk-cascade>
-        </div>
-        <div>
-            多选
-            <bk-cascade
-                v-model="value"
-                multiple
-                :check-any-level="true"
-                :list="list2"
-                class="mb40 mt5"
-                clearable
-                :filterable="true"
-                style="width: 250px;"
-                @change="handleChange">
-            </bk-cascade>
-        </div>
+      单选
+      <bk-cascade
+        v-model="value3"
+        :check-any-level="true"
+        :filterable="true"
+        trigger="hover"
+        :list="list2"
+        class="mb40 mt5"
+        clearable
+        style="width: 250px;"
+        @change="handleChange">
+      </bk-cascade>
     </div>
+    <div>
+      多选
+      <bk-cascade
+        v-model="value2"
+        multiple
+        :check-any-level="true"
+        :filterable="true"
+        trigger="hover"
+        :list="list2"
+        class="mb40 mt5"
+
+        clearable
+        style="width: 250px;"
+        @change="handleChange">
+      </bk-cascade>
+    </div>
+    <div>
+      多选
+      <bk-cascade
+        v-model="value"
+        multiple
+        :check-any-level="true"
+        :list="list2"
+        class="mb40 mt5"
+        clearable
+        style="width: 250px;"
+        @change="handleChange">
+      </bk-cascade>
+    </div>
+    <div>
+      多选
+      <bk-cascade
+        v-model="value"
+        multiple
+        :check-any-level="true"
+        :list="list2"
+        class="mb40 mt5"
+        clearable
+        :filterable="true"
+        style="width: 250px;"
+        @change="handleChange">
+      </bk-cascade>
+    </div>
+  </div>
 </template>
 <script>
 import { bkCascade } from '@'

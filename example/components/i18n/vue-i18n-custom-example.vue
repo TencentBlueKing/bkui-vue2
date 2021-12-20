@@ -27,27 +27,27 @@
 -->
 
 <template>
-    <div>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            使用 bk-magic-vue 以及 vue-i18n@6+ 来支持业务项目的国际化
-        </h2>
-        <div class="example-item">
-            <bk-input :clearable="true" v-model="value" :placeholder="'Linux file path, such as：/data/log/nginx.log'"></bk-input>
-        </div>
-        <div class="example-item" style="height: 400px">
-            <bk-date-picker class="mr15" :type="'datetime'" :open="true" v-model="initDateTime"></bk-date-picker>
-            <bk-button type="primary submit" title="切换中英文" @click="handleClick">
-                切换中英文
-            </bk-button>
-            <span class="bk-text-primary">当前为{{curLang === 'zhCN' ? '中文' : '英文'}}</span>
-        </div>
-        <div class="example-item">
-            <div class="bk-text-primary">项目中、非组件内部的文案</div>
-            <p class="bk-text-danger">{{t('testName.word1')}}</p>
-            <p class="bk-text-danger">{{t('testName.word2', { key1: 'val1', key2: 'val2' })}}</p>
-        </div>
+  <div>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      使用 bk-magic-vue 以及 vue-i18n@6+ 来支持业务项目的国际化
+    </h2>
+    <div class="example-item">
+      <bk-input :clearable="true" v-model="value" :placeholder="'Linux file path, such as：/data/log/nginx.log'"></bk-input>
     </div>
+    <div class="example-item" style="height: 400px">
+      <bk-date-picker class="mr15" :type="'datetime'" :open="true" v-model="initDateTime"></bk-date-picker>
+      <bk-button type="primary submit" title="切换中英文" @click="handleClick">
+        切换中英文
+      </bk-button>
+      <span class="bk-text-primary">当前为{{curLang === 'zhCN' ? '中文' : '英文'}}</span>
+    </div>
+    <div class="example-item">
+      <div class="bk-text-primary">项目中、非组件内部的文案</div>
+      <p class="bk-text-danger">{{t('testName.word1')}}</p>
+      <p class="bk-text-danger">{{t('testName.word2', { key1: 'val1', key2: 'val2' })}}</p>
+    </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue'

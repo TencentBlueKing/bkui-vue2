@@ -27,17 +27,17 @@
 -->
 
 <template>
-    <section>
-        <bk-big-tree ref="tree"
-            default-expand-all
-            :show-checkbox="true"
-            :display-matched-node-descendants="true"
-            :check-only-available-strictly="true"
-            :data="data"
-            :show-link-line="hasLine"
-            :configurable="true">
-        </bk-big-tree>
-    </section>
+  <section>
+    <bk-big-tree ref="tree"
+      default-expand-all
+      :show-checkbox="true"
+      :display-matched-node-descendants="true"
+      :check-only-available-strictly="true"
+      :data="data"
+      :show-link-line="hasLine"
+      :configurable="true">
+    </bk-big-tree>
+  </section>
 </template>
 
 <script>

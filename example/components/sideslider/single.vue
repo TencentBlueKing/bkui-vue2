@@ -27,13 +27,13 @@
 -->
 
 <template>
-    <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width">
-        <template>
-            <div slot="content">
-                qweeqw
-            </div>
-        </template>
-    </bk-sideslider>
+  <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width">
+    <template>
+      <div slot="content">
+        qweeqw
+      </div>
+    </template>
+  </bk-sideslider>
 </template>
 <script>
 import { bkSideslider } from '@'

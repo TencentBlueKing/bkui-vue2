@@ -27,67 +27,67 @@
 -->
 
 <template>
-    <div class="bk-picker-panel-body-wrapper" :class="shortcuts.length ? 'bk-picker-panel-with-sidebar' : ''" @mousedown.prevent>
-        <div class="bk-picker-panel-sidebar" v-if="shortcuts.length">
-            <div class="bk-picker-panel-shortcut" v-for="(shortcut, index) in shortcuts" :key="index" @click="handleShortcutClick(shortcut)">
-                {{shortcut.text}}
-            </div>
-        </div>
-        <div class="bk-picker-panel-body" style="width: 261px;">
-            <div class="bk-date-picker-header" v-show="currentView !== 'time'">
-                <span :class="iconBtnCls('prev', '-double')" @click="changeYear(-1)"><i class="bk-icon icon-angle-double-left"></i></span>
-                <span :class="iconBtnCls('prev')" v-if="pickerTable === 'date-table'" @click="changeMonth(-1)" v-show="currentView === 'date'">
-                    <i class="bk-icon icon-angle-left"></i>
-                </span>
-                <date-panel-label :date-panel-label="datePanelLabel" :current-view="pickerTable.split('-').shift()"></date-panel-label>
-                <span :class="iconBtnCls('next', '-double')" @click="changeYear(+1)"><i class="bk-icon icon-angle-double-right"></i></span>
-                <span :class="iconBtnCls('next')" v-if="pickerTable === 'date-table'" @click="changeMonth(+1)" v-show="currentView === 'date'">
-                    <i class="bk-icon icon-angle-right"></i>
-                </span>
-            </div>
-            <div class="bk-picker-panel-content">
-                <!-- eslint-disable-next-line vue/require-component-is -->
-                <component
-                    :is="pickerTable"
-                    ref="pickerTable"
-                    v-if="currentView !== 'time'"
-                    :table-date="panelDate"
-                    :value="dates"
-                    :selection-mode="selectionMode"
-                    :disabled-date="disabledDate"
-                    :focused-date="focusedDate"
-                    @pick="panelPickerHandlers"
-                    @pick-click="handlePickClick"
-                ></component>
-            </div>
-            <div class="bk-picker-panel-content" v-show="isTime">
-                <time-picker
-                    ref="timePicker"
-                    v-if="currentView === 'time'"
-                    :value="dates"
-                    :format="format"
-                    :time-disabled="timeDisabled"
-                    :disabled-date="disabledDate"
-                    :focused-date="focusedDate"
-                    v-bind="timePickerOptions"
-                    @pick="handlePick"
-                    @pick-click="handlePickClick"
-                    @pick-clear="handlePickClear"
-                    @pick-success="handlePickSuccess"
-                    @pick-toggle-time="handleToggleTime"
-                ></time-picker>
-            </div>
-            <Confirm
-                v-if="confirm"
-                :clearable="clearable"
-                :show-time="showTime"
-                :is-time="isTime"
-                @pick-toggle-time="handleToggleTime"
-                @pick-clear="handlePickClear"
-                @pick-success="handlePickSuccess"
-            ></Confirm>
-        </div>
+  <div class="bk-picker-panel-body-wrapper" :class="shortcuts.length ? 'bk-picker-panel-with-sidebar' : ''" @mousedown.prevent>
+    <div class="bk-picker-panel-sidebar" v-if="shortcuts.length">
+      <div class="bk-picker-panel-shortcut" v-for="(shortcut, index) in shortcuts" :key="index" @click="handleShortcutClick(shortcut)">
+        {{shortcut.text}}
+      </div>
     </div>
+    <div class="bk-picker-panel-body" style="width: 261px;">
+      <div class="bk-date-picker-header" v-show="currentView !== 'time'">
+        <span :class="iconBtnCls('prev', '-double')" @click="changeYear(-1)"><i class="bk-icon icon-angle-double-left"></i></span>
+        <span :class="iconBtnCls('prev')" v-if="pickerTable === 'date-table'" @click="changeMonth(-1)" v-show="currentView === 'date'">
+          <i class="bk-icon icon-angle-left"></i>
+        </span>
+        <date-panel-label :date-panel-label="datePanelLabel" :current-view="pickerTable.split('-').shift()"></date-panel-label>
+        <span :class="iconBtnCls('next', '-double')" @click="changeYear(+1)"><i class="bk-icon icon-angle-double-right"></i></span>
+        <span :class="iconBtnCls('next')" v-if="pickerTable === 'date-table'" @click="changeMonth(+1)" v-show="currentView === 'date'">
+          <i class="bk-icon icon-angle-right"></i>
+        </span>
+      </div>
+      <div class="bk-picker-panel-content">
+        <!-- eslint-disable-next-line vue/require-component-is -->
+        <component
+          :is="pickerTable"
+          ref="pickerTable"
+          v-if="currentView !== 'time'"
+          :table-date="panelDate"
+          :value="dates"
+          :selection-mode="selectionMode"
+          :disabled-date="disabledDate"
+          :focused-date="focusedDate"
+          @pick="panelPickerHandlers"
+          @pick-click="handlePickClick"
+        ></component>
+      </div>
+      <div class="bk-picker-panel-content" v-show="isTime">
+        <time-picker
+          ref="timePicker"
+          v-if="currentView === 'time'"
+          :value="dates"
+          :format="format"
+          :time-disabled="timeDisabled"
+          :disabled-date="disabledDate"
+          :focused-date="focusedDate"
+          v-bind="timePickerOptions"
+          @pick="handlePick"
+          @pick-click="handlePickClick"
+          @pick-clear="handlePickClear"
+          @pick-success="handlePickSuccess"
+          @pick-toggle-time="handleToggleTime"
+        ></time-picker>
+      </div>
+      <Confirm
+        v-if="confirm"
+        :clearable="clearable"
+        :show-time="showTime"
+        :is-time="isTime"
+        @pick-toggle-time="handleToggleTime"
+        @pick-clear="handlePickClear"
+        @pick-success="handlePickSuccess"
+      ></Confirm>
+    </div>
+  </div>
 </template>
 <script>
 import { siblingMonth, formatDateLabels } from '@/utils/date'

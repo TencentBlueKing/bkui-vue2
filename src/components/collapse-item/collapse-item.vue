@@ -27,47 +27,47 @@
 -->
 
 <template>
-    <div class="bk-collapse-item"
-        :class="{
-            'bk-collapse-item-active': isActive,
-            'is-disabled': disabled,
-            [extCls]: true
-        }">
-        <div v-if="customTriggerArea" class="bk-collapse-item-header custom-trigger-layout">
-            <div class="trigger-area bk-collapse-item-hover cursor-pointer" @click="toggle">
-                <slot></slot>
-            </div>
-            <div class="no-trigger-area">
-                <slot name="no-trigger"></slot>
-            </div>
-            <span class="custom-trigger-angle" :class="{ 'collapse-expand': isActive }" @click="toggle">
-                <i class="bk-icon icon-angle-right" v-if="!hideArrow"></i>
-            </span>
-        </div>
-        <div v-else class="bk-collapse-item-header bk-collapse-item-hover cursor-pointer" @click="toggle">
-            <span class="fr" :class="{ 'collapse-expand': isActive }">
-                <i class="bk-icon icon-angle-right" v-if="!hideArrow"></i>
-            </span>
-            <slot name="icon"></slot>
-            <slot></slot>
-        </div>
-        <template v-if="calcRender">
-            <transition
-                name="collapse"
-                @before-enter="beforeEnter"
-                @enter="enter"
-                @after-enter="afterEnter"
-                @before-leave="beforeLeave"
-                @leave="leave"
-                @after-leave="afterLeave">
-                <div class="bk-collapse-item-content" v-show="isActive && isShow">
-                    <div class="bk-collapse-item-detail">
-                        <slot name="content"></slot>
-                    </div>
-                </div>
-            </transition>
-        </template>
+  <div class="bk-collapse-item"
+    :class="{
+      'bk-collapse-item-active': isActive,
+      'is-disabled': disabled,
+      [extCls]: true
+    }">
+    <div v-if="customTriggerArea" class="bk-collapse-item-header custom-trigger-layout">
+      <div class="trigger-area bk-collapse-item-hover cursor-pointer" @click="toggle">
+        <slot></slot>
+      </div>
+      <div class="no-trigger-area">
+        <slot name="no-trigger"></slot>
+      </div>
+      <span class="custom-trigger-angle" :class="{ 'collapse-expand': isActive }" @click="toggle">
+        <i class="bk-icon icon-angle-right" v-if="!hideArrow"></i>
+      </span>
     </div>
+    <div v-else class="bk-collapse-item-header bk-collapse-item-hover cursor-pointer" @click="toggle">
+      <span class="fr" :class="{ 'collapse-expand': isActive }">
+        <i class="bk-icon icon-angle-right" v-if="!hideArrow"></i>
+      </span>
+      <slot name="icon"></slot>
+      <slot></slot>
+    </div>
+    <template v-if="calcRender">
+      <transition
+        name="collapse"
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave">
+        <div class="bk-collapse-item-content" v-show="isActive && isShow">
+          <div class="bk-collapse-item-detail">
+            <slot name="content"></slot>
+          </div>
+        </div>
+      </transition>
+    </template>
+  </div>
 </template>
 <script>
 import { addClass, removeClass } from '@/utils/dom'

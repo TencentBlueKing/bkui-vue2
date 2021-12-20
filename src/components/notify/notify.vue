@@ -27,40 +27,40 @@
 -->
 
 <template>
-    <transition
-        name="placement-slide"
-        @after-leave="destroyEl">
-        <div
-            :class="['bk-notify', themeClass, hDirection, extCls]"
-            :style="placementStyle"
-            v-show="visible"
-            @mouseenter="stopCountDown"
-            @mouseleave="startCountDown">
-            <div class="bk-notify-icon">
-                <i :class="['bk-icon', tipsIcon]"></i>
-            </div>
-            <div class="bk-notify-content">
-                <h3 v-if="title" class="bk-notify-content-title">{{title}}</h3>
-                <slot>
-                    <div
-                        :class="['bk-notify-content-text', { limitLine: limitLine > 0 }]"
-                        :style="contentStyle">
-                        <template v-if="!useHTMLString">{{message}}</template>
-                        <span v-else v-html="message"></span>
-                        <button
-                            v-if="showViewMore"
-                            class="showMoreBtn"
-                            @click="onClickViewMore">
-                            {{t('bk.notify.showMore')}}
-                        </button>
-                    </div>
-                </slot>
-            </div>
-            <div class="bk-notify-close" v-if="dismissable">
-                <i class="bk-icon icon-close" @click.stop="close"></i>
-            </div>
-        </div>
-    </transition>
+  <transition
+    name="placement-slide"
+    @after-leave="destroyEl">
+    <div
+      :class="['bk-notify', themeClass, hDirection, extCls]"
+      :style="placementStyle"
+      v-show="visible"
+      @mouseenter="stopCountDown"
+      @mouseleave="startCountDown">
+      <div class="bk-notify-icon">
+        <i :class="['bk-icon', tipsIcon]"></i>
+      </div>
+      <div class="bk-notify-content">
+        <h3 v-if="title" class="bk-notify-content-title">{{title}}</h3>
+        <slot>
+          <div
+            :class="['bk-notify-content-text', { limitLine: limitLine > 0 }]"
+            :style="contentStyle">
+            <template v-if="!useHTMLString">{{message}}</template>
+            <span v-else v-html="message"></span>
+            <button
+              v-if="showViewMore"
+              class="showMoreBtn"
+              @click="onClickViewMore">
+              {{t('bk.notify.showMore')}}
+            </button>
+          </div>
+        </slot>
+      </div>
+      <div class="bk-notify-close" v-if="dismissable">
+        <i class="bk-icon icon-close" @click.stop="close"></i>
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
 /**

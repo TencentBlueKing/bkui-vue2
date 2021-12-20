@@ -27,30 +27,30 @@
 -->
 
 <template>
-    <transition name="slide">
-        <article :data-transfer="transfer" v-transfer-dom class="bk-sideslider" :class="extCls" :style="{ zIndex: localZIndex }" v-if="isShow" @mousedown.self="handleQuickClose">
-            <section class="bk-sideslider-wrapper" :class="[{ left: direction === 'left', right: direction === 'right' }]" :style="{ width: width + 'px' }">
-                <div class="bk-sideslider-header">
-                    <div class="bk-sideslider-closer" @click="handleClose" :style="{ float: calcDirection }">
-                        <i class="bk-icon" :class="'icon-angle-' + direction"></i>
-                    </div>
-                    <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 0 0 50px' : '0 0 0 30px' }">
-                        <slot name="header">
-                            {{title || t('bk.sideslider.title')}}
-                        </slot>
-                    </div>
-                </div>
-                <div class="bk-sideslider-content" ref="content" :style="{ maxHeight: $slots.footer ? 'calc(100vh - 114px)' : 'calc(100vh - 60px)' }">
-                    <slot name="content"></slot>
-                </div>
-                <div class="bk-sideslider-footer"
-                    v-if="$slots.footer"
-                    :style="{ borderTopColor: !needBorder ? 'transparent' : '#dcdee5', backgroundColor: !needBorder ? '#fafbfd' : '#ffffff' }">
-                    <slot name="footer"></slot>
-                </div>
-            </section>
-        </article>
-    </transition>
+  <transition name="slide">
+    <article :data-transfer="transfer" v-transfer-dom class="bk-sideslider" :class="extCls" :style="{ zIndex: localZIndex }" v-if="isShow" @mousedown.self="handleQuickClose">
+      <section class="bk-sideslider-wrapper" :class="[{ left: direction === 'left', right: direction === 'right' }]" :style="{ width: width + 'px' }">
+        <div class="bk-sideslider-header">
+          <div class="bk-sideslider-closer" @click="handleClose" :style="{ float: calcDirection }">
+            <i class="bk-icon" :class="'icon-angle-' + direction"></i>
+          </div>
+          <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 0 0 50px' : '0 0 0 30px' }">
+            <slot name="header">
+              {{title || t('bk.sideslider.title')}}
+            </slot>
+          </div>
+        </div>
+        <div class="bk-sideslider-content" ref="content" :style="{ maxHeight: $slots.footer ? 'calc(100vh - 114px)' : 'calc(100vh - 60px)' }">
+          <slot name="content"></slot>
+        </div>
+        <div class="bk-sideslider-footer"
+          v-if="$slots.footer"
+          :style="{ borderTopColor: !needBorder ? 'transparent' : '#dcdee5', backgroundColor: !needBorder ? '#fafbfd' : '#ffffff' }">
+          <slot name="footer"></slot>
+        </div>
+      </section>
+    </article>
+  </transition>
 </template>
 <script>
 /**

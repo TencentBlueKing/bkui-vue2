@@ -27,36 +27,36 @@
 -->
 
 <template>
-    <div class="bk-image">
-        <slot v-if="loading" name="placeholder">
-            <div class="bk-image-placeholder"><i class="bk-icon icon-image"></i></div>
-        </slot>
-        <slot v-else-if="error" name="error">
-            <div class="bk-image-placeholder">
-                <img v-if="fallback" :src="fallback">
-                <i v-else class="bk-icon icon-image-fail"></i>
-            </div>
-        </slot>
-        <img
-            v-else
-            class="bk-image-inner"
-            v-bind="$attrs"
-            v-on="$listeners"
-            @click="clickHandler"
-            :src="src"
-            :style="imageStyle"
-            :class="{ 'bk-image-inner-center': alignCenter, 'bk-image-preview': preview }">
-        <template v-if="preview">
-            <bk-image-viewer
-                v-if="showViewer"
-                :z-index="zIndex"
-                :is-show-title="isShowPreviewTitle"
-                :initial-index="imageIndex"
-                :url-list="previewSrcList"
-                :on-close="closeViewer"
-            ></bk-image-viewer>
-        </template>
-    </div>
+  <div class="bk-image">
+    <slot v-if="loading" name="placeholder">
+      <div class="bk-image-placeholder"><i class="bk-icon icon-image"></i></div>
+    </slot>
+    <slot v-else-if="error" name="error">
+      <div class="bk-image-placeholder">
+        <img v-if="fallback" :src="fallback">
+        <i v-else class="bk-icon icon-image-fail"></i>
+      </div>
+    </slot>
+    <img
+      v-else
+      class="bk-image-inner"
+      v-bind="$attrs"
+      v-on="$listeners"
+      @click="clickHandler"
+      :src="src"
+      :style="imageStyle"
+      :class="{ 'bk-image-inner-center': alignCenter, 'bk-image-preview': preview }">
+    <template v-if="preview">
+      <bk-image-viewer
+        v-if="showViewer"
+        :z-index="zIndex"
+        :is-show-title="isShowPreviewTitle"
+        :initial-index="imageIndex"
+        :url-list="previewSrcList"
+        :on-close="closeViewer"
+      ></bk-image-viewer>
+    </template>
+  </div>
 </template>
 
 <script>

@@ -27,10 +27,10 @@
 -->
 
 <template>
-    <div>
-        <bk-link theme="primary" href="/" target="_blank" icon="bk-icon icon-cog-shape">左侧图标</bk-link>
-        <bk-link theme="primary" href="/" target="_blank" icon="bk-icon icon-cog-shape" icon-placement="right">右侧图标</bk-link>
-    </div>
+  <div>
+    <bk-link theme="primary" href="/" target="_blank" icon="bk-icon icon-cog-shape">左侧图标</bk-link>
+    <bk-link theme="primary" href="/" target="_blank" icon="bk-icon icon-cog-shape" icon-placement="right">右侧图标</bk-link>
+  </div>
 </template>
 
 <script>

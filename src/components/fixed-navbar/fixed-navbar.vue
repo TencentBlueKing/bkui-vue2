@@ -27,15 +27,15 @@
 -->
 
 <template>
-    <div class="bk-fixed-navbar-wrapper" :class="[extCls, position]" :style="{ zIndex: localZIndex }">
-        <div class="fixed-navbar-item" v-for="(item, index) in navConfig"
-            :key="index"
-            @click="item.action"
-            v-bk-tooltips="item.tooltip">
-            <i :class="['bk-icon', item.icon]"></i>
-            <span class="text">{{item.text}}</span>
-        </div>
+  <div class="bk-fixed-navbar-wrapper" :class="[extCls, position]" :style="{ zIndex: localZIndex }">
+    <div class="fixed-navbar-item" v-for="(item, index) in navConfig"
+      :key="index"
+      @click="item.action"
+      v-bk-tooltips="item.tooltip">
+      <i :class="['bk-icon', item.icon]"></i>
+      <span class="text">{{item.text}}</span>
     </div>
+  </div>
 </template>
 
 <script>

@@ -27,9 +27,9 @@
 -->
 
 <template>
-    <section class="bk-tab-content" v-if="shouldRender" v-show="active">
-        <slot></slot>
-    </section>
+  <section class="bk-tab-content" v-if="shouldRender" v-show="active">
+    <slot></slot>
+  </section>
 </template>
 
 <script>

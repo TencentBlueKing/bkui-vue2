@@ -27,72 +27,72 @@
 -->
 
 <template>
-    <section class="bk-scroll-home" :class="extCls" @mousewheel="handleWheel" @DOMMouseScroll="handleWheel" ref="scrollHome">
-        <main class="bk-scroll-main">
-            <ul
-                class="bk-scroll-index bk-scroll"
-                :style="{
-                    height: `${ulHeight}px`,
-                    top: `${-totalScrollHeight}px`,
-                    width: `${indexWidth}px`
-                }"
-                v-if="showIndex">
-                <li
-                    class="bk-scroll-item"
-                    v-for="(item, index) in indexList"
-                    :key="index"
-                    :style="{
-                        height: `${itemHeight}px`,
-                        top: `${item.top}px`
-                    }">
-                    <slot :data="item.value" name="index">
-                        {{item.value}}
-                    </slot>
-                </li>
-            </ul>
-            <ul
-                class="bk-scroll"
-                ref="scrollMain"
-                :style="{
-                    height: `${ulHeight}px`,
-                    top: `${-totalScrollHeight}px`,
-                    width: `${mainWidth}px`,
-                    left: `${mainLeft}px`
-                }">
-                <li
-                    class="bk-scroll-item"
-                    v-for="item in listData"
-                    :key="item.top"
-                    :style="{
-                        height: `${itemHeight}px`,
-                        top: `${item.top}px`,
-                        left: `${-bottomScrollDis * (itemWidth - mainWidth) / (mainWidth - bottomScrollWidth)}px`
-                    }">
-                    <slot :data="item.value"></slot>
-                </li>
-            </ul>
-        </main>
-        <canvas class="bk-min-nav" :style="`height: ${visHeight}px;`" ref="minNav"></canvas>
-        <span
-            ref="scrollNav"
-            class="bk-min-nav-slide bk-nav-show"
-            v-if="navHeight < visHeight"
-            :style="{
-                height: `${navHeight}px`,
-                top: `${minNavTop}px`
-            }"
-            @mousedown="startNavMove(visHeight - navHeight)">
-        </span>
-        <span
-            class="bk-min-nav-slide bk-bottom-scroll"
-            v-if="bottomScrollWidth < mainWidth"
-            :style="{
-                left: `${indexWidth + bottomScrollDis}px`,
-                width: `${bottomScrollWidth}px`
-            }"
-            @mousedown="startBottomMove">
-        </span>
-    </section>
+  <section class="bk-scroll-home" :class="extCls" @mousewheel="handleWheel" @DOMMouseScroll="handleWheel" ref="scrollHome">
+    <main class="bk-scroll-main">
+      <ul
+        class="bk-scroll-index bk-scroll"
+        :style="{
+          height: `${ulHeight}px`,
+          top: `${-totalScrollHeight}px`,
+          width: `${indexWidth}px`
+        }"
+        v-if="showIndex">
+        <li
+          class="bk-scroll-item"
+          v-for="(item, index) in indexList"
+          :key="index"
+          :style="{
+            height: `${itemHeight}px`,
+            top: `${item.top}px`
+          }">
+          <slot :data="item.value" name="index">
+            {{item.value}}
+          </slot>
+        </li>
+      </ul>
+      <ul
+        class="bk-scroll"
+        ref="scrollMain"
+        :style="{
+          height: `${ulHeight}px`,
+          top: `${-totalScrollHeight}px`,
+          width: `${mainWidth}px`,
+          left: `${mainLeft}px`
+        }">
+        <li
+          class="bk-scroll-item"
+          v-for="item in listData"
+          :key="item.top"
+          :style="{
+            height: `${itemHeight}px`,
+            top: `${item.top}px`,
+            left: `${-bottomScrollDis * (itemWidth - mainWidth) / (mainWidth - bottomScrollWidth)}px`
+          }">
+          <slot :data="item.value"></slot>
+        </li>
+      </ul>
+    </main>
+    <canvas class="bk-min-nav" :style="`height: ${visHeight}px;`" ref="minNav"></canvas>
+    <span
+      ref="scrollNav"
+      class="bk-min-nav-slide bk-nav-show"
+      v-if="navHeight < visHeight"
+      :style="{
+        height: `${navHeight}px`,
+        top: `${minNavTop}px`
+      }"
+      @mousedown="startNavMove(visHeight - navHeight)">
+    </span>
+    <span
+      class="bk-min-nav-slide bk-bottom-scroll"
+      v-if="bottomScrollWidth < mainWidth"
+      :style="{
+        left: `${indexWidth + bottomScrollDis}px`,
+        width: `${bottomScrollWidth}px`
+      }"
+      @mousedown="startBottomMove">
+    </span>
+  </section>
 </template>
 
 <script>

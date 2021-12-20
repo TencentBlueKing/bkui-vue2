@@ -27,12 +27,12 @@
 -->
 
 <template>
-    <transition class="bk-transition" :name="transitionName">
-        <CollapseTransition v-if="name === 'collapse'">
-            <slot></slot>
-        </CollapseTransition>
-        <slot v-else></slot>
-    </transition>
+  <transition class="bk-transition" :name="transitionName">
+    <CollapseTransition v-if="name === 'collapse'">
+      <slot></slot>
+    </CollapseTransition>
+    <slot v-else></slot>
+  </transition>
 </template>
 
 <script>

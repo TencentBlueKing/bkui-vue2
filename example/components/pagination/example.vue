@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <bk-pagination
-        :current.sync="defaultPaging.current"
-        :count.sync="defaultPaging.count"
-        :limit="defaultPaging.limit"
-        :small="small"
-        show-total-count
-        align="right"
-        @change="handlePageChange"
-        @limit-change="handleLimitChange">
-    </bk-pagination>
+  <bk-pagination
+    :current.sync="defaultPaging.current"
+    :count.sync="defaultPaging.count"
+    :limit="defaultPaging.limit"
+    :small="small"
+    show-total-count
+    align="right"
+    @change="handlePageChange"
+    @limit-change="handleLimitChange">
+  </bk-pagination>
 </template>
 
 <script>

@@ -27,276 +27,276 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Grid 栅格更多示例
-        </h2>
-        <div class="example-item">
-            <div class="wrapper custom">
-                <bk-container :col="4">
-                    <bk-row>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                        <bk-col :span="1"><div class="content">1/4</div></bk-col>
-                    </bk-row>
-                </bk-container>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="wrapper">
-                <bk-container :col="12" :gutter="40">
-                    <bk-row>
-                        <bk-col :span="0">
-                            <div class="content">12/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="6">
-                            <div class="content">6/12</div>
-                        </bk-col>
-                        <bk-col :span="6">
-                            <div class="content">6/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="4">
-                            <div class="content">4/12</div>
-                        </bk-col>
-                        <bk-col :span="4">
-                            <div class="content">4/12</div>
-                        </bk-col>
-                        <bk-col :span="4">
-                            <div class="content">4/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="3">
-                            <div class="content">3/12</div>
-                        </bk-col>
-                        <bk-col :span="3">
-                            <div class="content">3/12</div>
-                        </bk-col>
-                        <bk-col :span="3">
-                            <div class="content">3/12</div>
-                        </bk-col>
-                        <bk-col :span="3">
-                            <div class="content">3/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="2">
-                            <div class="content">2/12</div>
-                        </bk-col>
-                        <bk-col :span="2">
-                            <div class="content">2/12</div>
-                        </bk-col>
-                        <bk-col :span="2">
-                            <div class="content">2/12</div>
-                        </bk-col>
-                        <bk-col :span="2">
-                            <div class="content">2/12</div>
-                        </bk-col>
-                        <bk-col :span="2">
-                            <div class="content">2/12</div>
-                        </bk-col>
-                        <bk-col :span="2">
-                            <div class="content">2/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="8">
-                            <div class="content">8/12</div>
-                        </bk-col>
-                        <bk-col :span="4">
-                            <div class="content">4/12</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="3">
-                            <div class="content">3/12</div>
-                        </bk-col>
-                        <bk-col :span="6">
-                            <div class="content">6/12</div>
-                        </bk-col>
-                        <bk-col :span="3">
-                            <div class="content">3/12</div>
-                        </bk-col>
-                    </bk-row>
-                </bk-container>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="wrapper">
-                <bk-container :gutter="15">
-                    <bk-row>
-                        <bk-col :span="8">
-                            <div class="content">8/24</div>
-                        </bk-col>
-                        <bk-col :span="16">
-                            <div class="content">16/24</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="6">
-                            <div class="content">6/24</div>
-                        </bk-col>
-                        <bk-col :span="6">
-                            <div class="content">6/24</div>
-                        </bk-col>
-                        <bk-col :span="6">
-                            <div class="content">6/24</div>
-                        </bk-col>
-                        <bk-col :span="6">
-                            <div class="content">6/24</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="12">
-                            <div class="content">12/24</div>
-                        </bk-col>
-                        <bk-col :span="6">
-                            <div class="content">6/24</div>
-                        </bk-col>
-                        <bk-col :span="4">
-                            <div class="content">4/24</div>
-                        </bk-col>
-                        <bk-col :span="2">
-                            <div class="content">2/24</div>
-                        </bk-col>
-                    </bk-row>
-                </bk-container>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="wrapper">
-                <bk-container :col="4">
-                    <bk-row>
-                        <bk-col :span="1">
-                            <div class="content">1/4</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/4</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/4</div>
-                        </bk-col>
-                        <bk-col :span="1">
-                            <div class="content">1/4</div>
-                        </bk-col>
-                    </bk-row>
-                </bk-container>
-            </div>
-        </div>
-        <div class="example-item flex">
-            <div class="wrapper">
-                <bk-container flex :col="12" :gutter="15">
-                    <bk-row>
-                        <bk-col :span="4">
-                            <div class="content">4/12</div>
-                        </bk-col>
-                        <bk-col :span="8">
-                            <bk-row>
-                                <bk-col :span="4">
-                                    <div class="content">4/12</div>
-                                </bk-col>
-                                <bk-col :span="4">
-                                    <div class="content">4/12</div>
-                                </bk-col>
-                            </bk-row>
-                            <bk-row>
-                                <bk-col :span="3">
-                                    <div class="content">3/12</div>
-                                </bk-col>
-                                <bk-col :span="5">
-                                    <div class="content">5/12</div>
-                                </bk-col>
-                            </bk-row>
-                        </bk-col>
-                    </bk-row>
-                </bk-container>
-            </div>
-        </div>
-        <div class="example-item">
-            <div class="wrapper">
-                <bk-container>
-                    <bk-row>
-                        <bk-col :span="8" :offset="8">
-                            <div class="content">8/24 (offset: 8)</div>
-                        </bk-col>
-                        <bk-col :span="8">
-                            <div class="content">8/24</div>
-                        </bk-col>
-                    </bk-row>
-                    <bk-row>
-                        <bk-col :span="8" :push="16">
-                            <div class="content">8/24 (push: 16)</div>
-                        </bk-col>
-                        <bk-col :span="16" :pull="8">
-                            <div class="content">16/24 (pull: 8)</div>
-                        </bk-col>
-                    </bk-row>
-                </bk-container>
-            </div>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Grid 栅格更多示例
+    </h2>
+    <div class="example-item">
+      <div class="wrapper custom">
+        <bk-container :col="4">
+          <bk-row>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+            <bk-col :span="1"><div class="content">1/4</div></bk-col>
+          </bk-row>
+        </bk-container>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="wrapper">
+        <bk-container :col="12" :gutter="40">
+          <bk-row>
+            <bk-col :span="0">
+              <div class="content">12/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="6">
+              <div class="content">6/12</div>
+            </bk-col>
+            <bk-col :span="6">
+              <div class="content">6/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="4">
+              <div class="content">4/12</div>
+            </bk-col>
+            <bk-col :span="4">
+              <div class="content">4/12</div>
+            </bk-col>
+            <bk-col :span="4">
+              <div class="content">4/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="3">
+              <div class="content">3/12</div>
+            </bk-col>
+            <bk-col :span="3">
+              <div class="content">3/12</div>
+            </bk-col>
+            <bk-col :span="3">
+              <div class="content">3/12</div>
+            </bk-col>
+            <bk-col :span="3">
+              <div class="content">3/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="2">
+              <div class="content">2/12</div>
+            </bk-col>
+            <bk-col :span="2">
+              <div class="content">2/12</div>
+            </bk-col>
+            <bk-col :span="2">
+              <div class="content">2/12</div>
+            </bk-col>
+            <bk-col :span="2">
+              <div class="content">2/12</div>
+            </bk-col>
+            <bk-col :span="2">
+              <div class="content">2/12</div>
+            </bk-col>
+            <bk-col :span="2">
+              <div class="content">2/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="8">
+              <div class="content">8/12</div>
+            </bk-col>
+            <bk-col :span="4">
+              <div class="content">4/12</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="3">
+              <div class="content">3/12</div>
+            </bk-col>
+            <bk-col :span="6">
+              <div class="content">6/12</div>
+            </bk-col>
+            <bk-col :span="3">
+              <div class="content">3/12</div>
+            </bk-col>
+          </bk-row>
+        </bk-container>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="wrapper">
+        <bk-container :gutter="15">
+          <bk-row>
+            <bk-col :span="8">
+              <div class="content">8/24</div>
+            </bk-col>
+            <bk-col :span="16">
+              <div class="content">16/24</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="6">
+              <div class="content">6/24</div>
+            </bk-col>
+            <bk-col :span="6">
+              <div class="content">6/24</div>
+            </bk-col>
+            <bk-col :span="6">
+              <div class="content">6/24</div>
+            </bk-col>
+            <bk-col :span="6">
+              <div class="content">6/24</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="12">
+              <div class="content">12/24</div>
+            </bk-col>
+            <bk-col :span="6">
+              <div class="content">6/24</div>
+            </bk-col>
+            <bk-col :span="4">
+              <div class="content">4/24</div>
+            </bk-col>
+            <bk-col :span="2">
+              <div class="content">2/24</div>
+            </bk-col>
+          </bk-row>
+        </bk-container>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="wrapper">
+        <bk-container :col="4">
+          <bk-row>
+            <bk-col :span="1">
+              <div class="content">1/4</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/4</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/4</div>
+            </bk-col>
+            <bk-col :span="1">
+              <div class="content">1/4</div>
+            </bk-col>
+          </bk-row>
+        </bk-container>
+      </div>
+    </div>
+    <div class="example-item flex">
+      <div class="wrapper">
+        <bk-container flex :col="12" :gutter="15">
+          <bk-row>
+            <bk-col :span="4">
+              <div class="content">4/12</div>
+            </bk-col>
+            <bk-col :span="8">
+              <bk-row>
+                <bk-col :span="4">
+                  <div class="content">4/12</div>
+                </bk-col>
+                <bk-col :span="4">
+                  <div class="content">4/12</div>
+                </bk-col>
+              </bk-row>
+              <bk-row>
+                <bk-col :span="3">
+                  <div class="content">3/12</div>
+                </bk-col>
+                <bk-col :span="5">
+                  <div class="content">5/12</div>
+                </bk-col>
+              </bk-row>
+            </bk-col>
+          </bk-row>
+        </bk-container>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="wrapper">
+        <bk-container>
+          <bk-row>
+            <bk-col :span="8" :offset="8">
+              <div class="content">8/24 (offset: 8)</div>
+            </bk-col>
+            <bk-col :span="8">
+              <div class="content">8/24</div>
+            </bk-col>
+          </bk-row>
+          <bk-row>
+            <bk-col :span="8" :push="16">
+              <div class="content">8/24 (push: 16)</div>
+            </bk-col>
+            <bk-col :span="16" :pull="8">
+              <div class="content">16/24 (pull: 8)</div>
+            </bk-col>
+          </bk-row>
+        </bk-container>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

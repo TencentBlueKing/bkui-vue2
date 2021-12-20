@@ -27,46 +27,46 @@
 -->
 
 <template>
-    <div class="bk-picker-panel-body-wrapper bk-time-picker-with-range" :class="showSeconds ? 'bk-time-picker-with-seconds' : ''" @mousedown.prevent>
-        <div class="bk-picker-panel-body" :style="{ width: `${width * 2}px` }">
-            <div class="bk-picker-panel-content bk-picker-panel-content-left" :style="{ width: `${width}px` }">
-                <div class="bk-time-picker-header" v-if="showDate">
-                    <template>{{leftDatePanelLabel}}</template>
-                </div>
-                <time-spinner
-                    ref="timeSpinner"
-                    :steps="steps"
-                    :show-seconds="showSeconds"
-                    :hours="value[0] && dateStart.getHours()"
-                    :minutes="value[0] && dateStart.getMinutes()"
-                    :seconds="value[0] && dateStart.getSeconds()"
-                    :disabled-hours="disabledHours"
-                    :disabled-minutes="disabledMinutes"
-                    :disabled-seconds="disabledSeconds"
-                    :hide-disabled-options="hideDisabledOptions"
-                    @change="handleStartChange"
-                    @pick-click="handlePickClick"></time-spinner>
-            </div>
-            <div class="bk-picker-panel-content bk-picker-panel-content-right" :style="{ width: `${width}px` }">
-                <div class="bk-time-picker-header" v-if="showDate">
-                    <template>{{rightDatePanelLabel}}</template>
-                </div>
-                <time-spinner
-                    ref="timeSpinnerEnd"
-                    :steps="steps"
-                    :show-seconds="showSeconds"
-                    :hours="value[1] && dateEnd.getHours()"
-                    :minutes="value[1] && dateEnd.getMinutes()"
-                    :seconds="value[1] && dateEnd.getSeconds()"
-                    :disabled-hours="disabledHours"
-                    :disabled-minutes="disabledMinutes"
-                    :disabled-seconds="disabledSeconds"
-                    :hide-disabled-options="hideDisabledOptions"
-                    @change="handleEndChange"
-                    @pick-click="handlePickClick"></time-spinner>
-            </div>
+  <div class="bk-picker-panel-body-wrapper bk-time-picker-with-range" :class="showSeconds ? 'bk-time-picker-with-seconds' : ''" @mousedown.prevent>
+    <div class="bk-picker-panel-body" :style="{ width: `${width * 2}px` }">
+      <div class="bk-picker-panel-content bk-picker-panel-content-left" :style="{ width: `${width}px` }">
+        <div class="bk-time-picker-header" v-if="showDate">
+          <template>{{leftDatePanelLabel}}</template>
         </div>
+        <time-spinner
+          ref="timeSpinner"
+          :steps="steps"
+          :show-seconds="showSeconds"
+          :hours="value[0] && dateStart.getHours()"
+          :minutes="value[0] && dateStart.getMinutes()"
+          :seconds="value[0] && dateStart.getSeconds()"
+          :disabled-hours="disabledHours"
+          :disabled-minutes="disabledMinutes"
+          :disabled-seconds="disabledSeconds"
+          :hide-disabled-options="hideDisabledOptions"
+          @change="handleStartChange"
+          @pick-click="handlePickClick"></time-spinner>
+      </div>
+      <div class="bk-picker-panel-content bk-picker-panel-content-right" :style="{ width: `${width}px` }">
+        <div class="bk-time-picker-header" v-if="showDate">
+          <template>{{rightDatePanelLabel}}</template>
+        </div>
+        <time-spinner
+          ref="timeSpinnerEnd"
+          :steps="steps"
+          :show-seconds="showSeconds"
+          :hours="value[1] && dateEnd.getHours()"
+          :minutes="value[1] && dateEnd.getMinutes()"
+          :seconds="value[1] && dateEnd.getSeconds()"
+          :disabled-hours="disabledHours"
+          :disabled-minutes="disabledMinutes"
+          :disabled-seconds="disabledSeconds"
+          :hide-disabled-options="hideDisabledOptions"
+          @change="handleEndChange"
+          @pick-click="handlePickClick"></time-spinner>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 import fecha from '@/utils/fecha'

@@ -27,87 +27,87 @@
 -->
 
 <template>
-    <div class="bk-transfer" :class="extCls" ref="transfer">
-        <div class="source-list">
-            <div class="slot-header" v-if="slot['left-header']">
-                <div class="slot-content">
-                    <slot name="left-header"></slot>
-                </div>
-            </div>
-            <div class="header" v-else>
-                {{title[0] ? title[0] : t('bk.transfer.left')}}{{t('bk.transfer.total', { total: dataList.length })}}
-                <span v-if="dataList.length === 0" class="disabled">{{t('bk.transfer.addAll')}}</span>
-                <span v-else @click="allToRight">{{t('bk.transfer.addAll')}}</span>
-            </div>
-            <bk-input
-                class="transfer-search-input"
-                v-if="searchable"
-                v-model="keyword"
-                :clearable="true"
-                :left-icon="'bk-icon icon-search'"
-                :placeholder="searchPlaceholder || t('bk.transfer.searchPlaceholder')">
-            </bk-input>
+  <div class="bk-transfer" :class="extCls" ref="transfer">
+    <div class="source-list">
+      <div class="slot-header" v-if="slot['left-header']">
+        <div class="slot-content">
+          <slot name="left-header"></slot>
+        </div>
+      </div>
+      <div class="header" v-else>
+        {{title[0] ? title[0] : t('bk.transfer.left')}}{{t('bk.transfer.total', { total: dataList.length })}}
+        <span v-if="dataList.length === 0" class="disabled">{{t('bk.transfer.addAll')}}</span>
+        <span v-else @click="allToRight">{{t('bk.transfer.addAll')}}</span>
+      </div>
+      <bk-input
+        class="transfer-search-input"
+        v-if="searchable"
+        v-model="keyword"
+        :clearable="true"
+        :left-icon="'bk-icon icon-search'"
+        :placeholder="searchPlaceholder || t('bk.transfer.searchPlaceholder')">
+      </bk-input>
 
-            <template v-if="displayDataList.length">
-                <ul class="content">
-                    <li v-for="(item, index) in displayDataList"
-                        @click.stop.prevent="leftClick(index)"
-                        @mouseover.stop.prevent="leftMouseover(index)"
-                        @mouseleave.stop.prevent="leftMouseleave(index)" :key="index">
-                        <slot name="source-option" v-bind="item">
-                            <span class="content-text" v-bk-overflow-tips v-if="showOverflowTips">{{item[displayCode]}}</span>
-                            <span class="content-text" :title="item[displayCode]" v-else>{{item[displayCode]}}</span>
-                            <span class="icon-wrapper" :class="[index === leftHoverIndex ? 'hover' : '']"><i class="bk-icon icon-arrows-right"></i></span>
-                        </slot>
-                    </li>
-                </ul>
-            </template>
-            <template v-else>
-                <div v-if="slot['left-empty-content']">
-                    <slot name="left-empty-content"></slot>
-                </div>
-                <div class="empty" v-else>
-                    {{emptyContent[0] ? emptyContent[0] : t('bk.transfer.emptyContent')}}
-                </div>
-            </template>
+      <template v-if="displayDataList.length">
+        <ul class="content">
+          <li v-for="(item, index) in displayDataList"
+            @click.stop.prevent="leftClick(index)"
+            @mouseover.stop.prevent="leftMouseover(index)"
+            @mouseleave.stop.prevent="leftMouseleave(index)" :key="index">
+            <slot name="source-option" v-bind="item">
+              <span class="content-text" v-bk-overflow-tips v-if="showOverflowTips">{{item[displayCode]}}</span>
+              <span class="content-text" :title="item[displayCode]" v-else>{{item[displayCode]}}</span>
+              <span class="icon-wrapper" :class="[index === leftHoverIndex ? 'hover' : '']"><i class="bk-icon icon-arrows-right"></i></span>
+            </slot>
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <div v-if="slot['left-empty-content']">
+          <slot name="left-empty-content"></slot>
         </div>
-        <div class="transfer">
+        <div class="empty" v-else>
+          {{emptyContent[0] ? emptyContent[0] : t('bk.transfer.emptyContent')}}
         </div>
-        <div class="target-list">
-            <div class="slot-header" v-if="slot['right-header']">
-                <div class="slot-content">
-                    <slot name="right-header"></slot>
-                </div>
-            </div>
-            <div class="header" v-else>
-                {{title[1] ? title[1] : t('bk.transfer.right')}}{{t('bk.transfer.total', { total: hasSelectedList.length })}}
-                <span v-if="hasSelectedList.length === 0" class="disabled">{{t('bk.transfer.removeAll')}}</span>
-                <span v-else @click="allToLeft">{{t('bk.transfer.removeAll')}}</span>
-            </div>
-            <template v-if="hasSelectedList.length">
-                <ul class="content">
-                    <li v-for="(item, index) in hasSelectedList"
-                        @click.stop.prevent="rightClick(index)"
-                        @mouseover.stop.prevent="rightMouseover(index)"
-                        @mouseleave.stop.prevent="rightMouseleave(index)" :key="index">
-                        <slot name="target-option" v-bind="item">
-                            <span class="content-text" v-bk-overflow-tips v-if="showOverflowTips">{{item[displayCode]}}</span>
-                            <span class="content-text" :title="item[displayCode]" v-else>{{item[displayCode]}}</span>
-                            <span class="icon-wrapper" :class="[index === rightHoverIndex ? 'hover' : '']"><i class="bk-icon icon-close"></i></span>
-                        </slot>
-                    </li>
-                </ul>
-            </template>
-            <template v-else>
-                <div v-if="slot['right-empty-content']">
-                    <slot name="right-empty-content"></slot>
-                </div>
-                <div class="empty" v-else>
-                    {{emptyContent[1] ? emptyContent[1] : t('bk.transfer.emptySelected')}}
-                </div>
-            </template>
-        </div>
+      </template>
     </div>
+    <div class="transfer">
+    </div>
+    <div class="target-list">
+      <div class="slot-header" v-if="slot['right-header']">
+        <div class="slot-content">
+          <slot name="right-header"></slot>
+        </div>
+      </div>
+      <div class="header" v-else>
+        {{title[1] ? title[1] : t('bk.transfer.right')}}{{t('bk.transfer.total', { total: hasSelectedList.length })}}
+        <span v-if="hasSelectedList.length === 0" class="disabled">{{t('bk.transfer.removeAll')}}</span>
+        <span v-else @click="allToLeft">{{t('bk.transfer.removeAll')}}</span>
+      </div>
+      <template v-if="hasSelectedList.length">
+        <ul class="content">
+          <li v-for="(item, index) in hasSelectedList"
+            @click.stop.prevent="rightClick(index)"
+            @mouseover.stop.prevent="rightMouseover(index)"
+            @mouseleave.stop.prevent="rightMouseleave(index)" :key="index">
+            <slot name="target-option" v-bind="item">
+              <span class="content-text" v-bk-overflow-tips v-if="showOverflowTips">{{item[displayCode]}}</span>
+              <span class="content-text" :title="item[displayCode]" v-else>{{item[displayCode]}}</span>
+              <span class="icon-wrapper" :class="[index === rightHoverIndex ? 'hover' : '']"><i class="bk-icon icon-close"></i></span>
+            </slot>
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <div v-if="slot['right-empty-content']">
+          <slot name="right-empty-content"></slot>
+        </div>
+        <div class="empty" v-else>
+          {{emptyContent[1] ? emptyContent[1] : t('bk.transfer.emptySelected')}}
+        </div>
+      </template>
+    </div>
+  </div>
 </template>
 
 <script>

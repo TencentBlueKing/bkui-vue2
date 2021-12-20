@@ -27,11 +27,11 @@
 -->
 
 <template>
-    <section :class="classes" :style="style" @click="handleClick">
-        <i :class="`bk-icon bk-tag-icon ${icon}`" v-if="icon"></i>
-        <span><slot></slot></span>
-        <i class="bk-icon icon-close bk-tag-close" v-if="closable" @click.stop="handleClose"></i>
-    </section>
+  <section :class="classes" :style="style" @click="handleClick">
+    <i :class="`bk-icon bk-tag-icon ${icon}`" v-if="icon"></i>
+    <span><slot></slot></span>
+    <i class="bk-icon icon-close bk-tag-close" v-if="closable" @click.stop="handleClose"></i>
+  </section>
 </template>
 <script>
 export default {

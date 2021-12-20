@@ -27,74 +27,74 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Tree 按钮更多示例
-        </h2>
-        <div class="example-item">
-            <div class="tree3">
-                <input class="tree-search-input" type="text" v-model="searchword" placeholder="search..." />
-                <bk-button class="tree-search-btn" @click="search">search</bk-button>
-                <bk-tree
-                    ref="tree1"
-                    :is-delete-root="false"
-                    :data="treeData1"
-                    :node-key="'id'"
-                    :has-border="true"
-                    :draggable="true"
-                    @on-check="nodechekced"
-                    @on-click="nodeClicked"
-                    @on-expanded="nodeExpanded"
-                    :multiple="true">
-                </bk-tree>
-                <div v-if="isEmpty">暂无数据</div>
-                <bk-button class="tree-search-btn" @click="searchSelected">searchSelected</bk-button>
-            </div>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Tree 按钮更多示例
+    </h2>
+    <div class="example-item">
+      <div class="tree3">
+        <input class="tree-search-input" type="text" v-model="searchword" placeholder="search..." />
+        <bk-button class="tree-search-btn" @click="search">search</bk-button>
+        <bk-tree
+          ref="tree1"
+          :is-delete-root="false"
+          :data="treeData1"
+          :node-key="'id'"
+          :has-border="true"
+          :draggable="true"
+          @on-check="nodechekced"
+          @on-click="nodeClicked"
+          @on-expanded="nodeExpanded"
+          :multiple="true">
+        </bk-tree>
+        <div v-if="isEmpty">暂无数据</div>
+        <bk-button class="tree-search-btn" @click="searchSelected">searchSelected</bk-button>
+      </div>
+    </div>
+    <div class="example-item">
+      <div style="display: flex;">
+        <div class=" flex-1">
+          <bk-tree
+            ref="tree2"
+            :is-delete-root="false"
+            :data="treeData4"
+            :has-border="true"
+            :node-key="'id'"
+            :draggable="true"
+            @on-click="nodeClicked4"
+            @on-expanded="nodeExpanded4"
+            :multiple="false">
+          </bk-tree>
         </div>
-        <div class="example-item">
-            <div style="display: flex;">
-                <div class=" flex-1">
-                    <bk-tree
-                        ref="tree2"
-                        :is-delete-root="false"
-                        :data="treeData4"
-                        :has-border="true"
-                        :node-key="'id'"
-                        :draggable="true"
-                        @on-click="nodeClicked4"
-                        @on-expanded="nodeExpanded4"
-                        :multiple="false">
-                    </bk-tree>
-                </div>
-                <div class="">
-                    <bk-tree
-                        ref="tree2"
-                        :is-delete-root="false"
-                        :data="treeData4"
-                        :has-border="true"
-                        :node-key="'id'"
-                        @on-click="nodeClicked4"
-                        @on-expanded="nodeExpanded4"
-                        :multiple="false">
-                    </bk-tree>
-                </div>
-            </div>
+        <div class="">
+          <bk-tree
+            ref="tree2"
+            :is-delete-root="false"
+            :data="treeData4"
+            :has-border="true"
+            :node-key="'id'"
+            @on-click="nodeClicked4"
+            @on-expanded="nodeExpanded4"
+            :multiple="false">
+          </bk-tree>
         </div>
-        <div class="example-item">
-            <div class="tree3">
-                <bk-tree ref="tree2"
-                    :data="treeData2"
-                    :multiple="false"
-                    :draggable="true"
-                    :node-key="'id'"
-                    @async-load-nodes="asyncLoad2"
-                    @on-drag-node="dragNodeEnd"
-                    @on-expanded="nodeExpandeds">
-                </bk-tree>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+    <div class="example-item">
+      <div class="tree3">
+        <bk-tree ref="tree2"
+          :data="treeData2"
+          :multiple="false"
+          :draggable="true"
+          :node-key="'id'"
+          @async-load-nodes="asyncLoad2"
+          @on-drag-node="dragNodeEnd"
+          @on-expanded="nodeExpandeds">
+        </bk-tree>
+      </div>
+    </div>
+  </section>
 </template>
 <script>
 import { bkTree, bkButton } from '@'

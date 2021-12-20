@@ -27,19 +27,19 @@
 -->
 
 <template>
-    <div>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            结合 vue-i18n@6+ 使用
-        </h2>
-        <div class="example-item" style="height: 400px">
-            <bk-date-picker class="mr15" :type="'datetime'" :open="true" v-model="initDateTime"></bk-date-picker>
-            <bk-button type="primary submit" title="切换中英文" @click="handleClick">
-                切换中英文
-            </bk-button>
-            <span class="bk-text-primary">当前为{{curLang === 'zhCN' ? '中文' : '英文'}}</span>
-        </div>
+  <div>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      结合 vue-i18n@6+ 使用
+    </h2>
+    <div class="example-item" style="height: 400px">
+      <bk-date-picker class="mr15" :type="'datetime'" :open="true" v-model="initDateTime"></bk-date-picker>
+      <bk-button type="primary submit" title="切换中英文" @click="handleClick">
+        切换中英文
+      </bk-button>
+      <span class="bk-text-primary">当前为{{curLang === 'zhCN' ? '中文' : '英文'}}</span>
     </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue'

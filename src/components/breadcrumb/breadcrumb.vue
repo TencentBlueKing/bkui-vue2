@@ -27,15 +27,15 @@
 -->
 
 <template>
-    <div class="bk-breadcrumb" aria-label="Breadcrumb" role="navigation">
-        <div v-if="!$slots.prefix && backRouter" class="bk-breadcrumb-goback">
-            <i class="bk-icon icon-arrows-left icon-default" @click="goBack"></i>
-        </div>
-        <div v-if="$slots.prefix" class="bk-breadcrumb-goback">
-            <slot name="prefix"></slot>
-        </div>
-        <slot></slot>
+  <div class="bk-breadcrumb" aria-label="Breadcrumb" role="navigation">
+    <div v-if="!$slots.prefix && backRouter" class="bk-breadcrumb-goback">
+      <i class="bk-icon icon-arrows-left icon-default" @click="goBack"></i>
     </div>
+    <div v-if="$slots.prefix" class="bk-breadcrumb-goback">
+      <slot name="prefix"></slot>
+    </div>
+    <slot></slot>
+  </div>
 </template>
 <script>
 export default {

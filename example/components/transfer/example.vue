@@ -27,35 +27,35 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Transfer 按钮更多示例
-        </h2>
-        <div class="example-item">
-            <bk-transfer
-                :source-list="listCopy"
-                :target-list="value"
-                :display-key="'service_name'"
-                :setting-key="'service_code'"
-                :sort-key="key"
-                :title="title"
-                :empty-content="emptyContent"
-                :sortable="true"
-                @change="change">
-                <div slot="source-option" slot-scope="data">
-                    {{ data.service_name }}
-                </div>
-                <div slot="target-option" slot-scope="data">
-                    {{ data.service_name }}
-                </div>
-            </bk-transfer>
-            <p>
-                <bk-button type="default" @click.stop="changeList">改变数据源</bk-button>
-                <bk-button type="default" @click.stop="changeKey">改变排序key</bk-button>
-            </p>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Transfer 按钮更多示例
+    </h2>
+    <div class="example-item">
+      <bk-transfer
+        :source-list="listCopy"
+        :target-list="value"
+        :display-key="'service_name'"
+        :setting-key="'service_code'"
+        :sort-key="key"
+        :title="title"
+        :empty-content="emptyContent"
+        :sortable="true"
+        @change="change">
+        <div slot="source-option" slot-scope="data">
+          {{ data.service_name }}
         </div>
-    </section>
+        <div slot="target-option" slot-scope="data">
+          {{ data.service_name }}
+        </div>
+      </bk-transfer>
+      <p>
+        <bk-button type="default" @click.stop="changeList">改变数据源</bk-button>
+        <bk-button type="default" @click.stop="changeKey">改变排序key</bk-button>
+      </p>
+    </div>
+  </section>
 </template>
 <script>
 import { bkTransfer, bkButton } from '@'

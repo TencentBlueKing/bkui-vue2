@@ -27,9 +27,9 @@
 -->
 
 <template>
-    <form :class="[formCls, extCls]" @submit="formSubmit">
-        <slot></slot>
-    </form>
+  <form :class="[formCls, extCls]" @submit="formSubmit">
+    <slot></slot>
+  </form>
 </template>
 
 <script>

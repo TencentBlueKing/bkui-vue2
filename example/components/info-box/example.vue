@@ -27,27 +27,27 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Info 提示框更多示例
-        </h2>
-        <div class="example-item">
-            <bk-button @click="mountInBody">
-                mount in body
-            </bk-button>
-        </div>
-        <div class="example-item">
-            <bk-button :theme="'success'" @click="mountInParent" ref="vvv">
-                mount in parentNode
-            </bk-button>
-        </div>
-        <div class="example-item">
-            <bk-button :theme="'success'" @click="test">
-                test
-            </bk-button>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Info 提示框更多示例
+    </h2>
+    <div class="example-item">
+      <bk-button @click="mountInBody">
+        mount in body
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button :theme="'success'" @click="mountInParent" ref="vvv">
+        mount in parentNode
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button :theme="'success'" @click="test">
+        test
+      </bk-button>
+    </div>
+  </section>
 </template>
 
 <script>

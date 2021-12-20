@@ -27,47 +27,47 @@
 -->
 
 <template>
-    <div class="bk-process" :class="extCls">
-        <ul :style="{ paddingBottom: paddingBottom + 'px' }">
-            <li v-for="(item, index) in dataList" :key="index"
-                :style="{ cursor: controllables ? 'pointer' : '' }"
-                :class="{ success: curProcess >= (index + 1), current: item.isLoading && index === curProcess - 1 }"
-                @click="toggle(item, index)">
-                {{item[displayKey]}}
-                <div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-white" v-if="item.isLoading && index === curProcess - 1">
-                    <div class="rotate rotate1"></div>
-                    <div class="rotate rotate2"></div>
-                    <div class="rotate rotate3"></div>
-                    <div class="rotate rotate4"></div>
-                    <div class="rotate rotate5"></div>
-                    <div class="rotate rotate6"></div>
-                    <div class="rotate rotate7"></div>
-                    <div class="rotate rotate8"></div>
-                </div>
-                <i class="bk-icon icon-check-1" v-else></i>
-                <dl class="bk-process-step" ref="stepsDom" v-show="item.steps && item.steps.length && showFlag">
-                    <dd v-for="(step, stepIndex) in item.steps" :key="stepIndex">
-                        {{step[displayKey]}}
-                        <div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-primary steps-loading" v-if="step.isLoading && index === curProcess - 1">
-                            <div class="rotate rotate1"></div>
-                            <div class="rotate rotate2"></div>
-                            <div class="rotate rotate3"></div>
-                            <div class="rotate rotate4"></div>
-                            <div class="rotate rotate5"></div>
-                            <div class="rotate rotate6"></div>
-                            <div class="rotate rotate7"></div>
-                            <div class="rotate rotate8"></div>
-                        </div>
-                        <i class="bk-icon icon-check-1" v-else></i>
-                    </dd>
-                </dl>
-            </li>
-        </ul>
-        <a href="javascript:;" class="bk-process-toggle" @click="toggleProcess" v-if="toggleFlag">
-            <i class="bk-icon"
-                :class="showFlag ? 'icon-angle-up' : 'icon-angle-down'"></i>
-        </a>
-    </div>
+  <div class="bk-process" :class="extCls">
+    <ul :style="{ paddingBottom: paddingBottom + 'px' }">
+      <li v-for="(item, index) in dataList" :key="index"
+        :style="{ cursor: controllables ? 'pointer' : '' }"
+        :class="{ success: curProcess >= (index + 1), current: item.isLoading && index === curProcess - 1 }"
+        @click="toggle(item, index)">
+        {{item[displayKey]}}
+        <div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-white" v-if="item.isLoading && index === curProcess - 1">
+          <div class="rotate rotate1"></div>
+          <div class="rotate rotate2"></div>
+          <div class="rotate rotate3"></div>
+          <div class="rotate rotate4"></div>
+          <div class="rotate rotate5"></div>
+          <div class="rotate rotate6"></div>
+          <div class="rotate rotate7"></div>
+          <div class="rotate rotate8"></div>
+        </div>
+        <i class="bk-icon icon-check-1" v-else></i>
+        <dl class="bk-process-step" ref="stepsDom" v-show="item.steps && item.steps.length && showFlag">
+          <dd v-for="(step, stepIndex) in item.steps" :key="stepIndex">
+            {{step[displayKey]}}
+            <div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-primary steps-loading" v-if="step.isLoading && index === curProcess - 1">
+              <div class="rotate rotate1"></div>
+              <div class="rotate rotate2"></div>
+              <div class="rotate rotate3"></div>
+              <div class="rotate rotate4"></div>
+              <div class="rotate rotate5"></div>
+              <div class="rotate rotate6"></div>
+              <div class="rotate rotate7"></div>
+              <div class="rotate rotate8"></div>
+            </div>
+            <i class="bk-icon icon-check-1" v-else></i>
+          </dd>
+        </dl>
+      </li>
+    </ul>
+    <a href="javascript:;" class="bk-process-toggle" @click="toggleProcess" v-if="toggleFlag">
+      <i class="bk-icon"
+        :class="showFlag ? 'icon-angle-up' : 'icon-angle-down'"></i>
+    </a>
+  </div>
 </template>
 <script>
 /**

@@ -27,18 +27,18 @@
 -->
 
 <template>
-    <div class="bk-breadcrumb-item">
-        <span
-            @click="jump"
-            :class="['bk-breadcrumb-item-inner', to ? 'is-link' : '']"
-            ref="link"
-            role="link">
-            <slot></slot>
-        </span>
-        <!--如果传了class ，当做icon-class，-->
-        <i v-if="$parent.separatorClass" class="bk-breadcrumb-separator" :class="$parent.separatorClass"></i>
-        <span v-else class="bk-breadcrumb-separator" role="presentation">{{$parent.separator}}</span>
-    </div>
+  <div class="bk-breadcrumb-item">
+    <span
+      @click="jump"
+      :class="['bk-breadcrumb-item-inner', to ? 'is-link' : '']"
+      ref="link"
+      role="link">
+      <slot></slot>
+    </span>
+    <!--如果传了class ，当做icon-class，-->
+    <i v-if="$parent.separatorClass" class="bk-breadcrumb-separator" :class="$parent.separatorClass"></i>
+    <span v-else class="bk-breadcrumb-separator" role="presentation">{{$parent.separator}}</span>
+  </div>
 </template>
 <script>
 export default {

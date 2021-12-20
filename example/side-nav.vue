@@ -27,68 +27,68 @@
 -->
 
 <template>
-    <div class="side-nav">
-        <div class="side-header">
-            <div class="title">
-                <img src="./img/logo.png" class="vue-logo">
-                Vue 组件库
-            </div>
-            <div class="placeholder"></div>
-            <div class="search-wrapper" v-bk-clickoutside="searchClose">
-                <bk-input
-                    ref="searchInput"
-                    :placeholder="'搜索'"
-                    :clearable="true"
-                    :right-icon="'bk-icon icon-search'"
-                    v-model="search"
-                    @change="searchHandle"
-                    @focus="searchFocus"
-                    @keydown="keyupHandle">
-                </bk-input>
+  <div class="side-nav">
+    <div class="side-header">
+      <div class="title">
+        <img src="./img/logo.png" class="vue-logo">
+        Vue 组件库
+      </div>
+      <div class="placeholder"></div>
+      <div class="search-wrapper" v-bk-clickoutside="searchClose">
+        <bk-input
+          ref="searchInput"
+          :placeholder="'搜索'"
+          :clearable="true"
+          :right-icon="'bk-icon icon-search'"
+          v-model="search"
+          @change="searchHandle"
+          @focus="searchFocus"
+          @keydown="keyupHandle">
+        </bk-input>
 
-                <bk-popover class="search-dropdown"
-                    trigger="manual"
-                    placement="bottom-start"
-                    animation="slide-toggle"
-                    :offset="-1"
-                    :distance="12"
-                    :tippy-options="popoverOptions">
-                    <transition name="optionList">
-                        <template v-if="showList">
-                            <div class="search-dropdown-list" v-if="renderList.length">
-                                <ul ref="searchListContainer" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
-                                    <li v-for="(data, index) in renderList"
-                                        class="search-dropdown-list-item"
-                                        :class="selectIndex === index ? 'cur' : ''"
-                                        :key="index"
-                                        @click="changeRouter(data, true)">
-                                        <SearchItemRender :query="search" :node="data" />
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="search-dropdown-list" v-else>
-                                <ul ref="searchListContainer" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
-                                    <li class="search-dropdown-list-item">
-                                        <span class="text">没有找到组件</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </template>
-                    </transition>
-                </bk-popover>
-            </div>
-        </div>
-        <div class="nav-item-wrapper">
-            <div class="nav-item" v-for="(group, groupIndex) in groups.groups" :key="groupIndex">
-                <div class="nav-title" :class="!group.groupId ? 'no-groupid' : ''">{{group.groupId}}</div>
-                <div class="nav-content" :class="{
-                    'nav-active': activeId === component.id || activeId === component.id + 'Example'
-                }" v-for="(component, componentIndex) in group.components" :key="componentIndex" @click="changeRouter(component)">
-                    {{component.name}}
-                </div>
-            </div>
-        </div>
+        <bk-popover class="search-dropdown"
+          trigger="manual"
+          placement="bottom-start"
+          animation="slide-toggle"
+          :offset="-1"
+          :distance="12"
+          :tippy-options="popoverOptions">
+          <transition name="optionList">
+            <template v-if="showList">
+              <div class="search-dropdown-list" v-if="renderList.length">
+                <ul ref="searchListContainer" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
+                  <li v-for="(data, index) in renderList"
+                    class="search-dropdown-list-item"
+                    :class="selectIndex === index ? 'cur' : ''"
+                    :key="index"
+                    @click="changeRouter(data, true)">
+                    <SearchItemRender :query="search" :node="data" />
+                  </li>
+                </ul>
+              </div>
+              <div class="search-dropdown-list" v-else>
+                <ul ref="searchListContainer" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
+                  <li class="search-dropdown-list-item">
+                    <span class="text">没有找到组件</span>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </transition>
+        </bk-popover>
+      </div>
     </div>
+    <div class="nav-item-wrapper">
+      <div class="nav-item" v-for="(group, groupIndex) in groups.groups" :key="groupIndex">
+        <div class="nav-title" :class="!group.groupId ? 'no-groupid' : ''">{{group.groupId}}</div>
+        <div class="nav-content" :class="{
+          'nav-active': activeId === component.id || activeId === component.id + 'Example'
+        }" v-for="(component, componentIndex) in group.components" :key="componentIndex" @click="changeRouter(component)">
+          {{component.name}}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

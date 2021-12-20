@@ -27,20 +27,20 @@
 -->
 
 <template>
-    <div class="bk-progress" :class="extCls">
-        <div class="progress-bar" :class="`bk-progress-${size}`" :style="percentStyle">
-            <div class="progress-inner" :style="barStyle" :class="`bk-${themeType}`">
-                <div class="inner-text" v-if="showText && textInside && percentFixed !== 0" :style="titleStyle">{{percentFixed}}%</div>
-            </div>
-            <template v-if="showText && textInside && percentFixed === 0">{{percentFixed}}%</template>
-        </div>
-        <div
-            class="progress-text"
-            v-if="showText && !textInside"
-            :style="titleStyle">
-            <slot>{{percentFixed}}%</slot>
-        </div>
+  <div class="bk-progress" :class="extCls">
+    <div class="progress-bar" :class="`bk-progress-${size}`" :style="percentStyle">
+      <div class="progress-inner" :style="barStyle" :class="`bk-${themeType}`">
+        <div class="inner-text" v-if="showText && textInside && percentFixed !== 0" :style="titleStyle">{{percentFixed}}%</div>
+      </div>
+      <template v-if="showText && textInside && percentFixed === 0">{{percentFixed}}%</template>
     </div>
+    <div
+      class="progress-text"
+      v-if="showText && !textInside"
+      :style="titleStyle">
+      <slot>{{percentFixed}}%</slot>
+    </div>
+  </div>
 </template>
 
 <script>

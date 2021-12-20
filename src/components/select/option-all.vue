@@ -27,20 +27,20 @@
 -->
 
 <template>
-    <li class="bk-option"
-        :class="{
-            'is-disabled': disabled
-        }"
-        @click="handleOptionClick">
-        <div class="bk-option-content">
-            <span class="bk-option-name">
-                {{t('bk.select.selectAll')}}
-                <template v-if="isAllSelected">
-                    {{`(${select.selectedOptions.length})`}}
-                </template>
-            </span>
-        </div>
-    </li>
+  <li class="bk-option"
+    :class="{
+      'is-disabled': disabled
+    }"
+    @click="handleOptionClick">
+    <div class="bk-option-content">
+      <span class="bk-option-name">
+        {{t('bk.select.selectAll')}}
+        <template v-if="isAllSelected">
+          {{`(${select.selectedOptions.length})`}}
+        </template>
+      </span>
+    </div>
+  </li>
 </template>
 
 <script>

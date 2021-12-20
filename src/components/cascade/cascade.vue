@@ -27,126 +27,126 @@
 -->
 
 <template>
-    <div class="bk-cascade"
-        :class="{
-            'is-focus': showCascade,
-            'is-disabled': disabled,
-            'is-unselected': isUnselected,
-            'is-default-trigger': !$scopedSlots.trigger
-        }"
-        tabindex="0"
-        :data-placeholder="placeContent"
-        @keydown.enter.prevent="showTippyInstance"
-        @keydown.tab="handleDropdownHide"
-        @keydown.esc.stop.prevent="handleDropdownHide">
-        <i class="bk-cascade-angle bk-icon icon-angle-down"></i>
-        <i class="bk-cascade-clear bk-icon icon-close"
-            v-if="clearable && !disabled && selectedName"
-            @click.prevent.stop="clearData">
-        </i>
-        <bk-popover
-            style="max-width: 100%;"
-            class="bk-cascade-dropdown"
-            ref="cascadeDropdown"
-            trigger="click"
-            placement="bottom-start"
-            theme="light bk-cascade-dropdown"
-            animation="slide-toggle"
-            :distance="12"
-            :on-show="handleDropdownShow"
-            :on-hide="handleDropdownHide"
-            :tippy-options="popoverOptions">
-            <template v-if="multiple">
-                <div class="bk-cascade-name" :title="selectedName" v-if="limitOneLine">
-                    <span>{{selectedName}}</span>
-                </div>
-                <section v-else>
-                    <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
-                        <span v-for="(item, index) in multipleSelectedList"
-                            :key="index"
-                            class="bk-cascade-tag-item" style="padding-right: 18px;">
-                            <span class="bk-cascade-item-name" :title="item.name">{{item.name}}</span>
-                            <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
-                                <i class="bk-icon icon-close"></i>
-                            </a>
-                        </span>
-                    </div>
-                </section>
-                <div class="bk-cascade-name" v-if="filterable">
-                    <input
-                        class="bk-cascade-search-input"
-                        ref="searchInput"
-                        type="text"
-                        :placeholder="t('bk.select.searchPlaceholder')"
-                        @input="handleSearchInput"
-                        v-model="searchContent">
-                </div>
-            </template>
-            <div class="bk-cascade-name" :title="selectedName" v-else>
-                <input
-                    class="bk-cascade-search-input"
-                    ref="searchInput"
-                    type="text"
-                    :placeholder="t('bk.select.searchPlaceholder')"
-                    v-if="filterable"
-                    @input="handleSearchInput"
-                    v-model="searchContent">
-                <span v-else>{{selectedName}}</span>
-            </div>
-            <div slot="content"
-                :class="['bk-cascade-dropdown-content',extPopoverCls]"
-                v-show="!disabled"
-                :style="{
-                    width: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? defaultWidth : (scrollWidth * popoverWidth + 2)) + 'px'
+  <div class="bk-cascade"
+    :class="{
+      'is-focus': showCascade,
+      'is-disabled': disabled,
+      'is-unselected': isUnselected,
+      'is-default-trigger': !$scopedSlots.trigger
+    }"
+    tabindex="0"
+    :data-placeholder="placeContent"
+    @keydown.enter.prevent="showTippyInstance"
+    @keydown.tab="handleDropdownHide"
+    @keydown.esc.stop.prevent="handleDropdownHide">
+    <i class="bk-cascade-angle bk-icon icon-angle-down"></i>
+    <i class="bk-cascade-clear bk-icon icon-close"
+      v-if="clearable && !disabled && selectedName"
+      @click.prevent.stop="clearData">
+    </i>
+    <bk-popover
+      style="max-width: 100%;"
+      class="bk-cascade-dropdown"
+      ref="cascadeDropdown"
+      trigger="click"
+      placement="bottom-start"
+      theme="light bk-cascade-dropdown"
+      animation="slide-toggle"
+      :distance="12"
+      :on-show="handleDropdownShow"
+      :on-hide="handleDropdownHide"
+      :tippy-options="popoverOptions">
+      <template v-if="multiple">
+        <div class="bk-cascade-name" :title="selectedName" v-if="limitOneLine">
+          <span>{{selectedName}}</span>
+        </div>
+        <section v-else>
+          <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
+            <span v-for="(item, index) in multipleSelectedList"
+              :key="index"
+              class="bk-cascade-tag-item" style="padding-right: 18px;">
+              <span class="bk-cascade-item-name" :title="item.name">{{item.name}}</span>
+              <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
+                <i class="bk-icon icon-close"></i>
+              </a>
+            </span>
+          </div>
+        </section>
+        <div class="bk-cascade-name" v-if="filterable">
+          <input
+            class="bk-cascade-search-input"
+            ref="searchInput"
+            type="text"
+            :placeholder="t('bk.select.searchPlaceholder')"
+            @input="handleSearchInput"
+            v-model="searchContent">
+        </div>
+      </template>
+      <div class="bk-cascade-name" :title="selectedName" v-else>
+        <input
+          class="bk-cascade-search-input"
+          ref="searchInput"
+          type="text"
+          :placeholder="t('bk.select.searchPlaceholder')"
+          v-if="filterable"
+          @input="handleSearchInput"
+          v-model="searchContent">
+        <span v-else>{{selectedName}}</span>
+      </div>
+      <div slot="content"
+        :class="['bk-cascade-dropdown-content',extPopoverCls]"
+        v-show="!disabled"
+        :style="{
+          width: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? defaultWidth : (scrollWidth * popoverWidth + 2)) + 'px'
+        }">
+        <div class="bk-cascade-options"
+          :style="{
+            height: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? 32 : scrollHeight) + 'px'
+          }">
+          <div class="bk-cascade-panel"
+            v-if="filterable && !!searchContent && filterableStatus">
+            <ul class="bk-cascade-panel-ul" style="width: 100%">
+              <li class="bk-option"
+                v-for="(item, index) in searchList"
+                :key="index"
+                @click.prevent.stop="handleSelectItem(item, index)"
+                :class="{
+                  'is-selected': item.isSelected,
+                  'is-disabled': item.disabled
                 }">
-                <div class="bk-cascade-options"
-                    :style="{
-                        height: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? 32 : scrollHeight) + 'px'
-                    }">
-                    <div class="bk-cascade-panel"
-                        v-if="filterable && !!searchContent && filterableStatus">
-                        <ul class="bk-cascade-panel-ul" style="width: 100%">
-                            <li class="bk-option"
-                                v-for="(item, index) in searchList"
-                                :key="index"
-                                @click.prevent.stop="handleSelectItem(item, index)"
-                                :class="{
-                                    'is-selected': item.isSelected,
-                                    'is-disabled': item.disabled
-                                }">
-                                <div class="bk-option-content">
-                                    <slot>
-                                        <div class="bk-option-content-default" :title="item.name">
-                                            <span class="bk-option-name">{{ item.name }}</span>
-                                        </div>
-                                    </slot>
-                                </div>
-                            </li>
-                            <li class="bk-option-none" v-if="!searchList.length">
-                                <span>{{ emptyText || t('bk.select.searchEmpty') }}</span>
-                            </li>
-                        </ul>
+                <div class="bk-option-content">
+                  <slot>
+                    <div class="bk-option-content-default" :title="item.name">
+                      <span class="bk-option-name">{{ item.name }}</span>
                     </div>
-                    <bk-caspanel
-                        v-show="!filterableStatus"
-                        :list="cascadeList"
-                        :trigger="trigger"
-                        :scroll-width="scrollWidth"
-                        :disabled="disabled"
-                        :check-any-level="checkAnyLevel"
-                        :filterable="filterable"
-                        :multiple="multiple"
-                        :is-remote="isRemote"
-                        :remote-method="remoteMethod"
-                        @updateSelectedList="updateSelectedList">
-                        <template slot="prepend" slot-scope="{ node }">
-                            <slot name="prepend" :node="node"></slot>
-                        </template>
-                    </bk-caspanel>
+                  </slot>
                 </div>
-            </div>
-        </bk-popover>
-    </div>
+              </li>
+              <li class="bk-option-none" v-if="!searchList.length">
+                <span>{{ emptyText || t('bk.select.searchEmpty') }}</span>
+              </li>
+            </ul>
+          </div>
+          <bk-caspanel
+            v-show="!filterableStatus"
+            :list="cascadeList"
+            :trigger="trigger"
+            :scroll-width="scrollWidth"
+            :disabled="disabled"
+            :check-any-level="checkAnyLevel"
+            :filterable="filterable"
+            :multiple="multiple"
+            :is-remote="isRemote"
+            :remote-method="remoteMethod"
+            @updateSelectedList="updateSelectedList">
+            <template slot="prepend" slot-scope="{ node }">
+              <slot name="prepend" :node="node"></slot>
+            </template>
+          </bk-caspanel>
+        </div>
+      </div>
+    </bk-popover>
+  </div>
 </template>
 
 <script>

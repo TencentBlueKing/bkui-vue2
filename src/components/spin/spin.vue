@@ -27,28 +27,28 @@
 -->
 
 <template>
-    <transition name="fade">
-        <div :class="['bk-spin', extCls]">
-            <div :style="{ display: placement === 'right' ? 'flex' : '' }">
-                <div :class="[dotClass]" v-if="!icon">
-                    <div class="rotate1" :class="slotTypeClass"></div>
-                    <div class="rotate2" :class="slotTypeClass"></div>
-                    <div class="rotate3" :class="slotTypeClass"></div>
-                    <div class="rotate4" :class="slotTypeClass"></div>
-                    <div class="rotate5" :class="slotTypeClass"></div>
-                    <div class="rotate6" :class="slotTypeClass"></div>
-                    <div class="rotate7" :class="slotTypeClass"></div>
-                    <div class="rotate8" :class="slotTypeClass"></div>
-                </div>
-                <div :class="[iconClass]" v-if="icon">
-                    <i :class="['bk-icon', 'icon-' + icon]"></i>
-                </div>
-                <div :class="[slotClass]" v-if="$slots.default">
-                    <slot></slot>
-                </div>
-            </div>
+  <transition name="fade">
+    <div :class="['bk-spin', extCls]">
+      <div :style="{ display: placement === 'right' ? 'flex' : '' }">
+        <div :class="[dotClass]" v-if="!icon">
+          <div class="rotate1" :class="slotTypeClass"></div>
+          <div class="rotate2" :class="slotTypeClass"></div>
+          <div class="rotate3" :class="slotTypeClass"></div>
+          <div class="rotate4" :class="slotTypeClass"></div>
+          <div class="rotate5" :class="slotTypeClass"></div>
+          <div class="rotate6" :class="slotTypeClass"></div>
+          <div class="rotate7" :class="slotTypeClass"></div>
+          <div class="rotate8" :class="slotTypeClass"></div>
         </div>
-    </transition>
+        <div :class="[iconClass]" v-if="icon">
+          <i :class="['bk-icon', 'icon-' + icon]"></i>
+        </div>
+        <div :class="[slotClass]" v-if="$slots.default">
+          <slot></slot>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>

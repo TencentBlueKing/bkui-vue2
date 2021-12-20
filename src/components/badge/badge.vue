@@ -27,24 +27,24 @@
 -->
 
 <template>
-    <div class="bk-badge-wrapper"
-        :class="extCls"
-        :style="{ 'vertical-align': $slots.default ? 'middle' : '', 'cursor': icon ? 'pointer' : '' }">
-        <slot></slot>
-        <transition name="fade-center">
-            <span class="bk-badge"
-                v-show="visible"
-                :class="badgeClass"
-                :style="badgeStyle"
-                @mouseenter="handleHover"
-                @mouseleave="handleLeave">
-                <i class="bk-icon"
-                    :class="'icon-' + icon"
-                    v-if="icon && !dot"></i>
-                <span v-if="!icon && !dot">{{text}}</span>
-            </span>
-        </transition>
-    </div>
+  <div class="bk-badge-wrapper"
+    :class="extCls"
+    :style="{ 'vertical-align': $slots.default ? 'middle' : '', 'cursor': icon ? 'pointer' : '' }">
+    <slot></slot>
+    <transition name="fade-center">
+      <span class="bk-badge"
+        v-show="visible"
+        :class="badgeClass"
+        :style="badgeStyle"
+        @mouseenter="handleHover"
+        @mouseleave="handleLeave">
+        <i class="bk-icon"
+          :class="'icon-' + icon"
+          v-if="icon && !dot"></i>
+        <span v-if="!icon && !dot">{{text}}</span>
+      </span>
+    </transition>
+  </div>
 </template>
 
 <script>
