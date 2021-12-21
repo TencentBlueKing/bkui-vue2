@@ -7,6 +7,12 @@
     .bk-icon {
         font-size: $iconNormalSize;
     }
+    .bk-spin-loading {
+        &.bk-spin-loading-mini{
+            width: 14px;
+            height: 14px;
+        }
+    }
     .bk-process-toggle {
         position: relative;
         left: 15px;
@@ -51,6 +57,12 @@
         color: $fnMainColor;
         i {
             display: none;
+        }
+        .bk-process-item {
+            display: inline-block;
+            > .bk-icon {
+                font-size: $iconSmallestSize;
+            }
         }
         &:first-of-type {
             border-radius: 13px 0 0 13px;
@@ -105,6 +117,21 @@
             .steps-loading {
                 top: -2px;
             }
+            .step-item {
+                &.error {
+                    color: $newRedColor1;
+
+                    .bk-icon {
+                        color: $newRedColor1;
+                        vertical-align: -2px;
+                    }
+                }
+                &.done {
+                    .bk-icon {
+                        color: $newGreenColor;
+                    }
+                }
+            }
         }
 
         &.success {
@@ -122,6 +149,58 @@
                 display: inline-block;
             }
         }
+
+        &.status-error {
+            background: $newRedColor1;
+            color: #fff;
+            &::after {
+                border-color: transparent transparent transparent $newRedColor1;
+            }
+            .bk-process-item > .bk-icon {
+                display: inline-block;
+            }
+            .bk-process-step {
+                .bk-icon {
+                    display: inline-block;
+                }
+            }
+        }
+        &.status-done {
+            background: $newGreenColor;
+            color: #fff;
+            &::after {
+                border-color: transparent transparent transparent $newGreenColor;
+            }
+            .bk-process-item > .bk-icon {
+                display: inline-block;
+            }
+            .bk-process-step {
+                .bk-icon {
+                    display: inline-block;
+                }
+            }
+        }
+        &.status-loading {
+            .bk-process-item > .bk-icon {
+                display: inline-block;
+            }
+            .bk-process-step {
+                .bk-icon {
+                    display: inline-block;
+                }
+            }
+        }
+        &.status-default {
+            .bk-process-item > .bk-icon {
+                display: inline-block;
+            }
+            .bk-process-step {
+                .bk-icon {
+                    display: inline-block;
+                }
+            }
+        }
+
         &.current {
             background: $newMainColor;
             color: #fff;
