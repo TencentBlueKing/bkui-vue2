@@ -37,57 +37,57 @@ import oldStr from '../../example/components/diff/old'
 import newStr from '../../example/components/diff/new'
 
 describe('Diff', () => {
-    it('render the correct oldContent and newContent', () => {
-        const wrapper = mountComponent(Diff, {
-            propsData: {
-                oldContent: oldStr,
-                newContent: newStr,
-                format: 'side-by-side'
-            }
-        })
-        const sourceContent = wrapper.find('.d2h-files-diff')
-        expect(sourceContent.exists()).toBe(true)
-        expect(sourceContent.contains('.d2h-file-side-diff')).toBe(true)
+  it('render the correct oldContent and newContent', () => {
+    const wrapper = mountComponent(Diff, {
+      propsData: {
+        oldContent: oldStr,
+        newContent: newStr,
+        format: 'side-by-side'
+      }
+    })
+    const sourceContent = wrapper.find('.d2h-files-diff')
+    expect(sourceContent.exists()).toBe(true)
+    expect(sourceContent.contains('.d2h-file-side-diff')).toBe(true)
 
-        const tableSourceContent = wrapper.find('.d2h-diff-tbody')
-        expect(tableSourceContent.exists()).toBe(true)
-        expect(tableSourceContent.contains('tr')).toBe(true)
+    const tableSourceContent = wrapper.find('.d2h-diff-tbody')
+    expect(tableSourceContent.exists()).toBe(true)
+    expect(tableSourceContent.contains('tr')).toBe(true)
+  })
+  it('has context', () => {
+    const wrapper = mountComponent(Diff, {
+      propsData: {
+        oldContent: oldStr,
+        newContent: newStr,
+        context: 20
+      }
     })
-    it('has context', () => {
-        const wrapper = mountComponent(Diff, {
-            propsData: {
-                oldContent: oldStr,
-                newContent: newStr,
-                context: 20
-            }
-        })
-        expect(wrapper.props('context')).toEqual(20)
+    expect(wrapper.props('context')).toEqual(20)
+  })
+  it('render the correct format with side-by-side ', () => {
+    const wrapper = mountComponent(Diff, {
+      propsData: {
+        oldContent: oldStr,
+        newContent: newStr,
+        format: 'side-by-side'
+      }
     })
-    it('render the correct format with side-by-side ', () => {
-        const wrapper = mountComponent(Diff, {
-            propsData: {
-                oldContent: oldStr,
-                newContent: newStr,
-                format: 'side-by-side'
-            }
-        })
-        const sourceContent = wrapper.find('.d2h-file-side-diff')
-        expect(sourceContent.exists()).toBe(true)
-        expect(sourceContent.contains('.d2h-code-wrapper')).toBe(true)
+    const sourceContent = wrapper.find('.d2h-file-side-diff')
+    expect(sourceContent.exists()).toBe(true)
+    expect(sourceContent.contains('.d2h-code-wrapper')).toBe(true)
+  })
+  it('render the correct format with line-by-line', () => {
+    const wrapper = mountComponent(Diff, {
+      propsData: {
+        oldContent: oldStr,
+        newContent: newStr,
+        format: 'line-by-line'
+      }
     })
-    it('render the correct format with line-by-line', () => {
-        const wrapper = mountComponent(Diff, {
-            propsData: {
-                oldContent: oldStr,
-                newContent: newStr,
-                format: 'line-by-line'
-            }
-        })
-        const sideSourceContent = wrapper.find('.d2h-file-side-diff')
-        expect(sideSourceContent.exists()).toBe(false)
+    const sideSourceContent = wrapper.find('.d2h-file-side-diff')
+    expect(sideSourceContent.exists()).toBe(false)
 
-        const lineSourceContent = wrapper.find('.d2h-file-diff')
-        expect(lineSourceContent.exists()).toBe(true)
-        expect(lineSourceContent.contains('.d2h-code-wrapper')).toBe(true)
-    })
+    const lineSourceContent = wrapper.find('.d2h-file-diff')
+    expect(lineSourceContent.exists()).toBe(true)
+    expect(lineSourceContent.contains('.d2h-code-wrapper')).toBe(true)
+  })
 })

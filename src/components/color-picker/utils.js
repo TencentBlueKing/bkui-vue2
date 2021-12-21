@@ -37,37 +37,37 @@ import tinycolor from 'tinycolor2'
  * @returns {Object} - 转化后的色值对象
  */
 export function formatColor (colorParam) {
-    if (colorParam === '') {
-        colorParam = '#FFFFFF'
-    }
-    // 如果参数不合法会返回黑色#000相关信息
-    const tinyColor = tinycolor(colorParam)
-    const hsl = tinyColor.toHsl()
-    const hsv = tinyColor.toHsv()
+  if (colorParam === '') {
+    colorParam = '#FFFFFF'
+  }
+  // 如果参数不合法会返回黑色#000相关信息
+  const tinyColor = tinycolor(colorParam)
+  const hsl = tinyColor.toHsl()
+  const hsv = tinyColor.toHsv()
 
-    // 因为饱和度为0时，颜色不受色相值影响，色相会置零，但是这里需要在面板中保存色相值
-    if (hsl.s === 0) {
-        hsl.h = hsv.h = colorParam.h || 0
-    }
+  // 因为饱和度为0时，颜色不受色相值影响，色相会置零，但是这里需要在面板中保存色相值
+  if (hsl.s === 0) {
+    hsl.h = hsv.h = colorParam.h || 0
+  }
 
-    // when the hsv.v is less than 0.0164 (base on test)
-    // because of possible loss of precision
-    // the result of hue and saturation would be miscalculated
-    if (hsv.v < 0.0164) {
-        hsv.h = colorParam.h || 0
-        hsv.s = colorParam.s || 0
-    }
-    if (hsl.l < 0.01) {
-        hsl.h = colorParam.h || 0
-        hsl.s = colorParam.s || 0
-    }
+  // when the hsv.v is less than 0.0164 (base on test)
+  // because of possible loss of precision
+  // the result of hue and saturation would be miscalculated
+  if (hsv.v < 0.0164) {
+    hsv.h = colorParam.h || 0
+    hsv.s = colorParam.s || 0
+  }
+  if (hsl.l < 0.01) {
+    hsl.h = colorParam.h || 0
+    hsl.s = colorParam.s || 0
+  }
 
-    return {
-        hsl,
-        hsv,
-        hex: tinyColor.toHexString().toUpperCase(),
-        rgba: tinyColor.toRgb()
-    }
+  return {
+    hsl,
+    hsv,
+    hex: tinyColor.toHexString().toUpperCase(),
+    rgba: tinyColor.toRgb()
+  }
 }
 
 /**
@@ -78,15 +78,15 @@ export function formatColor (colorParam) {
  * @returns {Number}
  */
 export function clamp (value, min, max) {
-    if (value < min) {
-        return min
-    }
+  if (value < min) {
+    return min
+  }
 
-    if (value > max) {
-        return max
-    }
+  if (value > max) {
+    return max
+  }
 
-    return value
+  return value
 }
 
 /**
@@ -96,7 +96,7 @@ export function clamp (value, min, max) {
  * @returns {Number}
  */
 export function getTouches (e, prop) {
-    return e.touches ? e.touches[0][prop] : 0
+  return e.touches ? e.touches[0][prop] : 0
 }
 
 /**
@@ -105,7 +105,7 @@ export function getTouches (e, prop) {
  * @returns {String}
  */
 export function toRGBAString (rgba) {
-    const { r, g, b, a } = rgba
+  const { r, g, b, a } = rgba
 
-    return `rgba(${[r, g, b, a].join(',')})`
+  return `rgba(${[r, g, b, a].join(',')})`
 }

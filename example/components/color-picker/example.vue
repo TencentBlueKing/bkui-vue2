@@ -27,36 +27,36 @@
 -->
 
 <template>
-    <section>
-        <h2 style="display: flex;align-items: center;">
-            <a href="javascript:void(0);" class="back-icon bk-icon icon-arrows-left" @click="back"></a>
-            <span style="margin-left: 8px;">ColorPicker 颜色选择器更多示例</span>
-        </h2>
-        <h3>控制颜色面板出现在 body 内</h3>
-        <bk-color-picker v-model="color" transfer></bk-color-picker>
-        <h3>禁用状态</h3>
-        <bk-color-picker v-model="color" disabled></bk-color-picker>
-        <h3>只读状态</h3>
-        <bk-color-picker v-model="color" readonly></bk-color-picker>
-    </section>
+  <section>
+    <h2 style="display: flex;align-items: center;">
+      <a href="javascript:void(0);" class="back-icon bk-icon icon-arrows-left" @click="back"></a>
+      <span style="margin-left: 8px;">ColorPicker 颜色选择器更多示例</span>
+    </h2>
+    <h3>控制颜色面板出现在 body 内</h3>
+    <bk-color-picker v-model="color" transfer></bk-color-picker>
+    <h3>禁用状态</h3>
+    <bk-color-picker v-model="color" disabled></bk-color-picker>
+    <h3>只读状态</h3>
+    <bk-color-picker v-model="color" readonly></bk-color-picker>
+  </section>
 </template>
 
 <script>
-    import { bkColorPicker } from '@'
+import { bkColorPicker } from '@'
 
-    export default {
-        components: {
-            bkColorPicker
-        },
-        data () {
-            return {
-                color: ''
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            }
-        }
+export default {
+  components: {
+    bkColorPicker
+  },
+  data () {
+    return {
+      color: ''
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
+  }
+}
 </script>

@@ -44,24 +44,24 @@ const distTarget = join(__dirname, `../${distDirName}`)
 const libTarget = join(__dirname, `../${distDirName}/lib`)
 
 rm(distTarget, e => {
-    if (e) {
-        throw e
+  if (e) {
+    throw e
+  }
+
+  cpx.copy(join(__dirname, '../dist/**'), distTarget, { includeEmptyDirs: true }, err => {
+    if (err) {
+      console.log(err)
+      process.exit(1)
     }
+    console.log(`copy dist to ${basename(distTarget)} done`)
+  })
 
-    cpx.copy(join(__dirname, '../dist/**'), distTarget, { includeEmptyDirs: true }, err => {
-        if (err) {
-            console.log(err)
-            process.exit(1)
-        }
-        console.log(`copy dist to ${basename(distTarget)} done`)
-    })
-
-    cpx.copy(join(__dirname, '../lib/**'), libTarget, { includeEmptyDirs: true }, err => {
-        if (err) {
-            console.log(err)
-            process.exit(1)
-        }
-        console.log(`copy lib to ${basename(distTarget)} done`)
-    })
-    console.log(`majorVer:${distDirName}`)
+  cpx.copy(join(__dirname, '../lib/**'), libTarget, { includeEmptyDirs: true }, err => {
+    if (err) {
+      console.log(err)
+      process.exit(1)
+    }
+    console.log(`copy lib to ${basename(distTarget)} done`)
+  })
+  console.log(`majorVer:${distDirName}`)
 })

@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <div class="magic-footer">
-        <div class="magic-copyright">
-            <p>
-                <a href="javascript:void(0);" id="contact-us" class="link magic-contact">
-                    <img src="./img/qq.png" style="width:17px;">QQ交谈
-                </a>
-                Copyright © 2012-<span id="cur_year">{{year}}</span> Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
-            </p>
-        </div>
-        <!-- <div class="magic-button">
+  <div class="magic-footer">
+    <div class="magic-copyright">
+      <p>
+        <a href="javascript:void(0);" id="contact-us" class="link magic-contact">
+          <img src="./img/qq.png" style="width:17px;">QQ交谈
+        </a>
+        Copyright © 2012-<span id="cur_year">{{year}}</span> Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
+      </p>
+    </div>
+    <!-- <div class="magic-button">
             <a href="javascript:void(0);" class="magic-top" v-show="showBackTop" @click="backTop">
                 <img src="./img/back_top.png" alt="返回顶部" />
             </a>
@@ -44,65 +44,65 @@
                 <img src="./img/feedback.png" alt="反馈" />
             </a>
         </div> -->
-    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                year: new Date().getFullYear(),
-                showBackTop: false
-            }
-        },
-        mounted () {
-            window.addEventListener('scroll', this.toggleBackTop)
-            try {
-                setTimeout(() => {
-                    window.__WPA.create({
-                        nameAccount: '800802001',
-                        customEle: document.getElementById('contact-us')
-                    })
-                }, 1000)
-            } catch (err) {
-                // do
-            }
-        },
-        destroyed () {
-            window.removeEventListener('scroll', this.toggleBackTop)
-        },
-        methods: {
-            /**
+export default {
+  data () {
+    return {
+      year: new Date().getFullYear(),
+      showBackTop: false
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.toggleBackTop)
+    try {
+      setTimeout(() => {
+        window.__WPA.create({
+          nameAccount: '800802001',
+          customEle: document.getElementById('contact-us')
+        })
+      }, 1000)
+    } catch (err) {
+      // do
+    }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.toggleBackTop)
+  },
+  methods: {
+    /**
              * 获取页面滚动高度，判断是否出现返回顶部
              */
-            toggleBackTop () {
-                let scrollTop = 0
-                let bodyScrollTop = 0
-                let documentScrollTop = 0
+    toggleBackTop () {
+      let scrollTop = 0
+      let bodyScrollTop = 0
+      let documentScrollTop = 0
 
-                if (document.body) {
-                    bodyScrollTop = document.body.scrollTop
-                }
+      if (document.body) {
+        bodyScrollTop = document.body.scrollTop
+      }
 
-                if (document.documentElement) {
-                    documentScrollTop = document.documentElement.scrollTop
-                }
+      if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop
+      }
 
-                scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
-                this.showBackTop = scrollTop > 0
-            },
+      scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
+      this.showBackTop = scrollTop > 0
+    },
 
-            /**
+    /**
              * 返回到页面顶部
              */
-            backTop () {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                })
-            }
-        }
+    backTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
+  }
+}
 </script>
 
 <style scoped lang="postcss">

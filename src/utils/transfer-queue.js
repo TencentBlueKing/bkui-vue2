@@ -33,7 +33,7 @@ import zIndexManager from './z-index-manager.js'
 let transferIndex = 0
 
 function transferIncrease () {
-    transferIndex = zIndexManager.nextZIndex()
+  transferIndex = zIndexManager.nextZIndex()
 }
 
 export { transferIndex, transferIncrease }

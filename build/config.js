@@ -35,13 +35,13 @@ const prodEnv = require('./prod.env')
 const devEnv = require('./dev.env')
 
 module.exports = {
-    build: {
-        env: prodEnv,
-        index: path.resolve(__dirname, '../example/index.html')
-    },
-    dev: {
-        env: devEnv,
-        port: 8002,
-        proxyTable: {}
-    }
+  build: {
+    env: prodEnv,
+    index: path.resolve(__dirname, '../example/index.html')
+  },
+  dev: {
+    env: devEnv,
+    port: 8002,
+    proxyTable: {}
+  }
 }

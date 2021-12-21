@@ -27,66 +27,66 @@
 -->
 
 <template>
-    <div class="bk-date-picker-cells bk-date-picker-cells-month">
-        <span :class="getCellCls(cell)" v-for="(cell, index) in cells" :key="index" @click="handleClick(cell)" @mouseenter="handleMouseMove(cell)">
-            <em>{{cell.text}}</em>
-        </span>
-    </div>
+  <div class="bk-date-picker-cells bk-date-picker-cells-month">
+    <span :class="getCellCls(cell)" v-for="(cell, index) in cells" :key="index" @click="handleClick(cell)" @mouseenter="handleMouseMove(cell)">
+      <em>{{cell.text}}</em>
+    </span>
+  </div>
 </template>
 <script>
-    import { clearHours } from '@/utils/date'
-    import mixin from './mixin'
+import { clearHours } from '@/utils/date'
+import mixin from './mixin'
 
-    export default {
-        mixins: [mixin],
-        computed: {
-            cells () {
-                const cells = []
-                const cellTmpl = {
-                    text: '',
-                    selected: false,
-                    disabled: false
-                }
+export default {
+  mixins: [mixin],
+  computed: {
+    cells () {
+      const cells = []
+      const cellTmpl = {
+        text: '',
+        selected: false,
+        disabled: false
+      }
 
-                const tableYear = this.tableDate.getFullYear()
-                const selectedDays = this.dates.filter(Boolean).map(
-                    date => clearHours(new Date(date.getFullYear(), date.getMonth(), 1))
-                )
-                const focusedDate = clearHours(
-                    new Date(this.focusedDate.getFullYear(), this.focusedDate.getMonth(), 1)
-                )
+      const tableYear = this.tableDate.getFullYear()
+      const selectedDays = this.dates.filter(Boolean).map(
+        date => clearHours(new Date(date.getFullYear(), date.getMonth(), 1))
+      )
+      const focusedDate = clearHours(
+        new Date(this.focusedDate.getFullYear(), this.focusedDate.getMonth(), 1)
+      )
 
-                for (let i = 0; i < 12; i++) {
-                    const cell = JSON.parse(JSON.stringify(cellTmpl))
-                    cell.date = new Date(tableYear, i, 1)
-                    cell.text = this.tCell(i + 1)
-                    const day = clearHours(cell.date)
-                    cell.disabled = typeof this.disabledDate === 'function'
-                        && this.disabledDate(cell.date)
-                        && this.selectionMode === 'month'
-                    cell.selected = selectedDays.includes(day)
-                    cell.focused = day === focusedDate
-                    cells.push(cell)
-                }
+      for (let i = 0; i < 12; i++) {
+        const cell = JSON.parse(JSON.stringify(cellTmpl))
+        cell.date = new Date(tableYear, i, 1)
+        cell.text = this.tCell(i + 1)
+        const day = clearHours(cell.date)
+        cell.disabled = typeof this.disabledDate === 'function'
+          && this.disabledDate(cell.date)
+          && this.selectionMode === 'month'
+        cell.selected = selectedDays.includes(day)
+        cell.focused = day === focusedDate
+        cells.push(cell)
+      }
 
-                return cells
-            }
-        },
-        methods: {
-            getCellCls (cell) {
-                return [
-                    `bk-date-picker-cells-cell`,
-                    {
-                        [`bk-date-picker-cells-cell-selected`]: cell.selected,
-                        [`bk-date-picker-cells-cell-disabled`]: cell.disabled,
-                        // [`bk-date-picker-cells-cell-focused`]: cell.focused,
-                        [`bk-date-picker-cells-cell-range`]: cell.range && !cell.start && !cell.end
-                    }
-                ]
-            },
-            tCell (nr) {
-                return String(nr).length > 1 ? nr : `0${nr}`
-            }
-        }
+      return cells
     }
+  },
+  methods: {
+    getCellCls (cell) {
+      return [
+        `bk-date-picker-cells-cell`,
+        {
+          [`bk-date-picker-cells-cell-selected`]: cell.selected,
+          [`bk-date-picker-cells-cell-disabled`]: cell.disabled,
+          // [`bk-date-picker-cells-cell-focused`]: cell.focused,
+          [`bk-date-picker-cells-cell-range`]: cell.range && !cell.start && !cell.end
+        }
+      ]
+    },
+    tCell (nr) {
+      return String(nr).length > 1 ? nr : `0${nr}`
+    }
+  }
+}
 </script>

@@ -35,11 +35,11 @@ import { mount } from '@vue/test-utils'
 import { createTestComp } from '../helpers'
 
 describe('rate', () => {
-    it('render the correct props', async (done) => {
-        const handler = jest.fn()
-        const wrapper = mount(
-            createTestComp(
-                `<bk-virtual-scroll ref="numberVirtualScroll"
+  it('render the correct props', async (done) => {
+    const handler = jest.fn()
+    const wrapper = mount(
+      createTestComp(
+        `<bk-virtual-scroll ref="numberVirtualScroll"
                     class="number-virtual-scroll"
                     :show-index="true"
                     :show-min-map="false"
@@ -50,50 +50,50 @@ describe('rate', () => {
                         <span class="item-txt">{{item.data}}</span>
                     </template>
                 </bk-virtual-scroll>`,
-                {
-                    components: {
-                        bkVirtualScroll: VirtualScroll
-                    },
+        {
+          components: {
+            bkVirtualScroll: VirtualScroll
+          },
 
-                    mounted () {
-                        this.initList()
-                    },
+          mounted () {
+            this.initList()
+          },
 
-                    methods: {
-                        initList () {
-                            const vDom = this.$refs.numberVirtualScroll
-                            const list = new Array(1000).fill(1)
-                            vDom.addListData(list)
-                            vDom.getListData()
-                        },
-                        listChange: handler
-                    }
-                }
-            ),
-            { sync: false }
-        )
-        const vm = wrapper.vm
-        const vDom = vm.$refs.numberVirtualScroll
+          methods: {
+            initList () {
+              const vDom = this.$refs.numberVirtualScroll
+              const list = new Array(1000).fill(1)
+              vDom.addListData(list)
+              vDom.getListData()
+            },
+            listChange: handler
+          }
+        }
+      ),
+      { sync: false }
+    )
+    const vm = wrapper.vm
+    const vDom = vm.$refs.numberVirtualScroll
 
-        // 测试数据是否正常
-        expect(vDom.listData[0].value).toBe(1)
+    // 测试数据是否正常
+    expect(vDom.listData[0].value).toBe(1)
 
-        // 测试handleWheel方法是否正常调用,change事件是否正常
-        vDom.handleWheel({})
-        await vm.$nextTick()
-        expect(vDom.listData[0].top).toBeGreaterThanOrEqual(30)
-        expect(handler).toBeCalled()
+    // 测试handleWheel方法是否正常调用,change事件是否正常
+    vDom.handleWheel({})
+    await vm.$nextTick()
+    expect(vDom.listData[0].top).toBeGreaterThanOrEqual(30)
+    expect(handler).toBeCalled()
 
-        // 测试setListData, scrollPageByIndex方法是否正常调用
-        const list = new Array(100).fill(1)
-        vDom.setListData(list)
-        vDom.getListData()
-        await vm.$nextTick()
-        vDom.scrollPageByIndex(10)
-        await vm.$nextTick()
-        expect(vDom.allListData).toBe(list)
-        expect(vDom.listData[0].value).toBe(1)
-        expect(handler).toBeCalled()
-        done()
-    })
+    // 测试setListData, scrollPageByIndex方法是否正常调用
+    const list = new Array(100).fill(1)
+    vDom.setListData(list)
+    vDom.getListData()
+    await vm.$nextTick()
+    vDom.scrollPageByIndex(10)
+    await vm.$nextTick()
+    expect(vDom.allListData).toBe(list)
+    expect(vDom.listData[0].value).toBe(1)
+    expect(handler).toBeCalled()
+    done()
+  })
 })
