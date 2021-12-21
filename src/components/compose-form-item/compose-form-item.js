@@ -27,69 +27,69 @@
 import '../../ui/compose-form-item.css'
 
 const isCustomComponent = node => {
-    return node.tag && node.componentOptions
+  return node.tag && node.componentOptions
 }
 
 export default {
-    name: 'bk-compose-form-item',
-    props: {
-        headBackgroundColor: {
-            type: String,
-            default: '#FAFBFD'
-        },
-        tailBackgroundColor: String
+  name: 'bk-compose-form-item',
+  props: {
+    headBackgroundColor: {
+      type: String,
+      default: '#FAFBFD'
     },
-    render (h) {
-        const childrenArr = this.$slots.default
+    tailBackgroundColor: String
+  },
+  render (h) {
+    const childrenArr = this.$slots.default
 
-        if (childrenArr.length > 1) {
-            const childrenLength = childrenArr.length
-            let startIndex = 0
-            let headChildren = null
-            while (startIndex < childrenLength) {
-                if (isCustomComponent(childrenArr[startIndex])) {
-                    headChildren = childrenArr[startIndex]
-                    break
-                }
-                startIndex++
-            }
-
-            let tailIndex = childrenLength - 1
-            let tailChildren = null
-            while (tailIndex >= 0 && tailIndex > startIndex) {
-                if (isCustomComponent(childrenArr[tailIndex])) {
-                    tailChildren = childrenArr[tailIndex]
-                    break
-                }
-                tailIndex--
-            }
-
-            if (headChildren && tailChildren) {
-                let headChildStaticClass = 'bk-compose-form-item-head'
-                if (headChildren.data.staticClass) {
-                    headChildStaticClass += ` ${headChildren.data.staticClass}`
-                }
-                if (this.headBackgroundColor) {
-                    headChildren.data.style = Object.assign(headChildren.data.style || {}, {
-                        'background-color': this.headBackgroundColor
-                    })
-                }
-                headChildren.data.staticClass = headChildStaticClass
-
-                let tailChildStaticClass = 'bk-compose-form-item-tail'
-                if (tailChildren.data.staticClass) {
-                    tailChildStaticClass += ` ${tailChildren.data.staticClass}`
-                }
-                if (this.tailBackgroundColor) {
-                    tailChildren.data.style = Object.assign(tailChildren.data.style || {}, {
-                        'background-color': this.tailBackgroundColor
-                    })
-                }
-                tailChildren.data.staticClass = tailChildStaticClass
-            }
+    if (childrenArr.length > 1) {
+      const childrenLength = childrenArr.length
+      let startIndex = 0
+      let headChildren = null
+      while (startIndex < childrenLength) {
+        if (isCustomComponent(childrenArr[startIndex])) {
+          headChildren = childrenArr[startIndex]
+          break
         }
-        return h('div', {
-            staticClass: 'bk-compose-form-item'
-        }, childrenArr)
+        startIndex++
+      }
+
+      let tailIndex = childrenLength - 1
+      let tailChildren = null
+      while (tailIndex >= 0 && tailIndex > startIndex) {
+        if (isCustomComponent(childrenArr[tailIndex])) {
+          tailChildren = childrenArr[tailIndex]
+          break
+        }
+        tailIndex--
+      }
+
+      if (headChildren && tailChildren) {
+        let headChildStaticClass = 'bk-compose-form-item-head'
+        if (headChildren.data.staticClass) {
+          headChildStaticClass += ` ${headChildren.data.staticClass}`
+        }
+        if (this.headBackgroundColor) {
+          headChildren.data.style = Object.assign(headChildren.data.style || {}, {
+            'background-color': this.headBackgroundColor
+          })
+        }
+        headChildren.data.staticClass = headChildStaticClass
+
+        let tailChildStaticClass = 'bk-compose-form-item-tail'
+        if (tailChildren.data.staticClass) {
+          tailChildStaticClass += ` ${tailChildren.data.staticClass}`
+        }
+        if (this.tailBackgroundColor) {
+          tailChildren.data.style = Object.assign(tailChildren.data.style || {}, {
+            'background-color': this.tailBackgroundColor
+          })
+        }
+        tailChildren.data.staticClass = tailChildStaticClass
+      }
     }
+    return h('div', {
+      staticClass: 'bk-compose-form-item'
+    }, childrenArr)
+  }
 }

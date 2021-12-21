@@ -27,12 +27,12 @@
 -->
 
 <template>
-    <div :class="['bk-page-selection-count', `bk-page-selection-count-${$parent.realityLocation}`]">
-        <template v-if="$parent.curLang === 'cn'">
-            已选择<span class="count">{{$parent.selectionCount}}</span>条
-        </template>
-        <template v-else>
-            <span class="count">{{$parent.selectionCount}}</span> item(s) selected
-        </template>
-    </div>
+  <div :class="['bk-page-selection-count', `bk-page-selection-count-${$parent.realityLocation}`]">
+    <template v-if="$parent.curLang === 'cn'">
+      已选择<span class="count">{{$parent.selectionCount}}</span>条
+    </template>
+    <template v-else>
+      <span class="count">{{$parent.selectionCount}}</span> item(s) selected
+    </template>
+  </div>
 </template>

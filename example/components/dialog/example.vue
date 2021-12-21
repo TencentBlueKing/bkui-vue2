@@ -27,8 +27,8 @@
 -->
 
 <template>
-    <section>
-        <!-- <h2>
+  <section>
+    <!-- <h2>
             <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
             Dialog 对话框更多示例
         </h2>
@@ -40,7 +40,7 @@
                 mount in body
             </bk-dialog>
         </div> -->
-        <!-- <div class="example-item">
+    <!-- <div class="example-item">
             <bk-button :theme="'success'" @click="visiable2 = true">
                 mount in parentNode
             </bk-button>
@@ -48,119 +48,119 @@
                 mount in parentNode
             </bk-dialog>
         </div> -->
-        <div class="example-item">
-            <bk-button type="default" @click="dialog1 = true">showDialog1</bk-button>
-            <bk-button type="default" @click="dialog2 = true">showDialog2</bk-button>
+    <div class="example-item">
+      <bk-button type="default" @click="dialog1 = true">showDialog1</bk-button>
+      <bk-button type="default" @click="dialog2 = true">showDialog2</bk-button>
 
-            <bk-dialog v-model="dialog1">
-                <bk-button @click="dialog2 = true">innerShowDialog2</bk-button>
-            </bk-dialog>
-            <bk-dialog v-model="dialog2" :render-directive="'if'">
-                dialog2
-            </bk-dialog>
-        </div>
-        <div class="example-item">
-            <bk-button type="default" @click="nestedDialog1 = true">showNestedDialog1</bk-button>
+      <bk-dialog v-model="dialog1">
+        <bk-button @click="dialog2 = true">innerShowDialog2</bk-button>
+      </bk-dialog>
+      <bk-dialog v-model="dialog2" :render-directive="'if'">
+        dialog2
+      </bk-dialog>
+    </div>
+    <div class="example-item">
+      <bk-button type="default" @click="nestedDialog1 = true">showNestedDialog1</bk-button>
 
-            <bk-dialog v-model="nestedDialog1" :transfer="false">
-                <bk-button @click="nestedDialog2 = true">showNestedDialog2</bk-button>
-                <bk-dialog v-model="nestedDialog2">
-                    nestedDialog2
-                </bk-dialog>
-            </bk-dialog>
-        </div>
+      <bk-dialog v-model="nestedDialog1" :transfer="false">
+        <bk-button @click="nestedDialog2 = true">showNestedDialog2</bk-button>
+        <bk-dialog v-model="nestedDialog2">
+          nestedDialog2
+        </bk-dialog>
+      </bk-dialog>
+    </div>
 
-        <div class="example-item">
-            <bk-button type="default" @click="aaa">dddd</bk-button>
-            <bk-dialog v-model="ddd" :render-directive="'if'">
-                sasddsadas
-            </bk-dialog>
-        </div>
+    <div class="example-item">
+      <bk-button type="default" @click="aaa">dddd</bk-button>
+      <bk-dialog v-model="ddd" :render-directive="'if'">
+        sasddsadas
+      </bk-dialog>
+    </div>
 
-        <div class="example-item">
-            <bk-button type="default" @click="ccc">ccc</bk-button>
-            <bk-dialog v-model="cccShow" width="500" @cancel="active = 'mission'">
-                <bk-tab :active.sync="active" type="unborder-card">
-                    <bk-tab-panel
-                        v-for="(panel, index) in panels2"
-                        v-bind="panel"
-                        :key="index">
-                        <div>{{panel.label}}-{{panel.count}}</div>
-                    </bk-tab-panel>
-                </bk-tab>
-            </bk-dialog>
-        </div>
+    <div class="example-item">
+      <bk-button type="default" @click="ccc">ccc</bk-button>
+      <bk-dialog v-model="cccShow" width="500" @cancel="active = 'mission'">
+        <bk-tab :active.sync="active" type="unborder-card">
+          <bk-tab-panel
+            v-for="(panel, index) in panels2"
+            v-bind="panel"
+            :key="index">
+            <div>{{panel.label}}-{{panel.count}}</div>
+          </bk-tab-panel>
+        </bk-tab>
+      </bk-dialog>
+    </div>
 
-        <div class="example-item">
-            <bk-button type="default" @click="tabPosClick">tabPos</bk-button>
-            <bk-dialog v-model="tabPosShow" width="500" @cancel="active = 'mission'">
-                <bk-tab :active.sync="active" type="unborder-card" :tab-position="'left'">
-                    <bk-tab-panel
-                        v-for="(panel, index) in panels2"
-                        v-bind="panel"
-                        :key="index">
-                        <div>{{panel.label}}-{{panel.count}}</div>
-                    </bk-tab-panel>
-                </bk-tab>
-            </bk-dialog>
-        </div>
-        <div class="example-item">
-            <bk-button type="default" @click="customZIndex">自定义zIndex</bk-button>
-            <bk-dialog v-model="customZIndexShow" :z-index="999">
-                custom-zIndex
-            </bk-dialog>
-        </div>
-    </section>
+    <div class="example-item">
+      <bk-button type="default" @click="tabPosClick">tabPos</bk-button>
+      <bk-dialog v-model="tabPosShow" width="500" @cancel="active = 'mission'">
+        <bk-tab :active.sync="active" type="unborder-card" :tab-position="'left'">
+          <bk-tab-panel
+            v-for="(panel, index) in panels2"
+            v-bind="panel"
+            :key="index">
+            <div>{{panel.label}}-{{panel.count}}</div>
+          </bk-tab-panel>
+        </bk-tab>
+      </bk-dialog>
+    </div>
+    <div class="example-item">
+      <bk-button type="default" @click="customZIndex">自定义zIndex</bk-button>
+      <bk-dialog v-model="customZIndexShow" :z-index="999">
+        custom-zIndex
+      </bk-dialog>
+    </div>
+  </section>
 </template>
 
 <script>
-    import { bkButton, bkDialog, bkTab, bkTabPanel } from '@'
-    export default {
-        components: {
-            bkButton,
-            bkDialog,
-            bkTab,
-            bkTabPanel
-        },
-        data () {
-            return {
-                visiable1: false,
-                visiable2: false,
-                dialog1: false,
-                dialog2: false,
-                nestedDialog1: false,
-                nestedDialog2: false,
-                ddd: false,
-                cccShow: false,
-                tabPosShow: false,
-                customZIndexShow: false,
-                panels2: [
-                    { name: 'mission', label: '任务报表任务报表任务报表任务报表', count: 10 },
-                    { name: 'config', label: '加速配置2', count: 20 },
-                    { name: 'history', label: '历史版本2', count: 30 },
-                    { name: 'deleted', label: '已归档加速任务2', count: 40 }
-                ],
-                active: 'mission'
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-
-            aaa () {
-                this.ddd = true
-            },
-
-            ccc () {
-                this.cccShow = true
-            },
-            tabPosClick () {
-                this.tabPosShow = true
-            },
-            customZIndex () {
-                this.customZIndexShow = true
-            }
-        }
+import { bkButton, bkDialog, bkTab, bkTabPanel } from '@'
+export default {
+  components: {
+    bkButton,
+    bkDialog,
+    bkTab,
+    bkTabPanel
+  },
+  data () {
+    return {
+      visiable1: false,
+      visiable2: false,
+      dialog1: false,
+      dialog2: false,
+      nestedDialog1: false,
+      nestedDialog2: false,
+      ddd: false,
+      cccShow: false,
+      tabPosShow: false,
+      customZIndexShow: false,
+      panels2: [
+        { name: 'mission', label: '任务报表任务报表任务报表任务报表', count: 10 },
+        { name: 'config', label: '加速配置2', count: 20 },
+        { name: 'history', label: '历史版本2', count: 30 },
+        { name: 'deleted', label: '已归档加速任务2', count: 40 }
+      ],
+      active: 'mission'
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+
+    aaa () {
+      this.ddd = true
+    },
+
+    ccc () {
+      this.cccShow = true
+    },
+    tabPosClick () {
+      this.tabPosShow = true
+    },
+    customZIndex () {
+      this.customZIndexShow = true
+    }
+  }
+}
 </script>

@@ -27,33 +27,33 @@
 -->
 
 <template>
-    <span>
-        <template v-if="datePanelLabel">
-            <span :class="cls" v-show="showLabelFirst" @click="datePanelLabel.labels[0].handler">{{datePanelLabel.labels[0].label}}</span>
-            <template v-if="currentView === 'date'">{{datePanelLabel.separator}}</template>
-            <span :class="cls" v-show="showLabelSecond" @click="datePanelLabel.labels[1].handler">{{datePanelLabel.labels[1].label}}</span>
-        </template>
-    </span>
+  <span>
+    <template v-if="datePanelLabel">
+      <span :class="cls" v-show="showLabelFirst" @click="datePanelLabel.labels[0].handler">{{datePanelLabel.labels[0].label}}</span>
+      <template v-if="currentView === 'date'">{{datePanelLabel.separator}}</template>
+      <span :class="cls" v-show="showLabelSecond" @click="datePanelLabel.labels[1].handler">{{datePanelLabel.labels[1].label}}</span>
+    </template>
+  </span>
 </template>
 
 <script>
-    export default {
-        props: {
-            datePanelLabel: Object,
-            currentView: String
-        },
-        data () {
-            return {
-                cls: 'bk-date-picker-header-label'
-            }
-        },
-        computed: {
-            showLabelFirst () {
-                return this.datePanelLabel.labels[0].type === 'year' || this.currentView === 'date'
-            },
-            showLabelSecond () {
-                return this.datePanelLabel.labels[1].type === 'year' || this.currentView === 'date'
-            }
-        }
+export default {
+  props: {
+    datePanelLabel: Object,
+    currentView: String
+  },
+  data () {
+    return {
+      cls: 'bk-date-picker-header-label'
     }
+  },
+  computed: {
+    showLabelFirst () {
+      return this.datePanelLabel.labels[0].type === 'year' || this.currentView === 'date'
+    },
+    showLabelSecond () {
+      return this.datePanelLabel.labels[1].type === 'year' || this.currentView === 'date'
+    }
+  }
+}
 </script>

@@ -27,16 +27,16 @@
 -->
 
 <template>
-    <div :class="[
-        'bk-page-total-count',
-        `bk-page-total-count-${$parent.realityLocation}`,
-        { 'bk-page-total-small': $parent.small }
-    ]" v-if="$parent.showTotalCount">
-        <template v-if="$parent.curLang === 'cn'">
-            共计<span class="stress">{{$parent.count}}</span>条
-        </template>
-        <template v-else>
-            Total: <span class="stress">{{$parent.count}}</span> items
-        </template>
-    </div>
+  <div :class="[
+    'bk-page-total-count',
+    `bk-page-total-count-${$parent.realityLocation}`,
+    { 'bk-page-total-small': $parent.small }
+  ]" v-if="$parent.showTotalCount">
+    <template v-if="$parent.curLang === 'cn'">
+      共计<span class="stress">{{$parent.count}}</span>条
+    </template>
+    <template v-else>
+      Total: <span class="stress">{{$parent.count}}</span> items
+    </template>
+  </div>
 </template>

@@ -37,8 +37,8 @@ import en from './lang/en.json'
 import cn from './lang/cn.json'
 
 const messages = {
-    enUS: Object.assign(langPkg.enUS, en),
-    zhCN: Object.assign(langPkg.zhCN, cn)
+  enUS: Object.assign(langPkg.enUS, en),
+  zhCN: Object.assign(langPkg.zhCN, cn)
 }
 
 Vue.use(VueI18n)
@@ -46,13 +46,13 @@ Vue.use(VueI18n)
 const curLocale = localStorage.getItem('lang') || 'enUS'
 
 const i18n = new VueI18n({
-    locale: curLocale,
-    fallbackLocale: 'zhCN',
-    messages,
-    missing (locale, path) {
-        const parsedPath = i18n._path.parsePath(path)
-        return parsedPath[parsedPath.length - 1]
-    }
+  locale: curLocale,
+  fallbackLocale: 'zhCN',
+  messages,
+  missing (locale, path) {
+    const parsedPath = i18n._path.parsePath(path)
+    return parsedPath[parsedPath.length - 1]
+  }
 })
 
 locale.i18n((key, value) => i18n.t(key, value))

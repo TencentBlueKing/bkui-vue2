@@ -35,70 +35,70 @@ import { mountComponent } from '../helpers'
 import Vue from 'vue'
 
 describe('Timeline', () => {
-    const vm = new Vue()
-    const wrapper = mountComponent(Timeline, {
-        propsData: {
-            list: [
-                { tag: '十月一日', content: '下雨了' },
-                { tag: '十月二日', content: '<div style="color: #ff5656;"><strong>天晴了</strong></div>', type: 'success' },
-                {
-                    tag: '十月三日',
-                    content:
+  const vm = new Vue()
+  const wrapper = mountComponent(Timeline, {
+    propsData: {
+      list: [
+        { tag: '十月一日', content: '下雨了' },
+        { tag: '十月二日', content: '<div style="color: #ff5656;"><strong>天晴了</strong></div>', type: 'success' },
+        {
+          tag: '十月三日',
+          content:
                         vm.$createElement('p', {
-                            style: {
-                                color: 'red'
-                            }
+                          style: {
+                            color: 'red'
+                          }
                         }, '今天天气很好')
-                }
-            ]
         }
+      ]
+    }
+  })
+
+  it('render the correct content', () => {
+    expect(wrapper.name()).toBe('bk-timeline')
+    expect(wrapper.html()).toContain('<div class="bk-timeline-time">十月一日</div>')
+    expect(wrapper.html()).toContain('<div style="color: #ff5656;"><strong>天晴了</strong></div>')
+    expect(wrapper.html()).toContain('<p style="color: red;">今天天气很好</p>')
+  })
+
+  it('render the correct class', () => {
+    wrapper.setProps({
+      list: [
+        { tag: '十月一日', content: '下雨了' }
+      ]
     })
+    expect(wrapper.contains('li.bk-timeline-dot.primary')).toBe(true)
 
-    it('render the correct content', () => {
-        expect(wrapper.name()).toBe('bk-timeline')
-        expect(wrapper.html()).toContain('<div class="bk-timeline-time">十月一日</div>')
-        expect(wrapper.html()).toContain('<div style="color: #ff5656;"><strong>天晴了</strong></div>')
-        expect(wrapper.html()).toContain('<p style="color: red;">今天天气很好</p>')
+    wrapper.setProps({
+      list: [
+        { tag: '十月一日', content: '下雨了', type: 'xxx' }
+      ]
     })
+    expect(wrapper.contains('li.bk-timeline-dot.primary')).toBe(true)
 
-    it('render the correct class', () => {
-        wrapper.setProps({
-            list: [
-                { tag: '十月一日', content: '下雨了' }
-            ]
-        })
-        expect(wrapper.contains('li.bk-timeline-dot.primary')).toBe(true)
-
-        wrapper.setProps({
-            list: [
-                { tag: '十月一日', content: '下雨了', type: 'xxx' }
-            ]
-        })
-        expect(wrapper.contains('li.bk-timeline-dot.primary')).toBe(true)
-
-        wrapper.setProps({
-            list: [
-                { tag: '十月一日', content: '下雨了', type: 'success' }
-            ]
-        })
-        expect(wrapper.contains('li.bk-timeline-dot.success')).toBe(true)
+    wrapper.setProps({
+      list: [
+        { tag: '十月一日', content: '下雨了', type: 'success' }
+      ]
     })
+    expect(wrapper.contains('li.bk-timeline-dot.success')).toBe(true)
+  })
 
-    it('trigger the correct event', () => {
-        wrapper.setProps({
-            list: [
-                { tag: '十月一日', content: '下雨了', type: 'yyy' }
-            ]
-        })
-        // click 时间标题触发 select 事件
-        const title = wrapper.find('.bk-timeline-time')
-        title.trigger('click')
-        const events = wrapper.emitted().select
-        // 触发了 select 事件
-        expect(events).toBeTruthy()
-        // 事件只触发一次
-        expect(events.length).toBe(1)
-        // 回调的参数正确
-        expect(events[0]).toEqual([{ tag: '十月一日', content: '下雨了', type: 'yyy' }])
+  it('trigger the correct event', () => {
+    wrapper.setProps({
+      list: [
+        { tag: '十月一日', content: '下雨了', type: 'yyy' }
+      ]
     })
+    // click 时间标题触发 select 事件
+    const title = wrapper.find('.bk-timeline-time')
+    title.trigger('click')
+    const events = wrapper.emitted().select
+    // 触发了 select 事件
+    expect(events).toBeTruthy()
+    // 事件只触发一次
+    expect(events.length).toBe(1)
+    // 回调的参数正确
+    expect(events[0]).toEqual([{ tag: '十月一日', content: '下雨了', type: 'yyy' }])
+  })
 })

@@ -37,81 +37,81 @@ import { mount } from '@vue/test-utils'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('radio && radio-button && radio-group', () => {
-    /* -------------------- radio -------------------- */
-    it('render the correct test', () => {
-        const wrapper = mountComponent(Radio, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'radio-test'
-            }
-        })
-        expect(wrapper.contains('.bk-form-radio')).toBe(true)
-        expect(wrapper.find('.bk-radio-text').text()).toBe('jest')
-        expect(wrapper.find('input').attributes('name')).toBe('radio-test')
-        expect(wrapper.html()).toContain('<div class="bk-radio-text">jest</div>')
+  /* -------------------- radio -------------------- */
+  it('render the correct test', () => {
+    const wrapper = mountComponent(Radio, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'radio-test'
+      }
+    })
+    expect(wrapper.contains('.bk-form-radio')).toBe(true)
+    expect(wrapper.find('.bk-radio-text').text()).toBe('jest')
+    expect(wrapper.find('input').attributes('name')).toBe('radio-test')
+    expect(wrapper.html()).toContain('<div class="bk-radio-text">jest</div>')
+  })
+
+  it('render radio with disabled prop', () => {
+    const wrapper = mountComponent(Radio, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        disabled: true
+      }
     })
 
-    it('render radio with disabled prop', () => {
-        const wrapper = mountComponent(Radio, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                disabled: true
-            }
-        })
+    expect(wrapper.find('input').attributes('disabled')).toBe('disabled')
+  })
 
-        expect(wrapper.find('input').attributes('disabled')).toBe('disabled')
+  it('radio render with deault checked', () => {
+    const wrapper = mountComponent(Radio, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        checked: true
+      }
     })
+    expect(wrapper.find('input').classes('is-checked')).toBe(true)
+  })
 
-    it('radio render with deault checked', () => {
-        const wrapper = mountComponent(Radio, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                checked: true
-            }
-        })
-        expect(wrapper.find('input').classes('is-checked')).toBe(true)
+  it('radio callback test', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(Radio, {
+      slots: {
+        default: 'jest'
+      },
+      listeners: {
+        change: handler
+      }
     })
+    wrapper.trigger('click')
+    expect(handler).toBeCalled()
+  })
 
-    it('radio callback test', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(Radio, {
-            slots: {
-                default: 'jest'
-            },
-            listeners: {
-                change: handler
-            }
-        })
-        wrapper.trigger('click')
-        expect(handler).toBeCalled()
+  it('radio callback with disabled test', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(Radio, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        disabled: true
+      },
+      listeners: {
+        change: handler
+      }
     })
+    wrapper.trigger('click')
+    expect(handler).not.toBeCalled()
+  })
 
-    it('radio callback with disabled test', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(Radio, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                disabled: true
-            },
-            listeners: {
-                change: handler
-            }
-        })
-        wrapper.trigger('click')
-        expect(handler).not.toBeCalled()
-    })
-
-    /* -------------------- radio-group -------------------- */
-    it('render radio-group test', () => {
-        const wrapper = mount(createTestComp(`
+  /* -------------------- radio-group -------------------- */
+  it('render radio-group test', () => {
+    const wrapper = mount(createTestComp(`
             <bk-radio-group name="radio-group"
                 v-model="choose">
                 <bk-radio :value="'wx'">
@@ -121,26 +121,26 @@ describe('radio && radio-button && radio-group', () => {
                     QQ
                 </bk-radio>
             </bk-radio-group>`, {
-            components: {
-                bkRadioGroup: RadioGroup,
-                bkRadio: Radio
-            },
-            data () {
-                return {
-                    choose: ''
-                }
-            }
-        }))
-        expect(wrapper.classes('bk-form-control')).toBe(true)
-        expect(wrapper.attributes('name')).toBe('radio-group')
-        expect(wrapper.contains('.bk-form-radio')).toBe(true)
-        expect(wrapper.findAll('.bk-radio-text').at(0).text()).toBe('微信')
-        expect(wrapper.findAll('.bk-radio-text').at(1).text()).toBe('QQ')
-    })
+      components: {
+        bkRadioGroup: RadioGroup,
+        bkRadio: Radio
+      },
+      data () {
+        return {
+          choose: ''
+        }
+      }
+    }))
+    expect(wrapper.classes('bk-form-control')).toBe(true)
+    expect(wrapper.attributes('name')).toBe('radio-group')
+    expect(wrapper.contains('.bk-form-radio')).toBe(true)
+    expect(wrapper.findAll('.bk-radio-text').at(0).text()).toBe('微信')
+    expect(wrapper.findAll('.bk-radio-text').at(1).text()).toBe('QQ')
+  })
 
-    it('radio-group selected and change listener', () => {
-        const handleChange = jest.fn()
-        const wrapper = mount(createTestComp(`
+  it('radio-group selected and change listener', () => {
+    const handleChange = jest.fn()
+    const wrapper = mount(createTestComp(`
             <bk-radio-group name="radio-group"
                 v-model="choose"
                 @change="handleChange">
@@ -151,95 +151,95 @@ describe('radio && radio-button && radio-group', () => {
                     QQ
                 </bk-radio>
             </bk-radio-group>`, {
-            components: {
-                bkRadioGroup: RadioGroup,
-                bkRadio: Radio
-            },
-            data () {
-                return {
-                    choose: 'qq'
-                }
-            },
-            methods: {
-                handleChange: handleChange
-            }
-        }))
-        const radioQQ = wrapper.find('.bk-form-radio')
-        const radioWX = wrapper.findAll('.bk-form-radio').at(1)
+      components: {
+        bkRadioGroup: RadioGroup,
+        bkRadio: Radio
+      },
+      data () {
+        return {
+          choose: 'qq'
+        }
+      },
+      methods: {
+        handleChange: handleChange
+      }
+    }))
+    const radioQQ = wrapper.find('.bk-form-radio')
+    const radioWX = wrapper.findAll('.bk-form-radio').at(1)
 
-        expect(radioWX.find('input').classes('is-checked')).toBe(true)
-        expect(radioQQ.find('input').classes('is-checked')).toBe(false)
+    expect(radioWX.find('input').classes('is-checked')).toBe(true)
+    expect(radioQQ.find('input').classes('is-checked')).toBe(false)
 
-        radioQQ.trigger('click')
+    radioQQ.trigger('click')
 
-        wrapper.vm.$nextTick(() => {
-            expect(handleChange).toHaveBeenCalledTimes(1)
-            expect(radioQQ.find('input').classes('is-checked')).toBe(true)
-        })
+    wrapper.vm.$nextTick(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1)
+      expect(radioQQ.find('input').classes('is-checked')).toBe(true)
     })
+  })
 
-    /* -------------------- radio-button -------------------- */
-    it('render button-radio test', () => {
-        const wrapper = mountComponent(RadioButton, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'radio-button-test'
-            }
-        })
-        expect(wrapper.find('.bk-radio-button-text').text()).toBe('jest')
-        expect(wrapper.find('label').classes('bk-form-radio-button')).toBe(true)
-        expect(wrapper.find('input').attributes('name')).toBe('radio-button-test')
-        expect(wrapper.html()).toContain('<div class="bk-radio-button-text">jest</div>')
+  /* -------------------- radio-button -------------------- */
+  it('render button-radio test', () => {
+    const wrapper = mountComponent(RadioButton, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'radio-button-test'
+      }
     })
+    expect(wrapper.find('.bk-radio-button-text').text()).toBe('jest')
+    expect(wrapper.find('label').classes('bk-form-radio-button')).toBe(true)
+    expect(wrapper.find('input').attributes('name')).toBe('radio-button-test')
+    expect(wrapper.html()).toContain('<div class="bk-radio-button-text">jest</div>')
+  })
 
-    it('render radio-button with disabled prop', () => {
-        const wrapper = mountComponent(RadioButton, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                disabled: true
-            }
-        })
-        expect(wrapper.find('label').classes()).toContain('disabled')
+  it('render radio-button with disabled prop', () => {
+    const wrapper = mountComponent(RadioButton, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        disabled: true
+      }
     })
+    expect(wrapper.find('label').classes()).toContain('disabled')
+  })
 
-    it('radio-button callback test', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(RadioButton, {
-            slots: {
-                default: 'jest'
-            },
-            listeners: {
-                change: handler
-            }
-        })
-        wrapper.trigger('click')
-        expect(handler).toBeCalled()
+  it('radio-button callback test', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(RadioButton, {
+      slots: {
+        default: 'jest'
+      },
+      listeners: {
+        change: handler
+      }
     })
+    wrapper.trigger('click')
+    expect(handler).toBeCalled()
+  })
 
-    it('radio-button callback with disabled test', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(RadioButton, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                disabled: true
-            },
-            listeners: {
-                change: handler
-            }
-        })
-        wrapper.trigger('click')
-        expect(handler).not.toBeCalled()
+  it('radio-button callback with disabled test', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(RadioButton, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        disabled: true
+      },
+      listeners: {
+        change: handler
+      }
     })
+    wrapper.trigger('click')
+    expect(handler).not.toBeCalled()
+  })
 
-    it('radio-button in group selected and change listener', () => {
-        const handleChange = jest.fn()
-        const wrapper = mount(createTestComp(`
+  it('radio-button in group selected and change listener', () => {
+    const handleChange = jest.fn()
+    const wrapper = mount(createTestComp(`
             <bk-radio-group name="radio-group"
                 v-model="choose"
                 @change="handleChange">
@@ -250,30 +250,30 @@ describe('radio && radio-button && radio-group', () => {
                     QQ
                 </bk-radio-button>
             </bk-radio-group>`, {
-            components: {
-                bkRadioGroup: RadioGroup,
-                bkRadioButton: RadioButton
-            },
-            data () {
-                return {
-                    choose: 'qq'
-                }
-            },
-            methods: {
-                handleChange: handleChange
-            }
-        }))
-        const radioQQ = wrapper.find('.bk-form-radio-button')
-        const radioWX = wrapper.findAll('.bk-form-radio-button').at(1)
+      components: {
+        bkRadioGroup: RadioGroup,
+        bkRadioButton: RadioButton
+      },
+      data () {
+        return {
+          choose: 'qq'
+        }
+      },
+      methods: {
+        handleChange: handleChange
+      }
+    }))
+    const radioQQ = wrapper.find('.bk-form-radio-button')
+    const radioWX = wrapper.findAll('.bk-form-radio-button').at(1)
 
-        expect(radioWX.find('input').classes()).toContain('is-checked')
-        expect(radioQQ.find('input').classes()).not.toContain('is-checked')
+    expect(radioWX.find('input').classes()).toContain('is-checked')
+    expect(radioQQ.find('input').classes()).not.toContain('is-checked')
 
-        radioQQ.trigger('click')
+    radioQQ.trigger('click')
 
-        wrapper.vm.$nextTick(() => {
-            expect(handleChange).toHaveBeenCalledTimes(1)
-            expect(radioQQ.find('input').classes()).toContain('is-checked')
-        })
+    wrapper.vm.$nextTick(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1)
+      expect(radioQQ.find('input').classes()).toContain('is-checked')
     })
+  })
 })

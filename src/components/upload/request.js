@@ -26,61 +26,61 @@
 
 import { t } from 'bk-magic-vue/lib/locale'
 const parseResponse = (response) => {
-    if (!response) {
-        return response || {}
-    }
-    try {
-        return JSON.parse(response)
-    } catch (error) {
-        return response || {}
-    }
+  if (!response) {
+    return response || {}
+  }
+  try {
+    return JSON.parse(response)
+  } catch (error) {
+    return response || {}
+  }
 }
 
 export default function upload (options) {
-    const xhr = new XMLHttpRequest()
-    options.fileObj.xhr = xhr
+  const xhr = new XMLHttpRequest()
+  options.fileObj.xhr = xhr
 
-    const formData = new FormData()
-    options.data.forEach(item => {
-        formData.append(item.name, item.value)
-    })
-    formData.append(options.fileName, options.fileObj.origin)
+  const formData = new FormData()
+  options.data.forEach(item => {
+    formData.append(item.name, item.value)
+  })
+  formData.append(options.fileName, options.fileObj.origin)
 
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            const reponseText = parseResponse(xhr.responseText || xhr.response)
-            if (xhr.status < 200 || xhr.status >= 300) {
-                options.fileObj.progress = 100 + '%'
-                options.fileObj.errorMsg = reponseText.message || t('bk.uploadFile.uploadFailed')
-                options.onError(options.fileObj, options.fileList, xhr.response)
-            } else {
-                options.onSuccess(reponseText, options.fileObj)
-            }
-            options.onDone(options.fileObj)
-        }
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      const reponseText = parseResponse(xhr.responseText || xhr.response)
+      if (xhr.status < 200 || xhr.status >= 300) {
+        options.fileObj.progress = 100 + '%'
+        options.fileObj.errorMsg = reponseText.message || t('bk.uploadFile.uploadFailed')
+        options.onError(options.fileObj, options.fileList, xhr.response)
+      } else {
+        options.onSuccess(reponseText, options.fileObj)
+      }
+      options.onDone(options.fileObj)
     }
+  }
 
-    xhr.upload.addEventListener('progress', options.onProgress, false)
-    xhr.withCredentials = options.withCredentials
-    xhr.open(options.method, options.url, true)
-    if (options.header) {
-        if (Array.isArray(options.header)) {
-            options.header.forEach(head => {
-                const headerKey = head.name
-                const headerVal = head.value
-                xhr.setRequestHeader(headerKey, headerVal)
-            })
-        } else {
-            const headerKey = options.header.name
-            const headerVal = options.header.value
-            xhr.setRequestHeader(headerKey, headerVal)
-        }
+  xhr.upload.addEventListener('progress', options.onProgress, false)
+  xhr.withCredentials = options.withCredentials
+  xhr.open(options.method, options.url, true)
+  if (options.header) {
+    if (Array.isArray(options.header)) {
+      options.header.forEach(head => {
+        const headerKey = head.name
+        const headerVal = head.value
+        xhr.setRequestHeader(headerKey, headerVal)
+      })
+    } else {
+      const headerKey = options.header.name
+      const headerVal = options.header.value
+      xhr.setRequestHeader(headerKey, headerVal)
     }
-    xhr.send(formData)
+  }
+  xhr.send(formData)
 
-    return {
-        abort () {
-            xhr.abort()
-        }
+  return {
+    abort () {
+      xhr.abort()
     }
+  }
 }

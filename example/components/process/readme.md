@@ -736,7 +736,7 @@
 :::
 ### 子步骤支持 VNode {page=#/process}
 
-:::demo `steps.content` 配置为 VNode，可以更加灵活的控制显示内容。使用 `step-change` 事件实现点击步骤项时的行为监听
+:::demo `steps.content` 配置为 VNode，可以更加灵活的控制显示内容。使用 `step-change` 事件实现点击步骤项时的行为监听。
 
 ```html
 <template>

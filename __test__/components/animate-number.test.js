@@ -35,29 +35,29 @@ import { mount } from '@vue/test-utils'
 import { createTestComp } from '../helpers'
 
 describe('rate', () => {
-    it('render the correct props', async (done) => {
-        const wrapper = mount(
-            createTestComp(
-                `<bk-animate-number :value="num" :digits="digits"></bk-animate-number>`,
-                {
-                    components: {
-                        bkAnimateNumber: animateNumber
-                    },
-                    data () {
-                        return {
-                            num: 50,
-                            digits: 2
-                        }
-                    }
-                }
-            ),
-            { sync: false }
-        )
+  it('render the correct props', async (done) => {
+    const wrapper = mount(
+      createTestComp(
+        `<bk-animate-number :value="num" :digits="digits"></bk-animate-number>`,
+        {
+          components: {
+            bkAnimateNumber: animateNumber
+          },
+          data () {
+            return {
+              num: 50,
+              digits: 2
+            }
+          }
+        }
+      ),
+      { sync: false }
+    )
 
-        setTimeout(() => {
-            const number = wrapper.find('span').text()
-            expect(number).toBe('50.00')
-            done()
-        }, 600)
-    })
+    setTimeout(() => {
+      const number = wrapper.find('span').text()
+      expect(number).toBe('50.00')
+      done()
+    }, 600)
+  })
 })
