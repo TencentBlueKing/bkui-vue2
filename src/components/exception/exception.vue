@@ -27,75 +27,75 @@
 -->
 
 <template>
-    <div class="bk-exception" :class="extCls">
-        <div class="bk-exception-img" :class="scene + '-img'">
-            <img class="exception-image" :src="images[type]" :alt="type" />
-        </div>
-        <div class="bk-exception-text" :class="scene + '-text'">
-            <slot>{{tipText[type]}}</slot>
-        </div>
+  <div class="bk-exception" :class="extCls">
+    <div class="bk-exception-img" :class="scene + '-img'">
+      <img class="exception-image" :src="images[type]" :alt="type" />
     </div>
+    <div class="bk-exception-text" :class="scene + '-text'">
+      <slot>{{tipText[type]}}</slot>
+    </div>
+  </div>
 </template>
 <script>
-    import Building from '@/ui/images/exceptions/building.svg'
-    import notFound from '@/ui/images/exceptions/404.svg'
-    import permissions from '@/ui/images/exceptions/403.svg'
-    import maintain from '@/ui/images/exceptions/500.svg'
-    import empty from '@/ui/images/exceptions/empty.svg'
-    import searchEmpty from '@/ui/images/exceptions/search-empty.svg'
-    import login from '@/ui/images/exceptions/login.svg'
-    import locale from 'bk-magic-vue/lib/locale'
+import Building from '@/ui/images/exceptions/building.svg'
+import notFound from '@/ui/images/exceptions/404.svg'
+import permissions from '@/ui/images/exceptions/403.svg'
+import maintain from '@/ui/images/exceptions/500.svg'
+import empty from '@/ui/images/exceptions/empty.svg'
+import searchEmpty from '@/ui/images/exceptions/search-empty.svg'
+import login from '@/ui/images/exceptions/login.svg'
+import locale from 'bk-magic-vue/lib/locale'
 
-    export default {
-        name: 'bk-exception',
-        mixins: [locale.mixin],
-        props: {
-            type: {
-                type: [String, Number],
-                default: 404,
-                validator (value) {
-                    return ['404', '403', '500', 'building', 'empty', 'search-empty', 'login'].indexOf(value + '') > -1
-                }
-            },
-            scene: {
-                type: String,
-                default: 'page',
-                valudator (value) {
-                    return ['page', 'part'].indexOf(value) > -1
-                }
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                images: {
-                    403: permissions,
-                    404: notFound,
-                    500: maintain,
-                    building: Building,
-                    empty: empty,
-                    'search-empty': searchEmpty,
-                    login: login
-                },
-                tipText: {}
-            }
-        },
-        created () {
-            this.tipText = Object.assign({}, {
-                403: this.t('bk.exception.403'),
-                404: this.t('bk.exception.404'),
-                500: this.t('bk.exception.500'),
-                building: this.t('bk.exception.building'),
-                empty: this.t('bk.exception.empty'),
-                'search-empty': this.t('bk.exception.searchEmpty'),
-                login: this.t('bk.exception.login')
-            })
-        }
+export default {
+  name: 'bk-exception',
+  mixins: [locale.mixin],
+  props: {
+    type: {
+      type: [String, Number],
+      default: 404,
+      validator (value) {
+        return ['404', '403', '500', 'building', 'empty', 'search-empty', 'login'].indexOf(value + '') > -1
+      }
+    },
+    scene: {
+      type: String,
+      default: 'page',
+      valudator (value) {
+        return ['page', 'part'].indexOf(value) > -1
+      }
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+  data () {
+    return {
+      images: {
+        403: permissions,
+        404: notFound,
+        500: maintain,
+        building: Building,
+        empty: empty,
+        'search-empty': searchEmpty,
+        login: login
+      },
+      tipText: {}
+    }
+  },
+  created () {
+    this.tipText = Object.assign({}, {
+      403: this.t('bk.exception.403'),
+      404: this.t('bk.exception.404'),
+      500: this.t('bk.exception.500'),
+      building: this.t('bk.exception.building'),
+      empty: this.t('bk.exception.empty'),
+      'search-empty': this.t('bk.exception.searchEmpty'),
+      login: this.t('bk.exception.login')
+    })
+  }
+}
 </script>
 <style>
     @import '../../ui/exception.css';

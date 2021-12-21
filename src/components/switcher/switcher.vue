@@ -27,19 +27,19 @@
 -->
 
 <template>
-    <div :class="classObject" @click="change" tabindex="0" @keydown.enter.prevent="change">
-        <input type="checkbox" :disabled="disabled" tabindex="-1">
-        <label class="switcher-label" v-show="showText">
-            <span class="switcher-text on-text">{{onText}}</span>
-            <span class="switcher-text off-text">{{offText}}</span>
-        </label>
-        <template v-if="isLoading">
-            <img class="bk-switcher-loading" src="../../ui/images/spinner.svg">
-        </template>
-    </div>
+  <div :class="classObject" @click="change" tabindex="0" @keydown.enter.prevent="change">
+    <input type="checkbox" :disabled="disabled" tabindex="-1">
+    <label class="switcher-label" v-show="showText">
+      <span class="switcher-text on-text">{{onText}}</span>
+      <span class="switcher-text off-text">{{offText}}</span>
+    </label>
+    <template v-if="isLoading">
+      <img class="bk-switcher-loading" src="../../ui/images/spinner.svg">
+    </template>
+  </div>
 </template>
 <script>
-    /**
+/**
      * bk-switcher
      * @module components/switcher
      * @desc 开关
@@ -50,138 +50,138 @@
      * <bk-switcher :value="isSelected" :show-text="showText"></bk-switcher>
      */
 
-    export default {
-        name: 'bk-switcher',
-        model: {
-            prop: 'value',
-            event: 'update'
-        },
-        props: {
-            value: {
-                type: [String, Number, Boolean],
-                default: false
+export default {
+  name: 'bk-switcher',
+  model: {
+    prop: 'value',
+    event: 'update'
+  },
+  props: {
+    value: {
+      type: [String, Number, Boolean],
+      default: false
 
-            },
-            trueValue: {
-                type: [String, Number, Boolean],
-                default: true
-            },
-            falseValue: {
-                type: [String, Number, Boolean],
-                default: false
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-            showText: {
-                type: Boolean,
-                default: false
-            },
-            onText: {
-                type: String,
-                default: 'ON'
-            },
-            offText: {
-                type: String,
-                default: 'OFF'
-            },
-            isOutline: {
-                type: Boolean,
-                default: false
-            },
-            theme: {
-                type: String,
-                default: 'success'
-            },
-            isSquare: {
-                type: Boolean,
-                default: false
-            },
-            size: {
-                type: String,
-                default: '',
-                validator (value) {
-                    if (['', 'large', 'small'].indexOf(value) < 0) {
-                        console.error(`size property is not valid: '${value}'`)
-                        return false
-                    }
-                    return true
-                }
-            },
-            preCheck: {
-                type: Function
-            }
-        },
-        data () {
-            return {
-                isLoading: false,
-                localValue: this.value
-            }
-        },
-        computed: {
-            isChecked () {
-                return this.localValue === this.trueValue
-            },
-            classObject () {
-                const cls = {
-                    'bk-switcher': true,
-                    'bk-switcher-outline': this.isOutline,
-                    'bk-switcher-square': this.isSquare,
-                    'show-label': this.showText,
-                    'is-disabled': this.disabled,
-                    'is-checked': this.isChecked,
-                    'is-unchecked': !this.isChecked,
-                    'is-loading': this.isLoading,
-                    'primary': this.theme === 'primary'
-                }
-
-                // 显示文本则size无效，使用固定尺寸
-                if (this.size && !this.showText) {
-                    const sizeStr = 'bk-switcher-' + this.size
-                    cls[sizeStr] = true
-                }
-                return cls
-            }
-        },
-        watch: {
-            value (newValue) {
-                this.localValue = newValue
-            }
-        },
-        methods: {
-            change () {
-                if (this.disabled || this.isLoading) {
-                    return
-                }
-                const lastValue = this.isChecked ? this.falseValue : this.trueValue
-                const lastChecked = !this.isChecked
-
-                const trigger = () => {
-                    this.localValue = lastValue
-                    this.$emit('update', lastValue)
-                    this.$emit('change', lastChecked)
-                }
-
-                let goodJob = true
-
-                if (typeof this.preCheck === 'function') {
-                    goodJob = this.preCheck(lastValue)
-                    if (typeof goodJob.then === 'function') {
-                        this.isLoading = true
-                        return goodJob.then(() => {
-                            trigger()
-                        }).finally(() => {
-                            this.isLoading = false
-                        })
-                    }
-                }
-                if (goodJob) {
-                    trigger()
-                }
-            }
+    },
+    trueValue: {
+      type: [String, Number, Boolean],
+      default: true
+    },
+    falseValue: {
+      type: [String, Number, Boolean],
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    showText: {
+      type: Boolean,
+      default: false
+    },
+    onText: {
+      type: String,
+      default: 'ON'
+    },
+    offText: {
+      type: String,
+      default: 'OFF'
+    },
+    isOutline: {
+      type: Boolean,
+      default: false
+    },
+    theme: {
+      type: String,
+      default: 'success'
+    },
+    isSquare: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: '',
+      validator (value) {
+        if (['', 'large', 'small'].indexOf(value) < 0) {
+          console.error(`size property is not valid: '${value}'`)
+          return false
         }
+        return true
+      }
+    },
+    preCheck: {
+      type: Function
     }
+  },
+  data () {
+    return {
+      isLoading: false,
+      localValue: this.value
+    }
+  },
+  computed: {
+    isChecked () {
+      return this.localValue === this.trueValue
+    },
+    classObject () {
+      const cls = {
+        'bk-switcher': true,
+        'bk-switcher-outline': this.isOutline,
+        'bk-switcher-square': this.isSquare,
+        'show-label': this.showText,
+        'is-disabled': this.disabled,
+        'is-checked': this.isChecked,
+        'is-unchecked': !this.isChecked,
+        'is-loading': this.isLoading,
+        'primary': this.theme === 'primary'
+      }
+
+      // 显示文本则size无效，使用固定尺寸
+      if (this.size && !this.showText) {
+        const sizeStr = 'bk-switcher-' + this.size
+        cls[sizeStr] = true
+      }
+      return cls
+    }
+  },
+  watch: {
+    value (newValue) {
+      this.localValue = newValue
+    }
+  },
+  methods: {
+    change () {
+      if (this.disabled || this.isLoading) {
+        return
+      }
+      const lastValue = this.isChecked ? this.falseValue : this.trueValue
+      const lastChecked = !this.isChecked
+
+      const trigger = () => {
+        this.localValue = lastValue
+        this.$emit('update', lastValue)
+        this.$emit('change', lastChecked)
+      }
+
+      let goodJob = true
+
+      if (typeof this.preCheck === 'function') {
+        goodJob = this.preCheck(lastValue)
+        if (typeof goodJob.then === 'function') {
+          this.isLoading = true
+          return goodJob.then(() => {
+            trigger()
+          }).finally(() => {
+            this.isLoading = false
+          })
+        }
+      }
+      if (goodJob) {
+        trigger()
+      }
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/switcher.css';

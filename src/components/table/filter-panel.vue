@@ -27,159 +27,159 @@
 -->
 
 <template>
-    <div class="bk-table-filter-panel"
-        :class="{ multiple }">
-        <div class="panel-search" v-if="searchable">
-            <i class="panel-search-icon bk-icon icon-search"></i>
-            <input type="text"
-                class="panel-search-input"
-                v-model.trim="keyword"
-                :placeholder="t('bk.table.filter.placeholder')">
-        </div>
-        <template v-if="multiple">
-            <bk-checkbox-group class="panel-checkbox-group"
-                v-show="!searchEmpty"
-                v-model="selected">
-                <bk-checkbox class="panel-checkbox"
-                    v-for="filter in filters"
-                    v-show="isMatched(filter)"
-                    :key="filter.value"
-                    :value="filter.value"
-                    :disabled="!!filter.disabled">
-                    {{filter.text}}
-                </bk-checkbox>
-            </bk-checkbox-group>
-            <div class="panel-options" v-show="!searchEmpty">
-                <bk-link class="panel-options-link" theme="primary" @click="handleConfirm">{{t('bk.table.confirm')}}</bk-link>
-                <bk-link class="panel-options-link" theme="primary" @click="handleReset">{{t('bk.table.reset')}}</bk-link>
-            </div>
-        </template>
-        <template v-else>
-            <ul class="panel-list" v-show="!searchEmpty">
-                <li class="panel-item"
-                    :class="{
-                        'is-selected': selected.length === 0,
-                        'is-hidden': !!keyword.length
-                    }"
-                    @click="handleReset">
-                    {{t('bk.table.all')}}
-                </li>
-                <li class="panel-item"
-                    v-for="filter in filters"
-                    :key="filter.value"
-                    :class="{
-                        'is-selected': selected.includes(filter.value),
-                        'is-disabled': !!filter.disabled,
-                        'is-hidden': !isMatched(filter)
-                    }"
-                    @click="handleSelect(filter)">
-                    {{filter.text}}
-                </li>
-            </ul>
-        </template>
-        <p class="panel-empty" v-if="searchEmpty">{{t('bk.table.filter.empty')}}</p>
+  <div class="bk-table-filter-panel"
+    :class="{ multiple }">
+    <div class="panel-search" v-if="searchable">
+      <i class="panel-search-icon bk-icon icon-search"></i>
+      <input type="text"
+        class="panel-search-input"
+        v-model.trim="keyword"
+        :placeholder="t('bk.table.filter.placeholder')">
     </div>
+    <template v-if="multiple">
+      <bk-checkbox-group class="panel-checkbox-group"
+        v-show="!searchEmpty"
+        v-model="selected">
+        <bk-checkbox class="panel-checkbox"
+          v-for="filter in filters"
+          v-show="isMatched(filter)"
+          :key="filter.value"
+          :value="filter.value"
+          :disabled="!!filter.disabled">
+          {{filter.text}}
+        </bk-checkbox>
+      </bk-checkbox-group>
+      <div class="panel-options" v-show="!searchEmpty">
+        <bk-link class="panel-options-link" theme="primary" @click="handleConfirm">{{t('bk.table.confirm')}}</bk-link>
+        <bk-link class="panel-options-link" theme="primary" @click="handleReset">{{t('bk.table.reset')}}</bk-link>
+      </div>
+    </template>
+    <template v-else>
+      <ul class="panel-list" v-show="!searchEmpty">
+        <li class="panel-item"
+          :class="{
+            'is-selected': selected.length === 0,
+            'is-hidden': !!keyword.length
+          }"
+          @click="handleReset">
+          {{t('bk.table.all')}}
+        </li>
+        <li class="panel-item"
+          v-for="filter in filters"
+          :key="filter.value"
+          :class="{
+            'is-selected': selected.includes(filter.value),
+            'is-disabled': !!filter.disabled,
+            'is-hidden': !isMatched(filter)
+          }"
+          @click="handleSelect(filter)">
+          {{filter.text}}
+        </li>
+      </ul>
+    </template>
+    <p class="panel-empty" v-if="searchEmpty">{{t('bk.table.filter.empty')}}</p>
+  </div>
 </template>
 <script>
-    import bkCheckboxGroup from '@/components/checkbox-group'
-    import bkCheckbox from '@/components/checkbox'
-    import bkLink from '@/components/link'
-    import Tippy from '@/utils/tippy'
-    import locale from 'bk-magic-vue/lib/locale'
+import bkCheckboxGroup from '@/components/checkbox-group'
+import bkCheckbox from '@/components/checkbox'
+import bkLink from '@/components/link'
+import Tippy from '@/utils/tippy'
+import locale from 'bk-magic-vue/lib/locale'
 
-    export default {
-        name: 'bk-table-filter-panel',
-        components: {
-            bkCheckboxGroup,
-            bkCheckbox,
-            bkLink
-        },
-        mixins: [locale.mixin],
-        data () {
-            return {
-                instance: null,
-                reference: null,
-                filters: [],
-                multiple: false,
-                placement: 'bottom-start',
-                method: null,
-                selected: [],
-                column: null,
-                table: null,
-                searchable: false,
-                keyword: '',
-                matchedFilters: []
-            }
-        },
-        computed: {
-            searchEmpty () {
-                return this.keyword.length && !this.matchedFilters.length
-            }
-        },
-        watch: {
-            keyword () {
-                this.setMatchedFilters()
-            }
-        },
-        mounted () {
-            this.instance = Tippy(this.reference, {
-                theme: 'light bk-table-filter-panel',
-                trigger: 'click',
-                interactive: true,
-                placement: this.placement,
-                content: this.$el,
-                onShow: () => {
-                    this.column.filterOpened = true
-                },
-                onHide: () => {
-                    this.column.filterOpened = false
-                },
-                onHidden: () => {
-                    this.keyword = ''
-                }
-            })
-        },
-        methods: {
-            setMatchedFilters () {
-                const keyword = this.keyword.toLowerCase()
-                this.matchedFilters = this.filters.filter(filter => {
-                    const index = filter.text.toString().toLowerCase().indexOf(keyword)
-                    return index > -1
-                })
-            },
-            isMatched (filter) {
-                if (!this.keyword.length) {
-                    return true
-                }
-                return this.matchedFilters.includes(filter)
-            },
-            handleConfirm () {
-                this.confirmFilter(this.selected)
-                this.instance.hide()
-            },
-            handleReset () {
-                this.selected = []
-                this.handleConfirm()
-            },
-            handleSelect (filter) {
-                if (filter.disabled) {
-                    return
-                }
-                if (this.selected.includes(filter.value)) {
-                    this.instance.hide()
-                    return
-                }
-                this.selected = [filter.value]
-                this.handleConfirm()
-            },
-            confirmFilter () {
-                this.column.filteredValue = this.selected
-                this.table.store.commit('filterChange', {
-                    column: this.column,
-                    values: this.selected
-                })
-                this.table.store.updateAllSelected()
-            }
-        }
+export default {
+  name: 'bk-table-filter-panel',
+  components: {
+    bkCheckboxGroup,
+    bkCheckbox,
+    bkLink
+  },
+  mixins: [locale.mixin],
+  data () {
+    return {
+      instance: null,
+      reference: null,
+      filters: [],
+      multiple: false,
+      placement: 'bottom-start',
+      method: null,
+      selected: [],
+      column: null,
+      table: null,
+      searchable: false,
+      keyword: '',
+      matchedFilters: []
     }
+  },
+  computed: {
+    searchEmpty () {
+      return this.keyword.length && !this.matchedFilters.length
+    }
+  },
+  watch: {
+    keyword () {
+      this.setMatchedFilters()
+    }
+  },
+  mounted () {
+    this.instance = Tippy(this.reference, {
+      theme: 'light bk-table-filter-panel',
+      trigger: 'click',
+      interactive: true,
+      placement: this.placement,
+      content: this.$el,
+      onShow: () => {
+        this.column.filterOpened = true
+      },
+      onHide: () => {
+        this.column.filterOpened = false
+      },
+      onHidden: () => {
+        this.keyword = ''
+      }
+    })
+  },
+  methods: {
+    setMatchedFilters () {
+      const keyword = this.keyword.toLowerCase()
+      this.matchedFilters = this.filters.filter(filter => {
+        const index = filter.text.toString().toLowerCase().indexOf(keyword)
+        return index > -1
+      })
+    },
+    isMatched (filter) {
+      if (!this.keyword.length) {
+        return true
+      }
+      return this.matchedFilters.includes(filter)
+    },
+    handleConfirm () {
+      this.confirmFilter(this.selected)
+      this.instance.hide()
+    },
+    handleReset () {
+      this.selected = []
+      this.handleConfirm()
+    },
+    handleSelect (filter) {
+      if (filter.disabled) {
+        return
+      }
+      if (this.selected.includes(filter.value)) {
+        this.instance.hide()
+        return
+      }
+      this.selected = [filter.value]
+      this.handleConfirm()
+    },
+    confirmFilter () {
+      this.column.filteredValue = this.selected
+      this.table.store.commit('filterChange', {
+        column: this.column,
+        values: this.selected
+      })
+      this.table.store.updateAllSelected()
+    }
+  }
+}
 </script>

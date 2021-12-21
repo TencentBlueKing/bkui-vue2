@@ -35,7 +35,7 @@ import Tippy from '@/utils/tippy'
 import setInstaller from '@/utils/component-installer.js'
 
 setInstaller(Popover, (Vue, options) => {
-    Vue.prototype.$bkPopover = (el, options) => Tippy(el, options)
+  Vue.prototype.$bkPopover = (el, options) => Tippy(el, options)
 })
 
 export default Popover

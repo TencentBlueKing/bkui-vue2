@@ -45,100 +45,100 @@ const mdLoaderOption = require('./md-loader-option')
 const hljsLanguageConfig = require('./hljs-language-config')
 
 module.exports = {
-    watchOptions: {
-        ignored: /node_modules/
-    },
-    resolve: {
-        extensions: ['.js', '.vue'],
-        modules: [NODE_MODULES_DIR],
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js',
-            // for example
-            'bk-magic-vue$': resolve('src'),
-            // for rollup build component
-            'bk-magic-vue/lib': resolve('src'),
-            '@': resolve('src')
+  watchOptions: {
+    ignored: /node_modules/
+  },
+  resolve: {
+    extensions: ['.js', '.vue'],
+    modules: [NODE_MODULES_DIR],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      // for example
+      'bk-magic-vue$': resolve('src'),
+      // for rollup build component
+      'bk-magic-vue/lib': resolve('src'),
+      '@': resolve('src')
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('build')],
+        exclude: /node_modules/,
+        options: {
+          formatter: friendlyFormatter
         }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|vue)$/,
-                loader: 'eslint-loader',
-                enforce: 'pre',
-                include: [resolve('src'), resolve('build')],
-                exclude: /node_modules/,
-                options: {
-                    formatter: friendlyFormatter
-                }
-            },
-            {
-                test: /\.vue$/,
-                use: {
-                    loader: 'vue-loader',
-                    options: {
-                        include: [LIBRARY_ROOT, EXAMPLE_DIR],
-                        transformAssetUrls: {
-                            video: 'src',
-                            source: 'src',
-                            img: 'src',
-                            image: 'xlink:href'
-                        }
-                    }
-                }
-            },
-            {
-                test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        include: LIBRARY_ROOT,
-                        cacheDirectory: './webpack_cache/',
-                        // 确保 JS 的转译应用到 node_modules 的 Vue 单文件组件
-                        exclude: file => (
-                            /node_modules/.test(file) && !/\.vue\.js/.test(file)
-                        )
-                    }
-                }
-            },
-            {
-                test: /\.md$/,
-                use: [
-                    {
-                        loader: 'vue-loader'
-                    },
-                    {
-                        loader: 'vue-markdown-loader/lib/markdown-compiler',
-                        options: mdLoaderOption
-                    }
-                ]
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: assetsPath('images/[name].[hash:7].[ext]')
-                }
-            },
-            {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 10000,
-                        name: assetsPath('fonts/[name].[hash:7].[ext]')
-                    }
-                }
+      },
+      {
+        test: /\.vue$/,
+        use: {
+          loader: 'vue-loader',
+          options: {
+            include: [LIBRARY_ROOT, EXAMPLE_DIR],
+            transformAssetUrls: {
+              video: 'src',
+              source: 'src',
+              img: 'src',
+              image: 'xlink:href'
             }
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            include: LIBRARY_ROOT,
+            cacheDirectory: './webpack_cache/',
+            // 确保 JS 的转译应用到 node_modules 的 Vue 单文件组件
+            exclude: file => (
+              /node_modules/.test(file) && !/\.vue\.js/.test(file)
+            )
+          }
+        }
+      },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'vue-loader'
+          },
+          {
+            loader: 'vue-markdown-loader/lib/markdown-compiler',
+            options: mdLoaderOption
+          }
         ]
-    },
-    plugins: [
-        new VueLoaderPlugin(),
-        new webpack.ContextReplacementPlugin(/brace\/mode$/, /^\.\/(json|python|sh|text)$/),
-        new webpack.ContextReplacementPlugin(
-            /highlight\.js\/lib\/languages$/,
-            new RegExp(`^./(${hljsLanguageConfig.join('|')})$`)
-        )
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: assetsPath('images/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: assetsPath('fonts/[name].[hash:7].[ext]')
+          }
+        }
+      }
     ]
+  },
+  plugins: [
+    new VueLoaderPlugin(),
+    new webpack.ContextReplacementPlugin(/brace\/mode$/, /^\.\/(json|python|sh|text)$/),
+    new webpack.ContextReplacementPlugin(
+      /highlight\.js\/lib\/languages$/,
+      new RegExp(`^./(${hljsLanguageConfig.join('|')})$`)
+    )
+  ]
 }

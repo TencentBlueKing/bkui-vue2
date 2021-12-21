@@ -38,69 +38,69 @@ import paginationTotalCount from '@/components/pagination/pagination-total-count
 import { mountComponent } from '../helpers'
 
 describe('Pagination ', () => {
-    it('render the correct component', () => {
-        const wrapper = mountComponent(Pagination, {
-            propsData: {
-                limit: 10,
-                count: 100,
-                current: 1,
-                showSelectionCount: true,
-                showTotalCount: true
-            },
-            components: { 'bk-select': bkSelect, 'bk-option': bkOption, 'pagination-selection-count': paginationSelectionCount, 'pagination-total-count': paginationTotalCount }
-        })
-        expect(wrapper.props('limit')).toEqual(10)
-        expect(wrapper.props('count')).toEqual(100)
-        expect(wrapper.props('current')).toEqual(1)
-        expect(wrapper.props('showSelectionCount')).toEqual(true)
-        expect(wrapper.props('showTotalCount')).toEqual(true)
-        expect(wrapper.classes('bk-page')).toBe(true)
-        expect(wrapper.classes('bk-page-align-left')).toBe(true)
-        expect(wrapper.classes('bk-page-compact')).toBe(false)
-        expect(wrapper.classes('bk-page-small')).toBe(false)
+  it('render the correct component', () => {
+    const wrapper = mountComponent(Pagination, {
+      propsData: {
+        limit: 10,
+        count: 100,
+        current: 1,
+        showSelectionCount: true,
+        showTotalCount: true
+      },
+      components: { 'bk-select': bkSelect, 'bk-option': bkOption, 'pagination-selection-count': paginationSelectionCount, 'pagination-total-count': paginationTotalCount }
     })
+    expect(wrapper.props('limit')).toEqual(10)
+    expect(wrapper.props('count')).toEqual(100)
+    expect(wrapper.props('current')).toEqual(1)
+    expect(wrapper.props('showSelectionCount')).toEqual(true)
+    expect(wrapper.props('showTotalCount')).toEqual(true)
+    expect(wrapper.classes('bk-page')).toBe(true)
+    expect(wrapper.classes('bk-page-align-left')).toBe(true)
+    expect(wrapper.classes('bk-page-compact')).toBe(false)
+    expect(wrapper.classes('bk-page-small')).toBe(false)
+  })
 
-    it('render the correct showLimit', () => {
-        const wrapper = mountComponent(Pagination, {
-            propsData: {
-                limit: 10,
-                count: 100,
-                current: 1,
-                showLimit: false
-            },
-            components: { 'bk-select': bkSelect, 'bk-option': bkOption }
-        })
-        const limitContent = wrapper.find('bk-page-count bk-page-count-right')
-        expect(limitContent.exists()).toBe(false)
+  it('render the correct showLimit', () => {
+    const wrapper = mountComponent(Pagination, {
+      propsData: {
+        limit: 10,
+        count: 100,
+        current: 1,
+        showLimit: false
+      },
+      components: { 'bk-select': bkSelect, 'bk-option': bkOption }
     })
+    const limitContent = wrapper.find('bk-page-count bk-page-count-right')
+    expect(limitContent.exists()).toBe(false)
+  })
 
-    it('emit change event', () => {
-        const wrapper = mountComponent(Pagination, {
-            propsData: {
-                limit: 10,
-                count: 100,
-                current: 1,
-                showLimit: false
-            },
-            components: { 'bk-select': bkSelect, 'bk-option': bkOption }
-        })
-        wrapper.vm.$emit('change', 1)
-        expect(wrapper.emitted().change).toBeTruthy()
-        expect(wrapper.emitted().change[0]).toEqual([1])
+  it('emit change event', () => {
+    const wrapper = mountComponent(Pagination, {
+      propsData: {
+        limit: 10,
+        count: 100,
+        current: 1,
+        showLimit: false
+      },
+      components: { 'bk-select': bkSelect, 'bk-option': bkOption }
     })
+    wrapper.vm.$emit('change', 1)
+    expect(wrapper.emitted().change).toBeTruthy()
+    expect(wrapper.emitted().change[0]).toEqual([1])
+  })
 
-    it('emit limit-change event', () => {
-        const wrapper = mountComponent(Pagination, {
-            propsData: {
-                limit: 10,
-                count: 100,
-                current: 1,
-                showLimit: false
-            },
-            components: { 'bk-select': bkSelect, 'bk-option': bkOption }
-        })
-        wrapper.setProps({ limit: 20 })
-        expect(wrapper.emitted()['limit-change']).toBeTruthy()
-        expect(wrapper.vm.limit).toBe(20)
+  it('emit limit-change event', () => {
+    const wrapper = mountComponent(Pagination, {
+      propsData: {
+        limit: 10,
+        count: 100,
+        current: 1,
+        showLimit: false
+      },
+      components: { 'bk-select': bkSelect, 'bk-option': bkOption }
     })
+    wrapper.setProps({ limit: 20 })
+    expect(wrapper.emitted()['limit-change']).toBeTruthy()
+    expect(wrapper.vm.limit).toBe(20)
+  })
 })

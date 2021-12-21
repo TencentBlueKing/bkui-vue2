@@ -36,108 +36,108 @@ import { mount } from '@vue/test-utils'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('checkbox && checkbox-group unit test', () => {
-    /* -------------------- radio -------------------- */
-    it('render the correct single checkbox', () => {
-        const wrapper = mountComponent(Checkbox, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'checkbox'
-            }
-        })
-
-        expect(wrapper.find('input').attributes('name')).toBe('checkbox')
-        expect(wrapper.find('input').attributes('type')).toBe('hidden')
-        expect(wrapper.find('.bk-checkbox-text').text()).toBe('jest')
-        expect(wrapper.find('label').classes('bk-form-checkbox')).toBe(true)
+  /* -------------------- radio -------------------- */
+  it('render the correct single checkbox', () => {
+    const wrapper = mountComponent(Checkbox, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'checkbox'
+      }
     })
 
-    it('render the correct checkbox with disabled', () => {
-        const wrapper = mountComponent(Checkbox, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'checkbox',
-                disabled: true
-            }
-        })
+    expect(wrapper.find('input').attributes('name')).toBe('checkbox')
+    expect(wrapper.find('input').attributes('type')).toBe('hidden')
+    expect(wrapper.find('.bk-checkbox-text').text()).toBe('jest')
+    expect(wrapper.find('label').classes('bk-form-checkbox')).toBe(true)
+  })
 
-        expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-disabled')
+  it('render the correct checkbox with disabled', () => {
+    const wrapper = mountComponent(Checkbox, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'checkbox',
+        disabled: true
+      }
     })
 
-    it('render the correct checkbox with indaterminate', () => {
-        const wrapper = mountComponent(Checkbox, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'checkbox',
-                indeterminate: true
-            }
-        })
+    expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-disabled')
+  })
 
-        expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-indeterminate')
+  it('render the correct checkbox with indaterminate', () => {
+    const wrapper = mountComponent(Checkbox, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'checkbox',
+        indeterminate: true
+      }
     })
 
-    it('checkbox with default checked test', () => {
-        const wrapper = mountComponent(Checkbox, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'checkbox',
-                checked: true
-            }
-        })
+    expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-indeterminate')
+  })
 
-        expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-checked')
+  it('checkbox with default checked test', () => {
+    const wrapper = mountComponent(Checkbox, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'checkbox',
+        checked: true
+      }
     })
 
-    it('checkbox with true-value & false-value test', () => {
-        const wrapper = mountComponent(Checkbox, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'checkbox',
-                trueValue: 'yes',
-                falseValue: 'no',
-                checked: true
-            }
-        })
-        expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-checked')
-        expect(wrapper.find('input[name="checkbox"]').attributes('value')).toBe('yes')
+    expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-checked')
+  })
 
-        wrapper.trigger('click')
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.find('.bk-form-checkbox').classes()).not.toContain('is-checked')
-            expect(wrapper.find('input[name="checkbox"]').attributes('value')).toBe('no')
-        })
+  it('checkbox with true-value & false-value test', () => {
+    const wrapper = mountComponent(Checkbox, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'checkbox',
+        trueValue: 'yes',
+        falseValue: 'no',
+        checked: true
+      }
+    })
+    expect(wrapper.find('.bk-form-checkbox').classes()).toContain('is-checked')
+    expect(wrapper.find('input[name="checkbox"]').attributes('value')).toBe('yes')
+
+    wrapper.trigger('click')
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.find('.bk-form-checkbox').classes()).not.toContain('is-checked')
+      expect(wrapper.find('input[name="checkbox"]').attributes('value')).toBe('no')
+    })
+  })
+
+  it('checkbox change event listener', () => {
+    const changeHandler = jest.fn()
+    const wrapper = mountComponent(Checkbox, {
+      slots: {
+        default: 'jest'
+      },
+      propsData: {
+        name: 'checkbox'
+      },
+      listeners: {
+        change: changeHandler
+      }
     })
 
-    it('checkbox change event listener', () => {
-        const changeHandler = jest.fn()
-        const wrapper = mountComponent(Checkbox, {
-            slots: {
-                default: 'jest'
-            },
-            propsData: {
-                name: 'checkbox'
-            },
-            listeners: {
-                change: changeHandler
-            }
-        })
+    wrapper.trigger('click')
+    expect(changeHandler).toHaveBeenCalledTimes(1)
+  })
 
-        wrapper.trigger('click')
-        expect(changeHandler).toHaveBeenCalledTimes(1)
-    })
-
-    it('checkbox in group selected and chenge event listener', () => {
-        const handleChange = jest.fn()
-        const wrapper = mount(createTestComp(`
+  it('checkbox in group selected and chenge event listener', () => {
+    const handleChange = jest.fn()
+    const wrapper = mount(createTestComp(`
             <div>
                 <bk-checkbox-group name="checkbox-group"
                     v-model="choose"
@@ -150,31 +150,31 @@ describe('checkbox && checkbox-group unit test', () => {
                     </bk-checkbox>
                 </bk-checkbox-group>
             </div>`, {
-            components: {
-                bkCheckbox: Checkbox,
-                bkCheckboxGroup: CheckboxGroup
-            },
-            data () {
-                return {
-                    choose: ['qq']
-                }
-            },
-            methods: {
-                handleChange: handleChange
-            }
-        }))
-        const radioWX = wrapper.find('.bk-form-checkbox')
-        const radioQQ = wrapper.findAll('.bk-form-checkbox').at(1)
+      components: {
+        bkCheckbox: Checkbox,
+        bkCheckboxGroup: CheckboxGroup
+      },
+      data () {
+        return {
+          choose: ['qq']
+        }
+      },
+      methods: {
+        handleChange: handleChange
+      }
+    }))
+    const radioWX = wrapper.find('.bk-form-checkbox')
+    const radioQQ = wrapper.findAll('.bk-form-checkbox').at(1)
 
-        expect(radioWX.classes()).not.toContain('is-checked')
-        expect(radioQQ.classes()).toContain('is-checked')
+    expect(radioWX.classes()).not.toContain('is-checked')
+    expect(radioQQ.classes()).toContain('is-checked')
 
-        radioWX.trigger('click')
+    radioWX.trigger('click')
 
-        wrapper.vm.$nextTick(() => {
-            expect(handleChange).toHaveBeenCalledTimes(1)
-            expect(radioWX.classes()).toContain('is-checked')
-            expect(radioQQ.classes()).toContain('is-checked')
-        })
+    wrapper.vm.$nextTick(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1)
+      expect(radioWX.classes()).toContain('is-checked')
+      expect(radioQQ.classes()).toContain('is-checked')
     })
+  })
 })

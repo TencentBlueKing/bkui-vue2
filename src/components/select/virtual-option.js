@@ -27,19 +27,19 @@
 import bkOption from './option.vue'
 
 export default {
-    name: 'bk-virtual-option',
+  name: 'bk-virtual-option',
 
-    props: {
-        renderFunc: Function,
-        item: Object
-    },
+  props: {
+    renderFunc: Function,
+    item: Object
+  },
 
-    components: {
-        bkOption
-    },
+  components: {
+    bkOption
+  },
 
-    render (h) {
-        if (this.renderFunc) return this.renderFunc(this.item, h)
-        else return <bk-option {...{ props: this.item }} class="bk-virtual-option"></bk-option>
-    }
+  render (h) {
+    if (this.renderFunc) return this.renderFunc(this.item, h)
+    else return <bk-option {...{ props: this.item }} class="bk-virtual-option"></bk-option>
+  }
 }
