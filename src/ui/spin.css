@@ -68,7 +68,7 @@
         }
         &.bk-spin-rotation-info-wait {
             .rotate {
-                background-color: #979ba5;
+                background-color: #63656e;
             }
         }
         .rotate1 {
@@ -169,6 +169,9 @@
     }
     .bk-spin-icon-danger {
         color: $dangerColor
+    }
+    .bk-spin-icon-info {
+    	color: #979ba5;
     }
     .bk-spin-icon-large {
         i {
