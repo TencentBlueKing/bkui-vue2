@@ -84,6 +84,9 @@
           width: bodyWidth
         }">
       </table-body>
+      <div class="bk-table-bottom-loading" v-if="scrollEndLoading.isLoading">
+        <bk-spin v-bind="scrollEndLoading">{{ scrollEndLoading.text }}</bk-spin>
+      </div>
       <div
         v-if="!data || data.length === 0 || store.states.data.length === 0"
         ref="emptyBlock"
@@ -165,6 +168,7 @@
             width: bodyWidth
           }">
         </table-body>
+        <div class="bk-table-bottom-loading" v-if="scrollEndLoading.isLoading"></div>
         <div
           v-if="$slots.append"
           class="bk-table-append-gutter"
@@ -230,6 +234,7 @@
             width: bodyWidth
           }">
         </table-body>
+        <div class="bk-table-bottom-loading" style="border-top: 1px solid #dfe0e5; bottom: 1px;" v-if="scrollEndLoading.isLoading"></div>
       </div>
       <div
         v-if="showSummary"
@@ -271,7 +276,6 @@
         @limit-change="handlePageLimitChange">
       </bk-pagination>
     </div>
-    <div class="bk-table-bottom-loading" v-bkloading="scrollLoading" v-if="scrollLoading.isLoading"></div>
   </div>
 </template>
 
@@ -279,7 +283,7 @@
 import { debounce } from 'throttle-debounce'
 import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
 import Mousewheel from '@/directives/mousewheel'
-import Bkloading from '@/components/loading/directive'
+import BkSpin from '@/components/spin'
 import TableStore from './table-store'
 import TableLayout from './table-layout'
 import TableBody from './table-body'
@@ -296,11 +300,11 @@ export default {
     TableHeader,
     TableFooter,
     TableBody,
-    BkPagination
+    BkPagination,
+    BkSpin
   },
   directives: {
-    Mousewheel,
-    Bkloading
+    Mousewheel
   },
   mixins: [locale.mixin],
   props: {
@@ -402,10 +406,7 @@ export default {
     },
     scrollLoading: {
       type: Object,
-      default: () => ({
-        size: 'mini',
-        isLoading: false
-      })
+      default: () => ({ isLoading: false })
     }
   },
   data () {
@@ -557,6 +558,16 @@ export default {
     },
     showSelectionCount () {
       return this.store.states._columns.some(column => column.type === 'selection')
+    },
+    scrollEndLoading () {
+      return Object.assign({
+        isLoading: false,
+        text: '加载中',
+        size: 'mini',
+        theme: 'info',
+        icon: 'circle-2-1',
+        placement: 'right'
+      }, this.scrollLoading)
     },
     isVirtualRender () {
       const prop = this.virtualRender
@@ -716,7 +727,7 @@ export default {
         } else {
           self.scrollPosition = 'middle'
         }
-        if (self.scrollLoading.isLoading) return
+        if (self.scrollEndLoading.isLoading) return
         if (this.scrollThrottle) return
         this.scrollThrottle = true
         setTimeout(() => {
