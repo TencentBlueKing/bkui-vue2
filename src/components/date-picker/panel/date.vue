@@ -49,7 +49,6 @@
         <!-- eslint-disable-next-line vue/require-component-is -->
         <component
           :is="pickerTable"
-          ref="pickerTable"
           v-if="currentView !== 'time'"
           :table-date="panelDate"
           :value="dates"
