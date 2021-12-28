@@ -47,7 +47,6 @@
         <!-- eslint-disable-next-line vue/require-component-is -->
         <component
           :is="leftPickerTable"
-          ref="leftYearTable"
           v-if="currentView !== 'time'"
           selection-mode="range"
           :table-date="leftPanelDate"
@@ -90,7 +89,6 @@
         <!-- eslint-disable-next-line vue/require-component-is -->
         <component
           :is="rightPickerTable"
-          ref="rightYearTable"
           v-if="currentView !== 'time'"
           selection-mode="range"
           :table-date="rightPanelDate"
@@ -364,11 +362,11 @@ export default {
     },
 
     /**
-             * 点击左侧面板以及右侧面板的年视图或者月视图
-             *
-             * @param {string} panelPosition 左侧 panel 还是右侧 panel
-             * @param {Date} value 选中的值，如果是年视图，那么就是选中年的一月一号，如果是月视图，那么就是选中月的一号
-             */
+     * 点击左侧面板以及右侧面板的年视图或者月视图
+     *
+     * @param {string} panelPosition 左侧 panel 还是右侧 panel
+     * @param {Date} value 选中的值，如果是年视图，那么就是选中年的一月一号，如果是月视图，那么就是选中月的一号
+     */
     handlePreSelection (panelPosition, value) {
       this[`${panelPosition}PanelDate`] = value
       const currentViewType = this[`${panelPosition}PickerTable`]
