@@ -27,43 +27,43 @@
 -->
 
 <template>
-    <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width">
-        <template>
-            <div slot="content">
-                qweeqw
-            </div>
-        </template>
-    </bk-sideslider>
+  <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width">
+    <template>
+      <div slot="content">
+        qweeqw
+      </div>
+    </template>
+  </bk-sideslider>
 </template>
 <script>
-    import { bkSideslider } from '@'
+import { bkSideslider } from '@'
 
-    export default {
-        components: {
-            bkSideslider
-        },
-        props: {
-            show: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data () {
-            return {
-                isShow: this.show,
-                defaultSettings: {
-                    width: 1000
-                }
-            }
-        },
-        watch: {
-            show (v) {
-                console.error(11, v)
-                this.isShow = v
-            }
-        },
-        created () {
-            console.error('createdcreatedcreatedcreated')
-        }
+export default {
+  components: {
+    bkSideslider
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    return {
+      isShow: this.show,
+      defaultSettings: {
+        width: 1000
+      }
+    }
+  },
+  watch: {
+    show (v) {
+      console.error(11, v)
+      this.isShow = v
+    }
+  },
+  created () {
+    console.error('createdcreatedcreatedcreated')
+  }
+}
 </script>

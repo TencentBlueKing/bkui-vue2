@@ -33,31 +33,31 @@
 import { throttle } from 'throttle-debounce'
 
 function visibleRender (e, wrapper, binding) {
-    const { lineHeight = 30, callback } = binding.value
-    const { scrollTop, offsetHeight, startIndex, endIndex } = wrapper
+  const { lineHeight = 30, callback } = binding.value
+  const { scrollTop, offsetHeight, startIndex, endIndex } = wrapper
 
-    const targetStartIndex = Math.floor(scrollTop / lineHeight)
-    const targetEndIndex = Math.ceil(offsetHeight / lineHeight) + targetStartIndex
-    if (startIndex !== targetStartIndex || endIndex !== targetEndIndex) {
-        typeof callback === 'function' && callback(e, targetStartIndex, targetEndIndex, scrollTop)
-    }
+  const targetStartIndex = Math.floor(scrollTop / lineHeight)
+  const targetEndIndex = Math.ceil(offsetHeight / lineHeight) + targetStartIndex
+  if (startIndex !== targetStartIndex || endIndex !== targetEndIndex) {
+    typeof callback === 'function' && callback(e, targetStartIndex, targetEndIndex, scrollTop)
+  }
 }
 
 const throttledRender = throttle(60, (e, wrapper, binding) => visibleRender(e, wrapper, binding))
 
 export default {
-    inserted (el, binding) {
-        const wrapper = el.parentNode
-        wrapper.addEventListener('scroll', (e) => throttledRender(e, wrapper, binding))
-    },
-    componentUpdated (el, binding) {
-        const wrapper = el.parentNode
-        throttledRender(null, wrapper, binding)
-    },
-    unbind (el) {
-        if (el) {
-            const wrapper = el.parentNode
-            wrapper && wrapper.removeEventListener('scroll', throttledRender)
-        }
+  inserted (el, binding) {
+    const wrapper = el.parentNode
+    wrapper.addEventListener('scroll', (e) => throttledRender(e, wrapper, binding))
+  },
+  componentUpdated (el, binding) {
+    const wrapper = el.parentNode
+    throttledRender(null, wrapper, binding)
+  },
+  unbind (el) {
+    if (el) {
+      const wrapper = el.parentNode
+      wrapper && wrapper.removeEventListener('scroll', throttledRender)
     }
+  }
 }

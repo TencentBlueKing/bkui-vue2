@@ -45,39 +45,39 @@ const spinner = ora('building for example...')
 spinner.start()
 
 rm(resolve(__dirname, '../dist/example'), e => {
-    if (e) {
-        throw e
+  if (e) {
+    throw e
+  }
+  webpack(webpackConf, (err, stats) => {
+    spinner.stop()
+    if (err) {
+      throw err
     }
-    webpack(webpackConf, (err, stats) => {
-        spinner.stop()
-        if (err) {
-            throw err
-        }
-        process.stdout.write(stats.toString({
-            colors: true,
-            modules: false,
-            children: false,
-            chunks: false,
-            chunkModules: false
-        }) + '\n\n')
+    process.stdout.write(stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false
+    }) + '\n\n')
 
-        if (stats.hasErrors()) {
-            console.log(chalk.red('  Build failed with errors.\n'))
-            process.exit(1)
-        }
+    if (stats.hasErrors()) {
+      console.log(chalk.red('  Build failed with errors.\n'))
+      process.exit(1)
+    }
 
-        const fontSrcDir = resolve(__dirname, '../dist/example/fonts')
-        const fontTargetDir = resolve(__dirname, '../dist/example/css/fonts')
+    const fontSrcDir = resolve(__dirname, '../dist/example/fonts')
+    const fontTargetDir = resolve(__dirname, '../dist/example/css/fonts')
 
-        fse.move(fontSrcDir, fontTargetDir).then(() => {
-            console.log(chalk.cyan('  Build example complete.\n'))
-            console.log(chalk.yellow(
-                '  Tip: built files are meant to be served over an HTTP server.\n'
+    fse.move(fontSrcDir, fontTargetDir).then(() => {
+      console.log(chalk.cyan('  Build example complete.\n'))
+      console.log(chalk.yellow(
+        '  Tip: built files are meant to be served over an HTTP server.\n'
                 + '  Opening index.html over file:// won\'t work.\n'
-            ))
-        }).catch(err => {
-            console.log(chalk.red(`  Build failed with errors: ${err.message}\n`))
-            process.exit(1)
-        })
+      ))
+    }).catch(err => {
+      console.log(chalk.red(`  Build failed with errors: ${err.message}\n`))
+      process.exit(1)
     })
+  })
 })

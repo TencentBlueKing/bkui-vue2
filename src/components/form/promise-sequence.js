@@ -36,24 +36,24 @@
  * @param {Object} args 参数
  */
 function primiseSequence (promises, args) {
-    const p = Promise.resolve()
-    const len = promises.length
-    let i = 0
+  const p = Promise.resolve()
+  const len = promises.length
+  let i = 0
 
-    if (len <= 0) {
-        return p
-    }
+  if (len <= 0) {
+    return p
+  }
 
-    function callBack (...params) {
-        return p.then(r => {
-            return promises[i](r, ...params)
-        }).then(r => {
-            ++i
-            return i > len - 1 ? Promise.resolve(r) : callBack(...params)
-        })
-    }
+  function callBack (...params) {
+    return p.then(r => {
+      return promises[i](r, ...params)
+    }).then(r => {
+      ++i
+      return i > len - 1 ? Promise.resolve(r) : callBack(...params)
+    })
+  }
 
-    return callBack(args)
+  return callBack(args)
 }
 
 export default primiseSequence

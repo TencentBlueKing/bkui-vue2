@@ -39,35 +39,36 @@ const LoadingConstructor = Vue.extend(LoadingView)
 let instance
 
 const Loading = function (options = {}) {
-    if (typeof options === 'string') {
-        options = {
-            title: options
-        }
+  if (typeof options === 'string') {
+    options = {
+      title: options
     }
+  }
 
-    options.opacity = options.opacity || 0.9
-    options.color = options.color || '#ffffff'
-    instance = new LoadingConstructor({
-        data: options
-    })
+  options.type = 'fixed'
+  options.opacity = options.opacity || 0.9
+  options.color = options.color || '#ffffff'
+  instance = new LoadingConstructor({
+    propsData: options
+  })
 
-    if (isVNode(instance.title)) {
-        instance.$slots.default = [instance.title]
-        instance.title = null
-    } else {
-        delete instance.$slots.default
-    }
+  if (isVNode(instance.title)) {
+    instance.$slots.title = [instance.title]
+    instance.title = null
+  } else {
+    delete instance.$slots.title
+  }
 
-    instance.viewmodel = instance.$mount()
-    document.body.appendChild(instance.viewmodel.$el)
-    instance.$dom = instance.viewmodel.$el
-    instance.viewmodel.isShow = true
+  instance.viewmodel = instance.$mount()
+  document.body.appendChild(instance.viewmodel.$el)
+  instance.$dom = instance.viewmodel.$el
+  instance.viewmodel.isShow = true
 
-    return instance.viewmodel
+  return instance.viewmodel
 }
 
 Loading.hide = function () {
-    instance.viewmodel.hide = true
+  instance.viewmodel.hide = true
 }
 
 Vue.prototype.$bkLoading = Loading

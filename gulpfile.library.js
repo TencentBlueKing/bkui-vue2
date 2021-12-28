@@ -44,82 +44,82 @@ const pkg = require('./package.json')
 const external = Object.keys(Object.assign({}, pkg.peerDependencies) || {})
 
 async function sourceLibrary () {
-    const bundle = await rollup({
-        external,
-        input: 'src/index.js',
-        plugins: plugins,
-        onwarn (warning) {
-            if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
-                // eslint-disable-next-line no-useless-return
-                return
-            }
-        }
-    })
+  const bundle = await rollup({
+    external,
+    input: 'src/index.js',
+    plugins: plugins,
+    onwarn (warning) {
+      if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+        // eslint-disable-next-line no-useless-return
+        return
+      }
+    }
+  })
 
-    bundle.write({
-        file: 'dist/bk-magic-vue.js',
-        format: 'umd',
-        name: 'bkMagicVue',
-        sourcemap: false,
-        exports: 'named',
-        globals: {
-            vue: 'Vue'
-        }
-    })
+  bundle.write({
+    file: 'dist/bk-magic-vue.js',
+    format: 'umd',
+    name: 'bkMagicVue',
+    sourcemap: false,
+    exports: 'named',
+    globals: {
+      vue: 'Vue'
+    }
+  })
 }
 
 async function minLibrary () {
-    const bundle = await rollup({
-        external,
-        input: 'src/index.js',
-        plugins: plugins.concat(
-            terser(),
-            rollupGzip({
-                gzipOptions: {
-                    level: 9
-                }
-            }),
-            rollupCopy({
-                targets: [
-                    { src: 'lib/ui/fonts', dest: 'dist' },
-                    { src: 'lib/ui/images', dest: 'dist' },
-                    { src: 'lib/ui/bk-magic-vue.css', dest: 'dist' },
-                    // // { src: 'lib/ui/bk-magic-vue.css.map', dest: 'dist' },
-                    { src: 'lib/ui/bk-magic-vue.min.css', dest: 'dist' },
-                    { src: 'lib/ui/bk-magic-vue.min.css.map', dest: 'dist' },
-                    { src: 'lib/ui/bk-magic-vue.min.css.gz', dest: 'dist' }
-                ],
-                verbose: false
-            })
-        ),
-        onwarn (warning) {
-            if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
-                // eslint-disable-next-line no-useless-return
-                return
-            }
+  const bundle = await rollup({
+    external,
+    input: 'src/index.js',
+    plugins: plugins.concat(
+      terser(),
+      rollupGzip({
+        gzipOptions: {
+          level: 9
         }
-    })
+      }),
+      rollupCopy({
+        targets: [
+          { src: 'lib/ui/fonts', dest: 'dist' },
+          { src: 'lib/ui/images', dest: 'dist' },
+          { src: 'lib/ui/bk-magic-vue.css', dest: 'dist' },
+          // // { src: 'lib/ui/bk-magic-vue.css.map', dest: 'dist' },
+          { src: 'lib/ui/bk-magic-vue.min.css', dest: 'dist' },
+          { src: 'lib/ui/bk-magic-vue.min.css.map', dest: 'dist' },
+          { src: 'lib/ui/bk-magic-vue.min.css.gz', dest: 'dist' }
+        ],
+        verbose: false
+      })
+    ),
+    onwarn (warning) {
+      if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+        // eslint-disable-next-line no-useless-return
+        return
+      }
+    }
+  })
 
-    bundle.write({
-        file: 'dist/bk-magic-vue.min.js',
-        format: 'umd',
-        name: 'bkMagicVue',
-        sourcemap: true,
-        exports: 'named',
-        globals: {
-            vue: 'Vue'
-        }
-    })
+  bundle.write({
+    file: 'dist/bk-magic-vue.min.js',
+    format: 'umd',
+    name: 'bkMagicVue',
+    sourcemap: true,
+    exports: 'named',
+    globals: {
+      vue: 'Vue'
+    }
+  })
 }
 
 const idx = (process.env.NODE_ENV || '').split(':')[1]
 
 if (idx === 'source') {
-    gulp.task('build-library', sourceLibrary)
+  gulp.task('build-library', sourceLibrary)
 } else if (idx === 'min') {
-    gulp.task('build-library', minLibrary)
+  gulp.task('build-library', minLibrary)
 } else {
-    gulp.task('build-library', gulp.parallel(sourceLibrary, minLibrary))
+  gulp.task('build-library', gulp.parallel(sourceLibrary, minLibrary))
 }
 
 // gulp.task('dist', gulp.series(

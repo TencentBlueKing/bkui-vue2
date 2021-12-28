@@ -27,13 +27,15 @@
 -->
 
 <template>
-    <div class="bk-form-control" :name="name">
-        <slot></slot>
-    </div>
+  <div class="bk-form-control" :name="name">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
-    /**
+import emitter from '@/mixins/emitter'
+
+/**
      * bk-radio-group
      * @module components/radio
      * @desc 单选框组合
@@ -44,66 +46,68 @@
             v-model="value">
         </bk-radio>
      */
-    export default {
-        name: 'bk-radio-group',
-        props: {
-            value: {
-                type: [String, Number, Boolean],
-                default: ''
-            },
-            name: {
-                type: [String, Number],
-                default () {
-                    let seed = 0
-                    const now = Date.now()
-                    return `bk_radio_${now}_${seed++}`
-                }
-            }
-        },
-        data () {
-            return {
-                curValue: this.value,
-                radios: []
-            }
-        },
-        watch: {
-            value () {
-                if (this.curValue !== this.value) {
-                    this.curValue = this.value
-                    this.$nextTick(() => {
-                        this.updateValue()
-                    })
-                }
-            }
-        },
-        mounted () {
-            this.updateValue()
-        },
-        methods: {
-            findComponentsDownward (context, componentName) {
-                return context.$children.reduce((components, child) => {
-                    if (child.$options.name === componentName) components.push(child)
-                    const foundChilds = this.findComponentsDownward(child, componentName)
-                    return components.concat(foundChilds)
-                }, [])
-            },
-            updateValue () {
-                this.radios = this.findComponentsDownward(this, 'bk-radio').concat(
-                    this.findComponentsDownward(this, 'bk-radio-button')
-                )
-
-                if (this.radios) {
-                    this.radios.forEach(child => {
-                        child.current = this.curValue
-                    })
-                }
-            },
-            change (data) {
-                this.curValue = data.value
-                this.updateValue()
-                this.$emit('input', data.value)
-                this.$emit('change', data.value)
-            }
-        }
+export default {
+  name: 'bk-radio-group',
+  mixins: [emitter],
+  props: {
+    value: {
+      type: [String, Number, Boolean],
+      default: ''
+    },
+    name: {
+      type: [String, Number],
+      default () {
+        let seed = 0
+        const now = Date.now()
+        return `bk_radio_${now}_${seed++}`
+      }
     }
+  },
+  data () {
+    return {
+      curValue: this.value,
+      radios: []
+    }
+  },
+  watch: {
+    value () {
+      if (this.curValue !== this.value) {
+        this.curValue = this.value
+        this.$nextTick(() => {
+          this.updateValue()
+        })
+      }
+    }
+  },
+  mounted () {
+    this.updateValue()
+  },
+  methods: {
+    findComponentsDownward (context, componentName) {
+      return context.$children.reduce((components, child) => {
+        if (child.$options.name === componentName) components.push(child)
+        const foundChilds = this.findComponentsDownward(child, componentName)
+        return components.concat(foundChilds)
+      }, [])
+    },
+    updateValue () {
+      this.radios = this.findComponentsDownward(this, 'bk-radio').concat(
+        this.findComponentsDownward(this, 'bk-radio-button')
+      )
+
+      if (this.radios) {
+        this.radios.forEach(child => {
+          child.current = this.curValue
+        })
+      }
+    },
+    change (data) {
+      this.curValue = data.value
+      this.updateValue()
+      this.$emit('input', data.value)
+      this.$emit('change', data.value)
+      this.dispatch('bk-form-item', 'form-change')
+    }
+  }
+}
 </script>

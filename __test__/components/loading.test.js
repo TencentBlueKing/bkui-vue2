@@ -37,146 +37,146 @@ import { createTestComp } from '../helpers.js'
 Vue.use(Loading)
 
 describe('render the Loading by directive', () => {
-    it('render the loading isLoading', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true
-                    }
-                }
-            }
-        ))
-        expect(wrapper.find('.bk-loading').exists()).toBe(true)
-    })
-    it('render the loading title', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading, title: title}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true,
-                        title: 'Jest'
-                    }
-                }
-            }
-        ))
-        expect(wrapper.find('.bk-loading-title').exists()).toBe(true)
-        expect(wrapper.find('.bk-loading-title').text()).toBe('Jest')
-    })
-    it('render the loading opacity', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading, opacity: opacity}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true,
-                        opacity: '0.6'
-                    }
-                }
-            }
-        ))
-        expect(wrapper.find('.bk-loading').attributes('style').indexOf(' background-color: rgba(255, 255, 255, 0.6)') > -1).toBe(true)
-    })
-    it('render the loading color by rgb', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading, color: color}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true,
-                        color: 'rgb(245,245,245)'
-                    }
-                }
-            }
-        ))
-        expect(wrapper.find('.bk-loading').attributes('style').indexOf('245, 245, 245') > -1).toBe(true)
-    })
-    it('render the loading color by hex', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading, color: hex}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true,
-                        hex: '#cccccc'
-                    }
-                }
-            }
-        ))
-        expect(wrapper.find('.bk-loading').attributes('style').indexOf('204, 204, 204') > -1).toBe(true)
-    })
-    it('render the loading color by rgba', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading, color: rgba}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true,
-                        rgba: 'rgba(245,245,245,0.6)'
-                    }
-                }
-            }
-        ))
-        expect(wrapper.find('.bk-loading').attributes('style').indexOf('245, 245, 245, 0.6') > -1).toBe(true)
-    })
+  it('render the loading isLoading', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true
+          }
+        }
+      }
+    ))
+    expect(wrapper.find('.bk-loading').exists()).toBe(true)
+  })
+  it('render the loading title', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading, title: title}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true,
+            title: 'Jest'
+          }
+        }
+      }
+    ))
+    expect(wrapper.find('.bk-loading-title').exists()).toBe(true)
+    expect(wrapper.find('.bk-loading-title').text()).toBe('Jest')
+  })
+  it('render the loading opacity', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading, opacity: opacity}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true,
+            opacity: '0.6'
+          }
+        }
+      }
+    ))
+    expect(wrapper.find('.bk-loading').attributes('style').indexOf(' background-color: rgba(255, 255, 255, 0.6)') > -1).toBe(true)
+  })
+  it('render the loading color by rgb', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading, color: color}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true,
+            color: 'rgb(245,245,245)'
+          }
+        }
+      }
+    ))
+    expect(wrapper.find('.bk-loading').attributes('style').indexOf('245, 245, 245') > -1).toBe(true)
+  })
+  it('render the loading color by hex', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading, color: hex}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true,
+            hex: '#cccccc'
+          }
+        }
+      }
+    ))
+    expect(wrapper.find('.bk-loading').attributes('style').indexOf('204, 204, 204') > -1).toBe(true)
+  })
+  it('render the loading color by rgba', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading, color: rgba}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true,
+            rgba: 'rgba(245,245,245,0.6)'
+          }
+        }
+      }
+    ))
+    expect(wrapper.find('.bk-loading').attributes('style').indexOf('245, 245, 245, 0.6') > -1).toBe(true)
+  })
 
-    it('loading afterLeave callback function', () => {
-        const wrapper = mount(createTestComp(
-            `<div v-bkloading="{isLoading: isLoading, afterLeave: afterLeave}"></div>`,
-            {
-                data () {
-                    return {
-                        isLoading: true,
-                        isTriggerCallback: false
-                    }
-                },
-                methods: {
-                    afterLeave () {
-                        this.isTriggerCallback = true
-                    }
-                }
-            }
-        ))
-        setTimeout(() => {
-            wrapper.setData({ isLoading: false })
-            expect(wrapper.vm.isTriggerCallback).toBe(true)
-        }, 200)
-    })
+  it('loading afterLeave callback function', () => {
+    const wrapper = mount(createTestComp(
+      `<div v-bkloading="{isLoading: isLoading, afterLeave: afterLeave}"></div>`,
+      {
+        data () {
+          return {
+            isLoading: true,
+            isTriggerCallback: false
+          }
+        },
+        methods: {
+          afterLeave () {
+            this.isTriggerCallback = true
+          }
+        }
+      }
+    ))
+    setTimeout(() => {
+      wrapper.setData({ isLoading: false })
+      expect(wrapper.vm.isTriggerCallback).toBe(true)
+    }, 200)
+  })
 
-    it('render the loading by function', () => {
-        const wrapper = mount(createTestComp(
-            `<div class="test-wrap"></div>`,
-            {
-                data () {
-                    return {
-                        isTriggerCallback: false
-                    }
-                },
-                created () {
-                    this.showLoading()
-                },
-                methods: {
-                    showLoading () {
-                        const h = this.$createElement
-                        this.$bkLoading({
-                            title: h('span', {
-                                style: {
-                                    color: 'red'
-                                }
-                            }, '加载中'),
-                            afterLeave () {
-                                this.isTriggerCallback = true
-                            }
-                        })
-                    }
+  it('render the loading by function', () => {
+    const wrapper = mount(createTestComp(
+      `<div class="test-wrap"></div>`,
+      {
+        data () {
+          return {
+            isTriggerCallback: false
+          }
+        },
+        created () {
+          this.showLoading()
+        },
+        methods: {
+          showLoading () {
+            const h = this.$createElement
+            this.$bkLoading({
+              title: h('span', {
+                style: {
+                  color: 'red'
                 }
-            }
-        ))
-        setTimeout(() => {
-            expect(wrapper.find('.bk-loading').exists()).toBe(true)
-            expect(wrapper.vm.isTriggerCallback).toBe(true)
-        }, 200)
-    })
+              }, '加载中'),
+              afterLeave () {
+                this.isTriggerCallback = true
+              }
+            })
+          }
+        }
+      }
+    ))
+    setTimeout(() => {
+      expect(wrapper.find('.bk-loading').exists()).toBe(true)
+      expect(wrapper.vm.isTriggerCallback).toBe(true)
+    }, 200)
+  })
 })

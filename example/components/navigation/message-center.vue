@@ -27,64 +27,64 @@
 -->
 
 <script>
-    export default {
-        name: 'message-center',
-        props: {
-            messageList: {
-                type: Array,
-                default () {
-                    return [
-                        {
-                            message: '你的“20181212112308”单据已通过',
-                            date: '刚刚'
-                        },
-                        {
-                            message: '你的“20181212112308”单据被驳回',
-                            date: '45分钟前'
-                        },
-                        {
-                            message: '你的“20181212112308”单据部分被驳回',
-                            date: '3天前'
-                        },
-                        {
-                            message: '你的“20181212112308”单据部分被驳回',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'jinnyyang 提醒了你',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”“蓝鲸作业平台”',
-                            date: '12月14日'
-                        },
-                        {
-                            message: '你的“20181212112308”单据部分被驳回',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'jinnyyang 提醒了你',
-                            date: '12月14日'
-                        },
-                        {
-                            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”的权限申请。',
-                            date: '12月14日'
-                        }
-                    ]
-                }
-            }
-        },
-        render (h) {
-            const { messageList = [] } = this
-            const listItem = this._l(messageList, (item, index) => {
-                return (
+export default {
+  name: 'message-center',
+  props: {
+    messageList: {
+      type: Array,
+      default () {
+        return [
+          {
+            message: '你的“20181212112308”单据已通过',
+            date: '刚刚'
+          },
+          {
+            message: '你的“20181212112308”单据被驳回',
+            date: '45分钟前'
+          },
+          {
+            message: '你的“20181212112308”单据部分被驳回',
+            date: '3天前'
+          },
+          {
+            message: '你的“20181212112308”单据部分被驳回',
+            date: '12月14日'
+          },
+          {
+            message: 'jinnyyang 提醒了你',
+            date: '12月14日'
+          },
+          {
+            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”“蓝鲸作业平台”',
+            date: '12月14日'
+          },
+          {
+            message: '你的“20181212112308”单据部分被驳回',
+            date: '12月14日'
+          },
+          {
+            message: 'jinnyyang 提醒了你',
+            date: '12月14日'
+          },
+          {
+            message: 'edwinwu 重新申请了“201812121108”内关于“蓝鲸作业平台”的权限申请。',
+            date: '12月14日'
+          }
+        ]
+      }
+    }
+  },
+  render (h) {
+    const { messageList = [] } = this
+    const listItem = this._l(messageList, (item, index) => {
+      return (
                     <li class={{ 'message-item': true }}>
                         <span class={{ 'message-item-desc': true }}>{item.message}</span>
                         <span class={{ 'message-item-date': true }}>{item.date}</span>
                     </li>
-                )
-            })
-            return (
+      )
+    })
+    return (
                 <div class={{ 'message-center': true }}>
                     <h5 class={{ 'message-center-header': true }}>消息中心</h5>
                     <ul class={{ 'message-center-list': true }}>
@@ -94,9 +94,9 @@
                         进入消息中心
                     </div>
                 </div>
-            )
-        }
-    }
+    )
+  }
+}
 </script>
 <style lang="postcss">
 .message-center {

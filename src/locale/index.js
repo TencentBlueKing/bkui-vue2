@@ -43,18 +43,18 @@ let merged = false
  * 检测是否使用 vue-i18n，如果使用了，那么会用 vue-i18n 的 $t 来取值
  */
 let i18nHandler = function () {
-    const i18n = Object.getPrototypeOf(this || Vue).$t
-    // vuei18n 6.x 没有 locale 方法
-    if (typeof i18n === 'function' && !!Vue.locale) {
-        if (!merged) {
-            merged = true
-            Vue.locale(
-                Vue.config.lang,
-                deepmerge(curLang, Vue.locale(Vue.config.lang) || {}, { clone: true })
-            )
-        }
-        return i18n.apply(this, arguments)
+  const i18n = Object.getPrototypeOf(this || Vue).$t
+  // vuei18n 6.x 没有 locale 方法
+  if (typeof i18n === 'function' && !!Vue.locale) {
+    if (!merged) {
+      merged = true
+      Vue.locale(
+        Vue.config.lang,
+        deepmerge(curLang, Vue.locale(Vue.config.lang) || {}, { clone: true })
+      )
     }
+    return i18n.apply(this, arguments)
+  }
 }
 
 /**
@@ -75,30 +75,30 @@ export const escape = str => String(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '
  * @return {string} 对应语言包的值
  */
 export const t = function (path, data) {
-    let value = i18nHandler.apply(this, arguments)
-    if (value !== null && typeof value !== 'undefined') {
-        return value
-    }
+  let value = i18nHandler.apply(this, arguments)
+  if (value !== null && typeof value !== 'undefined') {
+    return value
+  }
 
-    const arr = path.split('.')
-    let current = curLang
-    const len = arr.length
+  const arr = path.split('.')
+  let current = curLang
+  const len = arr.length
 
-    for (let i = 0; i < len; i++) {
-        value = current[arr[i]]
-        if (i === len - 1) {
-            if (data && typeof value === 'string') {
-                return value.replace(/\{(?=\w+)/g, '').replace(/(\w+)\}/g, '$1')
-                    .replace(new RegExp(Object.keys(data).map(escape).join('|'), 'g'), $0 => data[$0])
-            }
-            return value
-        }
-        if (!value) {
-            return ''
-        }
-        current = value
+  for (let i = 0; i < len; i++) {
+    value = current[arr[i]]
+    if (i === len - 1) {
+      if (data && typeof value === 'string') {
+        return value.replace(/\{(?=\w+)/g, '').replace(/(\w+)\}/g, '$1')
+          .replace(new RegExp(Object.keys(data).map(escape).join('|'), 'g'), $0 => data[$0])
+      }
+      return value
     }
-    return ''
+    if (!value) {
+      return ''
+    }
+    current = value
+  }
+  return ''
 }
 
 /**
@@ -107,9 +107,9 @@ export const t = function (path, data) {
  * @param {Object} l 使用的语言包
  */
 export const use = function (l) {
-    if (l) {
-        curLang = deepmerge(curLang, l)
-    }
+  if (l) {
+    curLang = deepmerge(curLang, l)
+  }
 }
 
 /**
@@ -118,30 +118,30 @@ export const use = function (l) {
  * @param {Function} fn i18n 处理函数
  */
 export const i18n = function (fn) {
-    i18nHandler = fn || i18nHandler
+  i18nHandler = fn || i18nHandler
 }
 
 export const getCurLang = function () {
-    return curLang
+  return curLang
 }
 
 const mixin = {
-    methods: {
-        t (...args) {
-            return t.apply(this, args)
-        }
+  methods: {
+    t (...args) {
+      return t.apply(this, args)
     }
+  }
 }
 
 Vue.prototype.bkLocale = {
-    use,
-    t,
-    i18n,
-    getCurLang,
-    lang: bkLang,
-    // 语言处理的 mixin，给组件加上一个 t 方法，组件在需要根据语言切换的地方，只要加入这个 mixin 并在输出的地方使用 t(key) 即可
-    // 例如 t(datePicker.today)
-    mixin: mixin
+  use,
+  t,
+  i18n,
+  getCurLang,
+  lang: bkLang,
+  // 语言处理的 mixin，给组件加上一个 t 方法，组件在需要根据语言切换的地方，只要加入这个 mixin 并在输出的地方使用 t(key) 即可
+  // 例如 t(datePicker.today)
+  mixin: mixin
 }
 
 export default { use, t, i18n, getCurLang, lang: bkLang, mixin: mixin }

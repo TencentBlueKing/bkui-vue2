@@ -34,89 +34,89 @@ import Progress from '@/components/progress'
 import { mountComponent } from '../helpers'
 
 describe('Progress', () => {
-    it('progress primary theme', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                theme: 'primary'
-            }
-        })
-        const targetContent = wrapper.find('div.progress-inner.bk-primary')
-        expect(targetContent.exists()).toBe(true)
+  it('progress primary theme', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        theme: 'primary'
+      }
     })
+    const targetContent = wrapper.find('div.progress-inner.bk-primary')
+    expect(targetContent.exists()).toBe(true)
+  })
 
-    it('render the correct percent width and backgroundColor', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                percent: 0.5,
-                color: '#2dcb56'
-            }
-        })
-        const progressInnerEle = wrapper.find('div.progress-inner.bk-primary').element
-        expect(progressInnerEle.style.width).toBe('50%')
-        expect(progressInnerEle.style.backgroundColor).toBe('rgb(45, 203, 86)')
+  it('render the correct percent width and backgroundColor', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        percent: 0.5,
+        color: '#2dcb56'
+      }
     })
+    const progressInnerEle = wrapper.find('div.progress-inner.bk-primary').element
+    expect(progressInnerEle.style.width).toBe('50%')
+    expect(progressInnerEle.style.backgroundColor).toBe('rgb(45, 203, 86)')
+  })
 
-    it('progress normal size', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                size: 'normal'
-            }
-        })
-        const targetContent = wrapper.find('div.progress-bar.bk-progress-normal')
-        expect(targetContent.exists()).toBe(true)
+  it('progress normal size', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        size: 'normal'
+      }
     })
+    const targetContent = wrapper.find('div.progress-bar.bk-progress-normal')
+    expect(targetContent.exists()).toBe(true)
+  })
 
-    it('render the correct height', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                strokeWidth: 20
-            }
-        })
-        const progressInnerEle = wrapper.find('div.progress-bar.bk-progress-normal').element
-        expect(progressInnerEle.style.height).toBe('20px')
+  it('render the correct height', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        strokeWidth: 20
+      }
     })
+    const progressInnerEle = wrapper.find('div.progress-bar.bk-progress-normal').element
+    expect(progressInnerEle.style.height).toBe('20px')
+  })
 
-    it('has text inside', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                textInside: true
-            }
-        })
-        const sourceContent = wrapper.find('div.progress-inner.bk-primary')
-        expect(sourceContent.exists()).toBe(true)
-        expect(sourceContent.contains('div')).toBe(true)
+  it('has text inside', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        textInside: true
+      }
     })
+    const sourceContent = wrapper.find('div.progress-inner.bk-primary')
+    expect(sourceContent.exists()).toBe(true)
+    expect(sourceContent.contains('div')).toBe(true)
+  })
 
-    it('has show text', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                showText: true
-            }
-        })
-        expect(wrapper.contains('div.bk-progress')).toBe(true)
-        expect(wrapper.contains('div.progress-text')).toBe(true)
+  it('has show text', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        showText: true
+      }
     })
+    expect(wrapper.contains('div.bk-progress')).toBe(true)
+    expect(wrapper.contains('div.progress-text')).toBe(true)
+  })
 
-    it('render the correct titleStyle', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                titleStyle: {
-                    fontSize: '16px',
-                    verticalAlign: `middle`
-                }
-            }
-        })
-        const progressInnerEle = wrapper.find('div.progress-text').element
-        expect(progressInnerEle.style.fontSize).toBe('16px')
-        expect(progressInnerEle.style.verticalAlign).toBe('middle')
+  it('render the correct titleStyle', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        titleStyle: {
+          fontSize: '16px',
+          verticalAlign: `middle`
+        }
+      }
     })
+    const progressInnerEle = wrapper.find('div.progress-text').element
+    expect(progressInnerEle.style.fontSize).toBe('16px')
+    expect(progressInnerEle.style.verticalAlign).toBe('middle')
+  })
 
-    it('has external class', () => {
-        const wrapper = mountComponent(Progress, {
-            propsData: {
-                extCls: 'bk-progress-red'
-            }
-        })
-        expect(wrapper.contains('div.bk-progress.bk-progress-red')).toBe(true)
+  it('has external class', () => {
+    const wrapper = mountComponent(Progress, {
+      propsData: {
+        extCls: 'bk-progress-red'
+      }
     })
+    expect(wrapper.contains('div.bk-progress.bk-progress-red')).toBe(true)
+  })
 })

@@ -27,66 +27,66 @@
 -->
 
 <template>
-    <div class="bk-selector-list">
-        <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
-            <li v-for="(data, index) in renderList"
-                class="bk-selector-list-item"
-                :class="activeClass(index)"
-                :key="index"
-                @click="handleSelect(data, 'select')">
-                <!-- <Render :node="data" :display-key="displayKey" :tpl="tpl" /> -->
-                <div class="bk-selector-node">
-                    <span class="text">{{data[displayKey]}}{{focusIndex}}</span>
-                </div>
-            </li>
-            <li class="bk-selector-list-item" v-if="showScrollLoading">
-                <div class="loading" v-bkloading="{ isLoading: true }"></div>
-            </li>
-        </ul>
-    </div>
+  <div class="bk-selector-list">
+    <ul ref="selectorList" :style="{ 'max-height': `${contentMaxHeight}px` }" class="outside-ul">
+      <li v-for="(data, index) in renderList"
+        class="bk-selector-list-item"
+        :class="activeClass(index)"
+        :key="index"
+        @click="handleSelect(data, 'select')">
+        <!-- <Render :node="data" :display-key="displayKey" :tpl="tpl" /> -->
+        <div class="bk-selector-node">
+          <span class="text">{{data[displayKey]}}{{focusIndex}}</span>
+        </div>
+      </li>
+      <li class="bk-selector-list-item" v-if="showScrollLoading">
+        <div class="loading" v-bkloading="{ isLoading: true }"></div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-    import Render from './render'
+import Render from './render'
 
-    export default {
-        components: [Render],
-        props: {
-            renderList: {
-                type: Array,
-                default () {
-                    return []
-                }
-            },
-            contentMaxHeight: {
-                type: Number,
-                default: 300
-            },
-            focusIndex: {
-                type: [Number, String]
-            },
-            displayKey: {
-                type: String,
-                default: 'name'
-            },
-            showScrollLoading: {
-                type: [Boolean],
-                default: false
-            },
-            tpl: Function
-        },
-        methods: {
-            // 更新样式
-            activeClass (i) {
-                return {
-                    'bk-selector-selected': i === this.focusIndex
-                }
-            },
-            handleSelect (data, type) {
-                this.$emit('item-select', data, type)
-            }
-        }
+export default {
+  components: [Render],
+  props: {
+    renderList: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    contentMaxHeight: {
+      type: Number,
+      default: 300
+    },
+    focusIndex: {
+      type: [Number, String]
+    },
+    displayKey: {
+      type: String,
+      default: 'name'
+    },
+    showScrollLoading: {
+      type: [Boolean],
+      default: false
+    },
+    tpl: Function
+  },
+  methods: {
+    // 更新样式
+    activeClass (i) {
+      return {
+        'bk-selector-selected': i === this.focusIndex
+      }
+    },
+    handleSelect (data, type) {
+      this.$emit('item-select', data, type)
     }
+  }
+}
 </script>
 
 <style lang="postcss">

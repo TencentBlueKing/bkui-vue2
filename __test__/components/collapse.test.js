@@ -35,22 +35,22 @@ import CollapseItem from '@/components/collapse-item'
 import { mountComponent } from '../helpers'
 
 describe('Collapse', () => {
-    it('render the correct markup', () => {
-        const wrapper = mountComponent(Collapse)
-        expect(wrapper.classes()).toContain('bk-collapse')
-    })
-    it('render the correct content', () => {
-        const wrapper = mountComponent({
-            data () {
-                return {
-                    activeName: [1]
-                }
-            },
-            components: {
-                'bk-collapse': Collapse,
-                'bk-collapse-item': CollapseItem
-            },
-            template: `
+  it('render the correct markup', () => {
+    const wrapper = mountComponent(Collapse)
+    expect(wrapper.classes()).toContain('bk-collapse')
+  })
+  it('render the correct content', () => {
+    const wrapper = mountComponent({
+      data () {
+        return {
+          activeName: [1]
+        }
+      },
+      components: {
+        'bk-collapse': Collapse,
+        'bk-collapse-item': CollapseItem
+      },
+      template: `
                 <bk-collapse v-model='activeName'>
                     <bk-collapse-item name="1">
                         方案成熟
@@ -79,19 +79,19 @@ describe('Collapse', () => {
                     </bk-collapse-item>
                 </bk-collapse>
             `
-        })
-        expect(wrapper.find('.bk-collapse-item').exists()).toBe(true)
-        expect(wrapper.findAll('.bk-collapse-item').at(0).classes('bk-collapse-item-active')).toBe(true)
-        expect(wrapper.findAll('.bk-collapse-item').at(1).classes('bk-collapse-item-active')).toBe(false)
-        expect(wrapper.html()).toContain('<div class="f13">拥有支撑数百款腾讯业务的经验沉淀，兼容各种复杂的系统架构，生于运维 · 精于运维;</div>')
     })
-    it('accordion props is correct', () => {
-        const wrapper = mountComponent({
-            components: {
-                'bk-collapse': Collapse,
-                'bk-collapse-item': CollapseItem
-            },
-            template: `
+    expect(wrapper.find('.bk-collapse-item').exists()).toBe(true)
+    expect(wrapper.findAll('.bk-collapse-item').at(0).classes('bk-collapse-item-active')).toBe(true)
+    expect(wrapper.findAll('.bk-collapse-item').at(1).classes('bk-collapse-item-active')).toBe(false)
+    expect(wrapper.html()).toContain('<div class="f13">拥有支撑数百款腾讯业务的经验沉淀，兼容各种复杂的系统架构，生于运维 · 精于运维;</div>')
+  })
+  it('accordion props is correct', () => {
+    const wrapper = mountComponent({
+      components: {
+        'bk-collapse': Collapse,
+        'bk-collapse-item': CollapseItem
+      },
+      template: `
                 <bk-collapse accordion>
                     <bk-collapse-item name="1">
                         方案成熟
@@ -120,13 +120,13 @@ describe('Collapse', () => {
                     </bk-collapse-item>
                 </bk-collapse>
             `
-        })
-        wrapper.findAll('.bk-collapse-item').at(0).find('.bk-collapse-item-header').trigger('click')
-        expect(wrapper.findAll('.bk-collapse-item').at(0).classes('bk-collapse-item-active')).toBe(true)
-        expect(wrapper.findAll('.bk-collapse-item').at(1).classes('bk-collapse-item-active')).toBe(false)
-
-        wrapper.findAll('.bk-collapse-item').at(1).find('.bk-collapse-item-header').trigger('click')
-        expect(wrapper.findAll('.bk-collapse-item').at(0).classes('bk-collapse-item-active')).toBe(false)
-        expect(wrapper.findAll('.bk-collapse-item').at(1).classes('bk-collapse-item-active')).toBe(true)
     })
+    wrapper.findAll('.bk-collapse-item').at(0).find('.bk-collapse-item-header').trigger('click')
+    expect(wrapper.findAll('.bk-collapse-item').at(0).classes('bk-collapse-item-active')).toBe(true)
+    expect(wrapper.findAll('.bk-collapse-item').at(1).classes('bk-collapse-item-active')).toBe(false)
+
+    wrapper.findAll('.bk-collapse-item').at(1).find('.bk-collapse-item-header').trigger('click')
+    expect(wrapper.findAll('.bk-collapse-item').at(0).classes('bk-collapse-item-active')).toBe(false)
+    expect(wrapper.findAll('.bk-collapse-item').at(1).classes('bk-collapse-item-active')).toBe(true)
+  })
 })

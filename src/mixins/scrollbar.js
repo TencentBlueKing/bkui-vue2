@@ -33,47 +33,47 @@
 import { getScrollBarWidth } from '../utils/dom'
 
 export default {
-    methods: {
-        checkScrollBar () {
-            let fullWindowWidth = window.innerWidth
-            if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
-                const documentElementRect = document.documentElement.getBoundingClientRect()
-                fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
-            }
-            this.bodyIsOverflowing = document.documentElement.clientWidth < fullWindowWidth
-            if (this.bodyIsOverflowing) {
-                this.scrollBarWidth = getScrollBarWidth() || (fullWindowWidth - document.documentElement.clientWidth)
-            }
-        },
-        checkMaskInVisible () {
-            const masks = document.getElementsByClassName('bk-dialog-mask') || []
-            return Array.from(masks).every(m => this.isHidden(m) || m.classList.contains('fade-leave-to'))
-        },
-        isHidden (el) {
-            const style = window.getComputedStyle(el)
-            return style.display === 'none'
-        },
-        setScrollBar () {
-            if (this.bodyIsOverflowing && this.scrollBarWidth !== undefined) {
-                document.body.style.paddingRight = `${this.scrollBarWidth}px`
-            }
-        },
-        resetScrollBar () {
-            document.body.style.paddingRight = ''
-        },
-        addScrollEffect () {
-            this.checkScrollBar()
-            this.setScrollBar()
-            if (document.body.__oldOverflow === undefined) {
-                document.body.__oldOverflow = document.body.style.overflow
-            }
-            document.body.style.overflow = 'hidden'
-        },
-        removeScrollEffect () {
-            if (this.checkMaskInVisible()) {
-                document.body.style.overflow = document.body.__oldOverflow || ''
-                this.resetScrollBar()
-            }
-        }
+  methods: {
+    checkScrollBar () {
+      let fullWindowWidth = window.innerWidth
+      if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+        const documentElementRect = document.documentElement.getBoundingClientRect()
+        fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
+      }
+      this.bodyIsOverflowing = document.documentElement.clientWidth < fullWindowWidth
+      if (this.bodyIsOverflowing) {
+        this.scrollBarWidth = getScrollBarWidth() || (fullWindowWidth - document.documentElement.clientWidth)
+      }
+    },
+    checkMaskInVisible () {
+      const masks = document.getElementsByClassName('bk-dialog-mask') || []
+      return Array.from(masks).every(m => this.isHidden(m) || m.classList.contains('fade-leave-to'))
+    },
+    isHidden (el) {
+      const style = window.getComputedStyle(el)
+      return style.display === 'none'
+    },
+    setScrollBar () {
+      if (this.bodyIsOverflowing && this.scrollBarWidth !== undefined) {
+        document.body.style.paddingRight = `${this.scrollBarWidth}px`
+      }
+    },
+    resetScrollBar () {
+      document.body.style.paddingRight = ''
+    },
+    addScrollEffect () {
+      this.checkScrollBar()
+      this.setScrollBar()
+      if (document.body.__oldOverflow === undefined) {
+        document.body.__oldOverflow = document.body.style.overflow
+      }
+      document.body.style.overflow = 'hidden'
+    },
+    removeScrollEffect () {
+      if (this.checkMaskInVisible()) {
+        document.body.style.overflow = document.body.__oldOverflow || ''
+        this.resetScrollBar()
+      }
     }
+  }
 }

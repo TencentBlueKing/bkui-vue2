@@ -118,7 +118,7 @@
     /* width: inherit; */
     /* max-height: 200px; */
     overflow: auto;
-    margin: 5px 0;
+    margin: $dropdownMarginBottom 0 0 0;
     padding: 5px 0 0 0;
     background-color: $defaultColor;
     box-sizing: border-box;
@@ -140,6 +140,13 @@
     border-top: 1px solid #dcdee5;
     clear: both;
     background-color: #fafbfd;
+    color: #979ba5;
+    font-size: 14px;
+}
+
+.bk-date-picker-top-wrapper {
+    margin-top: -5px;
+    clear: both;
     color: #979ba5;
     font-size: 14px;
 }

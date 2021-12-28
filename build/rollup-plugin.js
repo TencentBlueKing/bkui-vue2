@@ -44,81 +44,81 @@ const rollupCustomImage = require('./rollup-plugin-custom-image')
 
 const config = require('./config')
 module.exports = [
-    rollupReplace({
-        exclude: 'node_modules/**',
-        'process.env': JSON.stringify(config.build.env)
-    }),
-    rollupCustomImage(),
-    rollupAlias({
-        resolve: ['.js', '.vue', '.css', '.svg', '.png', '/index.js'],
-        '@': resolve('src'),
-        'bk-magic-vue/lib': resolve('src')
-    }),
-    rollupVue({
-        // https://github.com/vuejs/rollup-plugin-vue/blob/master/docs/options.md
-        css: false,
-        template: {
-            isProduction: true,
-            compilerOptions: {
-                preserveWhitespace: false
-            }
+  rollupReplace({
+    exclude: 'node_modules/**',
+    'process.env': JSON.stringify(config.build.env)
+  }),
+  rollupCustomImage(),
+  rollupAlias({
+    resolve: ['.js', '.vue', '.css', '.svg', '.png', '/index.js'],
+    '@': resolve('src'),
+    'bk-magic-vue/lib': resolve('src')
+  }),
+  rollupVue({
+    // https://github.com/vuejs/rollup-plugin-vue/blob/master/docs/options.md
+    css: false,
+    template: {
+      isProduction: true,
+      compilerOptions: {
+        preserveWhitespace: false
+      }
+    }
+  }),
+  rollupPostcss({
+    // 设置为 true 那么 index.js 中的 import ui/common.css 会以 styleInject 的形式打入到 bk-magic-vue.js 中
+    inject: false
+  }),
+  rollupBabel({
+    babelrc: false,
+    exclude: ['node_modules/**'],
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          // 设置' modules': false，否则 Babel 会在 Rollup 有机会做处理之前，
+          // 将我们的模块转成 CommonJS，导致 Rollup 的一些处理失败。
+          modules: false,
+          targets: {
+            browsers: ['> 1%', 'last 2 versions', 'not ie <= 8'],
+            node: 'current'
+          },
+          debug: false
         }
-    }),
-    rollupPostcss({
-        // 设置为 true 那么 index.js 中的 import ui/common.css 会以 styleInject 的形式打入到 bk-magic-vue.js 中
-        inject: false
-    }),
-    rollupBabel({
-        babelrc: false,
-        exclude: ['node_modules/**'],
-        presets: [
-            [
-                '@babel/preset-env',
-                {
-                    // 设置' modules': false，否则 Babel 会在 Rollup 有机会做处理之前，
-                    // 将我们的模块转成 CommonJS，导致 Rollup 的一些处理失败。
-                    modules: false,
-                    targets: {
-                        browsers: ['> 1%', 'last 2 versions', 'not ie <= 8'],
-                        node: 'current'
-                    },
-                    debug: false
-                }
-            ],
-            ['@vue/babel-preset-jsx']
-        ],
-        plugins: [
-            '@babel/plugin-transform-async-to-generator',
-            '@babel/plugin-transform-object-assign',
-            'date-fns',
-            '@babel/plugin-proposal-object-rest-spread',
-            // 使用 external-helpers 插件，它允许 Rollup 在包的顶部只引用一次 “helpers”，
-            // 而不是每个使用它们的模块中都引用一遍（这是默认行为）。
-            '@babel/plugin-external-helpers',
-            '@vue/babel-plugin-transform-vue-jsx',
-            '@babel/plugin-syntax-jsx',
-            '@babel/plugin-syntax-dynamic-import',
-            ['@babel/plugin-transform-runtime', {
-                corejs: 2,
-                helpers: false
-            }]
-        ],
-        runtimeHelpers: true,
-        comments: true,
-        extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue']
-    }),
-    rollupResolve({
-        mainFields: ['module', 'main', 'jsnext:main'],
-        browser: true,
-        extensions: ['.js', '.vue']
-    }),
-    rollupCommonjs({
-        namedExports: {
-            'node_modules/diff/dist/diff.js': ['createPatch']
-        //     'node_modules/popper.js/dist/umd/popper.js': ['Popper']
-        }
-    }),
-    rollupCleanup({
-        comments: 'none'
-    })
+      ],
+      ['@vue/babel-preset-jsx']
+    ],
+    plugins: [
+      '@babel/plugin-transform-async-to-generator',
+      '@babel/plugin-transform-object-assign',
+      'date-fns',
+      '@babel/plugin-proposal-object-rest-spread',
+      // 使用 external-helpers 插件，它允许 Rollup 在包的顶部只引用一次 “helpers”，
+      // 而不是每个使用它们的模块中都引用一遍（这是默认行为）。
+      '@babel/plugin-external-helpers',
+      '@vue/babel-plugin-transform-vue-jsx',
+      '@babel/plugin-syntax-jsx',
+      '@babel/plugin-syntax-dynamic-import',
+      ['@babel/plugin-transform-runtime', {
+        corejs: 2,
+        helpers: false
+      }]
+    ],
+    runtimeHelpers: true,
+    comments: true,
+    extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue']
+  }),
+  rollupResolve({
+    mainFields: ['module', 'main', 'jsnext:main'],
+    browser: true,
+    extensions: ['.js', '.vue']
+  }),
+  rollupCommonjs({
+    namedExports: {
+      'node_modules/diff/dist/diff.js': ['createPatch']
+      //     'node_modules/popper.js/dist/umd/popper.js': ['Popper']
+    }
+  }),
+  rollupCleanup({
+    comments: 'none'
+  })
 ]
