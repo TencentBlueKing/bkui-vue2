@@ -85,7 +85,7 @@
         }">
       </table-body>
       <div class="bk-table-bottom-loading" v-if="scrollEndLoading.isLoading">
-        <bk-spin v-bind="scrollEndLoading">{{ scrollEndLoading.text }}</bk-spin>
+        <bk-spin v-bind="scrollEndLoading" class="bk-table-bottom-loading-spin">{{ scrollEndLoading.text }}</bk-spin>
       </div>
       <div
         v-if="!data || data.length === 0 || store.states.data.length === 0"

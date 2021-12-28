@@ -594,6 +594,15 @@ td.bk-table-column-expand {
     line-height: 45px;
     width: 100%;
     z-index: 777;
+    .bk-table-bottom-loading-spin {
+        .bk-icon {
+            font-size: 15px;
+        }
+        .bk-spin-title {
+            color: #979ba5;
+            font-size: 12px;
+        }
+    }
 }
 
 .bk-table-pagination-wrapper {
