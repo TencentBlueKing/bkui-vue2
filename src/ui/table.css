@@ -587,11 +587,13 @@ td.bk-table-column-expand {
 }
 
 .bk-table-bottom-loading {
-    position: absolute;
-    bottom: 44px;
-    height: 42px;
-    width: calc(100% - 1px);
-    z-index: 100;
+    position: relative;
+    text-align: center;
+    bottom: 0;
+    height: 50px;
+    line-height: 45px;
+    width: 100%;
+    z-index: 777;
 }
 
 .bk-table-pagination-wrapper {
