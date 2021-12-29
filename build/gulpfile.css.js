@@ -38,48 +38,48 @@ const sourceMap = require('gulp-sourcemaps')
 const gzip = require('gulp-gzip')
 
 function copyFontsImages (done) {
-    gulp.src('../src/ui/fonts/**').pipe(gulp.dest('../lib/ui/fonts'))
-    gulp.src('../src/ui/images/**').pipe(gulp.dest('../lib/ui/images'))
-    done()
+  gulp.src('../src/ui/fonts/**').pipe(gulp.dest('../lib/ui/fonts'))
+  gulp.src('../src/ui/images/**').pipe(gulp.dest('../lib/ui/images'))
+  done()
 }
 
 function compileCssSource () {
-    return gulp.src(['../src/ui/*.css'])
-        .pipe(postcss())
-        .pipe(rename(path => {
-            if (path.basename === 'bk') {
-                path.basename = 'bk-magic-vue'
-            }
-        }))
-        // .pipe(sourceMap.write('.'))
-        .pipe(gulp.dest('../lib/ui'))
+  return gulp.src(['../src/ui/*.css'])
+    .pipe(postcss())
+    .pipe(rename(path => {
+      if (path.basename === 'bk') {
+        path.basename = 'bk-magic-vue'
+      }
+    }))
+  // .pipe(sourceMap.write('.'))
+    .pipe(gulp.dest('../lib/ui'))
 }
 
 function compileCssMin () {
-    return gulp.src(['../src/ui/*.css'])
-        .pipe(sourceMap.init())
-        .pipe(postcss({ min: true }))
-        .pipe(rename(path => {
-            if (path.basename === 'bk') {
-                path.basename = 'bk-magic-vue'
-            }
-            path.extname = '.min' + path.extname
-        }))
-        .pipe(sourceMap.write('.'))
-        .pipe(gulp.dest('../lib/ui'))
+  return gulp.src(['../src/ui/*.css'])
+    .pipe(sourceMap.init())
+    .pipe(postcss({ min: true }))
+    .pipe(rename(path => {
+      if (path.basename === 'bk') {
+        path.basename = 'bk-magic-vue'
+      }
+      path.extname = '.min' + path.extname
+    }))
+    .pipe(sourceMap.write('.'))
+    .pipe(gulp.dest('../lib/ui'))
 }
 
 function gzipCssMin () {
-    return gulp.src(['../lib/ui/bk-magic-vue.min.css'])
-        .pipe(gzip({ gzipOptions: { level: 9 } }))
-        .pipe(gulp.dest('../lib/ui'))
+  return gulp.src(['../lib/ui/bk-magic-vue.min.css'])
+    .pipe(gzip({ gzipOptions: { level: 9 } }))
+    .pipe(gulp.dest('../lib/ui'))
 }
 
 gulp.task('build-css', gulp.series(
-    copyFontsImages,
-    gulp.parallel(
-        compileCssSource,
-        compileCssMin
-    ),
-    gzipCssMin
+  copyFontsImages,
+  gulp.parallel(
+    compileCssSource,
+    compileCssMin
+  ),
+  gzipCssMin
 ))

@@ -32,37 +32,37 @@
  */
 
 const presets = [
-    [
-        '@babel/preset-env',
-        {
-            'modules': 'commonjs',
-            'corejs': 2,
-            'spec': true,
-            'targets': {
-                'browsers': ['> 1%', 'last 2 versions', 'not ie <= 8'],
-                'node': 'current'
-            },
-            'useBuiltIns': 'usage',
-            'debug': false
-        }
-    ],
-    ['@vue/babel-preset-jsx']
+  [
+    '@babel/preset-env',
+    {
+      'modules': 'commonjs',
+      'corejs': 2,
+      'spec': true,
+      'targets': {
+        'browsers': ['> 1%', 'last 2 versions', 'not ie <= 8'],
+        'node': 'current'
+      },
+      'useBuiltIns': 'usage',
+      'debug': false
+    }
+  ],
+  ['@vue/babel-preset-jsx']
 ]
 
 const plugins = [
-    '@babel/plugin-transform-runtime',
-    '@babel/plugin-transform-async-to-generator',
-    '@babel/plugin-transform-object-assign',
-    '@babel/plugin-syntax-dynamic-import',
-    'date-fns',
-    '@vue/babel-plugin-transform-vue-jsx',
-    '@babel/plugin-syntax-jsx'
+  '@babel/plugin-transform-runtime',
+  '@babel/plugin-transform-async-to-generator',
+  '@babel/plugin-transform-object-assign',
+  '@babel/plugin-syntax-dynamic-import',
+  'date-fns',
+  '@vue/babel-plugin-transform-vue-jsx',
+  '@babel/plugin-syntax-jsx'
 ]
 
 const comments = true
 
 module.exports = require('babel-jest').createTransformer({
-    presets,
-    plugins,
-    comments
+  presets,
+  plugins,
+  comments
 })

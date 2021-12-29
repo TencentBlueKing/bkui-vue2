@@ -1258,7 +1258,7 @@ export default {
 | select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | —— | true |
 | pagination | Table 的分页。`current` 属性表示当前页码,`count` 属性表示数据总量 | Object | —— | —— |
 | auto-scroll-to-top | Table 分页变化时，表格是否自动滚动到顶部 | Boolean | —— | false |
-| scroll-loading | 表格底部loading加载效果，可以配合表格scroll-end事件使用，它的值同v-bkloading相同 | Object | —— | `{ isLoading: false }` |
+| scroll-loading | 表格底部loading加载效果，可以配合表格scroll-end事件使用，isLoading属性控制底部加载显隐。其余属性可参考spin组件 | Object | —— | `{ isLoading: false, size: 'mini', theme: 'info', icon: 'circle-2-1', placement: 'right' }` |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-table` 上 | String | —— | —— |
 | virtual-render | 内置的虚拟滚动配置 | Boolean, Object | false / true / { virtual-render 配置 } | false |
 

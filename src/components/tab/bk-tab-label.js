@@ -31,39 +31,39 @@
  */
 
 export default {
-    name: 'bk-tab-label',
-    props: ['panel', 'index', 'closable', 'isSidePosition'],
-    render (h) {
-        const { renderLabel, $slots, label, name } = this.panel
-        const labelContent = (renderLabel && renderLabel(h, name)) || $slots.label || label
-        return (
+  name: 'bk-tab-label',
+  props: ['panel', 'index', 'closable', 'isSidePosition'],
+  render (h) {
+    const { renderLabel, $slots, label, name } = this.panel
+    const labelContent = (renderLabel && renderLabel(h, name)) || $slots.label || label
+    return (
             <li
                 on-click={() => this.$parent.togglePanel(this.panel)}
                 class={this.showClose && !this.isSidePosition ? 'has-close' : ''}>
                 <div class="bk-tab-label">{ labelContent }</div>
                 {
                     this.showClose
-                        ? (<i class="bk-tab-close-controller" on-click={$event => this.handleClosePanel($event)}></i>)
-                        : ''
+                      ? (<i class="bk-tab-close-controller" on-click={$event => this.handleClosePanel($event)}></i>)
+                      : ''
                 }
             </li>
-        )
-    },
-    computed: {
-        showClose () {
-            if (this.panel.disabled) {
-                return false
-            }
-            if (this.panel.closable !== undefined) {
-                return this.panel.closable
-            }
-            return this.closable
-        }
-    },
-    methods: {
-        handleClosePanel (event) {
-            event.stopPropagation()
-            this.$parent.handleClosePanel(this.index, this.panel)
-        }
+    )
+  },
+  computed: {
+    showClose () {
+      if (this.panel.disabled) {
+        return false
+      }
+      if (this.panel.closable !== undefined) {
+        return this.panel.closable
+      }
+      return this.closable
     }
+  },
+  methods: {
+    handleClosePanel (event) {
+      event.stopPropagation()
+      this.$parent.handleClosePanel(this.index, this.panel)
+    }
+  }
 }

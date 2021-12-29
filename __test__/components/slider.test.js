@@ -34,71 +34,71 @@ import Slider from '@/components/slider'
 import { mountComponent } from '../helpers'
 
 describe('Slider', () => {
-    it('render the correct slide-bar', () => {
-        const wrapper = mountComponent(Slider, {
-            propsData: {
-                value: 20
-            }
-        })
-        const sliderContent = wrapper.find('.bk-slider')
+  it('render the correct slide-bar', () => {
+    const wrapper = mountComponent(Slider, {
+      propsData: {
+        value: 20
+      }
+    })
+    const sliderContent = wrapper.find('.bk-slider')
 
-        expect(sliderContent.exists()).toBe(true)
-        expect(sliderContent.contains('.bk-slider-bar')).toBe(true)
-        expect(sliderContent.contains('.bk-slider-button')).toBe(true)
+    expect(sliderContent.exists()).toBe(true)
+    expect(sliderContent.contains('.bk-slider-bar')).toBe(true)
+    expect(sliderContent.contains('.bk-slider-button')).toBe(true)
+  })
+
+  it('render the correct percent width', () => {
+    const wrapper = mountComponent(Slider, {
+      propsData: {
+        value: 80
+      }
     })
 
-    it('render the correct percent width', () => {
-        const wrapper = mountComponent(Slider, {
-            propsData: {
-                value: 80
-            }
-        })
+    expect(wrapper.vm.barStyle.width).toBe('80%')
+  })
 
-        expect(wrapper.vm.barStyle.width).toBe('80%')
+  it('render the correct disable status', () => {
+    const wrapper = mountComponent(Slider, {
+      propsData: {
+        disable: true
+      }
     })
+    const sliderBar = wrapper.find('.bk-slider-bar')
+    expect(sliderBar.classes()).toContain('disable')
+  })
 
-    it('render the correct disable status', () => {
-        const wrapper = mountComponent(Slider, {
-            propsData: {
-                disable: true
-            }
-        })
-        const sliderBar = wrapper.find('.bk-slider-bar')
-        expect(sliderBar.classes()).toContain('disable')
+  it('render the correct slider width min-value and max-value', () => {
+    const wrapper = mountComponent(Slider, {
+      propsData: {
+        value: 50,
+        minValue: 20,
+        maxValue: 80
+      }
     })
+    const rangeValue = [wrapper.vm.minValue, wrapper.vm.maxValue]
+    const barStyle = wrapper.vm.barStyle
+    expect(barStyle.left).toBe('0%')
+    expect(barStyle.width).toBe('50%')
+    expect(rangeValue).toEqual([20, 80])
+  })
 
-    it('render the correct slider width min-value and max-value', () => {
-        const wrapper = mountComponent(Slider, {
-            propsData: {
-                value: 50,
-                minValue: 20,
-                maxValue: 80
-            }
-        })
-        const rangeValue = [wrapper.vm.minValue, wrapper.vm.maxValue]
-        const barStyle = wrapper.vm.barStyle
-        expect(barStyle.left).toBe('0%')
-        expect(barStyle.width).toBe('50%')
-        expect(rangeValue).toEqual([20, 80])
+  it('render the correct slider without tips', () => {
+    const wrapper = mountComponent(Slider, {
+      propsData: {
+        showTip: false
+      }
     })
+    const slideBtnEle = wrapper.find('.slider-button').element
 
-    it('render the correct slider without tips', () => {
-        const wrapper = mountComponent(Slider, {
-            propsData: {
-                showTip: false
-            }
-        })
-        const slideBtnEle = wrapper.find('.slider-button').element
-
-        expect(slideBtnEle._tippy).toBeUndefined()
+    expect(slideBtnEle._tippy).toBeUndefined()
+  })
+  it('render the correct slider without value an range', () => {
+    const wrapper = mountComponent(Slider, {
+      propsData: {
+        value: [5, 20],
+        range: true
+      }
     })
-    it('render the correct slider without value an range', () => {
-        const wrapper = mountComponent(Slider, {
-            propsData: {
-                value: [5, 20],
-                range: true
-            }
-        })
-        expect(wrapper.vm.barStyle.width).toBe('15%')
-    })
+    expect(wrapper.vm.barStyle.width).toBe('15%')
+  })
 })

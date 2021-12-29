@@ -35,27 +35,27 @@ import bkLoading from './loading.vue'
 import directive from './directive.js'
 
 bkLoading.install = (Vue, options = {}) => {
-    const props = bkLoading.props || {}
-    Object.keys(options).forEach(key => {
-        if (props.hasOwnProperty(key)) {
-            if (typeof props[key] === 'function' || props[key] instanceof Array) {
-                props[key] = {
-                    type: props[key],
-                    default: options[key]
-                }
-            } else {
-                props[key].default = options[key]
-            }
+  const props = bkLoading.props || {}
+  Object.keys(options).forEach(key => {
+    if (props.hasOwnProperty(key)) {
+      if (typeof props[key] === 'function' || props[key] instanceof Array) {
+        props[key] = {
+          type: props[key],
+          default: options[key]
         }
-    })
+      } else {
+        props[key].default = options[key]
+      }
+    }
+  })
 
-    bkLoading.name = options.namespace ? bkLoading.name.replace('bk', options.namespace) : bkLoading.name
+  bkLoading.name = options.namespace ? bkLoading.name.replace('bk', options.namespace) : bkLoading.name
 
-    Vue.component(bkLoading.name, bkLoading)
-    Vue.directive('bkloading', directive)
+  Vue.component(bkLoading.name, bkLoading)
+  Vue.directive('bkloading', directive)
 }
 
 export default Object.assign(bkLoading, {
-    Loading,
-    directive
+  Loading,
+  directive
 })

@@ -39,147 +39,147 @@ const events = {}
 const headers = {}
 let formdata
 const createMockXHR = (responseJSON) => {
-    const mockXHR = {
-        open: jest.fn(),
-        abort: jest.fn(),
-        send: jest.fn(data => {
-            formdata = data
-        }),
-        setRequestHeader: jest.fn((header, value) => {
-            headers[header] = value
-        }),
-        readyState: 4,
-        status: 200,
-        upload: {
-            events: {},
-            addEventListener: (name, fn) => {
-                // console.log(events, 'triggerEvent')
-                events[name] = fn
-            },
-            triggerEvent: (name, e) => {
-                events[name](e)
-            }
-        },
-        responseText: JSON.stringify(
-            responseJSON || {}
-        )
-    }
-    return mockXHR
+  const mockXHR = {
+    open: jest.fn(),
+    abort: jest.fn(),
+    send: jest.fn(data => {
+      formdata = data
+    }),
+    setRequestHeader: jest.fn((header, value) => {
+      headers[header] = value
+    }),
+    readyState: 4,
+    status: 200,
+    upload: {
+      events: {},
+      addEventListener: (name, fn) => {
+        // console.log(events, 'triggerEvent')
+        events[name] = fn
+      },
+      triggerEvent: (name, e) => {
+        events[name](e)
+      }
+    },
+    responseText: JSON.stringify(
+      responseJSON || {}
+    )
+  }
+  return mockXHR
 }
 
 describe('Upload', () => {
-    const oldXMLHttpRequest = window.XMLHttpRequest
-    let mockXHR = null
+  const oldXMLHttpRequest = window.XMLHttpRequest
+  let mockXHR = null
 
-    beforeEach(() => {
-        formdata = null
-        mockXHR = createMockXHR({
-            code: 0
-        })
-        window.XMLHttpRequest = jest.fn(() => mockXHR)
+  beforeEach(() => {
+    formdata = null
+    mockXHR = createMockXHR({
+      code: 0
+    })
+    window.XMLHttpRequest = jest.fn(() => mockXHR)
+  })
+
+  afterEach(() => {
+    window.XMLHttpRequest = oldXMLHttpRequest
+  })
+
+  it('render the correct markup and content', () => {
+    const uploadWrapper = mountComponent(Upload, {
+      propsData: {
+        url: '/upload'
+      }
     })
 
-    afterEach(() => {
-        window.XMLHttpRequest = oldXMLHttpRequest
+    expect(uploadWrapper.name()).toBe('bk-upload')
+    expect(uploadWrapper.classes()).toContain('bk-upload')
+    expect(uploadWrapper.classes('dragable')).toBe(true)
+    expect(uploadWrapper.find('.drop-upload').exists()).toBe(true)
+    expect(uploadWrapper.find('input[type="file"]').exists()).toBe(true)
+
+    // 切换theme
+    uploadWrapper.setProps({
+      theme: 'button'
+    })
+    expect(uploadWrapper.props('theme')).toBe('button')
+    expect(uploadWrapper.classes('button')).toBe(true)
+  })
+
+  it('test file size', () => {
+    let i = 0
+    let fileContent = ''
+    while (i < 10000) {
+      fileContent += 'test'
+      i++
+    }
+    const file = new Blob([JSON.stringify({ hello: fileContent }, null, 4)], {
+      type: 'application/json'
+    })
+    file.name = 'test.json'
+
+    const uploadWrapper = mountComponent(Upload, {
+      propsData: {
+        url: '/upload',
+        size: 0.01
+      }
     })
 
-    it('render the correct markup and content', () => {
-        const uploadWrapper = mountComponent(Upload, {
-            propsData: {
-                url: '/upload'
-            }
-        })
+    const files = [file]
+    const uploader = uploadWrapper.vm
+    uploader.selectFile({ target: { files } })
 
-        expect(uploadWrapper.name()).toBe('bk-upload')
-        expect(uploadWrapper.classes()).toContain('bk-upload')
-        expect(uploadWrapper.classes('dragable')).toBe(true)
-        expect(uploadWrapper.find('.drop-upload').exists()).toBe(true)
-        expect(uploadWrapper.find('input[type="file"]').exists()).toBe(true)
+    expect(uploadWrapper.find('.error-msg').exists()).toBe(true)
+  })
 
-        // 切换theme
-        uploadWrapper.setProps({
-            theme: 'button'
-        })
-        expect(uploadWrapper.props('theme')).toBe('button')
-        expect(uploadWrapper.classes('button')).toBe(true)
+  it('test only accept image', () => {
+    const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
+      type: 'application/json'
+    })
+    file.name = 'test.json'
+
+    const uploadWrapper = mountComponent(Upload, {
+      propsData: {
+        url: '/upload',
+        accept: 'image/png,image/jpeg,image/jpg'
+      }
     })
 
-    it('test file size', () => {
-        let i = 0
-        let fileContent = ''
-        while (i < 10000) {
-            fileContent += 'test'
-            i++
-        }
-        const file = new Blob([JSON.stringify({ hello: fileContent }, null, 4)], {
-            type: 'application/json'
-        })
-        file.name = 'test.json'
+    const files = [file]
+    const uploader = uploadWrapper.vm
+    uploader.selectFile({ target: { files } })
 
-        const uploadWrapper = mountComponent(Upload, {
-            propsData: {
-                url: '/upload',
-                size: 0.01
-            }
-        })
+    expect(uploadWrapper.find('.error-msg').exists()).toBe(true)
+  })
 
-        const files = [file]
-        const uploader = uploadWrapper.vm
-        uploader.selectFile({ target: { files } })
+  it('test custom formdata/header', () => {
+    const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
+      type: 'application/json'
+    })
+    file.name = 'test.json'
+    const files = [file]
 
-        expect(uploadWrapper.find('.error-msg').exists()).toBe(true)
+    const uploadWrapper = mountComponent(Upload, {
+      propsData: {
+        url: '/upload',
+        header: { name: 'foo', value: 'test' },
+        formDataAttributes: [{ name: 'foo', value: 'test' }]
+      }
     })
 
-    it('test only accept image', () => {
-        const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
-            type: 'application/json'
-        })
-        file.name = 'test.json'
+    const uploader = uploadWrapper.vm
+    uploader.selectFile({ target: { files } })
 
-        const uploadWrapper = mountComponent(Upload, {
-            propsData: {
-                url: '/upload',
-                accept: 'image/png,image/jpeg,image/jpg'
-            }
-        })
+    expect(formdata.get('foo')).toBe('test')
+    expect(headers).toEqual({ foo: 'test' })
+  })
 
-        const files = [file]
-        const uploader = uploadWrapper.vm
-        uploader.selectFile({ target: { files } })
-
-        expect(uploadWrapper.find('.error-msg').exists()).toBe(true)
+  it('test upload event', (done) => {
+    const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
+      type: 'application/json'
     })
+    file.name = 'success.json'
+    const files = [file]
 
-    it('test custom formdata/header', () => {
-        const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
-            type: 'application/json'
-        })
-        file.name = 'test.json'
-        const files = [file]
-
-        const uploadWrapper = mountComponent(Upload, {
-            propsData: {
-                url: '/upload',
-                header: { name: 'foo', value: 'test' },
-                formDataAttributes: [{ name: 'foo', value: 'test' }]
-            }
-        })
-
-        const uploader = uploadWrapper.vm
-        uploader.selectFile({ target: { files } })
-
-        expect(formdata.get('foo')).toBe('test')
-        expect(headers).toEqual({ foo: 'test' })
-    })
-
-    it('test upload event', (done) => {
-        const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
-            type: 'application/json'
-        })
-        file.name = 'success.json'
-        const files = [file]
-
-        const uploadWrapper = mount(createTestComp(`
+    const uploadWrapper = mount(createTestComp(`
             <bk-upload
                 ref="upload"
                 @on-success="testSuccess"
@@ -189,61 +189,61 @@ describe('Upload', () => {
                 :url="'/upload'"
             ></bk-upload>
         `, {
-            components: {
-                bkUpload: Upload
-            },
-            methods: {
-                testSuccess (file, fileList) {
-                    expect(file.name).toBe('success.json')
-                },
-                testProgress (e, file, fileList) {
-                    expect(file.progress).toBe('2%')
-                },
-                testDone (fileList) {
-                    expect(fileList.length).toBe(1)
-                },
-                testErr (file, fileList) {
-                    expect(file.errorMsg).toBe('upload failed')
-                    done()
-                }
-            }
-        }))
+      components: {
+        bkUpload: Upload
+      },
+      methods: {
+        testSuccess (file, fileList) {
+          expect(file.name).toBe('success.json')
+        },
+        testProgress (e, file, fileList) {
+          expect(file.progress).toBe('2%')
+        },
+        testDone (fileList) {
+          expect(fileList.length).toBe(1)
+        },
+        testErr (file, fileList) {
+          expect(file.errorMsg).toBe('upload failed')
+          done()
+        }
+      }
+    }))
 
-        const uploader = uploadWrapper.find({ ref: 'upload' }).vm
-        uploader.selectFile({ target: { files } })
+    const uploader = uploadWrapper.find({ ref: 'upload' }).vm
+    uploader.selectFile({ target: { files } })
 
-        mockXHR.onreadystatechange()
+    mockXHR.onreadystatechange()
 
-        mockXHR.status = 400
-        setTimeout(() => {
-            mockXHR.onreadystatechange()
-        }, 100)
+    mockXHR.status = 400
+    setTimeout(() => {
+      mockXHR.onreadystatechange()
+    }, 100)
 
-        mockXHR.upload.triggerEvent('progress', { lengthComputable: true, loaded: 20000, total: 1000000 })
+    mockXHR.upload.triggerEvent('progress', { lengthComputable: true, loaded: 20000, total: 1000000 })
+  })
+
+  it('test ui event', () => {
+    const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
+      type: 'application/json'
+    })
+    file.name = 'test.json'
+    const files = [file]
+
+    const uploadWrapper = mountComponent(Upload, {
+      propsData: {
+        url: '/upload'
+      }
     })
 
-    it('test ui event', () => {
-        const file = new Blob([JSON.stringify({ hello: 'world' }, null, 4)], {
-            type: 'application/json'
-        })
-        file.name = 'test.json'
-        const files = [file]
+    const uploader = uploadWrapper.vm
+    uploader.selectFile({ target: { files } })
 
-        const uploadWrapper = mountComponent(Upload, {
-            propsData: {
-                url: '/upload'
-            }
-        })
+    uploadWrapper.find({ ref: 'uploadel' }).trigger('dragenter')
+    expect(uploadWrapper.vm.isdrag).toBe(true)
 
-        const uploader = uploadWrapper.vm
-        uploader.selectFile({ target: { files } })
-
-        uploadWrapper.find({ ref: 'uploadel' }).trigger('dragenter')
-        expect(uploadWrapper.vm.isdrag).toBe(true)
-
-        expect(uploadWrapper.find('.all-file').exists()).toBe(true)
-        uploadWrapper.find('.close-upload').trigger('click')
-        expect(uploadWrapper.find('.all-file').exists()).toBe(false)
-        expect(uploader.fileList.length).toBe(0)
-    })
+    expect(uploadWrapper.find('.all-file').exists()).toBe(true)
+    uploadWrapper.find('.close-upload').trigger('click')
+    expect(uploadWrapper.find('.all-file').exists()).toBe(false)
+    expect(uploader.fileList.length).toBe(0)
+  })
 })

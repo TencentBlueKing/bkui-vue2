@@ -31,72 +31,72 @@
  */
 
 export default {
-    props: {
-        confirm: {
-            type: Boolean,
-            default: false
-        }
-    },
-    methods: {
-        capitalize (str) {
-            return str[0].toUpperCase() + str.slice(1)
-        },
-        iconBtnCls (direction, type = '') {
-            return [
-                'bk-picker-panel-icon-btn',
-                `bk-date-picker-${direction}-btn`,
-                `bk-date-picker-${direction}-btn-arrow${type}`
-            ]
-        },
-        handleShortcutClick (shortcut) {
-            if (shortcut.value) {
-                // pick 参数：dates, visible, type, isUseShortCut
-                this.$emit('pick', shortcut.value(), false, undefined, shortcut)
-                // this.$emit('pick', shortcut.value())
-            }
-            if (shortcut.onClick) {
-                shortcut.onClick(this)
-            }
-            if (this.shortcutClose) {
-                this.handlePickSuccess()
-            }
-        },
-        handlePickClear () {
-            this.resetView()
-            this.$emit('pick-clear')
-        },
-        handlePickSuccess () {
-            this.resetView()
-            this.$emit('pick-success')
-        },
-        handlePickClick () {
-            this.$emit('pick-click')
-        },
-        resetView () {
-            setTimeout(
-                () => {
-                    this.currentView = this.selectionMode
-                },
-                500
-            )
-        },
-        handleClear () {
-            this.dates = this.dates.map(() => null)
-            this.rangeState = {}
-            this.$emit('pick', this.dates)
-            this.handleConfirm()
-        },
-        handleConfirm (visible, type) {
-            this.$emit('pick', this.dates, visible, type || this.type)
-        },
-        onToggleVisibility (open) {
-            const { timeSpinner, timeSpinnerEnd } = this.$refs
-            if (open && timeSpinner) {
-                timeSpinner.updateScroll()
-            }
-            if (open && timeSpinnerEnd) {
-                timeSpinnerEnd.updateScroll()
-            }
-        }
+  props: {
+    confirm: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    capitalize (str) {
+      return str[0].toUpperCase() + str.slice(1)
+    },
+    iconBtnCls (direction, type = '') {
+      return [
+        'bk-picker-panel-icon-btn',
+        `bk-date-picker-${direction}-btn`,
+        `bk-date-picker-${direction}-btn-arrow${type}`
+      ]
+    },
+    handleShortcutClick (shortcut) {
+      if (shortcut.value) {
+        // pick 参数：dates, visible, type, isUseShortCut
+        this.$emit('pick', shortcut.value(), false, undefined, shortcut)
+        // this.$emit('pick', shortcut.value())
+      }
+      if (shortcut.onClick) {
+        shortcut.onClick(this)
+      }
+      if (this.shortcutClose) {
+        this.handlePickSuccess()
+      }
+    },
+    handlePickClear () {
+      this.resetView()
+      this.$emit('pick-clear')
+    },
+    handlePickSuccess () {
+      this.resetView()
+      this.$emit('pick-success')
+    },
+    handlePickClick () {
+      this.$emit('pick-click')
+    },
+    resetView () {
+      setTimeout(
+        () => {
+          this.currentView = this.selectionMode
+        },
+        500
+      )
+    },
+    handleClear () {
+      this.dates = this.dates.map(() => null)
+      this.rangeState = {}
+      this.$emit('pick', this.dates)
+      this.handleConfirm()
+    },
+    handleConfirm (visible, type) {
+      this.$emit('pick', this.dates, visible, type || this.type)
+    },
+    onToggleVisibility (open) {
+      const { timeSpinner, timeSpinnerEnd } = this.$refs
+      if (open && timeSpinner) {
+        timeSpinner.updateScroll()
+      }
+      if (open && timeSpinnerEnd) {
+        timeSpinnerEnd.updateScroll()
+      }
+    }
+  }
 }

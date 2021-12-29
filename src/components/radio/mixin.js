@@ -27,78 +27,78 @@
 import emitter from '@/mixins/emitter'
 
 export default {
-    mixins: [emitter],
-    data () {
-        return {
-            current: '',
-            group: false,
-            groupName: this.name,
-            parent: this.findComponentUpward(this, 'bk-radio-group')
-        }
-    },
-    computed: {
-        selected () {
-            return this.current === this.localTrueValue
-        },
-        localTrueValue () {
-            let localValue
-            if (this.parent) {
-                if (this.value === undefined && this.label === undefined) {
-                    localValue = this.trueValue
-                } else if (this.value !== undefined) {
-                    localValue = this.value
-                } else {
-                    localValue = this.label
-                }
-            } else {
-                localValue = this.trueValue
-            }
-            return localValue
-        }
-    },
-    mounted () {
-        if (this.parent) {
-            this.groupName = this.parent.name
-        }
-        this.updateValue()
-    },
-    methods: {
-        findComponentUpward (context, componentName, componentNames) {
-            if (typeof componentName === 'string') {
-                componentNames = [componentName]
-            } else {
-                componentNames = componentName
-            }
-
-            let parent = context.$parent
-            let name = parent.$options.name
-            while (parent && (!name || componentNames.indexOf(name) < 0)) {
-                parent = parent.$parent
-                if (parent) name = parent.$options.name
-            }
-            return parent
-        },
-        getKeyDownSelected (target) {
-            const ele = Array.prototype.find
-                .call(target.children, node => node.nodeName === 'INPUT' && node.type === 'radio')
-            return !ele.checked
-        },
-        handlerChange (event) {
-            if (this.disabled) {
-                return false
-            }
-
-            const selected = event.type === 'change' ? event.target.checked : this.getKeyDownSelected(event.target)
-            const value = selected ? this.localTrueValue : this.falseValue
-            this.$emit('input', value)
-            this.$emit('change', value)
-            this.dispatch('bk-form-item', 'form-change')
-
-            if (this.parent) {
-                this.parent.change({
-                    value: value
-                })
-            }
-        }
+  mixins: [emitter],
+  data () {
+    return {
+      current: '',
+      group: false,
+      groupName: this.name,
+      parent: this.findComponentUpward(this, 'bk-radio-group')
     }
+  },
+  computed: {
+    selected () {
+      return this.current === this.localTrueValue
+    },
+    localTrueValue () {
+      let localValue
+      if (this.parent) {
+        if (this.value === undefined && this.label === undefined) {
+          localValue = this.trueValue
+        } else if (this.value !== undefined) {
+          localValue = this.value
+        } else {
+          localValue = this.label
+        }
+      } else {
+        localValue = this.trueValue
+      }
+      return localValue
+    }
+  },
+  mounted () {
+    if (this.parent) {
+      this.groupName = this.parent.name
+    }
+    this.updateValue()
+  },
+  methods: {
+    findComponentUpward (context, componentName, componentNames) {
+      if (typeof componentName === 'string') {
+        componentNames = [componentName]
+      } else {
+        componentNames = componentName
+      }
+
+      let parent = context.$parent
+      let name = parent.$options.name
+      while (parent && (!name || componentNames.indexOf(name) < 0)) {
+        parent = parent.$parent
+        if (parent) name = parent.$options.name
+      }
+      return parent
+    },
+    getKeyDownSelected (target) {
+      const ele = Array.prototype.find
+        .call(target.children, node => node.nodeName === 'INPUT' && node.type === 'radio')
+      return !ele.checked
+    },
+    handlerChange (event) {
+      if (this.disabled) {
+        return false
+      }
+
+      const selected = event.type === 'change' ? event.target.checked : this.getKeyDownSelected(event.target)
+      const value = selected ? this.localTrueValue : this.falseValue
+      this.$emit('input', value)
+      this.$emit('change', value)
+      this.dispatch('bk-form-item', 'form-change')
+
+      if (this.parent) {
+        this.parent.change({
+          value: value
+        })
+      }
+    }
+  }
 }

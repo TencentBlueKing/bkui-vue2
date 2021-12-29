@@ -27,83 +27,83 @@
 -->
 
 <template>
-    <header class="magic-header">
-        <a href="//magicbox.bk.tencent.com/" class="logo">
-            <img src="./img/magic.png" alt="">
-        </a>
-        <ul class="clearfix">
-            <li class="dropdown nav-dropdown" id="nav_index" style="position: relative;">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                    <span>组件库</span>
-                    <span class="caret"></span>
-                    <div class="new-feature" style="right: 0px; top: 12px;"><span>NEW</span></div>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#"><span>PC端(普通版)</span></a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#index?isPro=1"><span>PC端(标准版)</span></a>
-                    </li>
-                    <li style="position: relative;">
-                        <a role="meneitem" href="#/">
-                            <span>
-                                Vue组件
-                                <div class="new-feature" style="top: 0; right: 0;"><span>NEW</span></div>
-                            </span>
-                        </a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#mobile/show"><span>移动端</span></a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#components"><span>组件预览</span></a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown nav-dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                    <span>可视化布局</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#build/show"><span>PC端</span></a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#mobile_build/show"><span>移动端</span></a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#wx_build/show"><span>微信小程序</span></a>
-                    </li>
-                </ul>
-            </li>
-            <li id="example_index"><a target="_blank" href="//magicbox.bk.tencent.com/#templates"><span>套餐样例</span></a>
-            </li>
-            <li id="plugin_index"><a target="_blank" href="//magicbox.bk.tencent.com/#plugin">插件列表</a>
-            </li>
-            <li class="dropdown magic-doc-list nav-dropdown" id="nav-dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                    <span>帮助文档</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#doc/show?id=html_structure">前端规范</a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#design">设计规范</a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#css">辅助样式</a>
-                    </li>
-                    <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#about/show">模版下载</a>
-                    </li>
-                </ul>
-            </li>
-            <li id="nav_start" style="margin-left:1px;"><a target="_blank" href="//magicbox.bk.tencent.com/#start"><span>新手起步</span></a>
-            </li>
-            <li class="fr header-user" style="display:none;" id="header_user_box">
-                <div class="fr logout"> <span class="magic-poweroff">退出</span>
-
-                </div>
-                <div class="fr" id="magic_user">
-                    <img src="" alt="" class="avatar">
-                    <a class="name" target="_blank" href="//magicbox.bk.tencent.com/#mytemplates"></a>
-                </div>
-            </li>
+  <header class="magic-header">
+    <a href="//magicbox.bk.tencent.com/" class="logo">
+      <img src="./img/magic.png" alt="">
+    </a>
+    <ul class="clearfix">
+      <li class="dropdown nav-dropdown" id="nav_index" style="position: relative;">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <span>组件库</span>
+          <span class="caret"></span>
+          <div class="new-feature" style="right: 0px; top: 12px;"><span>NEW</span></div>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#"><span>PC端(普通版)</span></a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#index?isPro=1"><span>PC端(标准版)</span></a>
+          </li>
+          <li style="position: relative;">
+            <a role="meneitem" href="#/">
+              <span>
+                Vue组件
+                <div class="new-feature" style="top: 0; right: 0;"><span>NEW</span></div>
+              </span>
+            </a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#mobile/show"><span>移动端</span></a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#components"><span>组件预览</span></a>
+          </li>
         </ul>
-    </header>
+      </li>
+      <li class="dropdown nav-dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <span>可视化布局</span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#build/show"><span>PC端</span></a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#mobile_build/show"><span>移动端</span></a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#wx_build/show"><span>微信小程序</span></a>
+          </li>
+        </ul>
+      </li>
+      <li id="example_index"><a target="_blank" href="//magicbox.bk.tencent.com/#templates"><span>套餐样例</span></a>
+      </li>
+      <li id="plugin_index"><a target="_blank" href="//magicbox.bk.tencent.com/#plugin">插件列表</a>
+      </li>
+      <li class="dropdown magic-doc-list nav-dropdown" id="nav-dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <span>帮助文档</span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#doc/show?id=html_structure">前端规范</a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#design">设计规范</a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#css">辅助样式</a>
+          </li>
+          <li><a role="meneitem" target="_blank" href="//magicbox.bk.tencent.com/#about/show">模版下载</a>
+          </li>
+        </ul>
+      </li>
+      <li id="nav_start" style="margin-left:1px;"><a target="_blank" href="//magicbox.bk.tencent.com/#start"><span>新手起步</span></a>
+      </li>
+      <li class="fr header-user" style="display:none;" id="header_user_box">
+        <div class="fr logout"> <span class="magic-poweroff">退出</span>
+
+        </div>
+        <div class="fr" id="magic_user">
+          <img src="" alt="" class="avatar">
+          <a class="name" target="_blank" href="//magicbox.bk.tencent.com/#mytemplates"></a>
+        </div>
+      </li>
+    </ul>
+  </header>
 </template>
 
 <style scoped lang="postcss">

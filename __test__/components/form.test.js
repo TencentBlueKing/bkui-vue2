@@ -36,10 +36,10 @@ import FormItem from '@/components/form/form-item.vue'
 import Input from '@/components/input/input.vue'
 
 describe('form test', () => {
-    it('props form-type', () => {
-        function getWrapper (type = 'horizontal') {
-            return mount({
-                template: `
+  it('props form-type', () => {
+    function getWrapper (type = 'horizontal') {
+      return mount({
+        template: `
                     <bk-form :form-type="formType" :model="formData">
                         <bk-form-item label="名称" v-model="formData.name">
                             <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
@@ -49,57 +49,57 @@ describe('form test', () => {
                         </bk-form-item>
                     </bk-form>
                 `,
-                components: {
-                    BkForm: Form,
-                    BkFormItem: FormItem,
-                    BkInput: Input
-                },
-                data () {
-                    return {
-                        formType: type,
-                        formData: {
-                            name: '',
-                            email: ''
-                        }
-                    }
-                }
-            })
+        components: {
+          BkForm: Form,
+          BkFormItem: FormItem,
+          BkInput: Input
+        },
+        data () {
+          return {
+            formType: type,
+            formData: {
+              name: '',
+              email: ''
+            }
+          }
         }
-        const defaultWrapper = getWrapper()
-        const verticalWrapper = getWrapper('vertical')
-        const inlineWrapper = getWrapper('inline')
-        expect(defaultWrapper.find('.bk-form').classes()).toEqual(['bk-form'])
-        expect(verticalWrapper.find('.bk-form').classes()).toContain('bk-form-vertical')
-        expect(inlineWrapper.find('.bk-form').classes()).toContain('bk-inline-form')
-    })
-    it('props label-width', () => {
-        const wrapper = mount({
-            template: `
+      })
+    }
+    const defaultWrapper = getWrapper()
+    const verticalWrapper = getWrapper('vertical')
+    const inlineWrapper = getWrapper('inline')
+    expect(defaultWrapper.find('.bk-form').classes()).toEqual(['bk-form'])
+    expect(verticalWrapper.find('.bk-form').classes()).toContain('bk-form-vertical')
+    expect(inlineWrapper.find('.bk-form').classes()).toContain('bk-inline-form')
+  })
+  it('props label-width', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData" :label-width="200">
                     <bk-form-item label="名称" v-model="formData.name">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: ''
-                    }
-                }
-            }
-        })
-
-        expect(wrapper.find('.bk-label').attributes('style')).toBe('width: 200px;')
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: ''
+          }
+        }
+      }
     })
-    it('props model', () => {
-        const wrapper = mount({
-            template: `
+
+    expect(wrapper.find('.bk-label').attributes('style')).toBe('width: 200px;')
+  })
+  it('props model', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData">
                     <bk-form-item label="名称" property="name">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin" v-model="formData.name"></bk-input>
@@ -109,86 +109,86 @@ describe('form test', () => {
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: 'test name',
-                        email: 'test@bk.magic.com'
-                    }
-                }
-            }
-        })
-
-        const bkInputs = wrapper.findAll('.bk-form-control')
-        expect(bkInputs.at(0).vm.$props.value).toEqual('test name')
-        expect(bkInputs.at(1).vm.$props.value).toEqual('test@bk.magic.com')
-
-        const inputs = wrapper.findAll('input[type="text"]')
-        inputs.at(0).setValue('new test name')
-        inputs.at(1).setValue('newEmailName@bk.magic.cn')
-        expect(wrapper.vm.formData).toEqual({ name: 'new test name', email: 'newEmailName@bk.magic.cn' })
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: 'test name',
+            email: 'test@bk.magic.com'
+          }
+        }
+      }
     })
-    it('props ext-cls', () => {
-        const wrapper = mount({
-            template: `
+
+    const bkInputs = wrapper.findAll('.bk-form-control')
+    expect(bkInputs.at(0).vm.$props.value).toEqual('test name')
+    expect(bkInputs.at(1).vm.$props.value).toEqual('test@bk.magic.com')
+
+    const inputs = wrapper.findAll('input[type="text"]')
+    inputs.at(0).setValue('new test name')
+    inputs.at(1).setValue('newEmailName@bk.magic.cn')
+    expect(wrapper.vm.formData).toEqual({ name: 'new test name', email: 'newEmailName@bk.magic.cn' })
+  })
+  it('props ext-cls', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData" ext-cls="test-cls">
                     <bk-form-item label="名称" v-model="formData.name">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: ''
-                    }
-                }
-            }
-        })
-
-        expect(wrapper.find('.bk-form').classes()).toContain('test-cls')
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: ''
+          }
+        }
+      }
     })
 
-    // @todo validate
+    expect(wrapper.find('.bk-form').classes()).toContain('test-cls')
+  })
 
-    it('bk-form-item props label', () => {
-        const wrapper = mount({
-            template: `
+  // @todo validate
+
+  it('bk-form-item props label', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData">
                     <bk-form-item label="测试名称" v-model="formData.name">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: ''
-                    }
-                }
-            }
-        })
-
-        expect(wrapper.find('.bk-form-item .bk-label span').text()).toEqual('测试名称')
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: ''
+          }
+        }
+      }
     })
-    it('bk-form-item props label', () => {
-        const wrapper = mount({
-            template: `
+
+    expect(wrapper.find('.bk-form-item .bk-label span').text()).toEqual('测试名称')
+  })
+  it('bk-form-item props label', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData" :label-width="100">
                     <bk-form-item label="名称" v-model="formData.name">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
@@ -198,72 +198,72 @@ describe('form test', () => {
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: '',
-                        email: ''
-                    }
-                }
-            }
-        })
-
-        const labels = wrapper.findAll('.bk-form-item .bk-label')
-
-        expect(labels.at(0).attributes('style')).toEqual('width: 100px;')
-        expect(labels.at(1).attributes('style')).toEqual('width: 300px;')
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: '',
+            email: ''
+          }
+        }
+      }
     })
-    it('bk-form-item props desc', () => {
-        const wrapper = mount({
-            template: `
+
+    const labels = wrapper.findAll('.bk-form-item .bk-label')
+
+    expect(labels.at(0).attributes('style')).toEqual('width: 100px;')
+    expect(labels.at(1).attributes('style')).toEqual('width: 300px;')
+  })
+  it('bk-form-item props desc', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData">
                     <bk-form-item label="测试名称" v-model="formData.name" desc="test some desc">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: ''
-                    }
-                }
-            }
-        })
-        expect(wrapper.find('.bk-form-item .bk-label').classes()).toContain('has-desc')
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: ''
+          }
+        }
+      }
     })
-    it('bk-form-item props ext-cls', () => {
-        const wrapper = mount({
-            template: `
+    expect(wrapper.find('.bk-form-item .bk-label').classes()).toContain('has-desc')
+  })
+  it('bk-form-item props ext-cls', () => {
+    const wrapper = mount({
+      template: `
                 <bk-form :model="formData">
                     <bk-form-item label="测试名称" v-model="formData.name" ext-cls="test-cls">
                         <bk-input placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
                     </bk-form-item>
                 </bk-form>
             `,
-            components: {
-                BkForm: Form,
-                BkFormItem: FormItem,
-                BkInput: Input
-            },
-            data () {
-                return {
-                    formData: {
-                        name: ''
-                    }
-                }
-            }
-        })
-        expect(wrapper.find('.bk-form-item').classes()).toContain('test-cls')
+      components: {
+        BkForm: Form,
+        BkFormItem: FormItem,
+        BkInput: Input
+      },
+      data () {
+        return {
+          formData: {
+            name: ''
+          }
+        }
+      }
     })
+    expect(wrapper.find('.bk-form-item').classes()).toContain('test-cls')
+  })
 })

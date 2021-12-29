@@ -34,71 +34,71 @@ import RoundProgress from '@/components/round-progress'
 import { mountComponent } from '../helpers'
 
 describe('RoundProgress', () => {
-    it('render the correct circle', () => {
-        const wrapper = mountComponent(RoundProgress, {
-            propsData: {
-                config: {
-                    strokeWidth: 5,
-                    bgColor: 'gray',
-                    activeColor: 'green',
-                    index: 1
-                },
-                percent: 0.3
-            }
-        })
-        expect(wrapper.props().percent).toBe(0.3)
-        expect(wrapper.props().config.strokeWidth).toBe(5)
-        expect(wrapper.props().config.bgColor).toBe('gray')
-        expect(wrapper.props().config.activeColor).toBe('green')
-        expect(wrapper.props().config.index).toBe(1)
+  it('render the correct circle', () => {
+    const wrapper = mountComponent(RoundProgress, {
+      propsData: {
+        config: {
+          strokeWidth: 5,
+          bgColor: 'gray',
+          activeColor: 'green',
+          index: 1
+        },
+        percent: 0.3
+      }
     })
+    expect(wrapper.props().percent).toBe(0.3)
+    expect(wrapper.props().config.strokeWidth).toBe(5)
+    expect(wrapper.props().config.bgColor).toBe('gray')
+    expect(wrapper.props().config.activeColor).toBe('green')
+    expect(wrapper.props().config.index).toBe(1)
+  })
 
-    it('render the correct title', () => {
-        const wrapper = mountComponent(RoundProgress, {
-            propsData: {
-                title: 'jest',
-                titleStyle: {
-                    fontSize: '16px'
-                }
-            }
-        })
-        expect(wrapper.contains('div.bk-round-progress')).toBe(true)
-        expect(wrapper.contains('div.title')).toBe(true)
-        const sourceContent = wrapper.find('div.title').element
-        expect(sourceContent.style.fontSize).toBe('16px')
+  it('render the correct title', () => {
+    const wrapper = mountComponent(RoundProgress, {
+      propsData: {
+        title: 'jest',
+        titleStyle: {
+          fontSize: '16px'
+        }
+      }
     })
+    expect(wrapper.contains('div.bk-round-progress')).toBe(true)
+    expect(wrapper.contains('div.title')).toBe(true)
+    const sourceContent = wrapper.find('div.title').element
+    expect(sourceContent.style.fontSize).toBe('16px')
+  })
 
-    it('render the correct num', () => {
-        const wrapper = mountComponent(RoundProgress, {
-            propsData: {
-                numShow: true,
-                numStyle: {
-                    fontSize: '16px'
-                }
-            }
-        })
-        expect(wrapper.contains('div.bk-round-progress')).toBe(true)
-        expect(wrapper.contains('div.num')).toBe(true)
-        const sourceContent = wrapper.find('div.num').element
-        expect(sourceContent.style.fontSize).toBe('16px')
+  it('render the correct num', () => {
+    const wrapper = mountComponent(RoundProgress, {
+      propsData: {
+        numShow: true,
+        numStyle: {
+          fontSize: '16px'
+        }
+      }
     })
+    expect(wrapper.contains('div.bk-round-progress')).toBe(true)
+    expect(wrapper.contains('div.num')).toBe(true)
+    const sourceContent = wrapper.find('div.num').element
+    expect(sourceContent.style.fontSize).toBe('16px')
+  })
 
-    it('render the correct radius', () => {
-        const wrapper = mountComponent(RoundProgress, {
-            propsData: {
-                radius: '100px'
-            }
-        })
-        const sourceContent = wrapper.find('svg')
-        expect(sourceContent.attributes('width')).toBe('100px')
+  it('render the correct radius', () => {
+    const wrapper = mountComponent(RoundProgress, {
+      propsData: {
+        radius: '100px'
+      }
     })
+    const sourceContent = wrapper.find('svg')
+    expect(sourceContent.attributes('width')).toBe('100px')
+  })
 
-    it('has external class', () => {
-        const wrapper = mountComponent(RoundProgress, {
-            propsData: {
-                extCls: 'bk-round-progress-red'
-            }
-        })
-        expect(wrapper.contains('div.bk-round-progress.bk-round-progress-red')).toBe(true)
+  it('has external class', () => {
+    const wrapper = mountComponent(RoundProgress, {
+      propsData: {
+        extCls: 'bk-round-progress-red'
+      }
     })
+    expect(wrapper.contains('div.bk-round-progress.bk-round-progress-red')).toBe(true)
+  })
 })

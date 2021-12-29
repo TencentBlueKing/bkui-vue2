@@ -27,63 +27,63 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Info 提示框更多示例
-        </h2>
-        <div class="example-item">
-            <bk-button @click="mountInBody">
-                mount in body
-            </bk-button>
-        </div>
-        <div class="example-item">
-            <bk-button :theme="'success'" @click="mountInParent" ref="vvv">
-                mount in parentNode
-            </bk-button>
-        </div>
-        <div class="example-item">
-            <bk-button :theme="'success'" @click="test">
-                test
-            </bk-button>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Info 提示框更多示例
+    </h2>
+    <div class="example-item">
+      <bk-button @click="mountInBody">
+        mount in body
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button :theme="'success'" @click="mountInParent" ref="vvv">
+        mount in parentNode
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button :theme="'success'" @click="test">
+        test
+      </bk-button>
+    </div>
+  </section>
 </template>
 
 <script>
-    import { bkButton } from '@'
-    export default {
-        components: {
-            bkButton
-        },
-        data () {
-            return {
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            },
-            mountInBody () {
-                this.$bkInfo({
-                    title: 'mount in body'
-                })
-            },
-            mountInParent () {
-                this.$bkInfo({
-                    title: 'mount in parentNode',
-                    // container: document.querySelectorAll('.example-item')[1]
-                    container: this.$refs.vvv.$el.parentNode
-                })
-            },
-            test () {
-                // const h = this.$createElement
-                this.$bkInfo({
-                    title: '支持VNode的提示框',
-                    subHeader: 'subHeader',
-                    subTitle: 'sdsdssd'
-                })
-            }
-        }
+import { bkButton } from '@'
+export default {
+  components: {
+    bkButton
+  },
+  data () {
+    return {
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    },
+    mountInBody () {
+      this.$bkInfo({
+        title: 'mount in body'
+      })
+    },
+    mountInParent () {
+      this.$bkInfo({
+        title: 'mount in parentNode',
+        // container: document.querySelectorAll('.example-item')[1]
+        container: this.$refs.vvv.$el.parentNode
+      })
+    },
+    test () {
+      // const h = this.$createElement
+      this.$bkInfo({
+        title: '支持VNode的提示框',
+        subHeader: 'subHeader',
+        subTitle: 'sdsdssd'
+      })
+    }
+  }
+}
 </script>

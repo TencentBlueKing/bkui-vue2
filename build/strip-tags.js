@@ -36,31 +36,31 @@
 const cheerio = require('cheerio')
 
 exports.strip = (str, tags) => {
-    const $ = cheerio.load(str, { decodeEntities: false })
+  const $ = cheerio.load(str, { decodeEntities: false })
 
-    if (!tags || tags.length === 0) {
-        return str
-    }
+  if (!tags || tags.length === 0) {
+    return str
+  }
 
-    tags = !Array.isArray(tags) ? [tags] : tags
+  tags = !Array.isArray(tags) ? [tags] : tags
 
-    let len = tags.length
+  let len = tags.length
 
-    while (len--) {
-        $(tags[len]).remove()
-    }
+  while (len--) {
+    $(tags[len]).remove()
+  }
 
-    const headNode = $('head')
-    const htmlStr = headNode.html()
+  const headNode = $('head')
+  const htmlStr = headNode.html()
 
-    return htmlStr
+  return htmlStr
 }
 
 exports.fetch = (str, tag) => {
-    const $ = cheerio.load(str, { decodeEntities: false })
-    if (!tag) {
-        return str
-    }
+  const $ = cheerio.load(str, { decodeEntities: false })
+  if (!tag) {
+    return str
+  }
 
-    return $(tag).html()
+  return $(tag).html()
 }

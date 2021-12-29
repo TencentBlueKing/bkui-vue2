@@ -27,34 +27,34 @@
 -->
 
 <template>
-    <bk-breadcrumb>
-        <bk-breadcrumb-item v-for="(item,index) in list" :key="index" :to="item.link">{{item.title}}</bk-breadcrumb-item>
-        <bk-breadcrumb-item>
-            <template>
-                <bk-input></bk-input>
-            </template>
-        </bk-breadcrumb-item>
-    </bk-breadcrumb>
+  <bk-breadcrumb>
+    <bk-breadcrumb-item v-for="(item,index) in list" :key="index" :to="item.link">{{item.title}}</bk-breadcrumb-item>
+    <bk-breadcrumb-item>
+      <template>
+        <bk-input></bk-input>
+      </template>
+    </bk-breadcrumb-item>
+  </bk-breadcrumb>
 </template>
 <script>
-    import { bkBreadcrumb, bkBreadcrumbItem, bkInput } from '@'
+import { bkBreadcrumb, bkBreadcrumbItem, bkInput } from '@'
 
-    export default {
-        components: {
-            bkInput,
-            bkBreadcrumb,
-            bkBreadcrumbItem
-        },
-        data () {
-            return {
-                list: [
-                    { title: '首页', link: { path: 'home' } },
-                    { title: '活动管理', link: { path: 'home' } },
-                    { title: '活动列表', link: { path: 'home' } },
-                    { title: '活动详情', link: null }
-                ],
-                separator: '/'
-            }
-        }
+export default {
+  components: {
+    bkInput,
+    bkBreadcrumb,
+    bkBreadcrumbItem
+  },
+  data () {
+    return {
+      list: [
+        { title: '首页', link: { path: 'home' } },
+        { title: '活动管理', link: { path: 'home' } },
+        { title: '活动列表', link: { path: 'home' } },
+        { title: '活动详情', link: null }
+      ],
+      separator: '/'
     }
+  }
+}
 </script>

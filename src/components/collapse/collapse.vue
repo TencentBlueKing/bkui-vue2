@@ -27,77 +27,77 @@
 -->
 
 <template>
-    <div class="bk-collapse" :class="extCls">
-        <slot></slot>
-    </div>
+  <div class="bk-collapse" :class="extCls">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'bk-collapse',
-        provide () {
-            return {
-                'collapse': this
-            }
-        },
-        props: {
-            accordion: {
-                type: Boolean,
-                default: false
-            },
-            value: {
-                type: [Array, String]
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                currentActive: []
-            }
-        },
-        watch: {
-            value: {
-                handler (value) {
-                    if (Array.isArray(value)) {
-                        this.currentActive = value.map(item => `${item}`)
-                    } else if (typeof value !== 'undefined') {
-                        this.currentActive = [`${value}`]
-                    } else {
-                        this.currentActive = []
-                    }
-                },
-                immediate: true
-            }
-        },
-        created () {
-            this.itemList = []
-            this.$on('inject', item => {
-                this.itemList.push(item)
-            })
-            this.$on('item-toggle', this.itemToggle)
-        },
-        methods: {
-            itemToggle (item) {
-                if (this.accordion) {
-                    this.currentActive = this.currentActive.length && this.currentActive[0] === item.name ? [] : [item.name]
-                } else {
-                    const index = this.currentActive.indexOf(item.name)
-                    if (index > -1) {
-                        this.currentActive.splice(index, 1)
-                    } else {
-                        this.currentActive.push(item.name)
-                    }
-                }
-
-                this.$emit('input', this.currentActive)
-                this.$emit('item-click', this.currentActive)
-            }
-        }
+export default {
+  name: 'bk-collapse',
+  provide () {
+    return {
+      'collapse': this
     }
+  },
+  props: {
+    accordion: {
+      type: Boolean,
+      default: false
+    },
+    value: {
+      type: [Array, String]
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      currentActive: []
+    }
+  },
+  watch: {
+    value: {
+      handler (value) {
+        if (Array.isArray(value)) {
+          this.currentActive = value.map(item => `${item}`)
+        } else if (typeof value !== 'undefined') {
+          this.currentActive = [`${value}`]
+        } else {
+          this.currentActive = []
+        }
+      },
+      immediate: true
+    }
+  },
+  created () {
+    this.itemList = []
+    this.$on('inject', item => {
+      this.itemList.push(item)
+    })
+    this.$on('item-toggle', this.itemToggle)
+  },
+  methods: {
+    itemToggle (item) {
+      if (this.accordion) {
+        this.currentActive = this.currentActive.length && this.currentActive[0] === item.name ? [] : [item.name]
+      } else {
+        const index = this.currentActive.indexOf(item.name)
+        if (index > -1) {
+          this.currentActive.splice(index, 1)
+        } else {
+          this.currentActive.push(item.name)
+        }
+      }
+
+      this.$emit('input', this.currentActive)
+      this.$emit('item-click', this.currentActive)
+    }
+  }
+}
 </script>
 
 <style>

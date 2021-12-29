@@ -31,5 +31,5 @@
  */
 
 module.exports = {
-    'NODE_ENV': JSON.stringify('prod')
+  'NODE_ENV': JSON.stringify('prod')
 }

@@ -27,104 +27,104 @@
 -->
 
 <template>
-    <p class="bk-score-group" :class="extCls">
-        <template v-if="edit">
-            <bk-star :rate="rate"
-                :hover-rate="hoverRate"
-                :width="width"
-                :height="height"
-                :tooltips="tooltips"
-                @chooseRate="chooseRate"
-                @changeHover="changeHover"
-                @mouseleave.native="changeHover(0)"
-            ></bk-star>
-        </template>
+  <p class="bk-score-group" :class="extCls">
+    <template v-if="edit">
+      <bk-star :rate="rate"
+        :hover-rate="hoverRate"
+        :width="width"
+        :height="height"
+        :tooltips="tooltips"
+        @chooseRate="chooseRate"
+        @changeHover="changeHover"
+        @mouseleave.native="changeHover(0)"
+      ></bk-star>
+    </template>
 
-        <template v-else>
-            <bk-star :rate="5"
-                :width="width"
-                :height="height"
-                :style="{ width: starWidth }"
-                class="bk-score-real"
-                :edit="false"
-                :tooltips="tooltips"
-            ></bk-star>
-            <bk-star :rate="0"
-                :width="width"
-                :height="height"
-                :edit="false"
-                :tooltips="tooltips"
-            ></bk-star>
-        </template>
-    </p>
+    <template v-else>
+      <bk-star :rate="5"
+        :width="width"
+        :height="height"
+        :style="{ width: starWidth }"
+        class="bk-score-real"
+        :edit="false"
+        :tooltips="tooltips"
+      ></bk-star>
+      <bk-star :rate="0"
+        :width="width"
+        :height="height"
+        :edit="false"
+        :tooltips="tooltips"
+      ></bk-star>
+    </template>
+  </p>
 </template>
 
 <script>
-    import bkStar from './star'
+import bkStar from './star'
 
-    export default {
-        name: 'bk-rate',
+export default {
+  name: 'bk-rate',
 
-        components: {
-            bkStar
-        },
+  components: {
+    bkStar
+  },
 
-        props: {
-            rate: {
-                type: Number,
-                default: 0
-            },
-            width: {
-                type: Number,
-                default: 15
-            },
-            height: {
-                type: Number,
-                default: 16
-            },
-            edit: {
-                type: Boolean,
-                default: true
-            },
-            tooltips: {
-                type: Array,
-                default: () => ([])
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-
-        data () {
-            return {
-                hoverRate: 0
-            }
-        },
-
-        computed: {
-            starWidth () {
-                const integer = Math.floor(this.rate)
-                const fixWidth = (this.width + 3) * integer
-                const rateWidth = this.width * (this.rate - integer)
-                return `${fixWidth + rateWidth}px`
-            }
-        },
-
-        methods: {
-            chooseRate (val) {
-                if (!this.edit) return
-
-                this.$emit('update:rate', val)
-                this.$emit('score', val)
-            },
-
-            changeHover (val) {
-                this.hoverRate = val
-            }
-        }
+  props: {
+    rate: {
+      type: Number,
+      default: 0
+    },
+    width: {
+      type: Number,
+      default: 15
+    },
+    height: {
+      type: Number,
+      default: 16
+    },
+    edit: {
+      type: Boolean,
+      default: true
+    },
+    tooltips: {
+      type: Array,
+      default: () => ([])
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+
+  data () {
+    return {
+      hoverRate: 0
+    }
+  },
+
+  computed: {
+    starWidth () {
+      const integer = Math.floor(this.rate)
+      const fixWidth = (this.width + 3) * integer
+      const rateWidth = this.width * (this.rate - integer)
+      return `${fixWidth + rateWidth}px`
+    }
+  },
+
+  methods: {
+    chooseRate (val) {
+      if (!this.edit) return
+
+      this.$emit('update:rate', val)
+      this.$emit('score', val)
+    },
+
+    changeHover (val) {
+      this.hoverRate = val
+    }
+  }
+}
 </script>
 
 <style>

@@ -46,19 +46,19 @@ Vue.component('app-header', header)
 Vue.component('app-footer', footer)
 
 if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual'
+  history.scrollRestoration = 'manual'
 } else {
-    window.onunload = () => window.scrollTo(0, 0)
+  window.onunload = () => window.scrollTo(0, 0)
 }
 
 Vue.config.devtools = true
 
 // eslint-disable-next-line no-new
 new Vue({
-    el: '#root',
-    router,
-    components: { App },
-    mixins: [anchorMixin, copyMixin],
-    // i18n,
-    template: '<App />'
+  el: '#root',
+  router,
+  components: { App },
+  mixins: [anchorMixin, copyMixin],
+  // i18n,
+  template: '<App />'
 })

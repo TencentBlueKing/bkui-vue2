@@ -36,51 +36,51 @@ import Badge from '@/components/badge'
 import { mountComponent } from '../helpers'
 
 describe('Component', () => {
-    it('render the correct markup', () => {
-        const wrapper = mountComponent(Badge, {
-            propsData: {
-                theme: 'danger',
-                val: 10
-            }
-        })
-
-        expect(wrapper.find('.bk-badge.bk-danger').exists()).toBe(true)
-        expect(wrapper.find('.bk-badge.bk-danger').text()).toBe('10')
+  it('render the correct markup', () => {
+    const wrapper = mountComponent(Badge, {
+      propsData: {
+        theme: 'danger',
+        val: 10
+      }
     })
 
-    it('max props is correct', () => {
-        const wrapper = mountComponent(Badge, {
-            propsData: {
-                val: 10,
-                max: 5
-            }
-        })
-        expect(wrapper.find('.bk-badge').text()).toBe('5+')
+    expect(wrapper.find('.bk-badge.bk-danger').exists()).toBe(true)
+    expect(wrapper.find('.bk-badge.bk-danger').text()).toBe('10')
+  })
+
+  it('max props is correct', () => {
+    const wrapper = mountComponent(Badge, {
+      propsData: {
+        val: 10,
+        max: 5
+      }
+    })
+    expect(wrapper.find('.bk-badge').text()).toBe('5+')
+  })
+
+  it('dot props is correct', () => {
+    const wrapper = mountComponent(Badge, {
+      propsData: {
+        val: 10,
+        max: 5,
+        dot: true
+      }
     })
 
-    it('dot props is correct', () => {
-        const wrapper = mountComponent(Badge, {
-            propsData: {
-                val: 10,
-                max: 5,
-                dot: true
-            }
-        })
+    expect(wrapper.find('.bk-badge.dot').exists()).toBe(true)
+    expect(wrapper.find('.bk-badge.dot').text()).toBe('')
+  })
 
-        expect(wrapper.find('.bk-badge.dot').exists()).toBe(true)
-        expect(wrapper.find('.bk-badge.dot').text()).toBe('')
+  it('emit event is correct', () => {
+    const wrapper = mountComponent(Badge, {
+      propsData: {
+        val: 10
+      }
     })
 
-    it('emit event is correct', () => {
-        const wrapper = mountComponent(Badge, {
-            propsData: {
-                val: 10
-            }
-        })
+    wrapper.find('.bk-badge').trigger('mouseenter')
+    wrapper.find('.bk-badge').trigger('mouseleave')
 
-        wrapper.find('.bk-badge').trigger('mouseenter')
-        wrapper.find('.bk-badge').trigger('mouseleave')
-
-        expect(wrapper.emittedByOrder().map(e => e.name)).toEqual(['hover', 'leave'])
-    })
+    expect(wrapper.emittedByOrder().map(e => e.name)).toEqual(['hover', 'leave'])
+  })
 })

@@ -37,51 +37,51 @@ import RangeTimePickerPanel from './panel/time-range.vue'
 import timeMixins from './time-mixins'
 
 export default {
-    name: 'bk-time-picker',
-    mixins: [Picker, timeMixins],
-    components: {
-        TimePickerPanel,
-        RangeTimePickerPanel
-    },
-    props: {
-        type: {
-            type: String,
-            default: 'time',
-            validator (value) {
-                if (['time', 'timerange'].indexOf(value) < 0) {
-                    console.error(`type property is not valid: '${value}'`)
-                    return false
-                }
-                return true
-            }
-        },
-        allowCrossDay: {
-            type: Boolean,
-            default: false
+  name: 'bk-time-picker',
+  mixins: [Picker, timeMixins],
+  components: {
+    TimePickerPanel,
+    RangeTimePickerPanel
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'time',
+      validator (value) {
+        if (['time', 'timerange'].indexOf(value) < 0) {
+          console.error(`type property is not valid: '${value}'`)
+          return false
         }
+        return true
+      }
     },
-    computed: {
-        panel () {
-            const isRange = this.type === 'timerange'
-            return isRange ? 'RangeTimePickerPanel' : 'TimePickerPanel'
-        },
-        ownPickerProps () {
-            return {
-                disabledHours: this.disabledHours,
-                disabledMinutes: this.disabledMinutes,
-                disabledSeconds: this.disabledSeconds,
-                hideDisabledOptions: this.hideDisabledOptions
-            }
-        }
-    },
-    watch: {
-        visible (visible) {
-            if (visible) {
-                this.$nextTick(() => {
-                    const spinners = findChildComponents(this, 'TimeSpinner')
-                    spinners.forEach(instance => instance.updateScroll())
-                })
-            }
-        }
+    allowCrossDay: {
+      type: Boolean,
+      default: false
     }
+  },
+  computed: {
+    panel () {
+      const isRange = this.type === 'timerange'
+      return isRange ? 'RangeTimePickerPanel' : 'TimePickerPanel'
+    },
+    ownPickerProps () {
+      return {
+        disabledHours: this.disabledHours,
+        disabledMinutes: this.disabledMinutes,
+        disabledSeconds: this.disabledSeconds,
+        hideDisabledOptions: this.hideDisabledOptions
+      }
+    }
+  },
+  watch: {
+    visible (visible) {
+      if (visible) {
+        this.$nextTick(() => {
+          const spinners = findChildComponents(this, 'TimeSpinner')
+          spinners.forEach(instance => instance.updateScroll())
+        })
+      }
+    }
+  }
 }
