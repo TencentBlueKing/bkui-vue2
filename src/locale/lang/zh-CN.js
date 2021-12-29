@@ -172,6 +172,17 @@ export default {
         message: {
             copy: '复制',
             copied: '已复制'
+        },
+        image: {
+            zoomIn: '放大',
+            zoomOut: '缩小',
+            rotateLeft: '向左旋转',
+            rotateRight: '向右旋转',
+            fullScreen: '适应屏幕',
+            original: '快速回到1：1',
+            prev: '上一张',
+            next: '上一张'
+
         }
     }
 }

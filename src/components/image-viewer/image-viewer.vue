@@ -30,13 +30,14 @@
     <transition name="bk-zoom">
         <div tabindex="-1" ref="bk-image-viewer-wrapper" class="bk-image-viewer-wrapper"
             :style="{ 'z-index': zIndex }">
+            <div @click="maskClose && hide()" class="bk-image-viewer-mask"></div>
             <div v-if="isShowTitle && urlList.length" class="bk-image-viewer-header">
-                <div>{{currentName}}</div>
-                <div class="tc">{{index + 1}}/{{urlList.length}}</div>
+                <div>{{ currentName }}</div>
+                <div class="tc">{{ index + 1 }}/{{ urlList.length }}</div>
                 <div class="quit-box tr">
-                    <div class="quit-tips mr10">{{t('bk.imageViewer.quitTips')}}</div>
+                    <div class="quit-tips mr10">{{ t('bk.imageViewer.quitTips') }}</div>
                     <!-- CLOSE -->
-                    <div class="bk-image-viewer-close" @click="hide">
+                    <div @click="hide" class="bk-image-viewer-close">
                         <i class="bk-icon icon-close"></i>
                     </div>
                 </div>
@@ -59,19 +60,25 @@
             <!-- ACTIONS -->
             <div class="bk-image-viewer-btn bk-image-viewer-actions">
                 <div class="bk-image-viewer-actions-inner">
-                    <i class="bk-icon icon-narrow-line" @click="handleActions('zoomOut')"></i>
-                    <i class="bk-icon icon-enlarge-line" @click="handleActions('zoomIn')"></i>
-                    <i class="bk-icon icon-normalized" @click="toggleMode('original')"></i>
-                    <i class="bk-icon icon-left-turn-line" @click="handleActions('anticlocelise')"></i>
-                    <i class="bk-icon icon-right-turn-line" @click="handleActions('clocelise')"></i>
-                    <i class="bk-icon icon-unfull-screen" @click="toggleMode('contain')"></i>
+                    <i class="bk-icon icon-narrow-line" @click="handleActions('zoomOut')"
+                        v-bk-tooltips.top="t('bk.image.zoomOut')" />
+                    <i class="bk-icon icon-enlarge-line" @click="handleActions('zoomIn')"
+                        v-bk-tooltips.top="t('bk.image.zoomIn')" />
+                    <i class="bk-icon icon-normalized" @click="toggleMode('original')"
+                        v-bk-tooltips.top="t('bk.image.original')" />
+                    <i class="bk-icon icon-left-turn-line" @click="handleActions('anticlocelise')"
+                        v-bk-tooltips.top="t('bk.image.rotateLeft')" />
+                    <i class="bk-icon icon-right-turn-line" @click="handleActions('clockwise')"
+                        v-bk-tooltips.top="t('bk.image.rotateRight')" />
+                    <i class="bk-icon icon-unfull-screen" @click="toggleMode('contain')"
+                        v-bk-tooltips.top="t('bk.image.fullScreen')" />
                 </div>
             </div>
             <!-- CANVAS -->
             <div class="bk-image-viewer-canvas" :class="{ 'bk-image-viewer-has-header': isShowTitle }">
                 <div class="bk-image-viewer-error" v-if="error">
                     <div><i class="bk-icon icon-image-fail"></i></div>
-                    <div>{{t('bk.imageViewer.loadFailed')}}</div>
+                    <div>{{ t('bk.imageViewer.loadFailed') }}</div>
                 </div>
                 <img
                     v-for="(url, i) in urlList"
@@ -93,6 +100,7 @@
 <script>
     import { addEvent, removeEvent } from '@/utils/dom'
     import locale from 'bk-magic-vue/lib/locale'
+
     // import { throttle } from 'throttle-debounce'
     function rafThrottle (fn) {
         let locked = false
@@ -105,6 +113,7 @@
             })
         }
     }
+
     export default {
         name: 'bk-image-viewer',
         mixins: [locale.mixin],
@@ -134,6 +143,10 @@
             initialIndex: {
                 type: Number,
                 default: 0
+            },
+            maskClose: {
+                type: Boolean,
+                default: true
             }
         },
 
@@ -336,7 +349,7 @@
                     case 'zoomIn':
                         transform.scale = parseFloat((transform.scale + zoomRate).toFixed(3))
                         break
-                    case 'clocelise':
+                    case 'clockwise':
                         transform.deg += rotateDeg
                         break
                     case 'anticlocelise':

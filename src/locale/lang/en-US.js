@@ -173,6 +173,17 @@ export default {
         message: {
             copy: 'copy',
             copied: 'copied'
+        },
+        image: {
+            zoomIn: 'zoom in',
+            zoomOut: 'zoom out',
+            rotateLeft: 'anticlockwise',
+            rotateRight: 'clockwise rotation',
+            fullScreen: 'full screen',
+            original: 'original size',
+            prev: 'prev',
+            next: 'next'
+
         }
     }
 }
