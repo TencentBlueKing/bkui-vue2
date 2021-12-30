@@ -48,6 +48,12 @@ import { getGroupName } from './checkbox-name.js'
 
 export default {
   name: 'bk-checkbox-group',
+  provide () {
+    return {
+      handleAddItem: this.handleAddItem,
+      handleRemoveItem: this.handleRemoveItem
+    }
+  },
   props: {
     value: {
       type: Array,
@@ -74,15 +80,18 @@ export default {
       this.localValue = [...value]
     }
   },
-  created () {
-    this.$on('checkbox-item-add', item => {
-      if (item) {
-        this.checkboxItems.push(item)
-      }
-      return false
-    })
-  },
   methods: {
+    handleAddItem (item) {
+      if (!item || this.checkboxItems.includes(item)) return
+
+      this.checkboxItems.push(item)
+    },
+    handleRemoveItem (item) {
+      const index = this.checkboxItems.indexOf(item)
+      if (index > -1) {
+        this.checkboxItems.splice(index, 1)
+      }
+    },
     handleChange (checked, value) {
       const oldValue = [...this.localValue]
       const localValue = []
