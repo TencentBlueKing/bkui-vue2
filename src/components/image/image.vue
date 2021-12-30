@@ -54,6 +54,7 @@
         :initial-index="imageIndex"
         :url-list="previewSrcList"
         :on-close="closeViewer"
+        :mask-close="maskClose"
       ></bk-image-viewer>
     </template>
   </div>
@@ -108,6 +109,10 @@ export default {
     zIndex: {
       type: Number,
       default: 2000
+    },
+    maskClose: {
+      type: Boolean,
+      default: true
     }
   },
 
