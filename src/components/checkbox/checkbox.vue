@@ -47,7 +47,7 @@ import { getCheckboxName } from './checkbox-name.js'
 export default {
   name: 'bk-checkbox',
   mixins: [emitter],
-
+  inject: ['handleRemoveItem', 'handleAddItem'],
   props: {
     value: {
       type: [String, Number, Boolean],
@@ -131,8 +131,16 @@ export default {
     }
   },
   created () {
-    this.dispatch('bk-checkbox-group', 'checkbox-item-add', this)
+    // this.dispatch('bk-checkbox-group', 'checkbox-item-add', this)
+    if (this.handleAddItem && typeof this.handleAddItem === 'function') {
+      this.handleAddItem(this)
+    }
     this.init()
+  },
+  destroyed () {
+    if (this.handleRemoveItem && typeof this.handleRemoveItem === 'function') {
+      this.handleRemoveItem(this)
+    }
   },
   methods: {
     getValue () {
