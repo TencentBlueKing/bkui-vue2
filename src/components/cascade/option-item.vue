@@ -45,7 +45,7 @@
             </bk-checkbox>
           </div>
           <span class="bk-option-name" :class="{ 'bk-margin-left': multiple }">
-            {{item.name}}
+            <slot name="option" :node="item"></slot>
             <slot name="prepend" :node="item"></slot>
           </span>
         </div>
