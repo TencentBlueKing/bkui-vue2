@@ -44,6 +44,9 @@
         @click.native.stop="cascadeClick(item)"
         @mouseenter.native.stop="cascadeHover(item)"
         @handleCheckItem="handleCheckItem">
+        <template slot="option" slot-scope="{ node }">
+          <slot name="option" :node="node"></slot>
+        </template>
         <template slot="prepend" slot-scope="{ node }">
           <slot name="prepend" :node="node"></slot>
         </template>
@@ -67,6 +70,9 @@
       :is-remote="isRemote"
       :remote-method="remoteMethod"
       @updateSelectedList="updateSelectedList">
+      <template slot="option" slot-scope="{ node }">
+        <slot name="option" :node="node"></slot>
+      </template>
       <template slot="prepend" slot-scope="{ node }">
         <slot name="prepend" :node="node"></slot>
       </template>

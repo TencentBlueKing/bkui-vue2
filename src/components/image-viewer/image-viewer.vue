@@ -30,6 +30,7 @@
   <transition name="bk-zoom">
     <div tabindex="-1" ref="bk-image-viewer-wrapper" class="bk-image-viewer-wrapper"
       :style="{ 'z-index': zIndex }">
+      <div class="bk-image-viewer-mask" @click="maskClose && hide()"></div>
       <div v-if="isShowTitle && urlList.length" class="bk-image-viewer-header">
         <div>{{currentName}}</div>
         <div class="tc">{{index + 1}}/{{urlList.length}}</div>
@@ -59,12 +60,18 @@
       <!-- ACTIONS -->
       <div class="bk-image-viewer-btn bk-image-viewer-actions">
         <div class="bk-image-viewer-actions-inner">
-          <i class="bk-icon icon-narrow-line" @click="handleActions('zoomOut')"></i>
-          <i class="bk-icon icon-enlarge-line" @click="handleActions('zoomIn')"></i>
-          <i class="bk-icon icon-normalized" @click="toggleMode('original')"></i>
-          <i class="bk-icon icon-left-turn-line" @click="handleActions('anticlocelise')"></i>
-          <i class="bk-icon icon-right-turn-line" @click="handleActions('clocelise')"></i>
-          <i class="bk-icon icon-unfull-screen" @click="toggleMode('contain')"></i>
+          <i class="bk-icon icon-narrow-line" @click="handleActions('zoomOut')"
+            v-bk-tooltips.top="t('bk.image.zoomOut')" />
+          <i class="bk-icon icon-enlarge-line" @click="handleActions('zoomIn')"
+            v-bk-tooltips.top="t('bk.image.zoomIn')" />
+          <i class="bk-icon icon-normalized" @click="toggleMode('original')"
+            v-bk-tooltips.top="t('bk.image.original')" />
+          <i class="bk-icon icon-left-turn-line" @click="handleActions('anticlocelise')"
+            v-bk-tooltips.top="t('bk.image.rotateLeft')" />
+          <i class="bk-icon icon-right-turn-line" @click="handleActions('clockwise')"
+            v-bk-tooltips.top="t('bk.image.rotateRight')" />
+          <i class="bk-icon icon-unfull-screen" @click="toggleMode('contain')"
+            v-bk-tooltips.top="t('bk.image.fullScreen')" />
         </div>
       </div>
       <!-- CANVAS -->
@@ -134,6 +141,10 @@ export default {
     initialIndex: {
       type: Number,
       default: 0
+    },
+    maskClose: {
+      type: Boolean,
+      default: true
     }
   },
 
