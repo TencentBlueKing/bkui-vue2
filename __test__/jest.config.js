@@ -33,41 +33,41 @@
  */
 
 module.exports = {
-    rootDir: '../',
-    setupFiles: ['<rootDir>/__test__/setup', 'jest-canvas-mock'],
-    moduleFileExtensions: [
-        'js',
-        'json',
-        'vue'
-    ],
-    moduleNameMapper: {
-        '^@$': '<rootDir>/src/index',
-        '^@/(.*)$': '<rootDir>/src/$1',
-        '^bk-magic-vue/lib/locale$': '<rootDir>/src/locale',
-        '^bk-magic-vue/lib/locale/lang$': '<rootDir>/src/locale/lang',
-        '^bk-magic-vue/lib/locale/lang/en-US$': '<rootDir>/src/locale/lang/en-US',
-        '^bk-magic-vue/lib/locale/lang/zh-CN$': '<rootDir>/src/locale/lang/en-US'
-    },
-    transform: {
-        '^.+\\.js$': '<rootDir>/__test__/jest.babel.js',
-        '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',
-        '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$': 'jest-transform-stub'
-    },
-    transformIgnorePatterns: ['<rootDir>/node_modules/(?!popper.js)'],
-    snapshotSerializers: [
-        '<rootDir>/node_modules/jest-serializer-vue'
-    ],
-    testMatch: [
-        '**/__test__/components/**/*.test.(js)|**/__test__/*.(js)'
-    ],
-    collectCoverage: false,
-    collectCoverageFrom: [
-        'src/**/*.{js,vue}',
-        '!**/node_modules/**'
-    ],
-    coverageReporters: [
-        'html',
-        // 'text',
-        'text-summary'
-    ]
+  rootDir: '../',
+  setupFiles: ['<rootDir>/__test__/setup', 'jest-canvas-mock'],
+  moduleFileExtensions: [
+    'js',
+    'json',
+    'vue'
+  ],
+  moduleNameMapper: {
+    '^@$': '<rootDir>/src/index',
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^bk-magic-vue/lib/locale$': '<rootDir>/src/locale',
+    '^bk-magic-vue/lib/locale/lang$': '<rootDir>/src/locale/lang',
+    '^bk-magic-vue/lib/locale/lang/en-US$': '<rootDir>/src/locale/lang/en-US',
+    '^bk-magic-vue/lib/locale/lang/zh-CN$': '<rootDir>/src/locale/lang/en-US'
+  },
+  transform: {
+    '^.+\\.js$': '<rootDir>/__test__/jest.babel.js',
+    '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$': 'jest-transform-stub'
+  },
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!popper.js)'],
+  snapshotSerializers: [
+    '<rootDir>/node_modules/jest-serializer-vue'
+  ],
+  testMatch: [
+    '**/__test__/components/**/*.test.(js)|**/__test__/*.(js)'
+  ],
+  collectCoverage: false,
+  collectCoverageFrom: [
+    'src/**/*.{js,vue}',
+    '!**/node_modules/**'
+  ],
+  coverageReporters: [
+    'html',
+    // 'text',
+    'text-summary'
+  ]
 }

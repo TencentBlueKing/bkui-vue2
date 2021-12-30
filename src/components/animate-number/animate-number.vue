@@ -27,89 +27,89 @@
 -->
 
 <template>
-    <span :class="extCls">{{formatValue}}</span>
+  <span :class="extCls">{{formatValue}}</span>
 </template>
 
 <script>
-    export default {
-        name: 'bk-animate-number',
+export default {
+  name: 'bk-animate-number',
 
-        props: {
-            value: {
-                type: Number,
-                required: true
-            },
-            digits: {
-                type: Number,
-                default: 0
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-
-        data () {
-            return {
-                tweeningValue: 0,
-                rafId: ''
-            }
-        },
-
-        computed: {
-            formatValue () {
-                return Number(this.tweeningValue).toFixed(this.digits)
-            }
-        },
-
-        watch: {
-            value (newValue, oldValue) {
-                this.tween(oldValue, newValue)
-            }
-        },
-
-        mounted () {
-            this.tween(0, this.value)
-        },
-
-        beforeDestroy () {
-            cancelAnimationFrame(this.rafId)
-        },
-
-        methods: {
-            tween (startValue, endValue) {
-                // 错误数据返回0
-                if (Number.isNaN(+endValue)) return 0
-
-                const dis = Math.abs(endValue - startValue)
-                const isPositive = endValue - startValue > 0 ? 1 : -1
-                const ticDis = Math.ceil((dis / 30) * (10 ** this.digits)) / (10 ** this.digits)
-                const ticTimes = Math.ceil(dis / ticDis)
-                // 算出每次计算需要间隔的时间，保证动画的流畅
-                const gapTime = 25 / ticTimes
-                let tickGap = 1
-
-                const animate = () => {
-                    if (tickGap < gapTime) {
-                        this.rafId = requestAnimationFrame(animate)
-                        tickGap++
-                        return
-                    }
-
-                    this.tweeningValue += (ticDis * isPositive)
-
-                    const isUnDone = isPositive === 1 ? this.tweeningValue < endValue : this.tweeningValue > endValue
-                    if (isUnDone) {
-                        this.rafId = requestAnimationFrame(animate)
-                        tickGap = 1
-                    } else {
-                        this.tweeningValue = endValue
-                    }
-                }
-
-                animate()
-            }
-        }
+  props: {
+    value: {
+      type: Number,
+      required: true
+    },
+    digits: {
+      type: Number,
+      default: 0
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+
+  data () {
+    return {
+      tweeningValue: 0,
+      rafId: ''
+    }
+  },
+
+  computed: {
+    formatValue () {
+      return Number(this.tweeningValue).toFixed(this.digits)
+    }
+  },
+
+  watch: {
+    value (newValue, oldValue) {
+      this.tween(oldValue, newValue)
+    }
+  },
+
+  mounted () {
+    this.tween(0, this.value)
+  },
+
+  beforeDestroy () {
+    cancelAnimationFrame(this.rafId)
+  },
+
+  methods: {
+    tween (startValue, endValue) {
+      // 错误数据返回0
+      if (Number.isNaN(+endValue)) return 0
+
+      const dis = Math.abs(endValue - startValue)
+      const isPositive = endValue - startValue > 0 ? 1 : -1
+      const ticDis = Math.ceil((dis / 30) * (10 ** this.digits)) / (10 ** this.digits)
+      const ticTimes = Math.ceil(dis / ticDis)
+      // 算出每次计算需要间隔的时间，保证动画的流畅
+      const gapTime = 25 / ticTimes
+      let tickGap = 1
+
+      const animate = () => {
+        if (tickGap < gapTime) {
+          this.rafId = requestAnimationFrame(animate)
+          tickGap++
+          return
+        }
+
+        this.tweeningValue += (ticDis * isPositive)
+
+        const isUnDone = isPositive === 1 ? this.tweeningValue < endValue : this.tweeningValue > endValue
+        if (isUnDone) {
+          this.rafId = requestAnimationFrame(animate)
+          tickGap = 1
+        } else {
+          this.tweeningValue = endValue
+        }
+      }
+
+      animate()
+    }
+  }
+}
 </script>

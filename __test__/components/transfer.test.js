@@ -34,127 +34,127 @@ import Transfer from '@/components/transfer'
 import { mountComponent } from '../helpers'
 
 describe('Transfer', () => {
-    it('left header slot is rendered', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sourceList: [1, 5, 8, 10],
-                targetList: [1, 5]
-            },
-            slots: {
-                'left-header': 'left-header'
-            }
-        })
-        expect(wrapper.html()).toContain('<div class="slot-content">left-header</div>')
+  it('left header slot is rendered', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sourceList: [1, 5, 8, 10],
+        targetList: [1, 5]
+      },
+      slots: {
+        'left-header': 'left-header'
+      }
     })
-    it('right header slot is rendered', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sourceList: [1, 5, 8, 10],
-                targetList: [1, 5]
-            },
-            slots: {
-                'right-header': 'right-header'
-            }
-        })
-        expect(wrapper.html()).toContain('<div class="slot-content">right-header</div>')
+    expect(wrapper.html()).toContain('<div class="slot-content">left-header</div>')
+  })
+  it('right header slot is rendered', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sourceList: [1, 5, 8, 10],
+        targetList: [1, 5]
+      },
+      slots: {
+        'right-header': 'right-header'
+      }
     })
-    it('left empty content slot is rendered', () => {
-        const wrapper = mountComponent(Transfer, {
-            slots: {
-                'left-empty-content': '暂无选项'
-            }
-        })
-        expect(wrapper.html()).toContain('<div>暂无选项</div>')
+    expect(wrapper.html()).toContain('<div class="slot-content">right-header</div>')
+  })
+  it('left empty content slot is rendered', () => {
+    const wrapper = mountComponent(Transfer, {
+      slots: {
+        'left-empty-content': '暂无选项'
+      }
     })
-    it('right empty content slot is rendered', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sourceList: [1, 5, 8, 10],
-                targetList: []
-            },
-            slots: {
-                'right-empty-content': '未选择任何选项'
-            }
-        })
-        expect(wrapper.html()).toContain('<div>未选择任何选项</div>')
+    expect(wrapper.html()).toContain('<div>暂无选项</div>')
+  })
+  it('right empty content slot is rendered', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sourceList: [1, 5, 8, 10],
+        targetList: []
+      },
+      slots: {
+        'right-empty-content': '未选择任何选项'
+      }
     })
-    it('render the correct title', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                title: ['left-title', 'right-title']
-            }
-        })
-        expect(wrapper.props('title')).toEqual(['left-title', 'right-title'])
+    expect(wrapper.html()).toContain('<div>未选择任何选项</div>')
+  })
+  it('render the correct title', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        title: ['left-title', 'right-title']
+      }
     })
-    it('render the correct empty-content', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                emptyContent: ['left-content', 'right-content']
-            }
-        })
-        expect(wrapper.props('emptyContent')).toEqual(['left-content', 'right-content'])
+    expect(wrapper.props('title')).toEqual(['left-title', 'right-title'])
+  })
+  it('render the correct empty-content', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        emptyContent: ['left-content', 'right-content']
+      }
     })
-    it('has display-key', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                displayKey: 'name'
-            }
-        })
-        expect(wrapper.props('displayKey')).toEqual('name')
+    expect(wrapper.props('emptyContent')).toEqual(['left-content', 'right-content'])
+  })
+  it('has display-key', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        displayKey: 'name'
+      }
     })
-    it('has setting-key', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                settingKey: 'id'
-            }
-        })
-        expect(wrapper.props('settingKey')).toEqual('id')
+    expect(wrapper.props('displayKey')).toEqual('name')
+  })
+  it('has setting-key', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        settingKey: 'id'
+      }
     })
-    it('has sort-key', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sortKey: 'id'
-            }
-        })
-        expect(wrapper.props('sortKey')).toEqual('id')
+    expect(wrapper.props('settingKey')).toEqual('id')
+  })
+  it('has sort-key', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sortKey: 'id'
+      }
     })
-    it('has sortable', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sortable: true
-            }
-        })
-        expect(wrapper.props('sortable')).toEqual(true)
+    expect(wrapper.props('sortKey')).toEqual('id')
+  })
+  it('has sortable', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sortable: true
+      }
     })
-    it('has source-list', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sourceList: [1, 5, 8, 10]
-            }
-        })
-        const sourceContent = wrapper.find('.source-list .content')
-        expect(sourceContent.exists()).toBe(true)
-        expect(sourceContent.contains('li')).toBe(true)
+    expect(wrapper.props('sortable')).toEqual(true)
+  })
+  it('has source-list', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sourceList: [1, 5, 8, 10]
+      }
     })
-    it('has target-list', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sourceList: [1, 5, 8, 10],
-                targetList: [1, 5]
-            }
-        })
-        const targetContent = wrapper.find('.target-list .content')
-        expect(targetContent.exists()).toBe(true)
-        expect(targetContent.contains('li')).toBe(true)
+    const sourceContent = wrapper.find('.source-list .content')
+    expect(sourceContent.exists()).toBe(true)
+    expect(sourceContent.contains('li')).toBe(true)
+  })
+  it('has target-list', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sourceList: [1, 5, 8, 10],
+        targetList: [1, 5]
+      }
     })
-    it('emit change event', () => {
-        const wrapper = mountComponent(Transfer, {
-            propsData: {
-                sourceList: [1, 5, 8, 10]
-            }
-        })
-        wrapper.vm.$emit('change', [1, 5, 8, 10], [], [])
-        expect(wrapper.emitted().change).toBeTruthy()
-        expect(wrapper.emitted().change[1]).toEqual([[1, 5, 8, 10], [], []])
+    const targetContent = wrapper.find('.target-list .content')
+    expect(targetContent.exists()).toBe(true)
+    expect(targetContent.contains('li')).toBe(true)
+  })
+  it('emit change event', () => {
+    const wrapper = mountComponent(Transfer, {
+      propsData: {
+        sourceList: [1, 5, 8, 10]
+      }
     })
+    wrapper.vm.$emit('change', [1, 5, 8, 10], [], [])
+    expect(wrapper.emitted().change).toBeTruthy()
+    expect(wrapper.emitted().change[1]).toEqual([[1, 5, 8, 10], [], []])
+  })
 })

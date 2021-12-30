@@ -1,5 +1,169 @@
 <script>
-    import { bkProcess, bkButton } from '@'
+    import { bkProcess, bkButton, bkLink } from '@'
+    const defaultStatusList = () => (
+        [
+            {
+                content: '创建应用',
+                status: 'done',
+                steps: [
+                    {
+                        content: '创建应用1',
+                        status: 'done' // 'error' | 'loading'
+                    },
+                    {
+                        content: '创建应用2',
+                        status: 'done'
+                    }
+                ]
+            },
+            {
+                content: '完善资料',
+                status: 'error',
+                statusIcon: 'close-circle-shape',
+                steps: [
+                    {
+                        content: '完善资料1',
+                        status: 'done'
+                    },
+                    {
+                        content: '完善资料2',
+                        status: 'error'
+                    }
+                ]
+            },
+            {
+                content: '下载代码',
+                status: false,
+                steps: [
+                    {
+                        content: '下载代码1',
+                        status: false,
+                    },
+                    {
+                        content: '下载代码2',
+                        status: false,
+                    },
+                    {
+                        content: '下载代码3',
+                        status: false,
+                    },
+                    {
+                        content: '下载代码4',
+                        status: false,
+                    }
+                ]
+            },
+            {
+                content: '测试部署',
+                status: false,
+                steps: [
+                    {
+                        content: '测试部署1',
+                        status: false,
+                    },
+                    {
+                        content: '测试部署2',
+                        status: false,
+                    }
+                ]
+            },
+            {
+                content: '开发完成',
+                steps: [
+                    {
+                        content: '开发完成1',
+                    },
+                    {
+                        content: '开发完成2',
+                    }
+                ]
+            }
+        ]
+    )
+
+    const defaultListWithVNode = function() {
+        const createElement = this.$createElement
+        return (
+            [
+                {
+                    content: '创建应用',
+                    status: 'done',
+                    steps: [
+                        {
+                            content: '创建应用1',
+                            status: 'done' // 'error' | 'loading'
+                        },
+                        {
+                            content: '创建应用2',
+                            status: 'done'
+                        }
+                    ]
+                },
+                {
+                    content: '完善资料',
+                    status: 'error',
+                    statusIcon: 'close-circle-shape',
+                    steps: [
+                        {
+                            content: '完善资料1',
+                            status: 'done'
+                        },
+                        {
+                            content: '完善资料2',
+                            status: 'error'
+                        }
+                    ]
+                },
+                {
+                    content: '下载代码',
+                    status: false,
+                    steps: [
+                        {
+                            content: '下载代码1',
+                            status: false,
+                        },
+                        {
+                            content: '下载代码2',
+                            status: false,
+                        },
+                        {
+                            content: createElement('span', { style: { color: 'blue' } }, [createElement('b', '下载代码3')]),
+                            status: false,
+                        },
+                        {
+                            content: createElement(bkLink, { props: { underline: true } }, '下载代码4'),
+                            status: false,
+                        }
+                    ]
+                },
+                {
+                    content: '测试部署',
+                    status: false,
+                    steps: [
+                        {
+                            content: '测试部署1',
+                            status: false,
+                        },
+                        {
+                            content: '测试部署2',
+                            status: false,
+                        }
+                    ]
+                },
+                {
+                    content: '开发完成',
+                    steps: [
+                        {
+                            content: '开发完成1',
+                        },
+                        {
+                            content: '开发完成2',
+                        }
+                    ]
+                }
+            ]
+        )
+    }
 
     export default {
         components: {
@@ -7,6 +171,7 @@
             bkButton
         },
         data () {
+            this.getDefaultListWithVNode = defaultListWithVNode.bind(this)
             return {
                 process: 1,
                 loadingProcess: 2,
@@ -121,7 +286,9 @@
                             }
                         ]
                     }
-                ]
+                ],
+                dataStatusList: defaultStatusList(),
+                dataListWithVNode: this.getDefaultListWithVNode()
             }
         },
         methods: {
@@ -138,10 +305,45 @@
                 console.log(process)
                 console.log(data)
             },
+            handleStepChange (step, stepIndex, processIndex) {
+                console.log(step, stepIndex, processIndex)
+            },
             next () {
                 this.curProcess++
             },
             reset () {
+                this.curProcess = 1
+            },
+            statusNext () {
+                const status = ['done', 'error', 'loading']
+                const next = this.curProcess % this.dataStatusList.length
+                this.dataStatusList[next].status = status[Math.floor(Math.random() * status.length)]
+                this.dataStatusList[next].statusIcon = ''
+
+                this.dataStatusList[next].steps.forEach(step => {
+                    step.status = status[Math.floor(Math.random() * status.length)]
+                    // or
+                    // this.$set(step, 'status', status[Math.floor(Math.random() * status.length)])
+                })
+                this.curProcess++
+            },
+            statusReset () {
+                this.dataStatusList = defaultStatusList()
+                this.curProcess = 1
+            },
+            vNodeListNext () {
+                const status = ['done', 'error', 'loading']
+                const next = this.curProcess % this.dataListWithVNode.length
+                this.dataListWithVNode[next].status = status[Math.floor(Math.random() * status.length)]
+                this.dataListWithVNode[next].statusIcon = ''
+
+                this.dataListWithVNode[next].steps.forEach(step => {
+                    step.status = status[Math.floor(Math.random() * status.length)]
+                })
+                this.curProcess++
+            },
+            vNodeListReset () {
+                this.dataListWithVNode = this.getDefaultListWithVNode()
                 this.curProcess = 1
             }
         }
@@ -261,7 +463,7 @@
 ```
 :::
 
-### 扩展 {page=#/process}
+### 配置子步骤 {page=#/process}
 
 :::demo 在 `list` 数据源中配置 `steps` 属性
 
@@ -385,6 +587,295 @@
 ```
 :::
 
+
+### 步骤状态配置 {page=#/process}
+
+:::demo 配置 `steps` 的不同状态，使用 `status` 属性设置当前步骤状态，支持 `default`、`done`、`loading`、`error` 和 布尔值 `false` 表示不显示状态图标，当配置 `status` 后 `isLoading` 无效。除 `default` 状态外其它状态都拥有默认的图标，可以通过 `statusIcon` 属性自定义状态图标，如 `statusIcon: 'circle-shape'` 支持Icon图标组件中的图标。
+
+```html
+<template>
+    <div>
+        <bk-button type="primary" v-if="curProcess <= dataStatusList.length" @click="statusNext" style="margin-top: 20px; margin-bottom: 20px;">{{curProcess === dataStatusList.length ? '完成' : '下一步' }}</bk-button>
+        <bk-button type="primary" @click="statusReset" style="margin-top: 20px; margin-bottom: 20px;" v-else>重置</bk-button>
+        <bk-process
+            :list="dataStatusList"
+            :cur-process.sync="curProcess"
+            :display-key="'content'"
+            :show-steps="true"
+            :controllable="false"
+            @process-changed="changeProcess">
+        </bk-process>
+    </div>
+</template>
+<script>
+    import { bkProcess, bkButton } from '{{BASE_LIB_NAME}}'
+
+    const defaultStatusList = () => (
+        [
+            {
+                content: '创建应用',
+                status: 'done',
+                steps: [
+                    {
+                        content: '创建应用1',
+                        status: 'done' // 'error' | 'loading' ｜ false
+                    },
+                    {
+                        content: '创建应用2',
+                        status: 'done'
+                    }
+                ]
+            },
+            {
+                content: '完善资料',
+                status: 'error',
+                statusIcon: 'close-circle-shape',
+                steps: [
+                    {
+                        content: '完善资料1',
+                        status: 'done'
+                    },
+                    {
+                        content: '完善资料2',
+                        status: 'error'
+                    }
+                ]
+            },
+            {
+                content: '下载代码',
+                status: false,
+                steps: [
+                    {
+                        content: '下载代码1',
+                        status: false,
+                    },
+                    {
+                        content: '下载代码2',
+                        status: false,
+                    },
+                    {
+                        content: '下载代码3',
+                        status: false,
+                    },
+                    {
+                        content: '下载代码4',
+                        status: false,
+                    }
+                ]
+            },
+            {
+                content: '测试部署',
+                status: false,
+                steps: [
+                    {
+                        content: '测试部署1',
+                        status: false,
+                    },
+                    {
+                        content: '测试部署2',
+                        status: false,
+                    }
+                ]
+            },
+            {
+                content: '开发完成',
+                steps: [
+                    {
+                        content: '开发完成1',
+                    },
+                    {
+                        content: '开发完成2',
+                    }
+                ]
+            }
+        ]
+    )
+
+    export default {
+        components: {
+            bkProcess,
+            bkButton
+        },
+        data () {
+            return {
+                curProcess: 1,
+                dataStatusList: defaultStatusList()
+            }
+        },
+        methods: {
+            changeProcess (process, data) {
+                console.log(process)
+                console.log(data)
+            },
+            statusNext () {
+                const status = ['done', 'error', 'loading']
+                const next = this.curProcess % this.dataStatusList.length
+
+                // 随机父步骤状态
+                this.dataStatusList[next].status = status[Math.floor(Math.random() * status.length)]
+                this.dataStatusList[next].statusIcon = ''
+
+                // 随机子步骤状态
+                this.dataStatusList[next].steps.forEach(step => {
+                    step.status = status[Math.floor(Math.random() * status.length)]
+                    // or status为动态创建
+                    // this.$set(step, 'status', status[Math.floor(Math.random() * status.length)])
+                })
+
+                this.curProcess++
+            },
+            statusReset () {
+                this.dataStatusList = defaultStatusList()
+                this.curProcess = 1
+            }
+        }
+    }
+</script>
+```
+
+:::
+### 子步骤支持 VNode {page=#/process}
+
+:::demo `steps.content` 配置为 VNode，可以更加灵活的控制显示内容。使用 `step-change` 事件实现点击步骤项时的行为监听。
+
+```html
+<template>
+    <div>
+        <bk-button type="primary" v-if="curProcess <= dataListWithVNode.length" @click="vNodeListNext" style="margin-top: 20px; margin-bottom: 20px;">{{curProcess === dataListWithVNode.length ? '完成' : '下一步' }}</bk-button>
+        <bk-button type="primary" @click="vNodeListReset" style="margin-top: 20px; margin-bottom: 20px;" v-else>重置</bk-button>
+        <bk-process
+            :list="dataListWithVNode"
+            :cur-process.sync="curProcess"
+            :display-key="'content'"
+            :show-steps="true"
+            :controllable="false"
+            @step-change="handleStepChange">
+        </bk-process>
+    </div>
+</template>
+<script>
+    import { bkProcess, bkButton, bkLink } from '{{BASE_LIB_NAME}}'
+
+    const defaultListWithVNode = function() {
+        const createElement = this.$createElement
+        return (
+            [
+                {
+                    content: '创建应用',
+                    status: 'done',
+                    steps: [
+                        {
+                            content: '创建应用1',
+                            status: 'done' // 'error' | 'loading'
+                        },
+                        {
+                            content: '创建应用2',
+                            status: 'done'
+                        }
+                    ]
+                },
+                {
+                    content: '完善资料',
+                    status: 'error',
+                    statusIcon: 'close-circle-shape',
+                    steps: [
+                        {
+                            content: '完善资料1',
+                            status: 'done'
+                        },
+                        {
+                            content: '完善资料2',
+                            status: 'error'
+                        }
+                    ]
+                },
+                {
+                    content: '下载代码',
+                    status: false,
+                    steps: [
+                        {
+                            content: '下载代码1',
+                            status: false,
+                        },
+                        {
+                            content: '下载代码2',
+                            status: false,
+                        },
+                        {
+                            content: createElement('span', { style: { color: 'blue' } }, [createElement('b', '下载代码3')]),
+                            status: false,
+                        },
+                        {
+                            content: createElement(bkLink, { props: { underline: true } }, '下载代码4'),
+                            status: false,
+                        }
+                    ]
+                },
+                {
+                    content: '测试部署',
+                    status: false,
+                    steps: [
+                        {
+                            content: '测试部署1',
+                            status: false,
+                        },
+                        {
+                            content: '测试部署2',
+                            status: false,
+                        }
+                    ]
+                },
+                {
+                    content: '开发完成',
+                    steps: [
+                        {
+                            content: '开发完成1',
+                        },
+                        {
+                            content: '开发完成2',
+                        }
+                    ]
+                }
+            ]
+        )
+    }
+
+    export default {
+        components: {
+            bkProcess,
+            bkButton
+        },
+        data () {
+            this.getDefaultListWithVNode = defaultListWithVNode.bind(this)
+            return {
+                curProcess: 1,
+                dataListWithVNode: this.getDefaultListWithVNode()
+            }
+        },
+        methods: {
+            vNodeListNext () {
+                const status = ['done', 'error', 'loading']
+                const next = this.curProcess % this.dataListWithVNode.length
+                this.dataListWithVNode[next].status = status[Math.floor(Math.random() * status.length)]
+                this.dataListWithVNode[next].statusIcon = ''
+
+                this.dataListWithVNode[next].steps.forEach(step => {
+                    step.status = status[Math.floor(Math.random() * status.length)]
+                })
+                this.curProcess++
+            },
+            vNodeListReset () {
+                this.dataListWithVNode = this.getDefaultListWithVNode()
+                this.curProcess = 1
+            },
+            handleStepChange (step, stepIndex, processIndex) {
+                console.log(step, stepIndex, processIndex)
+            }
+        }
+    }
+</script>
+```
+:::
 ### 属性 {page=#/process}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
@@ -399,3 +890,4 @@
 | 事件名称 | 说明 | 回调参数 |
 |------|------|------|
 | process-changed | 当前步骤变化时的回调  | 变化后的步骤 process / 变化后 process 对于的数据 data |
+| step-change | 步骤变化时的回调，当点击父节点时 stepIndex 为 null | step, stepIndex, processIndex |

@@ -33,80 +33,80 @@
 import { getActualTop } from '../../src/utils/util'
 
 export default {
-    watch: {
-        $route (to, from) {
-            const anchor = to.query.anchor || to.query.v
-            if (!anchor) {
-                window.scrollTo(0, 0)
-                return
-            }
-            setTimeout(() => {
-                this.jumpAnchor(anchor)
-            }, 0)
-        }
-    },
-    mounted () {
-        const self = this
-        document.querySelector('.app-content').addEventListener('click', e => {
-            const tagName = e.target.tagName.toUpperCase()
-            if (tagName === 'SPAN' && e.target.classList.contains('toc-link-content')) {
-                e.preventDefault()
-                e.stopPropagation()
-                const query = e.target.parentNode.getAttribute('href')
-                if (!query) {
-                    return
-                }
-                self.$router.push({
-                    name: self.$route.name,
-                    query: {
-                        anchor: query
-                    }
-                })
-            }
-            if (tagName === 'A') {
-                const anchorLink = e.target.getAttribute('anchor-link')
-                if (!anchorLink) {
-                    return
-                }
-                e.preventDefault()
-                e.stopPropagation()
-                self.$router.push({
-                    name: self.$route.name,
-                    query: {
-                        anchor: anchorLink
-                    }
-                })
-            }
-        })
-
-        const anchor = this.$route.query.anchor || this.$route.query.v
-        if (!anchor) {
-            return
-        }
+  watch: {
+    $route (to, from) {
+      const anchor = to.query.anchor || to.query.v
+      if (!anchor) {
+        window.scrollTo(0, 0)
+        return
+      }
+      setTimeout(() => {
         this.jumpAnchor(anchor)
-    },
-    methods: {
-        jumpAnchor (anchor) {
-            const node = document.getElementById(anchor)
-            if (!node) {
-                window.scrollTo(0, 0)
-                return
-            }
-
-            const tocNode = document.querySelector('.table-of-contents')
-            if (tocNode) {
-                Array.from(tocNode.querySelectorAll('a')).forEach(node => {
-                    node.parentNode.classList.remove('cur')
-                })
-                const hrefNode = tocNode.querySelector(`a[href="${anchor}"]`)
-                if (hrefNode) {
-                    hrefNode.parentNode.classList.add('cur')
-                }
-            }
-            const top = getActualTop(node)
-            setTimeout(() => {
-                window.scrollTo(0, top - 70)
-            }, 0)
-        }
+      }, 0)
     }
+  },
+  mounted () {
+    const self = this
+    document.querySelector('.app-content').addEventListener('click', e => {
+      const tagName = e.target.tagName.toUpperCase()
+      if (tagName === 'SPAN' && e.target.classList.contains('toc-link-content')) {
+        e.preventDefault()
+        e.stopPropagation()
+        const query = e.target.parentNode.getAttribute('href')
+        if (!query) {
+          return
+        }
+        self.$router.push({
+          name: self.$route.name,
+          query: {
+            anchor: query
+          }
+        })
+      }
+      if (tagName === 'A') {
+        const anchorLink = e.target.getAttribute('anchor-link')
+        if (!anchorLink) {
+          return
+        }
+        e.preventDefault()
+        e.stopPropagation()
+        self.$router.push({
+          name: self.$route.name,
+          query: {
+            anchor: anchorLink
+          }
+        })
+      }
+    })
+
+    const anchor = this.$route.query.anchor || this.$route.query.v
+    if (!anchor) {
+      return
+    }
+    this.jumpAnchor(anchor)
+  },
+  methods: {
+    jumpAnchor (anchor) {
+      const node = document.getElementById(anchor)
+      if (!node) {
+        window.scrollTo(0, 0)
+        return
+      }
+
+      const tocNode = document.querySelector('.table-of-contents')
+      if (tocNode) {
+        Array.from(tocNode.querySelectorAll('a')).forEach(node => {
+          node.parentNode.classList.remove('cur')
+        })
+        const hrefNode = tocNode.querySelector(`a[href="${anchor}"]`)
+        if (hrefNode) {
+          hrefNode.parentNode.classList.add('cur')
+        }
+      }
+      const top = getActualTop(node)
+      setTimeout(() => {
+        window.scrollTo(0, top - 70)
+      }, 0)
+    }
+  }
 }

@@ -34,46 +34,46 @@ import TimePicker from '@/components/time-picker'
 import { mountComponent } from '../helpers'
 
 describe('TimePicker', () => {
-    it('render the correct markup and content', () => {
-        const wrapper = mountComponent(TimePicker, {
-            propsData: {
-                value: '',
-                placeholder: '请选择时间'
-            }
-        })
-
-        expect(wrapper.vm.placement).toEqual('bottom-start')
-        expect(wrapper.vm.value).toEqual('')
-        expect(wrapper.vm.placeholder).toEqual('请选择时间')
-
-        wrapper.setProps({
-            placement: 'top-start',
-            type: 'timerange',
-            value: '00:00:00 - 10:00:00'
-        })
-
-        expect(wrapper.vm.type).toEqual('timerange')
-        expect(wrapper.vm.placement).toEqual('top-start')
-        expect(wrapper.vm.value).toEqual('00:00:00 - 10:00:00')
+  it('render the correct markup and content', () => {
+    const wrapper = mountComponent(TimePicker, {
+      propsData: {
+        value: '',
+        placeholder: '请选择时间'
+      }
     })
 
-    it('format props is correct', () => {
-        const parentWrapper = mountComponent({
-            data () {
-                return {
-                    value: '10:00:00',
-                    placeholder: '请选择时间',
-                    format: 'HH时mm分'
-                }
-            },
-            components: { 'bk-time-picker': TimePicker },
-            template: `
+    expect(wrapper.vm.placement).toEqual('bottom-start')
+    expect(wrapper.vm.value).toEqual('')
+    expect(wrapper.vm.placeholder).toEqual('请选择时间')
+
+    wrapper.setProps({
+      placement: 'top-start',
+      type: 'timerange',
+      value: '00:00:00 - 10:00:00'
+    })
+
+    expect(wrapper.vm.type).toEqual('timerange')
+    expect(wrapper.vm.placement).toEqual('top-start')
+    expect(wrapper.vm.value).toEqual('00:00:00 - 10:00:00')
+  })
+
+  it('format props is correct', () => {
+    const parentWrapper = mountComponent({
+      data () {
+        return {
+          value: '10:00:00',
+          placeholder: '请选择时间',
+          format: 'HH时mm分'
+        }
+      },
+      components: { 'bk-time-picker': TimePicker },
+      template: `
                 <div>
                     <bk-time-picker v-model="value" :format="'HH时mm分'"></bk-time-picker>
                 </div>
             `
-        })
-
-        expect(parentWrapper.vm.value).toEqual('10时00分')
     })
+
+    expect(parentWrapper.vm.value).toEqual('10时00分')
+  })
 })

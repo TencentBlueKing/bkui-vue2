@@ -35,111 +35,111 @@ import { mount } from '@vue/test-utils'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('Steps', () => {
-    it('render the correct prop steps', () => {
-        const wrapper = mountComponent(Steps, {
-            propsData: {
-                steps: [
-                    { title: '基本信息', icon: 1 },
-                    { title: '详细信息', icon: 2 },
-                    { title: '实名认证', icon: 3 }
-                ]
-            }
-        })
-        const children = wrapper.findAll('.bk-step')
-        const firstChild = children.at(0)
-        const title = firstChild.find('.bk-step-title')
-        const number = firstChild.find('.bk-step-number')
-        expect(title.text()).toBe('基本信息')
-        expect(number.text()).toBe('1')
-        expect(children.length).toBe(3)
+  it('render the correct prop steps', () => {
+    const wrapper = mountComponent(Steps, {
+      propsData: {
+        steps: [
+          { title: '基本信息', icon: 1 },
+          { title: '详细信息', icon: 2 },
+          { title: '实名认证', icon: 3 }
+        ]
+      }
     })
+    const children = wrapper.findAll('.bk-step')
+    const firstChild = children.at(0)
+    const title = firstChild.find('.bk-step-title')
+    const number = firstChild.find('.bk-step-number')
+    expect(title.text()).toBe('基本信息')
+    expect(number.text()).toBe('1')
+    expect(children.length).toBe(3)
+  })
 
-    it('render the correct prop cur-step', () => {
-        const wrapper = mountComponent(Steps, {
-            propsData: {
-                steps: [
-                    { title: '基本信息', icon: 1 },
-                    { title: '详细信息', icon: 2 },
-                    { title: '实名认证', icon: 3 }
-                ],
-                curStep: 3
-            }
-        })
-        const children = wrapper.findAll('.bk-step')
-        const current = children.at(2)
-        expect(current.classes()).toContain('current')
+  it('render the correct prop cur-step', () => {
+    const wrapper = mountComponent(Steps, {
+      propsData: {
+        steps: [
+          { title: '基本信息', icon: 1 },
+          { title: '详细信息', icon: 2 },
+          { title: '实名认证', icon: 3 }
+        ],
+        curStep: 3
+      }
     })
+    const children = wrapper.findAll('.bk-step')
+    const current = children.at(2)
+    expect(current.classes()).toContain('current')
+  })
 
-    it('render the correct prop direction', () => {
-        const wrapper = mountComponent(Steps, {
-            propsData: {
-                steps: [
-                    { title: '基本信息', icon: 1 },
-                    { title: '详细信息', icon: 2 },
-                    { title: '实名认证', icon: 3 }
-                ],
-                direction: 'vertical'
-            }
-        })
-        expect(wrapper.classes()).toContain('bk-steps-vertical')
+  it('render the correct prop direction', () => {
+    const wrapper = mountComponent(Steps, {
+      propsData: {
+        steps: [
+          { title: '基本信息', icon: 1 },
+          { title: '详细信息', icon: 2 },
+          { title: '实名认证', icon: 3 }
+        ],
+        direction: 'vertical'
+      }
     })
+    expect(wrapper.classes()).toContain('bk-steps-vertical')
+  })
 
-    it('render the correct prop theme', () => {
-        const wrapper = mountComponent(Steps, {
-            propsData: {
-                steps: [
-                    { title: '基本信息', icon: 1 },
-                    { title: '详细信息', icon: 2 },
-                    { title: '实名认证', icon: 3 }
-                ],
-                theme: 'success'
-            }
-        })
-        expect(wrapper.classes()).toContain('bk-steps-success')
+  it('render the correct prop theme', () => {
+    const wrapper = mountComponent(Steps, {
+      propsData: {
+        steps: [
+          { title: '基本信息', icon: 1 },
+          { title: '详细信息', icon: 2 },
+          { title: '实名认证', icon: 3 }
+        ],
+        theme: 'success'
+      }
     })
+    expect(wrapper.classes()).toContain('bk-steps-success')
+  })
 
-    it('step-change changeStep', () => {
-        const handler = jest.fn()
-        const wrapper = mount(
-            createTestComp(
-                `<bk-steps
+  it('step-change changeStep', () => {
+    const handler = jest.fn()
+    const wrapper = mount(
+      createTestComp(
+        `<bk-steps
                     :controllable="controllable"
                     :steps="steps"
                     :cur-step.sync="curStep"
                     @step-changed="stepChanged">
                 </bk-steps>`,
-                {
-                    components: {
-                        bkSteps: Steps
-                    },
+        {
+          components: {
+            bkSteps: Steps
+          },
 
-                    data () {
-                        return {
-                            steps: [
-                                { title: '基本信息', icon: 1 },
-                                { title: '详细信息', icon: 2 },
-                                { title: '实名认证', icon: 3 }
-                            ],
-                            controllable: true,
-                            curStep: 1
-                        }
-                    },
+          data () {
+            return {
+              steps: [
+                { title: '基本信息', icon: 1 },
+                { title: '详细信息', icon: 2 },
+                { title: '实名认证', icon: 3 }
+              ],
+              controllable: true,
+              curStep: 1
+            }
+          },
 
-                    methods: {
-                        stepChanged: handler
-                    }
-                }
-            ),
-            { sync: false }
-        )
+          methods: {
+            stepChanged: handler
+          }
+        }
+      ),
+      { sync: false }
+    )
 
-        const children = wrapper.findAll('.bk-step')
-        const lastChild = children.at(2)
-        const clickEle = lastChild.find('.bk-step-indicator')
-        clickEle.trigger('click')
-        expect(handler).toBeCalled()
-        wrapper.vm.$nextTick(() => {
-            expect(lastChild.classes()).toContain('current')
-        })
+    const children = wrapper.findAll('.bk-step')
+    const lastChild = children.at(2)
+    const clickEle = lastChild.find('.bk-step-indicator')
+    clickEle.trigger('click')
+    expect(handler).toBeCalled()
+    wrapper.vm.$nextTick(() => {
+      expect(lastChild.classes()).toContain('current')
     })
+  })
 })

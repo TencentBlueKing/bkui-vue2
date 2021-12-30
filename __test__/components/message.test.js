@@ -33,115 +33,115 @@
 import bkMessage from '@/components/Message/message.js'
 
 describe('message test', () => {
-    afterEach(() => {
-        const bkMessageInstance = document.querySelector('.bk-message')
-        if (!bkMessageInstance) {
-            return
-        }
-        bkMessageInstance.parentNode.removeChild(bkMessageInstance)
-        bkMessageInstance.__vue__.$destroy()
+  afterEach(() => {
+    const bkMessageInstance = document.querySelector('.bk-message')
+    if (!bkMessageInstance) {
+      return
+    }
+    bkMessageInstance.parentNode.removeChild(bkMessageInstance)
+    bkMessageInstance.__vue__.$destroy()
+  })
+  it('message element exist', () => {
+    bkMessage({
+      message: '选择填写相关信息'
     })
-    it('message element exist', () => {
-        bkMessage({
-            message: '选择填写相关信息'
-        })
-        expect(document.querySelector('.bk-message')).toBeTruthy()
+    expect(document.querySelector('.bk-message')).toBeTruthy()
+  })
+  it('props theme and icon', () => {
+    bkMessage({
+      message: '选择填写相关信息',
+      theme: 'warning',
+      icon: 'icon-test'
     })
-    it('props theme and icon', () => {
-        bkMessage({
-            message: '选择填写相关信息',
-            theme: 'warning',
-            icon: 'icon-test'
-        })
 
-        expect(document.querySelector('.bk-message-warning')).toBeTruthy()
-        expect(document.querySelector('.icon-test')).toBeTruthy()
+    expect(document.querySelector('.bk-message-warning')).toBeTruthy()
+    expect(document.querySelector('.icon-test')).toBeTruthy()
+  })
+  it('props message', () => {
+    bkMessage({
+      message: '选择填写相关信息',
+      theme: 'warning'
     })
-    it('props message', () => {
-        bkMessage({
-            message: '选择填写相关信息',
-            theme: 'warning'
-        })
 
-        expect(document.querySelector('.bk-message-content').textContent).toEqual('选择填写相关信息')
+    expect(document.querySelector('.bk-message-content').textContent).toEqual('选择填写相关信息')
+  })
+  it('props auto close', done => {
+    bkMessage({
+      message: '选择填写相关信息',
+      theme: 'warning',
+      delay: 500
     })
-    it('props auto close', done => {
-        bkMessage({
-            message: '选择填写相关信息',
-            theme: 'warning',
-            delay: 500
-        })
-        setTimeout(() => {
-            expect(document.querySelector('.bk-message')).toBeFalsy()
-            done()
-        }, 1000)
+    setTimeout(() => {
+      expect(document.querySelector('.bk-message')).toBeFalsy()
+      done()
+    }, 1000)
+  })
+  it('props manual close', done => {
+    bkMessage({
+      message: '选择填写相关信息',
+      theme: 'warning',
+      delay: 0
     })
-    it('props manual close', done => {
-        bkMessage({
-            message: '选择填写相关信息',
-            theme: 'warning',
-            delay: 0
-        })
-        setTimeout(() => {
-            const bkMessage = document.querySelector('.bk-message')
-            bkMessage.querySelector('.icon-close').click()
-            setTimeout(() => {
-                expect(bkMessage).toBeTruthy()
-                done()
-            }, 800)
-        }, 500)
-    })
-    it('props dismissable', done => {
-        bkMessage({
-            message: '选择填写相关信息',
-            dismissable: false
-        })
-        expect(document.querySelector('.bk-message-close')).toBeFalsy()
+    setTimeout(() => {
+      const bkMessage = document.querySelector('.bk-message')
+      bkMessage.querySelector('.icon-close').click()
+      setTimeout(() => {
+        expect(bkMessage).toBeTruthy()
         done()
+      }, 800)
+    }, 500)
+  })
+  it('props dismissable', done => {
+    bkMessage({
+      message: '选择填写相关信息',
+      dismissable: false
     })
-    it('props limit', done => {
-        bkMessage({
-            message: '消息1'
-        })
-        setTimeout(() => {
-            bkMessage({
-                message: '消息2',
-                limit: 1
-            })
-            setTimeout(() => {
-                expect(document.querySelectorAll('.bk-message').length).toEqual(1)
-                done()
-            }, 500)
-        }, 500)
+    expect(document.querySelector('.bk-message-close')).toBeFalsy()
+    done()
+  })
+  it('props limit', done => {
+    bkMessage({
+      message: '消息1'
     })
-    it('props offsetY', done => {
-        const message = bkMessage({
-            message: 'offsetY test',
-            offsetY: 100
-        })
-
-        expect(message.verticalOffset).toEqual(100 + message.spacing)
+    setTimeout(() => {
+      bkMessage({
+        message: '消息2',
+        limit: 1
+      })
+      setTimeout(() => {
+        expect(document.querySelectorAll('.bk-message').length).toEqual(1)
         done()
+      }, 500)
+    }, 500)
+  })
+  it('props offsetY', done => {
+    const message = bkMessage({
+      message: 'offsetY test',
+      offsetY: 100
     })
-    it('props ellipsisLine', () => {
-        const message = bkMessage({
-            message: '选择填写相关信息',
-            ellipsisLine: 2
-        })
 
-        expect(message.ellipsisStyle['--line']).toEqual(2)
+    expect(message.verticalOffset).toEqual(100 + message.spacing)
+    done()
+  })
+  it('props ellipsisLine', () => {
+    const message = bkMessage({
+      message: '选择填写相关信息',
+      ellipsisLine: 2
     })
-    it('call instance close', done => {
-        const message = bkMessage({
-            message: '选择填写相关信息'
-        })
 
-        setTimeout(() => {
-            message.close()
-            setTimeout(() => {
-                expect(document.querySelector('.bk-message')).toBeFalsy()
-                done()
-            }, 800)
-        }, 800)
+    expect(message.ellipsisStyle['--line']).toEqual(2)
+  })
+  it('call instance close', done => {
+    const message = bkMessage({
+      message: '选择填写相关信息'
     })
+
+    setTimeout(() => {
+      message.close()
+      setTimeout(() => {
+        expect(document.querySelector('.bk-message')).toBeFalsy()
+        done()
+      }, 800)
+    }, 800)
+  })
 })

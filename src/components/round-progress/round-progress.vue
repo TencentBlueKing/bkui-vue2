@@ -27,121 +27,121 @@
 -->
 
 <template>
-    <div class="bk-round-progress" :class="extCls">
-        <svg :width="diameter" :height="diameter" viewBox="0 0 100 100" version="1.1">
-            <circle
-                class="progress-background"
-                cx="50"
-                cy="50"
-                r="50"
-                fill="transparent"
-                :stroke-width="config.strokeWidth"
-                :stroke="config.bgColor" />
-            <circle
-                class="progress-bar"
-                cx="50"
-                cy="50"
-                r="50"
-                fill="transparent"
-                :class="'circle' + config.index"
-                :stroke-width="config.strokeWidth"
-                :stroke="config.activeColor"
-                :stroke-dasharray="dashArray"
-                :stroke-dashoffset="dashOffset" />
-        </svg>
-        <div class="num" v-if="numShow" :style="numStyle">
-            <template v-if="!content">
-                {{Math.round(percentFixed * 100)}}<span v-if="numUnit">{{numUnit}}</span>
-            </template>
-            <template v-else>{{content}}</template>
-        </div>
-        <div class="title" v-if="title" :style="titleStyle">
-            {{title}}
-        </div>
+  <div class="bk-round-progress" :class="extCls">
+    <svg :width="diameter" :height="diameter" viewBox="0 0 100 100" version="1.1">
+      <circle
+        class="progress-background"
+        cx="50"
+        cy="50"
+        r="50"
+        fill="transparent"
+        :stroke-width="config.strokeWidth"
+        :stroke="config.bgColor" />
+      <circle
+        class="progress-bar"
+        cx="50"
+        cy="50"
+        r="50"
+        fill="transparent"
+        :class="'circle' + config.index"
+        :stroke-width="config.strokeWidth"
+        :stroke="config.activeColor"
+        :stroke-dasharray="dashArray"
+        :stroke-dashoffset="dashOffset" />
+    </svg>
+    <div class="num" v-if="numShow" :style="numStyle">
+      <template v-if="!content">
+        {{Math.round(percentFixed * 100)}}<span v-if="numUnit">{{numUnit}}</span>
+      </template>
+      <template v-else>{{content}}</template>
     </div>
+    <div class="title" v-if="title" :style="titleStyle">
+      {{title}}
+    </div>
+  </div>
 </template>
 <script>
-    export default {
-        name: 'bk-round-progress',
-        props: {
-            config: {
-                type: Object,
-                default () {
-                    return {
-                        strokeWidth: 5,
-                        bgColor: 'gray',
-                        activeColor: 'green',
-                        index: 0
-                    }
-                }
-            },
-            percent: {
-                type: Number,
-                default: 0
-            },
-            title: {
-                type: String
-            },
-            content: {
-                type: [String, Number],
-                default: ''
-            },
-            titleStyle: {
-                type: Object,
-                default () {
-                    return {
-                        fontSize: '16px'
-                    }
-                }
-            },
-            numShow: {
-                type: Boolean,
-                default: true
-            },
-            numUnit: {
-                type: String,
-                default: '%'
-            },
-            numStyle: {
-                type: Object,
-                default () {
-                    return {
-                        fontSize: '16px'
-                    }
-                }
-            },
-            // 已改为 width 字段，保留该字段以兼容之前代码
-            radius: {
-                type: String,
-                default: '100px'
-            },
-            width: {
-                type: String,
-                default: ''
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                dashArray: Math.PI * 100
-            }
-        },
-        computed: {
-            dashOffset () {
-                return this.percentFixed > 1 ? false : (1 - this.percentFixed) * this.dashArray
-            },
-            percentFixed () {
-                return Number(this.percent.toFixed(2))
-            },
-            diameter () {
-                return this.width || this.radius
-            }
+export default {
+  name: 'bk-round-progress',
+  props: {
+    config: {
+      type: Object,
+      default () {
+        return {
+          strokeWidth: 5,
+          bgColor: 'gray',
+          activeColor: 'green',
+          index: 0
         }
+      }
+    },
+    percent: {
+      type: Number,
+      default: 0
+    },
+    title: {
+      type: String
+    },
+    content: {
+      type: [String, Number],
+      default: ''
+    },
+    titleStyle: {
+      type: Object,
+      default () {
+        return {
+          fontSize: '16px'
+        }
+      }
+    },
+    numShow: {
+      type: Boolean,
+      default: true
+    },
+    numUnit: {
+      type: String,
+      default: '%'
+    },
+    numStyle: {
+      type: Object,
+      default () {
+        return {
+          fontSize: '16px'
+        }
+      }
+    },
+    // 已改为 width 字段，保留该字段以兼容之前代码
+    radius: {
+      type: String,
+      default: '100px'
+    },
+    width: {
+      type: String,
+      default: ''
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+  data () {
+    return {
+      dashArray: Math.PI * 100
+    }
+  },
+  computed: {
+    dashOffset () {
+      return this.percentFixed > 1 ? false : (1 - this.percentFixed) * this.dashArray
+    },
+    percentFixed () {
+      return Number(this.percent.toFixed(2))
+    },
+    diameter () {
+      return this.width || this.radius
+    }
+  }
+}
 </script>
 <style>
     @import '../../ui/round-progress.css';
