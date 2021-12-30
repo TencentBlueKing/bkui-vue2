@@ -24,12 +24,12 @@
 ###### 2021.12.10
 
 * **[add]**:
-<<<<<<< HEAD
-    - [Select 下拉选框](#/select) 支持[分组全选](#/select?anchor=fen-zu--quan-xuan)
-    - [SearchSelect 查询选择器](#/searchselect) 新增 overflow 下 tag 加入 +num 显示
->>>>>>> staging
+    - [Select 下拉选框](#/select) 支持[分组全选](#/select?anchor=fen-zu--quan-xuan) [#56](https://github.com/TencentBlueKing/bkui-vue2/issues/56)
+    - [SearchSelect 查询选择器](#/searchselect) 新增 overflow 下 tag 加入 +num 显示 [#145](https://github.com/TencentBlueKing/bkui-vue2/issues/145)
+    - [Table 表格](#/table) 新增[底部加载](#/table?anchor=di-bu-jia-zai) [#147](https://github.com/TencentBlueKing/bkui-vue2/issues/147)
     - [Big Tree 大树](#/big-tree) 增加 [size 选项](#/big-tree?anchor=shu-de-chi-cun)
     - [DatePicker 日期选择器](#/date-picker) 新增 `header` slot
+    - [Breadcrumb 面包屑](#/breadcrumb) [支持返回配置以及前置插槽](#/breadcrumb?anchor=zhi-chi-fan-hui-pei-zhi-yi-ji-qian-zhi-cha-cao)
 * **[fix]**:
     - [Loading 加载](#/loading) 修复 z-index 的默认值 0 导致不传参时层级错误问题
     - [Select 下拉选框](#/select) 修复 z-index 设置不生效问题
