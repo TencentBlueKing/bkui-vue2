@@ -27,35 +27,35 @@
 -->
 
 <template>
-    <div class="bk-color-picker-input-part">
-        <input :type="info.name === 'HEX' ? 'text' : 'number'"
-            :class="['bk-color-picker-input-value', info.error && 'error']"
-            :value="info.value"
-            @keydown.tab="handleTab"
-            @input="handleInput">
-        <span class="bk-color-picker-input-text">{{info.name}}</span>
-    </div>
+  <div class="bk-color-picker-input-part">
+    <input :type="info.name === 'HEX' ? 'text' : 'number'"
+      :class="['bk-color-picker-input-value', info.error && 'error']"
+      :value="info.value"
+      @keydown.tab="handleTab"
+      @input="handleInput">
+    <span class="bk-color-picker-input-text">{{info.name}}</span>
+  </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            info: {
-                type: Object,
-                required: true
-            }
-        },
-        methods: {
-            handleTab (e) {
-                if (this.info.key === 'a') {
-                    this.$emit('tab', e)
-                }
-            },
-            handleInput (e) {
-                const { key } = this.info
-                const value = e.target.value
-                this.$emit('input', key, value)
-            }
-        }
+export default {
+  props: {
+    info: {
+      type: Object,
+      required: true
     }
+  },
+  methods: {
+    handleTab (e) {
+      if (this.info.key === 'a') {
+        this.$emit('tab', e)
+      }
+    },
+    handleInput (e) {
+      const { key } = this.info
+      const value = e.target.value
+      this.$emit('input', key, value)
+    }
+  }
+}
 </script>

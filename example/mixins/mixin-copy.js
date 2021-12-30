@@ -31,29 +31,29 @@
  */
 
 export default {
-    methods: {
-        codeCopy (ev, str) {
-            let code
-            if (str === 'demo') {
-                code = ev.target.parentNode.childNodes[3].innerText
-            } else {
-                code = ev.target.parentNode.childNodes[1].innerText
-            }
-            const el = document.createElement('textarea')
-            el.value = code
-            el.setAttribute('readonly', '')
-            el.style.position = 'absolute'
-            el.style.left = '-9999px'
-            document.body.appendChild(el)
-            const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
-            el.select()
-            document.execCommand('copy')
-            document.body.removeChild(el)
-            if (selected) {
-                document.getSelection().removeAllRanges()
-                document.getSelection().addRange(selected)
-            }
-            this.$bkMessage({ theme: 'primary', message: '代码复制成功', delay: 2000, dismissable: false })
-        }
+  methods: {
+    codeCopy (ev, str) {
+      let code
+      if (str === 'demo') {
+        code = ev.target.parentNode.childNodes[3].innerText
+      } else {
+        code = ev.target.parentNode.childNodes[1].innerText
+      }
+      const el = document.createElement('textarea')
+      el.value = code
+      el.setAttribute('readonly', '')
+      el.style.position = 'absolute'
+      el.style.left = '-9999px'
+      document.body.appendChild(el)
+      const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+      if (selected) {
+        document.getSelection().removeAllRanges()
+        document.getSelection().addRange(selected)
+      }
+      this.$bkMessage({ theme: 'primary', message: '代码复制成功', delay: 2000, dismissable: false })
     }
+  }
 }

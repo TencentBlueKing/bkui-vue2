@@ -34,180 +34,180 @@ import Button from '@/components/button'
 import { mountComponent } from '../helpers'
 
 describe('Button', () => {
-    it('render the correct markup', () => {
-        const wrapper = mountComponent(Button, {
-            slots: {
-                default: 'jest'
-            }
-        })
-        expect(wrapper.html()).toContain('<span>jest</span>')
-        expect(wrapper.text()).toBe('jest')
-        expect(wrapper.vm.showSlot).toBe(true)
+  it('render the correct markup', () => {
+    const wrapper = mountComponent(Button, {
+      slots: {
+        default: 'jest'
+      }
     })
-    it('render the without slot', () => {
-        const wrapper = mountComponent(Button)
+    expect(wrapper.html()).toContain('<span>jest</span>')
+    expect(wrapper.text()).toBe('jest')
+    expect(wrapper.vm.showSlot).toBe(true)
+  })
+  it('render the without slot', () => {
+    const wrapper = mountComponent(Button)
 
-        expect(wrapper.vm.showSlot).toBe(false)
-        expect(wrapper.text()).toBe('')
-        expect(wrapper.classes()).toContain('no-slot')
-    })
+    expect(wrapper.vm.showSlot).toBe(false)
+    expect(wrapper.text()).toBe('')
+    expect(wrapper.classes()).toContain('no-slot')
+  })
 
-    it('render the correct title', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                title: 'jest'
-            }
-        })
-        expect(wrapper.attributes('title')).toBe('jest')
+  it('render the correct title', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        title: 'jest'
+      }
     })
+    expect(wrapper.attributes('title')).toBe('jest')
+  })
 
-    it('has disabled', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                disabled: true
-            }
-        })
-        expect(wrapper.contains('button:disabled')).toBe(true)
+  it('has disabled', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        disabled: true
+      }
     })
-    it('has disabled', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                disabled: true
-            }
-        })
-        expect(wrapper.contains('button.is-disabled:disabled')).toBe(true)
+    expect(wrapper.contains('button:disabled')).toBe(true)
+  })
+  it('has disabled', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        disabled: true
+      }
     })
-    it('button primary theme', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                theme: 'primary'
-            }
-        })
-        expect(wrapper.classes()).toContain('bk-primary')
+    expect(wrapper.contains('button.is-disabled:disabled')).toBe(true)
+  })
+  it('button primary theme', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        theme: 'primary'
+      }
     })
+    expect(wrapper.classes()).toContain('bk-primary')
+  })
 
-    it('button hover success theme', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                hoverTheme: 'success'
-            }
-        })
-        expect(wrapper.classes()).toContain('bk-button-hover')
-        expect(wrapper.classes()).toContain('bk-success')
+  it('button hover success theme', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        hoverTheme: 'success'
+      }
     })
+    expect(wrapper.classes()).toContain('bk-button-hover')
+    expect(wrapper.classes()).toContain('bk-success')
+  })
 
-    it('button size', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                size: 'large'
-            }
-        })
-        expect(wrapper.contains('button.bk-button-large')).toBe(true)
+  it('button size', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        size: 'large'
+      }
     })
+    expect(wrapper.contains('button.bk-button-large')).toBe(true)
+  })
 
-    it('button text buttn', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                text: true
-            }
-        })
-        expect(wrapper.contains('button.bk-button-text.bk-primary')).toBe(true)
+  it('button text buttn', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        text: true
+      }
     })
+    expect(wrapper.contains('button.bk-button-text.bk-primary')).toBe(true)
+  })
 
-    it('outline button', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                outline: true
-            }
-        })
-        expect(wrapper.contains('button.is-outline')).toBe(true)
+  it('outline button', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        outline: true
+      }
     })
+    expect(wrapper.contains('button.is-outline')).toBe(true)
+  })
 
-    it('has loading', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                loading: true
-            }
-        })
-        expect(wrapper.contains('button.is-loading')).toBe(true)
-        expect(wrapper.contains('div.bk-button-loading')).toBe(true)
-        expect(wrapper.contains('div.bk-loading-wrapper')).toBe(true)
+  it('has loading', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        loading: true
+      }
     })
-    it('has left icon about plus', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                icon: 'plus'
-            }
-        })
-        expect(wrapper.contains('i.bk-icon.left-icon.icon-plus')).toBe(true)
+    expect(wrapper.contains('button.is-loading')).toBe(true)
+    expect(wrapper.contains('div.bk-button-loading')).toBe(true)
+    expect(wrapper.contains('div.bk-loading-wrapper')).toBe(true)
+  })
+  it('has left icon about plus', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        icon: 'plus'
+      }
     })
-    it('has left icon about loading', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                icon: 'loading'
-            }
-        })
-        const loading = wrapper.find('i.bk-icon.left-icon.icon-loading.bk-button-icon-loading')
-        expect(loading.exists()).toBe(true)
-        expect(loading.contains('.loading')).toBe(true)
+    expect(wrapper.contains('i.bk-icon.left-icon.icon-plus')).toBe(true)
+  })
+  it('has left icon about loading', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        icon: 'loading'
+      }
     })
+    const loading = wrapper.find('i.bk-icon.left-icon.icon-loading.bk-button-icon-loading')
+    expect(loading.exists()).toBe(true)
+    expect(loading.contains('.loading')).toBe(true)
+  })
 
-    it('has right icon about minus', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                iconRight: 'minus'
-            }
-        })
-        expect(wrapper.contains('i.bk-icon.right-icon.icon-minus')).toBe(true)
+  it('has right icon about minus', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        iconRight: 'minus'
+      }
     })
-    it('has right icon about loading', () => {
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                iconRight: 'loading'
-            }
-        })
-        const loading = wrapper.find('i.bk-icon.right-icon.icon-loading.bk-button-icon-loading')
-        expect(loading.exists()).toBe(true)
-        expect(loading.contains('.loading')).toBe(true)
+    expect(wrapper.contains('i.bk-icon.right-icon.icon-minus')).toBe(true)
+  })
+  it('has right icon about loading', () => {
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        iconRight: 'loading'
+      }
     })
+    const loading = wrapper.find('i.bk-icon.right-icon.icon-loading.bk-button-icon-loading')
+    expect(loading.exists()).toBe(true)
+    expect(loading.contains('.loading')).toBe(true)
+  })
 
-    it('click listener', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(Button, {
-            listeners: {
-                click: handler
-            }
-        })
-        wrapper.trigger('click')
-        wrapper.trigger('click')
-        expect(handler).toHaveBeenCalledTimes(2)
+  it('click listener', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(Button, {
+      listeners: {
+        click: handler
+      }
     })
+    wrapper.trigger('click')
+    wrapper.trigger('click')
+    expect(handler).toHaveBeenCalledTimes(2)
+  })
 
-    it('click listener with disabled', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                disabled: true
-            },
-            listeners: {
-                click: handler
-            }
-        })
-        wrapper.trigger('click')
-        expect(handler).not.toBeCalled()
+  it('click listener with disabled', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        disabled: true
+      },
+      listeners: {
+        click: handler
+      }
     })
+    wrapper.trigger('click')
+    expect(handler).not.toBeCalled()
+  })
 
-    it('click listener with loading', () => {
-        const handler = jest.fn()
-        const wrapper = mountComponent(Button, {
-            propsData: {
-                loading: true
-            },
-            listeners: {
-                click: handler
-            }
-        })
-        wrapper.trigger('click')
-        expect(handler).not.toBeCalled()
+  it('click listener with loading', () => {
+    const handler = jest.fn()
+    const wrapper = mountComponent(Button, {
+      propsData: {
+        loading: true
+      },
+      listeners: {
+        click: handler
+      }
     })
+    wrapper.trigger('click')
+    expect(handler).not.toBeCalled()
+  })
 })

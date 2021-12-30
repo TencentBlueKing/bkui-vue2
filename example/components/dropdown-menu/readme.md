@@ -457,6 +457,8 @@
 | font-size | 设置下拉已选择及列表的字体大小 | String | `normal`（12px），`medium`（14px），`large`（16px） | normal |
 | disabled | 禁用下拉菜单 | Boolean | `true`、`false`| `false` |
 | position-fixed | 下拉框定位属性 | Boolean | `true`（使用position:fiexed来进行定位）、`false`（使用position:absoluted来进行定位）| `false` |
+| open-delay | 打开下拉菜单的延迟时间，单位为毫秒 | Number | —— |  0 |
+| close-delay | 关闭下拉菜单的延迟时间，单位为毫秒 | Number | —— |  100 |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-dropdown-menu` 上 | String | —— | —— |
 
 ### 插槽(slot) {page=#/dropdown-menu}

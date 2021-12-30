@@ -34,7 +34,7 @@ import Select from './select.vue'
 import setInstaller from '@/utils/component-installer.js'
 import pinyin from '@/utils/pinyin'
 setInstaller(Select, (Vue, options) => {
-    Vue.prototype.$bkToPinyin = (str, lowerCase, separator) => pinyin.convertToPinyin(str, lowerCase, separator)
+  Vue.prototype.$bkToPinyin = (str, lowerCase, separator) => pinyin.convertToPinyin(str, lowerCase, separator)
 })
 
 export default Select

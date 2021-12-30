@@ -27,105 +27,140 @@
 -->
 
 <template>
-    <li class="bk-option-group" v-show="visible">
-        <div class="bk-option-group-name" :class="[select.fontSizeCls, showCollapse && !readonly ? 'is-collapse' : '']" @click="handleGroupNameClick">
-            <template v-if="showPrefixOpt">
-                <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
-            </template>
-            <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
-        </div>
-        <ul class="bk-group-options" v-show="!isLocalCollapse">
-            <slot></slot>
-        </ul>
-    </li>
+  <li class="bk-option-group" v-show="visible">
+    <div class="bk-option-group-name" :class="[select.fontSizeCls, showCollapse && !readonly ? 'is-collapse' : '']" @click="handleGroupNameClick">
+      <template v-if="showPrefixOpt">
+        <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
+      </template>
+      <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
+      <template v-if="showSelectAll">
+        <span class="btn-check-all">
+          <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @click.native="handleCheckAllClick" @change="handleSelectAll"></bk-checkbox>
+        </span>
+      </template>
+    </div>
+    <ul class="bk-group-options" v-show="!isLocalCollapse">
+      <slot></slot>
+    </ul>
+  </li>
 </template>
 
 <script>
-    export default {
-        name: 'bk-option-group',
-        props: {
-            name: {
-                type: String,
-                required: true
-            },
-            showCount: {
-                type: Boolean,
-                default: true
-            },
+import bkCheckbox from '@/components/checkbox'
+export default {
+  name: 'bk-option-group',
+  components: { bkCheckbox },
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    showCount: {
+      type: Boolean,
+      default: true
+    },
 
-            /** 是否显示展开\收起操作 */
-            showCollapse: {
-                type: Boolean,
-                default: false
-            },
+    /** 是否显示展开\收起操作 */
+    showCollapse: {
+      type: Boolean,
+      default: false
+    },
 
-            /** 是否收起 */
-            isCollapse: {
-                type: Boolean,
-                default: false
-            },
+    /** 是否收起 */
+    isCollapse: {
+      type: Boolean,
+      default: false
+    },
 
-            /** 展开\收起是否只读展示 */
-            readonly: {
-                type: Boolean,
-                default: false
-            }
-        },
-        provide () {
-            return {
-                optionGroup: this
-            }
-        },
-        inject: ['select'],
-        data () {
-            return {
-                options: [],
-                isLocalCollapse: false
-            }
-        },
-        computed: {
-            showPrefixOpt () {
-                return !!this.showCollapse
-            },
-            prefixOptionText () {
-                return this.isLocalCollapse ? '+' : '-'
-            },
-            unmatchedCount () {
-                return this.options.filter(option => option.unmatched).length
-            },
-            visible () {
-                const optionCount = this.options.length
-                if (!optionCount) {
-                    return true
-                }
-                return optionCount !== this.unmatchedCount
-            }
-        },
-        watch: {
-            isCollapse: {
-                immediate: true,
-                handler (isColl) {
-                    this.isLocalCollapse = isColl
-                }
-            }
-        },
-        methods: {
-            handleGroupNameClick () {
-                if (this.showCollapse && !this.readonly) {
-                    this.isLocalCollapse = !this.isLocalCollapse
-                    this.$emit('collapse', this.isLocalCollapse)
-                    this.$emit('update:isCollapse', this.isLocalCollapse)
-                }
-            },
-            registerOption (option) {
-                this.options.push(option)
-            },
-            removeOption (option) {
-                const index = this.options.indexOf(option)
-                if (index > -1) {
-                    this.options.splice(index, 1)
-                }
-            }
-        }
+    /** 展开\收起是否只读展示 */
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+
+    /** 是否支持支持分组全选 */
+    showSelectAll: {
+      type: Boolean,
+      default: false
     }
+  },
+  provide () {
+    return {
+      optionGroup: this
+    }
+  },
+  inject: ['select'],
+  data () {
+    return {
+      options: [],
+      selectedAll: false,
+      isLocalCollapse: false
+    }
+  },
+  computed: {
+    indeterminate () {
+      return !this.isSelectAllItems && !this.isEmpty
+    },
+    isSelectAllItems () {
+      return Array.prototype.every.call(this.options, option => option.isSelected)
+    },
+    isEmpty () {
+      return Array.prototype.every.call(this.options, option => !option.isSelected)
+    },
+    showPrefixOpt () {
+      return !!this.showCollapse
+    },
+    prefixOptionText () {
+      return this.isLocalCollapse ? '+' : '-'
+    },
+    unmatchedCount () {
+      return this.options.filter(option => option.unmatched).length
+    },
+    visible () {
+      const optionCount = this.options.length
+      if (!optionCount) {
+        return true
+      }
+      return optionCount !== this.unmatchedCount
+    }
+  },
+  watch: {
+    isCollapse: {
+      immediate: true,
+      handler (isColl) {
+        this.isLocalCollapse = isColl
+      }
+    }
+  },
+  methods: {
+    handleCheckAllClick (e) {
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      e.preventDefault()
+    },
+    handleSelectAll () {
+      if (this.isSelectAllItems) {
+        Array.prototype.forEach.call(this.options, option => this.select.unselectOption(option))
+      } else {
+        Array.prototype.forEach.call(this.options, option => this.select.selectOption(option))
+      }
+    },
+    handleGroupNameClick () {
+      if (this.showCollapse && !this.readonly) {
+        this.isLocalCollapse = !this.isLocalCollapse
+        this.$emit('collapse', this.isLocalCollapse)
+        this.$emit('update:isCollapse', this.isLocalCollapse)
+      }
+    },
+    registerOption (option) {
+      this.options.push(option)
+    },
+    removeOption (option) {
+      const index = this.options.indexOf(option)
+      if (index > -1) {
+        this.options.splice(index, 1)
+      }
+    }
+  }
+}
 </script>

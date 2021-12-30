@@ -52,16 +52,16 @@ const app = express()
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    stats: {
-        colors: true,
-        chunks: false
-    }
+  publicPath: webpackConfig.output.publicPath,
+  stats: {
+    colors: true,
+    chunks: false
+  }
 })
 
 const hotMiddleware = webpackHotMiddleware(compiler, {
-    log: false,
-    heartbeat: 2000
+  log: false,
+  heartbeat: 2000
 })
 
 // compiler.plugin('compilation', compilation => {
@@ -72,31 +72,31 @@ const hotMiddleware = webpackHotMiddleware(compiler, {
 // })
 
 Object.keys(proxyTable).forEach(context => {
-    let options = proxyTable[context]
-    if (typeof options === 'string') {
-        options = {
-            target: options
-        }
+  let options = proxyTable[context]
+  if (typeof options === 'string') {
+    options = {
+      target: options
     }
-    app.use(proxyMiddleware(context, options))
+  }
+  app.use(proxyMiddleware(context, options))
 })
 
 app.use(history({
-    verbose: false,
-    rewrites: [
-        {
-            // connect-history-api-fallback 默认会对 url 中有 . 的 url 当成静态资源处理而不是当成页面地址来处理
-            // 兼容 /router/10.121.23.12 这样以 IP 结尾的 url
-            from: /(\d+\.)*\d+$/,
-            to: '/'
-        },
-        {
-            // connect-history-api-fallback 默认会对 url 中有 . 的 url 当成静态资源处理而不是当成页面地址来处理
-            // 兼容 /router/0.aaa.bbb.ccc.1234567890/ddd/eee
-            from: /\/+.*\..*\//,
-            to: '/'
-        }
-    ]
+  verbose: false,
+  rewrites: [
+    {
+      // connect-history-api-fallback 默认会对 url 中有 . 的 url 当成静态资源处理而不是当成页面地址来处理
+      // 兼容 /router/10.121.23.12 这样以 IP 结尾的 url
+      from: /(\d+\.)*\d+$/,
+      to: '/'
+    },
+    {
+      // connect-history-api-fallback 默认会对 url 中有 . 的 url 当成静态资源处理而不是当成页面地址来处理
+      // 兼容 /router/0.aaa.bbb.ccc.1234567890/ddd/eee
+      from: /\/+.*\..*\//,
+      to: '/'
+    }
+  ]
 }))
 
 app.use(devMiddleware)
@@ -106,7 +106,7 @@ app.use(hotMiddleware)
 app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }))
 
 const staticPath = path.posix.join('/', 'example/static')
@@ -114,20 +114,20 @@ app.use(staticPath, express.static('./example/static'))
 
 let _resolve
 const readyPromise = new Promise(resolve => {
-    _resolve = resolve
+  _resolve = resolve
 })
 
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
-    console.log('\nListening at http://localhost:' + port + ' or http://' + getIP() + ':' + port + '\n')
-    _resolve()
+  console.log('\nListening at http://localhost:' + port + ' or http://' + getIP() + ':' + port + '\n')
+  _resolve()
 })
 
 const server = app.listen(port)
 
 module.exports = {
-    ready: readyPromise,
-    close: () => {
-        server.close()
-    }
+  ready: readyPromise,
+  close: () => {
+    server.close()
+  }
 }

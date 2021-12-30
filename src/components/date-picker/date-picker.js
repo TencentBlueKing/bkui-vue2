@@ -35,32 +35,32 @@ import DatePanel from './panel/date.vue'
 import DateRangePanel from './panel/date-range.vue'
 
 export default {
-    name: 'bk-date-picker',
-    mixins: [Picker],
-    components: {
-        DatePanel,
-        DateRangePanel
-    },
-    props: {
-        type: {
-            type: String,
-            default: 'date',
-            validator (value) {
-                if (['year', 'month', 'date', 'daterange', 'datetime', 'datetimerange'].indexOf(value) < 0) {
-                    console.error(`type property is not valid: '${value}'`)
-                    return false
-                }
-                return true
-            }
+  name: 'bk-date-picker',
+  mixins: [Picker],
+  components: {
+    DatePanel,
+    DateRangePanel
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'date',
+      validator (value) {
+        if (['year', 'month', 'date', 'daterange', 'datetime', 'datetimerange'].indexOf(value) < 0) {
+          console.error(`type property is not valid: '${value}'`)
+          return false
         }
-    },
-    computed: {
-        panel () {
-            const isRange = this.type === 'daterange' || this.type === 'datetimerange'
-            return isRange ? 'DateRangePanel' : 'DatePanel'
-        },
-        ownPickerProps () {
-            return this.options
-        }
+        return true
+      }
     }
+  },
+  computed: {
+    panel () {
+      const isRange = this.type === 'daterange' || this.type === 'datetimerange'
+      return isRange ? 'DateRangePanel' : 'DatePanel'
+    },
+    ownPickerProps () {
+      return this.options
+    }
+  }
 }

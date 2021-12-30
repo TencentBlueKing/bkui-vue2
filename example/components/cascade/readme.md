@@ -244,6 +244,14 @@
             }
         }
     }
+    .round {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #e5f6ea;
+        border: 1px solid #3fc06d;
+        border-radius: 50%;
+    }
 </style>
 
 ## Cascade 级联选框
@@ -260,6 +268,7 @@
         :list="list"
         clearable
         style="width: 250px;"
+        :ext-popover-cls="'custom-cls'"
         @change="handleChange">
     </bk-cascade>
     <script>
@@ -350,6 +359,8 @@
     <bk-cascade
         v-model="multipleValue"
         multiple
+        :limit-one-line="true"
+        clearable
         :list="list"
         :check-any-level="checkAnyLevel"
         style="width: 250px;">
@@ -664,6 +675,10 @@
         v-model="slotvalue"
         :list="disabledList"
         style="width: 250px;">
+        <template slot="option" slot-scope="{ node }">
+            <span v-bk-tooltips="node.name">
+                <i class="round mr5" v-if="node.children"></i>{{ node.name }} / {{node.id}}</span>
+        </template>
         <template slot="prepend" slot-scope="{ node }">
             <span v-if="node.children" class="bk-slot-item">{{ node.children.length }}</span>
         </template>
@@ -745,6 +760,7 @@
 <template>
     <bk-cascade
         v-model="value"
+        :multiple="true"
         :list="remoteList"
         :is-remote="isRemote"
         :remote-method="remoteMethod"
@@ -825,12 +841,16 @@
 | clearable | 是否允许清空 | Boolean | —— | false |
 | check-any-level | 是否允许选择任意一级 | Boolean | —— | false |
 | filterable | 是否允许快捷搜索 | Boolean | —— | false |
+| limit-one-line | 限制是否只显示一行，当显示为一行时，单个选项不允许删除。**（仅当 multiple 为 true 时生效）** | Boolean | —— | false |
 | show-complete-name | 输入框中是否显示选中值的完整路径 | Boolean | —— | true |
 | separator | 选项分隔符 | String | —— | ' / ' |
 | trigger | 触发子菜单模式 | String | 'click', 'hover' | 'click' |
 | remote-method | 远程搜索方法，具体配置看样例使用 | Function | —— | —— |
 | is-remote | 开启远程加载，搭配remote-method一起使用 | Boolean | —— | false |
 | popover-options | 透传至下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
+| ext-popover-cls | 配置自定义样式类名，传入的类会被加在下拉菜单的 DOM .bk-cascade-dropdown-content 上 | String | —— | —— |
+
+### 事件 {page=#/cascade}
 
 | 事件名称 | 说明 | 回调参数 |
 |---------|------|---------|

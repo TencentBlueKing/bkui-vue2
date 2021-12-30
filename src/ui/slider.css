@@ -31,6 +31,7 @@
         }
         .bk-slider-labels {
             position: relative;
+            font-size: $fnSmallSize;
             &.vertical {
                 left: 18px;
                 height: 100%;
@@ -141,6 +142,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: $fnSmallSize;
         &.vertical {
             left: 28px;
         }

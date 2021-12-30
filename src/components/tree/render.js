@@ -31,23 +31,23 @@
  */
 
 export default {
-    name: 'render',
-    functional: true,
-    props: {
-        node: Object,
-        tpl: Function
-    },
-    render (h, ct) {
-        const titleClass = ct.props.node.selected ? 'node-title node-selected' : 'node-title'
-        if (ct.props.tpl) {
-            // 防止某些情况下 h 不能自动注入而报错，需将 h 参数抛出；一般来说 h 默认是第一参数，但是现在改为第一参数会导致已经使用的用户都需要修改，所以先放在最后。
-            return ct.props.tpl(ct.props.node, h)
-        }
-        return (
+  name: 'render',
+  functional: true,
+  props: {
+    node: Object,
+    tpl: Function
+  },
+  render (h, ct) {
+    const titleClass = ct.props.node.selected ? 'node-title node-selected' : 'node-title'
+    if (ct.props.tpl) {
+      // 防止某些情况下 h 不能自动注入而报错，需将 h 参数抛出；一般来说 h 默认是第一参数，但是现在改为第一参数会导致已经使用的用户都需要修改，所以先放在最后。
+      return ct.props.tpl(ct.props.node, h)
+    }
+    return (
             <span domPropsInnerHTML={ct.props.node.name} title={ct.props.node.title} class={titleClass}
                 style='user-select: none'
                 onClick={() => ct.parent.nodeSelected(ct.props.node)}>
             </span>
-        )
-    }
+    )
+  }
 }

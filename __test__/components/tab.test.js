@@ -35,8 +35,8 @@ import bkTabPanel from '@/components/tab-panel'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('bkTab', () => {
-    it('test props of bkTab', async done => {
-        const wrapper = await mountComponent(createTestComp(`
+  it('test props of bkTab', async done => {
+    const wrapper = await mountComponent(createTestComp(`
             <bk-tab active.sync="mission" type="unborder-card" tab-position="top" :closable="true" :addable="true">
                 <bk-tab-panel
                     v-for="(panel, index) in panels"
@@ -44,50 +44,50 @@ describe('bkTab', () => {
                     :key="index">
                 </bk-tab-panel>
             </bk-tab>`, {
-            components: {
-                bkTab,
-                bkTabPanel
-            },
-            data () {
-                return {
-                    panels: [
-                        { name: 'mission', label: '任务报表' },
-                        { name: 'config', label: '加速配置' }
-                    ]
-                }
-            }
-        }))
+      components: {
+        bkTab,
+        bkTabPanel
+      },
+      data () {
+        return {
+          panels: [
+            { name: 'mission', label: '任务报表' },
+            { name: 'config', label: '加速配置' }
+          ]
+        }
+      }
+    }))
 
-        expect(wrapper.find('.active').text()).toBe('任务报表')
-        expect(wrapper.classes()).toContain('bk-tab-unborder-card')
-        expect(wrapper.html()).toContain('<i class="bk-tab-close-controller">')
-        expect(wrapper.html()).toContain('<i class="bk-tab-add-controller bk-icon icon-plus"></i>')
+    expect(wrapper.find('.active').text()).toBe('任务报表')
+    expect(wrapper.classes()).toContain('bk-tab-unborder-card')
+    expect(wrapper.html()).toContain('<i class="bk-tab-close-controller">')
+    expect(wrapper.html()).toContain('<i class="bk-tab-add-controller bk-icon icon-plus"></i>')
 
-        done()
+    done()
+  })
+
+  it('test slots of bkTab', () => {
+    const wrapper = mountComponent(bkTab, {
+      slots: {
+        setting: '<i class="setting-icon bk-icon icon-cog-shape"></i>'
+      }
     })
+    expect(wrapper.html()).toContain('<div class="bk-tab-header-setting has-setting"><i class="setting-icon bk-icon icon-cog-shape"></i></div>')
+  })
 
-    it('test slots of bkTab', () => {
-        const wrapper = mountComponent(bkTab, {
-            slots: {
-                setting: '<i class="setting-icon bk-icon icon-cog-shape"></i>'
-            }
-        })
-        expect(wrapper.html()).toContain('<div class="bk-tab-header-setting has-setting"><i class="setting-icon bk-icon icon-cog-shape"></i></div>')
-    })
+  test('test trigger events of bkTab', async done => {
+    const wrapper = mountComponent(bkTab)
+    wrapper.vm.$emit('tab-change', true)
+    wrapper.vm.$emit('close-panel', true)
+    wrapper.vm.$emit('add-panel', true)
+    await expect(wrapper.emitted()['tab-change']).toBeTruthy()
+    await expect(wrapper.emitted()['close-panel']).toBeTruthy()
+    await expect(wrapper.emitted()['add-panel']).toBeTruthy()
+    done()
+  })
 
-    test('test trigger events of bkTab', async done => {
-        const wrapper = mountComponent(bkTab)
-        wrapper.vm.$emit('tab-change', true)
-        wrapper.vm.$emit('close-panel', true)
-        wrapper.vm.$emit('add-panel', true)
-        await expect(wrapper.emitted()['tab-change']).toBeTruthy()
-        await expect(wrapper.emitted()['close-panel']).toBeTruthy()
-        await expect(wrapper.emitted()['add-panel']).toBeTruthy()
-        done()
-    })
-
-    it('test props of bkTab-panel', async () => {
-        const wrapper = await mountComponent(createTestComp(`
+  it('test props of bkTab-panel', async () => {
+    const wrapper = await mountComponent(createTestComp(`
             <bk-tab active.sync="mission">
                 <bk-tab-panel
                     v-for="(panel, index) in panels"
@@ -95,27 +95,27 @@ describe('bkTab', () => {
                     :key="index">
                 </bk-tab-panel>
             </bk-tab>`, {
-            components: {
-                bkTab,
-                bkTabPanel
-            },
-            data () {
-                return {
-                    panels: [
-                        { name: 'mission', label: '任务报表', closable: true, visible: true, renderDirective: 'if' },
-                        { name: 'config', label: '加速配置', closable: true, visible: false, renderDirective: 'if' },
-                        { name: 'hisitory', label: '历史版本', closable: true, visible: true, renderDirective: 'show' }
-                    ]
-                }
-            }
-        }))
-        expect(wrapper.html()).toContain('<i class="bk-tab-close-controller">')
-        expect(wrapper.html()).not.toContain('加速配置')
-        expect(wrapper.html()).toContain('历史版本')
-    })
+      components: {
+        bkTab,
+        bkTabPanel
+      },
+      data () {
+        return {
+          panels: [
+            { name: 'mission', label: '任务报表', closable: true, visible: true, renderDirective: 'if' },
+            { name: 'config', label: '加速配置', closable: true, visible: false, renderDirective: 'if' },
+            { name: 'history', label: '历史版本', closable: true, visible: true, renderDirective: 'show' }
+          ]
+        }
+      }
+    }))
+    expect(wrapper.html()).toContain('<i class="bk-tab-close-controller">')
+    expect(wrapper.html()).not.toContain('加速配置')
+    expect(wrapper.html()).toContain('历史版本')
+  })
 
-    it('test props of bkTab-panel', async () => {
-        const wrapper = await mountComponent(createTestComp(`
+  it('test props of bkTab-panel', async () => {
+    const wrapper = await mountComponent(createTestComp(`
             <bk-tab active.sync="mission">
                 <bk-tab-panel
                     v-for="(panel, index) in panels"
@@ -127,19 +127,19 @@ describe('bkTab', () => {
                     </template>
                 </bk-tab-panel>
             </bk-tab>`, {
-            components: {
-                bkTab,
-                bkTabPanel
-            },
-            data () {
-                return {
-                    panels: [
-                        { name: 'mission', label: '任务报表' }
-                    ]
-                }
-            }
-        }))
-        expect(wrapper.html()).not.toContain('任务配置')
-        expect(wrapper.html()).toContain('<i class="panel-icon bk-icon icon-cog-shape"></i> <span class="panel-name">mission</span>')
-    })
+      components: {
+        bkTab,
+        bkTabPanel
+      },
+      data () {
+        return {
+          panels: [
+            { name: 'mission', label: '任务报表' }
+          ]
+        }
+      }
+    }))
+    expect(wrapper.html()).not.toContain('任务配置')
+    expect(wrapper.html()).toContain('<i class="panel-icon bk-icon icon-cog-shape"></i> <span class="panel-name">mission</span>')
+  })
 })

@@ -39,128 +39,128 @@ const instancesList = []
 let seed = 0
 
 const Info = function (opts = {}) {
-    const id = 'bkInfoBox' + seed++
+  const id = 'bkInfoBox' + seed++
 
-    if (typeof opts === 'string') {
-        opts = {
-            title: opts
-        }
+  if (typeof opts === 'string') {
+    opts = {
+      title: opts
+    }
+  }
+
+  const instance = new InfoBoxConstructor()
+
+  instance.id = id
+  instance.name = 'bk-info-box'
+
+  if (opts.width) {
+    instance.width = opts.width
+  }
+  // 当 confirmFn 为异步函数时确定按钮自动 loading
+  instance.confirmLoading = Boolean(opts.confirmLoading)
+  // 显示/隐藏
+  instance.value = true
+  // 标题
+  instance.title = opts.title
+  // 二级标题
+  instance.subTitle = opts.subTitle
+  // type
+  instance.type = opts.type || ''
+  // 是否显示 footer
+  instance.showFooter = opts.showFooter !== false
+
+  instance.closeIcon = opts.closeIcon !== false
+
+  instance.maskClose = opts.maskClose
+  instance.escClose = opts.escClose
+  instance.theme = opts.theme || 'primary'
+  instance.icon = opts.icon
+  instance.extCls = opts.extCls
+  instance.okText = opts.okText
+  instance.cancelText = opts.cancelText
+  instance.zIndex = opts.zIndex || instance.zIndex
+
+  if (isVNode(opts.subHeader)) {
+    instance.$slots[opts.type ? 'type-sub-header' : 'sub-header'] = opts.subHeader
+  }
+
+  if (isVNode(opts.header)) {
+    instance.$slots[opts.type ? 'type-header' : 'header'] = opts.header
+  }
+
+  instance.confirmFn = opts.confirmFn && typeof opts.confirmFn === 'function'
+    ? async () => {
+      instance.closeIcon = false
+      const res = await opts.confirmFn(instance)
+      instance.closeIcon = opts.closeIcon !== false
+      if (!res && typeof res !== 'undefined') {
+        return
+      }
+      Info.close(id)
+    } : () => {
+      Info.close(id)
     }
 
-    const instance = new InfoBoxConstructor()
+  instance.cancelFn = opts.cancelFn && typeof opts.cancelFn === 'function'
+    ? opts.cancelFn
+    : () => {}
 
-    instance.id = id
-    instance.name = 'bk-info-box'
+  instance.afterLeaveFn = opts.afterLeaveFn && typeof opts.afterLeaveFn === 'function'
+    ? opts.afterLeaveFn
+    : () => {}
 
-    if (opts.width) {
-        instance.width = opts.width
-    }
-    // 当 confirmFn 为异步函数时确定按钮自动 loading
-    instance.confirmLoading = Boolean(opts.confirmLoading)
-    // 显示/隐藏
-    instance.value = true
-    // 标题
-    instance.title = opts.title
-    // 二级标题
-    instance.subTitle = opts.subTitle
-    // type
-    instance.type = opts.type || ''
-    // 是否显示 footer
-    instance.showFooter = opts.showFooter !== false
+  instance.stateChangeFn = opts.stateChangeFn && typeof opts.stateChangeFn === 'function'
+    ? opts.stateChangeFn
+    : () => {}
 
-    instance.closeIcon = opts.closeIcon !== false
+  instance.onClose = function () {
+    Info.close(id, opts.onClose)
+  }
 
-    instance.maskClose = opts.maskClose
-    instance.escClose = opts.escClose
-    instance.theme = opts.theme || 'primary'
-    instance.icon = opts.icon
-    instance.extCls = opts.extCls
-    instance.okText = opts.okText
-    instance.cancelText = opts.cancelText
-    instance.zIndex = opts.zIndex || instance.zIndex
-
-    if (isVNode(opts.subHeader)) {
-        instance.$slots[opts.type ? 'type-sub-header' : 'sub-header'] = opts.subHeader
-    }
-
-    if (isVNode(opts.header)) {
-        instance.$slots[opts.type ? 'type-header' : 'header'] = opts.header
-    }
-
-    instance.confirmFn = opts.confirmFn && typeof opts.confirmFn === 'function'
-        ? async () => {
-            instance.closeIcon = false
-            const res = await opts.confirmFn(instance)
-            instance.closeIcon = opts.closeIcon !== false
-            if (!res && typeof res !== 'undefined') {
-                return
-            }
-            Info.close(id)
-        } : () => {
-            Info.close(id)
-        }
-
-    instance.cancelFn = opts.cancelFn && typeof opts.cancelFn === 'function'
-        ? opts.cancelFn
-        : () => {}
-
-    instance.afterLeaveFn = opts.afterLeaveFn && typeof opts.afterLeaveFn === 'function'
-        ? opts.afterLeaveFn
-        : () => {}
-
-    instance.stateChangeFn = opts.stateChangeFn && typeof opts.stateChangeFn === 'function'
-        ? opts.stateChangeFn
-        : () => {}
-
-    instance.onClose = function () {
-        Info.close(id, opts.onClose)
-    }
-
-    let ref = document.body
-    const container = opts.container
-    if (container) {
-        instance.ignoreExistMask = false
-        if (typeof container !== 'string') {
-            ref = container instanceof Element
-                ? container
-                : (container instanceof Vue ? container.$el : document.querySelector(container))
-        } else {
-            const element = document.querySelector(container)
-            if (element) {
-                ref = element
-            } else {
-                throw new Error(`没有找到 ${element} 节点`)
-            }
-        }
-        instance.transfer = false
+  let ref = document.body
+  const container = opts.container
+  if (container) {
+    instance.ignoreExistMask = false
+    if (typeof container !== 'string') {
+      ref = container instanceof Element
+        ? container
+        : (container instanceof Vue ? container.$el : document.querySelector(container))
     } else {
-        instance.transfer = true
+      const element = document.querySelector(container)
+      if (element) {
+        ref = element
+      } else {
+        throw new Error(`没有找到 ${element} 节点`)
+      }
     }
+    instance.transfer = false
+  } else {
+    instance.transfer = true
+  }
 
-    instance.$mount()
-    instance.$dom = instance.$el
+  instance.$mount()
+  instance.$dom = instance.$el
 
-    ref.appendChild(instance.$el)
-    instancesList.push(instance)
-    return instance
+  ref.appendChild(instance.$el)
+  instancesList.push(instance)
+  return instance
 }
 
 Info.close = (id, optsClose) => {
-    const len = instancesList.length
-    for (let index = 0; index < len; index++) {
-        const targetInstance = instancesList[index]
-        if (id === targetInstance.id) {
-            targetInstance.value = false
-            if (typeof optsClose === 'function') {
-                optsClose(targetInstance)
-            }
-            instancesList.splice(index, 1)
-            targetInstance.$on('after-leave', () => {
-                targetInstance.$el.parentNode.removeChild(targetInstance.$el)
-            })
-            break
-        }
+  const len = instancesList.length
+  for (let index = 0; index < len; index++) {
+    const targetInstance = instancesList[index]
+    if (id === targetInstance.id) {
+      targetInstance.value = false
+      if (typeof optsClose === 'function') {
+        optsClose(targetInstance)
+      }
+      instancesList.splice(index, 1)
+      targetInstance.$on('after-leave', () => {
+        targetInstance.$el.parentNode.removeChild(targetInstance.$el)
+      })
+      break
     }
+  }
 }
 
 Vue.prototype.$bkInfo = Info

@@ -27,28 +27,28 @@
 -->
 
 <template>
-    <div class="bk-badge-wrapper"
-        :class="extCls"
-        :style="{ 'vertical-align': $slots.default ? 'middle' : '', 'cursor': icon ? 'pointer' : '' }">
-        <slot></slot>
-        <transition name="fade-center">
-            <span class="bk-badge"
-                v-show="visible"
-                :class="badgeClass"
-                :style="badgeStyle"
-                @mouseenter="handleHover"
-                @mouseleave="handleLeave">
-                <i class="bk-icon"
-                    :class="'icon-' + icon"
-                    v-if="icon && !dot"></i>
-                <span v-if="!icon && !dot">{{text}}</span>
-            </span>
-        </transition>
-    </div>
+  <div class="bk-badge-wrapper"
+    :class="extCls"
+    :style="{ 'vertical-align': $slots.default ? 'middle' : '', 'cursor': icon ? 'pointer' : '' }">
+    <slot></slot>
+    <transition name="fade-center">
+      <span class="bk-badge"
+        v-show="visible"
+        :class="badgeClass"
+        :style="badgeStyle"
+        @mouseenter="handleHover"
+        @mouseleave="handleLeave">
+        <i class="bk-icon"
+          :class="'icon-' + icon"
+          v-if="icon && !dot"></i>
+        <span v-if="!icon && !dot">{{text}}</span>
+      </span>
+    </transition>
+  </div>
 </template>
 
 <script>
-    /**
+/**
      *  bk-badge
      *  @module components/badge
      *  @desc 标记组件
@@ -75,135 +75,135 @@
           @hover="handleBadgeHover"
           @leave="handleBadgelLeave"></bk-badge>
     */
-    export default {
-        name: 'bk-badge',
-        props: {
-            // 组件的主题色
-            theme: {
-                type: String,
-                default: '',
-                validator (value) {
-                    return ['', 'primary', 'info', 'warning', 'danger', 'success'].indexOf(value) > -1
-                        || value.indexOf('#') === 0
-                }
-            },
-            // 组件显示的值
-            val: {
-                type: [Number, String],
-                default: 1
-            },
+export default {
+  name: 'bk-badge',
+  props: {
+    // 组件的主题色
+    theme: {
+      type: String,
+      default: '',
+      validator (value) {
+        return ['', 'primary', 'info', 'warning', 'danger', 'success'].indexOf(value) > -1
+          || value.indexOf('#') === 0
+      }
+    },
+    // 组件显示的值
+    val: {
+      type: [Number, String],
+      default: 1
+    },
 
-            /** 显示内容的长度 */
-            valLength: {
-                type: [Number, String],
-                default: 3
-            },
+    /** 显示内容的长度 */
+    valLength: {
+      type: [Number, String],
+      default: 3
+    },
 
-            // 组件显示图标；当设置 icon 时，将忽略设置的 value 值
-            icon: {
-                type: String,
-                default: ''
-            },
-            // 组件显示的最大值，当 value 超过 max，显示数字 +；仅当设置了 Number 类型的 value 值时生效
-            max: {
-                type: Number,
-                default: -1
-            },
-            // 是否仅显示小圆点；当设置 dot 为 true 时，value, icon, max 均会被忽略
-            dot: {
-                type: Boolean,
-                default: false
-            },
-            // 是否显示组件
-            visible: {
-                type: Boolean,
-                default: true
-            },
-            // 组件相对于其兄弟组件的位置
-            position: {
-                type: String,
-                default: 'top-right'
-            },
-            // 设置弧度 | 0的时候显示为方形， 可以是数字，百分比
-            radius: {
-                type: [String, Number],
-                default: undefined
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        computed: {
-            text () {
-                const _type = typeof this.val
-                const _max = this.max
-                let _value = this.val
-                const _icon = this.icon
-                const _isNumber = _type === 'number' || /^\d+$/.test(this.val)
-
-                if (_icon) {
-                    return _icon
-                }
-
-                if (_isNumber && _max > -1 && Number(_value) > _max) {
-                    return _max + '+'
-                } else {
-                    _value += ''
-                    const output = []
-                    let count = 0
-                    _value.split('').forEach(char => {
-                        if (count < Number(this.valLength)) {
-                            count += /[\u4e00-\u9fa5]/.test(char) ? 2 : 1
-                            output.push(char)
-                        }
-                    })
-
-                    return output.join('')
-                }
-            },
-            hexTheme () {
-                return /^#[0-9a-fA-F]{3,6}$/.test(this.theme)
-            },
-
-            /** 根据ICON Theme计算最终样式 */
-            badgeStyle () {
-                const isRadius = this.radius !== undefined && /^\d+(%|px|em|rem|vh|vw)?$/.test(this.radius)
-                const _radius = (isRadius && /^\d+$/.test(this.radius) && `${this.radius}px`) || this.radius
-                const style = (this.icon && { color: this.theme || '', borderColor: 'transparent', backgroundColor: '#fff' }) || {
-                    color: this.hexTheme ? '#fff' : '',
-                    backgroundColor: this.hexTheme ? this.theme : '',
-                    borderColor: this.hexTheme ? this.theme : '',
-                    borderWidth: this.dot ? '1px' : '2px'
-                }
-
-                isRadius && Object.assign(style, { borderRadius: _radius })
-                return style
-            },
-
-            /** 根据ICON Theme计算Class */
-            badgeClass () {
-                return [
-                    this.theme && !this.hexTheme ? ('bk-' + this.theme) : '',
-                    this.$slots.default ? this.position : '',
-                    {
-                        pinned: this.$slots.default,
-                        dot: this.dot,
-                        'is-icon': !!this.icon
-                    }
-                ]
-            }
-        },
-        methods: {
-            handleHover () {
-                this.$emit('hover')
-            },
-            handleLeave () {
-                this.$emit('leave')
-            }
-        }
+    // 组件显示图标；当设置 icon 时，将忽略设置的 value 值
+    icon: {
+      type: String,
+      default: ''
+    },
+    // 组件显示的最大值，当 value 超过 max，显示数字 +；仅当设置了 Number 类型的 value 值时生效
+    max: {
+      type: Number,
+      default: -1
+    },
+    // 是否仅显示小圆点；当设置 dot 为 true 时，value, icon, max 均会被忽略
+    dot: {
+      type: Boolean,
+      default: false
+    },
+    // 是否显示组件
+    visible: {
+      type: Boolean,
+      default: true
+    },
+    // 组件相对于其兄弟组件的位置
+    position: {
+      type: String,
+      default: 'top-right'
+    },
+    // 设置弧度 | 0的时候显示为方形， 可以是数字，百分比
+    radius: {
+      type: [String, Number],
+      default: undefined
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+  computed: {
+    text () {
+      const _type = typeof this.val
+      const _max = this.max
+      let _value = this.val
+      const _icon = this.icon
+      const _isNumber = _type === 'number' || /^\d+$/.test(this.val)
+
+      if (_icon) {
+        return _icon
+      }
+
+      if (_isNumber && _max > -1 && Number(_value) > _max) {
+        return _max + '+'
+      } else {
+        _value += ''
+        const output = []
+        let count = 0
+        _value.split('').forEach(char => {
+          if (count < Number(this.valLength)) {
+            count += /[\u4e00-\u9fa5]/.test(char) ? 2 : 1
+            output.push(char)
+          }
+        })
+
+        return output.join('')
+      }
+    },
+    hexTheme () {
+      return /^#[0-9a-fA-F]{3,6}$/.test(this.theme)
+    },
+
+    /** 根据ICON Theme计算最终样式 */
+    badgeStyle () {
+      const isRadius = this.radius !== undefined && /^\d+(%|px|em|rem|vh|vw)?$/.test(this.radius)
+      const _radius = (isRadius && /^\d+$/.test(this.radius) && `${this.radius}px`) || this.radius
+      const style = (this.icon && { color: this.theme || '', borderColor: 'transparent', backgroundColor: '#fff' }) || {
+        color: this.hexTheme ? '#fff' : '',
+        backgroundColor: this.hexTheme ? this.theme : '',
+        borderColor: this.hexTheme ? this.theme : '',
+        borderWidth: this.dot ? '1px' : '2px'
+      }
+
+      isRadius && Object.assign(style, { borderRadius: _radius })
+      return style
+    },
+
+    /** 根据ICON Theme计算Class */
+    badgeClass () {
+      return [
+        this.theme && !this.hexTheme ? ('bk-' + this.theme) : '',
+        this.$slots.default ? this.position : '',
+        {
+          pinned: this.$slots.default,
+          dot: this.dot,
+          'is-icon': !!this.icon
+        }
+      ]
+    }
+  },
+  methods: {
+    handleHover () {
+      this.$emit('hover')
+    },
+    handleLeave () {
+      this.$emit('leave')
+    }
+  }
+}
 </script>
 
 <style>

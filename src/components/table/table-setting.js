@@ -31,16 +31,16 @@
  */
 import bkPopover from '../popover'
 export default {
-    name: 'bk-table-setting',
-    components: {
-        bkPopover
-    },
-    props: {
-        column: Object
-    },
-    render (h) {
-        const popoverContent = this.column.settingContent ? this.column.settingContent(h) : ''
-        return (
+  name: 'bk-table-setting',
+  components: {
+    bkPopover
+  },
+  props: {
+    column: Object
+  },
+  render (h) {
+    const popoverContent = this.column.settingContent ? this.column.settingContent(h) : ''
+    return (
             <bk-popover
                 trigger="click"
                 placement="bottom-end"
@@ -49,6 +49,6 @@ export default {
                 <i class={ 'bk-table-setting-icon ' + this.column.icon }></i>
                 <template slot="content">{ popoverContent }</template>
             </bk-popover>
-        )
-    }
+    )
+  }
 }

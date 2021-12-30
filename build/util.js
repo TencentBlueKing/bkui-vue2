@@ -34,33 +34,33 @@ const path = require('path')
 const os = require('os')
 
 exports.assetsPath = _path => {
-    return path.posix.join('', _path)
+  return path.posix.join('', _path)
 }
 
 exports.getIP = () => {
-    const ifaces = os.networkInterfaces()
-    const defultAddress = '127.0.0.1'
-    let ip = defultAddress
+  const ifaces = os.networkInterfaces()
+  const defultAddress = '127.0.0.1'
+  let ip = defultAddress
 
-    /* eslint-disable fecs-use-for-of, no-loop-func */
-    for (const dev in ifaces) {
-        if (ifaces.hasOwnProperty(dev)) {
-            /* jshint loopfunc: true */
-            ifaces[dev].forEach(details => {
-                if (ip === defultAddress && details.family === 'IPv4') {
-                    ip = details.address
-                }
-            })
+  /* eslint-disable fecs-use-for-of, no-loop-func */
+  for (const dev in ifaces) {
+    if (ifaces.hasOwnProperty(dev)) {
+      /* jshint loopfunc: true */
+      ifaces[dev].forEach(details => {
+        if (ip === defultAddress && details.family === 'IPv4') {
+          ip = details.address
         }
+      })
     }
-    /* eslint-enable fecs-use-for-of, no-loop-func */
-    return ip
+  }
+  /* eslint-enable fecs-use-for-of, no-loop-func */
+  return ip
 }
 
 exports.convert = str => {
-    str = str.replace(/(&#x)(\w{4});/gi, () => String.fromCharCode(
-        // eslint-disable-next-line no-undef
-        parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16))
-    )
-    return str
+  str = str.replace(/(&#x)(\w{4});/gi, () => String.fromCharCode(
+    // eslint-disable-next-line no-undef
+    parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16))
+  )
+  return str
 }

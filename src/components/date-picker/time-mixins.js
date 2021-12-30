@@ -31,53 +31,53 @@
  */
 
 export default {
-    props: {
-        // 禁止选择的小时
-        disabledHours: {
-            type: Array,
-            default () {
-                return []
-            }
-        },
-        // 禁止选择的分钟
-        disabledMinutes: {
-            type: Array,
-            default () {
-                return []
-            }
-        },
-        // 禁止选择的秒
-        disabledSeconds: {
-            type: Array,
-            default () {
-                return []
-            }
-        },
-        // 是否隐藏禁止选择的小时、分钟、秒
-        hideDisabledOptions: {
-            type: Boolean,
-            default: false
-        },
-        width: {
-            type: Number,
-            default: 261
-        },
-        // 回车模式，为 true 即需要按回车才会把时间回填到文本框
-        enterMode: {
-            type: Boolean,
-            default: true
-        }
+  props: {
+    // 禁止选择的小时
+    disabledHours: {
+      type: Array,
+      default () {
+        return []
+      }
     },
-    methods: {
-        /**
+    // 禁止选择的分钟
+    disabledMinutes: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    // 禁止选择的秒
+    disabledSeconds: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    // 是否隐藏禁止选择的小时、分钟、秒
+    hideDisabledOptions: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: Number,
+      default: 261
+    },
+    // 回车模式，为 true 即需要按回车才会把时间回填到文本框
+    enterMode: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    /**
          * firstUpperCase
          *
          * @param {string} str str
          *
          * @return {string} str
          */
-        firstUpperCase (str) {
-            return str.toString()[0].toUpperCase() + str.toString().slice(1)
-        }
+    firstUpperCase (str) {
+      return str.toString()[0].toUpperCase() + str.toString().slice(1)
     }
+  }
 }
