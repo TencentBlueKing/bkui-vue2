@@ -34,42 +34,42 @@ import Exception from '@/components/exception'
 import { mountComponent } from '../helpers'
 
 describe('Exception', () => {
-    it('render the correct default exception', () => {
-        const wrapper = mountComponent(Exception, {
-            slots: {
-                default: '404'
-            }
-        })
-
-        expect(wrapper.classes()).toContain('bk-exception')
-        expect(wrapper.contains('img')).toBe(true)
-        expect(wrapper.find('.exception-text').exists()).toBe(true)
+  it('render the correct default exception', () => {
+    const wrapper = mountComponent(Exception, {
+      slots: {
+        default: '404'
+      }
     })
 
-    it('render the correct 500 exception', () => {
-        const wrapper = mountComponent(Exception, {
-            propsData: {
-                type: '500'
-            }
-        })
+    expect(wrapper.classes()).toContain('bk-exception')
+    expect(wrapper.contains('img')).toBe(true)
+    expect(wrapper.find('.exception-text').exists()).toBe(true)
+  })
 
-        expect(wrapper.props('type')).toBe('500')
-        expect(wrapper.find('img').attributes().alt).toBe('500')
+  it('render the correct 500 exception', () => {
+    const wrapper = mountComponent(Exception, {
+      propsData: {
+        type: '500'
+      }
     })
 
-    it('render the custom exception tips', () => {
-        const wrapper = mountComponent(Exception, {
-            propsData: {
-                type: '403'
-            },
-            slots: {
-                default: '您的权限不足!  <a href="javascript:;">申请权限</a>'
-            }
-        })
-        const exceptionText = wrapper.find('.exception-text')
+    expect(wrapper.props('type')).toBe('500')
+    expect(wrapper.find('img').attributes().alt).toBe('500')
+  })
 
-        expect(exceptionText.exists()).toBe(true)
-        expect(exceptionText.contains('a')).toBe(true)
-        expect(exceptionText.find('a').text()).toBe('申请权限')
+  it('render the custom exception tips', () => {
+    const wrapper = mountComponent(Exception, {
+      propsData: {
+        type: '403'
+      },
+      slots: {
+        default: '您的权限不足!  <a href="javascript:;">申请权限</a>'
+      }
     })
+    const exceptionText = wrapper.find('.exception-text')
+
+    expect(exceptionText.exists()).toBe(true)
+    expect(exceptionText.contains('a')).toBe(true)
+    expect(exceptionText.find('a').text()).toBe('申请权限')
+  })
 })

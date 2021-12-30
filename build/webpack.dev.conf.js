@@ -41,67 +41,67 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const manifest = require('../example/static/lib-manifest.json')
 
 const webpackConfig = merge(baseWebpackConfig, {
-    mode: 'development',
-    entry: {
-        index: './example/index.js'
-    },
-    output: {
-        path: resolve(__dirname, '../dist'),
-        filename: '[name].js',
-        chunkFilename: '[name].js',
-        publicPath: '/'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(css|postcss)$/,
-                use: [
-                    'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: resolve(__dirname, '..', 'postcss.config.js')
-                            }
-                        }
-                    }
-                ]
+  mode: 'development',
+  entry: {
+    index: './example/index.js'
+  },
+  output: {
+    path: resolve(__dirname, '../dist'),
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(css|postcss)$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
             }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: resolve(__dirname, '..', 'postcss.config.js')
+              }
+            }
+          }
         ]
-    },
-    devtool: '#cheap-module-eval-source-map',
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': config.dev.env
-        }),
-
-        new webpack.DllReferencePlugin({
-            context: resolve(__dirname, '../example'),
-            manifest: manifest
-        }),
-
-        new webpack.HotModuleReplacementPlugin(),
-
-        new webpack.NoEmitOnErrorsPlugin(),
-
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: join(__dirname, '../example/index.html'),
-            inject: true
-        }),
-
-        new FriendlyErrorsPlugin()
+      }
     ]
+  },
+  devtool: '#cheap-module-eval-source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env
+    }),
+
+    new webpack.DllReferencePlugin({
+      context: resolve(__dirname, '../example'),
+      manifest: manifest
+    }),
+
+    new webpack.HotModuleReplacementPlugin(),
+
+    new webpack.NoEmitOnErrorsPlugin(),
+
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: join(__dirname, '../example/index.html'),
+      inject: true
+    }),
+
+    new FriendlyErrorsPlugin()
+  ]
 })
 
 Object.keys(webpackConfig.entry).forEach(function (name) {
-    webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name])
+  webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name])
 })
 
 module.exports = webpackConfig

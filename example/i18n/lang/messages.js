@@ -37,8 +37,8 @@ import { langPkg } from '@'
 console.error(langPkg)
 
 export default {
-    // en: Object.assign(langPkg.enUS, en),
-    // 'zh_CN': Object.assign(langPkg.zhCN, cn)
-    enUS: Object.assign(langPkg.enUS, en),
-    zhCN: Object.assign(langPkg.zhCN, cn)
+  // en: Object.assign(langPkg.enUS, en),
+  // 'zh_CN': Object.assign(langPkg.zhCN, cn)
+  enUS: Object.assign(langPkg.enUS, en),
+  zhCN: Object.assign(langPkg.zhCN, cn)
 }

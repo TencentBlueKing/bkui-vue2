@@ -40,116 +40,116 @@ import '@/ui/tooltips.css'
  * @param trigger {String} - 触发事件 - ‘mouseenter focus', 'click', 'manual'
  */
 const defaultOptions = {
-    duration: 0,
-    arrow: true,
-    size: 'small',
-    trigger: 'mouseenter focus',
-    theme: 'dark',
-    interactive: true,
-    content: '',
-    allowHtml: false,
-    extCls: ''
+  duration: 0,
+  arrow: true,
+  size: 'small',
+  trigger: 'mouseenter focus',
+  theme: 'dark',
+  interactive: true,
+  content: '',
+  allowHtml: false,
+  extCls: ''
 }
 
 const validPlacements = [
-    'auto-start',
-    'auto',
-    'auto-end',
-    'top-start',
-    'top',
-    'top-end',
-    'right-start',
-    'right',
-    'right-end',
-    'bottom-end',
-    'bottom',
-    'bottom-start',
-    'left-end',
-    'left',
-    'left-start'
+  'auto-start',
+  'auto',
+  'auto-end',
+  'top-start',
+  'top',
+  'top-end',
+  'right-start',
+  'right',
+  'right-end',
+  'bottom-end',
+  'bottom',
+  'bottom-start',
+  'left-end',
+  'left',
+  'left-start'
 ]
 
 const createTippy = (el, binding) => {
-    const value = binding.value
-    const options = { ...defaultOptions }
+  const value = binding.value
+  const options = { ...defaultOptions }
 
-    if (typeof value === 'object') {
-        Object.assign(options, value)
-    } else {
-        options.content = value
+  if (typeof value === 'object') {
+    Object.assign(options, value)
+  } else {
+    options.content = value
+  }
+
+  const placement = validPlacements.find(placement => binding.modifiers[placement])
+  options.placement = options.placement || placement || (options.placements || ['top'])[0]
+
+  const { click, light } = binding.modifiers
+  if (click) {
+    options.trigger = 'click'
+  }
+  if (light) {
+    options.theme = 'light'
+  }
+
+  if (options.allowHtml) {
+    const selector = options.content
+    if (selector instanceof Vue) {
+      options.content = selector.$el
+    } else if (typeof selector === 'string') {
+      const element = document.querySelector(selector)
+      if (element) {
+        options.content = element
+      }
     }
+  }
 
-    const placement = validPlacements.find(placement => binding.modifiers[placement])
-    options.placement = options.placement || placement || (options.placements || ['top'])[0]
+  if (options.html) {
+    options.content = options.html
+  }
 
-    const { click, light } = binding.modifiers
-    if (click) {
-        options.trigger = 'click'
-    }
-    if (light) {
-        options.theme = 'light'
-    }
+  if (typeof options.onClose === 'function') {
+    options.onHide = options.onClose
+  }
 
-    if (options.allowHtml) {
-        const selector = options.content
-        if (selector instanceof Vue) {
-            options.content = selector.$el
-        } else if (typeof selector === 'string') {
-            const element = document.querySelector(selector)
-            if (element) {
-                options.content = element
-            }
-        }
-    }
-
-    if (options.html) {
-        options.content = options.html
-    }
-
-    if (typeof options.onClose === 'function') {
-        options.onHide = options.onClose
-    }
-
-    const validOptions = getValidTippyProps(options)
-    return Tippy(el, validOptions)
+  const validOptions = getValidTippyProps(options)
+  return Tippy(el, validOptions)
 }
 
 const bkTooltips = {
-    inserted (el, binding) {
-        const disabled = typeof binding.value === 'object' ? binding.value.disabled : false
-        if (!disabled) {
-            el.tippyInstance = createTippy(el, binding)
-        }
-    },
-    unbind (el) {
-        el._tippy && el._tippy.destroy()
-        el.tippyInstance = null
-    },
-    update (el, binding) {
-        const value = binding.value
-        const isObject = typeof value === 'object'
-        const content = isObject ? value.content : value
-        const disabled = isObject ? value.disabled : false
-        if (disabled || !content) {
-            el._tippy && el._tippy.destroy()
-            el.tippyInstance = null
-        } else if (content) {
-            if (!el._tippy) {
-                el.tippyInstance = createTippy(el, binding)
-            } else {
-                // TODO: 暂时先这样处理，如果是 html 那么再次实例化，如果不实例化只是更新 html 内容的话，那么第一次绑定的事件会消失
-                if (typeof value === 'object' && binding.value.allowHtml) {
-                    el.tippyInstance = createTippy(el, binding)
-                } else {
-                    el._tippy.setContent(content)
-                }
-            }
-        }
+  inserted (el, binding) {
+    const disabled = typeof binding.value === 'object' ? binding.value.disabled : false
+    if (!disabled) {
+      el.tippyInstance = createTippy(el, binding)
     }
+  },
+  unbind (el) {
+    el._tippy && el._tippy.destroy()
+    el.tippyInstance = null
+  },
+  update (el, binding) {
+    const value = binding.value
+    const isObject = typeof value === 'object'
+    const content = isObject ? value.content : value
+    const disabled = isObject ? value.disabled : false
+    if (disabled || !content) {
+      el._tippy && el._tippy.destroy()
+      el.tippyInstance = null
+    } else if (content) {
+      if (!el._tippy) {
+        el.tippyInstance = createTippy(el, binding)
+      } else {
+        // TODO: 暂时先这样处理，如果是 html 那么再次实例化，如果不实例化只是更新 html 内容的话，那么第一次绑定的事件会消失
+        if (typeof value === 'object' && binding.value.allowHtml) {
+          el.tippyInstance = createTippy(el, binding)
+        } else {
+          el._tippy.setContent(content)
+        }
+      }
+    }
+  }
 }
 
 bkTooltips.install = Vue => {
-    Vue.directive('bkTooltips', bkTooltips)
+  Vue.directive('bkTooltips', bkTooltips)
 }
 
 export default bkTooltips

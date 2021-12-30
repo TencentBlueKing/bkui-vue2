@@ -35,132 +35,132 @@ import Input from '@/components/input'
 import { createTestComp } from '../helpers'
 
 describe('Input', () => {
-    it('render the correct type: text', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                type: 'text',
-                value: ''
-            }
-        })
-        await expect(wrapper.find('input[type="text"]').exists()).toBe(true)
-        done()
+  it('render the correct type: text', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        type: 'text',
+        value: ''
+      }
     })
+    await expect(wrapper.find('input[type="text"]').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct type: number', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                type: 'number',
-                value: ''
-            }
-        })
-        await expect(wrapper.find('input[type="number"]').exists()).toBe(true)
-        done()
+  it('render the correct type: number', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        type: 'number',
+        value: ''
+      }
     })
+    await expect(wrapper.find('input[type="number"]').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct type: textarea', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                type: 'textarea',
-                value: ''
-            }
-        })
-        await expect(wrapper.find('textarea').exists()).toBe(true)
-        done()
+  it('render the correct type: textarea', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        type: 'textarea',
+        value: ''
+      }
     })
+    await expect(wrapper.find('textarea').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct fontSize', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: '',
-                fontSize: 'large'
-            }
-        })
-        await expect(wrapper.find('.large-font').exists()).toBe(true)
-        done()
+  it('render the correct fontSize', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: '',
+        fontSize: 'large'
+      }
     })
+    await expect(wrapper.find('.large-font').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct clearable', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: 'test',
-                clearable: true
-            }
-        })
-        await expect(wrapper.find('.clear-icon').exists()).toBe(true)
-        done()
+  it('render the correct clearable', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: 'test',
+        clearable: true
+      }
     })
+    await expect(wrapper.find('.clear-icon').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct leftIcon', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: '',
-                leftIcon: 'icon-search'
-            }
-        })
-        await expect(wrapper.find('.control-icon.left-icon').contains('.icon-search')).toBe(true)
-        done()
+  it('render the correct leftIcon', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: '',
+        leftIcon: 'icon-search'
+      }
     })
+    await expect(wrapper.find('.control-icon.left-icon').contains('.icon-search')).toBe(true)
+    done()
+  })
 
-    it('render the correct rightIcon', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: '',
-                rightIcon: 'icon-search'
-            }
-        })
-        await expect(wrapper.find('.control-icon.right-icon').contains('.icon-search')).toBe(true)
-        done()
+  it('render the correct rightIcon', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: '',
+        rightIcon: 'icon-search'
+      }
     })
+    await expect(wrapper.find('.control-icon.right-icon').contains('.icon-search')).toBe(true)
+    done()
+  })
 
-    it('render the correct placeholder', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: '测试',
-                placeholder: '请输入中文'
-            }
-        })
-        await expect(wrapper.find('input[placeholder="请输入中文"]').exists()).toBe(true)
-        done()
+  it('render the correct placeholder', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: '测试',
+        placeholder: '请输入中文'
+      }
     })
+    await expect(wrapper.find('input[placeholder="请输入中文"]').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct disabled', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: '',
-                disabled: true
-            }
-        })
-        await expect(wrapper.find('[disabled]').exists()).toBe(true)
-        done()
+  it('render the correct disabled', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: '',
+        disabled: true
+      }
     })
+    await expect(wrapper.find('[disabled]').exists()).toBe(true)
+    done()
+  })
 
-    it('render the correct readonly', async (done) => {
-        const wrapper = mount(Input, {
-            sync: false,
-            propsData: {
-                value: '',
-                readonly: true
-            }
-        })
-        await expect(wrapper.find('[readonly]').exists()).toBe(true)
-        done()
+  it('render the correct readonly', async (done) => {
+    const wrapper = mount(Input, {
+      sync: false,
+      propsData: {
+        value: '',
+        readonly: true
+      }
     })
+    await expect(wrapper.find('[readonly]').exists()).toBe(true)
+    done()
+  })
 
-    it('change input focus blur listener', async (done) => {
-        const changeHandler = jest.fn()
-        const inputHandler = jest.fn()
-        const focusHandler = jest.fn()
-        const blurHandler = jest.fn()
-        const wrapper = mount(createTestComp(`
+  it('change input focus blur listener', async (done) => {
+    const changeHandler = jest.fn()
+    const inputHandler = jest.fn()
+    const focusHandler = jest.fn()
+    const blurHandler = jest.fn()
+    const wrapper = mount(createTestComp(`
                 <bk-input
                     v-model="value"
                     @change="handleChange"
@@ -169,35 +169,35 @@ describe('Input', () => {
                     @blur="handleBlur">
                 </bk-input>
             `, {
-            components: {
-                bkInput: Input
-            },
-            data () {
-                return {
-                    value: 'test',
-                    isChangeTrigger: false
-                }
-            },
-            methods: {
-                handleChange: changeHandler,
-                handleInput: inputHandler,
-                handleFocus: focusHandler,
-                handleBlur: blurHandler
-            }
-        }), { sync: false })
-        const vm = wrapper.vm
-        await vm.$nextTick()
-        const input = wrapper.find('input[type="text"]')
-        input.trigger('input', {
-            key: 'a'
-        })
-        input.element.focus()
-        await vm.$nextTick()
-        expect(changeHandler).toHaveBeenCalledTimes(1)
-        expect(inputHandler).toHaveBeenCalledTimes(1)
-        expect(focusHandler).toHaveBeenCalledTimes(1)
-        input.element.blur()
-        expect(blurHandler).toHaveBeenCalledTimes(1)
-        done()
+      components: {
+        bkInput: Input
+      },
+      data () {
+        return {
+          value: 'test',
+          isChangeTrigger: false
+        }
+      },
+      methods: {
+        handleChange: changeHandler,
+        handleInput: inputHandler,
+        handleFocus: focusHandler,
+        handleBlur: blurHandler
+      }
+    }), { sync: false })
+    const vm = wrapper.vm
+    await vm.$nextTick()
+    const input = wrapper.find('input[type="text"]')
+    input.trigger('input', {
+      key: 'a'
     })
+    input.element.focus()
+    await vm.$nextTick()
+    expect(changeHandler).toHaveBeenCalledTimes(1)
+    expect(inputHandler).toHaveBeenCalledTimes(1)
+    expect(focusHandler).toHaveBeenCalledTimes(1)
+    input.element.blur()
+    expect(blurHandler).toHaveBeenCalledTimes(1)
+    done()
+  })
 })

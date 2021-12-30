@@ -35,8 +35,8 @@ import DropdownMenu from '@/components/dropdown-menu'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('Component', () => {
-    it('render the correct markup and content', done => {
-        const wrapper = mount(createTestComp(`
+  it('render the correct markup and content', done => {
+    const wrapper = mount(createTestComp(`
             <bk-dropdown-menu ref="dropdown">
                 <bk-button type="primary" slot="dropdown-trigger">
                     <span>更多操作</span>
@@ -49,57 +49,57 @@ describe('Component', () => {
                 </ul>
             </bk-dropdown-menu>
             `, {
-            components: {
-                bkDropdownMenu: DropdownMenu,
-                bkButton: Button
-            }
-        }), { sync: false })
-        setTimeout(_ => {
-            expect(wrapper.classes('bk-dropdown-menu')).toBe(true)
-            wrapper.find('.bk-dropdown-trigger').trigger('mouseover')
-            setTimeout(_ => {
-                expect(wrapper.find('.bk-dropdown-content.is-show').exists()).toBe(true)
-                done()
-            }, 300)
-        }, 400)
+      components: {
+        bkDropdownMenu: DropdownMenu,
+        bkButton: Button
+      }
+    }), { sync: false })
+    setTimeout(_ => {
+      expect(wrapper.classes('bk-dropdown-menu')).toBe(true)
+      wrapper.find('.bk-dropdown-trigger').trigger('mouseover')
+      setTimeout(_ => {
+        expect(wrapper.find('.bk-dropdown-content.is-show').exists()).toBe(true)
         done()
+      }, 300)
+    }, 400)
+    done()
+  })
+  it('render the correct properties', async done => {
+    const wrapper = shallowMount(DropdownMenu, {
+      propsData: {
+        'align': 'center',
+        'font-size': 'large',
+        'disabled': false,
+        'trigger': 'click'
+      }
     })
-    it('render the correct properties', async done => {
-        const wrapper = shallowMount(DropdownMenu, {
-            propsData: {
-                'align': 'center',
-                'font-size': 'large',
-                'disabled': false,
-                'trigger': 'click'
-            }
-        })
-        await expect(wrapper.props().align).toBe('center')
-        await expect(wrapper.find('.bk-dropdown-content.center-align').exists()).toBe(true)
-        await expect(wrapper.props().fontSize).toBe('large')
-        await expect(wrapper.props().disabled).toBe(false)
-        await expect(wrapper.props().trigger).toBe('click')
-        done()
+    await expect(wrapper.props().align).toBe('center')
+    await expect(wrapper.find('.bk-dropdown-content.center-align').exists()).toBe(true)
+    await expect(wrapper.props().fontSize).toBe('large')
+    await expect(wrapper.props().disabled).toBe(false)
+    await expect(wrapper.props().trigger).toBe('click')
+    done()
+  })
+  it('render the correct trigger slot', async done => {
+    const wrapper = mountComponent(DropdownMenu, {
+      slots: {
+        'dropdown-trigger': '<span>更多操作</span>'
+      }
     })
-    it('render the correct trigger slot', async done => {
-        const wrapper = mountComponent(DropdownMenu, {
-            slots: {
-                'dropdown-trigger': '<span>更多操作</span>'
-            }
-        })
-        await expect(wrapper.html()).toContain('<div class="bk-dropdown-trigger"><span>更多操作</span></div>')
-        done()
+    await expect(wrapper.html()).toContain('<div class="bk-dropdown-trigger"><span>更多操作</span></div>')
+    done()
+  })
+  it('render the correct content slot', async done => {
+    const wrapper = mountComponent(DropdownMenu, {
+      slots: {
+        'dropdown-content': '<li><a href="javascript:;">生产环境</a></li>'
+      }
     })
-    it('render the correct content slot', async done => {
-        const wrapper = mountComponent(DropdownMenu, {
-            slots: {
-                'dropdown-content': '<li><a href="javascript:;">生产环境</a></li>'
-            }
-        })
-        await expect(wrapper.find('.bk-dropdown-content').find('a').text()).toBe('生产环境')
-        done()
-    })
-    it('show and hide listener', async done => {
-        const wrapper = mount(createTestComp(`
+    await expect(wrapper.find('.bk-dropdown-content').find('a').text()).toBe('生产环境')
+    done()
+  })
+  it('show and hide listener', async done => {
+    const wrapper = mount(createTestComp(`
             <bk-dropdown-menu @show="dropdownShow" @hide="dropdownHide" ref="dropdown" trigger="click">
                 <bk-button type="primary" slot="dropdown-trigger">
                     <span>更多操作</span>
@@ -109,37 +109,37 @@ describe('Component', () => {
                 </ul>
             </bk-dropdown-menu>
             `, {
-            components: {
-                bkDropdownMenu: DropdownMenu,
-                bkButton: Button
-            },
-            data () {
-                return {
-                    isDropdownShow: false,
-                    isDropdownHide: true
-                }
-            },
-            methods: {
-                dropdownShow () {
-                    this.isDropdownShow = true
-                },
-                dropdownHide () {
-                    this.isDropdownHide = false
-                },
-                triggerHandler () {
-                    this.$refs.dropdown.hide()
-                }
-            }
-        }), { sync: false })
-        const vm = wrapper.vm
-        await vm.$refs['dropdown'].$el.click()
-        setTimeout(_ => {
-            expect(vm.isDropdownShow).toBe(true)
-            vm.$refs['dropdown'].$el.querySelector('.menu').click()
-            setTimeout(_ => {
-                expect(vm.isDropdownHide).toBe(false)
-                done()
-            }, 500)
-        }, 50)
-    })
+      components: {
+        bkDropdownMenu: DropdownMenu,
+        bkButton: Button
+      },
+      data () {
+        return {
+          isDropdownShow: false,
+          isDropdownHide: true
+        }
+      },
+      methods: {
+        dropdownShow () {
+          this.isDropdownShow = true
+        },
+        dropdownHide () {
+          this.isDropdownHide = false
+        },
+        triggerHandler () {
+          this.$refs.dropdown.hide()
+        }
+      }
+    }), { sync: false })
+    const vm = wrapper.vm
+    await vm.$refs['dropdown'].$el.click()
+    setTimeout(_ => {
+      expect(vm.isDropdownShow).toBe(true)
+      vm.$refs['dropdown'].$el.querySelector('.menu').click()
+      setTimeout(_ => {
+        expect(vm.isDropdownHide).toBe(false)
+        done()
+      }, 500)
+    }, 50)
+  })
 })

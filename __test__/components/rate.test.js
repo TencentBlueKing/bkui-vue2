@@ -35,30 +35,30 @@ import { mount } from '@vue/test-utils'
 import { createTestComp } from '../helpers'
 
 describe('rate', () => {
-    it('render the correct props', () => {
-        const chooseRateHandler = jest.fn()
-        const wrapper = mount(
-            createTestComp(
-                `<bk-rate :rate="rate" :edit="true" :width="18" :height="18" @score="chooseRate"></bk-rate>`,
-                {
-                    components: {
-                        bkRate: rate
-                    },
-                    data () {
-                        return {
-                            rate: 1
-                        }
-                    },
-                    methods: {
-                        chooseRate: chooseRateHandler
-                    }
-                }
-            ),
-            { sync: false }
-        )
-        const svg = wrapper.findAll('svg').at(4)
-        svg.trigger('click')
-        expect(chooseRateHandler).toBeCalled()
-        expect(svg.attributes('style')).toBe('width: 18px; height: 18px; min-width: 18px;')
-    })
+  it('render the correct props', () => {
+    const chooseRateHandler = jest.fn()
+    const wrapper = mount(
+      createTestComp(
+        `<bk-rate :rate="rate" :edit="true" :width="18" :height="18" @score="chooseRate"></bk-rate>`,
+        {
+          components: {
+            bkRate: rate
+          },
+          data () {
+            return {
+              rate: 1
+            }
+          },
+          methods: {
+            chooseRate: chooseRateHandler
+          }
+        }
+      ),
+      { sync: false }
+    )
+    const svg = wrapper.findAll('svg').at(4)
+    svg.trigger('click')
+    expect(chooseRateHandler).toBeCalled()
+    expect(svg.attributes('style')).toBe('width: 18px; height: 18px; min-width: 18px;')
+  })
 })

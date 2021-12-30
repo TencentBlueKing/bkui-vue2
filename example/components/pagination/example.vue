@@ -27,47 +27,47 @@
 -->
 
 <template>
-    <bk-pagination
-        :current.sync="defaultPaging.current"
-        :count.sync="defaultPaging.count"
-        :limit="defaultPaging.limit"
-        :small="small"
-        show-total-count
-        align="right"
-        @change="handlePageChange"
-        @limit-change="handleLimitChange">
-    </bk-pagination>
+  <bk-pagination
+    :current.sync="defaultPaging.current"
+    :count.sync="defaultPaging.count"
+    :limit="defaultPaging.limit"
+    :small="small"
+    show-total-count
+    align="right"
+    @change="handlePageChange"
+    @limit-change="handleLimitChange">
+  </bk-pagination>
 </template>
 
 <script>
-    import { bkPagination } from '@'
+import { bkPagination } from '@'
 
-    export default {
-        components: {
-            bkPagination
-        },
-        data () {
-            return {
-                defaultPaging: {
-                    current: 5,
-                    limit: 10,
-                    count: 300
-                },
-                small: true
-            }
-        },
-        mounted () {
-            setTimeout(() => {
-                this.defaultPaging.current = 10
-            }, 5000)
-        },
-        methods: {
-            handlePageChange (page) {
-                console.log(page)
-            },
-            handleLimitChange (limit) {
-                console.log(limit)
-            }
-        }
+export default {
+  components: {
+    bkPagination
+  },
+  data () {
+    return {
+      defaultPaging: {
+        current: 5,
+        limit: 10,
+        count: 300
+      },
+      small: true
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.defaultPaging.current = 10
+    }, 5000)
+  },
+  methods: {
+    handlePageChange (page) {
+      console.log(page)
+    },
+    handleLimitChange (limit) {
+      console.log(limit)
+    }
+  }
+}
 </script>

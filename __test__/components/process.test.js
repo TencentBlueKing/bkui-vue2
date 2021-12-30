@@ -35,73 +35,73 @@ import { mount } from '@vue/test-utils'
 import { createTestComp } from '../helpers'
 
 describe('process', () => {
-    it('render the correct prop list', () => {
-        const wrapper = mount(
-            createTestComp(
-                `<bk-process
+  it('render the correct prop list', () => {
+    const wrapper = mount(
+      createTestComp(
+        `<bk-process
                     :list="list"
                     :cur-process.sync="curProcess"
                     :display-key="displayKey"
                     :show-steps="true"
                 ></bk-process>`,
+        {
+          components: {
+            bkProcess: process
+          },
+
+          data () {
+            return {
+              list: [
                 {
-                    components: {
-                        bkProcess: process
+                  content: '创建应用',
+                  steps: [
+                    {
+                      content: '创建应用1',
+                      isLoading: true
                     },
-
-                    data () {
-                        return {
-                            list: [
-                                {
-                                    content: '创建应用',
-                                    steps: [
-                                        {
-                                            content: '创建应用1',
-                                            isLoading: true
-                                        },
-                                        {
-                                            content: '创建应用2',
-                                            isLoading: true
-                                        }
-                                    ]
-                                },
-                                {
-                                    content: '开发完成',
-                                    steps: [
-                                        {
-                                            content: '开发完成1',
-                                            isLoading: true
-                                        },
-                                        {
-                                            content: '开发完成2',
-                                            isLoading: false
-                                        }
-                                    ]
-                                }
-                            ],
-                            displayKey: 'content',
-                            curProcess: 1
-                        }
+                    {
+                      content: '创建应用2',
+                      isLoading: true
                     }
+                  ]
+                },
+                {
+                  content: '开发完成',
+                  steps: [
+                    {
+                      content: '开发完成1',
+                      isLoading: true
+                    },
+                    {
+                      content: '开发完成2',
+                      isLoading: false
+                    }
+                  ]
                 }
-            ),
-            { sync: false }
-        )
+              ],
+              displayKey: 'content',
+              curProcess: 1
+            }
+          }
+        }
+      ),
+      { sync: false }
+    )
 
-        const children = wrapper.findAll('li')
-        const firstChild = children.at(0)
-        const dd = firstChild.findAll('dd').at(0)
-        const loading = dd.find('.bk-spin-loading')
-        expect(dd.text()).toBe('创建应用1')
-        expect(loading.exists()).toBe(true)
-        expect(children.length).toBe(2)
-    })
+    const children = wrapper.findAll('li')
+    const firstChild = children.at(0)
+    const dd = firstChild.findAll('dd').at(0)
+    const loading = dd.find('.bk-spin-loading')
+    expect(dd.text()).toBe('创建应用1')
+    expect(loading.exists()).toBe(true)
+    expect(children.length).toBe(2)
+  })
 
-    it('render the correct prop controllable & emit process-changed', async (done) => {
-        const handler = jest.fn()
-        const wrapper = mount(
-            createTestComp(
-                `<bk-process
+  it('render the correct prop controllable & emit process-changed', async (done) => {
+    const handler = jest.fn()
+    const wrapper = mount(
+      createTestComp(
+        `<bk-process
                     :list="list"
                     :cur-process.sync="curProcess"
                     :display-key="displayKey"
@@ -109,105 +109,105 @@ describe('process', () => {
                     :controllable="controllable"
                     @process-changed="changeProcess"
                 ></bk-process>`,
-                {
-                    components: {
-                        bkProcess: process
-                    },
+        {
+          components: {
+            bkProcess: process
+          },
 
-                    data () {
-                        return {
-                            controllable: true,
-                            list: [
-                                { content: '基本信息', steps: [{ content: '创建应用1', isLoading: true }], isLoading: true },
-                                { content: '详细信息', isLoading: true },
-                                { content: '实名认证', isLoading: true }
-                            ],
-                            curProcess: 1,
-                            displayKey: 'content'
-                        }
-                    },
+          data () {
+            return {
+              controllable: true,
+              list: [
+                { content: '基本信息', steps: [{ content: '创建应用1', isLoading: true }], isLoading: true },
+                { content: '详细信息', isLoading: true },
+                { content: '实名认证', isLoading: true }
+              ],
+              curProcess: 1,
+              displayKey: 'content'
+            }
+          },
 
-                    methods: {
-                        changeProcess: handler
-                    }
-                }
-            ),
-            { sync: false }
-        )
+          methods: {
+            changeProcess: handler
+          }
+        }
+      ),
+      { sync: false }
+    )
 
-        const vm = wrapper.vm
-        const children = wrapper.findAll('li')
-        const lastChild = children.at(2)
-        lastChild.trigger('click')
-        await vm.$nextTick()
-        expect(lastChild.classes()).toContain('current')
-        expect(handler).toBeCalled()
-        done()
-    })
+    const vm = wrapper.vm
+    const children = wrapper.findAll('li')
+    const lastChild = children.at(2)
+    lastChild.trigger('click')
+    await vm.$nextTick()
+    expect(lastChild.classes()).toContain('current')
+    expect(handler).toBeCalled()
+    done()
+  })
 
-    it('render the correct prop show-steps', async (done) => {
-        const wrapper = mount(
-            createTestComp(
-                `<bk-process
+  it('render the correct prop show-steps', async (done) => {
+    const wrapper = mount(
+      createTestComp(
+        `<bk-process
                     :list="list"
                     :cur-process.sync="curProcess"
                     :display-key="displayKey"
                     :show-steps="showSteps"
                     :controllable="controllable"
                 ></bk-process>`,
+        {
+          components: {
+            bkProcess: process
+          },
+
+          data () {
+            return {
+              controllable: true,
+              list: [
                 {
-                    components: {
-                        bkProcess: process
+                  content: '创建应用',
+                  steps: [
+                    {
+                      content: '创建应用1',
+                      isLoading: true
                     },
-
-                    data () {
-                        return {
-                            controllable: true,
-                            list: [
-                                {
-                                    content: '创建应用',
-                                    steps: [
-                                        {
-                                            content: '创建应用1',
-                                            isLoading: true
-                                        },
-                                        {
-                                            content: '创建应用2',
-                                            isLoading: true
-                                        }
-                                    ]
-                                },
-                                {
-                                    content: '开发完成',
-                                    steps: [
-                                        {
-                                            content: '开发完成1',
-                                            isLoading: true
-                                        },
-                                        {
-                                            content: '开发完成2',
-                                            isLoading: false
-                                        }
-                                    ]
-                                }
-                            ],
-                            showSteps: true,
-                            displayKey: 'content',
-                            curProcess: 1
-                        }
+                    {
+                      content: '创建应用2',
+                      isLoading: true
                     }
+                  ]
+                },
+                {
+                  content: '开发完成',
+                  steps: [
+                    {
+                      content: '开发完成1',
+                      isLoading: true
+                    },
+                    {
+                      content: '开发完成2',
+                      isLoading: false
+                    }
+                  ]
                 }
-            ),
-            { sync: false }
-        )
+              ],
+              showSteps: true,
+              displayKey: 'content',
+              curProcess: 1
+            }
+          }
+        }
+      ),
+      { sync: false }
+    )
 
-        await wrapper.vm.$nextTick()
-        const processToggle = wrapper.find('.bk-process-toggle')
-        processToggle.trigger('click')
-        await wrapper.vm.$nextTick()
-        const children = wrapper.findAll('li')
-        const secChild = children.at(1).find('dl')
-        expect(secChild.attributes('style')).toBe('display: none;')
-        done()
-    })
+    await wrapper.vm.$nextTick()
+    const processToggle = wrapper.find('.bk-process-toggle')
+    processToggle.trigger('click')
+    await wrapper.vm.$nextTick()
+    const children = wrapper.findAll('li')
+    const secChild = children.at(1).find('dl')
+    expect(secChild.attributes('style')).toBe('display: none;')
+    done()
+  })
 })
