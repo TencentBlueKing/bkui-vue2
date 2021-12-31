@@ -97,5 +97,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/container.css';
+  @import '../../ui/container.css';
 </style>

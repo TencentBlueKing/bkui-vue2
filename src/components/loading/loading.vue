@@ -37,7 +37,7 @@
     <transition name="fade" :duration="{ enter: duration }" @after-leave="animationFinish">
       <div class="bk-loading-wrapper" v-show="isShow"
         :style="{
-          zIndex,
+          renderZIndex,
           backgroundColor: bgColor
         }">
         <div :class="computedClass">
@@ -68,7 +68,7 @@
     <div class="bk-loading" :class="extCls" v-show="isShow"
       :style="{
         position: type,
-        zIndex,
+        renderZIndex,
         backgroundColor: bgColor
       }">
       <div class="bk-loading-wrapper">
@@ -217,6 +217,9 @@ export default {
         return
       }
       return typeof this.zIndex === 'number' && !Number.isNaN(this.zIndex)
+    },
+    renderZIndex () {
+      return this.zIndex
     }
   },
   watch: {
@@ -235,7 +238,7 @@ export default {
     },
     isShow (newVal) {
       if (newVal && !this.hasZIndexOption) {
-        this.zIndex = zIndexManager.nextZIndex()
+        this.renderZIndex = zIndexManager.nextZIndex()
       }
     },
     isLoading: {
@@ -265,8 +268,8 @@ export default {
       this.$el.parentNode.removeChild(this.$el)
     },
     /**
-             * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
-             */
+     * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
+     */
     animationFinish () {
       if (this.afterLeave && typeof this.afterLeave === 'function') {
         this.afterLeave()

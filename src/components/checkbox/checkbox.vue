@@ -47,7 +47,14 @@ import { getCheckboxName } from './checkbox-name.js'
 export default {
   name: 'bk-checkbox',
   mixins: [emitter],
-  inject: ['handleRemoveItem', 'handleAddItem'],
+  inject: {
+    handleRemoveItem: {
+      default: null
+    },
+    handleAddItem: {
+      default: null
+    }
+  },
   props: {
     value: {
       type: [String, Number, Boolean],
@@ -223,5 +230,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/checkbox.css';
+  @import '../../ui/checkbox.css';
 </style>

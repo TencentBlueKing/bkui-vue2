@@ -34,16 +34,16 @@
 
 <script>
 /**
-     * bk-checkbox-group
-     * @module components/checkbox
-     * @desc 单选框组合
-     * @param name {String} - 名称
-     * @example
-        <bk-checkbox
-            value="demo"
-            v-model="value">
-        </bk-checkbox>
-     */
+ * bk-checkbox-group
+ * @module components/checkbox
+ * @desc 单选框组合
+ * @param name {String} - 名称
+ * @example
+    <bk-checkbox
+        value="demo"
+        v-model="value">
+    </bk-checkbox>
+  */
 import { getGroupName } from './checkbox-name.js'
 
 export default {
