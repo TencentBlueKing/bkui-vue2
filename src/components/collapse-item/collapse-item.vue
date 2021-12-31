@@ -77,10 +77,10 @@ export default {
   inject: ['collapse'],
   props: {
     /**
-             * 是否使用自定义触发区域配置
-             * @value false 默认不使用，整行hover触发
-             * @value true 使用自定义区域，no-trigger为不触发的区域
-             */
+     * 是否使用自定义触发区域配置
+     * @value false 默认不使用，整行hover触发
+     * @value true 使用自定义区域，no-trigger为不触发的区域
+     */
     customTriggerArea: {
       type: Boolean,
       default: false
@@ -99,10 +99,10 @@ export default {
     },
 
     /**
-             * collapse-item 的content初始时是否渲染
-             * @value none: 初始不渲染
-             * @value hidden: 初始渲染，但是dispaly: none
-             */
+     * collapse-item 的content初始时是否渲染
+     * @value none: 初始不渲染
+     * @value hidden: 初始渲染，但是dispaly: none
+     */
     contentHiddenType: {
       type: String,
       default: 'none'
@@ -225,5 +225,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/collapse-item.css';
+  @import '../../ui/collapse-item.css';
 </style>

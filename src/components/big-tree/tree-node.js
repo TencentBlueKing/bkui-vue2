@@ -66,15 +66,15 @@ export default class TreeNode {
   }
 
   /**
-     * 获取 uid
-     */
+   * 获取 uid
+   */
   get uid () {
     return `${this.tree.id}-node-${this.index}`
   }
 
   /**
-     * 获取 name
-     */
+   * 获取 name
+   */
   get name () {
     return this.data[this.tree.nodeOptions.nameKey]
   }
@@ -87,15 +87,15 @@ export default class TreeNode {
   }
 
   /**
-     * 获取 vNode
-     */
+   * 获取 vNode
+   */
   get vNode () {
     return this._vNode
   }
 
   /**
-     * 获取 parents
-     */
+   * 获取 parents
+   */
   get parents () {
     if (!this.parent) {
       return []
@@ -113,33 +113,33 @@ export default class TreeNode {
   }
 
   /**
-     * 是否是叶子节点
-     */
+   * 是否是叶子节点
+   */
   get isLeaf () {
     return !this.lazy && !this.loading && !this.children.length
   }
 
   /**
-     * 是否是 lazy
-     *
-     * @param {string} paramName paramDesc
-     *
-     * @return {string} returnDesc
-     */
+   * 是否是 lazy
+   *
+   * @param {string} paramName paramDesc
+   *
+   * @return {string} returnDesc
+   */
   get lazy () {
     return this.state.lazy && !this.children.length
   }
 
   /**
-     * 是否 loading
-     */
+   * 是否 loading
+   */
   get loading () {
     return this.state.loading
   }
 
   /**
-     * 是否有 checkbox
-     */
+   * 是否有 checkbox
+   */
   get hasCheckbox () {
     const showCheckbox = this.tree.showCheckbox
     if (typeof showCheckbox === 'function') {

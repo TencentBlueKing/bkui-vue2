@@ -88,5 +88,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/col.css';
+  @import '../../ui/col.css';
 </style>
