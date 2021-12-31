@@ -169,9 +169,9 @@ export default {
       default: 16
     },
     /**
-             * 树尺寸
-             * 可选项：normal/small
-             */
+     * 树尺寸
+     * 可选项：normal/small
+     */
     size: {
       type: String,
       default: 'normal'
@@ -674,5 +674,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/big-tree.css';
+  @import '../../ui/big-tree.css';
 </style>

@@ -230,5 +230,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/checkbox.css';
+  @import '../../ui/checkbox.css';
 </style>

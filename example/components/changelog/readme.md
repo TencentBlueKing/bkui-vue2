@@ -4,6 +4,15 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.2 {page=#/changelog}
+###### 2021.12.31
+
+* **[fix]**:
+    - 修复 provide/inject 无默认值的问题
+    - 修复示例页面的一些小问题
+
+---
+
 ### 2.4.1 {page=#/changelog}
 ###### 2021.12.30
 
