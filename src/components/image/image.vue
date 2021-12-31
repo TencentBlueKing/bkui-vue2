@@ -87,7 +87,6 @@ export default {
   },
 
   mixins: [locale.mixin],
-  inheritAttrs: false,
 
   props: {
     src: String,
