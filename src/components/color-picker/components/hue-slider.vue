@@ -92,10 +92,10 @@ export default {
       window.removeEventListener('mouseup', this.handleMouseUp)
     },
     /**
-             * 色相面板变化
-             * @param {MouseEvent|null} e - 鼠标滑动事件
-             * @param {Number} [appointedLeft] - 键盘事件对应坐标，如果有就优先使用
-             */
+     * 色相面板变化
+     * @param {MouseEvent|null} e - 鼠标滑动事件
+     * @param {Number} [appointedLeft] - 键盘事件对应坐标，如果有就优先使用
+     */
     handlePointChange (e, appointedLeft) {
       const { clientWidth } = this.$refs.container
       const left = appointedLeft !== undefined ? appointedLeft : this.getLeft(e)

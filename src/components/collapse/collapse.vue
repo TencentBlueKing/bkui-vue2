@@ -101,5 +101,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/collapse.css';
+  @import '../../ui/collapse.css';
 </style>

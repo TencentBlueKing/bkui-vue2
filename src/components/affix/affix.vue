@@ -35,12 +35,12 @@
 </template>
 <script>
 /**
-     * bk-affix
-     * @module components/affix
-     * @desc 图钉组件
-     * @param offsetTop    {number}   距离顶部的偏移量 默认为'0'
-     * @param offsetBottom {number}   距离底部的偏移量
-     */
+ * bk-affix
+ * @module components/affix
+ * @desc 图钉组件
+ * @param offsetTop    {number}   距离顶部的偏移量 默认为'0'
+ * @param offsetBottom {number}   距离底部的偏移量
+ */
 // 兼容浏览器，添加事件监听器
 const on = (() => {
   if (document.addEventListener) {
@@ -215,5 +215,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/affix.css';
+  @import '../../ui/affix.css';
 </style>

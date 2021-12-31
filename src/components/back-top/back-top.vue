@@ -44,9 +44,7 @@ export default {
   },
   computed: {
     positionStyle () {
-      return `right: ${this.right}px;
-                    bottom: ${this.bottom}px;
-                    z-index: ${this.zIndex}`
+      return `right: ${this.right}px; bottom: ${this.bottom}px; z-index: ${this.zIndex}`
     }
   },
   watch: {
@@ -84,5 +82,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/back-top.css';
+  @import '../../ui/back-top.css';
 </style>

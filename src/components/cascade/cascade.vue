@@ -780,5 +780,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/cascade.css';
+  @import '../../ui/cascade.css';
 </style>

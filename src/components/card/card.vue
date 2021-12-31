@@ -172,5 +172,5 @@ export default {
 }
 </script>
 <style lang='postcss'>
-    @import '../../ui/card.css';
+  @import '../../ui/card.css';
 </style>
