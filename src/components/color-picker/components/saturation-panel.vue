@@ -100,11 +100,11 @@ export default {
       this.handlePointChange(null, left, top)
     },
     /**
-             * 饱和度面板变化
-             * @param {MouseEvent|null} e - 鼠标滑动事件
-             * @param {Number} [appointedLeft] - 键盘事件对应坐标，如果有就优先使用
-             * @param {Number} [appointedTop] - 键盘事件对应坐标，如果有就优先使用
-             */
+     * 饱和度面板变化
+     * @param {MouseEvent|null} e - 鼠标滑动事件
+     * @param {Number} [appointedLeft] - 键盘事件对应坐标，如果有就优先使用
+     * @param {Number} [appointedTop] - 键盘事件对应坐标，如果有就优先使用
+     */
     handlePointChange (e, appointedLeft, appointedTop) {
       const { clientWidth, clientHeight } = this.$refs.container
       const left = appointedLeft !== undefined ? appointedLeft : this.getLeft(e)

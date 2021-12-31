@@ -83,10 +83,10 @@ export default {
       this.$emit('tab', e)
     },
     /**
-             * 处理手动输入颜色
-             * @param {String} key
-             * @param {String} value
-             */
+     * 处理手动输入颜色
+     * @param {String} key
+     * @param {String} value
+     */
     handleInput (key, value) {
       this[key].value = value
       if (this.validate()) {
