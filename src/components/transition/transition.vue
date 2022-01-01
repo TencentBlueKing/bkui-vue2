@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style>
-    .collapse-transition {
-        transition: .2s height ease-in-out, .2s padding-top ease-in-out, .2s padding-bottom ease-in-out
-    }
+  .collapse-transition {
+    transition: .2s height ease-in-out, .2s padding-top ease-in-out, .2s padding-bottom ease-in-out
+  }
 </style>

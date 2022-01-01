@@ -110,25 +110,25 @@ export default {
     SpinLoading: {
       functional: true,
       render: (h, ctx) => (
-          <div class="bk-spin-loading bk-spin-loading-mini" { ...{ class: ctx.props.themeClass } }>
-            <div class="rotate rotate1"></div>
-            <div class="rotate rotate2"></div>
-            <div class="rotate rotate3"></div>
-            <div class="rotate rotate4"></div>
-            <div class="rotate rotate5"></div>
-            <div class="rotate rotate6"></div>
-            <div class="rotate rotate7"></div>
-            <div class="rotate rotate8"></div>
-          </div>
+        <div class="bk-spin-loading bk-spin-loading-mini" { ...{ class: ctx.props.themeClass } }>
+          <div class="rotate rotate1"></div>
+          <div class="rotate rotate2"></div>
+          <div class="rotate rotate3"></div>
+          <div class="rotate rotate4"></div>
+          <div class="rotate rotate5"></div>
+          <div class="rotate rotate6"></div>
+          <div class="rotate rotate7"></div>
+          <div class="rotate rotate8"></div>
+        </div>
       )
     },
     VNodeContent: {
       functional: true,
       render: (h, ctx) => (
-          <div class="step-item-custom">
-            {ctx.props.content}
-            {ctx.children}
-          </div>
+        <div class="step-item-custom">
+          {ctx.props.content}
+          {ctx.children}
+        </div>
       )
     },
     StepStatusIcon: {

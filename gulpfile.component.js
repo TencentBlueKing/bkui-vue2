@@ -26,7 +26,7 @@
 
 /**
  * @file gulp 编译单个组件，这里不会编译样式
- *       npm run build:component
+ *    npm run build:component
  *
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
@@ -75,18 +75,18 @@ const componentFileList = []
 })(join(__dirname, 'src/components'))
 
 // componentFileList.push(
-//     {
-//         name: 'locale',
-//         path: './src/locale/index.js'
-//     },
-//     {
-//         name: 'localeMixin',
-//         path: './src/mixins/locale.js'
-//     },
-//     {
-//         name: 'lang',
-//         path: './src/locale/lang/index.js'
-//     }
+//   {
+//     name: 'locale',
+//     path: './src/locale/index.js'
+//   },
+//   {
+//     name: 'localeMixin',
+//     path: './src/mixins/locale.js'
+//   },
+//   {
+//     name: 'lang',
+//     path: './src/locale/lang/index.js'
+//   }
 // )
 
 const utilFileList = [
@@ -338,72 +338,72 @@ async function sourceComponent () {
 
 // eslint-disable-next-line no-unused-vars
 /* async function minComponent () {
-    const config = {
-        external,
-        plugins: plugins.concat(
-            terser()
-        ),
-        onwarn (warning) {
-            if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
-                return false
-            }
-        }
+  const config = {
+    external,
+    plugins: plugins.concat(
+      terser()
+    ),
+    onwarn (warning) {
+      if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+        return false
+      }
     }
+  }
 
-    const componentPromises = []
-    const componentEntryNames = []
-    componentFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            componentPromises.push(rollup(config))
-            componentEntryNames.push(entry.name)
+  const componentPromises = []
+  const componentEntryNames = []
+  componentFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      componentPromises.push(rollup(config))
+      componentEntryNames.push(entry.name)
+    }
+  })
+
+  try {
+    const componentRet = await Promise.all(componentPromises)
+    componentRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/${componentEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
         }
+      })
     })
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile component: ${e}`))
+  }
 
-    try {
-        const componentRet = await Promise.all(componentPromises)
-        componentRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/${componentEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile component: ${e}`))
+  const directivePromises = []
+  const directiveEntryNames = []
+  directiveFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      directivePromises.push(rollup(config))
+      directiveEntryNames.push(entry.name)
     }
-
-    const directivePromises = []
-    const directiveEntryNames = []
-    directiveFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            directivePromises.push(rollup(config))
-            directiveEntryNames.push(entry.name)
+  })
+  try {
+    const directiveRet = await Promise.all(directivePromises)
+    directiveRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/directives/${directiveEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
         }
+      })
     })
-    try {
-        const directiveRet = await Promise.all(directivePromises)
-        directiveRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/directives/${directiveEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile directive: ${e}`))
-    }
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile directive: ${e}`))
+  }
 } */
 
 // 不打 component 的 min，按需引入时，由项目的打包处理

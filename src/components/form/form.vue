@@ -162,5 +162,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/form.css';
+  @import '../../ui/form.css';
 </style>

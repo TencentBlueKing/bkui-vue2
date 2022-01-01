@@ -247,5 +247,5 @@ export default {
 }
 </script>
 <style>
-     @import '../../ui/version-detail.css';
+  @import '../../ui/version-detail.css';
 </style>

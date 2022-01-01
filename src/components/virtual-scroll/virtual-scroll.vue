@@ -409,9 +409,9 @@ export default {
     },
 
     /**
-             * 虚拟滚动条的 mousedown 事件
-             * 滚动条是虚拟的，不是真正的滚动条点击时会触发 document 的 click 事件，因此这里做一些特殊处理，来解决 #107 的问题
-             */
+     * 虚拟滚动条的 mousedown 事件
+     * 滚动条是虚拟的，不是真正的滚动条点击时会触发 document 的 click 事件，因此这里做一些特殊处理，来解决 #107 的问题
+     */
     startNavMove (rate) {
       this.moveRate = rate
       this.tempVal = event.screenY
@@ -481,5 +481,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/virtual-scroll.css';
+  @import '../../ui/virtual-scroll.css';
 </style>
