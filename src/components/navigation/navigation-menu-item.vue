@@ -300,5 +300,5 @@ export default {
 </script>
 
 <style>
-    @import "../../ui/navigation-menu-item.css";
+  @import '../../ui/navigation-menu-item.css';
 </style>

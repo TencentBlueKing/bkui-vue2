@@ -156,5 +156,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../../ui/time-picker.css';
+  @import '../../../ui/time-picker.css';
 </style>

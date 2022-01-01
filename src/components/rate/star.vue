@@ -111,5 +111,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/star.css';
+  @import '../../ui/star.css';
 </style>

@@ -75,5 +75,5 @@ export default {
 }
 </script>
 <style>
-@import '../../ui/fixed-navbar.css';
+  @import '../../ui/fixed-navbar.css';
 </style>

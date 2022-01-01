@@ -464,8 +464,8 @@ export default {
   },
   methods: {
     /**
-             * 监听 virtual-scroll 的 virtual-scroll-scroll-bar-mouse 事件
-             */
+     * 监听 virtual-scroll 的 virtual-scroll-scroll-bar-mouse 事件
+     */
     virtualScrollScrollBarMouse (idx) {
       const renderPopoverOptions = Object.assign({}, this.renderPopoverOptions)
       renderPopoverOptions.hideOnClick = idx !== 'down'
@@ -662,5 +662,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/select.css';
+  @import '../../ui/select.css';
 </style>

@@ -100,17 +100,17 @@
 </template>
 <script>
 /**
-     *  bk-loading
-     *  @module components/loading
-     *  @desc 加载组件
-     *  @param title {String，VNode} - 加载时的文案显示
-     *  @example
-        this.$bkLoading() or
-        this.$bkLoading('加载中') or
-        this.$bkLoading({
-          title: this.$createElement('span', '加载中')
-        })
-     */
+ *  bk-loading
+ *  @module components/loading
+ *  @desc 加载组件
+ *  @param title {String，VNode} - 加载时的文案显示
+ *  @example
+    this.$bkLoading() or
+    this.$bkLoading('加载中') or
+    this.$bkLoading({
+      title: this.$createElement('span', '加载中')
+    })
+  */
 import zIndexManager from '@/utils/z-index-manager.js'
 
 export default {
@@ -279,5 +279,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/loading.css';
+  @import '../../ui/loading.css';
 </style>

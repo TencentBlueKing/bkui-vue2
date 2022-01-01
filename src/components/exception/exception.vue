@@ -98,5 +98,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/exception.css';
+  @import '../../ui/exception.css';
 </style>

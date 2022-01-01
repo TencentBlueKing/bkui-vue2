@@ -36,16 +36,16 @@
 import emitter from '@/mixins/emitter'
 
 /**
-     * bk-radio-group
-     * @module components/radio
-     * @desc 单选框组合
-     * @param name {String} - 名称
-     * @example
-        <bk-radio
-            value="demo"
-            v-model="value">
-        </bk-radio>
-     */
+ * bk-radio-group
+ * @module components/radio
+ * @desc 单选框组合
+ * @param name {String} - 名称
+ * @example
+    <bk-radio
+        value="demo"
+        v-model="value">
+    </bk-radio>
+  */
 export default {
   name: 'bk-radio-group',
   mixins: [emitter],

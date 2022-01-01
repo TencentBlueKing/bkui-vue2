@@ -374,5 +374,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/pagination.css';
+  @import '../../ui/pagination.css';
 </style>
