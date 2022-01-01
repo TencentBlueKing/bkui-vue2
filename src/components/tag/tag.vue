@@ -117,6 +117,6 @@ export default {
   }
 }
 </script>
-<style lang='postcss'>
-    @import '../../ui/tag.css';
+<style>
+  @import '../../ui/tag.css';
 </style>

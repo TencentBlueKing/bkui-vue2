@@ -125,9 +125,9 @@ class TableLayout {
     const headerHeight = (this.headerHeight = !this.showHeader ? 0 : headerWrapper.offsetHeight)
     if (
       this.showHeader
-            && headerWrapper.offsetWidth > 0
-            && (this.table.columns || []).length > 0
-            && headerHeight < 2
+        && headerWrapper.offsetWidth > 0
+        && (this.table.columns || []).length > 0
+        && headerHeight < 2
     ) {
       return Vue.nextTick(() => this.updateElsHeight())
     }

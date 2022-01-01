@@ -37,16 +37,16 @@ export default {
     const { renderLabel, $slots, label, name } = this.panel
     const labelContent = (renderLabel && renderLabel(h, name)) || $slots.label || label
     return (
-            <li
-                on-click={() => this.$parent.togglePanel(this.panel)}
-                class={this.showClose && !this.isSidePosition ? 'has-close' : ''}>
-                <div class="bk-tab-label">{ labelContent }</div>
-                {
-                    this.showClose
-                      ? (<i class="bk-tab-close-controller" on-click={$event => this.handleClosePanel($event)}></i>)
-                      : ''
-                }
-            </li>
+      <li
+        on-click={() => this.$parent.togglePanel(this.panel)}
+        class={this.showClose && !this.isSidePosition ? 'has-close' : ''}>
+        <div class="bk-tab-label">{ labelContent }</div>
+        {
+          this.showClose
+            ? (<i class="bk-tab-close-controller" on-click={$event => this.handleClosePanel($event)}></i>)
+            : ''
+        }
+      </li>
     )
   },
   computed: {

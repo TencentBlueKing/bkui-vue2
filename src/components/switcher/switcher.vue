@@ -40,15 +40,15 @@
 </template>
 <script>
 /**
-     * bk-switcher
-     * @module components/switcher
-     * @desc 开关
-     * @param {boolean} [value=false] - 是否打开
-     * @param {boolean} [show-text=false] - 是否显示ON/OFF
-     * @param {boolean} [disabled=true] - 是否禁用
-     * @example
-     * <bk-switcher :value="isSelected" :show-text="showText"></bk-switcher>
-     */
+ * bk-switcher
+ * @module components/switcher
+ * @desc 开关
+ * @param {boolean} [value=false] - 是否打开
+ * @param {boolean} [show-text=false] - 是否显示ON/OFF
+ * @param {boolean} [disabled=true] - 是否禁用
+ * @example
+ * <bk-switcher :value="isSelected" :show-text="showText"></bk-switcher>
+ */
 
 export default {
   name: 'bk-switcher',
@@ -184,5 +184,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/switcher.css';
+  @import '../../ui/switcher.css';
 </style>

@@ -90,77 +90,77 @@ export default {
 </script>
 
 <style lang="postcss">
-    .bk-selector-list {
-        position: absolute;
-        top: calc(100% + 5px);
-        left: 0;
-        right: 0;
-        max-width: 190px;
-        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-        border-radius: 2px;
-        background-color: #fff;
-        z-index: 100;
-        overflow-y: hidden;
-        padding: 6px 0;
-        min-width: 100px;
+  .bk-selector-list {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    max-width: 190px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    background-color: #fff;
+    z-index: 100;
+    overflow-y: hidden;
+    padding: 6px 0;
+    min-width: 100px;
 
-        .outside-ul {
-            @mixin scroller;
-            max-height: 160px;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            overflow-y: auto;
-        }
-        .bk-selector-list-item {
-            position: relative;
-            width: 100%;
-            border-left: $formBorderColor;
-            border-right: $formBorderColor;
-            background-color: #fff;
-            cursor: pointer;
-            &:first-child {
-                border-top: $formBorderColor;
-            }
-            &:last-child {
-                border-bottom: $formBorderColor;
-            }
-            &:hover {
-                background-color: #EAF3FF;
-            }
-            &.bk-selector-selected {
-                background-color: #F4F6FA;
-                color: $primaryColor;
-                .bk-selector-tools {
-                    display: block;
-                }
-            }
-            .loading {
-                width: 100%;
-                height: 40px;
-                font-size: 14px;
-                position: relative;
-                cursor: default;
-            }
-            .text {
-                padding: 0 10px;
-                line-height: 32px;
-                font-size: 12px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                color: $fnMainColor;
-            }
-            .bk-selector-tools {
-                position: absolute;
-                display: none;
-                top: 10px;
-                right: 0;
-                font-size: 12px;
-                .bk-selector-list-icon {
-                    margin-right: 14px;
-                }
-            }
-        }
+    .outside-ul {
+      @mixin scroller;
+      max-height: 160px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      overflow-y: auto;
     }
+    .bk-selector-list-item {
+      position: relative;
+      width: 100%;
+      border-left: $formBorderColor;
+      border-right: $formBorderColor;
+      background-color: #fff;
+      cursor: pointer;
+      &:first-child {
+        border-top: $formBorderColor;
+      }
+      &:last-child {
+        border-bottom: $formBorderColor;
+      }
+      &:hover {
+        background-color: #EAF3FF;
+      }
+      &.bk-selector-selected {
+        background-color: #F4F6FA;
+        color: $primaryColor;
+        .bk-selector-tools {
+          display: block;
+        }
+      }
+      .loading {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+        position: relative;
+        cursor: default;
+      }
+      .text {
+        padding: 0 10px;
+        line-height: 32px;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $fnMainColor;
+      }
+      .bk-selector-tools {
+        position: absolute;
+        display: none;
+        top: 10px;
+        right: 0;
+        font-size: 12px;
+        .bk-selector-list-icon {
+          margin-right: 14px;
+        }
+      }
+    }
+  }
 </style>

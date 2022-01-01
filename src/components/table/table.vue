@@ -781,5 +781,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/table.css';
+  @import '../../ui/table.css';
 </style>

@@ -360,5 +360,5 @@ export default {
 }
 </script>
 <style>
-@import "../../ui/image-viewer.css";
+  @import "../../ui/image-viewer.css";
 </style>

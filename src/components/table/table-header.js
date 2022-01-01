@@ -112,92 +112,96 @@ export default {
     const isGroup = columnRows.length > 1
     if (isGroup) this.$parent.isGroup = true
     return (
-            <table
-                class="bk-table-header"
-                cellspacing="0"
-                cellpadding="0"
-                border="0">
-                <colgroup>
-                    {
-                        this._l(this.columns, column => <col name={ column.id } />)
-                    }
-                    {
-                        this.hasGutter ? <col name="gutter" /> : ''
-                    }
-                </colgroup>
-                <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
-                    {
-                        this._l(columnRows, (columns, rowIndex) =>
-                            <tr
-                                style={ this.getHeaderRowStyle(rowIndex) }
-                                class={ this.getHeaderRowClass(rowIndex) }
-                            >
+      <table
+        class="bk-table-header"
+        cellspacing="0"
+        cellpadding="0"
+        border="0">
+        <colgroup>
+          {
+            this._l(this.columns, column => <col name={ column.id } />)
+          }
+          {
+            this.hasGutter ? <col name="gutter" /> : ''
+          }
+        </colgroup>
+        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+          {
+            this._l(columnRows, (columns, rowIndex) =>
+              <tr
+                style={ this.getHeaderRowStyle(rowIndex) }
+                class={ this.getHeaderRowClass(rowIndex) }
+              >
+                {
+                  this._l(columns, (column, cellIndex) =>
+                    <th
+                      colspan={ column.colSpan }
+                      rowspan={ column.rowSpan }
+                      on-mousemove={ ($event) => this.handleMouseMove($event, column) }
+                      on-mouseout={ this.handleMouseOut }
+                      on-mousedown={ ($event) => this.handleMouseDown($event, column) }
+                      on-click={ ($event) => this.handleHeaderClick($event, column) }
+                      on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
+                      style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
+                      class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
+                      key={ column.id }
+                      domProps={ this.getHeaderCellAttributes(rowIndex, cellIndex, columns, column) }>
+                      {
+                        this.isCellHidden(cellIndex, columns)
+                          ? ''
+                          : (
+                            <div class="cell">
+                              <div class={ ['bk-table-header-label', column.labelClassName] }>
                                 {
-                                    this._l(columns, (column, cellIndex) =>
-                                        <th
-                                            colspan={ column.colSpan }
-                                            rowspan={ column.rowSpan }
-                                            on-mousemove={ ($event) => this.handleMouseMove($event, column) }
-                                            on-mouseout={ this.handleMouseOut }
-                                            on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                                            on-click={ ($event) => this.handleHeaderClick($event, column) }
-                                            on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
-                                            style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
-                                            class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
-                                            key={ column.id }
-                                            domProps={ this.getHeaderCellAttributes(rowIndex, cellIndex, columns, column) }>
-                                            {
-                                                this.isCellHidden(cellIndex, columns)
-                                                  ? ''
-                                                  : (<div class="cell">
-                                                        <div class={ ['bk-table-header-label', column.labelClassName] }>
-                                                            {
-                                                                column.renderHeader
-                                                                  ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context, fixed: this.fixed })
-                                                                  : column.label
-                                                            }
-                                                        </div>
-                                                        {
-                                                            column.sortable
-                                                              ? <span class="bk-table-caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                                                                    <i class="bk-table-sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }></i>
-                                                                    <i class="bk-table-sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }></i>
-                                                                </span>
-                                                              : ''
-                                                        }
-                                                        {
-                                                            column.filterable
-                                                              ? <span class={ [
-                                                                'bk-table-column-filter-trigger',
-                                                                'bk-icon icon-funnel',
-                                                                column.filterOpened ? 'is-open' : '',
-                                                                column.filteredValue && column.filteredValue.length > 0 ? 'is-filtered' : ''
-                                                              ]} on-click={ ($event) => this.handleFilterClick($event, column) }>
-                                                                </span>
-                                                              : ''
-                                                        }
-                                                    </div>)
-                                            }
-                                        </th>
-                                    )
+                                  column.renderHeader
+                                    ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context, fixed: this.fixed })
+                                    : column.label
                                 }
-                                {
-                                    this.hasGutter ? <th class="gutter"></th> : ''
-                                }
-                            </tr>
-                        )
-                    }
-                    {
-                        this.$slots.prepend
-                          ? <tr class="bk-table-header-append">
-                                <th colSpan={this.colSpanNum} class="is-prepend">
-                                    { this.$slots.prepend }
-                                </th>
-                            </tr>
-                          : ''
-                    }
-                </thead>
-            </table>
+                              </div>
+                              {
+                                column.sortable
+                                  ? <span class="bk-table-caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
+                                      <i class="bk-table-sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }></i>
+                                      <i class="bk-table-sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }></i>
+                                    </span>
+                                  : ''
+                              }
+                              {
+                                column.filterable
+                                  ? (
+                                      <span class={ [
+                                        'bk-table-column-filter-trigger',
+                                        'bk-icon icon-funnel',
+                                        column.filterOpened ? 'is-open' : '',
+                                        column.filteredValue && column.filteredValue.length > 0 ? 'is-filtered' : ''
+                                      ]} on-click={ ($event) => this.handleFilterClick($event, column) }>
+                                      </span>
+                                  )
+                                  : ''
+                              }
+                            </div>
+                          )
+                      }
+                    </th>
+                  )
+                }
+                {
+                  this.hasGutter ? <th class="gutter"></th> : ''
+                }
+              </tr>
+            )
+          }
+          {
+            this.$slots.prepend
+              ? <tr class="bk-table-header-append">
+                  <th colSpan={this.colSpanNum} class="is-prepend">
+                      { this.$slots.prepend }
+                  </th>
+                </tr>
+              : ''
+          }
+        </thead>
+      </table>
     )
   },
 
@@ -290,8 +294,8 @@ export default {
 
   methods: {
     /**
-         * 单元格是否隐藏
-         */
+     * 单元格是否隐藏
+     */
     isCellHidden (index, columns) {
       let start = 0
       for (let i = 0; i < index; i++) {
@@ -308,8 +312,8 @@ export default {
     },
 
     /**
-         * 获取 header row 的样式
-         */
+     * 获取 header row 的样式
+     */
     getHeaderRowStyle (rowIndex) {
       const headerRowStyle = this.table.headerRowStyle
       if (typeof headerRowStyle === 'function') {
@@ -319,8 +323,8 @@ export default {
     },
 
     /**
-         * 获取 header row 的类名
-         */
+     * 获取 header row 的类名
+     */
     getHeaderRowClass (rowIndex) {
       const classes = []
 
@@ -335,8 +339,8 @@ export default {
     },
 
     /**
-         * 获取 header cell 的样式
-         */
+     * 获取 header cell 的样式
+     */
     getHeaderCellStyle (rowIndex, columnIndex, row, column) {
       const headerCellStyle = this.table.headerCellStyle
       if (typeof headerCellStyle === 'function') {
@@ -351,8 +355,8 @@ export default {
     },
 
     /**
-         * 获取 header cell 的类名
-         */
+     * 获取 header cell 的类名
+     */
     getHeaderCellClass (rowIndex, columnIndex, row, column) {
       const classes = [column.id, column.order, column.headerAlign, column.className, column.labelClassName]
 
@@ -400,8 +404,8 @@ export default {
     },
 
     /**
-         * 获取 header cell 的属性
-         */
+     * 获取 header cell 的属性
+     */
     getHeaderCellAttributes (rowIndex, cellIndex, columns, column) {
       if (typeof this.table.headerCellAttributes === 'function') {
         const attributes = this.table.headerCellAttributes({ rowIndex, cellIndex, columns, column })
@@ -417,8 +421,8 @@ export default {
     },
 
     /**
-         * filter 点击事件处理
-         */
+     * filter 点击事件处理
+     */
     handleFilterClick (event, column) {
       event.stopPropagation()
 
@@ -458,8 +462,8 @@ export default {
     },
 
     /**
-         * header 点击事件处理
-         */
+     * header 点击事件处理
+     */
     handleHeaderClick (event, column) {
       if (!column.filters && column.sortable) {
         this.handleSortClick(event, column)
@@ -471,15 +475,15 @@ export default {
     },
 
     /**
-         * header 鼠标右键事件处理
-         */
+     * header 鼠标右键事件处理
+     */
     handleHeaderContextMenu (event, column) {
       this.$parent.$emit('header-contextmenu', column, event)
     },
 
     /**
-         * th mousedown 事件回调
-         */
+     * th mousedown 事件回调
+     */
     handleMouseDown (event, column) {
       if (column.children && column.children.length > 0) return
       // if (this.draggingColumn && this.border) {
@@ -559,8 +563,8 @@ export default {
     },
 
     /**
-         * th mousemove 事件处理
-         */
+     * th mousemove 事件处理
+     */
     handleMouseMove (event, column) {
       if (column.children && column.children.length > 0) return
       let target = event.target
@@ -592,8 +596,8 @@ export default {
     },
 
     /**
-         * th mouseout 事件处理
-         */
+     * th mouseout 事件处理
+     */
     handleMouseOut () {
       document.body.style.cursor = ''
     },

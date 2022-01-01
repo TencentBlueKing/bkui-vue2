@@ -128,17 +128,17 @@
 
 <script>
 /**
-     * bk-upload
-     * @module components/upload
-     * @desc 文件上传组件
-     * @param url（必传） {string}   文件上传到服务器的地址
-     * @param name       {string}   - 服务器读取文件的key， 默认为'uplaod_file'
-     * @param size       {number}   - 允许上传的文件大小
-     * @param multiple   {boolean}  - 是否支持多选
-     * @param accept     {string}   - 允许上传的文件类型
-     * @param header     {string}   - 请求头
-     * @param theme      {string}   - 主题，默认'draggable'，可选项：['draggable','button', 'picture']
-     */
+ * bk-upload
+ * @module components/upload
+ * @desc 文件上传组件
+ * @param url（必传） {string}   文件上传到服务器的地址
+ * @param name       {string}   - 服务器读取文件的key， 默认为'uplaod_file'
+ * @param size       {number}   - 允许上传的文件大小
+ * @param multiple   {boolean}  - 是否支持多选
+ * @param accept     {string}   - 允许上传的文件类型
+ * @param header     {string}   - 请求头
+ * @param theme      {string}   - 主题，默认'draggable'，可选项：['draggable','button', 'picture']
+ */
 import locale from 'bk-magic-vue/lib/locale'
 import defaultRequest from './request'
 import { uuid } from '@/utils/util'
@@ -210,9 +210,9 @@ export default {
     },
     limit: Number,
     /**
-             * 自定义扩展长传属性
-             * 格式: { name: 'attrName', value: Object }
-             */
+     * 自定义扩展长传属性
+     * 格式: { name: 'attrName', value: Object }
+     */
     formDataAttributes: {
       type: Array,
       default: () => []
@@ -573,5 +573,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/upload.css';
+  @import '../../ui/upload.css';
 </style>
