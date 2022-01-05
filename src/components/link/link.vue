@@ -80,6 +80,6 @@ export default {
 }
 </script>
 
-<style lang="postcss">
-    @import '../../ui/link.css';
+<style>
+  @import '../../ui/link.css';
 </style>

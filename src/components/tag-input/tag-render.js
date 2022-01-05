@@ -45,9 +45,9 @@ export default {
       return ct.props.tpl(ct.props.node, ct, h)
     }
     return (
-            <div class={parentClass}>
-                <span class={textClass}>{ct.props.node[ct.props.displayKey]}</span>
-            </div>
+      <div class={parentClass}>
+        <span class={textClass}>{ct.props.node[ct.props.displayKey]}</span>
+      </div>
     )
   }
 }

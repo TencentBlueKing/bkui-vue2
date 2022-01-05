@@ -140,5 +140,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/timeline.css';
+  @import '../../ui/timeline.css';
 </style>

@@ -179,15 +179,15 @@ export default {
 
     if (error) {
       return (
-                    <div class={{ 'bk-search-list': true }}>
-                        <div class={{ 'bk-search-list-error': true }}>{ error }</div>
-                    </div>
+        <div class={{ 'bk-search-list': true }}>
+            <div class={{ 'bk-search-list-error': true }}>{ error }</div>
+        </div>
       )
     } else if (!loading && (!list || !list.length)) {
       return (
-                    <div class={{ 'bk-search-list': true }}>
-                        <div class={{ 'bk-search-list-loading': true }}>{ remoteEmptyText }</div>
-                    </div>
+        <div class={{ 'bk-search-list': true }}>
+            <div class={{ 'bk-search-list-loading': true }}>{ remoteEmptyText }</div>
+        </div>
       )
     }
 
@@ -209,17 +209,17 @@ export default {
         next = text.slice(i + filter.length, text.length)
       }
       return (
-                    <li class={{ 'bk-search-list-menu-item': true, 'is-group': !!item.isGroup, 'is-disabled': item.disabled, 'is-hover': !item.disabled && hoverId === id }}>
-                        <div {...events} class={{ 'item-name': true }}>
-                            {
-                                isFilter
-                                  ? <div>{pre}<span class={{ 'item-name-filter': true }}>{filter}</span>{next}</div>
-                                  : text
-                            }
-                        </div>
-                        <span v-show={multiable && child && checked[text] && !isChildCondition} ref={id}
-                            class={{ 'bk-icon icon-check-1 item-icon': true }}></span>
-                    </li>
+        <li class={{ 'bk-search-list-menu-item': true, 'is-group': !!item.isGroup, 'is-disabled': item.disabled, 'is-hover': !item.disabled && hoverId === id }}>
+          <div {...events} class={{ 'item-name': true }}>
+            {
+              isFilter
+                ? <div>{pre}<span class={{ 'item-name-filter': true }}>{filter}</span>{next}</div>
+                : text
+            }
+          </div>
+          <span v-show={multiable && child && checked[text] && !isChildCondition} ref={id}
+            class={{ 'bk-icon icon-check-1 item-icon': true }}></span>
+        </li>
       )
     })
 
@@ -233,34 +233,34 @@ export default {
     }
 
     return (
-                <div class={{ 'bk-search-list': true }} {...wrapEvent} tabIndex="-1">
-                    <div v-show={loading} class={{ 'bk-search-list-loading': true }}>{remoteLoadingText}</div>
-                    {
-                            !isCondition
-                              ? ''
-                              : <div v-show={!loading} class={{ 'bk-search-list-condition': true }}
-                                   {...conditionEvent}>{condition[displayKey]}
-                            </div>
-                    }
-                    <div v-show={!loading} class="search-menu-wrap">
-                        <ul class={{ 'bk-search-list-menu': true }}>
-                            {items}
-                        </ul>
-                    </div>
-                    {
-                        multiable && child && !loading
-                          ? <div class={{ 'bk-search-list-footer': true }}>
-                                <span class={{ 'footer-btn': true }} {...footerEnterEvent}>{this.t('bk.searchSelect.ok')}</span>
-                                <span class={{ 'footer-btn': true }} {...footerCancelEvent}>{this.t('bk.searchSelect.cancel')}</span>
-                            </div>
-                          : ''
-                    }
-                </div>
+      <div class={{ 'bk-search-list': true }} {...wrapEvent} tabIndex="-1">
+        <div v-show={loading} class={{ 'bk-search-list-loading': true }}>{remoteLoadingText}</div>
+          {
+            !isCondition
+              ? ''
+              : <div v-show={!loading} class={{ 'bk-search-list-condition': true }}
+                  {...conditionEvent}>{condition[displayKey]}
+            </div>
+          }
+        <div v-show={!loading} class="search-menu-wrap">
+          <ul class={{ 'bk-search-list-menu': true }}>
+            {items}
+          </ul>
+        </div>
+        {
+          multiable && child && !loading
+            ? <div class={{ 'bk-search-list-footer': true }}>
+                <span class={{ 'footer-btn': true }} {...footerEnterEvent}>{this.t('bk.searchSelect.ok')}</span>
+                <span class={{ 'footer-btn': true }} {...footerCancelEvent}>{this.t('bk.searchSelect.cancel')}</span>
+              </div>
+            : ''
+        }
+      </div>
     )
   }
 }
 </script>
 
 <style>
-    @import '../../ui/search-select-menu.css';
+  @import '../../ui/search-select-menu.css';
 </style>

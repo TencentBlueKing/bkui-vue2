@@ -54,7 +54,7 @@ const BkMessage = function (config) {
   const spacing = parseInt(config.spacing) || 10 // 组件间的垂直间距
 
   if (config.ellipsisLine === null || config.ellipsisLine === undefined || config.ellipsisLine === ''
-        || isNaN(config.ellipsisLine)
+    || isNaN(config.ellipsisLine)
   ) {
     config.ellipsisLine = 1
   }
