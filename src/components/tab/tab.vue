@@ -429,7 +429,7 @@ export default {
             this.localActive = panel.name
           }
         } catch (e) {
-          console.log('Previous tab toggle canceled')
+          console.warn('Previous tab toggle canceled')
         } finally {
           this.clearToggleStatus()
         }
