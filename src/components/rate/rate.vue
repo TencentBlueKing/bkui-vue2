@@ -128,5 +128,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/rate.css';
+  @import '../../ui/rate.css';
 </style>

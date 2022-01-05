@@ -59,8 +59,8 @@ const components = []
       const ext = extname(item)
       if (ext === '.vue' || ext === '.js') {
         // const tmp = relative('.', filePath + sep + item)
-        //     .replace(basename(relative('.', filePath + sep + item)), '')
-        //     .replace(`src/components${sep}`, '')
+        //   .replace(basename(relative('.', filePath + sep + item)), '')
+        //   .replace(`src/components${sep}`, '')
 
         const absolutePath = relative('.', filePath + sep + item)
         const relativePath = absolutePath.replace(`src/components${sep}`, '')

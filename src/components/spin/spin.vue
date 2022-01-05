@@ -53,17 +53,17 @@
 
 <script>
 /**
-     * bk-spin
-     *
-     * @module components/spin
-     * @desc 加载组件
-     *
-     * @param theme {string} - 显示类型，接受 primary warning success danger
-     * @param size {string} - 尺寸，接受 large normal small mini
-     * @param icon {string} - 自定义 icon，使用蓝鲸 icon
-     * @param spinning {string} - 是否加载效果
-     * @param placement {string} - 插槽位置，默认为bottom, 接受 bottom right
-    */
+ * bk-spin
+ *
+ * @module components/spin
+ * @desc 加载组件
+ *
+ * @param theme {string} - 显示类型，接受 primary warning success danger
+ * @param size {string} - 尺寸，接受 large normal small mini
+ * @param icon {string} - 自定义 icon，使用蓝鲸 icon
+ * @param spinning {string} - 是否加载效果
+ * @param placement {string} - 插槽位置，默认为bottom, 接受 bottom right
+ */
 export default {
   name: 'bk-spin',
   props: {
@@ -156,5 +156,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/spin.css';
+  @import '../../ui/spin.css';
 </style>

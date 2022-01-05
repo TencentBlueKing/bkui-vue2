@@ -978,5 +978,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/search-select.css';
+  @import '../../ui/search-select.css';
 </style>

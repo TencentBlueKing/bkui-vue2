@@ -272,6 +272,7 @@
         :show-total-count="showPaginationInfo"
         :show-selection-count="showSelectionCount"
         :selection-count="store.states.selection.length"
+        :popover-options="popoverOptions"
         @change="handlePageChange"
         @limit-change="handlePageLimitChange">
       </bk-pagination>
@@ -407,6 +408,10 @@ export default {
     scrollLoading: {
       type: Object,
       default: () => ({ isLoading: false })
+    },
+    popoverOptions: {
+      type: Object,
+      default: () => ({})
     }
   },
   data () {
@@ -781,5 +786,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/table.css';
+  @import '../../ui/table.css';
 </style>

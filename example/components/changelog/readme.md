@@ -4,6 +4,15 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.3 {page=#/changelog}
+###### 2022.01.05
+
+* **[fix]**:
+    - [Table 表格](#/table) 添加 tippy-options 属性，对翻页下拉的自定义配置 [#188](https://github.com/TencentBlueKing/bkui-vue2/issues/188)
+    - 去掉代码中无用的日志
+
+---
+
 ### 2.4.2 {page=#/changelog}
 ###### 2021.12.31
 

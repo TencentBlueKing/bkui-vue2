@@ -95,15 +95,15 @@ export default {
       default: ''
     },
     /**
-             * 显示延迟时间，单位为毫秒
-             */
+     * 显示延迟时间，单位为毫秒
+     */
     openDelay: {
       type: Number,
       default: 0
     },
     /**
-             * 隐藏延迟时间，单位为毫秒
-             */
+     * 隐藏延迟时间，单位为毫秒
+     */
     closeDelay: {
       type: Number,
       default: 100
@@ -184,11 +184,11 @@ export default {
     },
 
     /**
-             * A quite wonderful function.
-             * @param {object} - privacy gown
-             * @param {object} - security
-             * @returns {survival}
-             */
+     * A quite wonderful function.
+     * @param {object} - privacy gown
+     * @param {object} - security
+     * @returns {survival}
+     */
     show () {
       clearTimeout(this.openTimer)
       clearTimeout(this.closeTimer)
@@ -209,5 +209,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/dropdown-menu.css';
+  @import '../../ui/dropdown-menu.css';
 </style>

@@ -40,11 +40,11 @@ import { uuid } from '@/utils/util'
         return String(key).replace(/#/g, '_')
       },
       /**
-             * 显示弹框
-             * key： 唯一ID，可以是组件Name
-             * instance： 弹出DOM实例
-             * options： tplAction，弹出模式（keepAll，保持所有弹出；onlyone，只保留最后一个）
-             */
+       * 显示弹框
+       * key： 唯一ID，可以是组件Name
+       * instance： 弹出DOM实例
+       * options： tplAction，弹出模式（keepAll，保持所有弹出；onlyone，只保留最后一个）
+       */
       show: function (key, instance, options =
       {
         tplAction: 'keepAll',

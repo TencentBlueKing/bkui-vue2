@@ -234,5 +234,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/navigation.css';
+  @import '../../ui/navigation.css';
 </style>

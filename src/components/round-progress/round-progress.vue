@@ -144,5 +144,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/round-progress.css';
+  @import '../../ui/round-progress.css';
 </style>

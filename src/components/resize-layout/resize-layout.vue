@@ -309,5 +309,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/resize-layout.css';
+  @import '../../ui/resize-layout.css';
 </style>

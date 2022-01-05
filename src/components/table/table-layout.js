@@ -125,9 +125,9 @@ class TableLayout {
     const headerHeight = (this.headerHeight = !this.showHeader ? 0 : headerWrapper.offsetHeight)
     if (
       this.showHeader
-            && headerWrapper.offsetWidth > 0
-            && (this.table.columns || []).length > 0
-            && headerHeight < 2
+        && headerWrapper.offsetWidth > 0
+        && (this.table.columns || []).length > 0
+        && headerHeight < 2
     ) {
       return Vue.nextTick(() => this.updateElsHeight())
     }
@@ -249,12 +249,10 @@ class TableLayout {
         if (!this.scrollX && flattenColumns.length) {
           // 当所有列均被指定了宽度后，如果列宽总和小于表格宽度，则将宽度差值分配给最右一列(非setting类型)
           const deltaWidth = bodyWidth - bodyMinWidth
-          console.log('from print table last column < ', lastColumn)
           lastColumn.realWidth = lastColumn.realWidth + deltaWidth
           this.bodyWidth = bodyWidth
         } else {
           // 当所有列均被指定了宽度后，如果列宽总和大于表格宽度修正最后一列(非setting类型)的宽度
-          console.log('from print table last column > ', lastColumn)
           if (lastColumn) {
             const lastRealWidth = typeof lastColumn.width !== 'number' ? lastColumn.minWidth : lastColumn.width
 

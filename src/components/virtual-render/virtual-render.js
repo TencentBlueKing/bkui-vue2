@@ -90,18 +90,18 @@ export default {
       default: 'div'
     },
     /**
-         * 内置滚动位置
-         * 可选：container （最外层容器），content（内容层容器）
-         */
+     * 内置滚动位置
+     * 可选：container （最外层容器），content（内容层容器）
+     */
     scrollPosition: {
       type: String,
       default: 'content'
     },
 
     /**
-         * 绝对高度 | 实际高估
-         * 可选值： auto(根据行高和行数计算) number(外层给定高度，若为0，则不显示)
-         */
+     * 绝对高度 | 实际高估
+     * 可选值： auto(根据行高和行数计算) number(外层给定高度，若为0，则不显示)
+     */
     abosuteHeight: {
       type: [Number, String],
       default: 'auto'
@@ -172,11 +172,10 @@ export default {
     scrollToIndex (index) {
       if (index >= 0) {
         const scrollTop = this.lineHeight * index
-        this.$el
-                    && this.$el.scrollTo({
-                      top: scrollTop,
-                      behavior: 'smooth'
-                    })
+        this.$el && this.$el.scrollTo({
+          top: scrollTop,
+          behavior: 'smooth'
+        })
       }
     }
   },

@@ -64,5 +64,5 @@ export default {
 }
 </script>
 <style>
- @import "../../ui/navigation-menu-group.css";
+  @import '../../ui/navigation-menu-group.css';
 </style>
