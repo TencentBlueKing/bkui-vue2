@@ -4,6 +4,14 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.4 {page=#/changelog}
+###### 2022.01.10
+
+* **[fix]**:
+    - [Loading 加载](#/loading) 修复计算变量 set 问题
+
+---
+
 ### 2.4.3 {page=#/changelog}
 ###### 2022.01.05
 
