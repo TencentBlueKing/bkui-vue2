@@ -218,8 +218,12 @@ export default {
       }
       return typeof this.zIndex === 'number' && !Number.isNaN(this.zIndex)
     },
-    renderZIndex () {
-      return this.zIndex
+    renderZIndex: {
+      get () {
+        return this.zIndex
+      },
+      set () {
+      }
     }
   },
   watch: {
