@@ -473,8 +473,8 @@ export default {
       }
     },
     /**
-             * 添加监听事件
-             */
+     * 添加监听事件
+     */
     on (element, event, handler) {
       if (element && event && handler) {
         element.addEventListener(event, handler, false)
@@ -482,8 +482,8 @@ export default {
     },
 
     /**
-             * 移除监听事件
-             */
+     * 移除监听事件
+     */
     off (element, event, handler) {
       if (element && event) {
         element.removeEventListener(event, handler, false)
@@ -497,5 +497,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/slider.css';
+  @import '../../ui/slider.css';
 </style>

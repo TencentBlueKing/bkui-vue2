@@ -109,5 +109,5 @@ export default {
 }
 </script>
 <style lang='postcss'>
-    @import '../../ui/alert.css';
+  @import '../../ui/alert.css';
 </style>

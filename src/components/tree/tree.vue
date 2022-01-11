@@ -199,8 +199,8 @@ export default {
   },
   mounted () {
     /**
-            * @event monitor 子节点 selected event
-            */
+     * @event monitor 子节点 selected event
+     */
     this.$on('childChecked', (node, checked) => {
       if (node.children && node.children.length) {
         for (const child of node.children) {
@@ -213,8 +213,8 @@ export default {
     })
 
     /**
-            * @event monitor 父节点 selected event
-            */
+     * @event monitor 父节点 selected event
+     */
     this.$on('parentChecked', (node, checked) => {
       if (!node.parent) {
         const allChildNodeChecked = node.children.every(node => node.checked)
@@ -258,8 +258,8 @@ export default {
     })
 
     /**
-            * @event monitor 节点 selected event on-broadcast-check
-            */
+     * @event monitor 节点 selected event on-broadcast-check
+     */
     this.$on('on-broadcast-check', (node, checked) => {
       // 根节点下无子节点需异步加载数据时 不进行check事件的传递
       if (!node.parent && !node.children) {
@@ -271,8 +271,8 @@ export default {
     })
 
     /**
-            * @event monitor 节点过滤时 可见/不可见 visible event
-            */
+     * @event monitor 节点过滤时 可见/不可见 visible event
+     */
     this.$on('toggleshow', (node, isShow) => {
       this.$set(node, 'visible', isShow)
       if (isShow && node.parent) {
@@ -294,8 +294,8 @@ export default {
   },
   methods: {
     /**
-             * 拖拽时生成随机guid将节点暂存window['bkTreeDrag'][guid]上
-             */
+     * 拖拽时生成随机guid将节点暂存window['bkTreeDrag'][guid]上
+     */
     gid () {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
         const r = Math.random() * 16 | 0
@@ -305,31 +305,31 @@ export default {
     },
 
     /**
-             * 设置拖拽节点
-             *
-             * @param {String} id 节点挂载id
-             * @param {Object} node 需要设置的节点
-             */
+     * 设置拖拽节点
+     *
+     * @param {String} id 节点挂载id
+     * @param {Object} node 需要设置的节点
+     */
     setDragNode (id, node) {
       window['bkTreeDrag'] = {}
       window['bkTreeDrag'][id] = node
     },
 
     /**
-             * 获取拖拽节点
-             *
-             * @param {String} id 节点挂载id
-             */
+     * 获取拖拽节点
+     *
+     * @param {String} id 节点挂载id
+     */
     getDragNode (id) {
       return window['bkTreeDrag'][id]
     },
 
     /**
-             * 节点是否可拖拽到某个节点下的标识
-             *
-             * @param {Object} root 根节点
-             * @param {Object} node 当前节点
-             */
+     * 节点是否可拖拽到某个节点下的标识
+     *
+     * @param {Object} root 根节点
+     * @param {Object} node 当前节点
+     */
     hasInGenerations (root, node) {
       if (root.hasOwnProperty('children') && root.children) {
         for (const rn of root.children) {
@@ -341,11 +341,11 @@ export default {
     },
 
     /**
-             * 节点是否可拖拽排序标识
-             *
-             * @param {Object} target 目标节点
-             * @param {Object} node 当前节点
-             */
+     * 节点是否可拖拽排序标识
+     *
+     * @param {Object} target 目标节点
+     * @param {Object} node 当前节点
+     */
     isDragSortHolder (target, node) {
       if (target.hasOwnProperty('children') && target.children) {
         for (const rn of target.children) {
@@ -357,10 +357,10 @@ export default {
     },
 
     /**
-             * 设置节点icon(父节点和子节点的传参不同)
-             *
-             * @param {Object} node 当前节点
-             */
+     * 设置节点icon(父节点和子节点的传参不同)
+     *
+     * @param {Object} node 当前节点
+     */
     setNodeIcon (node) {
       if (node.children && node.children.length) {
         if (node.expanded) {
@@ -374,11 +374,11 @@ export default {
     },
 
     /**
-            * 节点拖拽
-            *
-            * @param {Object} node 当前拖拽节点
-            * @param {Object} ev   $event
-            */
+     * 节点拖拽
+     *
+     * @param {Object} node 当前拖拽节点
+     * @param {Object} ev   $event
+     */
     drop (node, ev) {
       ev.preventDefault()
       ev.stopPropagation()
@@ -467,18 +467,18 @@ export default {
     },
 
     /**
-            * 节点拖拽 阻止默认事件和禁止冒泡
-            *
-            * @param {Object} ev $event
-            */
+     * 节点拖拽 阻止默认事件和禁止冒泡
+     *
+     * @param {Object} ev $event
+     */
     dragover (ev) {
       ev.preventDefault()
       ev.stopPropagation()
     },
 
-    /*
-            * 数据初始化
-            */
+    /**
+     * 数据初始化
+     */
     initTreeData () {
       for (const node of this.data) {
         this.$set(node, 'parent', this.parent)
@@ -510,10 +510,10 @@ export default {
     },
 
     /**
-            * 节点展开/收起
-            *
-            * @param {Object} node 当前节点
-            */
+     * 节点展开/收起
+     *
+     * @param {Object} node 当前节点
+     */
     expandNode (node) {
       this.$set(node, 'expanded', !node.expanded)
       if (node.async && !node.children) {
@@ -536,10 +536,10 @@ export default {
     },
 
     /**
-            * 节点展开/收起
-            *
-            * @param {Object} node 当前节点
-            */
+     * 节点展开/收起
+     *
+     * @param {Object} node 当前节点
+     */
     triggerExpand (item) {
       if (!item.parent || (item.children && item.children.length) || item.async) {
         this.expandNode(item)
@@ -547,10 +547,10 @@ export default {
     },
 
     /**
-            * 异步加载节点
-            *
-            * @param {Object} node 当前点击节点
-            */
+     * 异步加载节点
+     *
+     * @param {Object} node 当前点击节点
+     */
     asyncLoadNodes (node) {
       if (node.async && !node.children) {
         this.$emit('async-load-nodes', node)
@@ -558,20 +558,20 @@ export default {
     },
 
     /**
-            * 判断是否子节点
-            *
-            * @param {Object} node 当前节点
-            */
+     * 判断是否子节点
+     *
+     * @param {Object} node 当前节点
+     */
     isLeaf (node) {
       return !(node.children && node.children.length) && node.parent && !node.async
     },
 
     /**
-            * 添加单个节点
-            *
-            * @param {Object} parent 父节点
-            * @param {Object} newnode  新节点
-            */
+     * 添加单个节点
+     *
+     * @param {Object} parent 父节点
+     * @param {Object} newnode  新节点
+     */
     addNode (parent, newNode) {
       let addnode = {}
       this.$set(parent, 'expanded', true)
@@ -597,11 +597,11 @@ export default {
     },
 
     /**
-            * 添加多个节点
-            *
-            * @param {Object} parent 父节点
-            * @param {Array} newChildren  子节点数组
-            */
+     * 添加多个节点
+     *
+     * @param {Object} parent 父节点
+     * @param {Array} newChildren  子节点数组
+     */
     addNodes (parent, newChildren) {
       for (const n of newChildren) {
         this.addNode(parent, n)
@@ -609,8 +609,8 @@ export default {
     },
 
     /**
-            * 获取搜索时返回结果
-            */
+     * 获取搜索时返回结果
+     */
     getSearchResult () {
       const list = []
       for (let i = 0; i < this.data.length; i++) {
@@ -633,59 +633,59 @@ export default {
     },
 
     /**
-            * 节点点击事件
-            *
-            * @param {Object} node 当前点击节点
-            */
+     * 节点点击事件
+     *
+     * @param {Object} node 当前点击节点
+     */
     onClick (node) {
       this.$emit('on-click', node)
     },
 
     /**
-            * 节点复选框 change 事件 不触发传递给子节点
-            *
-            * @param {Object} node 当前节点
-            * @param {Boolean} checked 选中状态
-            */
+     * 节点复选框 change 事件 不触发传递给子节点
+     *
+     * @param {Object} node 当前节点
+     * @param {Boolean} checked 选中状态
+     */
     onCheck (node, checked) {
       this.$emit('on-check', node, checked)
     },
 
     /**
-            * 节点复选框 change 事件 触发传递给子节点
-            *
-            * @param {Object} node 当前节点
-            * @param {Boolean} checked 选中状态
-            */
+     * 节点复选框 change 事件 触发传递给子节点
+     *
+     * @param {Object} node 当前节点
+     * @param {Boolean} checked 选中状态
+     */
     onBroadcastCheck (node, checked) {
       this.$emit('on-broadcast-check', node, checked)
     },
 
     /**
-            * 复选框状态改变时告知父组件
-            *
-            * @param {Object} node 改变状态的节点
-            * @param {Boolean} checked 选中/非选中
-            */
+     * 复选框状态改变时告知父组件
+     *
+     * @param {Object} node 改变状态的节点
+     * @param {Boolean} checked 选中/非选中
+     */
     nodeCheckStatusChange (node, checked) {
       this.$emit('dropTreeChecked', node, checked)
     },
 
     /**
-            * 拖拽结束事件
-            *
-            * @param {Object} event $event
-            */
+     * 拖拽结束事件
+     *
+     * @param {Object} event $event
+     */
     onDragNode (event) {
       this.$emit('on-drag-node', event)
     },
 
     /**
-            * 删除节点
-            *
-            * @param {Object} parent 父节点
-            * @param {Object} node 当前节点
-            */
+     * 删除节点
+     *
+     * @param {Object} parent 父节点
+     * @param {Object} node 当前节点
+     */
     delNode (parent, node) {
       if (parent === null || typeof parent === 'undefined') {
         // isDeleteRoot 为false时不可删除根节点
@@ -701,21 +701,21 @@ export default {
     },
 
     /**
-            * 复选框change事件
-            *
-            * @param {Object} node 当前节点
-            * @param {Object} event $event
-            */
+     * 复选框change事件
+     *
+     * @param {Object} node 当前节点
+     * @param {Object} event $event
+     */
     changeCheckStatus (node, $event) {
       this.$emit('on-check', node, $event.target.checked)
       this.$emit('on-broadcast-check', node, $event.target.checked)
     },
 
     /**
-            * 节点selected
-            *
-            * @param {Object} node 当前节点
-            */
+     * 节点selected
+     *
+     * @param {Object} node 当前节点
+     */
     nodeSelected (node) {
       const getRoot = (el) => {
         if (el.$parent.$el.nodeName === 'UL') {
@@ -738,12 +738,12 @@ export default {
     },
 
     /**
-            * 节点数据处理
-            *
-            * @param {Object} opt 参数设置
-            * @param {Array}  data 根节点或子节点数组
-            * @param {Array/String}  keyParton 自定义键值
-            */
+     * 节点数据处理
+     *
+     * @param {Object} opt 参数设置
+     * @param {Array}  data 根节点或子节点数组
+     * @param {Array/String}  keyParton 自定义键值
+     */
     nodeDataHandler (opt, data, keyParton) {
       data = data || this.data
       let res = []
@@ -783,10 +783,10 @@ export default {
     },
 
     /**
-            * 获取所需节点
-            *
-            * @param {Array/String}  keyParton 自定义键值
-            */
+     * 获取所需节点
+     *
+     * @param {Array/String}  keyParton 自定义键值
+     */
     getNode (keyParton) {
       if (!this.multiple) {
         return this.nodeDataHandler({ selected: true }, this.data, keyParton)
@@ -796,11 +796,11 @@ export default {
     },
 
     /**
-            * 节点过滤
-            *
-            * @param {String/Function} filter 过滤器
-            * @param {Object} data 所需过滤的数据
-            */
+     * 节点过滤
+     *
+     * @param {String/Function} filter 过滤器
+     * @param {Object} data 所需过滤的数据
+     */
     searchNode (filter, data) {
       data = data || this.data
       for (const node of data) {
@@ -821,5 +821,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/tree.css';
+  @import '../../ui/tree.css';
 </style>

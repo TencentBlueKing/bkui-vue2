@@ -4,21 +4,45 @@
 
 <div class="changelog-wrapper">
 
-### 2.4.1-beta.2 {page=#/changelog}
+### 2.4.4 {page=#/changelog}
+###### 2022.01.10
+
+* **[fix]**:
+    - [Loading 加载](#/loading) 修复计算变量 set 问题
+
+---
+
+### 2.4.3 {page=#/changelog}
+###### 2022.01.05
+
+* **[fix]**:
+    - [Table 表格](#/table) 添加 tippy-options 属性，对翻页下拉的自定义配置 [#188](https://github.com/TencentBlueKing/bkui-vue2/issues/188)
+    - 去掉代码中无用的日志
+
+---
+
+### 2.4.2 {page=#/changelog}
+###### 2021.12.31
+
+* **[fix]**:
+    - 修复 provide/inject 无默认值的问题
+    - 修复示例页面的一些小问题
+
+---
+
+### 2.4.1 {page=#/changelog}
+###### 2021.12.30
 
 * **[add]**:
     - [Process 步骤](#/process) 支持自定义步骤状态 [#182](https://github.com/TencentBlueKing/bkui-vue2/issues/182)
     - [Spin 加载中](#/spin) 新增 info 主题 [#183](https://github.com/TencentBlueKing/bkui-vue2/issues/183)
-* **[update]**:
-    - [Table 表格](#/table) table 底部加载样式调整 [#183](https://github.com/TencentBlueKing/bkui-vue2/issues/183)
-
-
----
-
-### 2.4.1-beta.1 {page=#/changelog}
-
+    - [Image 图片](#/image) 图片预览增加蒙层关闭配置，增加 tooltips 以及样式优化
 * **[fix]**:
     - [Dialog 对话框](#/dialog) dialog 组件自定义 z-index 不生效 [#180](https://github.com/TencentBlueKing/bkui-vue2/issues/180)
+* **[update]**:
+    - [Table 表格](#/table) table 底部加载样式调整 [#183](https://github.com/TencentBlueKing/bkui-vue2/issues/183)
+    - [Checkbox 多选框](#/checkbox) 更改 checkbox-group 注册子组件方式
+    - [Cascade 级联选框](#/cascade) 组件支持自定义节点展示的内容
 
 ---
 

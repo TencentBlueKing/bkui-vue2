@@ -139,6 +139,9 @@
             :is-remote="isRemote"
             :remote-method="remoteMethod"
             @updateSelectedList="updateSelectedList">
+            <template slot="option" slot-scope="{ node }">
+              <slot name="option" :node="node">{{node.name}}</slot>
+            </template>
             <template slot="prepend" slot-scope="{ node }">
               <slot name="prepend" :node="node"></slot>
             </template>
@@ -777,5 +780,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/cascade.css';
+  @import '../../ui/cascade.css';
 </style>

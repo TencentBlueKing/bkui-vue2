@@ -39,14 +39,14 @@
 
 <script>
 /**
-     * bk-divider
-     *
-     * @module components/divider
-     * @desc 基础按钮
-     *
-     * @param direction {string} [type=default] - 分割线方向
-     * @param position {string} - 分割线 内容位置
-     */
+ * bk-divider
+ *
+ * @module components/divider
+ * @desc 基础按钮
+ *
+ * @param direction {string} [type=default] - 分割线方向
+ * @param position {string} - 分割线 内容位置
+ */
 export default {
   name: 'bk-divider',
   props: {
@@ -106,5 +106,5 @@ export default {
 
 </script>
 <style>
-    @import '../../ui/divider.css';
+  @import '../../ui/divider.css';
 </style>

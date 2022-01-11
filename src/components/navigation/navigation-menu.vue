@@ -292,9 +292,9 @@ export default {
   render () {
     const { defItemDefaultBgColor, navigationType } = this
     return (
-                <div class={{ 'navigation-menu': true }} style={{ backgroundColor: defItemDefaultBgColor }} key={navigationType}>
-                    {this.$slots.default}
-                </div>
+      <div class={{ 'navigation-menu': true }} style={{ backgroundColor: defItemDefaultBgColor }} key={navigationType}>
+          {this.$slots.default}
+      </div>
     )
   }
 }

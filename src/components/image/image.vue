@@ -87,7 +87,6 @@ export default {
   },
 
   mixins: [locale.mixin],
-  inheritAttrs: false,
 
   props: {
     src: String,
@@ -248,8 +247,8 @@ export default {
       this._lazyLoadHandler = null
     },
     /**
-             * simulate object-fit behavior to compatible with IE11 and other browsers which not support object-fit
-             */
+     * simulate object-fit behavior to compatible with IE11 and other browsers which not support object-fit
+     */
     getImageStyle (fit) {
       const { imageWidth, imageHeight } = this
       const {
@@ -295,5 +294,5 @@ export default {
 }
 </script>
 <style>
-@import "../../ui/image.css";
+  @import "../../ui/image.css";
 </style>

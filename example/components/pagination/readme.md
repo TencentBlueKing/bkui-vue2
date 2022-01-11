@@ -264,6 +264,7 @@
 | size | 页码尺寸大小 | String | `default` `small` | default |
 | small | 小型分页 | Boolean | `false` `true` | false |
 | show-total-count | 总计 | Boolean | `false` `true` | false |
+| popover-options | 透传至翻页下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-page` 上 | String | —— | —— |
 
 ### 事件 {page=#/pagination}

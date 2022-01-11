@@ -138,5 +138,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/zoom-image.css';
+  @import '../../ui/zoom-image.css';
 </style>

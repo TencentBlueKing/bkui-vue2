@@ -44,10 +44,10 @@ export default {
       return ct.props.tpl(ct.props.node, h)
     }
     return (
-            <span domPropsInnerHTML={ct.props.node.name} title={ct.props.node.title} class={titleClass}
-                style='user-select: none'
-                onClick={() => ct.parent.nodeSelected(ct.props.node)}>
-            </span>
+      <span domPropsInnerHTML={ct.props.node.name} title={ct.props.node.title} class={titleClass}
+        style='user-select: none'
+        onClick={() => ct.parent.nodeSelected(ct.props.node)}>
+      </span>
     )
   }
 }

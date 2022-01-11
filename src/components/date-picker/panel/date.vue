@@ -244,5 +244,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../../ui/date-picker.css';
+  @import '../../../ui/date-picker.css';
 </style>

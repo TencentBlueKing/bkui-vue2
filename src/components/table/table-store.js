@@ -184,8 +184,8 @@ class TableStore {
   get mutations () {
     return {
       /**
-             * setData
-             */
+       * setData
+       */
       setData (states, data) {
         const dataInstanceChanged = states._data !== data
         states._data = data
@@ -257,8 +257,8 @@ class TableStore {
       },
 
       /**
-             * 改变排序条件
-             */
+       * 改变排序条件
+       */
       changeSortCondition (states, options) {
         states.data = sortData((states.filteredData || states._data || []), states)
 
@@ -285,8 +285,8 @@ class TableStore {
       },
 
       /**
-             * 排序
-             */
+       * 排序
+       */
       sort (states, options) {
         const { prop, order } = options
         if (prop) {
@@ -310,8 +310,8 @@ class TableStore {
       },
 
       /**
-             * 改变 filter
-             */
+       * 改变 filter
+       */
       filterChange (states, options) {
         let { values } = options
         const { column, silent } = options
@@ -351,8 +351,8 @@ class TableStore {
       },
 
       /**
-             * 插入 column
-             */
+       * 插入 column
+       */
       insertColumn (states, column, index, parent) {
         let array = states._columns
         if (parent) {
@@ -378,8 +378,8 @@ class TableStore {
       },
 
       /**
-             * 移除 column
-             */
+       * 移除 column
+       */
       removeColumn (states, column, parent) {
         let array = states._columns
         if (parent) {
@@ -397,15 +397,15 @@ class TableStore {
       },
 
       /**
-             * 设置 hover 的 row
-             */
+       * 设置 hover 的 row
+       */
       setHoverRow (states, row) {
         states.hoverRow = row
       },
 
       /**
-             * 设置当前 row
-             */
+       * 设置当前 row
+       */
       setCurrentRow (states, row) {
         const oldCurrentRow = states.currentRow
         states.currentRow = row
@@ -459,8 +459,8 @@ class TableStore {
   }
 
   /**
-     * 更新 column
-     */
+   * 更新 column
+   */
   updateColumns () {
     const states = this.states
     const _columns = states._columns || []
@@ -488,8 +488,8 @@ class TableStore {
   }
 
   /**
-     * 判断是否选中
-     */
+   * 判断是否选中
+   */
   isSelected (row) {
     return (this.states.selection || []).indexOf(row) > -1
   }
@@ -504,8 +504,8 @@ class TableStore {
   }
 
   /**
-     * 清空选中
-     */
+   * 清空选中
+   */
   clearSelection () {
     const states = this.states
     states.isAllSelected = false
