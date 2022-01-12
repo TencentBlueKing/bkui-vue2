@@ -33,7 +33,7 @@
       <div class="bk-image-viewer-mask" @click="maskClose && hide()"></div>
       <div v-if="isShowTitle && urlList.length" class="bk-image-viewer-header">
         <div>{{currentName}}</div>
-        <div class="tc">{{index + 1}}/{{urlList.length}}</div>
+        <div class="tc ">{{index + 1}}/{{urlList.length}}</div>
         <div class="quit-box tr">
           <div class="quit-tips mr10">{{t('bk.imageViewer.quitTips')}}</div>
           <!-- CLOSE -->
@@ -347,7 +347,7 @@ export default {
         case 'zoomIn':
           transform.scale = parseFloat((transform.scale + zoomRate).toFixed(3))
           break
-        case 'clocelise':
+        case 'clockwise':
           transform.deg += rotateDeg
           break
         case 'anticlocelise':
