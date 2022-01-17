@@ -34,7 +34,7 @@ $tipsColor:$newBlackColor3;
         justify-content: space-between;
         align-items: center;
         color: $imgWrapTextColor;
-
+        background: rgba(0,0,0,0.70);
         > div {
             flex: 1;
             overflow: hidden;
@@ -48,7 +48,9 @@ $tipsColor:$newBlackColor3;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            height: 100%;
+        }
+        .quit-tips{
+            font-size: 14px;
             color: $tipsColor;
         }
     }
@@ -73,13 +75,15 @@ $tipsColor:$newBlackColor3;
     }
 
     &-close {
-        width: 80px;
-        height: 80px;
-        line-height: 80px;
+        height: 52px;
+        line-height: 48px;
         text-align: center;
-        font-size: 50px;
-        color: $defaultLightColor;
+        font-size: 32px;
+        color: #C4C6CC;
         cursor: pointer;
+        &:hover{
+            color: #fff;
+        }
     }
 
     &-canvas {
@@ -147,7 +151,6 @@ $tipsColor:$newBlackColor3;
         height: 80px;
         font-size: 40px;
         cursor: pointer;
-    //background: rgb(76,76,76);
     }
 
     &-prev {
