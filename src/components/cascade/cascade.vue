@@ -750,6 +750,9 @@ export default {
     },
     // 多选删除数据
     removeTag (item, index) {
+      if (this.disabled) {
+        return
+      }
       const oldId = JSON.parse(JSON.stringify(this.multipleCurrentList))
       this.multipleCurrentList = this.multipleCurrentList.filter(itemInfo => itemInfo.join(',') !== item.id.join(','))
       this.multipleSelectedList = this.multipleSelectedList.filter(itemInfo => itemInfo.id.join(',') !== item.id.join(','))
