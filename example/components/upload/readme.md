@@ -308,6 +308,84 @@
 </script>
 ```
 
+[comment]: <> (:::)
+
+[comment]: <> (### 大文件分片上传 {page=#/upload})
+
+[comment]: <> (:::demo 设置 slice-upload 属性为 true, 设置slice-url分片上传路径地址, 设置merge-url合并分片的路径地址, 设置chunk-size分片大小)
+
+[comment]: <> (```html)
+
+[comment]: <> (<template>)
+
+[comment]: <> (    <bk-upload)
+
+[comment]: <> (        :theme="'button'")
+
+[comment]: <> (        :tip="'最大上传5000&#40;Mb&#41;的文件'")
+
+[comment]: <> (        :with-credentials="true")
+
+[comment]: <> (        :handle-res-code="handleRes")
+
+[comment]: <> (        :slice-upload="true")
+
+[comment]: <> (        :slice-url="'/api/file/upload'")
+
+[comment]: <> (        :merge-url="'/api/file/merge_chunks'")
+
+[comment]: <> (        :chunk-size="10")
+
+[comment]: <> (        :size="5000")
+
+[comment]: <> (        :limit="5")
+
+[comment]: <> (        @on-delete="deleteHandle")
+
+[comment]: <> (    ></bk-upload>)
+
+[comment]: <> (</template>)
+
+[comment]: <> (<script>)
+
+[comment]: <> (    import { bkUpload } from '{{BASE_LIB_NAME}}')
+
+[comment]: <> (    export default {)
+
+[comment]: <> (        components: {)
+
+[comment]: <> (            bkUpload)
+
+[comment]: <> (        },)
+
+[comment]: <> (        methods: {)
+
+[comment]: <> (            handleRes &#40;response&#41; {)
+
+[comment]: <> (                if &#40;response.id&#41; {)
+
+[comment]: <> (                    return true)
+
+[comment]: <> (                })
+
+[comment]: <> (                return false)
+
+[comment]: <> (            },)
+
+[comment]: <> (            deleteHandle&#40;file, fileList&#41; {)
+
+[comment]: <> (                console.log&#40;file&#41;)
+
+[comment]: <> (            })
+
+[comment]: <> (        })
+
+[comment]: <> (    })
+
+[comment]: <> (</script>)
+
+[comment]: <> (```)
+
 :::
 
 ### 照片墙 {page=#/upload}
@@ -446,6 +524,10 @@
 | custom-request | 覆盖默认的上传行为，自定义上传的实现 | Function | -- | -- |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-upload` 上 | String | —— | —— |
 | files | 默认图片 | Array | —— | —— |
+| slice-upload | 是否采用大文件分片上传 | Boolean | true/false | false |
+| slice-url | 分片上传chunk服务器路径 | String | —— | —— |
+| merge-url | 分片上传合并chunk服务器路径 | String | —— | —— |
+| chunk-size | 分片大小 | Number | —— | 10M
 
 ### 事件 {page=#/upload}
 | 事件名称 | 说明 | 回调参数 |
