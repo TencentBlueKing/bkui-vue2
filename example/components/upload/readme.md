@@ -308,83 +308,124 @@
 </script>
 ```
 
-[comment]: <> (:::)
+:::
 
-[comment]: <> (### 大文件分片上传 {page=#/upload})
+### 大文件分片上传 {page=#/upload}
 
-[comment]: <> (:::demo 设置 slice-upload 属性为 true, 设置slice-url分片上传路径地址, 设置merge-url合并分片的路径地址, 设置chunk-size分片大小)
+**本示例不可用，只展示代码，需要的后端代码如下**
 
-[comment]: <> (```html)
+:::demo 设置 slice-upload 属性为 true，设置 slice-url 分片上传路径地址，设置 merge-url 合并分片的路径地址，设置 chunk-size 分片大小。
 
-[comment]: <> (<template>)
+```html
+<template>
+    <bk-upload
+        :theme="'button'"
+        :tip="'最大上传5000(Mb)的文件'"
+        :with-credentials="true"
+        :handle-res-code="handleRes"
+        :slice-upload="true"
+        :slice-url="'/api/file/upload'"
+        :merge-url="'/api/file/merge_chunks'"
+        :chunk-size="10"
+        :size="5000"
+        :limit="5"
+    ></bk-upload>
+</template>
+<script>
+    import { bkUpload } from '{{BASE_LIB_NAME}}'
+    export default {
+        components: {
+            bkUpload
+        },
+        methods: {
+            handleRes (response) {
+                if (response.id) {
+                    return true
+                }
+                return false
+            }
+        }
+    }
+</script>
+```
 
-[comment]: <> (    <bk-upload)
+```js
+// 本示例需要的后端代码
+const Koa = require('koa')
+const app = new Koa()
+const Router = require('koa-router')
+const multer = require('koa-multer')
+const serve = require('koa-static')
+const path = require('path')
+const fs = require('fs-extra')
+const koaBody = require('koa-body')
 
-[comment]: <> (        :theme="'button'")
+const uploadPath = path.join(__dirname, 'uploads')
+const uploadTempPath = path.join(uploadPath, 'temp')
+const upload = multer({ dest: uploadTempPath })
+const router = new Router()
 
-[comment]: <> (        :tip="'最大上传5000&#40;Mb&#41;的文件'")
+const mkdirsSync = (dirname) => {
+  if (fs.existsSync(dirname)) {
+    return true
+  } else {
+    if (mkdirsSync(path.dirname(dirname))) {
+      fs.mkdirSync(dirname)
+      return true
+    }
+  }
+}
 
-[comment]: <> (        :with-credentials="true")
+app.use(koaBody())
 
-[comment]: <> (        :handle-res-code="handleRes")
+router.post('/file/upload', upload.single('file'), async (ctx, next) => {
+  console.log('file upload...')
+  // 根据文件hash创建文件夹，把默认上传的文件移动当前hash文件夹下。方便后续文件合并。
+  const { index, hash } = ctx.req.body
 
-[comment]: <> (        :slice-upload="true")
+  const chunksPath = path.join(uploadPath, hash, '/')
+  if (!fs.existsSync(chunksPath)) mkdirsSync(chunksPath)
+  fs.renameSync(ctx.req.file.path, chunksPath + hash + '-' + index)
+  ctx.status = 200
+  ctx.body = { id: 'Success' }
+  // ctx.res.end('Success')
+})
 
-[comment]: <> (        :slice-url="'/api/file/upload'")
-
-[comment]: <> (        :merge-url="'/api/file/merge_chunks'")
-
-[comment]: <> (        :chunk-size="10")
-
-[comment]: <> (        :size="5000")
-
-[comment]: <> (        :limit="5")
-
-[comment]: <> (        @on-delete="deleteHandle")
-
-[comment]: <> (    ></bk-upload>)
-
-[comment]: <> (</template>)
-
-[comment]: <> (<script>)
-
-[comment]: <> (    import { bkUpload } from '{{BASE_LIB_NAME}}')
-
-[comment]: <> (    export default {)
-
-[comment]: <> (        components: {)
-
-[comment]: <> (            bkUpload)
-
-[comment]: <> (        },)
-
-[comment]: <> (        methods: {)
-
-[comment]: <> (            handleRes &#40;response&#41; {)
-
-[comment]: <> (                if &#40;response.id&#41; {)
-
-[comment]: <> (                    return true)
-
-[comment]: <> (                })
-
-[comment]: <> (                return false)
-
-[comment]: <> (            },)
-
-[comment]: <> (            deleteHandle&#40;file, fileList&#41; {)
-
-[comment]: <> (                console.log&#40;file&#41;)
-
-[comment]: <> (            })
-
-[comment]: <> (        })
-
-[comment]: <> (    })
-
-[comment]: <> (</script>)
-
-[comment]: <> (```)
+router.post('/file/merge_chunks', async (ctx, next) => {
+  const { name, total, hash } = ctx.request.body
+  // 根据hash值，获取分片文件。
+  // 创建存储文件
+  // 合并
+  const chunksPath = path.join(uploadPath, hash, '/')
+  const filePath = path.join(uploadPath, name)
+  // 读取所有的chunks 文件名存放在数组中
+  const chunks = fs.readdirSync(chunksPath)
+  // 创建存储文件
+  fs.writeFileSync(filePath, '')
+  if (chunks.length !== total || chunks.length === 0) {
+    ctx.status = 500
+    ctx.res.end('切片文件数量不符合')
+    return
+  }
+  for (let i = 0; i < total; i++) {
+    // 追加写入到文件中
+    fs.appendFileSync(filePath, fs.readFileSync(chunksPath + hash + '-' + i))
+    // 删除本次使用的chunk
+    fs.unlinkSync(chunksPath + hash + '-' + i)
+  }
+  fs.rmdirSync(chunksPath)
+  // 文件合并成功，可以把文件信息进行入库。
+  ctx.status = 200
+  ctx.body = { id: 'Success' }
+  // ctx.res.end('Success');
+})
+app.use(router.routes())
+app.use(router.allowedMethods())
+app.use(serve(`${__dirname}/static`))
+app.listen(8000, () => {
+  console.log('Listening at 8000')
+})
+```
 
 :::
 

@@ -22,21 +22,8 @@
                 options: options,
                 hoverId: -1,
                 value: 3,
-                value2:'',
                 multipleValue: [1],
                 groupValue: ['1-1'],
-                list2:[
-                    { id: 1, name: '爬山' },
-                    { id: 2, name: '跑步' },
-                    { id: 3, name: '打球' },
-                    { id: 4, name: '跳舞' },
-                    { id: 5, name: '健身' },
-                    { id: 6, name: '骑车' },
-                    { id: 7, name: 'k8s' },
-                    { id: 8, name: 'K8S' },
-                    { id: 9, name: 'mesos' },
-                    { id: 10, name: 'MESOS' }
-                ],
                 list: [
                     { id: 1, name: '爬山' },
                     { id: 2, name: '跑步' },
@@ -140,20 +127,6 @@
             },
             handleClear() {
                 this.$refs.tree && this.$refs.tree.removeChecked({ emitEvent: false })
-            },
-            async remoteSearch (keyword) {
-                if (!keyword) {
-                    this.list2 = this.list
-                }
-                this.list2 = await this.search(keyword)
-            },
-            search (keyword) {
-                return new Promise((resolve,reject)=>{
-                    setTimeout(()=>{
-                        const list = this.list.filter(item => item.name.toLowerCase().indexOf(keyword) > -1)
-                        resolve(list)
-                    }, 2000)
-                })
             }
         }
     }
@@ -1068,72 +1041,6 @@
 ```
 
 :::
-
-### 远程搜索列表 {page=#/select}
-::: demo 可以配置`remote-method`属性配置远程搜索
-```html
-<template>
-     <bk-select :disabled="false"
-        :search-with-pinyin="true"
-        v-model="value2"
-        style="width: 250px;"
-        :remote-method="remoteSearch"
-        searchable>
-        <bk-option v-for="option in list2"
-            :key="option.id"
-            :id="option.id"
-            :name="option.name">
-        </bk-option>
-    </bk-select>
-</template>
-
-<script>
-    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
-    export default {
-        components: {
-            bkSelect,
-            bkOption,
-        },
-        data () {
-            return {
-                value2: '',
-                list: [
-                    { id: 1, name: '爬山' },
-                    { id: 2, name: '跑步' },
-                    { id: 3, name: '打球' },
-                    { id: 4, name: '跳舞' },
-                    { id: 5, name: '健身' },
-                    { id: 6, name: '骑车' },
-                    { id: 7, name: 'k8s' },
-                    { id: 8, name: 'K8S' },
-                    { id: 9, name: 'mesos' },
-                    { id: 10, name: 'MESOS' }
-                ],
-                list2: []
-            }
-        },
-        methods: {
-            async remoteSearch (keyword) {
-                if (!keyword) {
-                    this.list2 = this.list
-                }
-                this.list2 = await this.search(keyword)
-            },
-            search (keyword) {
-                return new Promise((resolve,reject)=>{
-                    setTimeout(()=>{
-                        const list = this.list.filter(item => item.name.toLowerCase().indexOf(keyword) > -1)
-                        resolve(list)
-                    }, 3000)
-                })
-            }
-        }
-    }
-</script>
-
-```
-:::
-
 
 ### bk-select 下拉选框属性 {page=#/select}
 

@@ -98,6 +98,7 @@ $tableInfoColor: #909399;
     th.is-leaf,
     td {
         border-bottom: $tableBorder;
+        height: 43px;
     }
 
     th.is-sortable {

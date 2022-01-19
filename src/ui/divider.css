@@ -4,7 +4,7 @@
     position: relative
 }
 
-.bk-divider-info{
+.bk-divider-info {
     position: absolute;
     padding: 0 1.4em;
     color: $newBlackColor1;
