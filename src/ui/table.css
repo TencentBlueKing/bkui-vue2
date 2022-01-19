@@ -98,6 +98,7 @@ $tableInfoColor: #909399;
     th.is-leaf,
     td {
         border-bottom: $tableBorder;
+        height: 43px;
     }
 
     th.is-sortable {
@@ -237,6 +238,13 @@ $tableInfoColor: #909399;
         z-index: -1;
     }
 }
+
+.bk-table-row-auto-height {
+    .cell {
+        display: block;
+    }
+}
+
 .bk-table-group,
 .bk-table-border,
 .bk-table-outer-border {

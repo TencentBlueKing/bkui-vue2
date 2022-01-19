@@ -138,7 +138,7 @@ class TableLayout {
 
     const noData = !this.table.data || this.table.data.length === 0
     this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight
-
+    this.syncRowHeight()
     this.updateScrollY()
     this.notifyObservers('scrollable')
   }

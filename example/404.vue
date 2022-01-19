@@ -42,12 +42,12 @@ export default {
 </script>
 
 <style scoped lang="postcss">
-    .exception-box {
-        text-align: center;
-        margin: auto;
-        img {
-            width: 300px;
-            margin-top: 150px;
-        }
+  .exception-box {
+    text-align: center;
+    margin: auto;
+    img {
+      width: 300px;
+      margin-top: 150px;
     }
+  }
 </style>

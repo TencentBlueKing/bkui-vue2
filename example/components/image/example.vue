@@ -26,21 +26,33 @@
  * IN THE SOFTWARE.
 -->
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="icon" href="./example/static/images/favicon.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="./example/static/images/favicon.png" type="image/x-icon" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta name="format-detection" content="telephone=no, email=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="referrer" content="never" />
-    <title> 蓝鲸 MagicBox-Vue 组件库 </title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="./example/static/lib.bundle.js"></script>
-    <script src="//wp.qiye.qq.com/loader/4.0.0.js"></script>
-  </body>
-</html>
+<template>
+  <div>
+    <bk-image style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
+  </div>
+</template>
+
+<script>
+import { bkImage } from '@'
+export default {
+  components: {
+    bkImage
+  },
+  data () {
+    return {
+      previewSrc: './example/static/images/preview/0.png',
+      srcList: [
+        './example/static/images/preview/0.png',
+        './example/static/images/preview/1.png',
+        './example/static/images/preview/2.png',
+        './example/static/images/preview/3.png',
+        './example/static/images/preview/33.png',
+        './example/static/images/preview/4.png',
+        './example/static/images/preview/55.png',
+        './example/static/images/preview/5.png',
+        './example/static/images/preview/6.png'
+      ]
+    }
+  }
+}
+</script>
