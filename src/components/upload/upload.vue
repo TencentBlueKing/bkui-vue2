@@ -175,7 +175,7 @@ export default {
       default: 0
     },
     url: {
-      required: true,
+      required: false,
       type: String
     },
     size: {
