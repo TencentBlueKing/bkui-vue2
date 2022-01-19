@@ -464,7 +464,7 @@ body {
         z-index: 1;
     }
 
-    .auto-height {
+    .row-auto-height {
         .demo-box {
             .demo-meta {
                 max-height: max-content;

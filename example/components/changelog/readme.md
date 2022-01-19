@@ -4,6 +4,22 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.5 {page=#/changelog}
+###### 2022.01.20
+
+* **[add]**:
+    - [Upload 文件上传](#/upload) 新增[大文件分片上传](#/upload?anchor=da-wen-jian-fen-pian-shang-chuan)
+    - [Select 下拉选框](#/select) 新增下拉框高度在[标签多选](#/select?anchor=duo-xuan)形式是否自动撑开的配置 `auto-height`
+* **[fix]**:
+    - [Cascade 级联选框](#/cascade) 修复禁用状态下依旧能删除 tag 的问题
+    - [Table 表格](#/table) 修复开启定位和自动行高拖动修改列宽，影响行高没有重新计算定位行高的问题
+* **[update]**:
+    - [ZoomImage 缩放图组件](#/zoom-image) 样式优化
+    - [Divider 分割线](#/divider) 样式优化
+    - [Image 图片](#/image) 示例优化
+
+---
+
 ### 2.4.4 {page=#/changelog}
 ###### 2022.01.10
 

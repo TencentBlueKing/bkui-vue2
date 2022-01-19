@@ -42,7 +42,8 @@
         'bk-table-fluid-height': maxHeight,
         'bk-table-scrollable-x': layout.scrollX,
         'bk-table-scrollable-y': layout.scrollY,
-        'bk-table-enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+        'bk-table-enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100,
+        'bk-table-row-auto-height': rowAutoHeight
       },
       tableSize ? `bk-table-${ tableSize }` : '',
       extCls
@@ -327,6 +328,10 @@ export default {
     fit: {
       type: Boolean,
       default: true
+    },
+    rowAutoHeight: {
+      type: Boolean,
+      default: false
     },
     stripe: Boolean,
     border: Boolean,

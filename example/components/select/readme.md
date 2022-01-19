@@ -217,7 +217,7 @@
 
 ### 多选 {page=#/select}
 
-:::demo 开启 `multiple` 属性进行多选，注意此时 `v-model` 对应的值应是数组，可开启 `show-select-all` 属性提供一键全选功能; 在多选情况下，可以通过配置`display-tag`属性，已选择的结果将以标签形式显示
+:::demo 开启 `multiple` 属性进行多选，注意此时 `v-model` 对应的值应是数组，可开启 `show-select-all` 属性提供一键全选功能; 在多选情况下，可以通过配置`display-tag`属性，已选择的结果将以标签形式显示; 在以标签形式展示选择结果时，下拉框高度会自动撑开，此时可以通过设置`auto-height`为`false`固定高度
 
 ```html
 <template>
@@ -238,6 +238,19 @@
             searchable
             multiple
             display-tag
+            v-model="multipleValue">
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+
+        <bk-select style="width: 250px;margin-top: 10px;"
+            searchable
+            multiple
+            display-tag
+            :auto-height="false"
             v-model="multipleValue">
             <bk-option v-for="option in list"
                 :key="option.id"
@@ -1026,6 +1039,7 @@
     }
 </script>
 ```
+
 :::
 
 ### bk-select 下拉选框属性 {page=#/select}
@@ -1035,6 +1049,7 @@
 | value | 当前被选中的值，支持 `v-model` | String / Array / Number | —— | —— |
 | multiple | 是否多选 | Boolean | —— | false |
 | display-tag | 是否将选择的结果以标签的形式显示，仅当开启`multiple`时生效 | Boolean | —— | false |
+| auto-height | 下拉框高度是否自动撑开，当开启`display-tag`时生效 | Boolean | —— | true |
 | is-tag-width-limit | 是否对标签进行宽度限制，超出显示`...` | Boolean | —— | true |
 | collapse-tag | 当以标签形式显示选择结果时，是否合并溢出的结果以数字显示 | Boolean | —— | true |
 | show-select-all | 是否显示全选选项，仅当开启`multiple`时生效 | Boolean | —— | false |
