@@ -74,6 +74,7 @@ const TimePickerExample = () => import(/* webpackChunkName: 'time-picker' */'./c
 const DatePicker = () => import(/* webpackChunkName: 'date-picker' */'./components/date-picker/readme.md')
 const DatePickerExample = () => import(/* webpackChunkName: 'date-picker' */'./components/date-picker/example')
 const Form = () => import(/* webpackChunkName: 'form' */'./components/form/readme.md')
+const FormExample = () => import(/* webpackChunkName: 'form' */'./components/form/example')
 const Pagination = () => import(/* webpackChunkName: 'pagination' */'./components/pagination/readme.md')
 const Changelog = () => import(/* webpackChunkName: 'changelog' */'./components/changelog/readme.md')
 const I18N = () => import(/* webpackChunkName: 'i18n' */'./components/i18n/readme.md')
@@ -477,6 +478,11 @@ const router = new VueRouter({
       name: 'form',
       path: '/form',
       component: Form
+    },
+    {
+      name: 'formExample',
+      path: '/form/example',
+      component: FormExample
     },
     {
       name: 'input',

@@ -1039,7 +1039,7 @@ export default {
 ```
 :::
 
-### 浮动定位 {page=#/table}
+### 固定列 {page=#/table}
 
 :::demo 配置`bk-table-column`的`fixed`属性设置为`left`或者`right`会见列固定在左侧或者右侧，设置为`true`会固定到左侧。`row-auto-height`为`true`时，拖动调整列宽表格行高会被撑开，`fixed`列也会自动重新计算高度.
 
