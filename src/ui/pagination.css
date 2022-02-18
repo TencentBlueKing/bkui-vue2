@@ -5,6 +5,7 @@ $hoverBackground: #eaf3ff;
 
 .bk-page {
     overflow: hidden;
+    white-space: normal;
     .icon-angle-right, .icon-angle-left {
         line-height: 36px;
         font-size: $iconNormalSize;
