@@ -104,16 +104,12 @@
 ```
 :::
 
-### 可不包裹使用 {page=#/badge}
+### 不包裹任何元素，独立使用 {page=#/badge}
 
-:::demo 配置参数 `ext-cls` 可在不包裹使用情况下灵活对badge进行定位
+:::demo 可在不包裹任何元素情况下，独立使用 badge
 ```html
 <template>
-    <bk-table
-    class="my-table"
-    :data="tableData"
-    style="width: 100%"
-    :max-height="400">
+    <bk-table class="my-table" :data="tableData" style="width: 100%" :max-height="400">
         <bk-table-column prop="name" label="姓名" width="180">
             <template slot-scope="props">
                 <span style="position: relative">
@@ -135,50 +131,50 @@
     </bk-table>
 </template>
 <script>
-  import { bkTable, bkTableColumn, bkBadge } from '{{BASE_LIB_NAME}}'
-  export default {
-    components: {
-        bkTable,
-        bkBadge,
-        bkTableColumn,
-        bkPopover
-    },
-    data () {
-        return {
-            badgeStatusMap: {
-                '完成': 'success',
-                '进行中': 'primary',
-                '失败': 'danger',
-            },
-            tableData: [
-                {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    status: '完成',
-                    order: 2,
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    tag: '家'
+    import { bkTable, bkTableColumn, bkBadge } from '{{BASE_LIB_NAME}}'
+    export default {
+        components: {
+            bkTable,
+            bkBadge,
+            bkTableColumn,
+            bkPopover
+        },
+        data () {
+            return {
+                badgeStatusMap: {
+                    '完成': 'success',
+                    '进行中': 'primary',
+                    '失败': 'danger',
                 },
-                {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    status: '进行中',
-                    order: 3,
-                    address: '上海市普陀区金沙江路 1517 弄',
-                    tag: '公司'
-                },
-                {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    status: '失败',
-                    order: 4,
-                    address: '上海市普陀区金沙江路 1519 弄',
-                    tag: '家'
-                }
-            ]
+                tableData: [
+                    {
+                        date: '2016-05-02',
+                        name: '王小虎',
+                        status: '完成',
+                        order: 2,
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        tag: '家'
+                    },
+                    {
+                        date: '2016-05-04',
+                        name: '王小虎',
+                        status: '进行中',
+                        order: 3,
+                        address: '上海市普陀区金沙江路 1517 弄',
+                        tag: '公司'
+                    },
+                    {
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        status: '失败',
+                        order: 4,
+                        address: '上海市普陀区金沙江路 1519 弄',
+                        tag: '家'
+                    }
+                ]
+            }
         }
     }
-  }
 </script>
 
 ```

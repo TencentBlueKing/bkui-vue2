@@ -88,7 +88,7 @@
 
 ### 基础用法 {page=#/big-tree}
 
-:::demo 同步数据渲染, 通过设置 `show-checkbox` 开启节点勾选功能，通过设置 `enable-title-tip` 开启节点的tip提示。
+:::demo 同步数据渲染, 通过设置 `show-checkbox` 开启节点勾选功能，通过设置 `enable-title-tip` 开启节点的 title 提示（浏览器的 title 提示）。
 
 ```html
 <template>
