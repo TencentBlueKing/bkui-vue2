@@ -1,16 +1,45 @@
 <script>
-    import { bkBadge, bkButton } from '@'
+    import { bkBadge, bkTable, bkTableColumn, bkButton } from '@'
 
     export default {
         components: {
             bkBadge,
-            bkButton
+            bkButton,
+            bkTable,
+            bkTableColumn
         },
         data () {
             return {
                 customBadge: {
                     visible: true
-                }
+                },
+                badgeStatusMap: {
+                    '完成': 'success',
+                    '进行中': 'primary',
+                    '失败': 'danger',
+                },
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎虎虎虎',
+                    status: '完成',
+                    order: 2,
+                    address: '上海市普陀区金沙江路 1518 弄',
+                    tag: '家'
+                }, {
+                  date: '2016-05-04',
+                  name: '王小虎',
+                  status: '进行中',
+                  order: 3,
+                  address: '上海市普陀区金沙江路 1517 弄',
+                  tag: '公司'
+                }, {
+                  date: '2016-05-01',
+                  name: '王小虎',
+                  status: '失败',
+                  order: 4,
+                  address: '上海市普陀区金沙江路 1519 弄',
+                  tag: '家'
+                }]
             }
         },
         methods: {
@@ -72,6 +101,86 @@
         }
     }
 </script>
+```
+:::
+
+### 可不包裹使用 {page=#/badge}
+
+:::demo 配置参数 `ext-cls` 可在不包裹使用情况下灵活对badge进行定位
+```html
+<template>
+    <bk-table
+    class="my-table"
+    :data="tableData"
+    style="width: 100%"
+    :max-height="400">
+        <bk-table-column prop="name" label="姓名" width="180">
+            <template slot-scope="props">
+                <span style="position: relative">
+                    {{props.row.name}}
+                    <bk-badge theme="danger" :val="props.row.order"></bk-badge>
+                </span>
+            </template>
+        </bk-table-column>
+        <bk-table-column prop="name" label="进度" width="180">
+            <template slot-scope="props">
+                <span style="position: relative">
+                    <bk-badge dot :theme="badgeStatusMap[props.row.status]"></bk-badge>
+                    {{props.row.status}}
+                </span>
+            </template>
+        </bk-table-column>
+        <bk-table-column prop="address" label="地址">
+        </bk-table-column>
+    </bk-table>
+</template>
+<script>
+  import { bkTable, bkTableColumn, bkBadge } from '{{BASE_LIB_NAME}}'
+  export default {
+    components: {
+        bkTable,
+        bkBadge,
+        bkTableColumn,
+        bkPopover
+    },
+    data () {
+        return {
+            badgeStatusMap: {
+                '完成': 'success',
+                '进行中': 'primary',
+                '失败': 'danger',
+            },
+            tableData: [
+                {
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    status: '完成',
+                    order: 2,
+                    address: '上海市普陀区金沙江路 1518 弄',
+                    tag: '家'
+                },
+                {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    status: '进行中',
+                    order: 3,
+                    address: '上海市普陀区金沙江路 1517 弄',
+                    tag: '公司'
+                },
+                {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    status: '失败',
+                    order: 4,
+                    address: '上海市普陀区金沙江路 1519 弄',
+                    tag: '家'
+                }
+            ]
+        }
+    }
+  }
+</script>
+
 ```
 :::
 
