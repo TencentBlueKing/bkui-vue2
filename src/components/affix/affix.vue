@@ -124,13 +124,16 @@ export default {
   methods: {
     // 解决设置滚动容器时window滚动Affix对象已固定不随滚的问题
     setTargetLoop () {
+      const rect = this.targetEl.getBoundingClientRect()
       if (this.offsetType === 'top') {
         this.styles = {
-          top: `${this.targetEl.getBoundingClientRect().top + this.offsetTop}px`
+          top: `${rect.top + this.offsetTop}px`,
+          width: `${rect.width}px`
         }
       } else {
         this.styles = {
-          bottom: `${window.innerHeight - this.targetEl.getBoundingClientRect().bottom + this.offsetBottom}px`
+          bottom: `${window.innerHeight - rect.bottom + this.offsetBottom}px`,
+          width: `${rect.width}px`
         }
       }
     },

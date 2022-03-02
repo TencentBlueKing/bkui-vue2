@@ -307,6 +307,10 @@ export default {
   },
   watch: {
     showCascade (val) {
+      if (!val) {
+        // 通知表单组件，可用于实时验证
+	this.dispatch('bk-form-item', 'form-blur')
+      }
       this.$emit('toggle', val)
       this.filterableStatus = this.searchContent !== ''
       if (val) {
@@ -547,6 +551,8 @@ export default {
         const selectedList = this.multiple ? this.multipleSelectedList : this.selectedList
         this.$emit('input', newId)
         this.$emit('change', newId, oldId, JSON.parse(JSON.stringify(selectedList)))
+        // 通知表单组件，可用于实时验证
+        this.dispatch('bk-form-item', 'form-change')
       }
     },
     exposeMultiple (oldId) {
