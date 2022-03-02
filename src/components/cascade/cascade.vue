@@ -309,7 +309,7 @@ export default {
     showCascade (val) {
       if (!val) {
         // 通知表单组件，可用于实时验证
-	this.dispatch('bk-form-item', 'form-blur')
+        this.dispatch('bk-form-item', 'form-blur')
       }
       this.$emit('toggle', val)
       this.filterableStatus = this.searchContent !== ''
