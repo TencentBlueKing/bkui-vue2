@@ -43,6 +43,7 @@
     <!-- 非虚拟滚动 -->
     <template v-for="node in nodes" v-else>
       <tree-item
+        :enable-title-tip="enableTitleTip"
         :node="node"
         :ref="node.id"
         :key="node.id">
@@ -175,6 +176,10 @@ export default {
     size: {
       type: String,
       default: 'normal'
+    },
+    enableTitleTip: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

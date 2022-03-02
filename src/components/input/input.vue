@@ -522,6 +522,7 @@ export default {
       }
     },
     handleNumberDelete (event) {
+      this.curValue === '' && (this.curValue = this.max)
       const curNumberValue = Number(this.curValue)
       if (curNumberValue - 1 >= this.min) {
         const curLenAfterDot = (String(curNumberValue) || '').split('.')[1] || ''
@@ -536,6 +537,7 @@ export default {
       }
     },
     handleNumberAdd (event) {
+      this.curValue === '' && (this.curValue = this.min)
       const curNumberValue = Number(this.curValue)
       if (curNumberValue <= this.max - 1) {
         const curLenAfterDot = (String(curNumberValue) || '').split('.')[1] || ''
