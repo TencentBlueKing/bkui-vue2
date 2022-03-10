@@ -72,11 +72,20 @@
       <slot name="trigger" v-bind="$props">
         <bk-select-tag v-if="multiple && displayTag"
           :width-limit="isTagWidthLimit"></bk-select-tag>
-        <div class="bk-select-name" v-else
-          :class="fontSizeCls"
-          :title="selectedName">
-          {{selectedName}}
-        </div>
+        <template v-else>
+          <input
+            v-if="allowCreate"
+            class="bk-select-name"
+            @change="handleInputChange"
+            :class="fontSizeCls"
+            :value="selectedName || value"
+            :title="selectedName" />
+          <div class="bk-select-name" v-else
+            :class="fontSizeCls"
+            :title="selectedName">
+            {{selectedName}}
+          </div>
+        </template>
       </slot>
       <div slot="content" class="bk-select-dropdown-content"
         :class="[popoverCls, extPopoverCls]"
@@ -190,6 +199,7 @@ export default {
       type: Boolean,
       default: true
     },
+    allowCreate: Boolean,
     disabled: Boolean,
     readonly: Boolean,
     loading: Boolean,
@@ -528,7 +538,7 @@ export default {
       const popover = this.getPopoverInstance()
       popover.set({
         onShown: () => {
-          if (this.searchable) {
+          if (this.searchable && !this.allowCreate) {
             this.$refs.searchInput.focus()
           }
         }
@@ -540,6 +550,12 @@ export default {
     },
     handleDropdownHide () {
       this.focus = false
+    },
+    handleInputChange (e) {
+      console.log(e.target.value)
+      const value = e.target.value
+      this.$emit('input', value)
+      this.$emit('change', value, this.value)
     },
     registerOption (option) {
       if (this.enableVirtualScroll) return
