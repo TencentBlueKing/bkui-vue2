@@ -223,7 +223,7 @@
 <template>
     <div style="display: flex;flex-wrap: wrap;">
         <div class="mr15">
-            <bk-select size="small"  v-model="value" style="width: 200px;"
+            <bk-select size="small"  v-model="value" style="width: 180px;"
                         ext-cls="select-custom"
                         ext-popover-cls="select-popover-custom"
                         searchable>
@@ -235,7 +235,7 @@
             </bk-select>
         </div>
         <div class="mr15">
-            <bk-select  v-model="value"  style="width: 200px;"
+            <bk-select  v-model="value"  style="width: 180px;"
                         ext-cls="select-custom"
                         ext-popover-cls="select-popover-custom"
                         searchable>
@@ -247,7 +247,7 @@
             </bk-select>
         </div>
         <div>
-            <bk-select  v-model="value" size="large" style="width: 250px;"
+            <bk-select  v-model="value" size="large" style="width: 180px;"
                         ext-cls="select-custom"
                         ext-popover-cls="select-popover-custom"
                         searchable>
