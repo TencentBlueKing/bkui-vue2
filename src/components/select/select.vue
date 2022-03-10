@@ -248,6 +248,10 @@ export default {
       default: ''
     },
     displayTag: Boolean,
+    autoHeight: {
+      type: Boolean,
+      default: true
+    },
     collapseTag: {
       type: Boolean,
       default: true
@@ -546,7 +550,7 @@ export default {
     },
     handleDropdownShow () {
       this.defaultWidth = this.$el.offsetWidth
-      this.focus = true
+      if (this.autoHeight) this.focus = true
     },
     handleDropdownHide () {
       this.focus = false

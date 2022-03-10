@@ -292,7 +292,7 @@
 
 ### 多选 {page=#/select}
 
-:::demo 开启 `multiple` 属性进行多选，注意此时 `v-model` 对应的值应是数组，可开启 `show-select-all` 属性提供一键全选功能; 在多选情况下，可以通过配置`display-tag`属性，已选择的结果将以标签形式显示
+:::demo 开启 `multiple` 属性进行多选，注意此时 `v-model` 对应的值应是数组，可开启 `show-select-all` 属性提供一键全选功能; 在多选情况下，可以通过配置`display-tag`属性，已选择的结果将以标签形式显示; 在以标签形式展示选择结果时，下拉框高度会自动撑开，此时可以通过设置`auto-height`为`false`固定高度
 
 ```html
 <template>
@@ -313,6 +313,19 @@
             searchable
             multiple
             display-tag
+            v-model="multipleValue">
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+
+        <bk-select style="width: 250px;margin-top: 10px;"
+            searchable
+            multiple
+            display-tag
+            :auto-height="false"
             v-model="multipleValue">
             <bk-option v-for="option in list"
                 :key="option.id"
@@ -1101,6 +1114,7 @@
     }
 </script>
 ```
+
 :::
 
 ### 支持输入自定义标签 {page=#/tag}
@@ -1154,44 +1168,45 @@
 
 ### bk-select 下拉选框属性 {page=#/select}
 
-| 参数                    | 说明 | 类型 | 可选值 | 默认值 |
-|-----------------------|------|------|------|------|
-| value                 | 当前被选中的值，支持 `v-model` | String / Array / Number | —— | —— |
-| multiple              | 是否多选 | Boolean | —— | false |
-| display-tag           | 是否将选择的结果以标签的形式显示，仅当开启`multiple`时生效 | Boolean | —— | false |
-| is-tag-width-limit    | 是否对标签进行宽度限制，超出显示`...` | Boolean | —— | true |
-| collapse-tag          | 当以标签形式显示选择结果时，是否合并溢出的结果以数字显示 | Boolean | —— | true |
-| show-select-all       | 是否显示全选选项，仅当开启`multiple`时生效 | Boolean | —— | false |
-| scroll-height         | 下拉列表滚动高度 | Number | —— | 216 |
-| placeholder           | 未选择数据时的占位 | String | —— | 请选择 |
-| disabled              | 是否禁用 | Boolean | —— | false |
-| allow-create          | 是否允许自定义标签输入 | Boolean | —— | false |
-| readonly              | 是否只读 | Boolean | —— | false |
-| size                  | 尺寸 | String | `large` `small` | —— |
-| loading               | 是否加载中 | Boolean | —— | false |
-| clearable             | 是否允许清空 | Boolean | —— | true |
-| searchable            | 是否显示搜索框 | Boolean | —— | false |
-| search-ignore-case    | 搜索选项时是否忽略大小写 | Boolean | —— | true |
-| popover-min-width     | 设置下拉列表的最小宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
-| popover-width         | 设置下拉列表的宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
-| popover-options       | 透传至下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
-| remote-method         | 远程搜索方法（可返回 Promise 或者直接返回数据），函数的参数为搜索关键字 | Function | —— | —— |
-| font-size             | 设置下拉已选择及列表的字体大小 | String | `normal`（12px），`medium`（14px），`large`（16px） | normal |
-| ext-cls               | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-select` 上 | String | —— | —— |
-| ext-popover-cls       | 配置自定义样式类名，传入的类会被加在下拉菜单的 DOM `.bk-select-dropdown-content` 上 | String | —— | —— |
-| z-index               | 弹出层的 `z-index` | Number | —— | 2500 |
-| prefix-icon           | 配置在下拉选框前面的icon类名 | String | —— | —— |
-| search-placeholder    | 搜索框占位 | String | —— | 输入关键字搜索 |
-| search-with-pinyin    | 搜索的时候是否加入中文转换为拼音搜索 | Boolean | —— | false |
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+|------|------|------|------|------|
+| value | 当前被选中的值，支持 `v-model` | String / Array / Number | —— | —— |
+| multiple | 是否多选 | Boolean | —— | false |
+| display-tag | 是否将选择的结果以标签的形式显示，仅当开启`multiple`时生效 | Boolean | —— | false |
+| auto-height | 下拉框高度是否自动撑开，当开启`display-tag`时生效 | Boolean | —— | true |
+| is-tag-width-limit | 是否对标签进行宽度限制，超出显示`...` | Boolean | —— | true |
+| collapse-tag | 当以标签形式显示选择结果时，是否合并溢出的结果以数字显示 | Boolean | —— | true |
+| show-select-all | 是否显示全选选项，仅当开启`multiple`时生效 | Boolean | —— | false |
+| scroll-height | 下拉列表滚动高度 | Number | —— | 216 |
+| placeholder | 未选择数据时的占位 | String | —— | 请选择 |
+| disabled | 是否禁用 | Boolean | —— | false |
+| allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
+| readonly | 是否只读 | Boolean | —— | false |
+| size | 尺寸 | String | `large` `small` | —— |
+| loading | 是否加载中 | Boolean | —— | false |
+| clearable | 是否允许清空 | Boolean | —— | true |
+| searchable | 是否显示搜索框 | Boolean | —— | false |
+| search-ignore-case | 搜索选项时是否忽略大小写 | Boolean | —— | true |
+| popover-min-width | 设置下拉列表的最小宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
+| popover-width | 设置下拉列表的宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
+| popover-options | 透传至下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
+| remote-method | 远程搜索方法（可返回 Promise 或者直接返回数据），函数的参数为搜索关键字 | Function | —— | —— |
+| font-size | 设置下拉已选择及列表的字体大小 | String | `normal`（12px），`medium`（14px），`large`（16px） | normal |
+| ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-select` 上 | String | —— | —— |
+| ext-popover-cls | 配置自定义样式类名，传入的类会被加在下拉菜单的 DOM `.bk-select-dropdown-content` 上 | String | —— | —— |
+| z-index | 弹出层的 `z-index` | Number | —— | 2500 |
+| prefix-icon | 配置在下拉选框前面的icon类名 | String | —— | —— |
+| search-placeholder | 搜索框占位 | String | —— | 输入关键字搜索 |
+| search-with-pinyin | 搜索的时候是否加入中文转换为拼音搜索 | Boolean | —— | false |
 | enable-virtual-scroll | 是否开启虚拟滚动 | Boolean | —— | false |
 | virtual-scroll-render | 虚拟滚动内容的render,参数分别为数据和 createElement 函数 | Function | —— | —— |
-| list                  | 开启虚拟滚动的时候需要传入的数据列表 | Array | —— | —— |
-| id-Key                | 虚拟滚动数据，值的key值 | String | —— | id |
-| display-key           | 虚拟滚动数据，显示字段的key值 | String | —— | name |
-| item-height           | 虚拟滚动单行元素的高度 | Number | —— | 32 |
-| show-empty            | 是否展示空数据的提示 | Boolean | —— | true |
-| show-on-init          | 是否在初始化的时候展示下拉列表 | Boolean | —— | false |
-| behavior              | 风格设置(simplicity:简约 normal:正常) | String | 'normal'/'simplicity' | normal |
+| list | 开启虚拟滚动的时候需要传入的数据列表 | Array | —— | —— |
+| id-Key | 虚拟滚动数据，值的key值 | String | —— | id |
+| display-key | 虚拟滚动数据，显示字段的key值 | String | —— | name |
+| item-height | 虚拟滚动单行元素的高度 | Number | —— | 32 |
+| show-empty| 是否展示空数据的提示 | Boolean | —— | true |
+| show-on-init | 是否在初始化的时候展示下拉列表 | Boolean | —— | false |
+| behavior | 风格设置(simplicity:简约 normal:正常) | String | 'normal'/'simplicity' | normal |
 
 ### bk-select 下拉选框事件 {page=#/select}
 

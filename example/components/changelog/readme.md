@@ -4,6 +4,36 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.6 {page=#/changelog}
+###### 2022.03.03
+
+* **[add]**:
+    - [Badge 标记](#/badge) badge 组件支持[不包裹任何元素，独立使用](#/badge?anchor=bu-bao-guo-ren-he-yuan-su-du-li-shi-yong) [#18](https://github.com/TencentBlueKing/bkui-vue2/issues/18)
+    - [Big Tree 大树](#/big-tree) 新增 enable-title-tip 配置用来开启节点的 title 提示（浏览器的 title 提示）
+    - [Cascade 级联选框](#/cascade) 支持触发表单校验
+* **[fix]**:
+    - [Table 表格](#/table) 修复表格会被外部 white-space 样式影响问题
+    - [Affix 图钉](#/affix) 修复 affix 组件设置 target 后无宽度问题
+    - [Input 输入框](#/input) 数字输入框，修复设置最大最小输入范围清空内容后，点击加减控制图标，无论限制范围(min, max)，都会从 1 开始递增的问题
+
+---
+
+### 2.4.5 {page=#/changelog}
+###### 2022.01.20
+
+* **[add]**:
+    - [Upload 文件上传](#/upload) 新增[大文件分片上传](#/upload?anchor=da-wen-jian-fen-pian-shang-chuan)
+    - [Select 下拉选框](#/select) 新增下拉框高度在[标签多选](#/select?anchor=duo-xuan)形式是否自动撑开的配置 `auto-height`
+* **[fix]**:
+    - [Cascade 级联选框](#/cascade) 修复禁用状态下依旧能删除 tag 的问题
+    - [Table 表格](#/table) 修复开启定位和自动行高拖动修改列宽，影响行高没有重新计算定位行高的问题
+* **[update]**:
+    - [ZoomImage 缩放图组件](#/zoom-image) 样式优化
+    - [Divider 分割线](#/divider) 样式优化
+    - [Image 图片](#/image) 示例优化
+
+---
+
 ### 2.4.4 {page=#/changelog}
 ###### 2022.01.10
 
