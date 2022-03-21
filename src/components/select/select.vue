@@ -238,6 +238,10 @@ export default {
       default: ''
     },
     displayTag: Boolean,
+    autoHeight: {
+      type: Boolean,
+      default: true
+    },
     collapseTag: {
       type: Boolean,
       default: true
@@ -464,8 +468,8 @@ export default {
   },
   methods: {
     /**
-             * 监听 virtual-scroll 的 virtual-scroll-scroll-bar-mouse 事件
-             */
+     * 监听 virtual-scroll 的 virtual-scroll-scroll-bar-mouse 事件
+     */
     virtualScrollScrollBarMouse (idx) {
       const renderPopoverOptions = Object.assign({}, this.renderPopoverOptions)
       renderPopoverOptions.hideOnClick = idx !== 'down'
@@ -536,7 +540,7 @@ export default {
     },
     handleDropdownShow () {
       this.defaultWidth = this.$el.offsetWidth
-      this.focus = true
+      if (this.autoHeight) this.focus = true
     },
     handleDropdownHide () {
       this.focus = false
@@ -662,5 +666,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/select.css';
+  @import '../../ui/select.css';
 </style>

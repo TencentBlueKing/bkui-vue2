@@ -37,7 +37,7 @@
     <transition name="fade" :duration="{ enter: duration }" @after-leave="animationFinish">
       <div class="bk-loading-wrapper" v-show="isShow"
         :style="{
-          zIndex,
+          renderZIndex,
           backgroundColor: bgColor
         }">
         <div :class="computedClass">
@@ -68,7 +68,7 @@
     <div class="bk-loading" :class="extCls" v-show="isShow"
       :style="{
         position: type,
-        zIndex,
+        renderZIndex,
         backgroundColor: bgColor
       }">
       <div class="bk-loading-wrapper">
@@ -100,17 +100,17 @@
 </template>
 <script>
 /**
-     *  bk-loading
-     *  @module components/loading
-     *  @desc 加载组件
-     *  @param title {String，VNode} - 加载时的文案显示
-     *  @example
-        this.$bkLoading() or
-        this.$bkLoading('加载中') or
-        this.$bkLoading({
-          title: this.$createElement('span', '加载中')
-        })
-     */
+ *  bk-loading
+ *  @module components/loading
+ *  @desc 加载组件
+ *  @param title {String，VNode} - 加载时的文案显示
+ *  @example
+    this.$bkLoading() or
+    this.$bkLoading('加载中') or
+    this.$bkLoading({
+      title: this.$createElement('span', '加载中')
+    })
+  */
 import zIndexManager from '@/utils/z-index-manager.js'
 
 export default {
@@ -217,6 +217,13 @@ export default {
         return
       }
       return typeof this.zIndex === 'number' && !Number.isNaN(this.zIndex)
+    },
+    renderZIndex: {
+      get () {
+        return this.zIndex
+      },
+      set () {
+      }
     }
   },
   watch: {
@@ -235,7 +242,7 @@ export default {
     },
     isShow (newVal) {
       if (newVal && !this.hasZIndexOption) {
-        this.zIndex = zIndexManager.nextZIndex()
+        this.renderZIndex = zIndexManager.nextZIndex()
       }
     },
     isLoading: {
@@ -265,8 +272,8 @@ export default {
       this.$el.parentNode.removeChild(this.$el)
     },
     /**
-             * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
-             */
+     * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
+     */
     animationFinish () {
       if (this.afterLeave && typeof this.afterLeave === 'function') {
         this.afterLeave()
@@ -276,5 +283,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/loading.css';
+  @import '../../ui/loading.css';
 </style>

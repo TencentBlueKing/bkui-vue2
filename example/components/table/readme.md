@@ -1039,6 +1039,202 @@ export default {
 ```
 :::
 
+### 固定列 {page=#/table}
+
+:::demo 配置`bk-table-column`的`fixed`属性设置为`left`或者`right`会见列固定在左侧或者右侧，设置为`true`会固定到左侧。`row-auto-height`为`true`时，拖动调整列宽表格行高会被撑开，`fixed`列也会自动重新计算高度.
+
+```html
+
+<template>
+    <div>
+        <bk-table :row-auto-height="true" style="margin-top: 15px;" :data="data" :size="size" :pagination="pagination"
+            @row-mouse-enter="handleRowMouseEnter" @row-mouse-leave="handleRowMouseLeave"
+            @page-change="handlePageChange" @page-limit-change="handlePageLimitChange">
+            <bk-table-column type="selection" width="60" fixed="left"></bk-table-column>
+            <bk-table-column type="index" label="序列" width="60"></bk-table-column>
+            <bk-table-column label="名称/内网IP" width="500" prop="ip"></bk-table-column>
+            <bk-table-column label="来源" width="500" prop="source"></bk-table-column>
+            <bk-table-column label="状态" width="500" prop="status"></bk-table-column>
+            <bk-table-column label="创建时间" width="500" prop="create_time"></bk-table-column>
+            <bk-table-column label="操作" width="150" fixed="right">
+                <template slot-scope="props">
+                    <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'"
+                        @click="reset(props.row)">重置</bk-button>
+                    <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
+                    <bk-popover class="dot-menu" placement="bottom-start" theme="dot-menu light" trigger="click"
+                        :arrow="false" offset="15" :distance="0">
+                        <span class="dot-menu-trigger"></span>
+                        <ul class="dot-menu-list" slot="content">
+                            <li class="dot-menu-item">导入</li>
+                            <li class="dot-menu-item">导出</li>
+                        </ul>
+                    </bk-popover>
+                </template>
+            </bk-table-column>
+        </bk-table>
+    </div>
+</template>
+<script>
+    import { bkTable, bkTableColumn, bkButton, bkPopover } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTable,
+            bkTableColumn,
+            bkButton,
+            bkPopover
+        },
+        data() {
+            return {
+                size: 'small',
+                data: [
+                    {
+                        ip: '192.168.0.1',
+                        source: 'QQ',
+                        status: '创建中',
+                        create_time: '2018-05-25 15:02:24',
+                        children: [
+                            {
+                                name: '用户管理',
+                                count: '23',
+                                creator: 'person2',
+                                create_time: '2017-10-10 11:12',
+                                desc: '用户管理'
+                            },
+                            {
+                                name: '模块管理',
+                                count: '2',
+                                creator: 'person1',
+                                create_time: '2017-10-10 11:12',
+                                desc: '无数据测试'
+                            }
+                        ]
+                    },
+                    {
+                        ip: '192.168.0.2',
+                        source: '微信',
+                        status: '正常',
+                        create_time: '2018-05-25 15:02:24',
+                        children: [
+                            {
+                                name: '用户管理',
+                                count: '23',
+                                creator: 'person2',
+                                create_time: '2017-10-10 11:12',
+                                desc: '用户管理'
+                            },
+                            {
+                                name: '模块管理',
+                                count: '2',
+                                creator: 'person1',
+                                create_time: '2017-10-10 11:12',
+                                desc: '无数据测试'
+                            }
+                        ]
+                    },
+                    {
+                        ip: '192.168.0.3',
+                        source: 'QQ',
+                        status: '创建中',
+                        create_time: '2018-05-25 15:02:24',
+                        children: [
+                            {
+                                name: '用户管理',
+                                count: '23',
+                                creator: 'person2',
+                                create_time: '2017-10-10 11:12',
+                                desc: '用户管理'
+                            },
+                            {
+                                name: '模块管理',
+                                count: '2',
+                                creator: 'person1',
+                                create_time: '2017-10-10 11:12',
+                                desc: '无数据测试'
+                            }
+                        ]
+                    }
+                ],
+                pagination: {
+                    current: 1,
+                    count: 500,
+                    limit: 20
+                }
+            }
+        },
+        methods: {
+            handlePageLimitChange() {
+                console.log('handlePageLimitChange', arguments)
+            },
+            toggleTableSize() {
+                const size = ['small', 'medium', 'large']
+                const index = (size.indexOf(this.size) + 1) % 3
+                this.size = size[index]
+            },
+            handlePageChange(page) {
+                this.pagination.current = page
+            }
+        }
+    }
+</script>
+
+<style>
+    .dot-menu {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .tippy-tooltip.dot-menu-theme {
+        padding: 0;
+    }
+
+    .dot-menu-trigger {
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 0;
+        cursor: pointer;
+    }
+
+    .dot-menu-trigger:hover {
+        color: #3A84FF;
+        background-color: #DCDEE5;
+    }
+
+    .dot-menu-trigger:before {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: currentColor;
+        box-shadow: 0 -4px 0 currentColor, 0 4px 0 currentColor;
+    }
+
+    .dot-menu-list {
+        margin: 0;
+        padding: 5px 0;
+        min-width: 50px;
+        list-style: none;
+    }
+
+    .dot-menu-list .dot-menu-item {
+        padding: 0 10px;
+        font-size: 12px;
+        line-height: 26px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #eaf3ff;
+            color: #3a84ff;
+        }
+    }
+</style>
+```
+:::
 
 
 ### 虚拟滚动渲染配置 {page=#/table}
@@ -1233,6 +1429,7 @@ export default {
 | col-border | 是否带有纵向边框, 当 border 为 true 时，此属性设置无效 | Boolean | —— | false |
 | size | Table 的尺寸, 用于控制表格显示文本的最大行数 | String | small(1行) / medium(2行) / large(3行) | small |
 | fit | 列的宽度是否自动撑开 | Boolean | —— | true |
+| row-auto-height | 行的高度是否自动撑开 | Boolean | —— | false |
 | show-header | 是否显示表头 | Boolean | —— | true |
 | highlight-current-row | 是否高亮当前行 | Boolean | —— | false |
 | row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className | `Function({row, rowIndex}) / String` | —— | —— |
@@ -1257,6 +1454,7 @@ export default {
 | span-method | 合并行或列的计算方法 | `Function({ row, column, rowIndex, columnIndex })` | —— | —— |
 | select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | —— | true |
 | pagination | Table 的分页。`current` 属性表示当前页码,`count` 属性表示数据总量 | Object | —— | —— |
+| popover-options | 透传至翻页下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
 | auto-scroll-to-top | Table 分页变化时，表格是否自动滚动到顶部 | Boolean | —— | false |
 | scroll-loading | 表格底部loading加载效果，可以配合表格scroll-end事件使用，isLoading属性控制底部加载显隐。其余属性可参考spin组件 | Object | —— | `{ isLoading: false, size: 'mini', theme: 'info', icon: 'circle-2-1', placement: 'right' }` |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-table` 上 | String | —— | —— |

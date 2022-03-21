@@ -224,10 +224,10 @@ export default {
       }
     },
     /**
-             * created 时、props.value 变化时、每次关闭组件时调用
-             * @param {Object} option
-             * @param {Boolean} [option.isCreated = false] - 是否是实例创建完成后的第一次调用
-             */
+     * created 时、props.value 变化时、每次关闭组件时调用
+     * @param {Object} option
+     * @param {Boolean} [option.isCreated = false] - 是否是实例创建完成后的第一次调用
+     */
     changeColorFromProps ({ isCreated = false } = {}) {
       // 空字符串为默认值且合法
       if (this.value === '') {
@@ -276,9 +276,9 @@ export default {
       }
     },
     /**
-             * 组件内部选择颜色处理
-             * @param {String|Object} val - hex,rgba,hsla,hsva
-             */
+     * 组件内部选择颜色处理
+     * @param {String|Object} val - hex,rgba,hsla,hsva
+     */
     handleColorChange (val) {
       // 组件内拿到的色值都是合法的，空字符串特殊处理
       if (val === '') {
@@ -299,5 +299,5 @@ export default {
 </script>
 
 <style lang="postcss">
-    @import "../../ui/color-picker.css";
+  @import "../../ui/color-picker.css";
 </style>

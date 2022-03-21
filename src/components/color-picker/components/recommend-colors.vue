@@ -124,10 +124,10 @@ export default {
       })
     },
     /**
-             * 校验、处理预设值
-             * @param {Boolean|String[]} recommend
-             * @returns {String[]}
-             */
+     * 校验、处理预设值
+     * @param {Boolean|String[]} recommend
+     * @returns {String[]}
+     */
     getColorsFromRecommend (recommend) {
       if (recommend === true) {
         return [

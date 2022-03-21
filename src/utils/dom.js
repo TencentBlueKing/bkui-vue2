@@ -126,22 +126,22 @@ export function getScrollBarWidth (fromCache) {
 }
 
 export const requestAnimationFrame = window.requestAnimationFrame
-    || window.webkitRequestAnimationFrame
-    || window.mozRequestAnimationFrame
-    || window.oRequestAnimationFrame
-    || window.msRequestAnimationFrame
-    || function (callback) {
-      window.setTimeout(callback, 1000 / 60)
-    }
+  || window.webkitRequestAnimationFrame
+  || window.mozRequestAnimationFrame
+  || window.oRequestAnimationFrame
+  || window.msRequestAnimationFrame
+  || function (callback) {
+    window.setTimeout(callback, 1000 / 60)
+  }
 
 export const cancelAnimationFrame = window.cancelAnimationFrame
-    || window.webkitCancelAnimationFrame
-    || window.mozCancelAnimationFrame
-    || window.oCancelAnimationFrame
-    || window.msCancelAnimationFrame
-    || function (id) {
-      window.clearTimeout(id)
-    }
+  || window.webkitCancelAnimationFrame
+  || window.mozCancelAnimationFrame
+  || window.oCancelAnimationFrame
+  || window.msCancelAnimationFrame
+  || function (id) {
+    window.clearTimeout(id)
+  }
 
 /**
  * 寻找子组件
@@ -335,7 +335,7 @@ export const isInContainer = (el, container) => {
   }
 
   return elRect.top < containerRect.bottom
-        && elRect.bottom > containerRect.top
-        && elRect.right > containerRect.left
-        && elRect.left < containerRect.right
+    && elRect.bottom > containerRect.top
+    && elRect.right > containerRect.left
+    && elRect.left < containerRect.right
 }

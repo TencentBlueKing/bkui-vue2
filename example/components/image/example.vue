@@ -27,66 +27,32 @@
 -->
 
 <template>
-  <div class="bk-grid-col" :style="style">
-    <slot />
+  <div>
+    <bk-image style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
   </div>
 </template>
 
 <script>
-import { formatPercentage } from '@/utils/util'
-
+import { bkImage } from '@'
 export default {
-  name: 'bk-col',
-  props: {
-    // 栅格的占位格数，可选值为 0~24 的整数，为 0 时，则为 col 相当于 width: 100%
-    span: {
-      type: Number,
-      default: 1
-    },
-    // 栅格的偏移
-    offset: {
-      type: Number,
-      default: 0
-    },
-    // 栅格向左移动格数
-    pull: {
-      type: Number,
-      default: 0
-    },
-    // 栅格向右移动格数
-    push: {
-      type: Number,
-      default: 0
-    }
+  components: {
+    bkImage
   },
-  provide () {
-    const { flex, gutter, realSpan } = this
-    return { flex, gutter, col: realSpan }
-  },
-  inject: ['col', 'gutter', 'flex'],
-  computed: {
-    realSpan () {
-      return this.span || this.col
-    },
-    width () {
-      const { col, realSpan } = this
-      return formatPercentage(realSpan / col)
-    },
-    style () {
-      const { width, gutter, col, offset, pull, push } = this
-      return {
-        width,
-        'padding-right': `${gutter / 2}px`,
-        'padding-left': `${gutter / 2}px`,
-        'margin-left': offset ? formatPercentage(offset / col) : null,
-        'right': pull ? formatPercentage(pull / col) : null,
-        'left': push ? formatPercentage(push / col) : null
-      }
+  data () {
+    return {
+      previewSrc: './example/static/images/preview/0.png',
+      srcList: [
+        './example/static/images/preview/0.png',
+        './example/static/images/preview/1.png',
+        './example/static/images/preview/2.png',
+        './example/static/images/preview/3.png',
+        './example/static/images/preview/33.png',
+        './example/static/images/preview/4.png',
+        './example/static/images/preview/55.png',
+        './example/static/images/preview/5.png',
+        './example/static/images/preview/6.png'
+      ]
     }
   }
 }
 </script>
-
-<style>
-  @import '../../ui/col.css';
-</style>

@@ -49,24 +49,24 @@ const bkClickoutside = {
     const id = nodeList.push(el) - 1
     const clickoutsideHandler = (mouseup = {}, mousedown = {}) => {
       if (!vnode.context // 点击在 vue 实例之外的 DOM 上
-                || !mouseup.target
-                || !mousedown.target
-                || el.contains(mouseup.target) // 鼠标按下时的 DOM 节点是当前展开的组件的子元素
-                || el.contains(mousedown.target) // 鼠标松开时的 DOM 节点是当前展开的组件的子元素
-                || el === mouseup.target // 鼠标松开时的 DOM 节点是当前展开的组件的根元素
-                || (vnode.context.popup // 当前点击元素是有弹出层的
-                    && (
-                      vnode.context.popup.contains(mouseup.target) // 鼠标按下时的 DOM 节点是当前有弹出层元素的子节点
-                        || vnode.context.popup.contains(mousedown.target) // 鼠标松开时的 DOM 节点是当前有弹出层元素的子节点
-                    )
-                )
+        || !mouseup.target
+        || !mousedown.target
+        || el.contains(mouseup.target) // 鼠标按下时的 DOM 节点是当前展开的组件的子元素
+        || el.contains(mousedown.target) // 鼠标松开时的 DOM 节点是当前展开的组件的子元素
+        || el === mouseup.target // 鼠标松开时的 DOM 节点是当前展开的组件的根元素
+        || (vnode.context.popup // 当前点击元素是有弹出层的
+            && (
+              vnode.context.popup.contains(mouseup.target) // 鼠标按下时的 DOM 节点是当前有弹出层元素的子节点
+                || vnode.context.popup.contains(mousedown.target) // 鼠标松开时的 DOM 节点是当前有弹出层元素的子节点
+            )
+        )
       ) {
         return
       }
 
       if (binding.expression // 传入了指令绑定的表达式
-                && el[clickctx].callbackName // 当前元素的 clickoutside 对象中有回调函数名
-                && vnode.context[el[clickctx].callbackName] // vnode 中存在回调函数
+        && el[clickctx].callbackName // 当前元素的 clickoutside 对象中有回调函数名
+        && vnode.context[el[clickctx].callbackName] // vnode 中存在回调函数
       ) {
         vnode.context[el[clickctx].callbackName](mouseup, mousedown, el)
       } else {

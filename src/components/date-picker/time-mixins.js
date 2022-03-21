@@ -70,12 +70,12 @@ export default {
   },
   methods: {
     /**
-         * firstUpperCase
-         *
-         * @param {string} str str
-         *
-         * @return {string} str
-         */
+     * firstUpperCase
+     *
+     * @param {string} str str
+     *
+     * @return {string} str
+     */
     firstUpperCase (str) {
       return str.toString()[0].toUpperCase() + str.toString().slice(1)
     }

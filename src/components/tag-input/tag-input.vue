@@ -288,12 +288,12 @@ export default {
   computed: {
     isShowClear () {
       /**
-                 * 不显示条件：
-                 * 1. 设置不可清除
-                 * 2. 禁用时
-                 * 3. tag标签为空时
-                 * 4. 设置了showClearOnlyHover，且没有hover的时候
-                 */
+       * 不显示条件：
+       * 1. 设置不可清除
+       * 2. 禁用时
+       * 3. tag标签为空时
+       * 4. 设置了showClearOnlyHover，且没有hover的时候
+       */
       return this.clearable && !this.disabled && this.localTagList.length !== 0 && (this.showClearOnlyHover ? this.hover : true)
     },
     resultList () {
@@ -431,10 +431,10 @@ export default {
       this.initPageConf(this.renderListAll.length)
     },
     /**
-             * 初始化翻页
-             *
-             * @param {number} count 数据总条数
-             */
+     * 初始化翻页
+     *
+     * @param {number} count 数据总条数
+     */
     initPageConf (count) {
       this.curPage = 1
       this.totalSize = count
@@ -449,10 +449,10 @@ export default {
     },
 
     /**
-             * 翻页回调
-             *
-             * @param {number} page 当前页
-             */
+     * 翻页回调
+     *
+     * @param {number} page 当前页
+     */
     pageChange (page) {
       this.curPage = page
       this.renderList.splice(this.renderList.length, 0, ...this.renderListPaged[this.curPage - 1])
@@ -460,10 +460,10 @@ export default {
     },
 
     /**
-             * 滚动回调
-             *
-             * @param {Object} e 事件对象
-             */
+     * 滚动回调
+     *
+     * @param {Object} e 事件对象
+     */
     scrollHandler (e) {
       if (this.showScrollLoading || this.isBeforeDestroy) {
         return
@@ -486,8 +486,8 @@ export default {
     },
 
     /**
-             * optionList transition 动画离开后的回调
-             */
+     * optionList transition 动画离开后的回调
+     */
     transitionAfterLeave () {
       this.renderList.splice(0, this.renderList.length, ...[])
     },
@@ -1121,6 +1121,6 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/tag-input.css';
-    @import '../../ui/select.css';
+  @import '../../ui/tag-input.css';
+  @import '../../ui/select.css';
 </style>

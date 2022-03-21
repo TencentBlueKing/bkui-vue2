@@ -165,5 +165,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/notify.css';
+  @import '../../ui/notify.css';
 </style>

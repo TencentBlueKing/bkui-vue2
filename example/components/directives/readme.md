@@ -14,7 +14,8 @@
         },
         data () {
             return {
-                text: '点击测试'
+                text: '点击测试',
+                copyText: ''
             }
         },
         methods: {

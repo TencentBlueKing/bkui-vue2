@@ -26,9 +26,9 @@
 
 /**
  * @file gulp 编译 library
- *       npm run build:library
- *       npm run build:source
- *       npm run build:min
+ *    npm run build:library
+ *    npm run build:source
+ *    npm run build:min
  *
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
@@ -123,20 +123,20 @@ if (idx === 'source') {
 }
 
 // gulp.task('dist', gulp.series(
-//     gulp.parallel(
+//   gulp.parallel(
+//     gulp.series(
+//       cleanDev,
+//       gulp.parallel(
 //         gulp.series(
-//             cleanDev,
-//             gulp.parallel(
-//                 gulp.series(
-//                     sprite,
-//                     compileCss
-//                 ),
-//                 compileJs,
-//                 copyHtml
-//             )
+//           sprite,
+//           compileCss
 //         ),
-//         cleanDist
+//         compileJs,
+//         copyHtml
+//       )
 //     ),
-//     reversion,
-//     replace
+//     cleanDist
+//   ),
+//   reversion,
+//   replace
 // ))
