@@ -215,6 +215,81 @@
 ```
 :::
 
+### 尺寸 {page=#/select}
+
+:::demo large、默认、 small 三种尺寸
+
+```html
+<template>
+    <div style="display: flex;flex-wrap: wrap;">
+        <div class="mr15">
+            <bk-select size="small"  v-model="value" style="width: 180px;"
+                        ext-cls="select-custom"
+                        ext-popover-cls="select-popover-custom"
+                        searchable>
+                <bk-option v-for="option in list"
+                           :key="option.id"
+                           :id="option.id"
+                           :name="option.name">
+                </bk-option>
+            </bk-select>
+        </div>
+        <div class="mr15">
+            <bk-select  v-model="value"  style="width: 180px;"
+                        ext-cls="select-custom"
+                        ext-popover-cls="select-popover-custom"
+                        searchable>
+                <bk-option v-for="option in list"
+                           :key="option.id"
+                           :id="option.id"
+                           :name="option.name">
+                </bk-option>
+            </bk-select>
+        </div>
+        <div>
+            <bk-select  v-model="value" size="large" style="width: 180px;"
+                        ext-cls="select-custom"
+                        ext-popover-cls="select-popover-custom"
+                        searchable>
+                <bk-option v-for="option in list"
+                           :key="option.id"
+                           :id="option.id"
+                           :name="option.name">
+                </bk-option>
+            </bk-select>
+        </div>
+    </div>
+</template>
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSelect,
+            bkOption
+        },
+        data (s) {
+            return {
+                value: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ]
+            }
+        }
+    }
+</script>
+```
+:::
+
 ### 多选 {page=#/select}
 
 :::demo 开启 `multiple` 属性进行多选，注意此时 `v-model` 对应的值应是数组，可开启 `show-select-all` 属性提供一键全选功能; 在多选情况下，可以通过配置`display-tag`属性，已选择的结果将以标签形式显示; 在以标签形式展示选择结果时，下拉框高度会自动撑开，此时可以通过设置`auto-height`为`false`固定高度
@@ -1042,6 +1117,55 @@
 
 :::
 
+### 支持输入自定义标签 {page=#/tag}
+
+:::demo 可以通过 `allow-create` 属性来输入自定义标签
+
+
+```html
+<template>
+    <bk-select :disabled="false" v-model="value" style="width: 250px;"
+        ext-cls="select-custom"
+        ext-popover-cls="select-popover-custom"
+        allow-create
+        searchable>
+        <bk-option v-for="option in list"
+            :key="option.id"
+            :id="option.id"
+            :name="option.name">
+        </bk-option>
+    </bk-select>
+</template>
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSelect,
+            bkOption
+        },
+        data (s) {
+            return {
+                value: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ]
+            }
+        }
+    }
+</script>
+```
+:::
+
 ### bk-select 下拉选框属性 {page=#/select}
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
@@ -1056,6 +1180,7 @@
 | scroll-height | 下拉列表滚动高度 | Number | —— | 216 |
 | placeholder | 未选择数据时的占位 | String | —— | 请选择 |
 | disabled | 是否禁用 | Boolean | —— | false |
+| allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
 | readonly | 是否只读 | Boolean | —— | false |
 | size | 尺寸 | String | `large` `small` | —— |
 | loading | 是否加载中 | Boolean | —— | false |
