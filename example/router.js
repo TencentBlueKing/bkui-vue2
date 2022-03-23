@@ -48,6 +48,7 @@ const AnimateNumber = () => import(/* webpackChunkName: 'animate-number' */'./co
 const Button = () => import(/* webpackChunkName: 'button' */'./components/button/readme.md')
 const ButtonExample = () => import(/* webpackChunkName: 'button' */'./components/button/example')
 const DropdownMenu = () => import(/* webpackChunkName: 'dropdown-menu' */'./components/dropdown-menu/readme.md')
+const DropdownMenuExample = () => import(/* webpackChunkName: 'dropdown-menu' */'./components/dropdown-menu/example')
 const SideSlider = () => import(/* webpackChunkName: 'sideslider' */'./components/sideslider/readme.md')
 const SideSliderExample = () => import(/* webpackChunkName: 'sideslider' */'./components/sideslider/example')
 const Switcher = () => import(/* webpackChunkName: 'switcher' */'./components/switcher/readme.md')
@@ -288,6 +289,11 @@ const router = new VueRouter({
       name: 'dropdownMenu',
       path: '/dropdown-menu',
       component: DropdownMenu
+    },
+    {
+      name: 'dropdownMenuExample',
+      path: '/dropdown-menu/example',
+      component: DropdownMenuExample
     },
     {
       name: 'badge',
