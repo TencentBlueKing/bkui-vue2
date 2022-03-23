@@ -1112,9 +1112,9 @@
 
 :::
 
-### 支持输入自定义标签 {page=#/tag}
+### 支持自定义输入 {page=#/select}
 
-:::demo 可以通过 `allow-create` 属性来输入自定义标签
+:::demo 可以通过 `allow-create` 属性来自定义输入
 
 
 ```html
@@ -1163,7 +1163,9 @@
 :::
 
 ### 下拉列表滚动分页 {page=#/select}
-::: demo 可以配置` enable-scroll-load` 和 `scroll-loading`属性配置滚动分页
+
+::: demo 可以配置 `enable-scroll-load` 和 `scroll-loading` 属性配置滚动分页
+
 ```html
 <template>
      <bk-select
