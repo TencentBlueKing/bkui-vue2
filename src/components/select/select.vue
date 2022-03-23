@@ -124,6 +124,9 @@
               </template>
             </bk-virtual-scroll>
             <slot v-else></slot>
+            <div class="bk-select-bottom-loading" v-if="scrollEndLoading.isLoading">
+              <bk-spin v-bind="scrollEndLoading">{{ scrollEndLoading.text }}</bk-spin>
+            </div>
           </ul>
         </div>
         <template v-if="showEmpty">
@@ -154,6 +157,8 @@ import pinyin from '@/utils/pinyin'
 import bkVirtualScroll from '@/components/virtual-scroll'
 import virtualOption from './virtual-option'
 import { dropdownMarginBottom } from '@/ui/variable'
+import { debounce } from '@/utils/util'
+import bkSpin from '@/components/spin'
 
 export default {
   name: 'bk-select',
@@ -162,7 +167,8 @@ export default {
     bkOptionAll,
     bkSelectTag,
     bkVirtualScroll,
-    virtualOption
+    virtualOption,
+    bkSpin
   },
   directives: {
     bkloading: bkLoading
@@ -291,6 +297,14 @@ export default {
       validate (v) {
         return ['simplicity', 'normal'].indexOf(v) > -1
       }
+    },
+    enableScrollLoad: {
+      type: Boolean,
+      default: false
+    },
+    scrollLoading: {
+      type: Object,
+      default: () => ({})
     }
   },
   provide () {
@@ -319,7 +333,8 @@ export default {
       // 是否自动更新selectOptions（嵌套tree-select时需要在value变化时更新selectOptions）
       autoUpdate: false,
       renderPopoverOptions: {},
-      popoverDistance: 10 + parseInt(dropdownMarginBottom)
+      popoverDistance: 10 + parseInt(dropdownMarginBottom),
+      optionList: null
     }
   },
   computed: {
@@ -386,6 +401,16 @@ export default {
     },
     localSearchPlaceholder () {
       return this.searchPlaceholder ? this.searchPlaceholder : this.t('bk.select.searchPlaceholder')
+    },
+    scrollEndLoading () {
+      return Object.assign({
+        isLoading: false,
+        text: '加载中',
+        size: 'mini',
+        theme: 'info',
+        icon: 'circle-2-1',
+        placement: 'right'
+      }, this.scrollLoading)
     }
   },
   watch: {
@@ -398,11 +423,15 @@ export default {
       if (!focus) {
         this.resetSearchValue()
         this.dispatch('bk-form-item', 'form-blur')
+        if (this.enableScrollLoad) this.optionList = null
       }
       this.$nextTick(() => {
         this.$emit('toggle', focus)
         this.dispatch('bk-form-item', 'form-focus')
-        if (focus) this.showVirtualScroll()
+        if (focus) {
+          this.showVirtualScroll()
+          if (this.enableScrollLoad) this.handleScroll()
+        }
       })
     },
     dropdownActive () {
@@ -676,6 +705,16 @@ export default {
     },
     handleTabRemove (options) {
       this.$emit('tab-remove', options)
+    },
+    handleScroll () {
+      this.optionList = this.$refs.optionList
+      this.optionList.onscroll = debounce(this.listenScroll, 300, this.optionList)
+    },
+    listenScroll (e, optionList) {
+      if (this.scrollEndLoading.isLoading) return
+      if (optionList.scrollHeight - (optionList.clientHeight + optionList.scrollTop) < 30) {
+        this.$emit('scroll-end', true)
+      }
     }
   }
 }
