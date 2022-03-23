@@ -29,10 +29,15 @@
 <template>
   <button :title="title" :disabled="disabled" :class="[buttonCls, extCls]" :type="nativeType" @click="handleClick" v-bind="$attrs">
     <div class="bk-button-loading" v-if="loading">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-      <div class="bounce4"></div>
+      <template v-if="!text">
+        <div class="bounce bounce1"></div>
+        <div class="bounce bounce2"></div>
+        <div class="bounce bounce3"></div>
+        <div class="bounce bounce4"></div>
+      </template>
+      <template v-else>
+        <bk-spin size="mini" :theme="theme"></bk-spin>
+      </template>
     </div>
     <div :class="loading ? 'bk-loading-wrapper' : ''">
       <i class="bk-icon left-icon" :class="['icon-' + iconType, iconType === 'loading' ? 'bk-button-icon-loading' : '']" v-if="iconType">
@@ -68,8 +73,12 @@
  * @param outline {boolean} [outline=true] - 显示反色按钮
  * @param text {boolean} [text=true] - 配置文字按钮
 */
+import BkSpin from '@/components/spin'
 export default {
   name: 'bk-button',
+  components: {
+    BkSpin
+  },
   props: {
     // 按钮类型
     theme: {
