@@ -208,18 +208,15 @@
     outline: none;
     height: 22px;
     padding: 0;
-
-    /* .bk-icon {
-        width: 16px;
-        min-width: 16px;
-        margin-right: 5px;
+    
+    .bk-loading-wrapper {
         display: inline-block;
-    } */
+    }
 
     .bk-button-loading {
-        width: 58px;
+        position: relative;
         display: inline-block;
-        div {
+        .bounce {
             width: 7px;
             height: 7px;
             border-radius: 100%;
@@ -238,6 +235,10 @@
         }
         .bounce4 {
             animation-delay: 0s;
+        }
+        .bk-spin {
+            position: relative;
+            top: -1px;
         }
     }
 

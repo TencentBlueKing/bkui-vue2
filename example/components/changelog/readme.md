@@ -4,6 +4,17 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.7 {page=#/changelog}
+###### 2022.03.24
+
+* **[add]**:
+    - [Select 下拉选框](#/select) [支持自定义输入](#/select?anchor=zhi-chi-zi-ding-yi-shu-ru) [#224](https://github.com/TencentBlueKing/bkui-vue2/issues/224)
+    - [Select 下拉选框](#/select) [支持滚动加载](#/select?anchor=xia-la-lie-biao-gun-dong-fen-ye) [#223](https://github.com/TencentBlueKing/bkui-vue2/issues/223)
+* **[fix]**:
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 修复 show 和 hide 事件无法监听的问题 [#217](https://github.com/TencentBlueKing/bkui-vue2/issues/217)
+
+---
+
 ### 2.4.6 {page=#/changelog}
 ###### 2022.03.03
 

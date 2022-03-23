@@ -70,7 +70,11 @@
                     }
                 ],
                 selectValue: ['node-3'],
-                treeData: this.getNodes(null, 2, 3)
+                treeData: this.getNodes(null, 2, 3),
+                bottomLoadingOptions: {
+                   size: 'mini',
+                   isLoading: false
+                }
             }
         },
         methods: {
@@ -127,6 +131,15 @@
             },
             handleClear() {
                 this.$refs.tree && this.$refs.tree.removeChecked({ emitEvent: false })
+            },
+            handleScrollToBottom() {
+                this.bottomLoadingOptions.isLoading = true
+                setTimeout(() => {
+                    this.list.push(
+                       { id: '11', name: '爬山-2' }
+                    )
+                    this.bottomLoadingOptions.isLoading = false
+                }, 2000)
             }
         }
     }
@@ -184,6 +197,63 @@
             :name="option.name">
         </bk-option>
     </bk-select>
+</template>
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSelect,
+            bkOption
+        },
+        data (s) {
+            return {
+                value: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ]
+            }
+        }
+    }
+</script>
+```
+:::
+
+### 尺寸 {page=#/select}
+
+:::demo `size` 属性进行尺寸设置，可选值为 `large`, `small`，如不设置，则为默认尺寸
+
+```html
+<template>
+    <div style="display: flex;flex-wrap: wrap;">
+        <div class="mr15">
+            <bk-select size="small" v-model="value" searchable
+                style="width: 180px;" ext-cls="select-custom" ext-popover-cls="select-popover-custom">
+                <bk-option v-for="option in list" :key="option.id" :id="option.id" :name="option.name"></bk-option>
+            </bk-select>
+        </div>
+        <div class="mr15">
+            <bk-select v-model="value" searchable
+                style="width: 180px;" ext-cls="select-custom" ext-popover-cls="select-popover-custom">
+                <bk-option v-for="option in list" :key="option.id" :id="option.id" :name="option.name"></bk-option>
+            </bk-select>
+        </div>
+        <div>
+            <bk-select size="large" v-model="value" searchable
+                style="width: 180px;" ext-cls="select-custom" ext-popover-cls="select-popover-custom">
+                <bk-option v-for="option in list" :key="option.id" :id="option.id" :name="option.name"></bk-option>
+            </bk-select>
+        </div>
+    </div>
 </template>
 <script>
     import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
@@ -1042,6 +1112,122 @@
 
 :::
 
+### 支持自定义输入 {page=#/select}
+
+:::demo 可以通过 `allow-create` 属性来自定义输入
+
+
+```html
+<template>
+    <bk-select :disabled="false" v-model="value" style="width: 250px;"
+        ext-cls="select-custom"
+        ext-popover-cls="select-popover-custom"
+        allow-create
+        searchable>
+        <bk-option v-for="option in list"
+            :key="option.id"
+            :id="option.id"
+            :name="option.name">
+        </bk-option>
+    </bk-select>
+</template>
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSelect,
+            bkOption
+        },
+        data (s) {
+            return {
+                value: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ]
+            }
+        }
+    }
+</script>
+
+```
+:::
+
+### 下拉列表滚动分页 {page=#/select}
+
+::: demo 可以配置 `enable-scroll-load` 和 `scroll-loading` 属性配置滚动分页
+
+```html
+<template>
+     <bk-select
+        v-model="value2"
+        style="width: 250px;"
+        enable-scroll-load
+        :scroll-loading="bottomLoadingOptions"
+        @scroll-end="handleScrollToBottom">
+        <bk-option v-for="option in list"
+            :key="option.id"
+            :id="option.id"
+            :name="option.name">
+        </bk-option>
+    </bk-select>
+</template>
+
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+    export default {
+        components: {
+            bkSelect,
+            bkOption,
+        },
+        data () {
+            return {
+                value2: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ],
+                list2: [],
+                bottomLoadingOptions: {
+                   size: 'small',
+                   isLoading: true
+                }
+            }
+        },
+        methods: {
+            handleScrollToBottom() {
+                this.bottomLoadingOptions.isLoading = true
+                setTimeout(() => {
+                    this.list.push(
+                       { id: '11', name: '爬山-2' }
+                    )
+                    this.bottomLoadingOptions.isLoading = false
+                }, 2000)
+            }
+        }
+    }
+</script>
+
+```
+:::
+
 ### bk-select 下拉选框属性 {page=#/select}
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
@@ -1056,6 +1242,7 @@
 | scroll-height | 下拉列表滚动高度 | Number | —— | 216 |
 | placeholder | 未选择数据时的占位 | String | —— | 请选择 |
 | disabled | 是否禁用 | Boolean | —— | false |
+| allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
 | readonly | 是否只读 | Boolean | —— | false |
 | size | 尺寸 | String | `large` `small` | —— |
 | loading | 是否加载中 | Boolean | —— | false |
@@ -1082,6 +1269,9 @@
 | show-empty| 是否展示空数据的提示 | Boolean | —— | true |
 | show-on-init | 是否在初始化的时候展示下拉列表 | Boolean | —— | false |
 | behavior | 风格设置(simplicity:简约 normal:正常) | String | 'normal'/'simplicity' | normal |
+| enable-scroll-load | 下拉列表是否支持滚动分页加载，配合scroll-end事件使用 | Boolean | true/false | false |
+| scroll-loading | 滚动分页loading状态，同spin组件的配置一样 | Object | —— | { isLoading: false, size: 'mini', theme: 'info', icon: 'circle-2-1', placement: 'right' } |
+
 
 ### bk-select 下拉选框事件 {page=#/select}
 
@@ -1092,6 +1282,7 @@
 | change | 选项发生变化时调用 | newValue, oldValue |
 | clear | 清空已选项时调用 | oldValue |
 | tab-remove | 删除tab时触发 | options |
+| scroll-end | 下拉列表滚动到底部时触发（需enable-scroll-load为true） | -- |
 
 ### bk-select 选项卡插槽(slot) {page=#/select}
 
