@@ -54,6 +54,7 @@
         :initial-index="imageIndex"
         :url-list="previewSrcList"
         :on-close="closeViewer"
+        :mask-close="maskClose"
       ></bk-image-viewer>
     </template>
   </div>
@@ -86,7 +87,6 @@ export default {
   },
 
   mixins: [locale.mixin],
-  inheritAttrs: false,
 
   props: {
     src: String,
@@ -108,6 +108,10 @@ export default {
     zIndex: {
       type: Number,
       default: 2000
+    },
+    maskClose: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -243,8 +247,8 @@ export default {
       this._lazyLoadHandler = null
     },
     /**
-             * simulate object-fit behavior to compatible with IE11 and other browsers which not support object-fit
-             */
+     * simulate object-fit behavior to compatible with IE11 and other browsers which not support object-fit
+     */
     getImageStyle (fit) {
       const { imageWidth, imageHeight } = this
       const {
@@ -290,5 +294,5 @@ export default {
 }
 </script>
 <style>
-@import "../../ui/image.css";
+  @import "../../ui/image.css";
 </style>

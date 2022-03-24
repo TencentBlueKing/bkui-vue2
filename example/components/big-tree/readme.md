@@ -88,12 +88,14 @@
 
 ### 基础用法 {page=#/big-tree}
 
-:::demo 同步数据渲染, 通过设置 `show-checkbox` 开启节点勾选功能。
+:::demo 同步数据渲染, 通过设置 `show-checkbox` 开启节点勾选功能，通过设置 `enable-title-tip` 开启节点的 title 提示（浏览器的 title 提示）。
 
 ```html
 <template>
     <section>
-        <bk-big-tree ref="tree"
+        <bk-big-tree
+            ref="tree"
+            enable-title-tip
             :show-checkbox="isShowCheckbox"
             :data="data"
             :show-link-line="isShowLinkLine"
@@ -261,7 +263,9 @@
 ```html
 <template>
     <section>
-        <bk-big-tree ref="tree"
+        <bk-big-tree
+            enable-title-tip
+            ref="tree"
             :selectable="true"
             :default-expanded-nodes="['0']"
             :default-selected-node="'0-2'"
@@ -321,7 +325,9 @@
         <div class="mb10">
             <bk-button @click="isShowCheckbox=!isShowCheckbox">是否显示节点复选框</bk-button>
         </div>
-        <bk-big-tree ref="tree"
+        <bk-big-tree
+            enable-title-tip
+            ref="tree"
             :options="{ nameKey: 'name',folderKey: 'folder',idKey: 'identifier' }"
             :show-checkbox="isShowCheckbox"
             :data="tree"
@@ -401,7 +407,9 @@
                 </template>
             </bk-input>
         </div>
-        <bk-big-tree ref="tree3"
+        <bk-big-tree
+            enable-title-tip
+            ref="tree3"
             :show-checkbox="isShowCheckbox"
             :data="data"
             :show-link-line="isShowLinkLine2"
@@ -509,6 +517,7 @@
 | node-height | 单个节点的高度，用于虚拟滚动的数据计算， | Number | —— | `32` |
 | configurable | 仅作为数据展示用时，可将此属性配置为`false`，从而节省渲染开销，但会导致数据失去响应式的能力 | Boolean | —— | `true` |
 | padding | 节点左侧缩进的距离，默认为 16 | Number | —— | 16 |
+| enable-title-tip | 是否开启节点tip提示 | Boolean | —— | false |
 
 ### 事件 {page=#/big-tree}
 | 事件名称 | 说明 | 参数 |

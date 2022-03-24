@@ -54,23 +54,23 @@
 </template>
 <script>
 /**
-     *  bk-sideslider
-     *  @module components/side-slider
-     *  @desc 滑动侧边栏组件
-     *  @param isShow {Boolean} - 是否显示组件，默认为false；支持.sync修饰符
-     *  @param title {String} - 组件标题
-     *  @param quickClose {Boolean} - 是否支持点击遮罩关闭组件，默认为false
-     *  @param width {String} - 组件的宽度，支持5% ~ 100%，步长为5%的值，默认为40%
-     *  @param direction {String} - 组件滑出的方向，可选left，right；默认为right
-     *  @param beforeClose {Function} - 关闭钩子函数
-     *  @example
-     *  <bk-sideslider
-          :is-show.sync="isShow"
-          :title="'测试标题'"
-          :width="'80%'"
-          :direction="'left'">
-        </bk-sideslider>
-     */
+ *  bk-sideslider
+ *  @module components/side-slider
+ *  @desc 滑动侧边栏组件
+ *  @param isShow {Boolean} - 是否显示组件，默认为false；支持.sync修饰符
+ *  @param title {String} - 组件标题
+ *  @param quickClose {Boolean} - 是否支持点击遮罩关闭组件，默认为false
+ *  @param width {String} - 组件的宽度，支持5% ~ 100%，步长为5%的值，默认为40%
+ *  @param direction {String} - 组件滑出的方向，可选left，right；默认为right
+ *  @param beforeClose {Function} - 关闭钩子函数
+ *  @example
+ *  <bk-sideslider
+      :is-show.sync="isShow"
+      :title="'测试标题'"
+      :width="'80%'"
+      :direction="'left'">
+    </bk-sideslider>
+  */
 import { addClass, removeClass } from '@/utils/util'
 import locale from 'bk-magic-vue/lib/locale'
 import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
@@ -132,8 +132,8 @@ export default {
     },
 
     /**
-             * 是否允许多个弹框同时存在
-             *  */
+     * 是否允许多个弹框同时存在
+     */
     multiInstance: {
       type: Boolean,
       default: true
@@ -250,5 +250,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/sideslider.css';
+  @import '../../ui/sideslider.css';
 </style>

@@ -43,6 +43,7 @@
     <!-- 非虚拟滚动 -->
     <template v-for="node in nodes" v-else>
       <tree-item
+        :enable-title-tip="enableTitleTip"
         :node="node"
         :ref="node.id"
         :key="node.id">
@@ -169,12 +170,16 @@ export default {
       default: 16
     },
     /**
-             * 树尺寸
-             * 可选项：normal/small
-             */
+     * 树尺寸
+     * 可选项：normal/small
+     */
     size: {
       type: String,
       default: 'normal'
+    },
+    enableTitleTip: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -674,5 +679,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/big-tree.css';
+  @import '../../ui/big-tree.css';
 </style>

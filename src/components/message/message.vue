@@ -55,16 +55,16 @@
 </template>
 <script>
 /**
-     * @desc 通知、提示组件
-     * @param {String} theme 主题(primary | error | warning | success)
-     * @param {String} icon 提示信息 icon class 名称
-     * @param {String | VNode} message 提示消息
-     * @param {Number} delay 自动关闭定时时间
-     * @param {Boolean} dismissable 是否显示关闭 icon
-     * @param {Number} limit 消息提示组件同时显示的最大数目
-     * @param {Function} onClose 关闭回调函数
-     * @param {Boolean} ellipsisCopy 内容隐藏时是否显示复制按钮
-     */
+ * @desc 通知、提示组件
+ * @param {String} theme 主题(primary | error | warning | success)
+ * @param {String} icon 提示信息 icon class 名称
+ * @param {String | VNode} message 提示消息
+ * @param {Number} delay 自动关闭定时时间
+ * @param {Boolean} dismissable 是否显示关闭 icon
+ * @param {Number} limit 消息提示组件同时显示的最大数目
+ * @param {Function} onClose 关闭回调函数
+ * @param {Boolean} ellipsisCopy 内容隐藏时是否显示复制按钮
+ */
 import { copyText, checkOverflow } from '@/utils/util'
 import locale from 'bk-magic-vue/lib/locale'
 
@@ -160,5 +160,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/message.css';
+  @import '../../ui/message.css';
 </style>

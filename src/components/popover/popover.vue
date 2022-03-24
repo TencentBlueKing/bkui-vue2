@@ -206,5 +206,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/popover.css';
+  @import '../../ui/popover.css';
 </style>

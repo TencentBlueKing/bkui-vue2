@@ -149,36 +149,36 @@
 
 <script>
 /**
-     *  bk-dialog
-     *  @module components/dialog
-     *  @desc 弹窗组件
-     *  @param isShow {Boolean} - 是否显示弹窗，默认为false；支持.sync修饰符
-     *  @param width {Number} - 弹窗的宽度
-     *  @param title {String} - 弹窗的标题
-     *  @param content {String, Boolean} - 弹窗的内容
-     *  @param hasHeader {Boolean} - 是否显示头部，默认为true
-     *  @param draggable {Boolean} - 弹层是否可以拖拽, 默认为false
-     *  @param extCls {String} - 自定义的样式，传入的CSS类会被加在组件最外层的DOM上
-     *  @param padding {Number, String} - 弹窗内容区的内边距
-     *  @param closeIcon {Boolean} - 是否显示关闭按钮，默认为true
-     *  @param theme {String} - 组件的主题色，可选 primary warning success danger，默认为primary
-     *  @param confirm {String} - 确定按钮的文字
-     *  @param cancel {String} - 取消按钮的文字
-     *  @param maskClose {Boolean} - 是否允许点击遮罩关闭弹窗，默认为true
-     *  @param needCheck {Boolean} - 是否阻止按confirm按钮时隐藏
-     *  @param hasFooter {Boolean} - 是否显示footer
-     *  @param {escClose} [Boolean] 是否允许 esc 关闭，默认为 true
-     *  @example
-     *  <bk-dialog
-            :is-show.sync="textDialog.show"
-            :content="textDialog.content"
-            :width="textDialog.width"
-            :close-icon="textDialog.closeIcon">
-            <div class="text-dialog-content" slot="content">
-                <p>我是测试内容</p>
-            </div>
-        </bk-dialog>
-    */
+ *  bk-dialog
+ *  @module components/dialog
+ *  @desc 弹窗组件
+ *  @param isShow {Boolean} - 是否显示弹窗，默认为false；支持.sync修饰符
+ *  @param width {Number} - 弹窗的宽度
+ *  @param title {String} - 弹窗的标题
+ *  @param content {String, Boolean} - 弹窗的内容
+ *  @param hasHeader {Boolean} - 是否显示头部，默认为true
+ *  @param draggable {Boolean} - 弹层是否可以拖拽, 默认为false
+ *  @param extCls {String} - 自定义的样式，传入的CSS类会被加在组件最外层的DOM上
+ *  @param padding {Number, String} - 弹窗内容区的内边距
+ *  @param closeIcon {Boolean} - 是否显示关闭按钮，默认为true
+ *  @param theme {String} - 组件的主题色，可选 primary warning success danger，默认为primary
+ *  @param confirm {String} - 确定按钮的文字
+ *  @param cancel {String} - 取消按钮的文字
+ *  @param maskClose {Boolean} - 是否允许点击遮罩关闭弹窗，默认为true
+ *  @param needCheck {Boolean} - 是否阻止按confirm按钮时隐藏
+ *  @param hasFooter {Boolean} - 是否显示footer
+ *  @param {escClose} [Boolean] 是否允许 esc 关闭，默认为 true
+ *  @example
+ *  <bk-dialog
+        :is-show.sync="textDialog.show"
+        :content="textDialog.content"
+        :width="textDialog.width"
+        :close-icon="textDialog.closeIcon">
+        <div class="text-dialog-content" slot="content">
+            <p>我是测试内容</p>
+        </div>
+    </bk-dialog>
+*/
 import locale from 'bk-magic-vue/lib/locale'
 import bkButton from '@/components/button'
 import scrollbarMixins from '@/mixins/scrollbar'
@@ -409,16 +409,16 @@ export default {
     },
 
     /**
-             * 是否允许多个弹框同时存在
-             *  */
+     * 是否允许多个弹框同时存在
+     */
     multiInstance: {
       type: Boolean,
       default: true
     },
 
     /**
-             * 遮罩ZIndex是否忽略已存在的遮罩
-            */
+     * 遮罩ZIndex是否忽略已存在的遮罩
+     */
     ignoreExistMask: {
       type: Boolean,
       default: true
@@ -658,17 +658,17 @@ export default {
   },
   methods: {
     /**
-             * 获取当前 dialog 的 index，便于点击 esc 关闭的时候关闭正确的 dialog
-             *
-             * @return {number} index 索引
-             */
+     * 获取当前 dialog 的 index，便于点击 esc 关闭的时候关闭正确的 dialog
+     *
+     * @return {number} index 索引
+     */
     getDialogIndex () {
       return this.getLocalZIndex()
     },
 
     /**
-             * mask 遮罩点击事件
-             */
+     * mask 遮罩点击事件
+     */
     maskClickHandler () {
       if (this.maskClose && this.showMask && this.closeIcon) {
         this.close()
@@ -676,10 +676,10 @@ export default {
     },
 
     /**
-             * 弹框 wrapper .bk-dialog-wrapper 的点击事件，这个层与 .bk-dialog-mask 同级，因此点击它就相当于点击了 .bk-dialog-mask
-             *
-             * @param {Object} e 事件对象
-             */
+     * 弹框 wrapper .bk-dialog-wrapper 的点击事件，这个层与 .bk-dialog-mask 同级，因此点击它就相当于点击了 .bk-dialog-mask
+     *
+     * @param {Object} e 事件对象
+     */
     wrapClickHandler (e) {
       const classList = e.target.classList
       if (classList.contains('bk-dialog-wrapper')) {
@@ -688,10 +688,10 @@ export default {
     },
 
     /**
-             * 弹框内容区 .bk-dialog-content 的点击事件
-             *
-             * @param {Object} e 事件对象
-             */
+     * 弹框内容区 .bk-dialog-content 的点击事件
+     *
+     * @param {Object} e 事件对象
+     */
     contentClickHandler (e) {
       if (this.isDraggable) {
         // this.dialogIndex = this.getDialogIndex()
@@ -699,10 +699,10 @@ export default {
     },
 
     /**
-             * escClose handler
-             *
-             * @param {Object} e 事件对象
-             */
+     * escClose handler
+     *
+     * @param {Object} e 事件对象
+     */
     escCloseHandler (e) {
       if (this.visible && this.closeIcon) {
         if (e.keyCode === 27) {
@@ -727,10 +727,10 @@ export default {
     },
 
     /**
-             * 拖动开始事件回调
-             *
-             * @param {Object} e 事件对象
-             */
+     * 拖动开始事件回调
+     *
+     * @param {Object} e 事件对象
+     */
     moveStartHandler (e) {
       if (!this.isDraggable) {
         return false
@@ -831,19 +831,19 @@ export default {
     },
 
     /**
-             * 取消按钮点击事件
-             *
-             * @param {Objecy} e 事件对象
-             */
+     * 取消按钮点击事件
+     *
+     * @param {Objecy} e 事件对象
+     */
     cancelHandler (e) {
       this.close()
     },
 
     /**
-             * 确定按钮点击事件
-             *
-             * @param {Objecy} e 事件对象
-             */
+     * 确定按钮点击事件
+     *
+     * @param {Objecy} e 事件对象
+     */
     okHandler (e) {
       // 防止在loading状态中多次触发
       if (this.loading) return false
@@ -882,5 +882,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/dialog.css';
+  @import '../../ui/dialog.css';
 </style>

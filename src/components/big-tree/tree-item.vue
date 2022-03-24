@@ -65,7 +65,7 @@
         :class="['node-icon', props.node.nodeIcon]">
       </i>
     </div>
-    <div class="node-content">
+    <div class="node-content" :title="props.enableTitleTip ? props.node.name : false">
       <slot
         :node="props.node"
         :data="props.node.data">

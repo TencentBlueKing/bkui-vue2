@@ -45,20 +45,20 @@
 
 <script>
 /**
-     * bk-progress
-     *
-     * @module components/progress
-     * @desc 圆形进度
-     * @param theme {String}  - 显示类型，接受 primary warning success danger
-     * @param percent {Number} - 圆环的大小(必传)`0 < percent < 1`
-     * @param size {String} - 尺寸，接受 small normal large
-     * @param stroke-width {Number} - 进度条的宽度，单位 px
-     * @param text-inside {Boolean} - 进度条显示文字内置在进度条内
-     * @param color {String} - 进度条背景色
-     * @param show-text {Boolean} - 是否显示进度条文字内容
-     * @param title-style {Object} {fontSize: '16px'} - 设置title的样式
-     *
-    */
+ * bk-progress
+ *
+ * @module components/progress
+ * @desc 圆形进度
+ * @param theme {String}  - 显示类型，接受 primary warning success danger
+ * @param percent {Number} - 圆环的大小(必传)`0 < percent < 1`
+ * @param size {String} - 尺寸，接受 small normal large
+ * @param stroke-width {Number} - 进度条的宽度，单位 px
+ * @param text-inside {Boolean} - 进度条显示文字内置在进度条内
+ * @param color {String} - 进度条背景色
+ * @param show-text {Boolean} - 是否显示进度条文字内容
+ * @param title-style {Object} {fontSize: '16px'} - 设置title的样式
+ *
+*/
 export default {
   name: 'bk-progress',
   props: {
@@ -156,5 +156,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/progress.css';
+  @import '../../ui/progress.css';
 </style>

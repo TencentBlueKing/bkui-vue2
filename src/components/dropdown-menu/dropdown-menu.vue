@@ -30,12 +30,13 @@
   <div class="bk-dropdown-menu"
     :class="[disabled ? 'disabled' : '',positionFixed ? '' : 'bk-dropdown-full-width', fontSizeCls, extCls]"
     v-clickoutside="handleClickoutside"
+    :style="{ height: containerHeight + 'px' }"
     tabindex="0"
     @keydown.enter.prevent="handleMouseover"
     @keydown.esc.stop.prevent="handleMouseout"
     @click="handleClick"
-    @mouseover="handleMouseover"
-    @mouseout="handleMouseout">
+    @mouseenter="handleMouseover"
+    @mouseleave="handleMouseout">
     <div class="bk-dropdown-trigger" ref="refDropTrigger">
       <slot name="dropdown-trigger"></slot>
     </div>
@@ -95,15 +96,15 @@ export default {
       default: ''
     },
     /**
-             * 显示延迟时间，单位为毫秒
-             */
+     * 显示延迟时间，单位为毫秒
+     */
     openDelay: {
       type: Number,
       default: 0
     },
     /**
-             * 隐藏延迟时间，单位为毫秒
-             */
+     * 隐藏延迟时间，单位为毫秒
+     */
     closeDelay: {
       type: Number,
       default: 100
@@ -114,7 +115,8 @@ export default {
       menuStyle: null,
       timer: 0,
       isShow: false,
-      popInstance: null
+      popInstance: null,
+      containerHeight: 32
     }
   },
   computed: {
@@ -129,6 +131,10 @@ export default {
     }
   },
   mounted () {
+    // 让 container 的高度把 .bk-dropdown-trigger 以及 .bk-dropdown-content 向上偏移的 dropdownMarginBottom 覆盖
+    // .bk-dropdown-trigger 与 .bk-dropdown-content 之间没有空隙，这样鼠标在两个元素之间滑动时，不会多次触发 show 和 hide 事件
+    this.containerHeight = this.containerHeight + parseInt(dropdownMarginBottom, 10)
+
     const placement = `bottom${this.getPlacementFix()}`
     this.popInstance = new Popper(this.$refs.refDropTrigger, this.$refs.refDropContent, {
       placement,
@@ -184,16 +190,17 @@ export default {
     },
 
     /**
-             * A quite wonderful function.
-             * @param {object} - privacy gown
-             * @param {object} - security
-             * @returns {survival}
-             */
+     * A quite wonderful function.
+     * @param {object} - privacy gown
+     * @param {object} - security
+     * @returns {survival}
+     */
     show () {
       clearTimeout(this.openTimer)
       clearTimeout(this.closeTimer)
       this.openTimer = setTimeout(() => {
         this.isShow = true
+        this.$emit('show')
       }, this.openDelay)
       this.popInstance.scheduleUpdate()
     },
@@ -202,6 +209,7 @@ export default {
       clearTimeout(this.openTimer)
       this.closeTimer = setTimeout(() => {
         this.isShow = false
+        this.$emit('hide')
       }, this.closeDelay)
       this.popInstance.scheduleUpdate()
     }
@@ -209,5 +217,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/dropdown-menu.css';
+  @import '../../ui/dropdown-menu.css';
 </style>

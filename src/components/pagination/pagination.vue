@@ -41,6 +41,7 @@
       <template v-if="curLang === 'cn'">
         <span>每页</span>
         <bk-select placeholder="页数"
+          :popover-options="popoverOptions"
           :clearable="false"
           :size="small ? 'small' : ''"
           :class="{ 'page-select-small': small && !toggle }"
@@ -123,23 +124,23 @@
 </template>
 <script>
 /**
-     *  bk-pagination
-     *  @module components/pagination
-     *  @desc 分页组件
-     *  @param type {String} - 组件的类型，可选default和compact，默认为default
-     *  @param size {String} - 组件的尺寸，可选default和small，默认为default
-     *  @param total {Number} - 总页数，默认为20
-     *  @param current {Number} - 当前页数，默认为1，支持.sync修饰符
-     *  @param limitList {Array} - 自定义分页尺寸数组
-     *  @param showLimit {Boolean} - 是否只显示页码
-     *  @param location {String} - 自定义页码 位置
-     *  @event change {Event} - 当改变页码时，广播给父组件的事件
-     *  @example
-     *  <bk-pagination
-         :current.sync="current"
-         :total="total"
-         :type="'compact'"></bk-pagination>
-    */
+ *  bk-pagination
+ *  @module components/pagination
+ *  @desc 分页组件
+ *  @param type {String} - 组件的类型，可选default和compact，默认为default
+ *  @param size {String} - 组件的尺寸，可选default和small，默认为default
+ *  @param total {Number} - 总页数，默认为20
+ *  @param current {Number} - 当前页数，默认为1，支持.sync修饰符
+ *  @param limitList {Array} - 自定义分页尺寸数组
+ *  @param showLimit {Boolean} - 是否只显示页码
+ *  @param location {String} - 自定义页码 位置
+ *  @event change {Event} - 当改变页码时，广播给父组件的事件
+ *  @example
+ *  <bk-pagination
+     :current.sync="current"
+      :total="total"
+      :type="'compact'"></bk-pagination>
+*/
 import bkSelect from '../select/select.vue'
 import bkOption from '../select/option.vue'
 import locale from 'bk-magic-vue/lib/locale'
@@ -158,6 +159,10 @@ export default {
   },
   mixins: [locale.mixin],
   props: {
+    popoverOptions: {
+      type: Object,
+      default: () => ({})
+    },
     type: {
       type: String,
       default: 'default',
@@ -306,9 +311,9 @@ export default {
     },
 
     /**
-             *  计算被渲染的页码数组
-             *  @param current {number} 当前页码 or 下一次渲染的数组中的中间位置的页码数
-             */
+     *  计算被渲染的页码数组
+     *  @param current {number} 当前页码 or 下一次渲染的数组中的中间位置的页码数
+     */
     calcPageList (current) {
       const total = this.total
       const pageSize = this.pageSize
@@ -325,8 +330,8 @@ export default {
       }
     },
     /**
-             *  点击左侧...按钮
-             */
+     *  点击左侧...按钮
+     */
     prevGroup () {
       const pageSize = this.pageSize
       const middlePage = this.renderList[Math.ceil(this.renderList.length / 2)]
@@ -339,8 +344,8 @@ export default {
       this.jumpToPage(this.renderList[Math.floor(this.renderList.length / 2)])
     },
     /**
-             *  点击右侧...按钮
-             */
+     *  点击右侧...按钮
+     */
     nextGroup () {
       const pageSize = this.pageSize
       const total = this.total
@@ -374,5 +379,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/pagination.css';
+  @import '../../ui/pagination.css';
 </style>

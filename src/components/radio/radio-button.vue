@@ -50,24 +50,24 @@
 <script>
 import mixin from './mixin'
 /**
-    * bk-radio-button
-    * @module components/radio
-    * @desc 单选框
-    * @param disabled {Boolean} - 是否禁用， false
-    * @param value {String, Number} - 选项的值，false
-    * @example
-        <bk-radio-group v-model="value">
-            <bk-radio-button
-                :value="'work'">
-                工作
-            </bk-radio-button>
-            <bk-radio-button
-                :value="'happy'"
-                :disabled="true">
-                休假
-            </bk-radio-button>
-        </bk-radio-group>
-    */
+  * bk-radio-button
+  * @module components/radio
+  * @desc 单选框
+  * @param disabled {Boolean} - 是否禁用， false
+  * @param value {String, Number} - 选项的值，false
+  * @example
+      <bk-radio-group v-model="value">
+          <bk-radio-button
+              :value="'work'">
+              工作
+          </bk-radio-button>
+          <bk-radio-button
+              :value="'happy'"
+              :disabled="true">
+              休假
+          </bk-radio-button>
+      </bk-radio-group>
+  */
 export default {
   name: 'bk-radio-button',
   mixins: [mixin],
@@ -115,5 +115,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/radio-button.css';
+  @import '../../ui/radio-button.css';
 </style>

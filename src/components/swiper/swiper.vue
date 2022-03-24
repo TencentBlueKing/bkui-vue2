@@ -288,5 +288,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/swiper.css';
+  @import '../../ui/swiper.css';
 </style>

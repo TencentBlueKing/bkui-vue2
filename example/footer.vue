@@ -37,13 +37,13 @@
       </p>
     </div>
     <!-- <div class="magic-button">
-            <a href="javascript:void(0);" class="magic-top" v-show="showBackTop" @click="backTop">
-                <img src="./img/back_top.png" alt="返回顶部" />
-            </a>
-            <a href="https://bk.tencent.com/s-mart/community" target="_blank" class="magic-feedback">
-                <img src="./img/feedback.png" alt="反馈" />
-            </a>
-        </div> -->
+      <a href="javascript:void(0);" class="magic-top" v-show="showBackTop" @click="backTop">
+        <img src="./img/back_top.png" alt="返回顶部" />
+      </a>
+      <a href="https://bk.tencent.com/s-mart/community" target="_blank" class="magic-feedback">
+        <img src="./img/feedback.png" alt="反馈" />
+      </a>
+    </div> -->
   </div>
 </template>
 
@@ -73,8 +73,8 @@ export default {
   },
   methods: {
     /**
-             * 获取页面滚动高度，判断是否出现返回顶部
-             */
+     * 获取页面滚动高度，判断是否出现返回顶部
+     */
     toggleBackTop () {
       let scrollTop = 0
       let bodyScrollTop = 0
@@ -93,8 +93,8 @@ export default {
     },
 
     /**
-             * 返回到页面顶部
-             */
+     * 返回到页面顶部
+     */
     backTop () {
       window.scrollTo({
         top: 0,
@@ -106,60 +106,60 @@ export default {
 </script>
 
 <style scoped lang="postcss">
-    .magic-footer {
-        min-width: 950px;
-        text-align: center;
-        margin-left: 300px;
+  .magic-footer {
+    min-width: 950px;
+    text-align: center;
+    margin-left: 300px;
+  }
+  .magic-copyright {
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+    font: 13px/24px "hiragino sans gb", "microsoft yahei";
+    .magic-contact {
+      color: #555;
+      padding-right: 10px;
+      margin-right: 10px;
+      border-right: 1px solid #ddd;
+      display: inline-block;
+      text-decoration: none;
+      img {
+        width: 17px;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+      span {
+        vertical-align: middle;
+      }
     }
-    .magic-copyright {
-        color: #555;
-        text-align: center;
-        margin-bottom: 30px;
-        font: 13px/24px "hiragino sans gb", "microsoft yahei";
-        .magic-contact {
-            color: #555;
-            padding-right: 10px;
-            margin-right: 10px;
-            border-right: 1px solid #ddd;
-            display: inline-block;
-            text-decoration: none;
-            img {
-                width: 17px;
-                vertical-align: middle;
-                margin-right: 5px;
-            }
-            span {
-                vertical-align: middle;
-            }
-        }
-    }
+  }
 
-    .magic-button {
-        position: fixed;
-        right: 10px;
-        bottom: 50px;
-    }
+  .magic-button {
+    position: fixed;
+    right: 10px;
+    bottom: 50px;
+  }
 
-    .magic-button a {
-        display: block;
-        width: 38px;
-        height: 38px;
-        line-height: 35px;
-        text-align: center;
-        background: #9a9a9a;
-        border-radius: 2px;
-    }
+  .magic-button a {
+    display: block;
+    width: 38px;
+    height: 38px;
+    line-height: 35px;
+    text-align: center;
+    background: #9a9a9a;
+    border-radius: 2px;
+  }
 
-    .magic-button a:hover {
-        background: #454545;
-    }
+  .magic-button a:hover {
+    background: #454545;
+  }
 
-    .magic-button {
-        .magic-feedback {
-            margin-top: 5px;
-            img {
-                vertical-align: middle;
-            }
-        }
+  .magic-button {
+    .magic-feedback {
+      margin-top: 5px;
+      img {
+        vertical-align: middle;
+      }
     }
+  }
 </style>
