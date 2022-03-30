@@ -22,7 +22,7 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
-*/
+ */
 
 /**
  * @file all mixin
@@ -61,6 +61,10 @@ export default {
     focusedDate: {
       type: Date,
       required: true
+    },
+    cellClass: {
+      type: Function,
+      default: () => ''
     }
   },
   computed: {
