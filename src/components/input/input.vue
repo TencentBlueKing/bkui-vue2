@@ -115,28 +115,28 @@
 
 <script>
 /**
-     * bk-input
-     * @module components/input
-     * @desc 文本输入框
-     * @param type {String} - 输入框类型，有input和textarea，默认为text
-     * @param placeholder {String} - 空白提示，默认为“请输入”
-     * @param disabled {Boolean} - 是否禁用，默认为flase
-     * @param readonly {Boolean} - 是否只读，默认为flase
-     * @param name {String} - 名称
-     * @param clearable {Boolean} - 是否可清除，默认为false
-     * @param maxlength {Number} - 最大输入长度
-     * @param inputStyle {Object} - 样式
-     * @param minlength {Number} - 最小输入长度
-     * @param leftIcon {String} - 左边显示icon
-     * @param rightIcon {String} - 右边显示icon
-     * @param rows {Number} - 行数，type为textarea有效
-     * @param precision {Number} - 保留小数位，默认 0
-     * @example
-     * <bk-input
-            :placeholder=“请输入”
-            v-model="value">
-       </bk-input>
-     */
+ * bk-input
+ * @module components/input
+ * @desc 文本输入框
+ * @param type {String} - 输入框类型，有input和textarea，默认为text
+ * @param placeholder {String} - 空白提示，默认为“请输入”
+ * @param disabled {Boolean} - 是否禁用，默认为flase
+ * @param readonly {Boolean} - 是否只读，默认为flase
+ * @param name {String} - 名称
+ * @param clearable {Boolean} - 是否可清除，默认为false
+ * @param maxlength {Number} - 最大输入长度
+ * @param inputStyle {Object} - 样式
+ * @param minlength {Number} - 最小输入长度
+ * @param leftIcon {String} - 左边显示icon
+ * @param rightIcon {String} - 右边显示icon
+ * @param rows {Number} - 行数，type为textarea有效
+ * @param precision {Number} - 保留小数位，默认 0
+ * @example
+ * <bk-input
+        :placeholder=“请输入”
+        v-model="value">
+    </bk-input>
+  */
 import emitter from '@/mixins/emitter'
 import locale from 'bk-magic-vue/lib/locale'
 import { getStyle } from '@/utils/dom'
@@ -290,12 +290,12 @@ export default {
   },
   computed: {
     /**
-             * 不显示条件：
-             * 1. 设置不可清除
-             * 2. 禁用时
-             * 3. input为空时
-             * 4. 设置了showClearOnlyHover，且没有hover的时候
-             */
+     * 不显示条件：
+     * 1. 设置不可清除
+     * 2. 禁用时
+     * 3. input为空时
+     * 4. 设置了showClearOnlyHover，且没有hover的时候
+     */
     showClearIcon () {
       return this.clearable && this.curValue && !this.disabled && (this.showClearOnlyHover ? this.hover : true)
     },
@@ -308,10 +308,10 @@ export default {
     },
     showInputWordLimit () {
       /**
-                 * 仅对text、textarea有效
-                 * text在不传show-word-limit时，默认不显示
-                 * textarea在不传show-word-limit(undefined), 默认需显示
-                 */
+       * 仅对text、textarea有效
+       * text在不传show-word-limit时，默认不显示
+       * textarea在不传show-word-limit(undefined), 默认需显示
+       */
       if (!['text', 'textarea'].includes(this.type)) return false
       return this.type === 'text' ? this.maxlength && this.showWordLimit : this.maxlength && this.showWordLimit !== false
     },
@@ -522,6 +522,7 @@ export default {
       }
     },
     handleNumberDelete (event) {
+      this.curValue === '' && (this.curValue = this.max)
       const curNumberValue = Number(this.curValue)
       if (curNumberValue - 1 >= this.min) {
         const curLenAfterDot = (String(curNumberValue) || '').split('.')[1] || ''
@@ -536,6 +537,7 @@ export default {
       }
     },
     handleNumberAdd (event) {
+      this.curValue === '' && (this.curValue = this.min)
       const curNumberValue = Number(this.curValue)
       if (curNumberValue <= this.max - 1) {
         const curLenAfterDot = (String(curNumberValue) || '').split('.')[1] || ''
@@ -680,15 +682,15 @@ export default {
 </script>
 
 <style>
-    /*
-        这里不需要单独引入 iconfont.css
-        1. 全量引入 bk-magic-vue 时
-            import 'bk-magic-vue' 或 import bkMagicVue from 'bk-magic-vue'
-            均会自动引入 bk-magic-vue/dist/bk-magic-vue.min.css，bk-magic-vue.min.css 里包含了 iconfont
-        2. 按需引入 bk-magic-vue 时
-            import bkInput from 'bk-magic-vue/lib/input' 或 import { bkInput } from 'bk-magic-vue'
-            均会自动引入 bk-magic-vue/lib/ui/common.min.css，common.min.css 里包含了 iconfont
-     */
-    /* @import '../../ui/iconfont.css'; */
-    @import '../../ui/input.css';
+  /*
+    这里不需要单独引入 iconfont.css
+    1. 全量引入 bk-magic-vue 时
+        import 'bk-magic-vue' 或 import bkMagicVue from 'bk-magic-vue'
+        均会自动引入 bk-magic-vue/dist/bk-magic-vue.min.css，bk-magic-vue.min.css 里包含了 iconfont
+    2. 按需引入 bk-magic-vue 时
+        import bkInput from 'bk-magic-vue/lib/input' 或 import { bkInput } from 'bk-magic-vue'
+        均会自动引入 bk-magic-vue/lib/ui/common.min.css，common.min.css 里包含了 iconfont
+  */
+  /* @import '../../ui/iconfont.css'; */
+  @import '../../ui/input.css';
 </style>

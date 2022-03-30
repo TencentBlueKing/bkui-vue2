@@ -181,5 +181,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/diff.css';
+  @import '../../ui/diff.css';
 </style>

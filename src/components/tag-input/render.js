@@ -59,9 +59,9 @@ export default {
       return innerHtml
     } else {
       return (
-                <div class={parentClass}>
-                    <span domPropsInnerHTML={highlightKeyword(node[displayKey])} class={textClass}></span>
-                </div>
+        <div class={parentClass}>
+          <span domPropsInnerHTML={highlightKeyword(node[displayKey])} class={textClass}></span>
+        </div>
       )
     }
   }

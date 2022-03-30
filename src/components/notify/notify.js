@@ -69,10 +69,9 @@ const BkNotify = function (config) {
     data: config
   })
 
-  if (
-    config.message !== null
-        && typeof config.message === 'object'
-        && config.message.hasOwnProperty('componentOptions')
+  if (config.message !== null
+      && typeof config.message === 'object'
+      && config.message.hasOwnProperty('componentOptions')
   ) {
     instance.$slots.default = [config.message]
     instance.message = null

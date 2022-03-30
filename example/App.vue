@@ -68,8 +68,8 @@ export default {
 </script>
 
 <style lang="postcss">
-    @import './css/app.css';
-    * {
-        outline: none;
-    }
+  @import './css/app.css';
+  * {
+    outline: none;
+  }
 </style>

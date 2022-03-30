@@ -128,19 +128,19 @@
 
 <script>
 /**
-     * bk-upload
-     * @module components/upload
-     * @desc 文件上传组件
-     * @param url（必传） {string}   文件上传到服务器的地址
-     * @param name       {string}   - 服务器读取文件的key， 默认为'uplaod_file'
-     * @param size       {number}   - 允许上传的文件大小
-     * @param multiple   {boolean}  - 是否支持多选
-     * @param accept     {string}   - 允许上传的文件类型
-     * @param header     {string}   - 请求头
-     * @param theme      {string}   - 主题，默认'draggable'，可选项：['draggable','button', 'picture']
-     */
+ * bk-upload
+ * @module components/upload
+ * @desc 文件上传组件
+ * @param url（必传） {string}   文件上传到服务器的地址
+ * @param name       {string}   - 服务器读取文件的key， 默认为'uplaod_file'
+ * @param size       {number}   - 允许上传的文件大小
+ * @param multiple   {boolean}  - 是否支持多选
+ * @param accept     {string}   - 允许上传的文件类型
+ * @param header     {string}   - 请求头
+ * @param theme      {string}   - 主题，默认'draggable'，可选项：['draggable','button', 'picture']
+ */
 import locale from 'bk-magic-vue/lib/locale'
-import defaultRequest from './request'
+import { defaultRequest, sliceRequest } from './request'
 import { uuid } from '@/utils/util'
 import bkOverflowTips from '../../directives/overflow-tips'
 
@@ -175,7 +175,7 @@ export default {
       default: 0
     },
     url: {
-      required: true,
+      required: false,
       type: String
     },
     size: {
@@ -210,9 +210,9 @@ export default {
     },
     limit: Number,
     /**
-             * 自定义扩展长传属性
-             * 格式: { name: 'attrName', value: Object }
-             */
+     * 自定义扩展长传属性
+     * 格式: { name: 'attrName', value: Object }
+     */
     formDataAttributes: {
       type: Array,
       default: () => []
@@ -222,7 +222,23 @@ export default {
       type: String,
       default: ''
     },
-    customRequest: Function
+    customRequest: Function,
+    sliceUpload: {
+      type: Boolean,
+      default: false
+    },
+    sliceUrl: {
+      type: String,
+      default: ''
+    },
+    mergeUrl: {
+      type: String,
+      default: ''
+    },
+    chunkSize: {
+      type: Number,
+      default: 10
+    }
   },
   data () {
     // let acceptTypes = this.accept
@@ -377,6 +393,9 @@ export default {
           fileHeader: '',
           origin: file,
           url: '',
+          sliceUrl: '',
+          mergeUrl: '',
+          chunkSize: 10,
           base64: '',
           status: '',
           done: false,
@@ -442,9 +461,11 @@ export default {
         this.$emit('on-error', fileObj, this.fileList)
         return
       }
-      const uploadProgress = e => {
-        if (e.lengthComputable) {
-          const percentComplete = Math.round(e.loaded * 100 / e.total)
+      // 保存分片上传的进度
+      const progressList = []
+      const uploadProgress = (e, val) => {
+        if (e.lengthComputable && !this.sliceUpload) {
+          const percentComplete = val || Math.round(e.loaded * 100 / e.total)
           const kb = Math.round(e.loaded / 1000)
           fileObj.progress = percentComplete + '%'
           this.speed = kb - this.total
@@ -455,6 +476,25 @@ export default {
             this.unit = 'mb/s'
           }
           this.$emit('on-progress', e, fileObj, this.fileList)
+        }
+        // 计算分片上传的进度和速度
+        if (e.lengthComputable && this.sliceUpload) {
+          // 保存每个分片上传的进度
+          progressList[val] = e.loaded
+          // 计算已上传的总进度
+          const complete = progressList.reduce((p, c) => p + c)
+          const kb = Math.round(complete / 1000)
+          this.speed = kb - this.total
+          this.total = kb
+          this.unit = 'kb/s'
+          if (this.speed > 1000) {
+            this.speed = Math.round(this.speed / 1000)
+            this.unit = 'mb/s'
+          }
+          fileObj.progress = Math.round(complete * 100 / fileObj.origin.size) + '%'
+          if (fileObj.progress === 100 + '%') {
+            this.$emit('on-progress', e, fileObj, this.fileList)
+          }
         }
         fileObj.status = 'running'
       }
@@ -467,8 +507,11 @@ export default {
         method: 'POST',
         header: this.header,
         url: this.url,
-        onProgress: (event) => {
-          uploadProgress(event)
+        sliceUrl: this.sliceUrl,
+        mergeUrl: this.mergeUrl,
+        chunkSize: this.chunkSize,
+        onProgress: (event, val) => {
+          uploadProgress(event, val)
         },
         onSuccess: (reponseText, fileObj) => {
           this.handleSuccess(reponseText, fileObj)
@@ -481,7 +524,7 @@ export default {
         }
       }
       this.isdrag = false
-      const request = this.customRequest || defaultRequest
+      const request = this.customRequest ? this.customRequest : this.sliceUpload ? sliceRequest : defaultRequest
       request(options)
     },
     handleSuccess (response, file) {
@@ -573,5 +616,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/upload.css';
+  @import '../../ui/upload.css';
 </style>

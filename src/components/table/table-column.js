@@ -87,29 +87,29 @@ const forced = {
   selection: {
     renderHeader: function (h, { store, column }) {
       return <bk-checkbox
-                disabled={ store.isAllSelectionDisabled }
-                indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
-                before-change={ () => column.beforeSelectAllChange(this.isAllSelected, { column, store }) }
-                nativeOn-click={ async () => {
-                  const result = await column.beforeSelectAllChange(this.isAllSelected, { column, store })
-                  if (result === false) return
-                  this.toggleAllSelection()
-                } }
-                checked={ this.isAllSelected }></bk-checkbox>
+        disabled={ store.isAllSelectionDisabled }
+        indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
+        before-change={ () => column.beforeSelectAllChange(this.isAllSelected, { column, store }) }
+        nativeOn-click={ async () => {
+          const result = await column.beforeSelectAllChange(this.isAllSelected, { column, store })
+          if (result === false) return
+          this.toggleAllSelection()
+        } }
+        checked={ this.isAllSelected }></bk-checkbox>
     },
     renderCell: function (h, { row, column, store, $index }) {
       const disabled = column.selectable ? !column.selectable.call(null, row, $index) : false
       return <bk-checkbox
-                checked={ store.isSelected(row) }
-                disabled={ disabled }
-                before-change={ () => column.beforeSelectChange(store.isSelected(row), { row, column, store, $index }) }
-                nativeOn-click={ async event => {
-                  event.stopPropagation()
-                  if (disabled) return
-                  const result = await column.beforeSelectChange(store.isSelected(row),
-                    { row, column, store, $index })
-                  result !== false && store.commit('rowSelectedChanged', row)
-                } } ></bk-checkbox>
+        checked={ store.isSelected(row) }
+        disabled={ disabled }
+        before-change={ () => column.beforeSelectChange(store.isSelected(row), { row, column, store, $index }) }
+        nativeOn-click={ async event => {
+          event.stopPropagation()
+          if (disabled) return
+          const result = await column.beforeSelectChange(store.isSelected(row),
+            { row, column, store, $index })
+          result !== false && store.commit('rowSelectedChanged', row)
+        } } ></bk-checkbox>
     },
     sortable: false,
     resizable: false
@@ -140,9 +140,9 @@ const forced = {
       const { row, store } = data
       const expanded = store.states.expandRows.indexOf(row) > -1
       return <div class={ 'bk-table-expand-icon ' + (expanded ? 'bk-table-expand-icon-expanded' : '') }
-                on-click={ event => proxy.handleExpandClick({ ...data, event }) }>
-                <i class={'bk-icon icon-play-shape'}></i>
-            </div>
+        on-click={ event => proxy.handleExpandClick({ ...data, event }) }>
+        <i class={'bk-icon icon-play-shape'}></i>
+      </div>
     },
     sortable: false,
     resizable: false,

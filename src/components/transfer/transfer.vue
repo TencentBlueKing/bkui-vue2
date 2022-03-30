@@ -112,30 +112,30 @@
 
 <script>
 /**
-     *  bk-transfer
-     *  @module components/transfer
-     *  @desc 穿梭框组件
-     *  @param title {Array} - 顶部title(title[0]: 左侧title,title[1]: 右侧title,)
-     *  @param emptyContent {Array} - 穿梭框无数据时提示文案
-     *  @param displayKey {String} - 循环list时，显示字段的key值(当list为普通数组时可不传传了也无效)
-     *  @param settingKey {String} - 唯一key值
-     *  @param sortKey {String} - 排序所依据的key(当list为普通数组时可不传，默认按照index值排序)
-     *  @param sortable {Boolean} - 是否开启排序功能
-     *  @param sourceList {Array} - 穿梭框数据源(支持普通数组)
-     *  @param targetList {Array} - 默认已选择的数据源
-     *  @example
-    <bk-transfer
-        :source-list="list"
-        :target-list="value"
-        :title="title"
-        :empty-content="emptyContent"
-        :display-key="'value'"
-        :setting-key="'label'"
-        :sort-key="'label'"
-        :is-sort="true"
-        @change="change">
-    </bk-transfer>
-    */
+ *  bk-transfer
+ *  @module components/transfer
+ *  @desc 穿梭框组件
+ *  @param title {Array} - 顶部title(title[0]: 左侧title,title[1]: 右侧title,)
+ *  @param emptyContent {Array} - 穿梭框无数据时提示文案
+ *  @param displayKey {String} - 循环list时，显示字段的key值(当list为普通数组时可不传传了也无效)
+ *  @param settingKey {String} - 唯一key值
+ *  @param sortKey {String} - 排序所依据的key(当list为普通数组时可不传，默认按照index值排序)
+ *  @param sortable {Boolean} - 是否开启排序功能
+ *  @param sourceList {Array} - 穿梭框数据源(支持普通数组)
+ *  @param targetList {Array} - 默认已选择的数据源
+ *  @example
+<bk-transfer
+    :source-list="list"
+    :target-list="value"
+    :title="title"
+    :empty-content="emptyContent"
+    :display-key="'value'"
+    :setting-key="'label'"
+    :sort-key="'label'"
+    :is-sort="true"
+    @change="change">
+</bk-transfer>
+*/
 
 import locale from 'bk-magic-vue/lib/locale'
 import { isEmpty } from '@/utils/util'
@@ -303,8 +303,8 @@ export default {
   },
   methods: {
     /**
-             * 数据改变初始化
-             */
+     * 数据改变初始化
+     */
     initData () {
       if (this.typeFlag !== 'empty') {
         if (!this.typeFlag) {
@@ -316,8 +316,8 @@ export default {
     },
 
     /**
-             * 普通数组数据初始化
-             */
+     * 普通数组数据初始化
+     */
     generalInit () {
       if (!this.targetList.length || this.targetList.length > this.sourceList.length) {
         const list = []
@@ -358,8 +358,8 @@ export default {
     },
 
     /**
-             * 对象数组数据初始化
-             */
+     * 对象数组数据初始化
+     */
     init () {
       if (!this.targetList.length || this.targetList.length > this.sourceList.length) {
         this.dataList = [...this.sourceList]
@@ -387,8 +387,8 @@ export default {
     },
 
     /**
-             * 普通数组数据处理
-             */
+     * 普通数组数据处理
+     */
     generalListHandler (list) {
       const templateList = []
       if (!list.length) {
@@ -403,8 +403,8 @@ export default {
     },
 
     /**
-             * 对象数组数据处理
-             */
+     * 对象数组数据处理
+     */
     sourceListHandler (list) {
       const templateList = []
       if (!list.length) {
@@ -423,8 +423,8 @@ export default {
     },
 
     /**
-             * 初始化排序
-             */
+     * 初始化排序
+     */
     initSort () {
       let templateList = []
       if (!this.typeFlag) {
@@ -459,8 +459,8 @@ export default {
     },
 
     /**
-             * 排序处理
-             */
+     * 排序处理
+     */
     sortDataList (list, key, sortList) {
       const arr = sortList
       return list.sort((a, b) => arr.indexOf(a[key]) - arr.indexOf(b[key]) >= 0)
@@ -474,8 +474,8 @@ export default {
     },
 
     /**
-             * 全部添加到右侧穿梭框
-             */
+     * 全部添加到右侧穿梭框
+     */
     allToRight () {
       this.leftHoverIndex = -1
       const displayDataList = this.displayDataList
@@ -504,8 +504,8 @@ export default {
     },
 
     /**
-             * 全部移除到左侧穿梭框
-             */
+     * 全部移除到左侧穿梭框
+     */
     allToLeft () {
       this.rightHoverIndex = -1
       const hasSelectedList = this.hasSelectedList
@@ -528,10 +528,10 @@ export default {
     },
 
     /**
-             * 左侧穿梭框 点击 事件
-             *
-             * @param {number} index item 的索引
-             */
+     * 左侧穿梭框 点击 事件
+     *
+     * @param {number} index item 的索引
+     */
     leftClick (index) {
       this.leftHoverIndex = -1
       const transferItem = this.displayDataList[index]
@@ -554,10 +554,10 @@ export default {
     },
 
     /**
-             * 右侧穿梭框 点击 事件
-             *
-             * @param {number} index item 的索引
-             */
+     * 右侧穿梭框 点击 事件
+     *
+     * @param {number} index item 的索引
+     */
     rightClick (index) {
       this.rightHoverIndex = -1
       const transferItem = this.hasSelectedList.splice(index, 1)[0]
@@ -577,37 +577,37 @@ export default {
     },
 
     /**
-             * 左侧穿梭框 mouseover 事件
-             *
-             * @param {number} index hover 的索引
-             */
+     * 左侧穿梭框 mouseover 事件
+     *
+     * @param {number} index hover 的索引
+     */
     leftMouseover (index) {
       this.leftHoverIndex = index
     },
 
     /**
-             * 左侧穿梭框 mouseleave 事件
-             *
-             * @param {number} index hover 的索引
-             */
+     * 左侧穿梭框 mouseleave 事件
+     *
+     * @param {number} index hover 的索引
+     */
     leftMouseleave (index) {
       this.leftHoverIndex = -1
     },
 
     /**
-             * 右侧穿梭框 mouseover 事件
-             *
-             * @param {number} index hover 的索引
-             */
+     * 右侧穿梭框 mouseover 事件
+     *
+     * @param {number} index hover 的索引
+     */
     rightMouseover (index) {
       this.rightHoverIndex = index
     },
 
     /**
-             * 右侧穿梭框 mouseleave 事件
-             *
-             * @param {number} index hover 的索引
-             */
+     * 右侧穿梭框 mouseleave 事件
+     *
+     * @param {number} index hover 的索引
+     */
     rightMouseleave (index) {
       this.rightHoverIndex = -1
     }
@@ -616,5 +616,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/transfer.css';
+  @import '../../ui/transfer.css';
 </style>

@@ -29,10 +29,15 @@
 <template>
   <button :title="title" :disabled="disabled" :class="[buttonCls, extCls]" :type="nativeType" @click="handleClick" v-bind="$attrs">
     <div class="bk-button-loading" v-if="loading">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-      <div class="bounce4"></div>
+      <template v-if="!text">
+        <div class="bounce bounce1"></div>
+        <div class="bounce bounce2"></div>
+        <div class="bounce bounce3"></div>
+        <div class="bounce bounce4"></div>
+      </template>
+      <template v-else>
+        <bk-spin size="mini" :theme="theme"></bk-spin>
+      </template>
     </div>
     <div :class="loading ? 'bk-loading-wrapper' : ''">
       <i class="bk-icon left-icon" :class="['icon-' + iconType, iconType === 'loading' ? 'bk-button-icon-loading' : '']" v-if="iconType">
@@ -52,24 +57,28 @@
 
 <script>
 /**
-     * bk-button
-     *
-     * @module components/button
-     * @desc 基础按钮
-     *
-     * @param theme {string} [type=default] - 显示类型，接受 default primary warning success danger
-     * @param hoverTheme {string} - moverhover 类型，接受 primary warning success danger，当设置了此属性时，`theme` 和 `text` 失效
-     * @param size {string} - 尺寸，接受 small normal large
-     * @param title {string} - 提示信息
-     * @param icon {string} - 显示左侧 icon，使用蓝鲸 icon
-     * @param iconRight {string} - 显示右侧 icon，使用蓝鲸 icon
-     * @param disabled {boolean} [disabled=false] - 禁用
-     * @param loading {boolean} [loading=true] - 加载中
-     * @param outline {boolean} [outline=true] - 显示反色按钮
-     * @param text {boolean} [text=true] - 配置文字按钮
-    */
+ * bk-button
+ *
+ * @module components/button
+ * @desc 基础按钮
+ *
+ * @param theme {string} [type=default] - 显示类型，接受 default primary warning success danger
+ * @param hoverTheme {string} - moverhover 类型，接受 primary warning success danger，当设置了此属性时，`theme` 和 `text` 失效
+ * @param size {string} - 尺寸，接受 small normal large
+ * @param title {string} - 提示信息
+ * @param icon {string} - 显示左侧 icon，使用蓝鲸 icon
+ * @param iconRight {string} - 显示右侧 icon，使用蓝鲸 icon
+ * @param disabled {boolean} [disabled=false] - 禁用
+ * @param loading {boolean} [loading=true] - 加载中
+ * @param outline {boolean} [outline=true] - 显示反色按钮
+ * @param text {boolean} [text=true] - 配置文字按钮
+*/
+import BkSpin from '@/components/spin'
 export default {
   name: 'bk-button',
+  components: {
+    BkSpin
+  },
   props: {
     // 按钮类型
     theme: {
@@ -186,10 +195,10 @@ export default {
   },
   methods: {
     /**
-             * 点击事件
-             *
-             * @param {Object} e 事件对象
-             */
+     * 点击事件
+     *
+     * @param {Object} e 事件对象
+     */
     handleClick (e) {
       if (!this.disabled && !this.loading) {
         this.$emit('click', e)
@@ -200,5 +209,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/button.css';
+  @import '../../ui/button.css';
 </style>

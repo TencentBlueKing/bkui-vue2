@@ -27,12 +27,12 @@
 */
 const bkCopy = {
   /**
-     * @descripttion:
-     * @param {*} el 作用的 dom 对象
-     * @param {*} value 传给指令的值
-     * @param {*} vnode 虚拟节点
-     * @return {*}
-     */
+   * @descripttion:
+   * @param {*} el 作用的 dom 对象
+   * @param {*} value 传给指令的值
+   * @param {*} vnode 虚拟节点
+   * @return {*}
+   */
   bind (el, { value }, vnode) {
     el.$value = value
     el.copyHandler = () => {
@@ -67,7 +67,6 @@ const bkCopy = {
   unbind (el) {
     el.removeEventListener('click', el.copyHandler)
   }
-    
 }
 
 bkCopy.install = Vue => {

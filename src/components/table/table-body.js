@@ -69,103 +69,103 @@ export default {
     const columnsHidden = this.columns.map((column, index) => this.isColumnHidden(index))
     const renderRows = (row, $index) => {
       return [
-                <tr
-                    ref="row"
-                    refInFor={true}
-                    style={this.getRowStyle(row, $index)}
-                    key={this.table.rowKey ? this.getKeyOfRow(row, $index) : $index}
-                    on-dblclick={($event) => this.handleDoubleClick($event, row)}
-                    on-click={($event) => this.handleClick($event, row)}
-                    on-contextmenu={($event) => this.handleContextMenu($event, row)}
-                    on-mouseenter={($event) => this.handleMouseEnter($index, $event, row)}
-                    on-mouseleave={($event) => this.handleMouseLeave($index, $event, row)}
-                    class={[this.getRowClass(row, $index)]}
-                    attrs={this.getRowAttributes(row, $index)}
+        <tr
+          ref="row"
+          refInFor={true}
+          style={this.getRowStyle(row, $index)}
+          key={this.table.rowKey ? this.getKeyOfRow(row, $index) : $index}
+          on-dblclick={($event) => this.handleDoubleClick($event, row)}
+          on-click={($event) => this.handleClick($event, row)}
+          on-contextmenu={($event) => this.handleContextMenu($event, row)}
+          on-mouseenter={($event) => this.handleMouseEnter($index, $event, row)}
+          on-mouseleave={($event) => this.handleMouseLeave($index, $event, row)}
+          class={[this.getRowClass(row, $index)]}
+          attrs={this.getRowAttributes(row, $index)}
+        >
+          {this._l(this.columns, (column, cellIndex) => {
+            const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex)
+            if (!rowspan || !colspan || column.type === 'setting') {
+              return ''
+            } else {
+              return (
+                <td
+                  style={this.getCellStyle($index, cellIndex, row, column)}
+                  class={this.getCellClass($index, cellIndex, row, column)}
+                  rowspan={rowspan}
+                  colspan={colspan}
+                  on-mouseenter={($event) => this.handleCellMouseEnter($event, row)}
+                  on-mouseleave={this.handleCellMouseLeave}
+                  domProps={this.getCellAttributes($index, cellIndex, row, column)}
                 >
-                    {this._l(this.columns, (column, cellIndex) => {
-                      const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex)
-                      if (!rowspan || !colspan || column.type === 'setting') {
-                        return ''
-                      } else {
-                        return (
-                                <td
-                                    style={this.getCellStyle($index, cellIndex, row, column)}
-                                    class={this.getCellClass($index, cellIndex, row, column)}
-                                    rowspan={rowspan}
-                                    colspan={colspan}
-                                    on-mouseenter={($event) => this.handleCellMouseEnter($event, row)}
-                                    on-mouseleave={this.handleCellMouseLeave}
-                                    domProps={this.getCellAttributes($index, cellIndex, row, column)}
-                                >
-                                    {this.isColumnInvisible(cellIndex)
-                                      ? ''
-                                      : column.renderCell.call(
-                                        this._renderProxy,
-                                        h,
-                                        {
-                                          row,
-                                          column,
-                                          $index,
-                                          store: this.store,
-                                          _self: this.context || this.table.$vnode.context
-                                        },
-                                        columnsHidden[cellIndex]
-                                      )}
-                                </td>
-                        )
-                      }
-                    })}
-                </tr>,
-                this.store.isRowExpanded(row) ? (
-                    <tr
-                        ref="row"
-                        refInFor={true}
-                        attrs={this.getExpandedRowAttributes(row, $index)}
-                        style={this.getExpandedRowStyle(row, $index)}
-                        class={this.getExpandedRowClass(row, $index)}
-                    >
-                        <td colspan={this.columns.length} class="bk-table-expanded-cell">
-                            {!this.fixed && this.table.renderExpanded
-                              ? this.table.renderExpanded(h, { row, $index, store: this.store })
-                              : ''}
-                        </td>
-                    </tr>
-                ) : (
-                  ''
-                )
+                  {this.isColumnInvisible(cellIndex)
+                    ? ''
+                    : column.renderCell.call(
+                      this._renderProxy,
+                      h,
+                      {
+                        row,
+                        column,
+                        $index,
+                        store: this.store,
+                        _self: this.context || this.table.$vnode.context
+                      },
+                      columnsHidden[cellIndex]
+                    )}
+                </td>
+              )
+            }
+          })}
+        </tr>,
+        this.store.isRowExpanded(row) ? (
+          <tr
+            ref="row"
+            refInFor={true}
+            attrs={this.getExpandedRowAttributes(row, $index)}
+            style={this.getExpandedRowStyle(row, $index)}
+            class={this.getExpandedRowClass(row, $index)}
+          >
+            <td colspan={this.columns.length} class="bk-table-expanded-cell">
+              {!this.fixed && this.table.renderExpanded
+                ? this.table.renderExpanded(h, { row, $index, store: this.store })
+                : ''}
+            </td>
+          </tr>
+        ) : (
+          ''
+        )
       ]
     }
     const tableStyle = { width: `${this.tableLayout.bodyWidth - (this.tableLayout.scrollY ? 10 : 0)}px` }
     return this.virtualRender ? (
-            <bk-virtual-render
-                list={this.data}
-                width={this.virtualRenderOpt.width}
-                height={this.virtualRenderOpt.height}
-                lineHeight={this.virtualRenderOpt.lineHeight}
-                {...{
-                  scopedSlots: {
-                    default: (slot) => (
-                            <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0" style={tableStyle}>
-                                <colgroup>
-                                    {this._l(this.columns, (column) => (
-                                        <col name={column.id} />
-                                    ))}
-                                </colgroup>
-                                <tbody>{this._l(slot.data, renderRows)}</tbody>
-                            </table>
-                    )
-                  }
-                }}
-            ></bk-virtual-render>
+      <bk-virtual-render
+        list={this.data}
+        width={this.virtualRenderOpt.width}
+        height={this.virtualRenderOpt.height}
+        lineHeight={this.virtualRenderOpt.lineHeight}
+        {...{
+          scopedSlots: {
+            default: (slot) => (
+              <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0" style={tableStyle}>
+                  <colgroup>
+                      {this._l(this.columns, (column) => (
+                          <col name={column.id} />
+                      ))}
+                  </colgroup>
+                  <tbody>{this._l(slot.data, renderRows)}</tbody>
+              </table>
+            )
+          }
+        }}
+      ></bk-virtual-render>
     ) : (
-            <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0">
-                <colgroup>
-                    {this._l(this.columns, (column) => (
-                        <col name={column.id} />
-                    ))}
-                </colgroup>
-                <tbody>{this._l(this.data, renderRows)}</tbody>
-            </table>
+      <table class="bk-table-body" cellspacing="0" cellpadding="0" border="0">
+        <colgroup>
+          {this._l(this.columns, (column) => (
+            <col name={column.id} />
+          ))}
+        </colgroup>
+        <tbody>{this._l(this.data, renderRows)}</tbody>
+      </table>
     )
   },
 
@@ -281,8 +281,8 @@ export default {
 
   methods: {
     /**
-         * 获取行标识
-         */
+     * 获取行标识
+     */
     getKeyOfRow (row, index) {
       const rowKey = this.table.rowKey
       if (rowKey) {
@@ -292,8 +292,8 @@ export default {
     },
 
     /**
-         * 列是否不可见
-         */
+     * 列是否不可见
+     */
     isColumnInvisible (index) {
       if (!this.fixed) {
         return false
@@ -302,8 +302,8 @@ export default {
     },
 
     /**
-         * 列是否隐藏
-         */
+     * 列是否隐藏
+     */
     isColumnHidden (index) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedLeafCount
@@ -315,8 +315,8 @@ export default {
     },
 
     /**
-         * 获取合并单元格的数据
-         */
+     * 获取合并单元格的数据
+     */
     getSpan (row, column, rowIndex, columnIndex) {
       let rowspan = 1
       let colspan = 1
@@ -349,8 +349,8 @@ export default {
     },
 
     /**
-         * 获取行样式
-         */
+     * 获取行样式
+     */
     getRowStyle (row, rowIndex) {
       let rowStyle = this.table.rowStyle || {}
       if (typeof rowStyle === 'function') {
@@ -368,8 +368,8 @@ export default {
     },
 
     /**
-         * 获取行类名
-         */
+     * 获取行类名
+     */
     getRowClass (row, rowIndex) {
       const classes = ['bk-table-row']
       if (rowIndex === this.data.length - 1) {
@@ -403,8 +403,8 @@ export default {
     },
 
     /**
-         * 获取行属性
-         */
+     * 获取行属性
+     */
     getRowAttributes (row, rowIndex) {
       return {
         'data-table-row': `row-${rowIndex}`
@@ -412,8 +412,8 @@ export default {
     },
 
     /**
-         * 获取单元格样式
-         */
+     * 获取单元格样式
+     */
     getCellStyle (rowIndex, columnIndex, row, column) {
       const cellStyle = this.table.cellStyle
       if (typeof cellStyle === 'function') {
@@ -428,8 +428,8 @@ export default {
     },
 
     /**
-         * 获取单元格类名
-         */
+     * 获取单元格类名
+     */
     getCellClass (rowIndex, columnIndex, row, column) {
       const classes = [column.id, column.align, column.className]
 
@@ -463,8 +463,8 @@ export default {
     },
 
     /**
-         * 获取单元格属性
-         */
+     * 获取单元格属性
+     */
     getCellAttributes (rowIndex, cellIndex, row, column) {
       if (typeof this.table.cellAttributes === 'function') {
         const attributes = this.table.cellAttributes({ rowIndex, cellIndex, row, column })
@@ -476,8 +476,8 @@ export default {
     },
 
     /**
-         * 获取展开行的属性
-         */
+     * 获取展开行的属性
+     */
     getExpandedRowAttributes (row, rowIndex) {
       return {
         'data-table-row': `expanded-row-${rowIndex}`
@@ -485,8 +485,8 @@ export default {
     },
 
     /**
-         * 获取展开行的样式
-         */
+     * 获取展开行的样式
+     */
     getExpandedRowStyle (row, rowIndex) {
       const style = {}
       const height = this.tableLayout.rowsHeight[`expanded-row-${rowIndex}`]
@@ -497,16 +497,16 @@ export default {
     },
 
     /**
-         * 获取展开行类名
-         */
+     * 获取展开行类名
+     */
     getExpandedRowClass (row, rowIndex) {
       const classes = ['is-expanded-row']
       return classes.join(' ')
     },
 
     /**
-         * 单元格鼠标进入事件回调
-         */
+     * 单元格鼠标进入事件回调
+     */
     handleCellMouseEnter (event, row) {
       const table = this.table
       const cell = getCell(event)
@@ -519,8 +519,8 @@ export default {
     },
 
     /**
-         * 单元格鼠标离开事件回调
-         */
+     * 单元格鼠标离开事件回调
+     */
     handleCellMouseLeave (event) {
       const cell = getCell(event)
       if (!cell) return
@@ -530,46 +530,46 @@ export default {
     },
 
     /**
-         * 行鼠标进入事件回调
-         */
+     * 行鼠标进入事件回调
+     */
     handleMouseEnter (index, event, row) {
       this.store.commit('setHoverRow', index)
       this.table.$emit('row-mouse-enter', index, event, row)
     },
 
     /**
-         * 行鼠标离开事件回调
-         */
+     * 行鼠标离开事件回调
+     */
     handleMouseLeave (index, event, row) {
       this.store.commit('setHoverRow', null)
       this.table.$emit('row-mouse-leave', index, event, row)
     },
 
     /**
-         * 行鼠标右键事件回调
-         */
+     * 行鼠标右键事件回调
+     */
     handleContextMenu (event, row) {
       this.handleEvent(event, row, 'contextmenu')
     },
 
     /**
-         * 行双击事件回调
-         */
+     * 行双击事件回调
+     */
     handleDoubleClick (event, row) {
       this.handleEvent(event, row, 'dblclick')
     },
 
     /**
-         * 行单击事件回调
-         */
+     * 行单击事件回调
+     */
     handleClick (event, row) {
       this.store.commit('setCurrentRow', row)
       this.handleEvent(event, row, 'click')
     },
 
     /**
-         * 事件统一处理函数
-         */
+     * 事件统一处理函数
+     */
     handleEvent (event, row, name) {
       const table = this.table
       const cell = getCell(event)

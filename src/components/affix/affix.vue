@@ -35,12 +35,12 @@
 </template>
 <script>
 /**
-     * bk-affix
-     * @module components/affix
-     * @desc 图钉组件
-     * @param offsetTop    {number}   距离顶部的偏移量 默认为'0'
-     * @param offsetBottom {number}   距离底部的偏移量
-     */
+ * bk-affix
+ * @module components/affix
+ * @desc 图钉组件
+ * @param offsetTop    {number}   距离顶部的偏移量 默认为'0'
+ * @param offsetBottom {number}   距离底部的偏移量
+ */
 // 兼容浏览器，添加事件监听器
 const on = (() => {
   if (document.addEventListener) {
@@ -124,13 +124,16 @@ export default {
   methods: {
     // 解决设置滚动容器时window滚动Affix对象已固定不随滚的问题
     setTargetLoop () {
+      const rect = this.targetEl.getBoundingClientRect()
       if (this.offsetType === 'top') {
         this.styles = {
-          top: `${this.targetEl.getBoundingClientRect().top + this.offsetTop}px`
+          top: `${rect.top + this.offsetTop}px`,
+          width: `${rect.width}px`
         }
       } else {
         this.styles = {
-          bottom: `${window.innerHeight - this.targetEl.getBoundingClientRect().bottom + this.offsetBottom}px`
+          bottom: `${window.innerHeight - rect.bottom + this.offsetBottom}px`,
+          width: `${rect.width}px`
         }
       }
     },
@@ -215,5 +218,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/affix.css';
+  @import '../../ui/affix.css';
 </style>

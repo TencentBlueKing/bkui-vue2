@@ -79,5 +79,5 @@ export default {
 }
 </script>
 <style>
-    @import "../../ui/breadcrumb.css";
+  @import "../../ui/breadcrumb.css";
 </style>

@@ -41,6 +41,7 @@
       <template v-if="curLang === 'cn'">
         <span>每页</span>
         <bk-select placeholder="页数"
+          :popover-options="popoverOptions"
           :clearable="false"
           :size="small ? 'small' : ''"
           :class="{ 'page-select-small': small && !toggle }"
@@ -158,6 +159,10 @@ export default {
   },
   mixins: [locale.mixin],
   props: {
+    popoverOptions: {
+      type: Object,
+      default: () => ({})
+    },
     type: {
       type: String,
       default: 'default',
@@ -374,5 +379,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/pagination.css';
+  @import '../../ui/pagination.css';
 </style>

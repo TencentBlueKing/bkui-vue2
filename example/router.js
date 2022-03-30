@@ -48,6 +48,7 @@ const AnimateNumber = () => import(/* webpackChunkName: 'animate-number' */'./co
 const Button = () => import(/* webpackChunkName: 'button' */'./components/button/readme.md')
 const ButtonExample = () => import(/* webpackChunkName: 'button' */'./components/button/example')
 const DropdownMenu = () => import(/* webpackChunkName: 'dropdown-menu' */'./components/dropdown-menu/readme.md')
+const DropdownMenuExample = () => import(/* webpackChunkName: 'dropdown-menu' */'./components/dropdown-menu/example')
 const SideSlider = () => import(/* webpackChunkName: 'sideslider' */'./components/sideslider/readme.md')
 const SideSliderExample = () => import(/* webpackChunkName: 'sideslider' */'./components/sideslider/example')
 const Switcher = () => import(/* webpackChunkName: 'switcher' */'./components/switcher/readme.md')
@@ -74,6 +75,7 @@ const TimePickerExample = () => import(/* webpackChunkName: 'time-picker' */'./c
 const DatePicker = () => import(/* webpackChunkName: 'date-picker' */'./components/date-picker/readme.md')
 const DatePickerExample = () => import(/* webpackChunkName: 'date-picker' */'./components/date-picker/example')
 const Form = () => import(/* webpackChunkName: 'form' */'./components/form/readme.md')
+const FormExample = () => import(/* webpackChunkName: 'form' */'./components/form/example')
 const Pagination = () => import(/* webpackChunkName: 'pagination' */'./components/pagination/readme.md')
 const Changelog = () => import(/* webpackChunkName: 'changelog' */'./components/changelog/readme.md')
 const I18N = () => import(/* webpackChunkName: 'i18n' */'./components/i18n/readme.md')
@@ -289,6 +291,11 @@ const router = new VueRouter({
       component: DropdownMenu
     },
     {
+      name: 'dropdownMenuExample',
+      path: '/dropdown-menu/example',
+      component: DropdownMenuExample
+    },
+    {
       name: 'badge',
       path: '/badge',
       component: Badge
@@ -477,6 +484,11 @@ const router = new VueRouter({
       name: 'form',
       path: '/form',
       component: Form
+    },
+    {
+      name: 'formExample',
+      path: '/form/example',
+      component: FormExample
     },
     {
       name: 'input',
