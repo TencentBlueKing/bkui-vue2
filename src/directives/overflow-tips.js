@@ -29,75 +29,75 @@ import '@/ui/overflow-tips.css'
 import { checkOverflow } from '@/utils/util'
 
 function beforeShow (instance) {
-    const { reference } = instance
-    const { props } = reference._bk_overflow_tips_
-    const isOverflow = checkOverflow(reference)
-    if (isOverflow) {
-        instance.setContent(props.content
-            ? props.content : props.allowHTML
-                ? reference.innerHTML : reference.textContent)
-        return true
-    }
-    return false
+  const { reference } = instance
+  const { props } = reference._bk_overflow_tips_
+  const isOverflow = checkOverflow(reference)
+  if (isOverflow) {
+    instance.setContent(props.content
+      ? props.content : props.allowHTML
+        ? reference.innerHTML : reference.textContent)
+    return true
+  }
+  return false
 }
 
 function setupOnShow (props, customProps) {
-    props.onShow = instance => {
-        if (typeof customProps.onShow === 'function') {
-            const result = customProps.onShow(instance)
-            if (!result) return false
-        }
-        return beforeShow(instance)
+  props.onShow = instance => {
+    if (typeof customProps.onShow === 'function') {
+      const result = customProps.onShow(instance)
+      if (!result) return false
     }
+    return beforeShow(instance)
+  }
 }
 
 function setupTheme (props, customProps) {
-    const theme = ['bk-overflow-tips']
-    if (customProps.theme) {
-        theme.push(customProps.theme)
-    }
-    props.theme = theme.join(' ')
+  const theme = ['bk-overflow-tips']
+  if (customProps.theme) {
+    theme.push(customProps.theme)
+  }
+  props.theme = theme.join(' ')
 }
 
 const defaultProps = {
-    arrow: true,
-    interactive: true,
-    delay: 150,
-    allowHTML: false,
-    maxWidth: 400,
-    boundary: 'window',
-    placement: 'top'
+  arrow: true,
+  interactive: true,
+  delay: 150,
+  allowHTML: false,
+  maxWidth: 400,
+  boundary: 'window',
+  placement: 'top'
 }
 
 const overflowTips = {
-    inserted (el, binding = {}) {
-        const customProps = typeof binding.value === 'object' ? binding.value : {}
-        const props = Object.assign({ ...defaultProps }, customProps)
-        setupOnShow(props, customProps)
-        setupTheme(props, customProps)
-        el._bk_overflow_tips_ = {
-            props: props, // 指令配置的props单独存储方便后续做判断
-            instance: Tippy(el, props)
-        }
-    },
-    update (el, binding) {
-        const { props, instance } = el._bk_overflow_tips_
-        const customProps = typeof binding.value === 'object' ? binding.value : {}
-        Object.assign(props, customProps)
-        setupOnShow(props, customProps)
-        instance.set(props)
-    },
-    unbind (el) {
-        el._tippy && el._tippy.destroy()
-        delete el._bk_overflow_tips_
-    },
-    setDefaultProps (props) {
-        Object.assign(defaultProps, props)
+  inserted (el, binding = {}) {
+    const customProps = typeof binding.value === 'object' ? binding.value : {}
+    const props = Object.assign({ ...defaultProps }, customProps)
+    setupOnShow(props, customProps)
+    setupTheme(props, customProps)
+    el._bk_overflow_tips_ = {
+      props: props, // 指令配置的props单独存储方便后续做判断
+      instance: Tippy(el, props)
     }
+  },
+  update (el, binding) {
+    const { props, instance } = el._bk_overflow_tips_
+    const customProps = typeof binding.value === 'object' ? binding.value : {}
+    Object.assign(props, customProps)
+    setupOnShow(props, customProps)
+    instance.set(props)
+  },
+  unbind (el) {
+    el._tippy && el._tippy.destroy()
+    delete el._bk_overflow_tips_
+  },
+  setDefaultProps (props) {
+    Object.assign(defaultProps, props)
+  }
 }
 
 overflowTips.install = Vue => {
-    Vue.directive('bk-overflow-tips', overflowTips)
+  Vue.directive('bk-overflow-tips', overflowTips)
 }
 
 export default overflowTips

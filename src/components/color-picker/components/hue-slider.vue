@@ -27,94 +27,94 @@
 -->
 
 <template>
-    <div ref="container"
-        tabindex="0"
-        class="bk-color-picker-hue"
-        @keydown="handleArrowKeydown"
-        @mousedown.stop="handleMouseDown">
-        <div class="bk-color-picker-hue-pointer" :style="pointerStyle">
-            <div class="bk-color-picker-hue-rectangle"></div>
-        </div>
+  <div ref="container"
+    tabindex="0"
+    class="bk-color-picker-hue"
+    @keydown="handleArrowKeydown"
+    @mousedown.stop="handleMouseDown">
+    <div class="bk-color-picker-hue-pointer" :style="pointerStyle">
+      <div class="bk-color-picker-hue-rectangle"></div>
     </div>
+  </div>
 </template>
 
 <script>
-    import { clamp, getTouches } from '../utils'
+import { clamp, getTouches } from '../utils'
 
-    export default {
-        props: {
-            colorObj: {
-                type: Object,
-                required: true
-            }
-        },
-        computed: {
-            pointerStyle () {
-                return { left: `${this.colorObj.hsv.h / 360 * 100}%` }
-            }
-        },
-        methods: {
-            handleArrowKeydown (e) {
-                const { clientWidth } = this.$refs.container
-                let left = this.colorObj.hsv.h / 360 * clientWidth
-                const step = 2
-                const hugeStep = 10
-                switch (e.code) {
-                    case 'ArrowLeft':
-                        e.preventDefault()
-                        left = clamp(left - step, 0, clientWidth)
-                        break
-                    case 'ArrowRight':
-                        e.preventDefault()
-                        left = clamp(left + step, 0, clientWidth)
-                        break
-                    case 'ArrowUp':
-                        e.preventDefault()
-                        left = clamp(left - hugeStep, 0, clientWidth)
-                        break
-                    case 'ArrowDown':
-                        e.preventDefault()
-                        left = clamp(left + hugeStep, 0, clientWidth)
-                        break
-                    default:
-                        return
-                }
-                this.handlePointChange(null, left)
-            },
-            handleMouseDown (e) {
-                this.$el.focus()
-                this.handlePointChange(e)
-                window.addEventListener('mousemove', this.handlePointChange, { passive: true })
-                window.addEventListener('mouseup', this.handleMouseUp)
-            },
-            handleMouseUp () {
-                window.removeEventListener('mousemove', this.handlePointChange)
-                window.removeEventListener('mouseup', this.handleMouseUp)
-            },
-            /**
+export default {
+  props: {
+    colorObj: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    pointerStyle () {
+      return { left: `${this.colorObj.hsv.h / 360 * 100}%` }
+    }
+  },
+  methods: {
+    handleArrowKeydown (e) {
+      const { clientWidth } = this.$refs.container
+      let left = this.colorObj.hsv.h / 360 * clientWidth
+      const step = 2
+      const hugeStep = 10
+      switch (e.code) {
+        case 'ArrowLeft':
+          e.preventDefault()
+          left = clamp(left - step, 0, clientWidth)
+          break
+        case 'ArrowRight':
+          e.preventDefault()
+          left = clamp(left + step, 0, clientWidth)
+          break
+        case 'ArrowUp':
+          e.preventDefault()
+          left = clamp(left - hugeStep, 0, clientWidth)
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          left = clamp(left + hugeStep, 0, clientWidth)
+          break
+        default:
+          return
+      }
+      this.handlePointChange(null, left)
+    },
+    handleMouseDown (e) {
+      this.$el.focus()
+      this.handlePointChange(e)
+      window.addEventListener('mousemove', this.handlePointChange, { passive: true })
+      window.addEventListener('mouseup', this.handleMouseUp)
+    },
+    handleMouseUp () {
+      window.removeEventListener('mousemove', this.handlePointChange)
+      window.removeEventListener('mouseup', this.handleMouseUp)
+    },
+    /**
              * 色相面板变化
              * @param {MouseEvent|null} e - 鼠标滑动事件
              * @param {Number} [appointedLeft] - 键盘事件对应坐标，如果有就优先使用
              */
-            handlePointChange (e, appointedLeft) {
-                const { clientWidth } = this.$refs.container
-                const left = appointedLeft !== undefined ? appointedLeft : this.getLeft(e)
-                this.changeColor(left / clientWidth)
-            },
-            getLeft (e) {
-                const { container } = this.$refs
-                const xOffset = container.getBoundingClientRect().left + window.pageXOffset
-                const pageX = e.pageX || getTouches(e, 'PageX')
+    handlePointChange (e, appointedLeft) {
+      const { clientWidth } = this.$refs.container
+      const left = appointedLeft !== undefined ? appointedLeft : this.getLeft(e)
+      this.changeColor(left / clientWidth)
+    },
+    getLeft (e) {
+      const { container } = this.$refs
+      const xOffset = container.getBoundingClientRect().left + window.pageXOffset
+      const pageX = e.pageX || getTouches(e, 'PageX')
 
-                return clamp(pageX - xOffset, 0, container.clientWidth)
-            },
-            changeColor (ratio) {
-                const { h, s, l, a } = this.colorObj.hsl
-                const newHue = ratio * 360
-                if (h !== newHue) {
-                    this.$emit('change', { h: newHue, s, l, a })
-                }
-            }
-        }
+      return clamp(pageX - xOffset, 0, container.clientWidth)
+    },
+    changeColor (ratio) {
+      const { h, s, l, a } = this.colorObj.hsl
+      const newHue = ratio * 360
+      if (h !== newHue) {
+        this.$emit('change', { h: newHue, s, l, a })
+      }
     }
+  }
+}
 </script>

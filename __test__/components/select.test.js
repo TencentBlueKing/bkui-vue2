@@ -35,12 +35,12 @@ import bkOption from '@/components/option'
 import { mount } from '@vue/test-utils'
 
 const createWrapper = (data, props = {}) => {
-    return mount({
-        components: {
-            bkSelect,
-            bkOption
-        },
-        template: `
+  return mount({
+    components: {
+      bkSelect,
+      bkOption
+    },
+    template: `
             <div>
                 <bk-select ref="select"
                     v-model="value"
@@ -53,105 +53,105 @@ const createWrapper = (data, props = {}) => {
                 </bk-select>
             </div>
         `,
-        data () {
-            return {
-                ...data,
-                props
-            }
-        }
-    })
+    data () {
+      return {
+        ...data,
+        props
+      }
+    }
+  })
 }
 
 const getDOM = (wrapper, selector) => {
-    const select = wrapper.find('.bk-select')
-    return select.vm.$refs.selectDropdown.instance.popper.querySelectorAll(selector)
+  const select = wrapper.find('.bk-select')
+  return select.vm.$refs.selectDropdown.instance.popper.querySelectorAll(selector)
 }
 
 describe('Select unit test', () => {
-    const wrapperA = createWrapper({
-        value: '',
-        options: [{
-            id: 'a',
-            name: 'A'
-        }, {
-            id: 'b',
-            name: 'B'
-        }]
-    })
-    it('renders the correct markup', () => {
-        const options = getDOM(wrapperA, '.bk-option')
-        expect(options.length).toBe(2)
-        expect(wrapperA.find('.bk-select-name').text()).toBe('')
-    })
-    it('renders the correct selected content', () => {
-        wrapperA.setData({ value: 'a' })
-        const select = wrapperA.find('.bk-select')
-        const options = getDOM(wrapperA, '.bk-option')
-        expect([].findIndex.call(options, option => option.classList.contains('is-selected'))).toBe(0)
-        expect(select.find('.bk-select-name').text()).toBe('A')
-        expect(select.emittedByOrder().map(e => e.name)).toEqual(['input', 'change'])
-    })
-    it('no response event while disabled', () => {
-        wrapperA.setProps({ disabled: true })
-        const select = wrapperA.find('.bk-select')
-        select.trigger('click')
-        setTimeout(() => {
-            expect(select.classes()).toContain('is-disabled')
-            expect(select.emittedByOrder().length).toBe(0)
-        }, 500)
-    })
-
-    const wrapperB = createWrapper({
-        value: '',
-        options: [{
-            id: 'a',
-            name: 'A'
-        }, {
-            id: 'b',
-            name: 'B'
-        }]
-    })
-    it('emit correct events', () => {
-        const select = wrapperB.find('.bk-select')
-        const options = getDOM(wrapperB, '.bk-option')
-        select.trigger('click')
-        setTimeout(() => {
-            expect(select.classes()).toContain('is-focus')
-            options[0].click()
-            expect(select.emittedByOrder().map(e => e.name)).toEqual(['toggle', 'input', 'change', 'selected', 'toggle'])
-            expect([].findIndex.call(options, option => option.classList.contains('is-selected'))).toBe(0)
-            expect(wrapperB.vm.value).toBe('a')
-        }, 500)
-    })
-
-    const wrapperC = createWrapper({
-        value: ['a', 'b'],
-        options: [{
-            id: 'a',
-            name: 'A'
-        }, {
-            id: 'b',
-            name: 'B'
-        }, {
-            id: 'c',
-            name: 'C'
-        }]
+  const wrapperA = createWrapper({
+    value: '',
+    options: [{
+      id: 'a',
+      name: 'A'
     }, {
-        multiple: true
-    })
-    it('render the correct markup and content', () => {
-        const select = wrapperC.find('.bk-select')
-        expect(select.vm.selected).toEqual(['a', 'b'])
+      id: 'b',
+      name: 'B'
+    }]
+  })
+  it('renders the correct markup', () => {
+    const options = getDOM(wrapperA, '.bk-option')
+    expect(options.length).toBe(2)
+    expect(wrapperA.find('.bk-select-name').text()).toBe('')
+  })
+  it('renders the correct selected content', () => {
+    wrapperA.setData({ value: 'a' })
+    const select = wrapperA.find('.bk-select')
+    const options = getDOM(wrapperA, '.bk-option')
+    expect([].findIndex.call(options, option => option.classList.contains('is-selected'))).toBe(0)
+    expect(select.find('.bk-select-name').text()).toBe('A')
+    expect(select.emittedByOrder().map(e => e.name)).toEqual(['input', 'change'])
+  })
+  it('no response event while disabled', () => {
+    wrapperA.setProps({ disabled: true })
+    const select = wrapperA.find('.bk-select')
+    select.trigger('click')
+    setTimeout(() => {
+      expect(select.classes()).toContain('is-disabled')
+      expect(select.emittedByOrder().length).toBe(0)
+    }, 500)
+  })
 
-        const options = getDOM(wrapperC, '.bk-option')
-        expect([].filter.call(options, option => option.classList.contains('is-selected')).length).toBe(2)
-        options[2].click()
-        setTimeout(() => {
-            expect(wrapperC.vm.value).toEqual(['a', 'b', 'c'])
+  const wrapperB = createWrapper({
+    value: '',
+    options: [{
+      id: 'a',
+      name: 'A'
+    }, {
+      id: 'b',
+      name: 'B'
+    }]
+  })
+  it('emit correct events', () => {
+    const select = wrapperB.find('.bk-select')
+    const options = getDOM(wrapperB, '.bk-option')
+    select.trigger('click')
+    setTimeout(() => {
+      expect(select.classes()).toContain('is-focus')
+      options[0].click()
+      expect(select.emittedByOrder().map(e => e.name)).toEqual(['toggle', 'input', 'change', 'selected', 'toggle'])
+      expect([].findIndex.call(options, option => option.classList.contains('is-selected'))).toBe(0)
+      expect(wrapperB.vm.value).toBe('a')
+    }, 500)
+  })
 
-            wrapperC.find('.bk-select-clear').trigger('click')
-            expect(select.emitted().clear).toBeTruthy()
-            expect(wrapperC.vm.value).toEqual([])
-        }, 500)
-    })
+  const wrapperC = createWrapper({
+    value: ['a', 'b'],
+    options: [{
+      id: 'a',
+      name: 'A'
+    }, {
+      id: 'b',
+      name: 'B'
+    }, {
+      id: 'c',
+      name: 'C'
+    }]
+  }, {
+    multiple: true
+  })
+  it('render the correct markup and content', () => {
+    const select = wrapperC.find('.bk-select')
+    expect(select.vm.selected).toEqual(['a', 'b'])
+
+    const options = getDOM(wrapperC, '.bk-option')
+    expect([].filter.call(options, option => option.classList.contains('is-selected')).length).toBe(2)
+    options[2].click()
+    setTimeout(() => {
+      expect(wrapperC.vm.value).toEqual(['a', 'b', 'c'])
+
+      wrapperC.find('.bk-select-clear').trigger('click')
+      expect(select.emitted().clear).toBeTruthy()
+      expect(wrapperC.vm.value).toEqual([])
+    }, 500)
+  })
 })

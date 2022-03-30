@@ -244,6 +244,14 @@
             }
         }
     }
+    .round {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #e5f6ea;
+        border: 1px solid #3fc06d;
+        border-radius: 50%;
+    }
 </style>
 
 ## Cascade 级联选框
@@ -667,6 +675,10 @@
         v-model="slotvalue"
         :list="disabledList"
         style="width: 250px;">
+        <template slot="option" slot-scope="{ node }">
+            <span v-bk-tooltips="node.name">
+                <i class="round mr5" v-if="node.children"></i>{{ node.name }} / {{node.id}}</span>
+        </template>
         <template slot="prepend" slot-scope="{ node }">
             <span v-if="node.children" class="bk-slot-item">{{ node.children.length }}</span>
         </template>
@@ -748,6 +760,7 @@
 <template>
     <bk-cascade
         v-model="value"
+        :multiple="true"
         :list="remoteList"
         :is-remote="isRemote"
         :remote-method="remoteMethod"
@@ -836,6 +849,8 @@
 | is-remote | 开启远程加载，搭配remote-method一起使用 | Boolean | —— | false |
 | popover-options | 透传至下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
 | ext-popover-cls | 配置自定义样式类名，传入的类会被加在下拉菜单的 DOM .bk-cascade-dropdown-content 上 | String | —— | —— |
+
+### 事件 {page=#/cascade}
 
 | 事件名称 | 说明 | 回调参数 |
 |---------|------|---------|

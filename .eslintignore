@@ -3,3 +3,4 @@ webpack_cache/
 src/utils/tippy/
 src/utils/tippy2/
 lib/
+static/

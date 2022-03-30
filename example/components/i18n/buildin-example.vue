@@ -27,59 +27,59 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            单独使用组件库内置的语言包
-        </h2>
-        <div class="example-item" style="height: 400px">
-            <bk-date-picker class="mr15" :type="'datetime'" :open="true" v-model="initDateTime"></bk-date-picker>
-            <bk-button type="primary submit" title="切换中英文" @click="handleClick">
-                切换中英文
-            </bk-button>
-            <span class="bk-text-primary">当前为{{curLang === 'zhCN' ? '中文' : '英文'}}</span>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      单独使用组件库内置的语言包
+    </h2>
+    <div class="example-item" style="height: 400px">
+      <bk-date-picker class="mr15" :type="'datetime'" :open="true" v-model="initDateTime"></bk-date-picker>
+      <bk-button type="primary submit" title="切换中英文" @click="handleClick">
+        切换中英文
+      </bk-button>
+      <span class="bk-text-primary">当前为{{curLang === 'zhCN' ? '中文' : '英文'}}</span>
+    </div>
+  </section>
 </template>
 
 <script>
-    import { bkDatePicker, bkButton, locale, lang } from '@'
-    // import { bkDatePicker, bkButton } from '@'
+import { bkDatePicker, bkButton, locale, lang } from '@'
+// import { bkDatePicker, bkButton } from '@'
 
-    export default {
-        components: {
-            bkDatePicker,
-            bkButton
-        },
-        data () {
-            return {
-                initDateTime: new Date(),
-                curLang: ''
-            }
-        },
-        created () {
-            // 获取语言标识
-            this.curLang = localStorage.getItem('curLang') || 'zhCN'
-            // 根据语言包标识设置组件库的语言，目前语言包支持中文和英文，对应的标识分别为 zhCN, enUS
-            locale.use(lang[this.curLang])
-        },
-        methods: {
-            back () {
-                window.location.href = '#/i18n?anchor=dan-du-shi-yong-zu-jian-ku-nei-zhi-de-yu-yan-bao-example'
-            },
-            handleClick (event) {
-                // 当前为中文时
-                if (this.curLang === 'zhCN') {
-                    // 切换英文
-                    localStorage.setItem('curLang', 'enUS')
-                } else { // 当前为英文时
-                    // 切换中文
-                    localStorage.setItem('curLang', 'zhCN')
-                }
-                this.$nextTick(() => {
-                    window.location.reload()
-                })
-            }
-        }
+export default {
+  components: {
+    bkDatePicker,
+    bkButton
+  },
+  data () {
+    return {
+      initDateTime: new Date(),
+      curLang: ''
     }
+  },
+  created () {
+    // 获取语言标识
+    this.curLang = localStorage.getItem('curLang') || 'zhCN'
+    // 根据语言包标识设置组件库的语言，目前语言包支持中文和英文，对应的标识分别为 zhCN, enUS
+    locale.use(lang[this.curLang])
+  },
+  methods: {
+    back () {
+      window.location.href = '#/i18n?anchor=dan-du-shi-yong-zu-jian-ku-nei-zhi-de-yu-yan-bao-example'
+    },
+    handleClick (event) {
+      // 当前为中文时
+      if (this.curLang === 'zhCN') {
+        // 切换英文
+        localStorage.setItem('curLang', 'enUS')
+      } else { // 当前为英文时
+        // 切换中文
+        localStorage.setItem('curLang', 'zhCN')
+      }
+      this.$nextTick(() => {
+        window.location.reload()
+      })
+    }
+  }
+}
 </script>

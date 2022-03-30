@@ -36,19 +36,19 @@ const canUseSymbol = typeof Symbol === 'function' && Symbol.for
 const REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7
 
 function isReactElement (value) {
-    return value.$$typeof === REACT_ELEMENT_TYPE
+  return value.$$typeof === REACT_ELEMENT_TYPE
 }
 
 function isNonNullObject (value) {
-    return !!value && typeof value === 'object'
+  return !!value && typeof value === 'object'
 }
 
 function isSpecial (value) {
-    const stringValue = Object.prototype.toString.call(value)
+  const stringValue = Object.prototype.toString.call(value)
 
-    return stringValue === '[object RegExp]' || stringValue === '[object Date]' || isReactElement(value)
+  return stringValue === '[object RegExp]' || stringValue === '[object Date]' || isReactElement(value)
 }
 
 export default function (value) {
-    return isNonNullObject(value) && !isSpecial(value)
+  return isNonNullObject(value) && !isSpecial(value)
 }

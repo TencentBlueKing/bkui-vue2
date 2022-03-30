@@ -360,6 +360,7 @@
 | preview-src-list | 开启图片预览功能 | Array | —— | —— |
 | z-index | 设置图片预览的 z-index | Number | —— | 2000 |
 | isShowPreviewTitle |预览图片图片时，是否显示头部信息 | String | —— | —— |
+| mask-close |是否允许点击遮罩关闭弹框 | Boolean | —— | true |
 
 ### image 方法 {page=#/image}
 | 事件名称      | 说明    | 回调参数      |
@@ -387,3 +388,4 @@
 |---------- |-------- |---------- |
 | hide | 点击关闭按钮 | —— |
 | change | 当前预览图片的索引值 | index |
+| mask-close |是否允许点击遮罩关闭弹框 | Boolean | —— | true |

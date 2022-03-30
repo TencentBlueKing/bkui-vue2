@@ -37,24 +37,24 @@
  * @param {Object} opts 外层调用传来的参数
  */
 function replaceContent (token, opts) {
-    const type = token.type
-    if (type === 'fence' || type === 'code_block' || type === 'inline' || type === 'code_inline') {
-        token.content = token.content.replace(/\{\{\s*BASE_LIB_NAME\s*\}\}/g, opts.replaceStr)
-    }
-    if (token.children && token.children.length) {
-        token.children.forEach(child => {
-            replaceContent(child, opts)
-        })
-    }
+  const type = token.type
+  if (type === 'fence' || type === 'code_block' || type === 'inline' || type === 'code_inline') {
+    token.content = token.content.replace(/\{\{\s*BASE_LIB_NAME\s*\}\}/g, opts.replaceStr)
+  }
+  if (token.children && token.children.length) {
+    token.children.forEach(child => {
+      replaceContent(child, opts)
+    })
+  }
 }
 
 module.exports = function replace (md, opts) {
-    if (!opts.replaceStr) {
-        return
-    }
-    md.core.ruler.push('replace', state => {
-        state.tokens.forEach(token => {
-            replaceContent(token, opts)
-        })
+  if (!opts.replaceStr) {
+    return
+  }
+  md.core.ruler.push('replace', state => {
+    state.tokens.forEach(token => {
+      replaceContent(token, opts)
     })
+  })
 }
