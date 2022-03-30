@@ -134,6 +134,9 @@
             },
             shortcutChange (value, index) {
                 console.log('shortcutChange', value, index)
+            },
+            getCellClass(cell) {
+                return 'cell-x-Class';
             }
         }
     }
@@ -144,6 +147,19 @@
     }
     .custom-footer {
         text-align: center;
+    }
+
+    .cell-x-Class {
+      position: relative;
+      &::after {
+        content: '';
+        height: 1px;
+        background: red;
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        bottom: 0;
+      }
     }
 </style>
 
@@ -160,7 +176,7 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+        <bk-date-picker class="mr15" v-model="initDateTime" cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
 <script>
@@ -583,6 +599,51 @@
 ```
 :::
 
+### 自定义cell-class {page=#/date-picker}
+:::demo 通过设置`cell-class`自定义每个日期Cell样式
+
+```html
+<template>
+    <div>
+        <bk-date-picker class="mr15" v-model="initDateTime" :cell-class="getCellClass" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+    </div>
+</template>
+<script>
+    import { bkDatePicker } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkDatePicker
+        },
+        data () {
+            return {
+                initDateTime: new Date()
+            }
+        },
+        methods: {
+            getCellClass (cell) {
+              return 'cell-x-Class'
+            }
+        }
+    }
+</script>
+<style lang="postcss">
+    .cell-x-Class {
+      position: relative;
+      &::after {
+        content: '';
+        height: 1px;
+        background: red;
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        bottom: 0;
+      }
+    }
+</style>
+```
+:::
+
 ### 属性 {page=#/date-picker}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
@@ -613,6 +674,7 @@
 | footer-slot-cls | 自定义 footer 的容器的样式，**只有存在自定义 footer 时才会生效** | string | -- | —— |
 | header-slot-cls | 自定义 header 的容器的样式，**只有存在自定义 header 时才会生效** | string | -- | —— |
 | behavior | 风格设置(simplicity:简约 normal:正常) | String | 'normal'/'simplicity' | normal |
+| cell-class | 自定义每个日期Cell样式 | Function | () => '' | -- |
 
 ### 事件 {page=#/date-picker}
 | 事件名称 | 说明 | 回调参数 |
