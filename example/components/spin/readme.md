@@ -166,7 +166,7 @@
 ### 属性 {page=#/spin}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
-| theme | 加载类型 | String | `primary` `success` `warning` `danger` | `primary` |
+| theme | 加载类型 | String | `primary` `success` `warning` `danger` `info` | `primary` |
 | size | 尺寸 | String |`large` `normal` `small` `mini`|`small`|
 | icon | 自定义的加载图标 | String | 参考[蓝鲸 ICON](#/icon)| —— |
 | spinning | 是否为加载中状态 | Boolean | true/false | true |

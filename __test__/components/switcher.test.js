@@ -35,205 +35,205 @@ import { mount } from '@vue/test-utils'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('switcher unit test', () => {
-    it('switcher render with deault checked', () => {
-        const wrapper = mountComponent(Switcher, {
-            propsData: {
-                value: true
-            }
-        })
-        expect(wrapper.contains('.is-checked')).toBe(true)
+  it('switcher render with deault checked', () => {
+    const wrapper = mountComponent(Switcher, {
+      propsData: {
+        value: true
+      }
+    })
+    expect(wrapper.contains('.is-checked')).toBe(true)
+  })
+
+  it('switcher render with deault disabled checked', () => {
+    const wrapper = mountComponent(Switcher, {
+      propsData: {
+        value: true,
+        disabled: true
+      }
+    })
+    expect(wrapper.contains('.is-checked.is-disabled')).toBe(true)
+  })
+
+  it('switcher size test', () => {
+    const wrapper1 = mountComponent(Switcher, {
+      propsData: {
+        size: 'min'
+      }
+    })
+    const wrapper2 = mountComponent(Switcher, {
+      propsData: {
+        size: 'small'
+      }
+    })
+    const wrapper3 = mountComponent(Switcher, {
+      propsData: {
+        size: 'normal'
+      }
     })
 
-    it('switcher render with deault disabled checked', () => {
-        const wrapper = mountComponent(Switcher, {
-            propsData: {
-                value: true,
-                disabled: true
-            }
-        })
-        expect(wrapper.contains('.is-checked.is-disabled')).toBe(true)
+    expect(wrapper1.contains('.bk-switcher-min')).toBe(true)
+    expect(wrapper2.contains('.bk-switcher-small')).toBe(true)
+    expect(wrapper3.contains('.bk-switcher-normal')).toBe(true)
+  })
+
+  it('switcher theme test', () => {
+    const wrapper = mountComponent(Switcher, {
+      propsData: {
+        theme: 'primary'
+      }
     })
 
-    it('switcher size test', () => {
-        const wrapper1 = mountComponent(Switcher, {
-            propsData: {
-                size: 'min'
-            }
-        })
-        const wrapper2 = mountComponent(Switcher, {
-            propsData: {
-                size: 'small'
-            }
-        })
-        const wrapper3 = mountComponent(Switcher, {
-            propsData: {
-                size: 'normal'
-            }
-        })
+    expect(wrapper.classes()).toContain('primary')
+  })
 
-        expect(wrapper1.contains('.bk-switcher-min')).toBe(true)
-        expect(wrapper2.contains('.bk-switcher-small')).toBe(true)
-        expect(wrapper3.contains('.bk-switcher-normal')).toBe(true)
+  it('switcher ext-cls test', () => {
+    const wrapper = mountComponent(Switcher, {
+      propsData: {
+        extCls: 'ext-cls-test'
+      }
     })
 
-    it('switcher theme test', () => {
-        const wrapper = mountComponent(Switcher, {
-            propsData: {
-                theme: 'primary'
-            }
-        })
+    expect(wrapper.classes()).toContain('ext-cls-test')
+  })
 
-        expect(wrapper.classes()).toContain('primary')
+  it('switcher is-outline,is-square  test', () => {
+    const wrapper = mountComponent(Switcher, {
+      propsData: {
+        isOutline: true,
+        isSquare: true
+      }
     })
 
-    it('switcher ext-cls test', () => {
-        const wrapper = mountComponent(Switcher, {
-            propsData: {
-                extCls: 'ext-cls-test'
-            }
-        })
+    expect(wrapper.contains('.bk-switcher-outline.bk-switcher-square')).toBe(true)
+  })
 
-        expect(wrapper.classes()).toContain('ext-cls-test')
+  it('switcher show-text  test', () => {
+    const wrapper1 = mountComponent(Switcher, {
+      propsData: {
+        showText: false
+      }
+    })
+    const wrapper2 = mountComponent(Switcher, {
+      propsData: {
+        showText: true
+      }
     })
 
-    it('switcher is-outline,is-square  test', () => {
-        const wrapper = mountComponent(Switcher, {
-            propsData: {
-                isOutline: true,
-                isSquare: true
-            }
-        })
+    const lable1 = wrapper1.find('.switcher-label')
+    expect(lable1.attributes('style')).toBe('display: none;')
+    const lable2 = wrapper2.find('.switcher-label')
+    expect(lable2.attributes()).not.toContain('style')
+  })
 
-        expect(wrapper.contains('.bk-switcher-outline.bk-switcher-square')).toBe(true)
+  it('switcher show-text  test', () => {
+    const wrapper1 = mountComponent(Switcher, {
+      propsData: {
+        showText: false
+      }
+    })
+    const wrapper2 = mountComponent(Switcher, {
+      propsData: {
+        showText: true
+      }
     })
 
-    it('switcher show-text  test', () => {
-        const wrapper1 = mountComponent(Switcher, {
-            propsData: {
-                showText: false
-            }
-        })
-        const wrapper2 = mountComponent(Switcher, {
-            propsData: {
-                showText: true
-            }
-        })
+    const lable1 = wrapper1.find('.switcher-label')
+    expect(lable1.attributes('style')).toBe('display: none;')
+    const lable2 = wrapper2.find('.switcher-label')
+    expect(lable2.attributes()).not.toContain('style')
+  })
 
-        const lable1 = wrapper1.find('.switcher-label')
-        expect(lable1.attributes('style')).toBe('display: none;')
-        const lable2 = wrapper2.find('.switcher-label')
-        expect(lable2.attributes()).not.toContain('style')
+  it('switcher on-text,off-text  test', () => {
+    const wrapper1 = mountComponent(Switcher)
+    const wrapper2 = mountComponent(Switcher, {
+      propsData: {
+        onText: '开',
+        offText: '关'
+      }
     })
 
-    it('switcher show-text  test', () => {
-        const wrapper1 = mountComponent(Switcher, {
-            propsData: {
-                showText: false
-            }
-        })
-        const wrapper2 = mountComponent(Switcher, {
-            propsData: {
-                showText: true
-            }
-        })
+    const onText1 = wrapper1.find('.on-text')
+    const offText1 = wrapper1.find('.off-text')
+    const onText2 = wrapper2.find('.on-text')
+    const offText2 = wrapper2.find('.off-text')
 
-        const lable1 = wrapper1.find('.switcher-label')
-        expect(lable1.attributes('style')).toBe('display: none;')
-        const lable2 = wrapper2.find('.switcher-label')
-        expect(lable2.attributes()).not.toContain('style')
-    })
+    expect(onText1.html()).toContain('ON')
+    expect(offText1.html()).toContain('OFF')
+    expect(onText2.html()).toContain('开')
+    expect(offText2.html()).toContain('关')
+  })
 
-    it('switcher on-text,off-text  test', () => {
-        const wrapper1 = mountComponent(Switcher)
-        const wrapper2 = mountComponent(Switcher, {
-            propsData: {
-                onText: '开',
-                offText: '关'
-            }
-        })
-
-        const onText1 = wrapper1.find('.on-text')
-        const offText1 = wrapper1.find('.off-text')
-        const onText2 = wrapper2.find('.on-text')
-        const offText2 = wrapper2.find('.off-text')
-
-        expect(onText1.html()).toContain('ON')
-        expect(offText1.html()).toContain('OFF')
-        expect(onText2.html()).toContain('开')
-        expect(offText2.html()).toContain('关')
-    })
-
-    it('switcher change input listener', async (done) => {
-        const changeHandler = jest.fn()
-        const inputHandler = jest.fn()
-        const wrapper = mount(createTestComp(`
+  it('switcher change input listener', async (done) => {
+    const changeHandler = jest.fn()
+    const inputHandler = jest.fn()
+    const wrapper = mount(createTestComp(`
                 <bk-switcher
                     v-model="value"
                     @change="handleChange"
                     @input="handleInput">
                 </bk-switcher>
             `, {
-            components: {
-                bkSwitcher: Switcher
-            },
-            data () {
-                return {
-                    value: false
-                }
-            },
-            methods: {
-                handleChange: changeHandler,
-                handleInput: inputHandler
-            }
-        }), { sync: false })
-        const vm = wrapper.vm
-        await vm.$nextTick()
+      components: {
+        bkSwitcher: Switcher
+      },
+      data () {
+        return {
+          value: false
+        }
+      },
+      methods: {
+        handleChange: changeHandler,
+        handleInput: inputHandler
+      }
+    }), { sync: false })
+    const vm = wrapper.vm
+    await vm.$nextTick()
 
-        wrapper.trigger('click')
-        await vm.$nextTick()
-        expect(changeHandler).toHaveBeenCalledTimes(1)
-        expect(inputHandler).toHaveBeenCalledTimes(1)
-        expect(wrapper.find('input[type="checkbox"]').element.value).toBe('true')
-        expect(wrapper.contains('.is-checked')).toBe(true)
+    wrapper.trigger('click')
+    await vm.$nextTick()
+    expect(changeHandler).toHaveBeenCalledTimes(1)
+    expect(inputHandler).toHaveBeenCalledTimes(1)
+    expect(wrapper.find('input[type="checkbox"]').element.value).toBe('true')
+    expect(wrapper.contains('.is-checked')).toBe(true)
 
-        wrapper.trigger('click')
-        await vm.$nextTick()
-        expect(wrapper.find('input[type="checkbox"]').element.value).toBe('false')
-        expect(wrapper.classes()).not.toContain('is-checked')
+    wrapper.trigger('click')
+    await vm.$nextTick()
+    expect(wrapper.find('input[type="checkbox"]').element.value).toBe('false')
+    expect(wrapper.classes()).not.toContain('is-checked')
 
-        done()
-    })
+    done()
+  })
 
-    it('switcher disabled change input listener', async (done) => {
-        const wrapper = mount(createTestComp(`
+  it('switcher disabled change input listener', async (done) => {
+    const wrapper = mount(createTestComp(`
                 <bk-switcher
                     v-model="value"
                     :disabled="disabled">
                 </bk-switcher>
             `, {
-            components: {
-                bkSwitcher: Switcher
-            },
-            data () {
-                return {
-                    value: false,
-                    disabled: true
-                }
-            }
-        }), { sync: false })
-        const vm = wrapper.vm
-        await vm.$nextTick()
+      components: {
+        bkSwitcher: Switcher
+      },
+      data () {
+        return {
+          value: false,
+          disabled: true
+        }
+      }
+    }), { sync: false })
+    const vm = wrapper.vm
+    await vm.$nextTick()
 
-        wrapper.trigger('click')
-        await vm.$nextTick()
-        expect(wrapper.find('input[type="checkbox"]').element.value).toBe('false')
-        expect(wrapper.contains('.is-disabled')).toBe(true)
+    wrapper.trigger('click')
+    await vm.$nextTick()
+    expect(wrapper.find('input[type="checkbox"]').element.value).toBe('false')
+    expect(wrapper.contains('.is-disabled')).toBe(true)
 
-        wrapper.trigger('click')
-        await vm.$nextTick()
-        expect(wrapper.find('input[type="checkbox"]').element.value).toBe('false')
-        expect(wrapper.contains('.is-disabled')).toBe(true)
+    wrapper.trigger('click')
+    await vm.$nextTick()
+    expect(wrapper.find('input[type="checkbox"]').element.value).toBe('false')
+    expect(wrapper.contains('.is-disabled')).toBe(true)
 
-        done()
-    })
+    done()
+  })
 })

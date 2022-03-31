@@ -39,100 +39,99 @@ const notifyList = []
 let seed = 0
 
 const BkNotify = function (config) {
-    // 限制个数为 0 时，清除所有实例
-    if (config.limit === 0) {
-        BkNotify.batchClose()
-        return
+  // 限制个数为 0 时，清除所有实例
+  if (config.limit === 0) {
+    BkNotify.batchClose()
+    return
+  }
+
+  if (config.limit > 0) {
+    BkNotify.batchClose(config.limit)
+  }
+
+  const instanceId = `notifyInstance_${Date.now()}_${seed++}`
+  const offsetY = config.offsetY || 30 // 组件距视口垂直的偏移量
+  const offsetX = config.offsetX || 10 // 组件距视口水平的偏移量
+  const spacing = config.spacing || 10
+  let verticalOffset = offsetY
+
+  if (typeof config === 'string' || typeof config === 'number') {
+    config = {
+      message: config
     }
+  }
+  const configClose = config.onClose
+  config.onClose = function () {
+    BkNotify.close(instanceId, configClose)
+  }
 
-    if (config.limit > 0) {
-        BkNotify.batchClose(config.limit)
+  const instance = new NotifyComponent({
+    data: config
+  })
+
+  if (config.message !== null
+      && typeof config.message === 'object'
+      && config.message.hasOwnProperty('componentOptions')
+  ) {
+    instance.$slots.default = [config.message]
+    instance.message = null
+  }
+
+  instance.id = instanceId
+  instance.spacing = spacing
+  instance.verticalOffset = 0
+  instance.$mount()
+  instance.dom = instance.$el
+  document.body.appendChild(instance.$el)
+
+  notifyList.forEach(item => {
+    if (item.position === config.position) {
+      verticalOffset += (item.$el.offsetHeight + spacing)
     }
+  })
+  instance.verticalOffset = verticalOffset
+  instance.horizonOffset = offsetX
+  instance.visible = true
+  notifyList.push(instance)
 
-    const instanceId = `notifyInstance_${Date.now()}_${seed++}`
-    const offsetY = config.offsetY || 30 // 组件距视口垂直的偏移量
-    const offsetX = config.offsetX || 10 // 组件距视口水平的偏移量
-    const spacing = config.spacing || 10
-    let verticalOffset = offsetY
-
-    if (typeof config === 'string' || typeof config === 'number') {
-        config = {
-            message: config
-        }
-    }
-    const configClose = config.onClose
-    config.onClose = function () {
-        BkNotify.close(instanceId, configClose)
-    }
-
-    const instance = new NotifyComponent({
-        data: config
-    })
-
-    if (
-        config.message !== null
-        && typeof config.message === 'object'
-        && config.message.hasOwnProperty('componentOptions')
-    ) {
-        instance.$slots.default = [config.message]
-        instance.message = null
-    }
-
-    instance.id = instanceId
-    instance.spacing = spacing
-    instance.verticalOffset = 0
-    instance.$mount()
-    instance.dom = instance.$el
-    document.body.appendChild(instance.$el)
-
-    notifyList.forEach(item => {
-        if (item.position === config.position) {
-            verticalOffset += (item.$el.offsetHeight + spacing)
-        }
-    })
-    instance.verticalOffset = verticalOffset
-    instance.horizonOffset = offsetX
-    instance.visible = true
-    notifyList.push(instance)
-
-    return instance
+  return instance
 }
 // 实例关闭回调
 BkNotify.close = function (id, configClose) {
-    let instanceIndex = -1
-    notifyList.some((item, index) => {
-        if (item.id === id) {
-            instanceIndex = index
-            return true
-        }
+  let instanceIndex = -1
+  notifyList.some((item, index) => {
+    if (item.id === id) {
+      instanceIndex = index
+      return true
+    }
+  })
+
+  if (instanceIndex > -1) {
+    const instance = notifyList[instanceIndex]
+
+    if (typeof configClose === 'function') {
+      configClose(instance)
+    }
+
+    notifyList.forEach((item, i) => {
+      if (item.position === instance.position && i > instanceIndex) {
+        item.verticalOffset -= (instance.dom.offsetHeight + instance.spacing)
+      }
     })
 
-    if (instanceIndex > -1) {
-        const instance = notifyList[instanceIndex]
-
-        if (typeof configClose === 'function') {
-            configClose(instance)
-        }
-
-        notifyList.forEach((item, i) => {
-            if (item.position === instance.position && i > instanceIndex) {
-                item.verticalOffset -= (instance.dom.offsetHeight + instance.spacing)
-            }
-        })
-
-        notifyList.splice(instanceIndex, 1)
-    }
+    notifyList.splice(instanceIndex, 1)
+  }
 }
 // 批量清除实例
 BkNotify.batchClose = function (limit = 0) {
-    const len = notifyList.length
+  const len = notifyList.length
 
-    if (limit <= len) {
-        const InstancesShouldClose = notifyList.slice(0, len - limit + 1)
-        InstancesShouldClose.forEach(item => {
-            item.close()
-        })
-    }
+  if (limit <= len) {
+    const InstancesShouldClose = notifyList.slice(0, len - limit + 1)
+    InstancesShouldClose.forEach(item => {
+      item.close()
+    })
+  }
 }
 
 Vue.prototype.$bkNotify = BkNotify

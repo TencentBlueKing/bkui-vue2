@@ -35,107 +35,107 @@ import Button from '@/components/button'
 import { mountComponent } from '../helpers'
 
 describe('DatePicker', () => {
-    it('render the correct markup and content', () => {
-        const wrapper = mountComponent(DatePicker, {
-            propsData: {
-                value: '',
-                placeholder: '请选择日期'
-            }
-        })
-
-        expect(wrapper.vm.type).toEqual('date')
-        expect(wrapper.vm.placement).toEqual('bottom-start')
-        expect(wrapper.vm.value).toEqual('')
-        expect(wrapper.vm.placeholder).toEqual('请选择日期')
-
-        wrapper.setProps({
-            placement: 'top-start',
-            type: 'datetime',
-            value: '2019-10-01 10:00:00'
-        })
-
-        expect(wrapper.vm.type).toEqual('datetime')
-        expect(wrapper.vm.placement).toEqual('top-start')
-        expect(wrapper.vm.value).toEqual('2019-10-01 10:00:00')
+  it('render the correct markup and content', () => {
+    const wrapper = mountComponent(DatePicker, {
+      propsData: {
+        value: '',
+        placeholder: '请选择日期'
+      }
     })
 
-    it('shortcuts props is correct', () => {
-        const wrapper = mountComponent(DatePicker, {
-            propsData: {
-                value: '',
-                placeholder: '请选择日期',
-                shortcuts: [
-                    {
-                        text: '今天',
-                        value () {
-                            return new Date()
-                        },
-                        onClick: picker => {
-                            console.error(picker)
-                        }
-                    },
-                    {
-                        text: '7天前',
-                        value () {
-                            const date = new Date()
-                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
-                            return date
-                        },
-                        onClick: picker => {
-                            console.error(picker)
-                        }
-                    }
-                ]
-            }
-        })
+    expect(wrapper.vm.type).toEqual('date')
+    expect(wrapper.vm.placement).toEqual('bottom-start')
+    expect(wrapper.vm.value).toEqual('')
+    expect(wrapper.vm.placeholder).toEqual('请选择日期')
 
-        expect(wrapper.findAll('.bk-picker-panel-shortcut').at(0).text()).toBe('今天')
-        expect(wrapper.findAll('.bk-picker-panel-shortcut').at(1).text()).toBe('7天前')
+    wrapper.setProps({
+      placement: 'top-start',
+      type: 'datetime',
+      value: '2019-10-01 10:00:00'
     })
 
-    it('open props is correct', async () => {
-        const parentWrapper = mountComponent({
-            data () {
-                return {
-                    open: false,
-                    type: 'datetime',
-                    value: '2019-10-01 10:00:00',
-                    placeholder: '请选择日期',
-                    shortcuts: [
-                        {
-                            text: '今天',
-                            value () {
-                                return new Date()
-                            },
-                            onClick: picker => {
-                                // console.error(picker)
-                            }
-                        },
-                        {
-                            text: '7天前',
-                            value () {
-                                const date = new Date()
-                                date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
-                                return date
-                            },
-                            onClick: picker => {
-                                // console.error(picker)
-                            }
-                        }
-                    ]
-                }
+    expect(wrapper.vm.type).toEqual('datetime')
+    expect(wrapper.vm.placement).toEqual('top-start')
+    expect(wrapper.vm.value).toEqual('2019-10-01 10:00:00')
+  })
+
+  it('shortcuts props is correct', () => {
+    const wrapper = mountComponent(DatePicker, {
+      propsData: {
+        value: '',
+        placeholder: '请选择日期',
+        shortcuts: [
+          {
+            text: '今天',
+            value () {
+              return new Date()
             },
-            components: { 'bk-button': Button, 'bk-date-picker': DatePicker },
-            template: `
+            onClick: picker => {
+              console.error(picker)
+            }
+          },
+          {
+            text: '7天前',
+            value () {
+              const date = new Date()
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+              return date
+            },
+            onClick: picker => {
+              console.error(picker)
+            }
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.findAll('.bk-picker-panel-shortcut').at(0).text()).toBe('今天')
+    expect(wrapper.findAll('.bk-picker-panel-shortcut').at(1).text()).toBe('7天前')
+  })
+
+  it('open props is correct', async () => {
+    const parentWrapper = mountComponent({
+      data () {
+        return {
+          open: false,
+          type: 'datetime',
+          value: '2019-10-01 10:00:00',
+          placeholder: '请选择日期',
+          shortcuts: [
+            {
+              text: '今天',
+              value () {
+                return new Date()
+              },
+              onClick: picker => {
+                // console.error(picker)
+              }
+            },
+            {
+              text: '7天前',
+              value () {
+                const date = new Date()
+                date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+                return date
+              },
+              onClick: picker => {
+                // console.error(picker)
+              }
+            }
+          ]
+        }
+      },
+      components: { 'bk-button': Button, 'bk-date-picker': DatePicker },
+      template: `
                 <div>
                     <bk-button theme="primary" @click="open = !open">primary</bk-button>
                     <bk-date-picker ref="bkDatePicker" :shortcuts="shortcuts" :open="open" :shortcut-close="true"></bk-date-picker>
                 </div>
             `
-        })
-
-        expect(parentWrapper.find('.bk-date-picker-dropdown').isVisible()).toBeFalsy()
-        parentWrapper.find('button').trigger('click')
-        expect(parentWrapper.find('.bk-date-picker-dropdown').isVisible()).toBeTruthy()
     })
+
+    expect(parentWrapper.find('.bk-date-picker-dropdown').isVisible()).toBeFalsy()
+    parentWrapper.find('button').trigger('click')
+    expect(parentWrapper.find('.bk-date-picker-dropdown').isVisible()).toBeTruthy()
+  })
 })

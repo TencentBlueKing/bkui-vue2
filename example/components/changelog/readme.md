@@ -4,19 +4,102 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.7 {page=#/changelog}
+###### 2022.03.24
+
+* **[add]**:
+    - [Select 下拉选框](#/select) [支持自定义输入](#/select?anchor=zhi-chi-zi-ding-yi-shu-ru) [#224](https://github.com/TencentBlueKing/bkui-vue2/issues/224)
+    - [Select 下拉选框](#/select) [支持滚动加载](#/select?anchor=xia-la-lie-biao-gun-dong-fen-ye) [#223](https://github.com/TencentBlueKing/bkui-vue2/issues/223)
+* **[fix]**:
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 修复 show 和 hide 事件无法监听的问题 [#217](https://github.com/TencentBlueKing/bkui-vue2/issues/217)
+
+---
+
+### 2.4.6 {page=#/changelog}
+###### 2022.03.03
+
+* **[add]**:
+    - [Badge 标记](#/badge) badge 组件支持[不包裹任何元素，独立使用](#/badge?anchor=bu-bao-guo-ren-he-yuan-su-du-li-shi-yong) [#18](https://github.com/TencentBlueKing/bkui-vue2/issues/18)
+    - [Big Tree 大树](#/big-tree) 新增 enable-title-tip 配置用来开启节点的 title 提示（浏览器的 title 提示）
+    - [Cascade 级联选框](#/cascade) 支持触发表单校验
+* **[fix]**:
+    - [Table 表格](#/table) 修复表格会被外部 white-space 样式影响问题
+    - [Affix 图钉](#/affix) 修复 affix 组件设置 target 后无宽度问题
+    - [Input 输入框](#/input) 数字输入框，修复设置最大最小输入范围清空内容后，点击加减控制图标，无论限制范围(min, max)，都会从 1 开始递增的问题
+
+---
+
+### 2.4.5 {page=#/changelog}
+###### 2022.01.20
+
+* **[add]**:
+    - [Upload 文件上传](#/upload) 新增[大文件分片上传](#/upload?anchor=da-wen-jian-fen-pian-shang-chuan)
+    - [Select 下拉选框](#/select) 新增下拉框高度在[标签多选](#/select?anchor=duo-xuan)形式是否自动撑开的配置 `auto-height`
+* **[fix]**:
+    - [Cascade 级联选框](#/cascade) 修复禁用状态下依旧能删除 tag 的问题
+    - [Table 表格](#/table) 修复开启定位和自动行高拖动修改列宽，影响行高没有重新计算定位行高的问题
+* **[update]**:
+    - [ZoomImage 缩放图组件](#/zoom-image) 样式优化
+    - [Divider 分割线](#/divider) 样式优化
+    - [Image 图片](#/image) 示例优化
+
+---
+
+### 2.4.4 {page=#/changelog}
+###### 2022.01.10
+
+* **[fix]**:
+    - [Loading 加载](#/loading) 修复计算变量 set 问题
+
+---
+
+### 2.4.3 {page=#/changelog}
+###### 2022.01.05
+
+* **[fix]**:
+    - [Table 表格](#/table) 添加 tippy-options 属性，对翻页下拉的自定义配置 [#188](https://github.com/TencentBlueKing/bkui-vue2/issues/188)
+    - 去掉代码中无用的日志
+
+---
+
+### 2.4.2 {page=#/changelog}
+###### 2021.12.31
+
+* **[fix]**:
+    - 修复 provide/inject 无默认值的问题
+    - 修复示例页面的一些小问题
+
+---
+
+### 2.4.1 {page=#/changelog}
+###### 2021.12.30
+
+* **[add]**:
+    - [Process 步骤](#/process) 支持自定义步骤状态 [#182](https://github.com/TencentBlueKing/bkui-vue2/issues/182)
+    - [Spin 加载中](#/spin) 新增 info 主题 [#183](https://github.com/TencentBlueKing/bkui-vue2/issues/183)
+    - [Image 图片](#/image) 图片预览增加蒙层关闭配置，增加 tooltips 以及样式优化
+* **[fix]**:
+    - [Dialog 对话框](#/dialog) dialog 组件自定义 z-index 不生效 [#180](https://github.com/TencentBlueKing/bkui-vue2/issues/180)
+* **[update]**:
+    - [Table 表格](#/table) table 底部加载样式调整 [#183](https://github.com/TencentBlueKing/bkui-vue2/issues/183)
+    - [Checkbox 多选框](#/checkbox) 更改 checkbox-group 注册子组件方式
+    - [Cascade 级联选框](#/cascade) 组件支持自定义节点展示的内容
+
+---
+
 ### 2.4.0 {page=#/changelog}
 ###### 2021.12.10
 
 * **[add]**:
-    - [Select 下拉选框](#/select) 支持[分组全选](#/select?anchor=fen-zu--quan-xuan)
-    - [SearchSelect 查询选择器](#/searchselect) 新增 overflow 下 tag 加入 +num 显示
-    - [Table 表格](#/table) 新增[底部加载](#/table?anchor=di-bu-jia-zai)
+    - [Select 下拉选框](#/select) 支持[分组全选](#/select?anchor=fen-zu--quan-xuan) [#56](https://github.com/TencentBlueKing/bkui-vue2/issues/56)
+    - [SearchSelect 查询选择器](#/searchselect) 新增 overflow 下 tag 加入 +num 显示 [#145](https://github.com/TencentBlueKing/bkui-vue2/issues/145)
+    - [Table 表格](#/table) 新增[底部加载](#/table?anchor=di-bu-jia-zai) [#147](https://github.com/TencentBlueKing/bkui-vue2/issues/147)
     - [Big Tree 大树](#/big-tree) 增加 [size 选项](#/big-tree?anchor=shu-de-chi-cun)
     - [DatePicker 日期选择器](#/date-picker) 新增 `header` slot
     - [Breadcrumb 面包屑](#/breadcrumb) [支持返回配置以及前置插槽](#/breadcrumb?anchor=zhi-chi-fan-hui-pei-zhi-yi-ji-qian-zhi-cha-cao)
 * **[fix]**:
     - [Loading 加载](#/loading) 修复 z-index 的默认值 0 导致不传参时层级错误问题
-    - [Select 下拉选框](#/select) 修复 ziindex 设置不生效问题
+    - [Select 下拉选框](#/select) 修复 z-index 设置不生效问题
     - [TagInput 标签输入框](#/tag) tag-input 修复单选在多个 search-key 下出错的问题
     - [Table 表格](#/table) 修复 table 组件在 dialog 中高度失效问题；修复 table 组件开启 tooltip 后快速滚动列表 tooltip 不能及时消失的问题
     - [Cascade 级联选框](#/cascade) 修复级联菜单多选情况下动态加载的问题；修复级联菜单宽度小时，tag 上删除按钮样式错乱的问题

@@ -27,187 +27,195 @@
 -->
 
 <template>
-    <div class="bk-dropdown-menu"
-        :class="[disabled ? 'disabled' : '',positionFixed ? '' : 'bk-dropdown-full-width', fontSizeCls, extCls]"
-        v-clickoutside="handleClickoutside"
-        tabindex="0"
-        @keydown.enter.prevent="handleMouseover"
-        @keydown.esc.stop.prevent="handleMouseout"
-        @click="handleClick"
-        @mouseover="handleMouseover"
-        @mouseout="handleMouseout">
-        <div class="bk-dropdown-trigger" ref="refDropTrigger">
-            <slot name="dropdown-trigger"></slot>
-        </div>
-        <div ref="refDropContent" :class="[
-            'bk-dropdown-content', {
-                'is-show': isShow,
-                'right-align': align === 'right',
-                'center-align': align === 'center',
-                'left-align': align === 'left'
-            }]">
-            <slot name="dropdown-content"></slot>
-        </div>
+  <div class="bk-dropdown-menu"
+    :class="[disabled ? 'disabled' : '',positionFixed ? '' : 'bk-dropdown-full-width', fontSizeCls, extCls]"
+    v-clickoutside="handleClickoutside"
+    :style="{ height: containerHeight + 'px' }"
+    tabindex="0"
+    @keydown.enter.prevent="handleMouseover"
+    @keydown.esc.stop.prevent="handleMouseout"
+    @click="handleClick"
+    @mouseenter="handleMouseover"
+    @mouseleave="handleMouseout">
+    <div class="bk-dropdown-trigger" ref="refDropTrigger">
+      <slot name="dropdown-trigger"></slot>
     </div>
+    <div ref="refDropContent" :class="[
+      'bk-dropdown-content', {
+        'is-show': isShow,
+        'right-align': align === 'right',
+        'center-align': align === 'center',
+        'left-align': align === 'left'
+      }]">
+      <slot name="dropdown-content"></slot>
+    </div>
+  </div>
 </template>
 
 <script>
-    import clickoutside from '@/directives/clickoutside'
-    import Popper from 'popper.js'
-    import { dropdownMarginBottom } from '@/ui/variable'
+import clickoutside from '@/directives/clickoutside'
+import Popper from 'popper.js'
+import { dropdownMarginBottom } from '@/ui/variable'
 
-    export default {
-        name: 'bk-dropdown-menu',
-        directives: {
-            clickoutside
-        },
-        props: {
-            trigger: {
-                type: String,
-                default: 'mouseover',
-                validator (event) {
-                    return ['click', 'mouseover'].includes(event)
-                }
-            },
-            align: {
-                type: String,
-                default: 'left'
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-            // 1.x为 positionFixed，2.x 为strategy
-            positionFixed: {
-                type: Boolean,
-                default: false
-            },
-            // normal: 12px
-            // medium: 14px
-            // large: 16px
-            fontSize: {
-                type: String,
-                default: 'normal'
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            },
-            /**
-             * 显示延迟时间，单位为毫秒
-             */
-            openDelay: {
-                type: Number,
-                default: 0
-            },
-            /**
-             * 隐藏延迟时间，单位为毫秒
-             */
-            closeDelay: {
-                type: Number,
-                default: 100
-            }
-        },
-        data () {
-            return {
-                menuStyle: null,
-                timer: 0,
-                isShow: false,
-                popInstance: null
-            }
-        },
-        computed: {
-            fontSizeCls () {
-                let cls = ''
-                if (this.fontSize === 'medium') {
-                    cls = 'medium-font'
-                } else if (this.fontSize === 'large') {
-                    cls = 'large-font'
-                }
-                return cls
-            }
-        },
-        mounted () {
-            const placement = `bottom${this.getPlacementFix()}`
-            this.popInstance = new Popper(this.$refs.refDropTrigger, this.$refs.refDropContent, {
-                placement,
-                positionFixed: this.positionFixed,
-                modifiers: {
-                    offset: {
-                        offset: `0, ${dropdownMarginBottom}`
-                    },
-                    keepTogether: {}
-                }
-            })
-        },
-        beforeDestroy () {
-            if (this.popInstance) {
-                this.popInstance.destroy()
-                this.popInstance = null
-            }
-        },
-        methods: {
-            getPlacementFix () {
-                const placementFix = {
-                    'left': '-start',
-                    'right': '-end',
-                    'center': ''
-                }
-                const fixAppend = placementFix[this.align]
-                if (fixAppend !== undefined) {
-                    return fixAppend
-                }
-
-                return ''
-            },
-            handleClick () {
-                if (this.disabled || this.trigger !== 'click') {
-                    return
-                }
-                this.isShow ? this.hide() : this.show()
-            },
-            handleMouseover () {
-                if (this.trigger === 'mouseover' && !this.disabled) {
-                    this.show()
-                }
-            },
-            handleMouseout () {
-                if (this.trigger === 'mouseover' && !this.disabled) {
-                    this.hide()
-                }
-            },
-            handleClickoutside () {
-                if (this.isShow) {
-                    this.hide()
-                }
-            },
-
-            /**
-             * A quite wonderful function.
-             * @param {object} - privacy gown
-             * @param {object} - security
-             * @returns {survival}
-             */
-            show () {
-                clearTimeout(this.openTimer)
-                clearTimeout(this.closeTimer)
-                this.openTimer = setTimeout(() => {
-                    this.isShow = true
-                }, this.openDelay)
-                this.popInstance.scheduleUpdate()
-            },
-            hide () {
-                clearTimeout(this.closeTimer)
-                clearTimeout(this.openTimer)
-                this.closeTimer = setTimeout(() => {
-                    this.isShow = false
-                }, this.closeDelay)
-                this.popInstance.scheduleUpdate()
-            }
-        }
+export default {
+  name: 'bk-dropdown-menu',
+  directives: {
+    clickoutside
+  },
+  props: {
+    trigger: {
+      type: String,
+      default: 'mouseover',
+      validator (event) {
+        return ['click', 'mouseover'].includes(event)
+      }
+    },
+    align: {
+      type: String,
+      default: 'left'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    // 1.x为 positionFixed，2.x 为strategy
+    positionFixed: {
+      type: Boolean,
+      default: false
+    },
+    // normal: 12px
+    // medium: 14px
+    // large: 16px
+    fontSize: {
+      type: String,
+      default: 'normal'
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
+    },
+    /**
+     * 显示延迟时间，单位为毫秒
+     */
+    openDelay: {
+      type: Number,
+      default: 0
+    },
+    /**
+     * 隐藏延迟时间，单位为毫秒
+     */
+    closeDelay: {
+      type: Number,
+      default: 100
     }
+  },
+  data () {
+    return {
+      menuStyle: null,
+      timer: 0,
+      isShow: false,
+      popInstance: null,
+      containerHeight: 32
+    }
+  },
+  computed: {
+    fontSizeCls () {
+      let cls = ''
+      if (this.fontSize === 'medium') {
+        cls = 'medium-font'
+      } else if (this.fontSize === 'large') {
+        cls = 'large-font'
+      }
+      return cls
+    }
+  },
+  mounted () {
+    // 让 container 的高度把 .bk-dropdown-trigger 以及 .bk-dropdown-content 向上偏移的 dropdownMarginBottom 覆盖
+    // .bk-dropdown-trigger 与 .bk-dropdown-content 之间没有空隙，这样鼠标在两个元素之间滑动时，不会多次触发 show 和 hide 事件
+    this.containerHeight = this.containerHeight + parseInt(dropdownMarginBottom, 10)
+
+    const placement = `bottom${this.getPlacementFix()}`
+    this.popInstance = new Popper(this.$refs.refDropTrigger, this.$refs.refDropContent, {
+      placement,
+      positionFixed: this.positionFixed,
+      modifiers: {
+        offset: {
+          offset: `0, ${dropdownMarginBottom}`
+        },
+        keepTogether: {}
+      }
+    })
+  },
+  beforeDestroy () {
+    if (this.popInstance) {
+      this.popInstance.destroy()
+      this.popInstance = null
+    }
+  },
+  methods: {
+    getPlacementFix () {
+      const placementFix = {
+        'left': '-start',
+        'right': '-end',
+        'center': ''
+      }
+      const fixAppend = placementFix[this.align]
+      if (fixAppend !== undefined) {
+        return fixAppend
+      }
+
+      return ''
+    },
+    handleClick () {
+      if (this.disabled || this.trigger !== 'click') {
+        return
+      }
+      this.isShow ? this.hide() : this.show()
+    },
+    handleMouseover () {
+      if (this.trigger === 'mouseover' && !this.disabled) {
+        this.show()
+      }
+    },
+    handleMouseout () {
+      if (this.trigger === 'mouseover' && !this.disabled) {
+        this.hide()
+      }
+    },
+    handleClickoutside () {
+      if (this.isShow) {
+        this.hide()
+      }
+    },
+
+    /**
+     * A quite wonderful function.
+     * @param {object} - privacy gown
+     * @param {object} - security
+     * @returns {survival}
+     */
+    show () {
+      clearTimeout(this.openTimer)
+      clearTimeout(this.closeTimer)
+      this.openTimer = setTimeout(() => {
+        this.isShow = true
+        this.$emit('show')
+      }, this.openDelay)
+      this.popInstance.scheduleUpdate()
+    },
+    hide () {
+      clearTimeout(this.closeTimer)
+      clearTimeout(this.openTimer)
+      this.closeTimer = setTimeout(() => {
+        this.isShow = false
+        this.$emit('hide')
+      }, this.closeDelay)
+      this.popInstance.scheduleUpdate()
+    }
+  }
+}
 </script>
 <style>
-    @import '../../ui/dropdown-menu.css';
+  @import '../../ui/dropdown-menu.css';
 </style>

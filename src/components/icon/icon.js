@@ -31,65 +31,65 @@
  */
 
 export default ({
-    fontLibrary = 'bk-icon',
-    prefix = 'icon'
+  fontLibrary = 'bk-icon',
+  prefix = 'icon'
 } = {}) => ({
-    name: fontLibrary,
-    props: {
-        type: {
-            type: String,
-            required: true
-        },
-        svg: {
-            type: Boolean,
-            default: false
-        },
-        width: {
-            type: String,
-            default: '1em'
-        },
-        height: {
-            type: String,
-            default: '1em'
-        },
-        size: {
-            type: String,
-            default: 'inherit'
-        }
+  name: fontLibrary,
+  props: {
+    type: {
+      type: String,
+      required: true
     },
-    render (h) {
-        if (this.svg) {
-            return h('svg', {
-                style: {
-                    'width': this.width,
-                    'height': this.height,
-                    'font-size': this.size
-                },
-                attrs: {
-                    'fill': 'currentColor',
-                    'aria-hidden': true
-                },
-                props: this.$attrs,
-                on: this.$listeners
-            }, [
-                h('use', {
-                    attrs: {
-                        'xlink:href': `#${prefix}-${this.type}`
-                    }
-                })
-            ])
-        }
-        const classes = {
-            [fontLibrary]: true,
-            [`${prefix}-${this.type}`]: true
-        }
-        return h('i', {
-            style: {
-                'font-size': this.size
-            },
-            class: classes,
-            props: this.$attrs,
-            on: this.$listeners
-        })
+    svg: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: String,
+      default: '1em'
+    },
+    height: {
+      type: String,
+      default: '1em'
+    },
+    size: {
+      type: String,
+      default: 'inherit'
     }
+  },
+  render (h) {
+    if (this.svg) {
+      return h('svg', {
+        style: {
+          'width': this.width,
+          'height': this.height,
+          'font-size': this.size
+        },
+        attrs: {
+          'fill': 'currentColor',
+          'aria-hidden': true
+        },
+        props: this.$attrs,
+        on: this.$listeners
+      }, [
+        h('use', {
+          attrs: {
+            'xlink:href': `#${prefix}-${this.type}`
+          }
+        })
+      ])
+    }
+    const classes = {
+      [fontLibrary]: true,
+      [`${prefix}-${this.type}`]: true
+    }
+    return h('i', {
+      style: {
+        'font-size': this.size
+      },
+      class: classes,
+      props: this.$attrs,
+      on: this.$listeners
+    })
+  }
 })

@@ -27,50 +27,50 @@
 -->
 
 <template functional>
-    <div class="bk-big-tree-node clearfix"
-        v-if="props.node.visible"
-        :id="props.node.uid"
+  <div class="bk-big-tree-node clearfix"
+    v-if="props.node.visible"
+    :id="props.node.uid"
+    :class="{
+      'is-root': props.node.parent === null,
+      'is-leaf': !props.node.isFolder && props.node.isLeaf,
+      'is-folder': props.node.isFolder,
+      'is-expand': props.node.expanded,
+      'is-selected': props.node.selected,
+      'is-disabled': props.node.disabled,
+      'is-checked': props.node.checked,
+      'has-link-line': props.node.tree.hasLine
+    }"
+    :style="{
+      '--level': props.node.level,
+      '--line': props.node.line,
+      '--padding': `${props.node.tree.padding}px`
+    }"
+    @click="props.node.tree.handleNodeClick(props.node)">
+    <div class="node-options fl">
+      <i v-if="props.node.loading" :class="props.node.tree.loadingClass"></i>
+      <i v-else-if="props.node.isFolder || !props.node.isLeaf"
+        :class="['node-folder-icon', props.node.expanded ? props.node.expandIcon : props.node.collapseIcon]"
+        @click.stop="props.node.tree.handleNodeExpand(props.node)">
+      </i>
+      <span class="node-checkbox"
+        v-if="props.node.hasCheckbox"
         :class="{
-            'is-root': props.node.parent === null,
-            'is-leaf': !props.node.isFolder && props.node.isLeaf,
-            'is-folder': props.node.isFolder,
-            'is-expand': props.node.expanded,
-            'is-selected': props.node.selected,
-            'is-disabled': props.node.disabled,
-            'is-checked': props.node.checked,
-            'has-link-line': props.node.tree.hasLine
+          'is-disabled': props.node.disabled,
+          'is-checked': props.node.checked,
+          'is-indeterminate': props.node.indeterminate
         }"
-        :style="{
-            '--level': props.node.level,
-            '--line': props.node.line,
-            '--padding': `${props.node.tree.padding}px`
-        }"
-        @click="props.node.tree.handleNodeClick(props.node)">
-        <div class="node-options fl">
-            <i v-if="props.node.loading" :class="props.node.tree.loadingClass"></i>
-            <i v-else-if="props.node.isFolder || !props.node.isLeaf"
-                :class="['node-folder-icon', props.node.expanded ? props.node.expandIcon : props.node.collapseIcon]"
-                @click.stop="props.node.tree.handleNodeExpand(props.node)">
-            </i>
-            <span class="node-checkbox"
-                v-if="props.node.hasCheckbox"
-                :class="{
-                    'is-disabled': props.node.disabled,
-                    'is-checked': props.node.checked,
-                    'is-indeterminate': props.node.indeterminate
-                }"
-                @click.stop="props.node.tree.handleNodeCheck(props.node)">
-            </span>
-            <i v-if="props.node.nodeIcon"
-                :class="['node-icon', props.node.nodeIcon]">
-            </i>
-        </div>
-        <div class="node-content">
-            <slot
-                :node="props.node"
-                :data="props.node.data">
-                {{props.node.name}}
-            </slot>
-        </div>
+        @click.stop="props.node.tree.handleNodeCheck(props.node)">
+      </span>
+      <i v-if="props.node.nodeIcon"
+        :class="['node-icon', props.node.nodeIcon]">
+      </i>
     </div>
+    <div class="node-content" :title="props.enableTitleTip ? props.node.name : false">
+      <slot
+        :node="props.node"
+        :data="props.node.data">
+        {{props.node.name}}
+      </slot>
+    </div>
+  </div>
 </template>

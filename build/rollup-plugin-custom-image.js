@@ -35,42 +35,42 @@ const { extname } = require('path')
 const { createFilter } = require('rollup-pluginutils')
 
 const mimeTypes = {
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.png': 'image/png',
-    '.gif': 'image/gif',
-    '.svg': 'image/svg+xml'
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png': 'image/png',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml'
 }
 
 module.exports = function image (options = {}) {
-    const filter = createFilter(options.include, options.exclude)
+  const filter = createFilter(options.include, options.exclude)
 
-    return {
-        name: 'custom-image',
+  return {
+    name: 'custom-image',
 
-        load (id) {
-            if (!filter(id)) {
-                return null
-            }
+    load (id) {
+      if (!filter(id)) {
+        return null
+      }
 
-            const mime = mimeTypes[extname(id)]
-            if (!mime) {
-                return null
-            }
+      const mime = mimeTypes[extname(id)]
+      if (!mime) {
+        return null
+      }
 
-            const data = readFileSync(id, 'base64')
+      const data = readFileSync(id, 'base64')
 
-            // rollup 1.x 不需要修改 ast 了
-            // const code = `var img = new Image(); img.src = 'data:${mime};base64,${data}'; export default img.src;`
-            // const ast = {
-            //     type: 'Program',
-            //     sourceType: 'module',
-            //     start: 0,
-            //     end: null,
-            //     body: []
-            // }
-            // return { ast, code, map: { mappings: '' } }
-            return `var img = new Image(); img.src = 'data:${mime};base64,${data}'; export default img.src;`
-        }
+      // rollup 1.x 不需要修改 ast 了
+      // const code = `var img = new Image(); img.src = 'data:${mime};base64,${data}'; export default img.src;`
+      // const ast = {
+      //     type: 'Program',
+      //     sourceType: 'module',
+      //     start: 0,
+      //     end: null,
+      //     body: []
+      // }
+      // return { ast, code, map: { mappings: '' } }
+      return `var img = new Image(); img.src = 'data:${mime};base64,${data}'; export default img.src;`
     }
+  }
 }

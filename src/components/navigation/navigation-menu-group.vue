@@ -27,42 +27,42 @@
 -->
 
 <script>
-    export default {
-        name: 'bk-navigation-menu-group',
-        props: {
-            groupName: {
-                type: String,
-                default: ''
-            }
-        },
-        methods: {
-            content (h) {
-                if (!this.$slots.group && !this.groupName) {
-                    return null
-                }
-                return h('div', {
-                    class: {
-                        'group-name-wrap': true
-                    }
-                }, [h('div', {
-                    class: {
-                        'group-name': true
-                    }
-                }, this.$slots.group || this.groupName)])
-            }
-        },
-        render (h) {
-            return h('div', {
-                class: {
-                    'bk-navigation-menu-group': true
-                },
-                on: {
-                    click: (e) => this.$emit('click', e, this.groupName)
-                }
-            }, [this.content(h), this.$slots.default])
-        }
+export default {
+  name: 'bk-navigation-menu-group',
+  props: {
+    groupName: {
+      type: String,
+      default: ''
     }
+  },
+  methods: {
+    content (h) {
+      if (!this.$slots.group && !this.groupName) {
+        return null
+      }
+      return h('div', {
+        class: {
+          'group-name-wrap': true
+        }
+      }, [h('div', {
+        class: {
+          'group-name': true
+        }
+      }, this.$slots.group || this.groupName)])
+    }
+  },
+  render (h) {
+    return h('div', {
+      class: {
+        'bk-navigation-menu-group': true
+      },
+      on: {
+        click: (e) => this.$emit('click', e, this.groupName)
+      }
+    }, [this.content(h), this.$slots.default])
+  }
+}
 </script>
 <style>
- @import "../../ui/navigation-menu-group.css";
+  @import '../../ui/navigation-menu-group.css';
 </style>

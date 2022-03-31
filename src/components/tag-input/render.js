@@ -31,38 +31,38 @@
  */
 
 export default {
-    name: 'render',
-    functional: true,
-    props: {
-        node: Object,
-        displayKey: String,
-        searchKey: [String, Array],
-        searchKeyword: String,
-        tpl: Function
-    },
-    render (h, ct) {
-        const parentClass = 'bk-selector-node'
-        const textClass = 'text'
-        const { node, displayKey, searchKeyword, tpl } = ct.props
+  name: 'render',
+  functional: true,
+  props: {
+    node: Object,
+    displayKey: String,
+    searchKey: [String, Array],
+    searchKeyword: String,
+    tpl: Function
+  },
+  render (h, ct) {
+    const parentClass = 'bk-selector-node'
+    const textClass = 'text'
+    const { node, displayKey, searchKeyword, tpl } = ct.props
 
-        function highlightKeyword (value) {
-            if (searchKeyword) {
-                const keywordReg = new RegExp(`(${searchKeyword})`, 'i')
-                return value.replace(keywordReg, '<strong class="highlight-text">$1</strong>')
-            } else {
-                return value
-            }
-        }
-
-        if (tpl) {
-            const innerHtml = tpl(node, ct, highlightKeyword, h)
-            return innerHtml
-        } else {
-            return (
-                <div class={parentClass}>
-                    <span domPropsInnerHTML={highlightKeyword(node[displayKey])} class={textClass}></span>
-                </div>
-            )
-        }
+    function highlightKeyword (value) {
+      if (searchKeyword) {
+        const keywordReg = new RegExp(`(${searchKeyword})`, 'i')
+        return value.replace(keywordReg, '<strong class="highlight-text">$1</strong>')
+      } else {
+        return value
+      }
     }
+
+    if (tpl) {
+      const innerHtml = tpl(node, ct, highlightKeyword, h)
+      return innerHtml
+    } else {
+      return (
+        <div class={parentClass}>
+          <span domPropsInnerHTML={highlightKeyword(node[displayKey])} class={textClass}></span>
+        </div>
+      )
+    }
+  }
 }

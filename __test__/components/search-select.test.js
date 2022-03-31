@@ -35,86 +35,86 @@ import { createTestComp } from '../helpers'
 import bkSearchSelect from '@/components/search-select'
 
 describe('search-select', () => {
-    let wrapper
-    if (global.document) { // fix vm.$nextTick
-        document.createRange = () => ({
-            setStart: () => {},
-            setEnd: () => {},
-            commonAncestorContainer: {
-                nodeName: 'BODY',
-                ownerDocument: document
-            }
-        })
-    }
+  let wrapper
+  if (global.document) { // fix vm.$nextTick
+    document.createRange = () => ({
+      setStart: () => {},
+      setEnd: () => {},
+      commonAncestorContainer: {
+        nodeName: 'BODY',
+        ownerDocument: document
+      }
+    })
+  }
 
-    global.beforeEach(() => {
-        wrapper && wrapper.destroy()
+  global.beforeEach(() => {
+    wrapper && wrapper.destroy()
+  })
+
+  global.afterEach(() => {
+    wrapper && wrapper.destroy()
+  })
+
+  test('is create correct', async done => {
+    wrapper = mount(bkSearchSelect, {
+      sync: false,
+      propsData: {
+        data: [
+          {
+            name: 'test-1',
+            id: 'test-1'
+          },
+          {
+            name: 'test-2',
+            id: 'test-2'
+          }
+        ]
+      }
+    })
+    await expect(wrapper.classes('search-select-wrap')).toBe(true)
+    done()
+  })
+
+  test('static props can set correct', async done => {
+    wrapper = mount(bkSearchSelect, {
+      sync: false,
+      propsData: {
+        data: [
+          {
+            nameTest: 'test-1',
+            idTest: 'test-1'
+          },
+          {
+            nameTest: 'test-2',
+            idTest: 'test-2'
+          }
+        ],
+        placeholder: 'test-placeholder',
+        maxHeight: 180,
+        minHeight: 100,
+        displayKey: 'nameTest',
+        primaryKey: 'idTest',
+        wrapZindex: 100,
+        defaultFocus: false,
+        values: []
+      }
     })
 
-    global.afterEach(() => {
-        wrapper && wrapper.destroy()
-    })
+    const vm = wrapper.vm
+    const input = vm.$el.querySelector('.div-input')
+    await expect(input.dataset.placeholder).toBe('test-placeholder')
+    await expect(vm.$el.querySelector('.search-input').style.maxHeight).toEqual('100px')
+    await expect(vm.$el.style.zIndex).toEqual('100')
+    await expect(vm.$props.displayKey).toEqual('nameTest')
+    await expect(vm.$props.primaryKey).toEqual('idTest')
+    input.click()
+    await vm.$nextTick()
+    expect(vm.$el.querySelector('.search-input').style.maxHeight).toEqual('180px')
+    done()
+  })
 
-    test('is create correct', async done => {
-        wrapper = mount(bkSearchSelect, {
-            sync: false,
-            propsData: {
-                data: [
-                    {
-                        name: 'test-1',
-                        id: 'test-1'
-                    },
-                    {
-                        name: 'test-2',
-                        id: 'test-2'
-                    }
-                ]
-            }
-        })
-        await expect(wrapper.classes('search-select-wrap')).toBe(true)
-        done()
-    })
-
-    test('static props can set correct', async done => {
-        wrapper = mount(bkSearchSelect, {
-            sync: false,
-            propsData: {
-                data: [
-                    {
-                        nameTest: 'test-1',
-                        idTest: 'test-1'
-                    },
-                    {
-                        nameTest: 'test-2',
-                        idTest: 'test-2'
-                    }
-                ],
-                placeholder: 'test-placeholder',
-                maxHeight: 180,
-                minHeight: 100,
-                displayKey: 'nameTest',
-                primaryKey: 'idTest',
-                wrapZindex: 100,
-                defaultFocus: false,
-                values: []
-            }
-        })
-
-        const vm = wrapper.vm
-        const input = vm.$el.querySelector('.div-input')
-        await expect(input.dataset.placeholder).toBe('test-placeholder')
-        await expect(vm.$el.querySelector('.search-input').style.maxHeight).toEqual('100px')
-        await expect(vm.$el.style.zIndex).toEqual('100')
-        await expect(vm.$props.displayKey).toEqual('nameTest')
-        await expect(vm.$props.primaryKey).toEqual('idTest')
-        input.click()
-        await vm.$nextTick()
-        expect(vm.$el.querySelector('.search-input').style.maxHeight).toEqual('180px')
-        done()
-    })
-
-    test('test filter methods and event can trigger correct', async done => {
-        wrapper = mount(createTestComp(`
+  test('test filter methods and event can trigger correct', async done => {
+    wrapper = mount(createTestComp(`
                 <bk-search-select
                     ref="searchSelect"
                     :default-focus="true"
@@ -127,104 +127,104 @@ describe('search-select', () => {
                     @input-change="handleInputChange"
                     v-model="values">
                 </bk-search-select>`, {
-            components: {
-                bkSearchSelect
-            },
-            data () {
-                return {
-                    data: [
-                        {
-                            name: 'test-1',
-                            id: 'test-1',
-                            children: [
-                                {
-                                    name: 'child-1',
-                                    id: 'chidl-1'
-                                },
-                                {
-                                    name: 'child-2',
-                                    id: 'chidl-2'
-                                },
-                                {
-                                    name: 'child-3',
-                                    id: 'chidl-3'
-                                }
-                            ]
-                        },
-                        {
-                            name: 'test-2',
-                            id: 'test-2'
-                        }
-                    ],
-                    values: [],
-                    menuTrigger: false,
-                    childTrigger: false,
-                    inputChangeTrigger: false,
-                    inputClickTrigger: false,
-                    inputFocusTrigger: false
+      components: {
+        bkSearchSelect
+      },
+      data () {
+        return {
+          data: [
+            {
+              name: 'test-1',
+              id: 'test-1',
+              children: [
+                {
+                  name: 'child-1',
+                  id: 'chidl-1'
+                },
+                {
+                  name: 'child-2',
+                  id: 'chidl-2'
+                },
+                {
+                  name: 'child-3',
+                  id: 'chidl-3'
                 }
+              ]
             },
-            methods: {
-                handleFilterChildrenMethod () {
-                    this.childTrigger = true
-                    return []
-                },
-                handleFilterMenuMethod () {
-                    this.menuTrigger = true
-                    return []
-                },
-                handleInputChange () {
-                    this.inputChangeTrigger = true
-                },
-                handleInputClick () {
-                    this.inputClickTrigger = true
-                },
-                handleInputFocus () {
-                    this.inputFocusTrigger = true
-                }
+            {
+              name: 'test-2',
+              id: 'test-2'
             }
-        }), { sync: false })
-        const vm = wrapper.vm.$refs.searchSelect
-        const input = vm.$refs.input
-        input.click()
-        await vm.$nextTick()
-        // 模拟输入
-        input.textContent = 'test-1'
-        input.innerText = 'test-1'
-        vm.handleInputChange({
-            target: input,
-            preventDefault () {
+          ],
+          values: [],
+          menuTrigger: false,
+          childTrigger: false,
+          inputChangeTrigger: false,
+          inputClickTrigger: false,
+          inputFocusTrigger: false
+        }
+      },
+      methods: {
+        handleFilterChildrenMethod () {
+          this.childTrigger = true
+          return []
+        },
+        handleFilterMenuMethod () {
+          this.menuTrigger = true
+          return []
+        },
+        handleInputChange () {
+          this.inputChangeTrigger = true
+        },
+        handleInputClick () {
+          this.inputClickTrigger = true
+        },
+        handleInputFocus () {
+          this.inputFocusTrigger = true
+        }
+      }
+    }), { sync: false })
+    const vm = wrapper.vm.$refs.searchSelect
+    const input = vm.$refs.input
+    input.click()
+    await vm.$nextTick()
+    // 模拟输入
+    input.textContent = 'test-1'
+    input.innerText = 'test-1'
+    vm.handleInputChange({
+      target: input,
+      preventDefault () {
 
-            }
-        })
-        vm.initChildMenu()
-        vm.menu.active = 0
-        await vm.$nextTick()
-        // 模拟搜索
-        vm.handleSearch('test-1')
-        await vm.$nextTick()
-        await expect(wrapper.vm.menuTrigger).toBe(true)
-        input.textContent = 'test-1：1'
-        input.innerText = 'test-1：1'
-        vm.handleInputChange({
-            target: input,
-            preventDefault () {
-
-            }
-        })
-        vm.handleSearch('1')
-        await vm.$nextTick()
-        await expect(wrapper.vm.childTrigger).toBe(true)
-        await expect(wrapper.vm.inputChangeTrigger).toBe(true)
-        await expect(wrapper.vm.inputClickTrigger).toBe(true)
-        input.focus()
-        await vm.$nextTick()
-        await expect(wrapper.vm.inputFocusTrigger).toBe(true)
-        done()
+      }
     })
+    vm.initChildMenu()
+    vm.menu.active = 0
+    await vm.$nextTick()
+    // 模拟搜索
+    vm.handleSearch('test-1')
+    await vm.$nextTick()
+    await expect(wrapper.vm.menuTrigger).toBe(true)
+    input.textContent = 'test-1：1'
+    input.innerText = 'test-1：1'
+    vm.handleInputChange({
+      target: input,
+      preventDefault () {
 
-    test('test remote methods and event cant trigger correct', async done => {
-        wrapper = mount(createTestComp(`
+      }
+    })
+    vm.handleSearch('1')
+    await vm.$nextTick()
+    await expect(wrapper.vm.childTrigger).toBe(true)
+    await expect(wrapper.vm.inputChangeTrigger).toBe(true)
+    await expect(wrapper.vm.inputClickTrigger).toBe(true)
+    input.focus()
+    await vm.$nextTick()
+    await expect(wrapper.vm.inputFocusTrigger).toBe(true)
+    done()
+  })
+
+  test('test remote methods and event cant trigger correct', async done => {
+    wrapper = mount(createTestComp(`
                 <bk-search-select
                     ref="searchSelect"
                     :default-focus="true"
@@ -232,69 +232,69 @@ describe('search-select', () => {
                     :remote-method="handleRemoteMethod"
                     v-model="values">
                 </bk-search-select>`, {
-            components: {
-                bkSearchSelect
+      components: {
+        bkSearchSelect
+      },
+      data () {
+        return {
+          data: [
+            {
+              name: 'test-1',
+              id: 'test-1',
+              remote: true
             },
-            data () {
-                return {
-                    data: [
-                        {
-                            name: 'test-1',
-                            id: 'test-1',
-                            remote: true
-                        },
-                        {
-                            name: 'test-2',
-                            id: 'test-2'
-                        }
-                    ],
-                    values: [],
-                    remoteTrigger: false
-                }
-            },
-            methods: {
-                async handleRemoteMethod () {
-                    this.remoteTrigger = true
-                    return [
-                        {
-                            name: 'test-remote-1',
-                            id: 'test-remote-1'
-                        },
-                        {
-                            name: 'test-remote-2',
-                            id: 'test-remote-2'
-                        },
-                        {
-                            name: 'test-remote-3',
-                            id: 'test-remote-3'
-                        }
-                    ]
-                }
+            {
+              name: 'test-2',
+              id: 'test-2'
             }
-        }), { sync: false })
-        const vm = wrapper.vm.$refs.searchSelect
-        const input = vm.$refs.input
-        input.click()
-        await vm.$nextTick()
-        vm.initChildMenu()
-        input.textContent = 'test-1：1'
-        input.innerText = 'test-1：1'
-        vm.menu.active = 0
-        vm.handleInputChange({
-            target: input,
-            preventDefault () {
+          ],
+          values: [],
+          remoteTrigger: false
+        }
+      },
+      methods: {
+        async handleRemoteMethod () {
+          this.remoteTrigger = true
+          return [
+            {
+              name: 'test-remote-1',
+              id: 'test-remote-1'
+            },
+            {
+              name: 'test-remote-2',
+              id: 'test-remote-2'
+            },
+            {
+              name: 'test-remote-3',
+              id: 'test-remote-3'
+            }
+          ]
+        }
+      }
+    }), { sync: false })
+    const vm = wrapper.vm.$refs.searchSelect
+    const input = vm.$refs.input
+    input.click()
+    await vm.$nextTick()
+    vm.initChildMenu()
+    input.textContent = 'test-1：1'
+    input.innerText = 'test-1：1'
+    vm.menu.active = 0
+    vm.handleInputChange({
+      target: input,
+      preventDefault () {
 
-            }
-        })
-        await vm.$nextTick()
-        vm.handleSearch('1')
-        await vm.$nextTick()
-        await expect(wrapper.vm.remoteTrigger).toBe(true)
-        done()
+      }
     })
+    await vm.$nextTick()
+    vm.handleSearch('1')
+    await vm.$nextTick()
+    await expect(wrapper.vm.remoteTrigger).toBe(true)
+    done()
+  })
 
-    test('test slot can set correct', async done => {
-        wrapper = mount(createTestComp(`
+  test('test slot can set correct', async done => {
+    wrapper = mount(createTestComp(`
                 <bk-search-select
                     ref="searchSelect"
                     :data="data"
@@ -306,29 +306,29 @@ describe('search-select', () => {
                         <div class="test-nextfix-slot">输入框后插槽</div>
                     </template>
                 </bk-search-select>`, {
-            components: {
-                bkSearchSelect
+      components: {
+        bkSearchSelect
+      },
+      data () {
+        return {
+          data: [
+            {
+              name: 'test-1',
+              id: 'test-1'
             },
-            data () {
-                return {
-                    data: [
-                        {
-                            name: 'test-1',
-                            id: 'test-1'
-                        },
-                        {
-                            name: 'test-2',
-                            id: 'test-2'
-                        }
-                    ],
-                    values: [],
-                    remoteTrigger: false
-                }
+            {
+              name: 'test-2',
+              id: 'test-2'
             }
-        }), { sync: false })
-        const vm = wrapper.vm.$refs.searchSelect
-        await expect(vm.$el.querySelector('.test-prefix-slot')).not.toBeNull()
-        await expect(vm.$el.querySelector('.test-nextfix-slot')).not.toBeNull()
-        done()
-    })
+          ],
+          values: [],
+          remoteTrigger: false
+        }
+      }
+    }), { sync: false })
+    const vm = wrapper.vm.$refs.searchSelect
+    await expect(vm.$el.querySelector('.test-prefix-slot')).not.toBeNull()
+    await expect(vm.$el.querySelector('.test-nextfix-slot')).not.toBeNull()
+    done()
+  })
 })

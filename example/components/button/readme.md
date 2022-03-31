@@ -259,6 +259,9 @@
             </bk-button>
         </div>
         <div class="mr10" style="text-align: center;">
+            <bk-button title="primary" :text="true" :loading="true">
+                加载中...
+            </bk-button>
             <bk-button title="primary" :text="true" :disabled="true">
                 禁用状态
             </bk-button>

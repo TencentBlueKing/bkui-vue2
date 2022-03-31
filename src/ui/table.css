@@ -13,6 +13,7 @@ $tableCurrentRowBackground: #ecf5ff;
 $tableInfoColor: #909399;
 
 .bk-table {
+    white-space: normal;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
@@ -98,6 +99,7 @@ $tableInfoColor: #909399;
     th.is-leaf,
     td {
         border-bottom: $tableBorder;
+        height: 43px;
     }
 
     th.is-sortable {
@@ -237,6 +239,13 @@ $tableInfoColor: #909399;
         z-index: -1;
     }
 }
+
+.bk-table-row-auto-height {
+    .cell {
+        display: block;
+    }
+}
+
 .bk-table-group,
 .bk-table-border,
 .bk-table-outer-border {
@@ -587,11 +596,22 @@ td.bk-table-column-expand {
 }
 
 .bk-table-bottom-loading {
-    position: absolute;
-    bottom: 44px;
-    height: 42px;
-    width: calc(100% - 1px);
-    z-index: 100;
+    position: relative;
+    text-align: center;
+    bottom: 0;
+    height: 50px;
+    line-height: 45px;
+    width: 100%;
+    z-index: 777;
+    .bk-table-bottom-loading-spin {
+        .bk-icon {
+            font-size: 15px;
+        }
+        .bk-spin-title {
+            color: #979ba5;
+            font-size: 12px;
+        }
+    }
 }
 
 .bk-table-pagination-wrapper {

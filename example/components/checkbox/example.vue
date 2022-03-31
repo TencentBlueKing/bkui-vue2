@@ -27,57 +27,57 @@
 -->
 
 <template>
-    <section>
-        <h2>
-            <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
-            Checkbox 多选框更多示例
-        </h2>
-        <div class="example-item">
-            <bk-checkbox-group v-model="value">
-                <bk-checkbox :label="'value0'">0</bk-checkbox>
-                <bk-checkbox :label="'value1'">1</bk-checkbox>
-                <bk-checkbox :label="'value2'">2</bk-checkbox>
-                <bk-checkbox :label="'value3'">3</bk-checkbox>
-                <bk-checkbox :label="'value4'">4</bk-checkbox>
-                <bk-checkbox :label="'value5'">5</bk-checkbox>
-                <bk-checkbox :label="'value6'">6</bk-checkbox>
-                <bk-checkbox :label="'value7'">7</bk-checkbox>
-                <bk-checkbox :label="'value8'">8</bk-checkbox>
-                <bk-checkbox :label="'value9'">9</bk-checkbox>
-                <bk-checkbox :label="'value10'">10</bk-checkbox>
-                <bk-checkbox :label="'value11'">11</bk-checkbox>
-                <bk-checkbox :label="'value12'">12</bk-checkbox>
-                <bk-checkbox :label="'value13'">13</bk-checkbox>
-                <bk-checkbox :label="'value14'">14</bk-checkbox>
-                <bk-checkbox :label="'value15'">15</bk-checkbox>
-                <bk-checkbox :label="'value16'">16</bk-checkbox>
-                <bk-checkbox :label="'value17'">17</bk-checkbox>
-                <bk-checkbox :label="'value18'">18</bk-checkbox>
-                <bk-checkbox :label="'value19'">19</bk-checkbox>
-            </bk-checkbox-group>
-        </div>
-    </section>
+  <section>
+    <h2>
+      <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
+      Checkbox 多选框更多示例
+    </h2>
+    <div class="example-item">
+      <bk-checkbox-group v-model="value">
+        <bk-checkbox :label="'value0'">0</bk-checkbox>
+        <bk-checkbox :label="'value1'">1</bk-checkbox>
+        <bk-checkbox :label="'value2'">2</bk-checkbox>
+        <bk-checkbox :label="'value3'">3</bk-checkbox>
+        <bk-checkbox :label="'value4'">4</bk-checkbox>
+        <bk-checkbox :label="'value5'">5</bk-checkbox>
+        <bk-checkbox :label="'value6'">6</bk-checkbox>
+        <bk-checkbox :label="'value7'">7</bk-checkbox>
+        <bk-checkbox :label="'value8'">8</bk-checkbox>
+        <bk-checkbox :label="'value9'">9</bk-checkbox>
+        <bk-checkbox :label="'value10'">10</bk-checkbox>
+        <bk-checkbox :label="'value11'">11</bk-checkbox>
+        <bk-checkbox :label="'value12'">12</bk-checkbox>
+        <bk-checkbox :label="'value13'">13</bk-checkbox>
+        <bk-checkbox :label="'value14'">14</bk-checkbox>
+        <bk-checkbox :label="'value15'">15</bk-checkbox>
+        <bk-checkbox :label="'value16'">16</bk-checkbox>
+        <bk-checkbox :label="'value17'">17</bk-checkbox>
+        <bk-checkbox :label="'value18'">18</bk-checkbox>
+        <bk-checkbox :label="'value19'">19</bk-checkbox>
+      </bk-checkbox-group>
+    </div>
+  </section>
 </template>
 
 <script>
-    import { bkCheckbox, bkCheckboxGroup } from '@'
+import { bkCheckbox, bkCheckboxGroup } from '@'
 
-    export default {
-        components: {
-            bkCheckbox,
-            bkCheckboxGroup
-        },
-        data () {
-            return {
-                value: ['value2', 'value4']
-            }
-        },
-        methods: {
-            back () {
-                window.history.go(-1)
-            }
-        }
+export default {
+  components: {
+    bkCheckbox,
+    bkCheckboxGroup
+  },
+  data () {
+    return {
+      value: ['value2', 'value4']
     }
+  },
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
+  }
+}
 </script>
 <style lang="postcss">
     .bk-form-checkbox {

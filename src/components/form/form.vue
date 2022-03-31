@@ -27,140 +27,140 @@
 -->
 
 <template>
-    <form :class="[formCls, extCls]" @submit="formSubmit">
-        <slot></slot>
-    </form>
+  <form :class="[formCls, extCls]" @submit="formSubmit">
+    <slot></slot>
+  </form>
 </template>
 
 <script>
-    export default {
-        name: 'bk-form',
-        props: {
-            formType: {
-                type: String,
-                default: 'horizontal',
-                validator (val) {
-                    return ['vertical', 'inline', 'horizontal'].indexOf(val) > -1
-                }
-            },
-            rules: {
-                type: Object
-            },
-            labelWidth: {
-                type: Number,
-                default: 150
-            },
-            model: {
-                type: Object
-            },
-            // 外部设置的 class name
-            extCls: {
-                type: String,
-                default: ''
-            }
-        },
-        data () {
-            return {
-                formItems: []
-            }
-        },
-        computed: {
-            formCls () {
-                const style = ['bk-form']
-                if (this.formType === 'vertical') {
-                    style.push('bk-form-vertical')
-                } else if (this.formType === 'inline') {
-                    style.push('bk-inline-form')
-                }
-                return style
-            }
-        },
-        provide () {
-            return {
-                form: this
-            }
-        },
-        created () {
-            this.$on('form-item-add', item => {
-                if (item) {
-                    this.formItems.push(item)
-                }
-                return false
-            })
-            this.$on('form-item-delete', item => {
-                const index = this.formItems.findIndex(fromItem => fromItem.id === item.id)
-                if (item && (index !== -1)) {
-                    this.formItems.splice(index, 1)
-                }
-                return false
-            })
-        },
-        methods: {
-            formSubmit (e) {
-                this.$emit('submit', this.formItems)
-                e.preventDefault()
-            },
-            clearFieldError (field) {
-                if (!field) {
-                    return
-                }
-                for (const formItem of this.formItems) {
-                    if (field === formItem.property) {
-                        formItem.clearError()
-                    }
-                }
-            },
-            clearError () {
-                for (const field of this.formItems) {
-                    field.clearError()
-                }
-            },
-            validateField (field) {
-                if (!field) {
-                    return Promise.reject(new Error('field 不能为空'))
-                }
-                for (const formItem of this.formItems) {
-                    if (field === formItem.property) {
-                        return new Promise((resolve, reject) => {
-                            formItem.validate('', validator => {
-                                if (validator && validator.state === 'error') {
-                                    reject(validator)
-                                } else {
-                                    resolve()
-                                }
-                            })
-                        })
-                    }
-                }
-                return Promise.reject(new Error('filed 不存在'))
-            },
-            validate (callback) {
-                return new Promise((resolve, reject) => {
-                    let valid = true
-                    let count = 0
-                    const that = this
-                    for (const field of this.formItems) {
-                        field.validate('', validator => {
-                            if (validator && validator.state === 'error') {
-                                valid = false
-                                reject(validator)
-                                return false
-                            }
-                            // TODO: 优化callback, 无论成功失败都执行
-                            if (++count === that.formItems.length) {
-                                resolve(valid)
-                                if (typeof callback === 'function') {
-                                    callback(valid)
-                                }
-                            }
-                        })
-                    }
-                })
-            }
-        }
+export default {
+  name: 'bk-form',
+  props: {
+    formType: {
+      type: String,
+      default: 'horizontal',
+      validator (val) {
+        return ['vertical', 'inline', 'horizontal'].indexOf(val) > -1
+      }
+    },
+    rules: {
+      type: Object
+    },
+    labelWidth: {
+      type: Number,
+      default: 150
+    },
+    model: {
+      type: Object
+    },
+    // 外部设置的 class name
+    extCls: {
+      type: String,
+      default: ''
     }
+  },
+  data () {
+    return {
+      formItems: []
+    }
+  },
+  computed: {
+    formCls () {
+      const style = ['bk-form']
+      if (this.formType === 'vertical') {
+        style.push('bk-form-vertical')
+      } else if (this.formType === 'inline') {
+        style.push('bk-inline-form')
+      }
+      return style
+    }
+  },
+  provide () {
+    return {
+      form: this
+    }
+  },
+  created () {
+    this.$on('form-item-add', item => {
+      if (item) {
+        this.formItems.push(item)
+      }
+      return false
+    })
+    this.$on('form-item-delete', item => {
+      const index = this.formItems.findIndex(fromItem => fromItem.id === item.id)
+      if (item && (index !== -1)) {
+        this.formItems.splice(index, 1)
+      }
+      return false
+    })
+  },
+  methods: {
+    formSubmit (e) {
+      this.$emit('submit', this.formItems)
+      e.preventDefault()
+    },
+    clearFieldError (field) {
+      if (!field) {
+        return
+      }
+      for (const formItem of this.formItems) {
+        if (field === formItem.property) {
+          formItem.clearError()
+        }
+      }
+    },
+    clearError () {
+      for (const field of this.formItems) {
+        field.clearError()
+      }
+    },
+    validateField (field) {
+      if (!field) {
+        return Promise.reject(new Error('field 不能为空'))
+      }
+      for (const formItem of this.formItems) {
+        if (field === formItem.property) {
+          return new Promise((resolve, reject) => {
+            formItem.validate('', validator => {
+              if (validator && validator.state === 'error') {
+                reject(validator)
+              } else {
+                resolve()
+              }
+            })
+          })
+        }
+      }
+      return Promise.reject(new Error('filed 不存在'))
+    },
+    validate (callback) {
+      return new Promise((resolve, reject) => {
+        let valid = true
+        let count = 0
+        const that = this
+        for (const field of this.formItems) {
+          field.validate('', validator => {
+            if (validator && validator.state === 'error') {
+              valid = false
+              reject(validator)
+              return false
+            }
+            // TODO: 优化callback, 无论成功失败都执行
+            if (++count === that.formItems.length) {
+              resolve(valid)
+              if (typeof callback === 'function') {
+                callback(valid)
+              }
+            }
+          })
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style>
-    @import '../../ui/form.css';
+  @import '../../ui/form.css';
 </style>

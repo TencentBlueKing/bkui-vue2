@@ -27,93 +27,93 @@
 -->
 
 <template>
-    <label class="bk-form-radio-button"
-        :class="{ 'disabled': disabled }"
-        :tabindex="disabled ? false : 0"
-        @keydown.enter.prevent="handlerChange">
-        <input
-            class="bk-radio-button-input"
-            type="radio"
-            :name="groupName"
-            :checked="selected"
-            :key="current"
-            :disabled="disabled"
-            :tabindex="-1"
-            :class="{
-                'is-checked': selected
-            }"
-            @change="handlerChange" />
-        <div class="bk-radio-button-text"><slot>{{label}}</slot></div>
-    </label>
+  <label class="bk-form-radio-button"
+    :class="{ 'disabled': disabled }"
+    :tabindex="disabled ? false : 0"
+    @keydown.enter.prevent="handlerChange">
+    <input
+      class="bk-radio-button-input"
+      type="radio"
+      :name="groupName"
+      :checked="selected"
+      :key="current"
+      :disabled="disabled"
+      :tabindex="-1"
+      :class="{
+        'is-checked': selected
+      }"
+      @change="handlerChange" />
+    <div class="bk-radio-button-text"><slot>{{label}}</slot></div>
+  </label>
 </template>
 
 <script>
-    import mixin from './mixin'
-    /**
-    * bk-radio-button
-    * @module components/radio
-    * @desc 单选框
-    * @param disabled {Boolean} - 是否禁用， false
-    * @param value {String, Number} - 选项的值，false
-    * @example
-        <bk-radio-group v-model="value">
-            <bk-radio-button
-                :value="'work'">
-                工作
-            </bk-radio-button>
-            <bk-radio-button
-                :value="'happy'"
-                :disabled="true">
-                休假
-            </bk-radio-button>
-        </bk-radio-group>
-    */
-    export default {
-        name: 'bk-radio-button',
-        mixins: [mixin],
-        props: {
-            name: {
-                type: [String]
-            },
-            value: {
-                type: [String, Number, Boolean],
-                default: undefined
-            },
-            trueValue: {
-                type: [String, Number, Boolean],
-                default: true
-            },
-            falseValue: {
-                type: [String, Number, Boolean],
-                default: false
-            },
-            label: {
-                type: [String, Number]
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            }
-        },
-        watch: {
-            value (val) {
-                if (val === this.localTrueValue || val === this.falseValue) {
-                    this.updateValue()
-                }
-            }
-        },
-        methods: {
-            updateValue () {
-                if (this.parent) {
-                    this.current = this.parent.value
-                } else {
-                    this.current = this.value
-                }
-            }
-        }
+import mixin from './mixin'
+/**
+  * bk-radio-button
+  * @module components/radio
+  * @desc 单选框
+  * @param disabled {Boolean} - 是否禁用， false
+  * @param value {String, Number} - 选项的值，false
+  * @example
+      <bk-radio-group v-model="value">
+          <bk-radio-button
+              :value="'work'">
+              工作
+          </bk-radio-button>
+          <bk-radio-button
+              :value="'happy'"
+              :disabled="true">
+              休假
+          </bk-radio-button>
+      </bk-radio-group>
+  */
+export default {
+  name: 'bk-radio-button',
+  mixins: [mixin],
+  props: {
+    name: {
+      type: [String]
+    },
+    value: {
+      type: [String, Number, Boolean],
+      default: undefined
+    },
+    trueValue: {
+      type: [String, Number, Boolean],
+      default: true
+    },
+    falseValue: {
+      type: [String, Number, Boolean],
+      default: false
+    },
+    label: {
+      type: [String, Number]
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
+  },
+  watch: {
+    value (val) {
+      if (val === this.localTrueValue || val === this.falseValue) {
+        this.updateValue()
+      }
+    }
+  },
+  methods: {
+    updateValue () {
+      if (this.parent) {
+        this.current = this.parent.value
+      } else {
+        this.current = this.value
+      }
+    }
+  }
+}
 </script>
 
 <style>
-    @import '../../ui/radio-button.css';
+  @import '../../ui/radio-button.css';
 </style>

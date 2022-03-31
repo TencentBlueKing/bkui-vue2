@@ -22,7 +22,7 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
-*/
+ */
 
 /**
  * @file date-panel-mixin
@@ -33,63 +33,67 @@
 import { initTime } from '@/utils/date'
 
 export default {
-    props: {
-        showTime: {
-            type: Boolean,
-            default: false
-        },
-        format: {
-            type: String,
-            default: 'yyyy-MM-dd'
-        },
-        selectionMode: {
-            type: String,
-            default: 'date',
-            validator (value) {
-                if (['year', 'month', 'date', 'time'].indexOf(value) < 0) {
-                    console.error(`selectionMode property is not valid: '${value}'`)
-                    return false
-                }
-                return true
-            }
-        },
-        disabledDate: {
-            type: Function,
-            default: () => false
-        },
-        value: {
-            type: Array,
-            default: () => [initTime(), initTime()]
-        },
-        timePickerOptions: {
-            default: () => ({}),
-            type: Object
-        },
-        startDate: {
-            type: Date
-        },
-        pickerType: {
-            type: String,
-            require: true
-        },
-        focusedDate: {
-            type: Date,
-            required: true
-        },
-        // 结束时间是否允许“至今”
-        upToNow: {
-            type: Boolean,
-            default: false
-        }
+  props: {
+    showTime: {
+      type: Boolean,
+      default: false
     },
-    computed: {
-        isTime () {
-            return this.currentView === 'time'
-        }
+    format: {
+      type: String,
+      default: 'yyyy-MM-dd'
     },
-    methods: {
-        handleToggleTime () {
-            this.currentView = this.currentView === 'time' ? 'date' : 'time'
+    selectionMode: {
+      type: String,
+      default: 'date',
+      validator (value) {
+        if (['year', 'month', 'date', 'time'].indexOf(value) < 0) {
+          console.error(`selectionMode property is not valid: '${value}'`)
+          return false
         }
+        return true
+      }
+    },
+    disabledDate: {
+      type: Function,
+      default: () => false
+    },
+    value: {
+      type: Array,
+      default: () => [initTime(), initTime()]
+    },
+    timePickerOptions: {
+      default: () => ({}),
+      type: Object
+    },
+    startDate: {
+      type: Date
+    },
+    pickerType: {
+      type: String,
+      require: true
+    },
+    focusedDate: {
+      type: Date,
+      required: true
+    },
+    // 结束时间是否允许“至今”
+    upToNow: {
+      type: Boolean,
+      default: false
+    },
+    cellClass: {
+      type: Function,
+      default: () => ''
     }
+  },
+  computed: {
+    isTime () {
+      return this.currentView === 'time'
+    }
+  },
+  methods: {
+    handleToggleTime () {
+      this.currentView = this.currentView === 'time' ? 'date' : 'time'
+    }
+  }
 }

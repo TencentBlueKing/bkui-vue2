@@ -31,23 +31,23 @@
  */
 
 export default {
-    name: 'tag-render',
-    functional: true,
-    props: {
-        node: Object,
-        displayKey: String,
-        tpl: Function
-    },
-    render (h, ct) {
-        const parentClass = 'tag'
-        const textClass = 'text'
-        if (ct.props.tpl) {
-            return ct.props.tpl(ct.props.node, ct, h)
-        }
-        return (
-            <div class={parentClass}>
-                <span class={textClass}>{ct.props.node[ct.props.displayKey]}</span>
-            </div>
-        )
+  name: 'tag-render',
+  functional: true,
+  props: {
+    node: Object,
+    displayKey: String,
+    tpl: Function
+  },
+  render (h, ct) {
+    const parentClass = 'tag'
+    const textClass = 'text'
+    if (ct.props.tpl) {
+      return ct.props.tpl(ct.props.node, ct, h)
     }
+    return (
+      <div class={parentClass}>
+        <span class={textClass}>{ct.props.node[ct.props.displayKey]}</span>
+      </div>
+    )
+  }
 }

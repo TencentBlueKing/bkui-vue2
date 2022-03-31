@@ -26,7 +26,7 @@
 
 /**
  * @file gulp 编译单个组件，这里不会编译样式
- *       npm run build:component
+ *    npm run build:component
  *
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
@@ -56,98 +56,98 @@ const componentFileList = []
  * @param {string} filePath 遍历的目录
  */
 ;(function walkTpl (filePath) {
-    const dirList = readdirSync(filePath)
-    dirList.forEach(item => {
-        if (statSync(filePath + '/' + item).isDirectory()) {
-            if (extname(item) !== '.bak') {
-                walkTpl(filePath + '/' + item)
-            }
-        } else {
-            const ext = extname(item)
-            if (ext === '.js' && item === 'index.js') {
-                componentFileList.push({
-                    name: basename(filePath),
-                    path: relative('.', filePath + '/' + item)
-                })
-            }
-        }
-    })
+  const dirList = readdirSync(filePath)
+  dirList.forEach(item => {
+    if (statSync(filePath + '/' + item).isDirectory()) {
+      if (extname(item) !== '.bak') {
+        walkTpl(filePath + '/' + item)
+      }
+    } else {
+      const ext = extname(item)
+      if (ext === '.js' && item === 'index.js') {
+        componentFileList.push({
+          name: basename(filePath),
+          path: relative('.', filePath + '/' + item)
+        })
+      }
+    }
+  })
 })(join(__dirname, 'src/components'))
 
 // componentFileList.push(
-//     {
-//         name: 'locale',
-//         path: './src/locale/index.js'
-//     },
-//     {
-//         name: 'localeMixin',
-//         path: './src/mixins/locale.js'
-//     },
-//     {
-//         name: 'lang',
-//         path: './src/locale/lang/index.js'
-//     }
+//   {
+//     name: 'locale',
+//     path: './src/locale/index.js'
+//   },
+//   {
+//     name: 'localeMixin',
+//     path: './src/mixins/locale.js'
+//   },
+//   {
+//     name: 'lang',
+//     path: './src/locale/lang/index.js'
+//   }
 // )
 
 const utilFileList = [
-    {
-        name: 'tippy',
-        path: './src/utils/tippy/index.js'
-    },
-    {
-        name: 'pop-manager',
-        path: './src/utils/pop-manager.js'
-    },
-    {
-        name: 'z-index-manager',
-        path: './src/utils/z-index-manager.js'
-    },
-    {
-        name: 'z-index-manager',
-        path: './src/utils/z-index-manager.js'
-    },
-    {
-        name: 'deepmerge',
-        path: './src/utils/deepmerge.js'
-    },
-    {
-        name: 'svg-icon',
-        path: './src/utils/svg-icon.js'
-    },
-    {
-        name: 'pinyin',
-        path: './src/utils/pinyin/index.js'
-    }
+  {
+    name: 'tippy',
+    path: './src/utils/tippy/index.js'
+  },
+  {
+    name: 'pop-manager',
+    path: './src/utils/pop-manager.js'
+  },
+  {
+    name: 'z-index-manager',
+    path: './src/utils/z-index-manager.js'
+  },
+  {
+    name: 'z-index-manager',
+    path: './src/utils/z-index-manager.js'
+  },
+  {
+    name: 'deepmerge',
+    path: './src/utils/deepmerge.js'
+  },
+  {
+    name: 'svg-icon',
+    path: './src/utils/svg-icon.js'
+  },
+  {
+    name: 'pinyin',
+    path: './src/utils/pinyin/index.js'
+  }
 ]
 
 const mixinsFileList = [
-    {
-        name: 'emitter',
-        path: './src/mixins/emitter.js'
-    },
-    {
-        name: 'scrollbar',
-        path: './src/mixins/scrollbar.js'
-    }
+  {
+    name: 'emitter',
+    path: './src/mixins/emitter.js'
+  },
+  {
+    name: 'scrollbar',
+    path: './src/mixins/scrollbar.js'
+  }
 ]
 
 const localeFileList = [
-    {
-        name: 'index',
-        path: './src/locale/index.js'
-    },
-    {
-        name: 'index',
-        path: './src/locale/lang/index.js'
-    },
-    {
-        name: 'en-US',
-        path: './src/locale/lang/en-US.js'
-    },
-    {
-        name: 'zh-CN',
-        path: './src/locale/lang/zh-CN.js'
-    }
+  {
+    name: 'index',
+    path: './src/locale/index.js'
+  },
+  {
+    name: 'index',
+    path: './src/locale/lang/index.js'
+  },
+  {
+    name: 'en-US',
+    path: './src/locale/lang/en-US.js'
+  },
+  {
+    name: 'zh-CN',
+    path: './src/locale/lang/zh-CN.js'
+  }
 ]
 
 /**
@@ -156,254 +156,254 @@ const localeFileList = [
  * @type {Array}
  */
 const directiveFileList = [
-    {
-        name: 'clickoutside',
-        path: './src/directives/clickoutside.js'
-    },
-    {
-        name: 'tooltips',
-        path: './src/directives/tooltips.js'
-    },
-    {
-        name: 'overflow-tips',
-        path: './src/directives/overflow-tips.js'
-    },
-    {
-        name: 'transfer-dom',
-        path: './src/directives/transfer-dom.js'
-    },
-    {
-        name: 'copy',
-        path: './src/directives/copy.js'
-    }
+  {
+    name: 'clickoutside',
+    path: './src/directives/clickoutside.js'
+  },
+  {
+    name: 'tooltips',
+    path: './src/directives/tooltips.js'
+  },
+  {
+    name: 'overflow-tips',
+    path: './src/directives/overflow-tips.js'
+  },
+  {
+    name: 'transfer-dom',
+    path: './src/directives/transfer-dom.js'
+  },
+  {
+    name: 'copy',
+    path: './src/directives/copy.js'
+  }
 ]
 
 async function sourceComponent () {
-    external.push(
-        'bk-magic-vue/lib/locale',
-        'bk-magic-vue/lib/locale/lang',
-        'bk-magic-vue/lib/locale/lang/zh-CN',
-        'bk-magic-vue/lib/locale/lang/en-US'
-    )
+  external.push(
+    'bk-magic-vue/lib/locale',
+    'bk-magic-vue/lib/locale/lang',
+    'bk-magic-vue/lib/locale/lang/zh-CN',
+    'bk-magic-vue/lib/locale/lang/en-US'
+  )
 
-    const config = {
-        external,
-        // treeshake: false,
-        plugins: plugins,
-        onwarn (warning) {
-            if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
-                return false
-            }
-        }
+  const config = {
+    external,
+    // treeshake: false,
+    plugins: plugins,
+    onwarn (warning) {
+      if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+        return false
+      }
     }
+  }
 
-    const utilPromises = []
-    const utilEntryNames = []
-    utilFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            utilPromises.push(rollup(config))
-            utilEntryNames.push(entry.name)
+  const utilPromises = []
+  const utilEntryNames = []
+  utilFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      utilPromises.push(rollup(config))
+      utilEntryNames.push(entry.name)
+    }
+  })
+  try {
+    const utilRet = await Promise.all(utilPromises)
+    utilRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/utils/${utilEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
         }
+      })
     })
-    try {
-        const utilRet = await Promise.all(utilPromises)
-        utilRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/utils/${utilEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile util: ${e}`))
-    }
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile util: ${e}`))
+  }
 
-    const mixinsPromises = []
-    const mixinsEntryNames = []
-    mixinsFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            mixinsPromises.push(rollup(config))
-            mixinsEntryNames.push(entry.name)
-        }
-    })
-    try {
-        const mixinsRet = await Promise.all(mixinsPromises)
-        mixinsRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/mixins/${mixinsEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile mixins: ${e}`))
+  const mixinsPromises = []
+  const mixinsEntryNames = []
+  mixinsFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      mixinsPromises.push(rollup(config))
+      mixinsEntryNames.push(entry.name)
     }
+  })
+  try {
+    const mixinsRet = await Promise.all(mixinsPromises)
+    mixinsRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/mixins/${mixinsEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
+        }
+      })
+    })
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile mixins: ${e}`))
+  }
 
-    const localePromises = []
-    const localeEntryNames = []
-    localeFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            localePromises.push(rollup(config))
-            localeEntryNames.push(entry.name)
-        }
-    })
-    try {
-        const localeRet = await Promise.all(localePromises)
-        localeRet.forEach((b, index) => {
-            const path = localeFileList[index].path
-            b.write({
-                file: path.indexOf('/lang/') > -1
-                    ? `./lib/locale/lang/${localeEntryNames[index]}.js`
-                    : `./lib/locale/${localeEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile locale: ${e}`))
+  const localePromises = []
+  const localeEntryNames = []
+  localeFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      localePromises.push(rollup(config))
+      localeEntryNames.push(entry.name)
     }
+  })
+  try {
+    const localeRet = await Promise.all(localePromises)
+    localeRet.forEach((b, index) => {
+      const path = localeFileList[index].path
+      b.write({
+        file: path.indexOf('/lang/') > -1
+          ? `./lib/locale/lang/${localeEntryNames[index]}.js`
+          : `./lib/locale/${localeEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
+        }
+      })
+    })
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile locale: ${e}`))
+  }
 
-    const directivePromises = []
-    const directiveEntryNames = []
-    directiveFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            directivePromises.push(rollup(config))
-            directiveEntryNames.push(entry.name)
-        }
-    })
-    try {
-        const directiveRet = await Promise.all(directivePromises)
-        directiveRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/directives/${directiveEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile directive: ${e}`))
+  const directivePromises = []
+  const directiveEntryNames = []
+  directiveFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      directivePromises.push(rollup(config))
+      directiveEntryNames.push(entry.name)
     }
+  })
+  try {
+    const directiveRet = await Promise.all(directivePromises)
+    directiveRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/directives/${directiveEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
+        }
+      })
+    })
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile directive: ${e}`))
+  }
 
-    const componentPromises = []
-    const componentEntryNames = []
-    componentFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            componentPromises.push(rollup(config))
-            componentEntryNames.push(entry.name)
-        }
-    })
-    try {
-        const componentRet = await Promise.all(componentPromises)
-        componentRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/${componentEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile component: ${e}`))
+  const componentPromises = []
+  const componentEntryNames = []
+  componentFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      componentPromises.push(rollup(config))
+      componentEntryNames.push(entry.name)
     }
+  })
+  try {
+    const componentRet = await Promise.all(componentPromises)
+    componentRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/${componentEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
+        }
+      })
+    })
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile component: ${e}`))
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
 /* async function minComponent () {
-    const config = {
-        external,
-        plugins: plugins.concat(
-            terser()
-        ),
-        onwarn (warning) {
-            if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
-                return false
-            }
-        }
+  const config = {
+    external,
+    plugins: plugins.concat(
+      terser()
+    ),
+    onwarn (warning) {
+      if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+        return false
+      }
     }
+  }
 
-    const componentPromises = []
-    const componentEntryNames = []
-    componentFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            componentPromises.push(rollup(config))
-            componentEntryNames.push(entry.name)
+  const componentPromises = []
+  const componentEntryNames = []
+  componentFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      componentPromises.push(rollup(config))
+      componentEntryNames.push(entry.name)
+    }
+  })
+
+  try {
+    const componentRet = await Promise.all(componentPromises)
+    componentRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/${componentEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
         }
+      })
     })
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile component: ${e}`))
+  }
 
-    try {
-        const componentRet = await Promise.all(componentPromises)
-        componentRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/${componentEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile component: ${e}`))
+  const directivePromises = []
+  const directiveEntryNames = []
+  directiveFileList.forEach(entry => {
+    if (entry.name !== 'js') {
+      config.input = entry.path
+      directivePromises.push(rollup(config))
+      directiveEntryNames.push(entry.name)
     }
-
-    const directivePromises = []
-    const directiveEntryNames = []
-    directiveFileList.forEach(entry => {
-        if (entry.name !== 'js') {
-            config.input = entry.path
-            directivePromises.push(rollup(config))
-            directiveEntryNames.push(entry.name)
+  })
+  try {
+    const directiveRet = await Promise.all(directivePromises)
+    directiveRet.forEach((b, index) => {
+      b.write({
+        file: `./lib/directives/${directiveEntryNames[index]}.js`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: false,
+        exports: 'named',
+        globals: {
+          vue: 'Vue'
         }
+      })
     })
-    try {
-        const directiveRet = await Promise.all(directivePromises)
-        directiveRet.forEach((b, index) => {
-            b.write({
-                file: `./lib/directives/${directiveEntryNames[index]}.js`,
-                format: 'umd',
-                name: 'library',
-                sourcemap: false,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            })
-        })
-    } catch (e) {
-        console.log(chalk(`compile-component-source error in compile directive: ${e}`))
-    }
+  } catch (e) {
+    console.log(chalk(`compile-component-source error in compile directive: ${e}`))
+  }
 } */
 
 // 不打 component 的 min，按需引入时，由项目的打包处理

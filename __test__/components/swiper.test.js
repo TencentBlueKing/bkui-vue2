@@ -37,42 +37,42 @@ import secondSwiper from '../../example/img/secondswiper.jpg'
 import { mountComponent, createTestComp } from '../helpers'
 
 describe('Component', () => {
-    it('render the correct markup and content', () => {
-        const wrapper = mountComponent(Swiper, {
-            propsData: {
-                pics: [
-                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
-                    { url: secondSwiper }
-                ],
-                isLoop: false,
-                loopTime: 4000
-            }
-        })
-        expect(wrapper.find('.bk-swiper-home').exists()).toBe(true)
-        expect(wrapper.props().loopTime).toBe(4000)
-        expect(wrapper.props().isLoop).toBe(false)
+  it('render the correct markup and content', () => {
+    const wrapper = mountComponent(Swiper, {
+      propsData: {
+        pics: [
+          { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+          { url: secondSwiper }
+        ],
+        isLoop: false,
+        loopTime: 4000
+      }
     })
-    it('indexChange listener', () => {
-        const handler = jest.fn()
-        const wrapper = mount(createTestComp(`
+    expect(wrapper.find('.bk-swiper-home').exists()).toBe(true)
+    expect(wrapper.props().loopTime).toBe(4000)
+    expect(wrapper.props().isLoop).toBe(false)
+  })
+  it('indexChange listener', () => {
+    const handler = jest.fn()
+    const wrapper = mount(createTestComp(`
                 <bk-swiper :pics="pics" class="swiper" :is-loop="false" @index-change="indexChange" ref="swiper"></bk-swiper>
             `, {
-            components: {
-                bkSwiper: Swiper
-            },
-            data () {
-                return {
-                    pics: [
-                        { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
-                        { url: secondSwiper }
-                    ]
-                }
-            },
-            methods: {
-                indexChange: handler
-            }
-        }), { sync: false })
-        wrapper.trigger('indexChange')
-        expect(handler).toHaveBeenCalledTimes(1)
-    })
+      components: {
+        bkSwiper: Swiper
+      },
+      data () {
+        return {
+          pics: [
+            { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+            { url: secondSwiper }
+          ]
+        }
+      },
+      methods: {
+        indexChange: handler
+      }
+    }), { sync: false })
+    wrapper.trigger('indexChange')
+    expect(handler).toHaveBeenCalledTimes(1)
+  })
 })

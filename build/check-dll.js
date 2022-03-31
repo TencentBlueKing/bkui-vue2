@@ -38,11 +38,11 @@ const manifestExist = fse.pathExistsSync(path.resolve(__dirname, '..', 'example'
 const bundleExist = fse.pathExistsSync(path.resolve(__dirname, '..', 'example', 'static', 'lib.bundle.js'))
 
 if (!(manifestExist & bundleExist)) {
-    npm.load({}, () => {
-        npm.run('dll', err => {
-            if (err) {
-                throw err
-            }
-        })
+  npm.load({}, () => {
+    npm.run('dll', err => {
+      if (err) {
+        throw err
+      }
     })
+  })
 }

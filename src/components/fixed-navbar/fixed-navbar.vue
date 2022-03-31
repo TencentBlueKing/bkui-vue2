@@ -27,53 +27,53 @@
 -->
 
 <template>
-    <div class="bk-fixed-navbar-wrapper" :class="[extCls, position]" :style="{ zIndex: localZIndex }">
-        <div class="fixed-navbar-item" v-for="(item, index) in navConfig"
-            :key="index"
-            @click="item.action"
-            v-bk-tooltips="item.tooltip">
-            <i :class="['bk-icon', item.icon]"></i>
-            <span class="text">{{item.text}}</span>
-        </div>
+  <div class="bk-fixed-navbar-wrapper" :class="[extCls, position]" :style="{ zIndex: localZIndex }">
+    <div class="fixed-navbar-item" v-for="(item, index) in navConfig"
+      :key="index"
+      @click="item.action"
+      v-bk-tooltips="item.tooltip">
+      <i :class="['bk-icon', item.icon]"></i>
+      <span class="text">{{item.text}}</span>
     </div>
+  </div>
 </template>
 
 <script>
-    import zIndexManager from '@/utils/z-index-manager.js'
-    export default {
-        name: 'bk-fixed-navbar',
-        props: {
-            navItems: {
-                type: Array,
-                default: () => []
-            },
-            extCls: {
-                type: String,
-                default: ''
-            },
-            position: {
-                type: String,
-                default: 'middle'
-            }
-        },
-        data () {
-            return {
-                localZIndex: zIndexManager.nextTickIndex(2)
-            }
-        },
-        computed: {
-            navConfig () {
-                const config = this.navItems.map(item => {
-                    return Object.assign({
-                        tooltip: { disabled: true },
-                        action: () => {}
-                    }, item)
-                })
-                return config
-            }
-        }
+import zIndexManager from '@/utils/z-index-manager.js'
+export default {
+  name: 'bk-fixed-navbar',
+  props: {
+    navItems: {
+      type: Array,
+      default: () => []
+    },
+    extCls: {
+      type: String,
+      default: ''
+    },
+    position: {
+      type: String,
+      default: 'middle'
     }
+  },
+  data () {
+    return {
+      localZIndex: zIndexManager.nextTickIndex(2)
+    }
+  },
+  computed: {
+    navConfig () {
+      const config = this.navItems.map(item => {
+        return Object.assign({
+          tooltip: { disabled: true },
+          action: () => {}
+        }, item)
+      })
+      return config
+    }
+  }
+}
 </script>
 <style>
-@import '../../ui/fixed-navbar.css';
+  @import '../../ui/fixed-navbar.css';
 </style>

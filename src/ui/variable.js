@@ -31,6 +31,6 @@
  */
 
 module.exports = {
-    // 下拉内容间距
-    dropdownMarginBottom: '4px'
+  // 下拉内容间距
+  dropdownMarginBottom: '4px'
 }
