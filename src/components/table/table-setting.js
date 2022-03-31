@@ -36,7 +36,8 @@ export default {
     bkPopover
   },
   props: {
-    column: Object
+    column: Object,
+    tippyOptions: Object
   },
   render (h) {
     const popoverContent = this.column.settingContent ? this.column.settingContent(h) : ''
@@ -45,7 +46,8 @@ export default {
         trigger="click"
         placement="bottom-end"
         theme="light bk-table-setting-popover-content"
-        distance={ -2 }>
+        distance={ -2 }
+        tippy-options={this.tippyOptions}>
         <i class={ 'bk-table-setting-icon ' + this.column.icon }></i>
         <template slot="content">{ popoverContent }</template>
       </bk-popover>
