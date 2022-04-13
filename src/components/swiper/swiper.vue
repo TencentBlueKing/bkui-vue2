@@ -196,7 +196,7 @@ export default {
   methods: {
     calcSize () {
       const swiperParentSize = getElementSize(this.$refs.swiper && this.$refs.swiper.parentElement)
-      this.realWidth = +this.width > 0 ? this.width : swiperParentSize.width || 400
+      this.realWidth = +this.width > 0 ? this.width : swiperParentSize.width || 600
       this.realHeight = +this.height > 0 ? this.height : swiperParentSize.height || 300
     },
 
