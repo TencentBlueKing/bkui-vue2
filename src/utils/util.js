@@ -329,11 +329,11 @@ export function checkOverflow (el) {
     const dom = document.createElement('div')
     const width = parseFloat(css['width']) ? Math.ceil(parseFloat(css['width'])) + 'px' : css['width']
     dom.style.cssText = `
-        width: ${width};
-        line-height: ${css['line-height']};
-        font-size: ${css['font-size']};
-        word-break: ${css['word-break']};
-        padding: ${css['padding']};
+      width: ${width};
+      line-height: ${css['line-height']};
+      font-size: ${css['font-size']};
+      word-break: ${css['word-break']};
+      padding: ${css['padding']};
     `
     dom.textContent = el.textContent
     return dom

@@ -109,9 +109,9 @@ const SearchItemRender = {
     const textClass = 'text'
     const { node, query } = ct.props
     return (
-                <span domPropsInnerHTML={
-                    query ? node.name.replace(new RegExp(`(${ct.props.query})`), '<em>$1</em>') : node.name
-                } class={textClass}></span>
+      <span domPropsInnerHTML={
+        query ? node.name.replace(new RegExp(`(${ct.props.query})`), '<em>$1</em>') : node.name
+      } class={textClass}></span>
     )
   }
 }
@@ -225,8 +225,8 @@ export default {
     // },
 
     /**
-             * window resize 事件
-             */
+     * window resize 事件
+     */
     resizeHandle () {
       if (!this.tocNode) {
         return
@@ -246,8 +246,8 @@ export default {
     },
 
     /**
-             * window scroll 事件
-             */
+     * window scroll 事件
+     */
     scrollHandle (e) {
       if (!this.tocNode) {
         return
@@ -261,8 +261,8 @@ export default {
     },
 
     /**
-             * 关闭搜索弹框
-             */
+     * 关闭搜索弹框
+     */
     searchClose () {
       this.showList = false
       this.selectIndex = 0
@@ -270,15 +270,15 @@ export default {
     },
 
     /**
-             * 搜索框 focus 事件
-             */
+     * 搜索框 focus 事件
+     */
     searchFocus () {
       // this.doSearch()
     },
 
     /**
-             * 搜索
-             */
+     * 搜索
+     */
     searchHandle () {
       this.selectIndex = 0
       this.doSearch()
@@ -286,8 +286,8 @@ export default {
     },
 
     /**
-             * 搜索执行
-             */
+     * 搜索执行
+     */
     doSearch () {
       const query = this.search.trim()
       if (query) {
@@ -307,10 +307,10 @@ export default {
     },
 
     /**
-             * 切换组件库版本
-             *
-             * @param {string} ver 版本标识
-             */
+     * 切换组件库版本
+     *
+     * @param {string} ver 版本标识
+     */
     toggleVer (ver) {
       const win = window.open(
         `${'{HOST}'.replace('2.0', '').replace('1.0', '')}${ver}/example/index.html#/`,
@@ -320,11 +320,11 @@ export default {
     },
 
     /**
-             * 文本框 keyup
-             *
-             * @param {string} value 文本框的值
-             * @param {Object} e 事件对象
-             */
+     * 文本框 keyup
+     *
+     * @param {string} value 文本框的值
+     * @param {Object} e 事件对象
+     */
     keyupHandle (value, e) {
       const keyCode = e.keyCode
       const length = this.renderList.length
@@ -378,11 +378,11 @@ export default {
     },
 
     /**
-             * 点击左侧导航或者搜索时切换 router
-             *
-             * @param {Object} component 组件信息对象
-             * @param {boolean} fromSearch 是否来自搜索
-             */
+     * 点击左侧导航或者搜索时切换 router
+     *
+     * @param {Object} component 组件信息对象
+     * @param {boolean} fromSearch 是否来自搜索
+     */
     changeRouter (component, fromSearch) {
       if (component.extraLink) {
         window.open(component.extraLink)
@@ -409,5 +409,5 @@ export default {
 </script>
 
 <style lang="postcss">
-    @import './css/side-nav.css';
+  @import './css/side-nav.css';
 </style>

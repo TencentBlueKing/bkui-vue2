@@ -51,5 +51,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/row.css';
+  @import '../../ui/row.css';
 </style>

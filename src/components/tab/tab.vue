@@ -178,10 +178,10 @@ export default {
     },
 
     /**
-             * 是否校验ActiveName
-             * true：如果active匹配不到，默认激活第一个Tab，触发tab-change
-             * false：active匹配不到不显示
-             */
+     * 是否校验ActiveName
+     * true：如果active匹配不到，默认激活第一个Tab，触发tab-change
+     * false：active匹配不到不显示
+     */
     validateActive: {
       type: Boolean,
       default: true
@@ -429,7 +429,7 @@ export default {
             this.localActive = panel.name
           }
         } catch (e) {
-          console.log('Previous tab toggle canceled')
+          console.warn('Previous tab toggle canceled')
         } finally {
           this.clearToggleStatus()
         }
@@ -705,12 +705,12 @@ export default {
       arr[b] = swap
     },
     /**
-             * @description  判断拖动的元素是否是在同一个tab。
-             *               使用guid，相比 el1.parentNode === el2.parentNode 判断，性能要高
-             * @param el1 {string} 拖动的元素
-             * @param el2 {string}  触发的元素
-             * @return {boolean}
-             */
+     * @description  判断拖动的元素是否是在同一个tab。
+     *               使用guid，相比 el1.parentNode === el2.parentNode 判断，性能要高
+     * @param el1 {string} 拖动的元素
+     * @param el2 {string}  触发的元素
+     * @return {boolean}
+     */
     distinctRoots (el1, el2) {
       return el1 === el2
     }
@@ -719,5 +719,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/tab.css';
+  @import '../../ui/tab.css';
 </style>

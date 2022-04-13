@@ -96,6 +96,7 @@
           :disabled-date="disabledDate"
           :value="preSelecting.right ? [dates[dates.length - 1]] : dates"
           :focused-date="focusedDate"
+          :cell-class="cellClass"
           @change-range="handleChangeRange"
           @pick="panelPickerHandlers.right"
           @pick-click="handlePickClick">
@@ -420,5 +421,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../../ui/date-picker.css';
+  @import '../../../ui/date-picker.css';
 </style>

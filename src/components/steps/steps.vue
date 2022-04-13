@@ -67,21 +67,21 @@
 
 <script>
 /**
-     *  bk-steps
-     *  @module components/steps
-     *  @desc 步骤条组件
-     *  @param steps {Array} - 组件步骤内容，数组中的元素可以是对象，可以是数字，可以是字符串，也可以是三者混合元素是对象时，有两个可选的key：title和icon；当元素是数字或字符串时，组件会将其解析成对象形式下的icon的值；素是字符串时，使用蓝鲸icon
-     *  @param curStep {Number} - 当前步骤的索引值，从1开始；支持.sync修饰符
-     *  @param controllable {Boolean} - 步骤可否被控制前后跳转，默认为false
-     *  @param theme {String} - 组件的主题色
-     *  @example
-     *  <bk-steps
-            :cur-step.sync="curStep"
-            :steps="step"
-            :theme="theme"
-            controllable>
-        </bk-steps>
-     */
+ *  bk-steps
+ *  @module components/steps
+ *  @desc 步骤条组件
+ *  @param steps {Array} - 组件步骤内容，数组中的元素可以是对象，可以是数字，可以是字符串，也可以是三者混合元素是对象时，有两个可选的key：title和icon；当元素是数字或字符串时，组件会将其解析成对象形式下的icon的值；素是字符串时，使用蓝鲸icon
+ *  @param curStep {Number} - 当前步骤的索引值，从1开始；支持.sync修饰符
+ *  @param controllable {Boolean} - 步骤可否被控制前后跳转，默认为false
+ *  @param theme {String} - 组件的主题色
+ *  @example
+ *  <bk-steps
+        :cur-step.sync="curStep"
+        :steps="step"
+        :theme="theme"
+        controllable>
+    </bk-steps>
+ */
 import locale from 'bk-magic-vue/lib/locale'
 
 export default {
@@ -255,5 +255,5 @@ export default {
 }
 </script>
 <style>
-    @import '../../ui/steps.css';
+  @import '../../ui/steps.css';
 </style>

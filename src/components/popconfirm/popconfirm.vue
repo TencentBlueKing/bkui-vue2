@@ -141,5 +141,5 @@ export default {
 </script>
 
 <style>
-    @import '../../ui/popconfirm.css';
+  @import '../../ui/popconfirm.css';
 </style>

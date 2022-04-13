@@ -68,13 +68,13 @@ module.exports = function ({ types: t }, { result = {} }) {
   return {
     visitor: {
       /**
-             * Property 对象属性
-             *
-             * https://github.com/estree/estree/blob/master/es5.md#property
-             *
-             * @param {Object} path 当前 NodePath
-             * @param {Object} state 当前 PluginPass 实例，一次 Program 里的 visitor 共享
-             */
+       * Property 对象属性
+       *
+       * https://github.com/estree/estree/blob/master/es5.md#property
+       *
+       * @param {Object} path 当前 NodePath
+       * @param {Object} state 当前 PluginPass 实例，一次 Program 里的 visitor 共享
+       */
       ObjectProperty (path, state) {
         const node = path.node
         // 只提取 props
@@ -148,14 +148,13 @@ module.exports = function ({ types: t }, { result = {} }) {
                 const endColumn = valueProp.body.loc.end.column - 0
 
                 // 都转化为 ArrowFunctionExpression，方便 eval 直接调用方法
-                result[keyName][k]
-                                    = `(${valueProp.params.map(param => param.name).join(',')}) => ${getSourceCode(
-                    this.file.code,
-                    startLine,
-                    endLine,
-                    startColumn,
-                    endColumn
-                  )}`
+                result[keyName][k] = `(${valueProp.params.map(param => param.name).join(',')}) => ${getSourceCode(
+                  this.file.code,
+                  startLine,
+                  endLine,
+                  startColumn,
+                  endColumn
+                )}`
               }
             })
           }
