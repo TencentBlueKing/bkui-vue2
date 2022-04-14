@@ -54,6 +54,7 @@
           :range-state="rangeState"
           :value="preSelecting.left ? [dates[0]] : dates"
           :focused-date="focusedDate"
+          :cell-class="cellClass"
           @change-range="handleChangeRange"
           @pick="panelPickerHandlers.left"
           @pick-click="handlePickClick"

@@ -347,8 +347,8 @@ export default {
       console.error(isOpen)
     },
     getCellClass (cell) {
-      console.log('cellClass', cell)
-      return 'cell-x-Class'
+      const hasPoint = Math.random() * 10 > 5
+      return hasPoint ? 'cell-x-Class' : ''
     }
   }
 }
