@@ -814,7 +814,7 @@
 
 ### 设置功能 {page=#/table}
 
-:::demo 通过配置`bk-table-column`的`type`属性为`setting`即可开启此功能，组件内置了一个默认设置内容`bk-table-setting-content`
+:::demo 通过配置`bk-table-column`的`type`属性为`setting`即可开启此功能，组件内置了一个默认设置内容`bk-table-setting-content`，通过`tippy-options`属性可以自定义弹层的层级
 
 ```html
 <template>
@@ -828,7 +828,7 @@
                 :label="field.label"
                 :prop="field.id">
             </bk-table-column>
-            <bk-table-column type="setting">
+            <bk-table-column type="setting" :tippy-options="{ zIndex: 3000 }">
                 <bk-table-setting-content
                     :fields="setting.fields"
                     :selected="setting.selectedFields"
@@ -1553,6 +1553,7 @@ export default {
 | before-expand-change | 行折叠状态发生变化前的回调函数，返回JavaScript中的falsy类型值时会阻止折叠状态变化 | Function({ row, column, $index })  | —— | —— |
 | before-select-change | 状态发生变化前的回调函数，返回false时会阻止勾选状态的变化 | Function(selected, { row, column, store, $index })  | —— | —— |
 | before-select-all-change | 全选状态发生变化前的回调函数，返回false时会阻止全选状态的变化 | Function(selected, { column, store })  | —— | —— |
+| tippy-options | type="setting"生效，更多的其他tippyjs参数参考[tippyjs参数](https://atomiks.github.io/tippyjs/v5/all-props/) | Object | —— | —— |
 
 
 ### bk-table-column 插槽 {page=#/table}

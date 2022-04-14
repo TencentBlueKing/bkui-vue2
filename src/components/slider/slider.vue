@@ -284,13 +284,15 @@ export default {
         console.warn('WARNNING:step should not be 0')
         return []
       }
-      const stepCount = (this.maxValue - this.minValue) / this.step
       const stepWidth = 100 * this.step / (this.maxValue - this.minValue)
       const result = []
-      for (let i = 0; i <= stepCount; i++) {
+      const minValue = parseFloat(this.minValue)
+      const maxValue = parseFloat(this.maxValue)
+      const step = parseFloat(this.step)
+      for (let i = minValue, j = 0; i <= maxValue; i += step, j++) {
         const item = {
-          stepWidth: i * stepWidth,
-          stepLabel: `${i * this.step}${this.intervalLabelUnit}`
+          stepWidth: j * stepWidth,
+          stepLabel: `${i}${this.intervalLabelUnit}`
         }
         result.push(item)
       }
