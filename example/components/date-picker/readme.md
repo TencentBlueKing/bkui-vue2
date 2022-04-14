@@ -136,7 +136,8 @@
                 console.log('shortcutChange', value, index)
             },
             getCellClass(cell) {
-                return 'cell-x-Class';
+                const hasPoint = Math.random() * 10 > 5
+                  return hasPoint ? 'cell-x-Class' : ''
             }
         }
     }
@@ -153,12 +154,15 @@
       position: relative;
       &::after {
         content: '';
-        height: 1px;
+        height: 5px;
         background: red;
         position: absolute;
-        left: 5px;
-        right: 5px;
-        bottom: 0;
+        left: 15px;
+        /* right: 5px; */
+        bottom: 2px;
+        border-radius: 50%;
+        border: solid 1px red;
+        width: 5px;
       }
     }
 </style>
@@ -176,7 +180,8 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+        <bk-date-picker class="mr15" v-model="initDateTime" 
+        cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
 <script>
@@ -605,7 +610,7 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" :cell-class="getCellClass" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+        <bk-date-picker class="mr15" v-model="initDateTime" :cell-class="getCellClass" :type="'datetimerange'" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
 <script>
@@ -617,12 +622,13 @@
         },
         data () {
             return {
-                initDateTime: new Date()
+                initDateTime: [new Date(), new Date()]
             }
         },
         methods: {
             getCellClass (cell) {
-              return 'cell-x-Class'
+              const hasPoint = Math.random() * 10 > 5
+              return hasPoint ? 'cell-x-Class' : ''
             }
         }
     }
@@ -632,12 +638,15 @@
       position: relative;
       &::after {
         content: '';
-        height: 1px;
+        height: 5px;
         background: red;
         position: absolute;
-        left: 5px;
-        right: 5px;
-        bottom: 0;
+        left: 15px;
+        /* right: 5px; */
+        bottom: 2px;
+        border-radius: 50%;
+        border: solid 1px red;
+        width: 5px;
       }
     }
 </style>
