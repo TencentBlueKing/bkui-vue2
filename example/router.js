@@ -48,6 +48,7 @@ const AnimateNumber = () => import(/* webpackChunkName: 'animate-number' */'./co
 const Button = () => import(/* webpackChunkName: 'button' */'./components/button/readme.md')
 const ButtonExample = () => import(/* webpackChunkName: 'button' */'./components/button/example')
 const DropdownMenu = () => import(/* webpackChunkName: 'dropdown-menu' */'./components/dropdown-menu/readme.md')
+const DropdownMenuExample = () => import(/* webpackChunkName: 'dropdown-menu' */'./components/dropdown-menu/example')
 const SideSlider = () => import(/* webpackChunkName: 'sideslider' */'./components/sideslider/readme.md')
 const SideSliderExample = () => import(/* webpackChunkName: 'sideslider' */'./components/sideslider/example')
 const Switcher = () => import(/* webpackChunkName: 'switcher' */'./components/switcher/readme.md')
@@ -108,6 +109,7 @@ const TabExample = () => import(/* webpackChunkName: 'tab' */'./components/tab/e
 const Select = () => import(/* webpackChunkName: 'select' */'./components/select/readme.md')
 const SelectExample = () => import(/* webpackChunkName: 'select' */'./components/select/example')
 const Slider = () => import(/* webpackChunkName: 'slider' */'./components/slider/readme.md')
+const SliderExample = () => import(/* webpackChunkName: 'slider' */'./components/slider/example')
 const Grid = () => import(/* webpackChunkName: 'grid' */'./components/grid/readme.md')
 const GridExample = () => import(/* webpackChunkName: 'grid' */'./components/grid/example')
 const Directives = () => import(/* webpackChunkName: 'directives' */'./components/directives/readme.md')
@@ -288,6 +290,11 @@ const router = new VueRouter({
       name: 'dropdownMenu',
       path: '/dropdown-menu',
       component: DropdownMenu
+    },
+    {
+      name: 'dropdownMenuExample',
+      path: '/dropdown-menu/example',
+      component: DropdownMenuExample
     },
     {
       name: 'badge',
@@ -543,6 +550,11 @@ const router = new VueRouter({
       name: 'slider',
       path: '/slider',
       component: Slider
+    },
+    {
+      name: 'sliderExample',
+      path: '/slider/example',
+      component: SliderExample
     },
     {
       name: 'grid',
