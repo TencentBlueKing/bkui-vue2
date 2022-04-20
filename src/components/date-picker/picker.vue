@@ -29,7 +29,7 @@
 <template>
   <div
     class="bk-date-picker"
-    :class="[type === 'datetimerange' ? 'long' : '', longWidthCls, extCls]"
+    :class="[type === 'datetimerange' ? 'long' : '', longWidthCls, extCls, type === 'time' ? 'time-picker' : '']"
     v-clickoutside="handleClose"
   >
     <div ref="reference" class="bk-date-picker-rel">

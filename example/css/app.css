@@ -54,7 +54,6 @@ body {
     .app-content {
         width: calc(100% - 250px);
         min-width: 950px;
-        position: relative;
         margin-left: 250px;
         padding: 0 195px 0 30px;
         margin-bottom: 50px;
@@ -124,6 +123,7 @@ body {
             font-size: 14px;
             position: relative;
             float: left;
+            margin-bottom: 60px;
             &:last-child {
                 margin-right: 0px;
             }
@@ -684,7 +684,19 @@ body {
     }
 }
 
-@media screen and (max-width: 1395px) {
+@media screen and (max-width: 1478px) {
+    .app-container .help-color {
+        margin-bottom: 270px;
+    }
+}
+
+@media screen and (max-width: 1219px) {
+    .app-container .middle-color {
+        margin-bottom: 270px;
+    }
+}
+
+@media screen and (max-width: 1450px) {
     .app-container .font-wrapper {
         margin-bottom: 380px;
     }
