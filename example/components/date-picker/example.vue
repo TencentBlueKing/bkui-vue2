@@ -228,7 +228,7 @@ export default {
             return new Date()
           },
           onClick: (picker) => {
-            console.error(picker)
+            console.log(picker)
           }
         },
         {
@@ -239,7 +239,7 @@ export default {
             return date
           },
           onClick: (picker) => {
-            console.error(picker)
+            console.log(picker)
           }
         },
         {
@@ -250,7 +250,7 @@ export default {
             return date
           },
           onClick: (picker) => {
-            console.error(picker)
+            console.log(picker)
           }
         }
       ],
@@ -263,7 +263,7 @@ export default {
             return [start, end]
           },
           onClick: (picker) => {
-            console.error(picker)
+            console.log(picker)
           }
         },
         {
@@ -332,23 +332,23 @@ export default {
       this.open = !this.open
     },
     handleChange (date) {
-      console.error('handleChange', date)
+      console.log('handleChange', date)
       this.value = date
     },
     handleClear () {
-      console.error('handleClear')
+      console.log('handleClear')
       this.open = false
     },
     handleOk () {
-      console.error('handleOK')
+      console.log('handleOK')
       this.open = false
     },
     handleOpenChange (isOpen) {
-      console.error(isOpen)
+      console.log(isOpen)
     },
     getCellClass (cell) {
-      console.log('cellClass', cell)
-      return 'cell-x-Class'
+      const hasPoint = Math.random() * 10 > 5
+      return hasPoint ? 'cell-x-Class' : ''
     }
   }
 }
