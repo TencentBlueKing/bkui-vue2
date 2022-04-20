@@ -176,9 +176,12 @@ export default {
       } else if (newPosition > 100) {
         newPosition = 100
       }
-      const lengthPerStep = 100 / ((this.maxValue - this.minValue) / this.step)
+      const maxValue = parseFloat(this.maxValue)
+      const minValue = parseFloat(this.minValue)
+      const step = parseFloat(this.step)
+      const lengthPerStep = 100 / ((maxValue - minValue) / step)
       const steps = Math.round(newPosition / lengthPerStep)
-      let value = steps * lengthPerStep * (this.maxValue - this.minValue) * 0.01 + this.minValue
+      let value = steps * lengthPerStep * (maxValue - minValue) * 0.01 + minValue
       value = parseFloat(value.toFixed(this.precision))
       this.$emit('input', value)
       if (!this.dragging && this.value !== this.oldValue) {

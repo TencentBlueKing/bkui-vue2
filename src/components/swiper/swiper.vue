@@ -27,7 +27,15 @@
 -->
 
 <template>
-  <section class="bk-swiper-home" :class="extCls" ref="swiper" v-if="sourceList.length">
+  <section
+    ref="swiper"
+    :class="['bk-swiper-home', extCls]"
+    :style="{
+      width: `${realWidth}px`,
+      height: `${realHeight}px`
+    }"
+    v-if="sourceList.length"
+  >
     <hgroup :style="{ width: `${swiperMainWith}px`, transform: `translateX(${imageTransfer}px)` }"
       :class="[{ 'bk-transition': isTransition }, 'bk-swiper-main']"
       @mousedown="moveStart"
@@ -64,6 +72,22 @@
 </template>
 
 <script>
+const getElementSize = (node) => {
+  if (node === undefined) {
+    return {
+      height: 0,
+      width: 0
+    }
+  }
+  const computedStyle = getComputedStyle(node)
+  const width = node.clientWidth - parseFloat(computedStyle.paddingTop) - parseFloat(computedStyle.paddingBottom)
+  const height = node.clientHeight - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight)
+  return {
+    height,
+    width
+  }
+}
+
 export default {
   name: 'bk-swiper',
 
@@ -107,7 +131,6 @@ export default {
 
   data () {
     return {
-      swiperMainWith: 0, // 轮播图宽度
       currentIndex: 1, // 轮播图索引
       isStartMove: false,
       isTransition: false,
@@ -115,7 +138,9 @@ export default {
       mouseDistance: 0,
       loopId: '',
       isClick: false,
-      realWidth: 0
+      realWidth: 0,
+      realHeight: 0,
+      resizeObserver: {}
     }
   },
 
@@ -128,6 +153,10 @@ export default {
       const first = this.sourceList[0]
       const last = this.sourceList.slice(-1)
       return [...last, ...this.sourceList, first]
+    },
+
+    swiperMainWith () {
+      return this.realWidth * this.dataList.length
     },
 
     imageTransfer () {
@@ -147,27 +176,12 @@ export default {
       immediate: true
     },
 
-    height (val) {
-      const ele = this.$refs.swiper || { style: { width: 0, height: 0 }, offsetWidth: 0 }
-      if (+val > 0) ele.style.height = val + 'px'
+    height () {
+      this.calcSize()
     },
 
-    width (val) {
-      const ele = this.$refs.swiper || { style: { width: 0, height: 0 }, offsetWidth: 0 }
-      this.realWidth = +val > 0 ? +val : ele.offsetWidth
-      ele.style.width = this.realWidth + 'px'
-    },
-
-    list () {
-      this.$nextTick(() => {
-        this.calcSize()
-      })
-    },
-
-    pics () {
-      this.$nextTick(() => {
-        this.calcSize()
-      })
+    width () {
+      this.calcSize()
     }
   },
 
@@ -181,24 +195,40 @@ export default {
 
   methods: {
     calcSize () {
-      const ele = this.$refs.swiper || { style: { width: 0, height: 0 }, offsetWidth: 0 }
-      if (+this.height > 0) ele.style.height = this.height + 'px'
-
-      this.realWidth = +this.width > 0 ? +this.width : ele.offsetWidth
-      ele.style.width = this.realWidth + 'px'
-      this.swiperMainWith = this.realWidth * this.dataList.length
+      const swiperParentSize = getElementSize(this.$refs.swiper && this.$refs.swiper.parentElement)
+      this.realWidth = +this.width > 0 ? this.width : swiperParentSize.width || 600
+      this.realHeight = +this.height > 0 ? this.height : swiperParentSize.height || 300
     },
 
     initStatus () {
       this.calcSize()
       this.startLoop()
+      this.watchParentSizeChange()
 
       document.addEventListener('visibilitychange', this.visChange)
     },
 
     destoryStatus () {
       this.endLoop()
+      this.endWatchParentSizeChange()
       document.removeEventListener('visibilitychange', this.visChange)
+    },
+
+    watchParentSizeChange () {
+      const parentEle = this.$refs.swiper && this.$refs.swiper.parentElement
+      if (!parentEle || !window.ResizeObserver) {
+        return
+      }
+      this.resizeObserver = new ResizeObserver(() => {
+        this.calcSize()
+      })
+      this.resizeObserver.observe(parentEle)
+    },
+
+    endWatchParentSizeChange () {
+      if (this.resizeObserver && this.resizeObserver.disconnect) {
+        this.resizeObserver.disconnect()
+      }
     },
 
     goToLink (link) {

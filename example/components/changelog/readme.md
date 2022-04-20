@@ -4,6 +4,23 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.8 {page=#/changelog}
+###### 2022.04.21
+
+* **[add]**:
+    - [DatePicker 日期选择器](#/date-picker) 新增 `cell-class` 配置项以支持自定义日期样式 [#229](https://github.com/TencentBlueKing/bkui-vue2/issues/229)
+    - [Table 表格](#/table) `bk-table-column` 增加 `tippy-options` 属性自定义配置表格的设置弹层 [#232](https://github.com/TencentBlueKing/bkui-vue2/issues/232)
+* **[fix]**:
+    - [Slider 滑动选择器](#/slider) 修复 min-value 设置为负值时无法正确渲染的问题 [#231](https://github.com/TencentBlueKing/bkui-vue2/issues/231)
+    - [TimePicker 时间选择器](#/time-picker) 修复 timer-picker 弹框偶发不会关闭的问题（页面存在多个 timer-picker 时 clickoutside 混乱的问题）
+* **[update]**:
+    - [Swiper 轮播图](#/swiper) 监听父容器高宽变化
+    - [VirtualScroll 虚拟滚动](#/virtual-scroll) 优化虚拟滚动折叠展开逻辑
+    - [Info 提示框](#/info-box) `maskClose`, `escClose` 默认值改为 `true`
+    - [Color 色彩](#/color), [Font 字体](#/font) 文档页面样式优化
+
+---
+
 ### 2.4.7 {page=#/changelog}
 ###### 2022.03.24
 

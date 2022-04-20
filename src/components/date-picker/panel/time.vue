@@ -149,7 +149,7 @@ export default {
       )
 
       if (emit) {
-        this.$emit('pick', newDate, 'time')
+        this.$emit('pick', newDate, true, 'time')
       }
     }
   }
