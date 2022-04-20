@@ -36,24 +36,23 @@
       <bk-button @click="dialogConfig.visiable = true" class="mr10">
         弹框
       </bk-button>
-      <bk-dialog v-model="dialogConfig.visiable" title="填写名称"
+      <bk-dialog
+        v-model="dialogConfig.visiable"
+        title="填写名称"
         :header-position="dialogConfig.headerPosition"
-        :width="dialogConfig.width">
+        :width="dialogConfig.width"
+      >
         <bk-date-picker :start-date="new Date(1991, 4, 14)"></bk-date-picker>
         <bk-time-picker v-model="initTime" :placeholder="'选择时间'"></bk-time-picker>
         <bk-select v-model="selectValue" style="width: 250px;" searchable>
-          <bk-option v-for="(option, index) in list"
-            :key="index"
-            :id="option.id"
-            :name="option.name">
-          </bk-option>
+          <bk-option v-for="(option, index) in list" :key="index" :id="option.id" :name="option.name"> </bk-option>
         </bk-select>
       </bk-dialog>
     </div>
     <div class="example-item">
       <div class="inner">
         <p><span class="bk-text-minor">基本使用</span></p>
-        <bk-date-picker :start-date="new Date(1991, 4, 14)"></bk-date-picker>
+        <bk-date-picker :cell-class="getCellClass" :start-date="new Date(1991, 4, 14)"></bk-date-picker>
         <!-- <bk-date-picker :value="['2016-01-01', '2016-02-15']" :type="'daterange'" @on-change></bk-date-picker> -->
       </div>
       <div class="inner">
@@ -84,7 +83,11 @@
     <div class="example-item">
       <div class="inner">
         <p><span class="bk-text-minor">快捷方式 datetime</span></p>
-        <bk-date-picker :shortcuts="shortcuts1" :type="'datetime'" :time-picker-options="{ steps: [1, 10, 10] }"></bk-date-picker>
+        <bk-date-picker
+          :shortcuts="shortcuts1"
+          :type="'datetime'"
+          :time-picker-options="{ steps: [1, 10, 10] }"
+        ></bk-date-picker>
       </div>
       <div class="inner">
         <p><span class="bk-text-minor">快捷方式 datetime（快捷方式关闭弹层）</span></p>
@@ -153,7 +156,9 @@
     <div class="example-item">
       <div class="inner">
         <p><span class="bk-text-minor">placeholder</span></p>
-        <bk-date-picker :open="open" :value="value"
+        <bk-date-picker
+          :open="open"
+          :value="value"
           @change="handleChange"
           @clear="handleClear"
           @pick-success="handleOk"
@@ -161,25 +166,26 @@
         >
           <a slot="trigger" href="javascript:void(0)" @click="handleClick">
             <template v-if="value === ''">Select date</template>
-            <template v-else>{{value}}</template>
+            <template v-else>{{ value }}</template>
           </a>
         </bk-date-picker>
       </div>
       <div class="inner">
         <p><span class="bk-text-minor">datetimerange</span></p>
-        <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal" :time-picker-options="{
-          disabledHours: [1, 5, 10],
-          disabledMinutes: [0, 10, 20]
-        }"></bk-date-picker>
+        <bk-date-picker
+          :type="'datetimerange'"
+          v-model="datetimerangeInitVal"
+          :time-picker-options="{
+            disabledHours: [1, 5, 10],
+            disabledMinutes: [0, 10, 20]
+          }"
+        ></bk-date-picker>
       </div>
     </div>
     <div class="example-item">
       <div class="inner">
         <p><span class="bk-text-minor">快捷选择区域插槽</span></p>
-        <bk-date-picker
-          :value="value"
-          :placement="'top-start'"
-          :type="'datetimerange'">
+        <bk-date-picker :value="value" :placement="'top-start'" :type="'datetimerange'">
           <div slot="shortcuts">自定义插槽</div>
         </bk-date-picker>
       </div>
@@ -221,8 +227,8 @@ export default {
           value () {
             return new Date()
           },
-          onClick: picker => {
-            console.error(picker)
+          onClick: (picker) => {
+            console.log(picker)
           }
         },
         {
@@ -232,8 +238,8 @@ export default {
             date.setTime(date.getTime() - 3600 * 1000 * 24)
             return date
           },
-          onClick: picker => {
-            console.error(picker)
+          onClick: (picker) => {
+            console.log(picker)
           }
         },
         {
@@ -243,8 +249,8 @@ export default {
             date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
             return date
           },
-          onClick: picker => {
-            console.error(picker)
+          onClick: (picker) => {
+            console.log(picker)
           }
         }
       ],
@@ -256,8 +262,8 @@ export default {
             const start = new Date()
             return [start, end]
           },
-          onClick: picker => {
-            console.error(picker)
+          onClick: (picker) => {
+            console.log(picker)
           }
         },
         {
@@ -326,30 +332,47 @@ export default {
       this.open = !this.open
     },
     handleChange (date) {
-      console.error('handleChange', date)
+      console.log('handleChange', date)
       this.value = date
     },
     handleClear () {
-      console.error('handleClear')
+      console.log('handleClear')
       this.open = false
     },
     handleOk () {
-      console.error('handleOK')
+      console.log('handleOK')
       this.open = false
     },
     handleOpenChange (isOpen) {
-      console.error(isOpen)
+      console.log(isOpen)
+    },
+    getCellClass (cell) {
+      const hasPoint = Math.random() * 10 > 5
+      return hasPoint ? 'cell-x-Class' : ''
     }
   }
 }
 </script>
 <style lang="postcss">
-    .custom-cls {
-        &.bk-date-picker {
-            width: 400px;
-        }
-        .bk-date-picker-dropdown {
-            background-color: #ddd;
-        }
-    }
+.custom-cls {
+  &.bk-date-picker {
+    width: 400px;
+  }
+  .bk-date-picker-dropdown {
+    background-color: #ddd;
+  }
+}
+
+.cell-x-Class {
+  position: relative;
+  &::after {
+    content: '';
+    height: 1px;
+    background: red;
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 0;
+  }
+}
 </style>

@@ -23,7 +23,7 @@
 ### 辅助色 {page=#/color}
 运维行业主要是对线上业务进行维护和检测，更为注重业务健康状况，为此使用红（危险）、橙（预警）、绿（健康）三种颜色作为辅助色。
 
-<div class="color-wrapper">
+<div class="color-wrapper help-color">
     <div class="color-item">
         <div class="main-color" style="background-color: #ea3636;color: #ffa7ab;"><span>#EA3636</span></div>
         <div class="other-color">
@@ -56,7 +56,7 @@
 ### 中性色 {page=#/color}
 在中性色的设计上加入环境色，使颜色更自然，和主题色搭配更为和谐。
 
-<div class="color-wrapper">
+<div class="color-wrapper middle-color">
     <div class="color-item color-item-max">
         <div class="main-color" style="background-color: #63656e;color: #979ba5;"><span>#63656E</span></div>
         <div class="other-color">

@@ -27,21 +27,47 @@
 -->
 
 <template>
-  <div class="bk-picker-panel-body-wrapper" :class="shortcuts.length ? 'bk-picker-panel-with-sidebar' : ''" @mousedown.prevent>
+  <div
+    class="bk-picker-panel-body-wrapper"
+    :class="shortcuts.length ? 'bk-picker-panel-with-sidebar' : ''"
+    @mousedown.prevent
+  >
     <div class="bk-picker-panel-sidebar" v-if="shortcuts.length">
-      <div class="bk-picker-panel-shortcut" v-for="(shortcut, index) in shortcuts" :key="index" @click="handleShortcutClick(shortcut)">
-        {{shortcut.text}}
+      <div
+        class="bk-picker-panel-shortcut"
+        v-for="(shortcut, index) in shortcuts"
+        :key="index"
+        @click="handleShortcutClick(shortcut)"
+      >
+        {{ shortcut.text }}
       </div>
     </div>
     <div class="bk-picker-panel-body" style="width: 261px;">
       <div class="bk-date-picker-header" v-show="currentView !== 'time'">
-        <span :class="iconBtnCls('prev', '-double')" @click="changeYear(-1)"><i class="bk-icon icon-angle-double-left"></i></span>
-        <span :class="iconBtnCls('prev')" v-if="pickerTable === 'date-table'" @click="changeMonth(-1)" v-show="currentView === 'date'">
+        <span :class="iconBtnCls('prev', '-double')" @click="changeYear(-1)"
+        ><i class="bk-icon icon-angle-double-left"></i
+        ></span>
+        <span
+          :class="iconBtnCls('prev')"
+          v-if="pickerTable === 'date-table'"
+          @click="changeMonth(-1)"
+          v-show="currentView === 'date'"
+        >
           <i class="bk-icon icon-angle-left"></i>
         </span>
-        <date-panel-label :date-panel-label="datePanelLabel" :current-view="pickerTable.split('-').shift()"></date-panel-label>
-        <span :class="iconBtnCls('next', '-double')" @click="changeYear(+1)"><i class="bk-icon icon-angle-double-right"></i></span>
-        <span :class="iconBtnCls('next')" v-if="pickerTable === 'date-table'" @click="changeMonth(+1)" v-show="currentView === 'date'">
+        <date-panel-label
+          :date-panel-label="datePanelLabel"
+          :current-view="pickerTable.split('-').shift()"
+        ></date-panel-label>
+        <span :class="iconBtnCls('next', '-double')" @click="changeYear(+1)"
+        ><i class="bk-icon icon-angle-double-right"></i
+        ></span>
+        <span
+          :class="iconBtnCls('next')"
+          v-if="pickerTable === 'date-table'"
+          @click="changeMonth(+1)"
+          v-show="currentView === 'date'"
+        >
           <i class="bk-icon icon-angle-right"></i>
         </span>
       </div>
@@ -55,6 +81,7 @@
           :selection-mode="selectionMode"
           :disabled-date="disabledDate"
           :focused-date="focusedDate"
+          :cell-class="cellClass"
           @pick="panelPickerHandlers"
           @pick-click="handlePickClick"
         ></component>
@@ -153,7 +180,7 @@ export default {
       const date = this.panelDate
       const { labels, separator } = formatDateLabels(locale, datePanelLabelStr, date)
 
-      const handler = type => {
+      const handler = (type) => {
         return () => {
           this.pickerTable = this.getTableType(type)
         }
@@ -161,7 +188,7 @@ export default {
 
       return {
         separator: separator,
-        labels: labels.map(obj => {
+        labels: labels.map((obj) => {
           obj.handler = handler(obj.type)
           return obj
         })
@@ -174,7 +201,7 @@ export default {
   watch: {
     value (newVal) {
       this.dates = newVal
-      const panelDate = this.multiple ? this.dates[this.dates.length - 1] : (this.startDate || this.dates[0])
+      const panelDate = this.multiple ? this.dates[this.dates.length - 1] : this.startDate || this.dates[0]
       this.panelDate = panelDate || new Date()
     },
     currentView (currentView) {
@@ -244,5 +271,5 @@ export default {
 }
 </script>
 <style>
-  @import '../../../ui/date-picker.css';
+@import '../../../ui/date-picker.css';
 </style>

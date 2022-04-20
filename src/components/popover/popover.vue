@@ -165,8 +165,9 @@ export default {
     const options = getValidTippyProps(Object.assign({}, { appendTo: popManager.container }, this.$props, this.tippyOptions))
     const onShow = options.onShow
     const onHide = options.onHide
+    const zIndex = typeof options.zIndex === 'number' ? options.zIndex : null
     options.onShow = tip => {
-      tip.set({ zIndex: this.getLocalZIndex(this.zIndex) })
+      tip.set({ zIndex: this.getLocalZIndex(zIndex || this.zIndex) })
       onShow && onShow(tip)
       this.$emit('show')
     }

@@ -30,11 +30,10 @@
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 
-// import Vue from 'vue'
-
 const nodeList = []
 const clickctx = '$clickoutsideCtx'
-let beginClick // 确保鼠标按下和松开时是同一个目标
+let beginClick
+let seed = 0
 
 document.addEventListener('mousedown', event => (beginClick = event))
 
@@ -46,7 +45,8 @@ document.addEventListener('mouseup', event => {
 
 const bkClickoutside = {
   bind (el, binding, vnode) {
-    const id = nodeList.push(el) - 1
+    nodeList.push(el)
+    const id = seed++
     const clickoutsideHandler = (mouseup = {}, mousedown = {}) => {
       if (!vnode.context // 点击在 vue 实例之外的 DOM 上
         || !mouseup.target
