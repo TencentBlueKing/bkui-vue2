@@ -154,7 +154,7 @@ export default {
       }
 
       if (emit) {
-        this.$emit('pick', [dateStart, dateEnd], 'time')
+        this.$emit('pick', [dateStart, dateEnd], true, 'time')
       }
     },
     handleStartChange (date) {

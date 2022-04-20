@@ -137,7 +137,7 @@
             },
             getCellClass(cell) {
                 const hasPoint = Math.random() * 10 > 5
-                  return hasPoint ? 'cell-x-Class' : ''
+                return hasPoint ? 'cell-x-Class' : ''
             }
         }
     }
@@ -180,7 +180,7 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" 
+        <bk-date-picker class="mr15" v-model="initDateTime"
         cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
@@ -610,7 +610,7 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" :cell-class="getCellClass" :type="'datetimerange'" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+        <bk-date-picker class="mr15" v-model="initDateTimeRange" :cell-class="getCellClass" :type="'datetimerange'" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
 <script>
@@ -622,7 +622,7 @@
         },
         data () {
             return {
-                initDateTime: [new Date(), new Date()]
+                initDateTimeRange: [new Date(), new Date()]
             }
         },
         methods: {
