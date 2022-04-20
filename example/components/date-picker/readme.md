@@ -18,11 +18,11 @@
                             text: '今天',
                             value () {
                                 const end = new Date()
-                                const start = new Date()
+                                const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
                                 return [start, end]
                             },
                             onClick: picker => {
-                                console.error(picker)
+                                console.log(picker)
                             }
                         },
                         {
@@ -59,11 +59,11 @@
                         text: '今天',
                         value () {
                             const end = new Date()
-                            const start = new Date()
+                            const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
                             return [start, end]
                         },
                         onClick: picker => {
-                            console.error(picker)
+                            console.log(picker)
                         }
                     },
                     {
@@ -111,7 +111,7 @@
                 this.value = date
             },
             handleOk () {
-                console.error('handleOK')
+                console.log('handleOK')
                 this.open = false
             },
             change4UpToNow (date, type) {
@@ -323,11 +323,11 @@
                         text: '今天',
                         value () {
                             const end = new Date()
-                            const start = new Date()
+                            const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
                             return [start, end]
                         },
                         onClick: picker => {
-                            console.error(picker)
+                            console.log(picker)
                         }
                     },
                     {
@@ -447,7 +447,7 @@
                 this.value = date
             },
             handleOk () {
-                console.error('handleOK')
+                console.log('handleOK')
                 this.open = false
             }
         }
