@@ -358,3 +358,64 @@ export function checkOverflow (el) {
   }
   return isOverflow
 }
+
+/**
+ * 监听鼠标滚轮事件
+ * @param {Dom Object} elem 目标dom
+ * @param {callback} callback 回调函数
+ * @param {Dom Object} useCapture 是否冒泡
+ */
+
+ export function addWheelListener (elem, callback, useCapture) {
+  let prefix = ''
+  let _addEventListener
+  
+  if (window.addEventListener) {
+    _addEventListener = 'addEventListener'
+  } else {
+    _addEventListener = 'attachEvent'
+    prefix = 'on'
+  }
+  
+  const support = 'onwheel' in document.createElement('div') ? 'wheel' : document.onmousewheel !== undefined ? 'mousewheel' : 'DOMMouseScroll'
+  
+  function _addWheelListener (elem, eventName, callback, useCapture) {
+    elem[_addEventListener](
+      prefix + eventName,
+      support === 'wheel'
+        ? callback : function (originalEvent) {
+          !originalEvent && (originalEvent = window.event)
+
+          const event = {
+            originalEvent: originalEvent,
+            target: originalEvent.target || originalEvent.srcElement,
+            type: 'wheel',
+            deltaMode: originalEvent.type === 'MozMousePixelScroll' ? 0 : 1,
+            deltaX: 0,
+            deltaZ: 0,
+            preventDefault: function () {
+              originalEvent.preventDefault
+                ? originalEvent.preventDefault()
+                : (originalEvent.returnValue = false)
+            }
+          }
+
+          if (support === 'mousewheel') {
+            event.deltaY = (-1 / 40) * originalEvent.wheelDelta
+            originalEvent.wheelDeltaX && (event.deltaX = (-1 / 40) * originalEvent.wheelDeltaX)
+          } else {
+            event.deltaY = originalEvent.detail
+          }
+
+          return callback(event)
+        },
+      useCapture || false
+    )
+  }
+  
+  if (support === 'DOMMouseScroll') {
+    _addWheelListener(elem, 'MozMousePixelScroll', callback, useCapture)
+  } else {
+    _addWheelListener(elem, support, callback, useCapture)
+  }
+}
