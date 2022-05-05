@@ -136,6 +136,7 @@ const Divider = () => import(/* webpackChunkName: 'image' */'./components/divide
 const PaginationExample = () => import(/* webpackChunkName: 'pagination-example' */'./components/pagination/example.vue')
 const Tag = () => import(/* webpackChunkName: 'tag' */'./components/tag/readme.md')
 const ResizeLayout = () => import(/* webpackChunkName: 'resize' */'./components/resize-layout/readme.md')
+const ResizeLayoutExample = () => import(/* webpackChunkName: 'resize-example' */'./components/resize-layout/example')
 const FixedNavbar = () => import(/* webpackChunkName: 'fixed-narbar' */'./components/fixed-navbar/readme.md')
 const Spin = () => import(/* webpackChunkName: 'spin' */'./components/spin/readme.md')
 const BackTop = () => import(/* webpackChunkName: 'back-top' */'./components/back-top/readme.md')
@@ -673,6 +674,11 @@ const router = new VueRouter({
       name: 'resize-layout',
       path: '/resize-layout',
       component: ResizeLayout
+    },
+    {
+      name: 'resize-layout-example',
+      path: '/resize-layout/example',
+      component: ResizeLayoutExample
     },
     {
       name: 'spin',
