@@ -29,7 +29,7 @@
 <template>
   <div
     class="bk-date-picker"
-    :class="[type === 'datetimerange' ? 'long' : '', longWidthCls, extCls]"
+    :class="[type === 'datetimerange' ? 'long' : '', longWidthCls, extCls, type === 'time' ? 'time-picker' : '']"
     v-clickoutside="handleClose"
   >
     <div ref="reference" class="bk-date-picker-rel">
@@ -544,9 +544,9 @@ export default {
     },
     // 开启 transfer 时，点击 Drop 即会关闭，这里不让其关闭
     handleTransferClick () {
-      if (this.transfer) {
-        this.disableCloseUnderTransfer = true
-      }
+      // if (this.transfer) {
+      //   this.disableCloseUnderTransfer = true
+      // }
     },
     handleClose (e) {
       if (this.disableCloseUnderTransfer) {

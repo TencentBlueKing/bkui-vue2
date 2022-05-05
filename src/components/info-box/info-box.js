@@ -70,8 +70,8 @@ const Info = function (opts = {}) {
 
   instance.closeIcon = opts.closeIcon !== false
 
-  instance.maskClose = opts.maskClose
-  instance.escClose = opts.escClose
+  instance.maskClose = opts.maskClose === undefined ? true : opts.maskClose
+  instance.escClose = opts.escClose === undefined ? true : opts.escClose
   instance.theme = opts.theme || 'primary'
   instance.icon = opts.icon
   instance.extCls = opts.extCls
