@@ -31,11 +31,12 @@
     <img :src="src" class="bk-real-image" @click="imgSrc = src">
     <transition name="fade">
       <div
-        style="position: absolute; top: -100000px; left: -100000px;"
+        v-if="imgSrc"
+        style="position: absolute; top: -100000px; left: -100000px;z-index: 9999"
         :data-transfer="true"
         class="bk-zoom-image"
         v-transfer-dom>
-        <section v-if="imgSrc"
+        <section
           class="bk-full-screen"
           @mousemove="mouseMove"
           @mouseup="mouseUp"
