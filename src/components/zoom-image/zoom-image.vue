@@ -30,37 +30,47 @@
   <section :class="[extCls, 'bk-zoom-image']">
     <img :src="src" class="bk-real-image" @click="imgSrc = src">
     <transition name="fade">
-      <section v-if="imgSrc"
-        class="bk-full-screen"
-        @mousemove="mouseMove"
-        @mouseup="mouseUp"
-      >
-        <img ref="screenImg"
-          :src="imgSrc"
-          @mousewheel.prevent="scrollImage"
-          @DOMMouseScroll.prevent="scrollImage"
-          @mousedown="mouseDown"
-          :class="[{ 'bk-zoom-init': isInit }, 'bk-full-image']"
-          :style="{
-            width: `${width}px`,
-            height: `${height}px`,
-            top: `${top}px`,
-            left: `${left}px`
-          }"
+      <div
+        style="position: absolute; top: -100000px; left: -100000px;"
+        :data-transfer="true"
+        class="bk-zoom-image"
+        v-transfer-dom>
+        <section v-if="imgSrc"
+          class="bk-full-screen"
+          @mousemove="mouseMove"
+          @mouseup="mouseUp"
         >
-      </section>
+          <img ref="screenImg"
+            :src="imgSrc"
+            @mousewheel.prevent="scrollImage"
+            @DOMMouseScroll.prevent="scrollImage"
+            @mousedown="mouseDown"
+            :class="[{ 'bk-zoom-init': isInit }, 'bk-full-image']"
+            :style="{
+              width: `${width}px`,
+              height: `${height}px`,
+              top: `${top}px`,
+              left: `${left}px`
+            }"
+          >
+        </section>
+      </div>
     </transition>
   </section>
 </template>
 
 <script>
+import transferDom from '@/directives/transfer-dom'
+
 export default {
   name: 'bk-zoom-image',
+  directives: {
+    transferDom
+  },
   props: {
     src: String,
     extCls: String
   },
-
   data () {
     return {
       imgSrc: '',
