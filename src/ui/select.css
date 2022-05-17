@@ -96,6 +96,9 @@ $disabledColor: #c4c6cc;
         /* color: #c4c6cc; */
         cursor: not-allowed;
         border-color: #dcdee5;
+        .bk-select-angle {
+            color: #c4c6cc;
+        }
     }
     &.is-readonly,
     &.is-loading {
