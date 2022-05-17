@@ -65,7 +65,9 @@ function toggle (el, options) {
         el.$vm.isShow = false
       }, delay)
     } else {
-      el.$vm.isShow = false
+      Vue.nextTick(() => {
+        el.$vm.isShow = false
+      })
     }
   }
 
@@ -108,7 +110,9 @@ const bkLoading = {
     }
   },
   update (el, binding) {
-    toggle(el, binding.value)
+    if (el.viewmodel) {
+      toggle(el, binding.value)
+    }
   }
 }
 
