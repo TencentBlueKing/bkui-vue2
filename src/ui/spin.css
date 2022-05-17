@@ -21,6 +21,11 @@
             animation-iteration-count: infinite;
             animation-direction: normal;
         }
+        &.bk-spin-rotation-default {
+            .rotate {
+                animation-name: fadeDefault;
+            }
+        }
         &.bk-spin-rotation-primary {
             .rotate {
                 animation-name: fadePrimary;
@@ -44,6 +49,11 @@
         &.bk-spin-rotation-info {
             .rotate {
                 animation-name: fadeInfo;
+            }
+        }
+        &.bk-spin-rotation-default-wait {
+            .rotate {
+                background-color: $newGreyColor;
             }
         }
         &.bk-spin-rotation-primary-wait {
@@ -156,19 +166,22 @@
         }
     }
     .bk-spin-icon-wait {
-        animation: none
+        animation: none;
+    }
+    .bk-spin-icon-default {
+        color: $newGreyColor;
     }
     .bk-spin-icon-primary {
-        color: $primaryColor
+        color: $primaryColor;
     }
     .bk-spin-icon-success {
-        color: $successColor
+        color: $successColor;
     }
     .bk-spin-icon-warning {
-        color: $warningColor
+        color: $warningColor;
     }
     .bk-spin-icon-danger {
-        color: $dangerColor
+        color: $dangerColor;
     }
     .bk-spin-icon-info {
     	color: #979ba5;
@@ -222,6 +235,16 @@
     .bk-display-flex {
         display: flex;
         align-items: center;
+    }
+}
+
+@keyframes fadeDefault{
+    0% {
+        background-color: $newGreyColor;
+    }
+
+    100% {
+        background-color: none;
     }
 }
 

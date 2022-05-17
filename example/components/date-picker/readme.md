@@ -18,11 +18,11 @@
                             text: '今天',
                             value () {
                                 const end = new Date()
-                                const start = new Date()
+                                const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
                                 return [start, end]
                             },
                             onClick: picker => {
-                                console.error(picker)
+                                console.log(picker)
                             }
                         },
                         {
@@ -59,11 +59,11 @@
                         text: '今天',
                         value () {
                             const end = new Date()
-                            const start = new Date()
+                            const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
                             return [start, end]
                         },
                         onClick: picker => {
-                            console.error(picker)
+                            console.log(picker)
                         }
                     },
                     {
@@ -111,7 +111,7 @@
                 this.value = date
             },
             handleOk () {
-                console.error('handleOK')
+                console.log('handleOK')
                 this.open = false
             },
             change4UpToNow (date, type) {
@@ -134,6 +134,10 @@
             },
             shortcutChange (value, index) {
                 console.log('shortcutChange', value, index)
+            },
+            getCellClass(cell) {
+                const hasPoint = Math.random() * 10 > 5
+                return hasPoint ? 'cell-x-Class' : ''
             }
         }
     }
@@ -144,6 +148,22 @@
     }
     .custom-footer {
         text-align: center;
+    }
+
+    .cell-x-Class {
+      position: relative;
+      &::after {
+        content: '';
+        height: 5px;
+        background: red;
+        position: absolute;
+        left: 15px;
+        /* right: 5px; */
+        bottom: 2px;
+        border-radius: 50%;
+        border: solid 1px red;
+        width: 5px;
+      }
     }
 </style>
 
@@ -160,7 +180,8 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+        <bk-date-picker class="mr15" v-model="initDateTime"
+        cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
 <script>
@@ -302,11 +323,11 @@
                         text: '今天',
                         value () {
                             const end = new Date()
-                            const start = new Date()
+                            const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
                             return [start, end]
                         },
                         onClick: picker => {
-                            console.error(picker)
+                            console.log(picker)
                         }
                     },
                     {
@@ -426,7 +447,7 @@
                 this.value = date
             },
             handleOk () {
-                console.error('handleOK')
+                console.log('handleOK')
                 this.open = false
             }
         }
@@ -583,6 +604,55 @@
 ```
 :::
 
+### 自定义cell-class {page=#/date-picker}
+:::demo 通过设置`cell-class`自定义每个日期Cell样式
+
+```html
+<template>
+    <div>
+        <bk-date-picker class="mr15" v-model="initDateTimeRange" :cell-class="getCellClass" :type="'datetimerange'" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+    </div>
+</template>
+<script>
+    import { bkDatePicker } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkDatePicker
+        },
+        data () {
+            return {
+                initDateTimeRange: [new Date(), new Date()]
+            }
+        },
+        methods: {
+            getCellClass (cell) {
+              const hasPoint = Math.random() * 10 > 5
+              return hasPoint ? 'cell-x-Class' : ''
+            }
+        }
+    }
+</script>
+<style lang="postcss">
+    .cell-x-Class {
+      position: relative;
+      &::after {
+        content: '';
+        height: 5px;
+        background: red;
+        position: absolute;
+        left: 15px;
+        /* right: 5px; */
+        bottom: 2px;
+        border-radius: 50%;
+        border: solid 1px red;
+        width: 5px;
+      }
+    }
+</style>
+```
+:::
+
 ### 属性 {page=#/date-picker}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
@@ -613,6 +683,7 @@
 | footer-slot-cls | 自定义 footer 的容器的样式，**只有存在自定义 footer 时才会生效** | string | -- | —— |
 | header-slot-cls | 自定义 header 的容器的样式，**只有存在自定义 header 时才会生效** | string | -- | —— |
 | behavior | 风格设置(simplicity:简约 normal:正常) | String | 'normal'/'simplicity' | normal |
+| cell-class | 自定义每个日期Cell样式 | Function | () => '' | -- |
 
 ### 事件 {page=#/date-picker}
 | 事件名称 | 说明 | 回调参数 |

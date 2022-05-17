@@ -151,7 +151,7 @@ const forced = {
   setting: {
     renderHeader: function (h, { column, fixed }) {
       if (fixed === 'right') {
-        return <bk-table-setting column={ column }></bk-table-setting>
+        return <bk-table-setting column={ column } tippyOptions={ column.tippyOptions }></bk-table-setting>
       }
       return ''
     },
@@ -270,7 +270,8 @@ export default {
     },
     beforeExpandChange: Function,
     beforeSelectChange: Function,
-    beforeSelectAllChange: Function
+    beforeSelectAllChange: Function,
+    tippyOptions: Object
   },
 
   data () {
@@ -366,6 +367,7 @@ export default {
       sortOrders: this.sortOrders,
       order: null,
       beforeExpandChange: this.beforeExpandChange,
+      tippyOptions: this.tippyOptions,
       beforeSelectChange: createFuncWrapper(this.beforeSelectChange),
       beforeSelectAllChange: createFuncWrapper(this.beforeSelectAllChange)
     })

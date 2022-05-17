@@ -71,7 +71,7 @@ export default {
       type: String,
       default: 'primary',
       validator (value) {
-        if (!['primary', 'warning', 'success', 'danger', 'info'].includes(value)) {
+        if (!['default', 'primary', 'warning', 'success', 'danger', 'info'].includes(value)) {
           console.error(`theme property is not valid: '${value}'`)
           return false
         }

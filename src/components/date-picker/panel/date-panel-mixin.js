@@ -22,7 +22,7 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
-*/
+ */
 
 /**
  * @file date-panel-mixin
@@ -80,6 +80,10 @@ export default {
     upToNow: {
       type: Boolean,
       default: false
+    },
+    cellClass: {
+      type: Function,
+      default: () => ''
     }
   },
   computed: {

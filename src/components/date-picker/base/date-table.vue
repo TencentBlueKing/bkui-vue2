@@ -29,10 +29,16 @@
 <template>
   <div class="bk-date-picker-cells">
     <div class="bk-date-picker-cells-header">
-      <span v-for="day in headerDays" :key="day">{{day}}</span>
+      <span v-for="day in headerDays" :key="day">{{ day }}</span>
     </div>
-    <span :class="getCellCls(cell)" v-for="(cell, i) in cells" :key="String(cell.date) + i" @click="handleClick(cell, $event)" @mouseenter="handleMouseMove(cell)">
-      <em>{{cell.desc}}</em>
+    <span
+      :class="getCellCls(cell)"
+      v-for="(cell, i) in cells"
+      :key="String(cell.date) + i"
+      @click="handleClick(cell, $event)"
+      @mouseenter="handleMouseMove(cell)"
+    >
+      <em>{{ cell.desc }}</em>
     </span>
   </div>
 </template>
@@ -50,8 +56,7 @@ import mixin from './mixin'
 export default {
   mixins: [mixin, locale.mixin],
   data () {
-    return {
-    }
+    return {}
   },
   computed: {
     calendar () {
@@ -82,7 +87,7 @@ export default {
       const isRange = this.selectionMode === 'range'
       const disabledTestFn = typeof this.disabledDate === 'function' && this.disabledDate
 
-      return this.calendar(tableYear, tableMonth, cell => {
+      return this.calendar(tableYear, tableMonth, (cell) => {
         if (cell.date instanceof Date) {
           cell.date.setTime(cell.date.getTime() + cell.date.getTimezoneOffset() * 60000)
         }
@@ -93,7 +98,7 @@ export default {
           ...cell,
           type: time === today ? 'today' : cell.type,
           selected: dateIsInCurrentMonth && selectedDays.includes(time),
-          disabled: (cell.date && disabledTestFn) && disabledTestFn(new Date(time)),
+          disabled: cell.date && disabledTestFn && disabledTestFn(new Date(time)),
           range: dateIsInCurrentMonth && isRange && isInRange(time, rangeStart, rangeEnd),
           start: dateIsInCurrentMonth && isRange && time === minDay,
           end: dateIsInCurrentMonth && isRange && time === maxDay
@@ -102,6 +107,13 @@ export default {
     }
   },
   methods: {
+    getExternalCellClass (cell) {
+      if (typeof this.cellClass === 'function') {
+        return this.cellClass(cell)
+      }
+
+      return ''
+    },
     getCellCls (cell) {
       return [
         'bk-date-picker-cells-cell',
@@ -114,7 +126,8 @@ export default {
           [`bk-date-picker-cells-cell-week-label`]: cell.type === 'weekLabel',
           [`bk-date-picker-cells-cell-range`]: cell.range && !cell.start && !cell.end
           // [`bk-date-picker-cells-focused`]: clearHours(cell.date) === clearHours(this.focusedDate)
-        }
+        },
+        this.getExternalCellClass(cell)
       ]
     }
   }

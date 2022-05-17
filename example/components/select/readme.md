@@ -230,27 +230,45 @@
 
 ### 尺寸 {page=#/select}
 
-:::demo `size` 属性进行尺寸设置，可选值为 `large`, `small`，如不设置，则为默认尺寸
+:::demo large、默认、 small 三种尺寸
 
 ```html
 <template>
     <div style="display: flex;flex-wrap: wrap;">
         <div class="mr15">
-            <bk-select size="small" v-model="value" searchable
-                style="width: 180px;" ext-cls="select-custom" ext-popover-cls="select-popover-custom">
-                <bk-option v-for="option in list" :key="option.id" :id="option.id" :name="option.name"></bk-option>
+            <bk-select size="small"  v-model="value" style="width: 180px;"
+                        ext-cls="select-custom"
+                        ext-popover-cls="select-popover-custom"
+                        searchable>
+                <bk-option v-for="option in list"
+                           :key="option.id"
+                           :id="option.id"
+                           :name="option.name">
+                </bk-option>
             </bk-select>
         </div>
         <div class="mr15">
-            <bk-select v-model="value" searchable
-                style="width: 180px;" ext-cls="select-custom" ext-popover-cls="select-popover-custom">
-                <bk-option v-for="option in list" :key="option.id" :id="option.id" :name="option.name"></bk-option>
+            <bk-select  v-model="value"  style="width: 180px;"
+                        ext-cls="select-custom"
+                        ext-popover-cls="select-popover-custom"
+                        searchable>
+                <bk-option v-for="option in list"
+                           :key="option.id"
+                           :id="option.id"
+                           :name="option.name">
+                </bk-option>
             </bk-select>
         </div>
         <div>
-            <bk-select size="large" v-model="value" searchable
-                style="width: 180px;" ext-cls="select-custom" ext-popover-cls="select-popover-custom">
-                <bk-option v-for="option in list" :key="option.id" :id="option.id" :name="option.name"></bk-option>
+            <bk-select  v-model="value" size="large" style="width: 180px;"
+                        ext-cls="select-custom"
+                        ext-popover-cls="select-popover-custom"
+                        searchable>
+                <bk-option v-for="option in list"
+                           :key="option.id"
+                           :id="option.id"
+                           :name="option.name">
+                </bk-option>
             </bk-select>
         </div>
     </div>

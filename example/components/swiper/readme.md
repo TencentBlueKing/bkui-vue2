@@ -52,11 +52,11 @@
 
 ### 基础用法 {page=#/swiper}
 
-:::demo 需要传入一个图片列表，轮播图的大小通过css来控制。通过属性`loop-time`控制轮播间隔时间
+:::demo 需要传入一个图片列表。通过属性`loop-time`控制轮播间隔时间。可以通过控制父元素的高宽来控制轮播图的高宽
 
 ```html
 <template>
-    <bk-swiper :pics="pics" class="swiper" :loop-time="4000"></bk-swiper>
+    <bk-swiper :pics="pics" :loop-time="4000"></bk-swiper>
 </template>
 <script>
     import { bkSwiper } from '{{BASE_LIB_NAME}}'
@@ -83,12 +83,6 @@
         }
     }
 </script>
-<style >
-    .swiper {
-        width: 100%;
-        height: 300px;
-    }
-</style>
 ```
 :::
 
@@ -98,7 +92,7 @@
 
 ```html
 <template>
-    <bk-swiper :pics="pics" class="swiper" :is-loop="false" @index-change="showIndex" ref="swiper"></bk-swiper>
+    <bk-swiper :pics="pics" :is-loop="false" @index-change="showIndex" ref="swiper"></bk-swiper>
 </template>
 <script>
     import { bkSwiper } from '{{BASE_LIB_NAME}}'
@@ -130,18 +124,12 @@
         }
     }
 </script>
-<style lang="postcss">
-    .swiper {
-        width: 100%;
-        height: 300px;
-    }
-</style>
 ```
 :::
 
 ### 控制轮播图高宽 {page=#/swiper}
 
-:::demo 通过`width`和`height`控制轮播图的高宽，如果不传则以轮播图的CSS样式控制高宽。
+:::demo 通过`width`和`height`控制轮播图的高宽，如果不传则使用父元素的高宽作为轮播图的高宽。
 
 ```html
 <template>
