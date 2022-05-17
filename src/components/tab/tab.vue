@@ -44,7 +44,8 @@
         ref="labelWrapper"
         :class="{
           'has-scroller': scrollState.show && !isSidePosition,
-          'has-add': (addable || hasAddBtnSlot) && !isSidePosition
+          'has-add': (addable || hasAddBtnSlot) && !isSidePosition,
+          'has-extension': hasExtensionSlot
         }"
         :style="{
           padding: scrollState.show && !isSidePosition ? `0 ${addCustomRect.width + 24}px 0 24px` : undefined
@@ -83,9 +84,19 @@
             @mouseleave.native.passive="handleClearHoverTimer(panel)">
           </li>
         </ul>
+        <div
+          v-if="hasExtensionSlot"
+          ref="extensionController"
+          :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
+          :class="{
+            'bk-tab-extension-controller': true,
+            'has-setting': $slots.extension
+          }">
+          <slot name="extension"></slot>
+        </div>
         <i class="bk-tab-add-controller bk-icon icon-plus"
           :class="{
-            'left-border': !visiblePanels.length,
+            'left-border': !visiblePanels.length && !hasExtensionSlot,
             'next-right': addShowNextRight
           }"
           :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
@@ -330,6 +341,9 @@ export default {
     // 是否存在自定义新增按钮
     hasAddBtnSlot () {
       return !!this.$slots && !!this.$slots.add
+    },
+    hasExtensionSlot () {
+      return !!this.$slots && !!this.$slots.extension
     }
   },
   watch: {
@@ -456,12 +470,13 @@ export default {
         return false
       }
       this.$nextTick(() => {
-        const { labelWrapper, labelList, addController } = this.$refs
+        const { labelWrapper, labelList, addController, extensionController } = this.$refs
         const labelWrapperRect = labelWrapper.getBoundingClientRect()
         const labelListRect = labelList.getBoundingClientRect()
         const addControllerRect = addController ? addController.getBoundingClientRect() : { width: 0 }
+        const extensionControllerReact = extensionController ? extensionController.getBoundingClientRect() : { width: 0 }
         this.addCustomRect = this.hasAddBtnSlot ? this.$refs.addCustom.getBoundingClientRect() : { width: 0 }
-        this.scrollState.show = (labelListRect.width + addControllerRect.width + this.addCustomRect.width) > labelWrapperRect.width
+        this.scrollState.show = (labelListRect.width + addControllerRect.width + this.addCustomRect.width + extensionControllerReact.width) > labelWrapperRect.width
         if (!this.scrollState.show) { // 如果不滚动，则恢复至原始位置
           this.scrollState.offset = 0
           this.scrollState.position = 'left'
@@ -500,8 +515,8 @@ export default {
       return width
     },
     getRightControllerWidth () {
-      const { nextController, addController } = this.$refs
-      const controllers = [nextController, addController]
+      const { nextController, addController, extensionController } = this.$refs
+      const controllers = [nextController, addController, extensionController]
       let width = 0
       controllers.forEach(controller => {
         width += controller ? controller.offsetWidth : 0
