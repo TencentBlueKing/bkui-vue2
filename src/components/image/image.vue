@@ -85,7 +85,6 @@ export default {
   components: {
     bkImageViewer
   },
-
   mixins: [locale.mixin],
 
   props: {
