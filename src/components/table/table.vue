@@ -702,7 +702,8 @@ export default {
     },
     handlePageChange (page) {
       this.autoScrollToTop && this.scrollToTop()
-      this.$emit('page-change', page)
+      // 翻页事件，传递当前页和每页条数
+      this.$emit('page-change', page, this.pagination.limit)
     },
     handlePageLimitChange (currentLimit, prevLimit) {
       this.autoScrollToTop && this.scrollToTop()
