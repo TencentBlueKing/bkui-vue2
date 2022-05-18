@@ -91,6 +91,14 @@ $hoverBackground: #eaf3ff;
             font-weight: bold;
         }
     }
+    .bk-page-jumper {
+        margin-left: 18px;
+        display: inline-block;
+        > span {
+            font-size: 14px;
+            color: $defaultPaginationTextColor;
+        }
+    } 
     &.bk-page-align {
         &-left {
             text-align: left;
@@ -112,6 +120,9 @@ $hoverBackground: #eaf3ff;
                 height: 32px;
                 line-height: 30px;
             }
+        }
+        .bk-page-jumper {
+            font-size: $smallPaginationFontSize;
         }
         .bk-page-total-count,
         .bk-page-selection-count {
