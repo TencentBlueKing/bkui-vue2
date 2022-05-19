@@ -363,6 +363,12 @@ export default {
     },
 
     // 用于 info-box
+    closeFn: {
+      type: Function,
+      default: null
+    },
+
+    // 用于 info-box
     onClose: {
       type: Function,
       default () {}
@@ -829,6 +835,7 @@ export default {
               typeof this.cancelFn === 'function' && this.cancelFn(this)
             }
             break
+          default:
         }
       }
     },
