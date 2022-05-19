@@ -28,32 +28,38 @@
 
 <template>
   <div>
-    <bk-image :transfer="false" style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
-    <bk-image style="width: 400px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
+    <p>拖动中设置了disabled=true，不再执行handleMouseMove方法</p>
+    <bk-resize-layout
+      style="height: 500px;margin-top: 20px;"
+      immediate
+      :min="min"
+      :disabled="disabled"
+      @resizing="handleResizing"
+      @after-resize="() => disabled = false">
+      <div slot="aside">aside</div>
+      <div slot="main">main</div>
+    </bk-resize-layout>
   </div>
 </template>
 
 <script>
-import { bkImage } from '@'
+import { bkResizeLayout } from '@'
+
 export default {
+  name: 'demo',
   components: {
-    bkImage
+    bkResizeLayout
   },
   data () {
     return {
-      src: './example/static/images/preview/0.png',
-      previewSrc: './example/static/images/preview/0.png',
-      srcList: [
-        './example/static/images/preview/0.png',
-        './example/static/images/preview/1.png',
-        './example/static/images/preview/2.png',
-        './example/static/images/preview/3.png',
-        './example/static/images/preview/33.png',
-        './example/static/images/preview/4.png',
-        './example/static/images/preview/55.png',
-        './example/static/images/preview/5.png',
-        './example/static/images/preview/6.png'
-      ]
+      disabled: false,
+      min: 100
+    }
+  },
+  methods: {
+    handleResizing (height) {
+      console.log(height)
+      this.disabled = (height - 3) <= this.min
     }
   }
 }

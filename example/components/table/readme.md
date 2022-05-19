@@ -1495,7 +1495,7 @@ export default {
 | current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
 | header-dragend | 当拖动表头改变了列的宽度的时候会触发该事件 | newWidth, oldWidth, column, event |
 | expand-change | 当用户对某一行展开或者关闭的时候会触发该事件 | row, expandedRows |
-| page-change | 当用户切换表格分页时会触发的事件 | newPage |
+| page-change | 当用户切换表格分页时会触发的事件 | newPage, pageSize |
 | page-limit-change | 当用户切换表格每页显示条数时会出发的事件 | limit |
 | scroll-end | 当表格滚动到底部时触发该事件 | —— |
 

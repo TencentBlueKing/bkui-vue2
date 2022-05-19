@@ -376,6 +376,66 @@
 </script>
 ```
 :::
+### 新增按钮前添加自定义插槽内容 {page=#/tab}
+
+:::demo 配置 `slot = "extension"` 可在新增按钮前添加自定义插槽内容
+
+```html
+<template>
+    <bk-tab addable closable
+        :active.sync="active"
+        :type="currentType"
+        @add-panel="addPanel"
+        @close-panel="closePanel">
+        <template slot="extension">
+            <i class="bk-icon icon-ellipsis"></i>
+        </template>
+        <bk-tab-panel
+            v-for="(panel, index) in panels"
+            v-bind="panel"
+            :key="index">
+        </bk-tab-panel>
+    </bk-tab>
+</template>
+<script>
+    import { bkTab, bkTabPanel } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTab,
+            bkTabPanel
+        },
+        data () {
+            return {
+                panels: [
+                    { name: 'mission', label: '任务报表', count: 10 },
+                    { name: 'config', label: '加速配置', count: 20 },
+                    { name: 'history', label: '历史版本', count: 30 },
+                    { name: 'deleted', label: '已归档加速任务', count: 40 }
+                ],
+                active: 'mission',
+                type: ['card', 'border-card', 'unborder-card', 'vertical-card'],
+                currentType: 'card'
+            }
+        },
+        methods: {
+            addPanel () {
+                const name = Math.random()
+                this.panels.push({
+                    name,
+                    label: '新标签页',
+                    count: 50
+                })
+                this.active = name
+            },
+            closePanel (index, panel) {
+                this.panels.splice(index, 1)
+            }
+        }
+    }
+</script>
+```
+:::
 
 ### 自定义选项卡内容 {page=#/tab}
 
@@ -738,6 +798,7 @@ export default {
 |---|---|
 | setting | 插入至选项卡右上角的扩展内容 |
 | add | 自定义新增按钮 |
+| extension | 自定义扩展内容（紧接选项卡之后，新增按钮之前） |
 
 ### bk-tab-panel 选项卡面板属性 {page=#/tab}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
