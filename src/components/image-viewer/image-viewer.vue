@@ -28,72 +28,70 @@
 
 <template>
   <transition name="bk-zoom">
-    <div style="position: absolute; top: -100000px; left: -100000px;" :data-transfer="true" v-transfer-dom>
-      <div tabindex="-1" ref="bk-image-viewer-wrapper" class="bk-image-viewer-wrapper"
-        :style="{ 'z-index': zIndex }">
-        <div class="bk-image-viewer-mask" @click="maskClose && hide()"></div>
-        <div v-if="isShowTitle && urlList.length" class="bk-image-viewer-header">
-          <div>{{currentName}}</div>
-          <div class="tc ">{{index + 1}}/{{urlList.length}}</div>
-          <div class="quit-box tr">
-            <div class="quit-tips mr10">{{t('bk.imageViewer.quitTips')}}</div>
-            <!-- CLOSE -->
-            <div class="bk-image-viewer-close" @click="hide">
-              <i class="bk-icon icon-close"></i>
-            </div>
+    <div tabindex="-1" ref="bk-image-viewer-wrapper" class="bk-image-viewer-wrapper"
+      :style="wrapStyles">
+      <div class="bk-image-viewer-mask" @click="maskClose && hide()"></div>
+      <div v-if="isShowTitle && urlList.length" class="bk-image-viewer-header">
+        <div>{{currentName}}</div>
+        <div class="tc ">{{index + 1}}/{{urlList.length}}</div>
+        <div class="quit-box tr">
+          <div class="quit-tips mr10">{{t('bk.imageViewer.quitTips')}}</div>
+          <!-- CLOSE -->
+          <div class="bk-image-viewer-close" @click="hide">
+            <i class="bk-icon icon-close"></i>
           </div>
         </div>
-        <!-- ARROW -->
-        <template v-if="!isSingle">
-          <div
-            class="bk-image-viewer-btn bk-image-viewer-prev"
-            :class="{ 'is-disabled': !infinite && isFirst }"
-            @click="prev">
-            <i class="bk-icon icon-angle-left" />
-          </div>
-          <div
-            class="bk-image-viewer-btn bk-image-viewer-next"
-            :class="{ 'is-disabled': !infinite && isLast }"
-            @click="next">
-            <i class="bk-icon icon-angle-right" />
-          </div>
-        </template>
-        <!-- ACTIONS -->
-        <div class="bk-image-viewer-btn bk-image-viewer-actions">
-          <div class="bk-image-viewer-actions-inner">
-            <i class="bk-icon icon-narrow-line" @click="handleActions('zoomOut')"
-              v-bk-tooltips.top="t('bk.image.zoomOut')" />
-            <i class="bk-icon icon-enlarge-line" @click="handleActions('zoomIn')"
-              v-bk-tooltips.top="t('bk.image.zoomIn')" />
-            <i class="bk-icon icon-normalized" @click="toggleMode('original')"
-              v-bk-tooltips.top="t('bk.image.original')" />
-            <i class="bk-icon icon-left-turn-line" @click="handleActions('anticlocelise')"
-              v-bk-tooltips.top="t('bk.image.rotateLeft')" />
-            <i class="bk-icon icon-right-turn-line" @click="handleActions('clockwise')"
-              v-bk-tooltips.top="t('bk.image.rotateRight')" />
-            <i class="bk-icon icon-unfull-screen" @click="toggleMode('contain')"
-              v-bk-tooltips.top="t('bk.image.fullScreen')" />
-          </div>
+      </div>
+      <!-- ARROW -->
+      <template v-if="!isSingle">
+        <div
+          class="bk-image-viewer-btn bk-image-viewer-prev"
+          :class="{ 'is-disabled': !infinite && isFirst }"
+          @click="prev">
+          <i class="bk-icon icon-angle-left" />
         </div>
-        <!-- CANVAS -->
-        <div class="bk-image-viewer-canvas" :class="{ 'bk-image-viewer-has-header': isShowTitle }">
-          <div class="bk-image-viewer-error" v-if="error">
-            <div><i class="bk-icon icon-image-fail"></i></div>
-            <div>{{t('bk.imageViewer.loadFailed')}}</div>
-          </div>
-          <img
-            v-for="(url, i) in urlList"
-            v-if="i === index"
-            :key="url"
-            v-show="!error"
-            ref="img"
-            class="bk-image-viewer-img"
-            :src="currentImg"
-            :style="imgStyle"
-            @load="handleImgLoad"
-            @error="handleImgError"
-            @mousedown="handleMouseDown" />
+        <div
+          class="bk-image-viewer-btn bk-image-viewer-next"
+          :class="{ 'is-disabled': !infinite && isLast }"
+          @click="next">
+          <i class="bk-icon icon-angle-right" />
         </div>
+      </template>
+      <!-- ACTIONS -->
+      <div class="bk-image-viewer-btn bk-image-viewer-actions">
+        <div class="bk-image-viewer-actions-inner">
+          <i class="bk-icon icon-narrow-line" @click="handleActions('zoomOut')"
+            v-bk-tooltips.top="t('bk.image.zoomOut')" />
+          <i class="bk-icon icon-enlarge-line" @click="handleActions('zoomIn')"
+            v-bk-tooltips.top="t('bk.image.zoomIn')" />
+          <i class="bk-icon icon-normalized" @click="toggleMode('original')"
+            v-bk-tooltips.top="t('bk.image.original')" />
+          <i class="bk-icon icon-left-turn-line" @click="handleActions('anticlocelise')"
+            v-bk-tooltips.top="t('bk.image.rotateLeft')" />
+          <i class="bk-icon icon-right-turn-line" @click="handleActions('clockwise')"
+            v-bk-tooltips.top="t('bk.image.rotateRight')" />
+          <i class="bk-icon icon-unfull-screen" @click="toggleMode('contain')"
+            v-bk-tooltips.top="t('bk.image.fullScreen')" />
+        </div>
+      </div>
+      <!-- CANVAS -->
+      <div class="bk-image-viewer-canvas" :class="{ 'bk-image-viewer-has-header': isShowTitle }">
+        <div class="bk-image-viewer-error" v-if="error">
+          <div><i class="bk-icon icon-image-fail"></i></div>
+          <div>{{t('bk.imageViewer.loadFailed')}}</div>
+        </div>
+        <img
+          v-for="(url, i) in urlList"
+          v-if="i === index"
+          :key="url"
+          v-show="!error"
+          ref="img"
+          class="bk-image-viewer-img"
+          :src="currentImg"
+          :style="imgStyle"
+          @load="handleImgLoad"
+          @error="handleImgError"
+          @mousedown="handleMouseDown" />
       </div>
     </div>
   </transition>
@@ -102,9 +100,7 @@
 <script>
 import { addEvent, removeEvent } from '@/utils/dom'
 import locale from 'bk-magic-vue/lib/locale'
-import transferDom from '@/directives/transfer-dom'
-
-// import { throttle } from 'throttle-debounce'
+import zIndex from '@/mixins/z-index'
 function rafThrottle (fn) {
   let locked = false
   return function (...args) {
@@ -118,11 +114,7 @@ function rafThrottle (fn) {
 }
 export default {
   name: 'bk-image-viewer',
-  directives: {
-    transferDom
-  },
-  mixins: [locale.mixin],
-
+  mixins: [locale.mixin, zIndex],
   props: {
     urlList: {
       type: Array,
@@ -153,6 +145,10 @@ export default {
     maskClose: {
       type: Boolean,
       default: true
+    },
+    transfer: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -174,8 +170,8 @@ export default {
       }
     }
   },
-
   computed: {
+
     isSingle () {
       return this.urlList.length <= 1
     },
@@ -191,6 +187,11 @@ export default {
     currentName () {
       const arr = this.currentImg.split('/')
       return arr[arr.length - 1]
+    },
+    wrapStyles () {
+      return {
+        zIndex: this.transfer ? this.getLocalZIndex() : this.zIndex
+      }
     },
     imgStyle () {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform
@@ -224,10 +225,17 @@ export default {
     }
   },
   mounted () {
+    if (this.transfer) {
+      document.body.appendChild(this.$el)
+    }
     this.deviceSupportInstall()
-    // add tabindex then wrapper can be focusable via Javascript
-    // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['bk-image-viewer-wrapper'].focus()
+  },
+  destroyed () {
+    // if transfer is true, remove DOM node after destroy
+    if (this.transfer && this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
   },
   methods: {
     hide () {
