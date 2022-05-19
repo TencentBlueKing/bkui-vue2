@@ -28,16 +28,18 @@
 
 <template>
   <section :class="[extCls, 'bk-zoom-image']">
-    <img :src="src" class="bk-real-image" @click="imgSrc = src">
+    <img :src="src" class="bk-real-image" @click="showImg">
     <transition name="fade">
       <div
-        v-if="imgSrc"
-        style="position: absolute; top: -100000px; left: -100000px;z-index: 9999"
-        :data-transfer="true"
+
+        style="position: absolute; top: -100000px; left: -100000px;"
+        :data-transfer="transfer"
         class="bk-zoom-image"
         v-transfer-dom>
         <section
+          v-if="imgSrc"
           class="bk-full-screen"
+          :style="{ zIndex: popIndex }"
           @mousemove="mouseMove"
           @mouseup="mouseUp"
         >
@@ -62,15 +64,24 @@
 
 <script>
 import transferDom from '@/directives/transfer-dom'
-
+import zIndex from '@/mixins/z-index'
 export default {
   name: 'bk-zoom-image',
   directives: {
     transferDom
   },
+  mixins: [zIndex],
   props: {
     src: String,
-    extCls: String
+    extCls: String,
+    zIndex: {
+      type: Number,
+      default: 2000
+    },
+    transfer: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -83,10 +94,10 @@ export default {
       width: 0,
       height: 0,
       top: 0,
-      left: 0
+      left: 0,
+      popIndex: 0
     }
   },
-
   watch: {
     imgSrc (val) {
       if (val) {
@@ -98,8 +109,11 @@ export default {
       }
     }
   },
-
   methods: {
+    showImg () {
+      this.imgSrc = this.src
+      this.popIndex = this.transfer ? this.getLocalZIndex() : this.zIndex
+    },
     startChange (event) {
       if (!this.isInit) return
       this.top = event.clientY - event.offsetY
