@@ -141,7 +141,8 @@
                     okText: '保存',
                     cancelText: '不保存',
                     cancelFn () {
-                        console.log('cancle')
+                        console.log(11, 'cancel')
+                        console.log('cancel')
                     }
                 })
             },
@@ -151,10 +152,12 @@
                     okText: '保存',
                     cancelText: '不保存',
                     closeFn () {
+                        console.log(22, 'close')
                         console.log('close')
                     },
                     cancelFn () {
-                        console.log('cancle')
+                        console.log(22, 'cancel')
+                        console.log('cancel')
                     }
                 })
             },

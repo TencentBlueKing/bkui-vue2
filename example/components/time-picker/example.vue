@@ -35,14 +35,14 @@
     <div class="example-item">
       <div class="inner">
         <p><span class="bk-text-minor">基本使用</span></p>
-        <bk-time-picker></bk-time-picker>
+        <bk-time-picker v-model="initTime" @change="change"></bk-time-picker>
       </div>
       <div class="inner">
         <p><span class="bk-text-minor">transfer</span></p>
         <bk-time-picker :transfer="true"></bk-time-picker>
       </div>
     </div>
-    <div class="example-item">
+    <!-- <div class="example-item">
       <div class="inner">
         <p><span class="bk-text-minor">timerange</span></p>
         <bk-time-picker :type="'timerange'"></bk-time-picker>
@@ -151,7 +151,7 @@
         <p><span class="bk-text-minor">timerange 非回车模式</span></p>
         <bk-time-picker :enter-mode="false" :type="'timerange'" @change="change" @open-change="openChange"></bk-time-picker>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
@@ -165,7 +165,8 @@ export default {
   data () {
     return {
       open: false,
-      initVal: '25-12-57'
+      initVal: '25-12-57',
+      initTime: '12:12:12'
     }
   },
   created () {

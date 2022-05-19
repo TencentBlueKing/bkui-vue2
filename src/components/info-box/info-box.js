@@ -104,6 +104,10 @@ const Info = function (opts = {}) {
     ? opts.cancelFn
     : () => {}
 
+  instance.closeFn = opts.closeFn && typeof opts.closeFn === 'function'
+    ? opts.closeFn
+    : null
+
   instance.afterLeaveFn = opts.afterLeaveFn && typeof opts.afterLeaveFn === 'function'
     ? opts.afterLeaveFn
     : () => {}

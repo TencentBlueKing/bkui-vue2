@@ -29,6 +29,7 @@
 <template>
   <section>
     <bk-big-tree ref="tree"
+      height="300"
       default-expand-all
       :show-checkbox="true"
       :display-matched-node-descendants="true"
