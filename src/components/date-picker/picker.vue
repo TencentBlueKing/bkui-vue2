@@ -607,24 +607,24 @@ export default {
     handleKeydown (e) {
       const keyCode = e.keyCode
       // tab
-      if (keyCode === 9) {
-        if (this.visible) {
-          e.stopPropagation()
-          e.preventDefault()
+      // if (keyCode === 9) {
+      //   if (this.visible) {
+      //     e.stopPropagation()
+      //     e.preventDefault()
 
-          if (this.isConfirm) {
-            const selector = '.bk-picker-confirm > *'
-            const tabbable = this.$refs.drop.$el.querySelectorAll(selector)
-            this.internalFocus = true
-            const element = [...tabbable][e.shiftKey ? 'pop' : 'shift']()
-            element.focus()
-          } else {
-            this.handleClose()
-          }
-        } else {
-          this.focused = false
-        }
-      }
+      //     if (this.isConfirm) {
+      //       const selector = '.bk-picker-confirm > *'
+      //       const tabbable = this.$refs.drop.$el.querySelectorAll(selector)
+      //       this.internalFocus = true
+      //       const element = [...tabbable][e.shiftKey ? 'pop' : 'shift']()
+      //       element.focus()
+      //     } else {
+      //       this.handleClose()
+      //     }
+      //   } else {
+      //     this.focused = false
+      //   }
+      // }
 
       // left, top, right, bottom
       const arrows = [37, 38, 39, 40]
@@ -641,8 +641,8 @@ export default {
         }
       }
 
-      // enter
-      if (keyCode === 13 && this.timeEnterMode) {
+      // tab or enter
+      if ((keyCode === 9 || keyCode === 13) && this.timeEnterMode) {
         const timePickers = findChildComponents(this, 'TimeSpinner')
         if (timePickers.length > 0) {
           const columnsPerPicker = timePickers[0].showSeconds ? 3 : 2
@@ -815,10 +815,10 @@ export default {
       }
     },
     handleInputMouseleave (e) {
-      if (e.toElement && e.toElement.classList.contains('clear-action')) {
-        return
-      }
-      this.showClose = false
+      // if (e.toElement && e.toElement.classList.contains('clear-action')) {
+      //   return
+      // }
+      // this.showClose = false
     },
     handleClear (e) {
       this.visible = false
