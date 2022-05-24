@@ -485,3 +485,13 @@ $disabledColor: #c4c6cc;
     width: 100%;
     z-index: 777;
 }
+
+.bk-select-tag-input{
+    height: 22px;
+    max-width: 190px;
+    padding: 0;
+    margin: 4px 5px 4px 0;
+    overflow: hidden;
+    border: none;
+    outline: none;
+}
