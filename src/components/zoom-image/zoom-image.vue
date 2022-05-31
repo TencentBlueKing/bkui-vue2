@@ -28,39 +28,61 @@
 
 <template>
   <section :class="[extCls, 'bk-zoom-image']">
-    <img :src="src" class="bk-real-image" @click="imgSrc = src">
+    <img :src="src" class="bk-real-image" @click="showImg">
     <transition name="fade">
-      <section v-if="imgSrc"
-        class="bk-full-screen"
-        @mousemove="mouseMove"
-        @mouseup="mouseUp"
-      >
-        <img ref="screenImg"
-          :src="imgSrc"
-          @mousewheel.prevent="scrollImage"
-          @DOMMouseScroll.prevent="scrollImage"
-          @mousedown="mouseDown"
-          :class="[{ 'bk-zoom-init': isInit }, 'bk-full-image']"
-          :style="{
-            width: `${width}px`,
-            height: `${height}px`,
-            top: `${top}px`,
-            left: `${left}px`
-          }"
+      <div
+
+        style="position: absolute; top: -100000px; left: -100000px;"
+        :data-transfer="transfer"
+        class="bk-zoom-image"
+        v-transfer-dom>
+        <section
+          v-if="imgSrc"
+          class="bk-full-screen"
+          :style="{ zIndex: popIndex }"
+          @mousemove="mouseMove"
+          @mouseup="mouseUp"
         >
-      </section>
+          <img ref="screenImg"
+            :src="imgSrc"
+            @mousewheel.prevent="scrollImage"
+            @DOMMouseScroll.prevent="scrollImage"
+            @mousedown="mouseDown"
+            :class="[{ 'bk-zoom-init': isInit }, 'bk-full-image']"
+            :style="{
+              width: `${width}px`,
+              height: `${height}px`,
+              top: `${top}px`,
+              left: `${left}px`
+            }"
+          >
+        </section>
+      </div>
     </transition>
   </section>
 </template>
 
 <script>
+import transferDom from '@/directives/transfer-dom'
+import zIndex from '@/mixins/z-index'
 export default {
   name: 'bk-zoom-image',
+  directives: {
+    transferDom
+  },
+  mixins: [zIndex],
   props: {
     src: String,
-    extCls: String
+    extCls: String,
+    zIndex: {
+      type: Number,
+      default: 2000
+    },
+    transfer: {
+      type: Boolean,
+      default: true
+    }
   },
-
   data () {
     return {
       imgSrc: '',
@@ -72,10 +94,10 @@ export default {
       width: 0,
       height: 0,
       top: 0,
-      left: 0
+      left: 0,
+      popIndex: 0
     }
   },
-
   watch: {
     imgSrc (val) {
       if (val) {
@@ -87,8 +109,11 @@ export default {
       }
     }
   },
-
   methods: {
+    showImg () {
+      this.imgSrc = this.src
+      this.popIndex = this.transfer ? this.getLocalZIndex() : this.zIndex
+    },
     startChange (event) {
       if (!this.isInit) return
       this.top = event.clientY - event.offsetY

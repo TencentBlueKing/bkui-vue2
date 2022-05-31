@@ -216,29 +216,31 @@ export default {
 
       const resizingCallback = throttle(100, value => this.$emit('resizing', value))
       const handleMouseMove = (event) => {
-        let delta
-        switch (placement) {
-          case 'top':
-            delta = event.clientY - this.state.mouse.clientY
-            break
-          case 'right':
-            delta = this.state.mouse.clientX - event.clientX
-            break
-          case 'bottom':
-            delta = this.state.mouse.clientY - event.clientY
-            break
-          case 'left':
-            delta = event.clientX - this.state.mouse.clientX
+        if (!this.disabled) {
+          let delta
+          switch (placement) {
+            case 'top':
+              delta = event.clientY - this.state.mouse.clientY
+              break
+            case 'right':
+              delta = this.state.mouse.clientX - event.clientX
+              break
+            case 'bottom':
+              delta = this.state.mouse.clientY - event.clientY
+              break
+            case 'left':
+              delta = event.clientX - this.state.mouse.clientX
+          }
+          const current = this.state.aside[this.computedStyleKey] + delta
+          const realValue = this.getRealValue(current) + this.triggerOffset
+          const pixel = `${realValue}px`
+          if (this.immediate) {
+            aside.style[this.computedStyleKey] = pixel
+          } else {
+            resizeProxy.style[placement] = pixel
+          }
+          resizingCallback(realValue)
         }
-        const current = this.state.aside[this.computedStyleKey] + delta
-        const realValue = this.getRealValue(current) + this.triggerOffset
-        const pixel = `${realValue}px`
-        if (this.immediate) {
-          aside.style[this.computedStyleKey] = pixel
-        } else {
-          resizeProxy.style[placement] = pixel
-        }
-        resizingCallback(realValue)
       }
       const handleMouseUp = (event) => {
         resizingCallback.cancel()

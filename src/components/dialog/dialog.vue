@@ -101,7 +101,7 @@
                   </slot>
                 </div>
               </template>
-              <i class="bk-dialog-close bk-icon icon-close" v-if="closeIcon" @click.stop="cancelHandler"></i>
+              <i class="bk-dialog-close bk-icon icon-close" v-if="closeIcon" @click.stop="closeHandler"></i>
             </div>
           </div>
         </template>
@@ -358,6 +358,12 @@ export default {
 
     // 用于 info-box
     confirmFn: {
+      type: Function,
+      default: null
+    },
+
+    // 用于 info-box
+    closeFn: {
       type: Function,
       default: null
     },
@@ -757,10 +763,10 @@ export default {
     },
 
     /**
-             * 拖动中事件回调
-             *
-             * @param {Object} e 事件对象
-             */
+     * 拖动中事件回调
+     *
+     * @param {Object} e 事件对象
+     */
     moveHandler (e) {
       const dragData = this.dragData
 
@@ -797,8 +803,8 @@ export default {
     },
 
     /**
-             * 拖动结束回调函数
-             */
+     * 拖动结束回调函数
+     */
     moveEndHandler () {
       this.dragData.dragging = false
       removeEvent(window, 'mousemove', this.moveHandler)
@@ -806,9 +812,9 @@ export default {
     },
 
     /**
-             *  关闭弹框
-             */
-    async close () {
+     *  关闭弹框
+     */
+    async close (type = 'cancel') {
       let shouldClose = true
       if (typeof this.beforeClose === 'function') {
         shouldClose = await this.beforeClose()
@@ -818,16 +824,34 @@ export default {
         typeof this.onClose === 'function' && this.onClose()
         this.$emit('input', false)
         this.$emit('cancel')
-        typeof this.cancelFn === 'function' && this.cancelFn(this)
+        switch (type) {
+          case 'cancel':
+            typeof this.cancelFn === 'function' && this.cancelFn(this)
+            break
+          case 'close':
+            if (this.closeFn) {
+              typeof this.closeFn === 'function' && this.closeFn(this)
+            } else {
+              typeof this.cancelFn === 'function' && this.cancelFn(this)
+            }
+            break
+          default:
+        }
       }
     },
 
     /**
-             * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
-             */
+     * .bk-dialog after-leave 回调，弹框消失的动画结束后触发
+     */
     animationFinish () {
       this.$emit('after-leave')
       typeof this.afterLeaveFn === 'function' && this.afterLeaveFn(this)
+    },
+    /**
+     * 右上角的关闭 icon 点击回调函数
+     */
+    closeHandler () {
+      this.close('close')
     },
 
     /**

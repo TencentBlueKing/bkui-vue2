@@ -4,6 +4,24 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.9 {page=#/changelog}
+###### 2022.05.19
+
+* **[add]**:
+    - [Table 表格](#/table) 翻页事件 `page-change`，返回参数增加`每页条数`
+    - [Pagination 分页](#/pagination) 支持[跳转分页](#/pagination?anchor=tiao-zhuan-fen-ye)
+    - [Info 提示框](#/info-box) 新增 `closeFn`，用来单独配置[关闭的回调函数](#/info-box?anchor=guan-bi-icon-hui-diao-zi-ding-yi)，默认与 `cancelFn` 一致
+    - [Tab 选项卡](#/tab) 支持新增按钮前添加[自定义插槽内容](#/tab?anchor=xin-zeng-an-niu-qian-tian-jia-zi-ding-yi-cha-cao-nei-rong)
+* **[fix]**:
+    - [Spin 加载中](#/spin) spin 组件增加 default 类型
+    - [ResizeLayout 可拉伸布局](#/resize-layout) 修复拖动中设置了 disabled=true 不再触发 handleMouseMove 方法的问题 [#251](https://github.com/TencentBlueKing/bkui-vue2/issues/251)
+    - [TimePicker 时间选择器](#/time-picker) 修复时间组件支持失焦后生效的问题 [#235](https://github.com/TencentBlueKing/bkui-vue2/issues/235)
+    - [Loading 加载](#/loading) 修复 loading 指令出现 el.viewmodel.$mount 读取错误的问题 [#258](https://github.com/TencentBlueKing/bkui-vue2/issues/258)
+* **[update]**:
+    - [Select 下拉选框](#/select) 调整下拉框禁用时箭头颜色
+
+---
+
 ### 2.4.8 {page=#/changelog}
 ###### 2022.04.21
 

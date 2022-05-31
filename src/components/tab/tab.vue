@@ -44,7 +44,8 @@
         ref="labelWrapper"
         :class="{
           'has-scroller': scrollState.show && !isSidePosition,
-          'has-add': (addable || hasAddBtnSlot) && !isSidePosition
+          'has-add': (addable || hasAddBtnSlot) && !isSidePosition,
+          'has-extension': hasExtensionSlot
         }"
         :style="{
           padding: scrollState.show && !isSidePosition ? `0 ${addCustomRect.width + 24}px 0 24px` : undefined
@@ -83,9 +84,19 @@
             @mouseleave.native.passive="handleClearHoverTimer(panel)">
           </li>
         </ul>
+        <div
+          v-if="hasExtensionSlot"
+          ref="extensionController"
+          :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
+          :class="{
+            'bk-tab-extension-controller': true,
+            'has-setting': $slots.extension
+          }">
+          <slot name="extension"></slot>
+        </div>
         <i class="bk-tab-add-controller bk-icon icon-plus"
           :class="{
-            'left-border': !visiblePanels.length,
+            'left-border': !visiblePanels.length && !hasExtensionSlot,
             'next-right': addShowNextRight
           }"
           :style="{ height: `${labelHeight}px`, lineHeight: `${labelHeight}px` }"
@@ -330,6 +341,9 @@ export default {
     // 是否存在自定义新增按钮
     hasAddBtnSlot () {
       return !!this.$slots && !!this.$slots.add
+    },
+    hasExtensionSlot () {
+      return !!this.$slots && !!this.$slots.extension
     }
   },
   watch: {
@@ -456,12 +470,13 @@ export default {
         return false
       }
       this.$nextTick(() => {
-        const { labelWrapper, labelList, addController } = this.$refs
+        const { labelWrapper, labelList, addController, extensionController } = this.$refs
         const labelWrapperRect = labelWrapper.getBoundingClientRect()
         const labelListRect = labelList.getBoundingClientRect()
         const addControllerRect = addController ? addController.getBoundingClientRect() : { width: 0 }
+        const extensionControllerReact = extensionController ? extensionController.getBoundingClientRect() : { width: 0 }
         this.addCustomRect = this.hasAddBtnSlot ? this.$refs.addCustom.getBoundingClientRect() : { width: 0 }
-        this.scrollState.show = (labelListRect.width + addControllerRect.width + this.addCustomRect.width) > labelWrapperRect.width
+        this.scrollState.show = (labelListRect.width + addControllerRect.width + this.addCustomRect.width + extensionControllerReact.width) > labelWrapperRect.width
         if (!this.scrollState.show) { // 如果不滚动，则恢复至原始位置
           this.scrollState.offset = 0
           this.scrollState.position = 'left'
@@ -500,8 +515,8 @@ export default {
       return width
     },
     getRightControllerWidth () {
-      const { nextController, addController } = this.$refs
-      const controllers = [nextController, addController]
+      const { nextController, addController, extensionController } = this.$refs
+      const controllers = [nextController, addController, extensionController]
       let width = 0
       controllers.forEach(controller => {
         width += controller ? controller.offsetWidth : 0
@@ -519,48 +534,50 @@ export default {
       this.$nextTick(() => {
         // 直接查找 html el 元素
         // const index = this.visiblePanels.findIndex(item => item.name === active)
-        const panel = this.$refs.tabLabel.find(item => {
-          if (item && item.$el) {
-            // number类型数据添加到dom会转成字符串
-            const newActive = Object.prototype.toString.call(active) === '[object Number]' ? active + '' : active
-            return item.$el.dataset.name === newActive
-          }
-        })
-        if (panel) {
-          const tabLabel = panel.$el
-          const tabLabelRect = tabLabel.getBoundingClientRect()
-          if (!this.isSidePosition) {
-            // 说明 tab 的父容器是 display none 的，获取不到高宽
-            if (tabLabelRect.width === 0 && tabLabelRect.height === 0) {
-              tabLabel.classList.add('simulate-border-bottom')
-            } else {
-              tabLabel.classList.remove('simulate-border-bottom')
+        if (Array.isArray(this.$refs.tabLabel)) {
+          const panel = this.$refs.tabLabel.find(item => {
+            if (item && item.$el) {
+              // number类型数据添加到dom会转成字符串
+              const newActive = Object.prototype.toString.call(active) === '[object Number]' ? active + '' : active
+              return item.$el.dataset.name === newActive
             }
+          })
+          if (panel) {
+            const tabLabel = panel.$el
+            const tabLabelRect = tabLabel.getBoundingClientRect()
+            if (!this.isSidePosition) {
+              // 说明 tab 的父容器是 display none 的，获取不到高宽
+              if (tabLabelRect.width === 0 && tabLabelRect.height === 0) {
+                tabLabel.classList.add('simulate-border-bottom')
+              } else {
+                tabLabel.classList.remove('simulate-border-bottom')
+              }
 
-            this.activeBarStyle.width = `${tabLabelRect.width - 24}px`
-            this.activeBarStyle.height = this.activeBar.height
-            this.activeBarStyle.transform = `translateX(${tabLabel.offsetLeft + 12}px)`
-            this.activeBarStyle.left = 0
-            if (this.activeBar.position === 'top') {
-              this.activeBarStyle.top = '0px'
-              this.activeBarStyle.bottom = 'auto'
-            } else {
-              this.activeBarStyle.top = 'auto'
-              this.activeBarStyle.bottom = '0px'
-            }
-          } else {
-            if (tabLabelRect.width === 0 && tabLabelRect.height === 0) {
-              tabLabel.classList.add('simulate-border-right')
-            } else {
-              tabLabel.classList.remove('simulate-border-right')
-            }
-            this.activeBarStyle.width = this.activeBar.height
-            this.activeBarStyle.height = `${tabLabelRect.height || 50}px`
-            this.activeBarStyle.transform = `translateY(${tabLabel.offsetTop}px)`
-            if (this.tabPosition === 'right') {
+              this.activeBarStyle.width = `${tabLabelRect.width - 24}px`
+              this.activeBarStyle.height = this.activeBar.height
+              this.activeBarStyle.transform = `translateX(${tabLabel.offsetLeft + 12}px)`
               this.activeBarStyle.left = 0
+              if (this.activeBar.position === 'top') {
+                this.activeBarStyle.top = '0px'
+                this.activeBarStyle.bottom = 'auto'
+              } else {
+                this.activeBarStyle.top = 'auto'
+                this.activeBarStyle.bottom = '0px'
+              }
             } else {
-              this.activeBarStyle.left = `${tabLabelRect.width - 2}px`
+              if (tabLabelRect.width === 0 && tabLabelRect.height === 0) {
+                tabLabel.classList.add('simulate-border-right')
+              } else {
+                tabLabel.classList.remove('simulate-border-right')
+              }
+              this.activeBarStyle.width = this.activeBar.height
+              this.activeBarStyle.height = `${tabLabelRect.height || 50}px`
+              this.activeBarStyle.transform = `translateY(${tabLabel.offsetTop}px)`
+              if (this.tabPosition === 'right') {
+                this.activeBarStyle.left = 0
+              } else {
+                this.activeBarStyle.left = `${tabLabelRect.width - 2}px`
+              }
             }
           }
         }

@@ -268,7 +268,9 @@
 ### 大图预览 {page=#/image}
 
 :::demo 可通过 `previewSrcList` 开启预览大图的功能。
+
 ```html
+
 <template>
     <div>
         <bk-image style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
@@ -277,7 +279,11 @@
 
 <script>
     import { bkImage } from '{{BASE_LIB_NAME}}'
+
     export default {
+        components: {
+            bkImage
+        },
         data () {
             return {
                 previewSrc: './example/static/images/preview/0.png',
@@ -296,7 +302,6 @@
         }
     }
 </script>
-
 ```
 :::
 
@@ -348,25 +353,27 @@
 :::
 
 ### image 属性 {page=#/image}
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
-|---------- |-------- |---------- |-------------  |-------- |
-| src | 图片源，同原生 | String | —— | —— |
+| 参数      | 说明                                                                                        | 类型      | 可选值       | 默认值   |
+|---------- |-------------------------------------------------------------------------------------------|---------- |-------------  |-------- |
+| src | 图片源，同原生                                                                                   | String | —— | —— |
 | fit | 确定图片如何适应容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | String | fill / contain / cover / none / scale-down | - |
-| alt | 原生 alt | String | —— | —— |
-| referrer-policy | 原生 referrerPolicy | String | —— | —— |
-| lazy | 是否开启懒加载 | Boolean | —— | false |
-| scroll-container | 开启懒加载后，监听 scroll 事件的容器 | String / HTMLElement | — | 最近一个 overflow 值为 auto 或 scroll 的父元素 |
-| fallback |加载失败容错地址,会被 Slots error 覆盖 | String | —— | —— |
-| preview-src-list | 开启图片预览功能 | Array | —— | —— |
-| z-index | 设置图片预览的 z-index | Number | —— | 2000 |
-| isShowPreviewTitle |预览图片图片时，是否显示头部信息 | String | —— | —— |
-| mask-close |是否允许点击遮罩关闭弹框 | Boolean | —— | true |
+| alt | 原生 alt                                                                                    | String | —— | —— |
+| referrer-policy | 原生 referrerPolicy                                                                         | String | —— | —— |
+| lazy | 是否开启懒加载                                                                                   | Boolean | —— | false |
+| scroll-container | 开启懒加载后，监听 scroll 事件的容器                                                                    | String / HTMLElement | — | 最近一个 overflow 值为 auto 或 scroll 的父元素 |
+| fallback | 加载失败容错地址,会被 Slots error 覆盖                                                                | String | —— | —— |
+| preview-src-list | 开启图片预览功能                                                                                  | Array | —— | —— |
+| isShowPreviewTitle | 预览图片图片时，是否显示头部信息                                                                          | String | —— | —— |
+| mask-close | 是否允许点击遮罩关闭弹框                                                                              | Boolean | —— | true |
+| transfer | 控制图片预览弹框是否出现在 body 内                                                                      | Boolean | true / false | true |
+| z-index | 设置图片预览的弹窗 z-index                                                                         | Number | —— | 2000 |
 
 ### image 方法 {page=#/image}
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | load | 图片加载成功触发 | (e: Event) |
 | error | 图片加载失败触发 | (e: Error) |
+
 
 ### Slots {page=#/image}
 | 名称    | 说明         |
@@ -382,6 +389,9 @@
 | onSwitch |切换图片 | Function | —— | —— |
 | onClose | 关闭预览 | Function | —— | —— |
 | initialIndex | z-index | Number | —— | 2000 |
+| transfer | 控制图片预览弹框是否出现在 body 内                                                                      | Boolean | true / false | true |
+| z-index | 设置图片预览的弹窗 z-index                                                                         | Number | —— | 2000 |
+
 
 ### image-viewer 方法 {page=#/image}
 | 事件名称      | 说明    | 回调参数      |

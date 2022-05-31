@@ -431,6 +431,7 @@
   "bk-info-box/confirmLoading": { "description": "异步 confirmFn 确定按钮自动开启 loading", "default": "false" },
   "bk-info-box/confirmFn": { "description": "确认按钮点击回调函数，支持异步函数，函数返回false可阻止弹窗关闭" },
   "bk-info-box/cancelFn": { "description": "取消按钮点击回调函数" },
+  "bk-info-box/closeFn": { "description": "右上角的关闭 icon 点击回调函数，默认与取消按钮的回调函数一致" },
   "bk-info-box/stateChangeFn": { "description": "弹框显示状态变化的回调函数" },
   "bk-info-box/afterLeaveFn": { "description": "弹框消失的动画结束后触发的回调函数" },
   "bk-link/href": { "description": "文字链接地址" },
