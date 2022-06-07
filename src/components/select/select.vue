@@ -71,10 +71,12 @@
       <i :class="['bk-select-prefix-icon', prefixIcon]" v-if="prefixIcon"></i>
       <slot name="trigger" v-bind="$props">
         <bk-select-tag v-if="multiple && displayTag"
-          :width-limit="isTagWidthLimit"></bk-select-tag>
+          :width-limit="isTagWidthLimit"
+          ref="bkSelectTag"
+          @create-tag="handleCreateTag"></bk-select-tag>
         <template v-else>
           <input
-            v-if="allowCreate"
+            v-if="allowCreate && !multiple"
             class="bk-select-name"
             ref="createInput"
             @change="handleInputChange"
@@ -115,6 +117,12 @@
               ref="selectAllOption"
               v-if="multiple && showSelectAll && !searchValue">
             </bk-option-all>
+            <bk-option v-for="item in allowCreateData"
+              :key="item.id"
+              :id="item.id"
+              :name="item.name"
+              v-show="false">
+            </bk-option>
             <bk-virtual-scroll ref="virtualScroll"
               :item-height="itemHeight"
               class="bk-virtual-select"
@@ -161,6 +169,7 @@ import virtualOption from './virtual-option'
 import { dropdownMarginBottom } from '@/ui/variable'
 import { debounce } from '@/utils/util'
 import bkSpin from '@/components/spin'
+import bkOption from './option.vue'
 
 export default {
   name: 'bk-select',
@@ -170,7 +179,8 @@ export default {
     bkSelectTag,
     bkVirtualScroll,
     virtualOption,
-    bkSpin
+    bkSpin,
+    bkOption
   },
   directives: {
     bkloading: bkLoading
@@ -340,7 +350,8 @@ export default {
       autoUpdate: false,
       renderPopoverOptions: {},
       popoverDistance: 10 + parseInt(dropdownMarginBottom),
-      optionList: null
+      optionList: null,
+      allowCreateData: []
     }
   },
   computed: {
@@ -456,6 +467,9 @@ export default {
     selected (value, oldValue) {
       if (this.shouldUpdate || this.autoUpdate) {
         this.setSelectedOptions()
+      }
+      if (this.allowCreate && this.displayTag && this.multiple && Array.isArray(value)) {
+        this.allowCreateData = this.allowCreateData.filter(item => value.includes(item.id))
       }
       this.$emit('input', value)
       this.$emit('change', value, oldValue)
@@ -591,7 +605,6 @@ export default {
       this.focus = false
     },
     handleInputChange (e) {
-      console.log(e.target.value)
       const value = e.target.value
       this.$emit('input', value)
       this.$emit('change', value, this.value)
@@ -624,6 +637,7 @@ export default {
       this.$nextTick(() => {
         this.$emit('selected', this.selected, this.selectedOptions)
       })
+      this.focusTagInput()
     },
     unselectOption (option) {
       if (this.multiple) {
@@ -766,6 +780,20 @@ export default {
       if (optionList.scrollHeight - (optionList.clientHeight + optionList.scrollTop) < 30) {
         this.$emit('scroll-end', true)
       }
+    },
+    handleCreateTag (value) {
+      if (!value
+        || this.optionsMap[value]
+        || this.allowCreateData.find(item => item.id === value)) return
+
+      this.allowCreateData.push({
+        id: value,
+        name: value
+      })
+      this.selected.push(value)
+    },
+    focusTagInput () {
+      this.$refs.bkSelectTag && this.$refs.bkSelectTag.focusInput()
     }
   }
 }

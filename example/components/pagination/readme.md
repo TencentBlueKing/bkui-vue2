@@ -84,6 +84,41 @@
 ```
 :::
 
+### 跳转分页 {page=#/pagination}
+
+:::demo 配置`showQuickJumper`来快速跳转到某一页
+
+```html
+<template>
+    <bk-pagination
+        :show-quick-jumper="true"
+        :current.sync="defaultPaging.current"
+        :count.sync="defaultPaging.count"
+        :limit="defaultPaging.limit">
+    </bk-pagination>
+</template>
+
+<script>
+    import { bkPagination } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkPagination
+        },
+        data () {
+            return {
+                defaultPaging: {
+                    current: 1,
+                    limit: 10,
+                    count: 300
+                }
+            }
+        }
+    }
+</script>
+```
+:::
+
 ### 紧凑效果 {page=#/pagination}
 
 :::demo 配置 `type` 字段
@@ -265,6 +300,7 @@
 | small | 小型分页 | Boolean | `false` `true` | false |
 | show-total-count | 总计 | Boolean | `false` `true` | false |
 | popover-options | 透传至翻页下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
+| show-quick-jumper | 是否可以快速跳转至某页，紧凑类型无效 | Boolean | `false` `true` | false |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-page` 上 | String | —— | —— |
 
 ### 事件 {page=#/pagination}

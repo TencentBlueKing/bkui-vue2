@@ -45,6 +45,12 @@
       <span>{{option.name}}</span>
       <i class="bk-icon icon-close" @click="handleRemoveSelected($event, option)"></i>
     </div>
+    <input v-if="select.allowCreate"
+      v-model="newOptionName"
+      class="bk-select-tag-input"
+      ref="inputRef"
+      @blur="handleCreateTag"
+      @keyup.enter="handleCreateTag" />
   </div>
 </template>
 
@@ -54,15 +60,26 @@ export default {
   data () {
     return {
       overflowTagNode: null,
-      overflowTagIndex: null
+      overflowTagIndex: null,
+      newOptionName: ''
     }
   },
   mounted () {
     this.calcOverflow()
-    this.$watch(() => this.select.focus, this.calcOverflow)
+    this.$watch(() => this.select.focus, (isFocus) => {
+      this.calcOverflow()
+      if (isFocus) {
+        this.focusInput()
+      } else {
+        this.newOptionName = ''
+      }
+    })
     this.$watch(() => this.select.selected, this.calcOverflow)
   },
   methods: {
+    focusInput () {
+      this.$refs.inputRef && this.$refs.inputRef.focus()
+    },
     handleRemoveSelected (event, option) {
       if (this.select.disabled || this.select.readonly) {
         return false
@@ -140,6 +157,11 @@ export default {
       if (this.overflowTagNode && this.overflowTagNode.parentNode === this.$el) {
         this.$el.removeChild(this.overflowTagNode)
       }
+    },
+    // 创建自定义Tag
+    handleCreateTag (e) {
+      this.$emit('create-tag', e.target.value)
+      this.newOptionName = ''
     }
   }
 }

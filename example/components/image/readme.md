@@ -272,31 +272,35 @@
 ```html
 
 <template>
-  <div>
-    <bk-image style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
-  </div>
+    <div>
+        <bk-image style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
+    </div>
 </template>
 
 <script>
-  import { bkImage } from '{{BASE_LIB_NAME}}'
-  export default {
-    data () {
-      return {
-        previewSrc: './example/static/images/preview/0.png',
-        srcList: [
-          './example/static/images/preview/0.png',
-          './example/static/images/preview/1.png',
-          './example/static/images/preview/2.png',
-          './example/static/images/preview/3.png',
-          './example/static/images/preview/33.png',
-          './example/static/images/preview/4.png',
-          './example/static/images/preview/55.png',
-          './example/static/images/preview/5.png',
-          './example/static/images/preview/6.png',
-        ]
-      }
+    import { bkImage } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkImage
+        },
+        data () {
+            return {
+                previewSrc: './example/static/images/preview/0.png',
+                srcList: [
+                    './example/static/images/preview/0.png',
+                    './example/static/images/preview/1.png',
+                    './example/static/images/preview/2.png',
+                    './example/static/images/preview/3.png',
+                    './example/static/images/preview/33.png',
+                    './example/static/images/preview/4.png',
+                    './example/static/images/preview/55.png',
+                    './example/static/images/preview/5.png',
+                    './example/static/images/preview/6.png',
+                ]
+            }
+        }
     }
-  }
 </script>
 ```
 :::
