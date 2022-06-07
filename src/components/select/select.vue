@@ -755,6 +755,7 @@ export default {
             return true
           }
         }
+        return false
       })
       if (option) {
         if (this.multiple && this.selected.includes(option.id)) {
