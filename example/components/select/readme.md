@@ -1261,6 +1261,7 @@
 | placeholder | 未选择数据时的占位 | String | —— | 请选择 |
 | disabled | 是否禁用 | Boolean | —— | false |
 | allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
+| allow-enter  | 是否允许按`enter`键，根据搜索结果确定选择值  | Boolean | —— | true |
 | readonly | 是否只读 | Boolean | —— | false |
 | size | 尺寸 | String | `large` `small` | —— |
 | loading | 是否加载中 | Boolean | —— | false |
@@ -1308,7 +1309,7 @@
 |---|---|
 | —— | 默认作用域插槽，用以自定义下拉列表展示格式, 作用域插槽参数为 `{option, optionIndex, group, groupIndex}` |
 | extension | 固定在下拉列表最后的内容 |
-| trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性
+| trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性 |
 
 ### bk-option 下拉框选项属性 {page=#/select}
 **（使用 v-for 添加选项时，如果有动态数据，请勿使用 index 作为 key 进行绑定，这将会引起更新错误）**
