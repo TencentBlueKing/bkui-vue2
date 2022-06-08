@@ -78,6 +78,7 @@
           <input
             v-if="allowCreate && !multiple"
             class="bk-select-name"
+            ref="createInput"
             @change="handleInputChange"
             :class="fontSizeCls"
             :value="selectedName || value"
@@ -100,6 +101,7 @@
             type="text"
             :placeholder="localSearchPlaceholder"
             v-model="searchValue"
+            @keydown.enter="ensureSearch"
             @keydown.tab="handleClose"
             @keydown.esc.stop.prevent="handleClose">
         </div>
@@ -216,6 +218,10 @@ export default {
       default: true
     },
     allowCreate: Boolean,
+    allowEnter: {
+      type: Boolean,
+      default: true
+    },
     disabled: Boolean,
     readonly: Boolean,
     loading: Boolean,
@@ -585,7 +591,7 @@ export default {
       const popover = this.getPopoverInstance()
       popover.set({
         onShown: () => {
-          if (this.searchable && !this.allowCreate) {
+          if (this.searchable) {
             this.$refs.searchInput.focus()
           }
         }
@@ -716,6 +722,52 @@ export default {
     handleClose () {
       this.close()
       this.$refs.bkSelect && this.$refs.bkSelect.focus()
+    },
+    ensureSearch () {
+      if (!this.allowEnter) {
+        return false
+      }
+      let option = {}
+      this.options.some((item) => {
+        // 根据unmatched，过滤的列表值确定筛选不对,所以根据name重新查找
+        const searchValue = this.searchValue
+        let data = item
+        if (item.$options) {
+          data = item.$options.propsData
+        }
+        const name = data.name
+        if (typeof name === 'string' && this.searchWithPinyin) {
+          const pinyinList = pinyin.parse(name).map(v => {
+            if (v.type === 2) {
+              return v.target.toLowerCase()
+            }
+            return v.target
+          })
+          const pinyinStr = pinyinList.reduce((res, cur) => res + cur[0], '')
+          if (pinyinList.join('').indexOf(searchValue) !== -1 || pinyinStr.indexOf(searchValue) !== -1) {
+            option = data
+            return true
+          }
+          return pinyinList.join('').indexOf(searchValue) !== -1 || pinyinStr.indexOf(searchValue) !== -1
+        } else {
+          if (`${name}`.includes(this.searchValue)) {
+            option = data
+            return true
+          }
+        }
+        return false
+      })
+      if (option) {
+        if (this.multiple && this.selected.includes(option.id)) {
+          return false
+        }
+        this.selectOption(option)
+      } else {
+        if (this.allowCreate) {
+          this.$refs.createInput.value = this.searchValue
+          this.handleInputChange({ target: { value: this.searchValue } })
+        }
+      }
     },
     handleTabRemove (options) {
       this.$emit('tab-remove', options)
