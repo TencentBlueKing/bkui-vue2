@@ -74,7 +74,8 @@
                 bottomLoadingOptions: {
                    size: 'mini',
                    isLoading: false
-                }
+                },
+                allowCreateValues: [1]
             }
         },
         methods: {
@@ -1228,6 +1229,67 @@
 ```
 :::
 
+### 创建自定义选项 {page=#/select}
+
+::: demo 可以配置 `allow-create` 属性开启自定义选项，多选模式下需要开启 `display-tag` 属性才会生效
+
+```html
+<template>
+    <div style="display: flex">
+        <bk-select style="width: 250px;" v-model="value" searchable clearable allow-create>
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+        <bk-select style="width: 250px;" 
+            class="ml10" 
+            v-model="allowCreateValues" 
+            multiple 
+            searchable 
+            display-tag
+            allow-create>
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+    </div>
+</template>
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSelect,
+            bkOption
+        },
+        data () {
+            return {
+                allowCreateValues: [1],
+                value: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
 ### bk-select 下拉选框属性 {page=#/select}
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
@@ -1243,6 +1305,7 @@
 | placeholder | 未选择数据时的占位 | String | —— | 请选择 |
 | disabled | 是否禁用 | Boolean | —— | false |
 | allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
+| allow-enter  | 是否允许按`enter`键，根据搜索结果确定选择值  | Boolean | —— | true |
 | readonly | 是否只读 | Boolean | —— | false |
 | size | 尺寸 | String | `large` `small` | —— |
 | loading | 是否加载中 | Boolean | —— | false |
@@ -1290,7 +1353,7 @@
 |---|---|
 | —— | 默认作用域插槽，用以自定义下拉列表展示格式, 作用域插槽参数为 `{option, optionIndex, group, groupIndex}` |
 | extension | 固定在下拉列表最后的内容 |
-| trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性
+| trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性 |
 
 ### bk-option 下拉框选项属性 {page=#/select}
 **（使用 v-for 添加选项时，如果有动态数据，请勿使用 index 作为 key 进行绑定，这将会引起更新错误）**
