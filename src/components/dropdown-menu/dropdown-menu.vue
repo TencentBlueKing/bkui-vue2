@@ -30,7 +30,6 @@
   <div class="bk-dropdown-menu"
     :class="[disabled ? 'disabled' : '',positionFixed ? '' : 'bk-dropdown-full-width', fontSizeCls, extCls]"
     v-clickoutside="handleClickoutside"
-    :style="{ height: containerHeight + 'px' }"
     tabindex="0"
     @keydown.enter.prevent="handleMouseover"
     @keydown.esc.stop.prevent="handleMouseout"
@@ -40,6 +39,7 @@
     <div class="bk-dropdown-trigger" ref="refDropTrigger">
       <slot name="dropdown-trigger"></slot>
     </div>
+    <div :style="{ height: holderHeight, width: '100%', position: 'absolute' }"></div>
     <div ref="refDropContent" :class="[
       'bk-dropdown-content', {
         'is-show': isShow,
@@ -116,7 +116,10 @@ export default {
       timer: 0,
       isShow: false,
       popInstance: null,
-      containerHeight: 32
+      // 占位 div 的高度
+      // 目的是为了让 container 的高度把 .bk-dropdown-trigger 以及 .bk-dropdown-content 向上偏移的 dropdownMarginBottom 覆盖
+      // .bk-dropdown-trigger 与 .bk-dropdown-content 之间没有空隙，这样鼠标在两个元素之间滑动时，不会多次触发 show 和 hide 事件
+      holderHeight: dropdownMarginBottom
     }
   },
   computed: {
@@ -131,10 +134,6 @@ export default {
     }
   },
   mounted () {
-    // 让 container 的高度把 .bk-dropdown-trigger 以及 .bk-dropdown-content 向上偏移的 dropdownMarginBottom 覆盖
-    // .bk-dropdown-trigger 与 .bk-dropdown-content 之间没有空隙，这样鼠标在两个元素之间滑动时，不会多次触发 show 和 hide 事件
-    this.containerHeight = this.containerHeight + parseInt(dropdownMarginBottom, 10)
-
     const placement = `bottom${this.getPlacementFix()}`
     this.popInstance = new Popper(this.$refs.refDropTrigger, this.$refs.refDropContent, {
       placement,
