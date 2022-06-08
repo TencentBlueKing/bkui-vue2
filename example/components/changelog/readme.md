@@ -13,7 +13,8 @@
 * **[fix]**:
     - [Radio 单选框](#/radio) 修复多个 radio-group name 有可能一样的问题 [#272](https://github.com/TencentBlueKing/bkui-vue2/issues/272)
     - [Switcher 开关](#/switcher) Switcher 组件 size 属性默认值修改为 `normal` [#270](https://github.com/TencentBlueKing/bkui-vue2/issues/270)
-    - [Input 输入框](#/input ) 修复数字文本框输入非法字符问题 [#269](https://github.com/TencentBlueKing/bkui-vue2/issues/269)
+    - [Input 输入框](#/input) 修复数字文本框输入非法字符问题 [#269](https://github.com/TencentBlueKing/bkui-vue2/issues/269)
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 修复 dropdown-menu 高度的问题
 * **[update]**:
     - [Divider 分割线](#/divider) divider 组件样式用 class 实现而不是行内样式 [#271](https://github.com/TencentBlueKing/bkui-vue2/issues/271)
 
