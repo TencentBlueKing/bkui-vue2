@@ -27,7 +27,7 @@
 -->
 
 <template>
-  <div class="bk-divider" :style="style">
+  <div class="bk-divider" :class="direction === 'horizontal' ? 'bk-divider__horizontal' : 'bk-divider__vertical'" :style="style">
     <div
       v-if="direction === 'horizontal'"
       :class="['bk-divider-info', `bk-divider-info-${align}`]"
@@ -84,20 +84,10 @@ export default {
     style () {
       if (this.direction === 'vertical') {
         return {
-          display: 'inline-block',
-          width: 0,
-          height: '1em',
-          margin: '0 8px',
-          verticalAlign: 'middle',
           borderRight: `${this.width}px ${this.type} ${this.color}`
         }
       }
       return {
-        display: 'block',
-        width: '100%',
-        height: 0,
-        margin: '1em 0',
-        verticalAlign: 'middle',
         borderBottom: `${this.width}px ${this.type} ${this.color}`
       }
     }

@@ -4,6 +4,21 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.10 {page=#/changelog}
+###### 2022.06.09
+
+* **[add]**:
+    - [Select 下拉选框](#/select) 新增 `allow-enter` 属性，用户在输入框输入关键词后，按下 enter 直接选择搜索结果，默认为 `true` [#273](https://github.com/TencentBlueKing/bkui-vue2/issues/273)
+    - [Select 下拉选框](#/select) 新增[创建自定义选项](#/select?anchor=chuang-jian-zi-ding-yi-xuan-xiang) [#256](https://github.com/TencentBlueKing/bkui-vue2/issues/256)
+* **[fix]**:
+    - [Radio 单选框](#/radio) 修复多个 radio-group name 有可能一样的问题 [#272](https://github.com/TencentBlueKing/bkui-vue2/issues/272)
+    - [Switcher 开关](#/switcher) Switcher 组件 size 属性默认值修改为 `normal` [#270](https://github.com/TencentBlueKing/bkui-vue2/issues/270)
+    - [Input 输入框](#/input ) 修复数字文本框输入非法字符问题 [#269](https://github.com/TencentBlueKing/bkui-vue2/issues/269)
+* **[update]**:
+    - [Divider 分割线](#/divider) divider 组件样式用 class 实现而不是行内样式 [#271](https://github.com/TencentBlueKing/bkui-vue2/issues/271)
+
+---
+
 ### 2.4.9 {page=#/changelog}
 ###### 2022.05.19
 
