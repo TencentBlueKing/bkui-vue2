@@ -230,7 +230,10 @@ export default {
       type: String,
       default: 'normal'
     },
-    precision: Number,
+    precision: {
+      type: Number,
+      default: 0
+    },
     passwordIcon: {
       type: Array,
       default () {
@@ -285,7 +288,17 @@ export default {
       inputSize: this.size,
       inputPasswordIcon: this.passwordIcon,
       inputRightPadding: '10px',
-      iconAreaSizeObserver: null
+      iconAreaSizeObserver: null,
+      // 数字输入框中允许输入的键盘按钮的 keyCode 集合
+      validKeyCodeList: [
+        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
+        8, // backspace
+        189, // -
+        190, // .
+        38, 40, 37, 39, // up down left right
+        46, // del
+        9 // tab
+      ]
     }
   },
   computed: {
@@ -453,6 +466,8 @@ export default {
             max: this.max
           }
           Object.assign(outputAttr, defaultAttr, numberAttr)
+          // 不使用 input type="number"
+          outputAttr.type = 'text'
           break
         case 'textarea':
           const txtAttr = { rows: this.rows }
@@ -564,7 +579,66 @@ export default {
       this.$emit('keypress', value, event)
     },
     handlerKeydown (event) {
-      const value = event.target.value
+      // const value = event.target.value
+      const keyCode = event.keyCode
+      const target = event.currentTarget
+      const value = target.value
+
+      if (this.inputType === 'number') {
+        // 键盘按下不允许的按钮
+        if (this.validKeyCodeList.indexOf(keyCode) < 0) {
+          event.stopPropagation()
+          event.preventDefault()
+          return false
+        }
+
+        // . 号
+        if (keyCode === 190) {
+          // 保留小数位为 0，此时不允许输入 .
+          if (this.precision === 0) {
+            event.stopPropagation()
+            event.preventDefault()
+            return false
+          }
+          if (String(value).trim()) {
+            // 已经有一个 . 了，本次又输入的是 .
+            if (value.indexOf('.') >= 0) {
+              event.stopPropagation()
+              event.preventDefault()
+              return false
+            }
+          }
+        }
+
+        // - 号
+        if (event.keyCode === 189) {
+          if (String(value).trim()) {
+            // 已经有一个 - 了，本次又输入的是 -
+            if (value.indexOf('-') >= 0) {
+              event.stopPropagation()
+              event.preventDefault()
+              return false
+            }
+            // 只有开头位置能出现 - 号
+            if (document.getSelection().type !== 'Range') {
+              if (target.selectionEnd !== 0) {
+                event.stopPropagation()
+                event.preventDefault()
+                return false
+              }
+            }
+          }
+        }
+
+        if (keyCode === 38) {
+          event.preventDefault()
+          this.handleNumberAdd(event)
+        } else if (keyCode === 40) {
+          event.preventDefault()
+          this.handleNumberDelete(event)
+        }
+      }
+
       this.$emit('keydown', value, event)
     },
     handlerFocus (event) {
