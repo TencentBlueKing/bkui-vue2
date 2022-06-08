@@ -45,6 +45,19 @@
         @clear="handleClear"
         @input="handleInput">
       </bk-input>
+
+      <bk-input type="number" :max="10" :min="-10" v-model="numberInputValue" precision="5"
+        @change="handleChange"
+        @enter="handleEnter"
+        @keyup="handleKeyup"
+        @keypress="handleKeypress"
+        @keydown="handleKeydown"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @paste="handlePaste"
+        @clear="handleClear"
+        @input="handleInput"
+      ></bk-input>
     </div>
   </section>
 </template>
@@ -57,7 +70,8 @@ export default {
   },
   data () {
     return {
-      value: ''
+      value: '',
+      numberInputValue: ''
     }
   },
   methods: {
@@ -66,6 +80,7 @@ export default {
     },
     handleChange (value, event) {
       console.log('change', value, event)
+      console.error(value)
     },
     handleInput (value, event) {
       console.log('input', value, event)

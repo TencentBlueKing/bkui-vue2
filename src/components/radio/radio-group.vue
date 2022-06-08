@@ -34,6 +34,7 @@
 
 <script>
 import emitter from '@/mixins/emitter'
+import { uuid } from '@/utils/util'
 
 /**
  * bk-radio-group
@@ -57,9 +58,7 @@ export default {
     name: {
       type: [String, Number],
       default () {
-        let seed = 0
-        const now = Date.now()
-        return `bk_radio_${now}_${seed++}`
+        return `bk_radio_${uuid()}`
       }
     }
   },
