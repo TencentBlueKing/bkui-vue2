@@ -27,22 +27,24 @@
 -->
 
 <template>
-  <bk-dropdown-menu @show="dropdownShow" @hide="dropdownHide" ref="dropdown">
-    <div class="dropdown-trigger-btn" style="padding-left: 19px;" slot="dropdown-trigger">
-      <span>更多操作</span>
-      <i :class="['bk-icon icon-angle-down',{ 'icon-flip': isDropdownShow }]"></i>
-    </div>
-    <ul class="bk-dropdown-list" slot="dropdown-content">
-      <li><a href="javascript:;" @click="triggerHandler">1111环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">222环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">生产环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">预发布环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">测试环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">开发环境</a></li>
-      <li><a href="javascript:;" @click="triggerHandler">调试环境</a></li>
-    </ul>
-  </bk-dropdown-menu>
+  <div style="background: red">
+    <bk-dropdown-menu @show="dropdownShow" @hide="dropdownHide" ref="dropdown">
+      <div class="dropdown-trigger-btn" style="padding-left: 19px;" slot="dropdown-trigger">
+        <span>更多操作</span>
+        <i :class="['bk-icon icon-angle-down',{ 'icon-flip': isDropdownShow }]"></i>
+      </div>
+      <ul class="bk-dropdown-list" slot="dropdown-content">
+        <li><a href="javascript:;" @click="triggerHandler">1111环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">222环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">生产环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">预发布环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">测试环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">开发环境</a></li>
+        <li><a href="javascript:;" @click="triggerHandler">调试环境</a></li>
+      </ul>
+    </bk-dropdown-menu>
+  </div>
 </template>
 <script>
 
