@@ -4,8 +4,8 @@
 
 <div class="changelog-wrapper">
 
-### 2.4.10 {page=#/changelog}
-###### 2022.06.09
+### 2.4.11 {page=#/changelog}
+###### 2022.06.10
 
 * **[add]**:
     - [Select 下拉选框](#/select) 新增 `allow-enter` 属性，用户在输入框输入关键词后，按下 enter 直接选择搜索结果，默认为 `true` [#273](https://github.com/TencentBlueKing/bkui-vue2/issues/273)
@@ -17,6 +17,7 @@
     - [DropdownMenu 下拉菜单](#/dropdown-menu) 修复 dropdown-menu 高度的问题
 * **[update]**:
     - [Divider 分割线](#/divider) divider 组件样式用 class 实现而不是行内样式 [#271](https://github.com/TencentBlueKing/bkui-vue2/issues/271)
+    - [Swiper 轮播图](#/swiper) 优化 swiper 计算高度、宽度的规则
 
 ---
 
