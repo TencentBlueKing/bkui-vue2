@@ -26,44 +26,13 @@
  * IN THE SOFTWARE.
 -->
 
-<template>
-  <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width" transfer="true">
-    <template>
-      <div slot="content">
-        qweeqw
-      </div>
-    </template>
-  </bk-sideslider>
-</template>
-<script>
-import { bkSideslider } from '@'
-
-export default {
-  components: {
-    bkSideslider
-  },
-  props: {
-    show: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      isShow: this.show,
-      defaultSettings: {
-        width: 1000
-      }
-    }
-  },
-  watch: {
-    show (v) {
-      console.error(11, v)
-      this.isShow = v
-    }
-  },
-  created () {
-    console.error('createdcreatedcreatedcreated')
-  }
-}
-</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> index </title>
+    </head>
+    <body>
+      <iframe src="http://bkui-vue2.ielgnaw.oa.com/#/sideslider/example" width="100%" height="1000"></iframe>
+    </body>
+</html>

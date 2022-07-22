@@ -4,6 +4,21 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.12 {page=#/changelog}
+###### 2022.07.22
+
+* **[add]**:
+    - [SearchSelect 查询选择器](#/searchselect) 新增 `input-unfocus-clear` 属性及 `input-click-outside` 事件，支持失焦时清空输入框内容
+    - [Select 下拉选框](#/select) 新增 `searchable-min-count` 属性，支持配置当选项数量超过一定数量时才会（默认 0 个）显示搜索框，仅在开启搜索时生效
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 type 为 number 时数字小键盘输入不生效问题 [#287](https://github.com/TencentBlueKing/bkui-vue2/issues/287)
+    - [Slider 滑动选择器](#/slider) 修复 `min-value`, `max-value` 输入框问题
+* **[update]**:
+    - [Table 表格](#/table) 移除 `showPaginationInfo` 属性并兼容已有逻辑
+    - [Table 表格](#/table) `virtual-render` 属性配置说明补充
+    - [Select 下拉选框](#/select) `id-key` 属性文档调整
+
+
 ### 2.4.11 {page=#/changelog}
 ###### 2022.06.10
 

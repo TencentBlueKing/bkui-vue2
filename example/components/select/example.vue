@@ -28,7 +28,7 @@
 
 <template>
   <section>
-    <bk-select searchable :multiple="multiple" v-model="value" :remote-method="remote" :display-tag="true" :tag-fixed-height="false">
+    <bk-select searchable searchable-min-count="31" :multiple="multiple" v-model="value" :remote-method="remote" :display-tag="true" :tag-fixed-height="false">
       <bk-option v-for="option in options"
         :key="option.id"
         v-bind="option">

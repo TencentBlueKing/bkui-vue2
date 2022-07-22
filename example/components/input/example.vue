@@ -33,20 +33,12 @@
       Input 输入框更多示例
     </h2>
     <div class="example-item">
-      <bk-input v-model="value" :clearable="true"
-        @change="handleChange"
-        @enter="handleEnter"
-        @keyup="handleKeyup"
-        @keypress="handleKeypress"
-        @keydown="handleKeydown"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @paste="handlePaste"
-        @clear="handleClear"
-        @input="handleInput">
+      <bk-input v-model="value"
+        :type="'textarea'"
+        :maxlength="10000">
       </bk-input>
 
-      <bk-input type="number" :max="10" :min="-10" v-model="numberInputValue" precision="5"
+      <!-- <bk-input type="number" :max="10" :min="-10" v-model="numberInputValue" precision="5"
         @change="handleChange"
         @enter="handleEnter"
         @keyup="handleKeyup"
@@ -57,7 +49,7 @@
         @paste="handlePaste"
         @clear="handleClear"
         @input="handleInput"
-      ></bk-input>
+      ></bk-input> -->
     </div>
   </section>
 </template>
