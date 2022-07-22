@@ -30,7 +30,6 @@
   <bk-table class="my-table" ref="filterTable" :data="tableData" style="width: 100%"
     auto-scroll-to-top
     :max-height="400"
-    :pagination="pagination"
     @page-change="handlePageChange"
     @page-limit-change="handlePageLimitChange">
     <bk-table-column type="expand" width="30" :before-expand-change="beforeExpand"></bk-table-column>
