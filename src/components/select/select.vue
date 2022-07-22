@@ -93,7 +93,7 @@
       <div slot="content" class="bk-select-dropdown-content"
         :class="[popoverCls, extPopoverCls]"
         :style="popoverStyle">
-        <div class="bk-select-search-wrapper" v-if="searchable">
+        <div class="bk-select-search-wrapper" v-if="showSearch">
           <i class="left-icon bk-icon icon-search"></i>
           <input class="bk-select-search-input"
             :class="fontSizeCls"
@@ -143,7 +143,7 @@
           <div class="bk-select-empty" :class="fontSizeCls" v-if="!options.length">
             {{ emptyText || t('bk.select.dataEmpty') }}
           </div>
-          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="searchable && unmatchedCount === options.length">
+          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="showSearch && unmatchedCount === options.length">
             {{ emptyText || t('bk.select.searchEmpty') }}
           </div>
         </template>
@@ -226,6 +226,10 @@ export default {
     readonly: Boolean,
     loading: Boolean,
     searchable: Boolean,
+    searchableMinCount: {
+      type: Number,
+      default: 0
+    },
     searchIgnoreCase: {
       type: Boolean,
       default: true
@@ -428,6 +432,9 @@ export default {
         icon: 'circle-2-1',
         placement: 'right'
       }, this.scrollLoading)
+    },
+    showSearch () {
+      return this.searchable && this.options.length >= this.searchableMinCount
     }
   },
   watch: {
@@ -591,7 +598,7 @@ export default {
       const popover = this.getPopoverInstance()
       popover.set({
         onShown: () => {
-          if (this.searchable) {
+          if (this.showSearch) {
             this.$refs.searchInput.focus()
           }
         }
