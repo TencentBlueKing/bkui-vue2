@@ -188,7 +188,10 @@
 
 ```html
 <template>
-    <bk-select :disabled="false" v-model="value" style="width: 250px;"
+    <bk-select
+        :disabled="false"
+        v-model="value"
+        style="width: 250px;"
         ext-cls="select-custom"
         ext-popover-cls="select-popover-custom"
         searchable>
@@ -1311,6 +1314,7 @@
 | loading | 是否加载中 | Boolean | —— | false |
 | clearable | 是否允许清空 | Boolean | —— | true |
 | searchable | 是否显示搜索框 | Boolean | —— | false |
+| searchable-min-count | 在显示搜索框的情况下，下拉列表数量大于等于该值时才显示搜索框 | Number | —— | 0 |
 | search-ignore-case | 搜索选项时是否忽略大小写 | Boolean | —— | true |
 | popover-min-width | 设置下拉列表的最小宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
 | popover-width | 设置下拉列表的宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
