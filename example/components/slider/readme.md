@@ -291,7 +291,7 @@
 ```html
 <template>
     <div>
-        <bk-slider v-model="value1" :show-input="true" :range="true"></bk-slider>
+        <bk-slider v-model="value1" :min-value="5" :show-input="true" :range="true"></bk-slider>
     </div>
 </template>
 <script>
