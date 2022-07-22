@@ -188,7 +188,10 @@
 
 ```html
 <template>
-    <bk-select :disabled="false" v-model="value" style="width: 250px;"
+    <bk-select
+        :disabled="false"
+        v-model="value"
+        style="width: 250px;"
         ext-cls="select-custom"
         ext-popover-cls="select-popover-custom"
         searchable>
@@ -1311,6 +1314,7 @@
 | loading | 是否加载中 | Boolean | —— | false |
 | clearable | 是否允许清空 | Boolean | —— | true |
 | searchable | 是否显示搜索框 | Boolean | —— | false |
+| searchable-min-count | 在显示搜索框的情况下，下拉列表数量大于等于该值时才显示搜索框 | Number | —— | 0 |
 | search-ignore-case | 搜索选项时是否忽略大小写 | Boolean | —— | true |
 | popover-min-width | 设置下拉列表的最小宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
 | popover-width | 设置下拉列表的宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
@@ -1326,7 +1330,7 @@
 | enable-virtual-scroll | 是否开启虚拟滚动 | Boolean | —— | false |
 | virtual-scroll-render | 虚拟滚动内容的render,参数分别为数据和 createElement 函数 | Function | —— | —— |
 | list | 开启虚拟滚动的时候需要传入的数据列表 | Array | —— | —— |
-| id-Key | 虚拟滚动数据，值的key值 | String | —— | id |
+| id-key | 虚拟滚动数据，值的key值 | String | —— | id |
 | display-key | 虚拟滚动数据，显示字段的key值 | String | —— | name |
 | item-height | 虚拟滚动单行元素的高度 | Number | —— | 32 |
 | show-empty| 是否展示空数据的提示 | Boolean | —— | true |

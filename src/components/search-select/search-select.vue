@@ -232,6 +232,10 @@ export default {
       type: String,
       default: ''
     },
+    inputUnfocusClear: {
+      type: Boolean,
+      default: false
+    },
     // 外部设置的 class name
     extCls: {
       type: String,
@@ -559,8 +563,19 @@ export default {
       if (unFocus) {
         this.hidePopper()
         this.input.focus = false
+        this.inputUnfocusClear && this.inputOutSideClear()
+        this.$emit('input-click-outside', e)
       }
-      this.$emit('input-click-outside', e)
+    },
+    inputOutSideClear () {
+      this.input.value = ''
+      this.menu.active = -1
+      this.menu.id = null
+      this.updateInput()
+      this.clearInput()
+      this.menu.checked = {}
+      this.menuChildInstance && (this.menuChildInstance.checked = {})
+      this.menuInstance = null
     },
     handleCancel (e) {
       this.handleClearChildSelectChecked()
