@@ -292,9 +292,12 @@ export default {
       // 数字输入框中允许输入的键盘按钮的 keyCode 集合
       validKeyCodeList: [
         48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
+        96, 97, 98, 99, 100, 101, 102, 103, 104, 105, // 0-9 Numpad
         8, // backspace
         189, // -
+        109, // - Numpad
         190, // .
+        110, // . Numpad
         38, 40, 37, 39, // up down left right
         46, // del
         9 // tab
