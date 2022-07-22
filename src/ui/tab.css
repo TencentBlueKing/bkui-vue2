@@ -166,7 +166,7 @@ $headerColor: $newBlackColor2;
             .bk-tab-add-controller {
                 border-left: none;
             }
-            ..bk-tab-extension-controller {
+            .bk-tab-extension-controller {
                 border-left: none;
             }
         }
