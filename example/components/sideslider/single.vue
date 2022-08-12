@@ -27,7 +27,7 @@
 -->
 
 <template>
-  <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width">
+  <bk-sideslider :is-show.sync="isShow" :quick-close="true" :width="defaultSettings.width" transfer="true">
     <template>
       <div slot="content">
         qweeqw

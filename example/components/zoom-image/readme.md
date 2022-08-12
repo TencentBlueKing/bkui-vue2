@@ -62,3 +62,5 @@
 |------|------|------|------|------|
 | src | 图片地址 | String | - | - |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-zoom-image` 上 | String | - | - |
+| transfer | 控制图片预览弹框是否出现在 body 内                                                                      | Boolean | true / false | true |
+| z-index | 设置图片预览的弹窗 z-index                                                                         | Number | —— | 2000 |

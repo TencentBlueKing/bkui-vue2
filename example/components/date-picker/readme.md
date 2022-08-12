@@ -180,8 +180,7 @@
 ```html
 <template>
     <div>
-        <bk-date-picker class="mr15" v-model="initDateTime"
-        cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
+        <bk-date-picker class="mr15" v-model="initDateTime" cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
     </div>
 </template>
 <script>

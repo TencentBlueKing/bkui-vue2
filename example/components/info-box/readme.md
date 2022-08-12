@@ -135,6 +135,32 @@
                     subTitle: '请稍等…'
                 })
             },
+            closeFnInfoBox1 () {
+                this.$bkInfo({
+                    title: '是否保存当前修改？',
+                    okText: '保存',
+                    cancelText: '不保存',
+                    cancelFn () {
+                        console.log(11, 'cancel')
+                        console.log('cancel')
+                    }
+                })
+            },
+            closeFnInfoBox2 () {
+                this.$bkInfo({
+                    title: '是否保存当前修改？',
+                    okText: '保存',
+                    cancelText: '不保存',
+                    closeFn () {
+                        console.log(22, 'close')
+                        console.log('close')
+                    },
+                    cancelFn () {
+                        console.log(22, 'cancel')
+                        console.log('cancel')
+                    }
+                })
+            },
             vnodeInfoBox () {
                 const h = this.$createElement
 
@@ -405,6 +431,52 @@
 ```
 :::
 
+### 关闭 icon 回调自定义 {page=#/info-box}
+
+:::demo 分别配置 `closeFn` 、`cancelFn` 参数
+```html
+<template>
+    <bk-button theme="primary" @click="closeFnInfoBox1">提示框1</bk-button>
+    <bk-button theme="primary" @click="closeFnInfoBox2">提示框2</bk-button>
+</template>
+
+<script>
+    import { bkButton } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkButton
+        },
+        methods: {
+            closeFnInfoBox1 () {
+                this.$bkInfo({
+                    title: '是否保存当前修改？',
+                    okText: '保存',
+                    cancelText: '不保存',
+                    cancelFn () {
+                        console.log('cancle')
+                    }
+                })
+            },
+            closeFnInfoBox2 () {
+                this.$bkInfo({
+                    title: '是否保存当前修改？',
+                    okText: '保存',
+                    cancelText: '不保存',
+                    closeFn () {
+                        console.log('close')
+                    },
+                    cancelFn () {
+                        console.log('cancle')
+                    }
+                })
+            }
+        }
+    }
+</script>
+```
+:::
+
 ### 控制弹窗出现在哪个容器内 {page=#/info-box}
 
 :::demo 通过配置 `container` 属性，来控制弹窗出现在哪个容器内。`container` 支持 `HTMLElement`, `VNode`, `String`
@@ -554,5 +626,6 @@
 | confirmLoading | 异步 confirmFn 确定按钮自动开启 loading | Boolean | —— | false |
 | confirmFn | 确认按钮点击回调函数，支持异步函数，函数返回false可阻止弹窗关闭 | Function | —— | —— |
 | cancelFn | 取消按钮点击回调函数 | Function | —— | —— |
+| closeFn | 右上角的关闭 icon 点击回调函数，默认与取消按钮的回调函数一致 | Function | —— | —— |
 | stateChangeFn | 弹框显示状态变化的回调函数 | Function | —— | —— |
 | afterLeaveFn | 弹框消失的动画结束后触发的回调函数 | Function | —— | —— |

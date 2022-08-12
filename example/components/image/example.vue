@@ -28,7 +28,8 @@
 
 <template>
   <div>
-    <bk-image style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
+    <bk-image :transfer="false" style="width: 200px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
+    <bk-image style="width: 400px;" :src="previewSrc" :preview-src-list="srcList"></bk-image>
   </div>
 </template>
 
@@ -40,6 +41,7 @@ export default {
   },
   data () {
     return {
+      src: './example/static/images/preview/0.png',
       previewSrc: './example/static/images/preview/0.png',
       srcList: [
         './example/static/images/preview/0.png',

@@ -560,7 +560,6 @@
 
 .tippy-backdrop+.tippy-content {
     transition-property: opacity;
-    will-change: opacity
 }
 
 .tippy-backdrop+.tippy-content[data-state=visible] {

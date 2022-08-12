@@ -50,7 +50,7 @@ $headerColor: $newBlackColor2;
             }
         }
     }
-    .bk-tab-add-controller {
+    .bk-tab-extension-controller, .bk-tab-add-controller {
         border-top: $border;
         background-color: #fff;
     }
@@ -85,7 +85,11 @@ $headerColor: $newBlackColor2;
             .bk-tab-add-controller {
                 border-left: none;
             }
+            .bk-tab-extension-controller {
+                border-left: none;
+            }
         }
+        .bk-tab-extension-controller,
         .bk-tab-add-controller,
         .bk-tab-scroll-controller {
             border: none;
@@ -162,6 +166,9 @@ $headerColor: $newBlackColor2;
             .bk-tab-add-controller {
                 border-left: none;
             }
+            .bk-tab-extension-controller {
+                border-left: none;
+            }
         }
 
         .bk-tab-label-list {
@@ -234,6 +241,20 @@ $headerColor: $newBlackColor2;
                 border-right: 0;
             }
         }
+        &.has-extension {
+            .bk-tab-extension-controller {
+                position: absolute;
+                top: 0;
+                right: 42px;
+                border-left: $border;
+            }
+            .bk-tab-add-controller {
+                border-left-width: 0;
+            }
+            .bk-tab-scroll-controller.next {
+                right: 84px !important;
+            }
+        }
         .bk-tab-scroll-controller.next {
             right: 42px;
         }
@@ -249,7 +270,19 @@ $headerColor: $newBlackColor2;
             }
         }
     }
-    .bk-tab-add-controller {
+    &.has-scroller.has-extension:not(.has-add) {
+        .bk-tab-extension-controller {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-bottom: $border;
+            border-left: $border;
+        }
+        .bk-tab-scroll-controller.next {
+            right: 42px;
+        }
+    }
+    .bk-tab-extension-controller, .bk-tab-add-controller {
         display: inline-block;
         vertical-align: middle;
         width: 42px;

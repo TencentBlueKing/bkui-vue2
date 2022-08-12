@@ -78,9 +78,10 @@
         <bk-input type="number" v-model="firstInput"
           :max="maxValue"
           :min="minValue"
-          @change="firstInputChange"
+          @change="firstChange"
           @enter="firstInputChange"
-          @blur="firstInputChange"></bk-input>
+          @blur="firstInputChange">
+        </bk-input>
       </div>
       <template v-if="showSecondInput && secondValue">
         <div class="input-center">～</div>
@@ -88,9 +89,10 @@
           <bk-input type="number" v-model="secondInput"
             :max="maxValue"
             :min="minValue"
-            @change="secondInputChange"
+            @change="secondChange"
             @enter="secondInputChange"
-            @blur="secondInputChange"></bk-input>
+            @blur="secondInputChange">
+          </bk-input>
         </div>
       </template>
     </div>
@@ -459,6 +461,15 @@ export default {
         this.firstValue = val
       }
     },
+    firstChange (v) {
+      if (v === '') {
+        return
+      }
+      this.firstInput = parseFloat(v)
+      if (this.firstInput >= this.minValue && this.firstInput <= this.maxValue) {
+        this.firstValue = parseFloat(v)
+      }
+    },
     secondInputChange (v) {
       if (v === '') {
         return
@@ -472,6 +483,15 @@ export default {
         this.secondValue = this.maxValue
       } else {
         this.secondValue = val
+      }
+    },
+    secondChange (v) {
+      if (v === '') {
+        return
+      }
+      this.secondInput = parseFloat(v)
+      if (this.secondInput >= this.minValue && this.secondInput <= this.maxValue) {
+        this.secondValue = parseFloat(v)
       }
     },
     /**

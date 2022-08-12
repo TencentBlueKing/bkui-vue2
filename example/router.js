@@ -126,16 +126,18 @@ const Link = () => import(/* webpackChunkName: 'link' */'./components/link/readm
 const LinkExample = () => import(/* webpackChunkName: 'link' */'./components/link/example.vue')
 const Cascade = () => import(/* webpackChunkName: 'cascade' */'./components/cascade/readme.md')
 const CascadeExample = () => import(/* webpackChunkName: 'cascade' */'./components/cascade/example')
-const ZoomImage = () => import(/* webpackChunkName: 'virtual-scroll' */'./components/zoom-image/readme.md')
+const ZoomImage = () => import(/* webpackChunkName: 'zoom-image' */'./components/zoom-image/readme.md')
 const VersionDetail = () => import(/* webpackChunkName: 'version-detaill' */'./components/version-detail/readme.md')
 const CardDetail = () => import(/* webpackChunkName: 'card-detaill' */'./components/card/readme.md')
 const Transition = () => import(/* webpackChunkName: 'animate' */'./components/transition/readme.md')
 const Image = () => import(/* webpackChunkName: 'image' */'./components/image/readme.md')
+const ImageExample = () => import(/* webpackChunkName: 'image-example' */'./components/image/example')
 const Breadcrumb = () => import(/* webpackChunkName: 'image' */'./components/breadcrumb/readme.md')
-const Divider = () => import(/* webpackChunkName: 'image' */'./components/divider/readme.md')
+const Divider = () => import(/* webpackChunkName: 'divider' */'./components/divider/readme.md')
 const PaginationExample = () => import(/* webpackChunkName: 'pagination-example' */'./components/pagination/example.vue')
 const Tag = () => import(/* webpackChunkName: 'tag' */'./components/tag/readme.md')
 const ResizeLayout = () => import(/* webpackChunkName: 'resize' */'./components/resize-layout/readme.md')
+const ResizeLayoutExample = () => import(/* webpackChunkName: 'resize-example' */'./components/resize-layout/example')
 const FixedNavbar = () => import(/* webpackChunkName: 'fixed-narbar' */'./components/fixed-navbar/readme.md')
 const Spin = () => import(/* webpackChunkName: 'spin' */'./components/spin/readme.md')
 const BackTop = () => import(/* webpackChunkName: 'back-top' */'./components/back-top/readme.md')
@@ -656,6 +658,11 @@ const router = new VueRouter({
       component: Image
     },
     {
+      name: 'imageExample',
+      path: '/image/example',
+      component: ImageExample
+    },
+    {
       name: 'breadcrumb',
       path: '/breadcrumb',
       component: Breadcrumb
@@ -673,6 +680,11 @@ const router = new VueRouter({
       name: 'resize-layout',
       path: '/resize-layout',
       component: ResizeLayout
+    },
+    {
+      name: 'resize-layout-example',
+      path: '/resize-layout/example',
+      component: ResizeLayoutExample
     },
     {
       name: 'spin',

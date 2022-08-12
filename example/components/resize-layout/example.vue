@@ -27,74 +27,40 @@
 -->
 
 <template>
-  <div class="bk-divider" :class="direction === 'horizontal' ? 'bk-divider__horizontal' : 'bk-divider__vertical'" :style="style">
-    <div
-      v-if="direction === 'horizontal'"
-      :class="['bk-divider-info', `bk-divider-info-${align}`]"
-    >
-      <slot />
-    </div>
+  <div>
+    <p>拖动中设置了disabled=true，不再执行handleMouseMove方法</p>
+    <bk-resize-layout
+      style="height: 500px;margin-top: 20px;"
+      immediate
+      :min="min"
+      :disabled="disabled"
+      @resizing="handleResizing"
+      @after-resize="() => disabled = false">
+      <div slot="aside">aside</div>
+      <div slot="main">main</div>
+    </bk-resize-layout>
   </div>
 </template>
 
 <script>
-/**
- * bk-divider
- *
- * @module components/divider
- * @desc 基础按钮
- *
- * @param direction {string} [type=default] - 分割线方向
- * @param position {string} - 分割线 内容位置
- */
+import { bkResizeLayout } from '@'
+
 export default {
-  name: 'bk-divider',
-  props: {
-    direction: {
-      type: String,
-      default: 'horizontal',
-      validator (val) {
-        return ['horizontal', 'vertical'].indexOf(val) !== -1
-      }
-    },
-    align: {
-      type: String,
-      default: 'center',
-      validator (val) {
-        return ['left', 'center', 'right'].indexOf(val) !== -1
-      }
-    },
-    color: {
-      type: String,
-      default: '#dcdee5'
-    },
-    width: {
-      type: Number,
-      default: 1
-    },
-    type: {
-      type: String,
-      default: 'solid'
-    }
+  name: 'demo',
+  components: {
+    bkResizeLayout
   },
   data () {
-    return {}
+    return {
+      disabled: false,
+      min: 100
+    }
   },
-  computed: {
-    style () {
-      if (this.direction === 'vertical') {
-        return {
-          borderRight: `${this.width}px ${this.type} ${this.color}`
-        }
-      }
-      return {
-        borderBottom: `${this.width}px ${this.type} ${this.color}`
-      }
+  methods: {
+    handleResizing (height) {
+      console.log(height)
+      this.disabled = (height - 3) <= this.min
     }
   }
 }
-
 </script>
-<style>
-  @import '../../ui/divider.css';
-</style>
