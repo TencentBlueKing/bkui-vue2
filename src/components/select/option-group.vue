@@ -113,6 +113,9 @@ export default {
       return !this.isSelectAllItems && !this.isEmpty
     },
     isSelectAllItems () {
+      if (this.options.length < 1) {
+        return false
+      }
       return Array.prototype.every.call(this.options, (option) => option.isSelected)
     },
     isEmpty () {
