@@ -814,13 +814,15 @@
 
 ### 设置功能 {page=#/table}
 
-:::demo 通过配置`bk-table-column`的`type`属性为`setting`即可开启此功能，组件内置了一个默认设置内容`bk-table-setting-content`，通过`tippy-options`属性可以自定义弹层的层级
+:::demo 通过配置`bk-table-column`的`type`属性为`setting`即可开启此功能，组件内置了一个默认设置内容`bk-table-setting-content`，通过`tippy-options`属性可以自定义弹层的层级。 使用`dark-header`属性，设置深色表头
 
 ```html
 <template>
     <div>
         <bk-table style="margin-top: 15px;"
             :data="data"
+            :outer-border="false"
+            :dark-header="true"
             :size="setting.size">
             <bk-table-column
                 v-for="field in setting.selectedFields"
@@ -1424,6 +1426,9 @@ export default {
 | max-height | Table 的最大高度 | String / Number | —— | —— |
 | stripe | 是否为斑马纹 Table | Boolean | —— | false |
 | border | 是否带有边框 | Boolean | —— | false |
+| dark-header | 是否是深色表头模式 | Boolean | —— | false |
+| custom-header-color | 自定义表头颜色，设置了此选项后，dark-header将会失效 | String | —— | '' |
+| custom-header-color-hover | 自定义表头Hover的颜色，设置了此选项后，dark-header将会失效 | String | —— | '' |
 | outer-border | 是否带有外边框 | Boolean | —— | false |
 | row-border | 是否带有横向边框, 当 border 为 true 时，此属性设置无效 | Boolean | —— | true |
 | col-border | 是否带有纵向边框, 当 border 为 true 时，此属性设置无效 | Boolean | —— | false |
