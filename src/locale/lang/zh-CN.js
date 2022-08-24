@@ -51,7 +51,8 @@ export default {
       hour: '时',
       min: '分',
       sec: '秒',
-      toNow: '至今'
+      toNow: '至今',
+      now: '此刻'
     },
     dialog: {
       ok: '确定',

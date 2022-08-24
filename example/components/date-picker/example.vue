@@ -67,7 +67,7 @@
       </div>
       <div class="inner">
         <p><span class="bk-text-minor">datetimerange</span></p>
-        <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal"></bk-date-picker>
+        <bk-date-picker :type="'datetimerange'" v-model="datetimerangeInitVal" :options="options3"></bk-date-picker>
       </div>
     </div>
     <div class="example-item">
@@ -218,6 +218,12 @@ export default {
       options2: {
         disabledDate (date) {
           return date.getDate() === 14
+          // return date.getMonth() === 6
+        }
+      },
+      options3: {
+        disabledDate (date) {
+          return date.valueOf() < new Date('2022-08-07') || date.valueOf() > new Date('2022-08-09 23:59:59')
           // return date.getMonth() === 6
         }
       },
