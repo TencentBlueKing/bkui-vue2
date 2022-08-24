@@ -42,6 +42,14 @@
         height: 100%;
         width: 100%;
     }
+    .bk-swiper-demo {
+        height: 500px;
+        width: 700px;
+    }
+    .swiper-parent {
+        width: 700px;
+        height: 600px;
+    }
 </style>
 
 [[toc]]
@@ -52,11 +60,11 @@
 
 ### 基础用法 {page=#/swiper}
 
-:::demo 需要传入一个图片列表，轮播图的大小通过css来控制。通过属性`loop-time`控制轮播间隔时间
+:::demo 需要传入一个图片列表。通过属性`loop-time`控制轮播间隔时间。可以通过控制父元素的高宽来控制轮播图的高宽
 
 ```html
 <template>
-    <bk-swiper :pics="pics" class="swiper" :loop-time="4000"></bk-swiper>
+    <bk-swiper :pics="pics" :loop-time="4000" class="swiper"></bk-swiper>
 </template>
 <script>
     import { bkSwiper } from '{{BASE_LIB_NAME}}'
@@ -83,7 +91,7 @@
         }
     }
 </script>
-<style >
+<style lang="postcss">
     .swiper {
         width: 100%;
         height: 300px;
@@ -98,7 +106,7 @@
 
 ```html
 <template>
-    <bk-swiper :pics="pics" class="swiper" :is-loop="false" @index-change="showIndex" ref="swiper"></bk-swiper>
+    <bk-swiper :pics="pics" :is-loop="false" @index-change="showIndex" class="swiper" ref="swiper"></bk-swiper>
 </template>
 <script>
     import { bkSwiper } from '{{BASE_LIB_NAME}}'
@@ -139,9 +147,9 @@
 ```
 :::
 
-### 控制轮播图高宽 {page=#/swiper}
+### 通过`width`和`height`属性控制轮播图的高宽 {page=#/swiper}
 
-:::demo 通过`width`和`height`控制轮播图的高宽，如果不传则以轮播图的CSS样式控制高宽。
+:::demo 通过`width`和`height`属性控制轮播图的高宽，优先级最高。
 
 ```html
 <template>
@@ -174,6 +182,92 @@
         }
     }
 </script>
+```
+:::
+
+### 通过 CSS 控制轮播图的高宽 {page=#/swiper}
+
+:::demo 通过 CSS 控制轮播图的高宽，优先级低于`width`和`height`属性。
+
+```html
+<template>
+    <bk-swiper class="bk-swiper-demo" :pics="pics" :is-loop="false"></bk-swiper>
+</template>
+<script>
+    import { bkSwiper } from '{{BASE_LIB_NAME}}'
+    import firstSwiper from '../../img/firstswiper.jpg'
+    import secondSwiper from '../../img/secondswiper.jpg'
+
+    export default {
+        components: {
+            bkSwiper
+        },
+        data () {
+            return {
+                pics: [
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper },
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper },
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper },
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper }
+                ],
+                height: 300,
+                width: 900
+            }
+        }
+    }
+</script>
+<style>
+    .bk-swiper-demo {
+        height: 500px;
+        width: 700px;
+    }
+</style>
+```
+:::
+
+### 通过父容器高宽控制 swiper 高宽 {page=#/swiper}
+
+:::demo 通过父容器高宽控制 swiper 高宽，优先级最低。
+
+```html
+<template>
+    <section class="swiper-parent">
+        <bk-swiper :pics="pics" :is-loop="false"></bk-swiper>
+    </section>
+</template>
+<script>
+    import { bkSwiper } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSwiper
+        },
+        data () {
+            return {
+                pics: [
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper },
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper },
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper },
+                    { url: firstSwiper, link: 'https://www.npmjs.com/package/bk-magic-vue' },
+                    { url: secondSwiper }
+                ]
+            }
+        }
+    }
+</script>
+<style>
+    .swiper-parent {
+        width: 700px;
+        height: 600px;
+    }
+</style>
 ```
 :::
 

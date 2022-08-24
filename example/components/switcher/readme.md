@@ -260,7 +260,7 @@
 | show-text | 是否显示文本 | Boolean | —— | false |
 | on-text | 打开状态显示的文本 | String | 建议 1 到 3 个字符，过长显示不全 | ON |
 | off-text | 关闭状态显示文本 | String | 建议 1 到 3 个字符，过长显示不全 | OFF |
-| size | 尺寸，显示文本时此属性无效 | String | `large` `small` | '' |
+| size | 尺寸，显示文本时此属性无效 | String | `small` `normal` `large` | `normal` |
 | theme | 主题 | String | `primary` `success` | success |
 | is-outline | 是否为描边效果 | Boolean | —— | false |
 | is-square | 是否为方形效果 | Boolean | —— | false |

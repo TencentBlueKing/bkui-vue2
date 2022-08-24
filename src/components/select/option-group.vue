@@ -28,14 +28,25 @@
 
 <template>
   <li class="bk-option-group" v-show="visible">
-    <div class="bk-option-group-name" :class="[select.fontSizeCls, showCollapse && !readonly ? 'is-collapse' : '']" @click="handleGroupNameClick">
+    <div
+      class="bk-option-group-name"
+      :class="[select.fontSizeCls, showCollapse && !readonly ? 'is-collapse' : '']"
+      @click="handleGroupNameClick"
+    >
       <template v-if="showPrefixOpt">
-        <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{prefixOptionText}}</span>
+        <span :class="['bk-option-group-prefix', readonly ? 'readonly' : '']">{{ prefixOptionText }}</span>
       </template>
-      <slot name="group-name">{{name}} <template v-if="showCount">({{options.length}})</template></slot>
+      <slot name="group-name"
+      >{{ name }} <template v-if="showCount">({{ options.length }})</template></slot
+      >
       <template v-if="showSelectAll">
         <span class="btn-check-all">
-          <bk-checkbox :indeterminate="indeterminate" :checked="isSelectAllItems" @click.native="handleCheckAllClick" @change="handleSelectAll"></bk-checkbox>
+          <bk-checkbox
+            :indeterminate="indeterminate"
+            :checked="isSelectAllItems"
+            @click.native="handleCheckAllClick"
+            @change="handleSelectAll"
+          ></bk-checkbox>
         </span>
       </template>
     </div>
@@ -102,10 +113,13 @@ export default {
       return !this.isSelectAllItems && !this.isEmpty
     },
     isSelectAllItems () {
-      return Array.prototype.every.call(this.options, option => option.isSelected)
+      if (this.options.length < 1) {
+        return false
+      }
+      return Array.prototype.every.call(this.options, (option) => option.isSelected)
     },
     isEmpty () {
-      return Array.prototype.every.call(this.options, option => !option.isSelected)
+      return Array.prototype.every.call(this.options, (option) => !option.isSelected)
     },
     showPrefixOpt () {
       return !!this.showCollapse
@@ -114,7 +128,7 @@ export default {
       return this.isLocalCollapse ? '+' : '-'
     },
     unmatchedCount () {
-      return this.options.filter(option => option.unmatched).length
+      return this.options.filter((option) => option.unmatched).length
     },
     visible () {
       const optionCount = this.options.length
@@ -140,9 +154,9 @@ export default {
     },
     handleSelectAll () {
       if (this.isSelectAllItems) {
-        Array.prototype.forEach.call(this.options, option => this.select.unselectOption(option))
+        Array.prototype.forEach.call(this.options, (option) => this.select.unselectOption(option))
       } else {
-        Array.prototype.forEach.call(this.options, option => this.select.selectOption(option))
+        Array.prototype.forEach.call(this.options, (option) => this.select.selectOption(option))
       }
     },
     handleGroupNameClick () {

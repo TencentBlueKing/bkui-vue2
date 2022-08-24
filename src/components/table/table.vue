@@ -270,7 +270,6 @@
         size="small"
         align="right"
         v-bind="pagination"
-        :show-total-count="showPaginationInfo"
         :show-selection-count="showSelectionCount"
         :selection-count="store.states.selection.length"
         :popover-options="popoverOptions"
@@ -380,7 +379,10 @@ export default {
       type: Boolean,
       default: true
     },
-    pagination: Object,
+    pagination: {
+      type: Object,
+      default: () => ({})
+    },
     showPaginationInfo: {
       type: Boolean,
       default: true
@@ -431,6 +433,7 @@ export default {
       fit: this.fit,
       showHeader: this.showHeader
     })
+    this.pagination.showTotalCount = !!this.showPaginationInfo
     return {
       layout,
       store,
@@ -702,7 +705,8 @@ export default {
     },
     handlePageChange (page) {
       this.autoScrollToTop && this.scrollToTop()
-      this.$emit('page-change', page)
+      // 翻页事件，传递当前页和每页条数
+      this.$emit('page-change', page, this.pagination.limit)
     },
     handlePageLimitChange (currentLimit, prevLimit) {
       this.autoScrollToTop && this.scrollToTop()

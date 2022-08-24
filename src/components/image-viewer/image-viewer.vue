@@ -29,7 +29,7 @@
 <template>
   <transition name="bk-zoom">
     <div tabindex="-1" ref="bk-image-viewer-wrapper" class="bk-image-viewer-wrapper"
-      :style="{ 'z-index': zIndex }">
+      :style="wrapStyles">
       <div class="bk-image-viewer-mask" @click="maskClose && hide()"></div>
       <div v-if="isShowTitle && urlList.length" class="bk-image-viewer-header">
         <div>{{currentName}}</div>
@@ -100,7 +100,7 @@
 <script>
 import { addEvent, removeEvent } from '@/utils/dom'
 import locale from 'bk-magic-vue/lib/locale'
-// import { throttle } from 'throttle-debounce'
+import zIndex from '@/mixins/z-index'
 function rafThrottle (fn) {
   let locked = false
   return function (...args) {
@@ -114,7 +114,7 @@ function rafThrottle (fn) {
 }
 export default {
   name: 'bk-image-viewer',
-  mixins: [locale.mixin],
+  mixins: [locale.mixin, zIndex],
   props: {
     urlList: {
       type: Array,
@@ -145,6 +145,10 @@ export default {
     maskClose: {
       type: Boolean,
       default: true
+    },
+    transfer: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -167,6 +171,7 @@ export default {
     }
   },
   computed: {
+
     isSingle () {
       return this.urlList.length <= 1
     },
@@ -182,6 +187,11 @@ export default {
     currentName () {
       const arr = this.currentImg.split('/')
       return arr[arr.length - 1]
+    },
+    wrapStyles () {
+      return {
+        zIndex: this.transfer ? this.getLocalZIndex() : this.zIndex
+      }
     },
     imgStyle () {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform
@@ -215,10 +225,17 @@ export default {
     }
   },
   mounted () {
+    if (this.transfer) {
+      document.body.appendChild(this.$el)
+    }
     this.deviceSupportInstall()
-    // add tabindex then wrapper can be focusable via Javascript
-    // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['bk-image-viewer-wrapper'].focus()
+  },
+  destroyed () {
+    // if transfer is true, remove DOM node after destroy
+    if (this.transfer && this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
   },
   methods: {
     hide () {

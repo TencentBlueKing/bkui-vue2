@@ -78,9 +78,10 @@
         <bk-input type="number" v-model="firstInput"
           :max="maxValue"
           :min="minValue"
-          @change="firstInputChange"
+          @change="firstChange"
           @enter="firstInputChange"
-          @blur="firstInputChange"></bk-input>
+          @blur="firstInputChange">
+        </bk-input>
       </div>
       <template v-if="showSecondInput && secondValue">
         <div class="input-center">～</div>
@@ -88,9 +89,10 @@
           <bk-input type="number" v-model="secondInput"
             :max="maxValue"
             :min="minValue"
-            @change="secondInputChange"
+            @change="secondChange"
             @enter="secondInputChange"
-            @blur="secondInputChange"></bk-input>
+            @blur="secondInputChange">
+          </bk-input>
         </div>
       </template>
     </div>
@@ -284,13 +286,15 @@ export default {
         console.warn('WARNNING:step should not be 0')
         return []
       }
-      const stepCount = (this.maxValue - this.minValue) / this.step
       const stepWidth = 100 * this.step / (this.maxValue - this.minValue)
       const result = []
-      for (let i = 0; i <= stepCount; i++) {
+      const minValue = parseFloat(this.minValue)
+      const maxValue = parseFloat(this.maxValue)
+      const step = parseFloat(this.step)
+      for (let i = minValue, j = 0; i <= maxValue; i += step, j++) {
         const item = {
-          stepWidth: i * stepWidth,
-          stepLabel: `${i * this.step}${this.intervalLabelUnit}`
+          stepWidth: j * stepWidth,
+          stepLabel: `${i}${this.intervalLabelUnit}`
         }
         result.push(item)
       }
@@ -457,6 +461,15 @@ export default {
         this.firstValue = val
       }
     },
+    firstChange (v) {
+      if (v === '') {
+        return
+      }
+      this.firstInput = parseFloat(v)
+      if (this.firstInput >= this.minValue && this.firstInput <= this.maxValue) {
+        this.firstValue = parseFloat(v)
+      }
+    },
     secondInputChange (v) {
       if (v === '') {
         return
@@ -470,6 +483,15 @@ export default {
         this.secondValue = this.maxValue
       } else {
         this.secondValue = val
+      }
+    },
+    secondChange (v) {
+      if (v === '') {
+        return
+      }
+      this.secondInput = parseFloat(v)
+      if (this.secondInput >= this.minValue && this.secondInput <= this.maxValue) {
+        this.secondValue = parseFloat(v)
       }
     },
     /**

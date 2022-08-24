@@ -22,7 +22,7 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
-*/
+ */
 
 /**
  * @file panel-mixins
@@ -73,12 +73,9 @@ export default {
       this.$emit('pick-click')
     },
     resetView () {
-      setTimeout(
-        () => {
-          this.currentView = this.selectionMode
-        },
-        500
-      )
+      setTimeout(() => {
+        this.currentView = this.selectionMode
+      }, 500)
     },
     handleClear () {
       this.dates = this.dates.map(() => null)

@@ -54,6 +54,7 @@
         :initial-index="imageIndex"
         :url-list="previewSrcList"
         :on-close="closeViewer"
+        :transfer="transfer"
         :mask-close="maskClose"
       ></bk-image-viewer>
     </template>
@@ -77,15 +78,11 @@ const ObjectFit = {
   SCALE_DOWN: 'scale-down'
 }
 
-let prevOverflow = ''
-
 export default {
   name: 'bk-image',
-
   components: {
     bkImageViewer
   },
-
   mixins: [locale.mixin],
 
   props: {
@@ -105,11 +102,15 @@ export default {
       type: Boolean,
       default: true
     },
+    maskClose: {
+      type: Boolean,
+      default: true
+    },
     zIndex: {
       type: Number,
       default: 2000
     },
-    maskClose: {
+    transfer: {
       type: Boolean,
       default: true
     }
@@ -122,7 +123,8 @@ export default {
       show: !this.lazy,
       imageWidth: 0,
       imageHeight: 0,
-      showViewer: false
+      showViewer: false,
+      prevOverflow: ''
     }
   },
 
@@ -282,12 +284,12 @@ export default {
         return
       }
       // prevent body scroll
-      prevOverflow = document.body.style.overflow
+      this.prevOverflow = document.body.style.overflow
       document.body.style.overflow = 'hidden'
       this.showViewer = true
     },
     closeViewer () {
-      document.body.style.overflow = prevOverflow
+      document.body.style.overflow = this.prevOverflow
       this.showViewer = false
     }
   }

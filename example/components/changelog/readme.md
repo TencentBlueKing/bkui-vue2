@@ -4,6 +4,73 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.12 {page=#/changelog}
+###### 2022.07.22
+
+* **[add]**:
+    - [SearchSelect 查询选择器](#/searchselect) 新增 `input-unfocus-clear` 属性及 `input-click-outside` 事件，支持失焦时清空输入框内容
+    - [Select 下拉选框](#/select) 新增 `searchable-min-count` 属性，支持配置当选项数量超过一定数量时才会（默认 0 个）显示搜索框，仅在开启搜索时生效
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 type 为 number 时数字小键盘输入不生效问题 [#287](https://github.com/TencentBlueKing/bkui-vue2/issues/287)
+    - [Slider 滑动选择器](#/slider) 修复 `min-value`, `max-value` 输入框问题
+* **[update]**:
+    - [Table 表格](#/table) 移除 `showPaginationInfo` 属性并兼容已有逻辑
+    - [Table 表格](#/table) `virtual-render` 属性配置说明补充
+    - [Select 下拉选框](#/select) `id-key` 属性文档调整
+
+
+### 2.4.11 {page=#/changelog}
+###### 2022.06.10
+
+* **[add]**:
+    - [Select 下拉选框](#/select) 新增 `allow-enter` 属性，用户在输入框输入关键词后，按下 enter 直接选择搜索结果，默认为 `true` [#273](https://github.com/TencentBlueKing/bkui-vue2/issues/273)
+    - [Select 下拉选框](#/select) 新增[创建自定义选项](#/select?anchor=chuang-jian-zi-ding-yi-xuan-xiang) [#256](https://github.com/TencentBlueKing/bkui-vue2/issues/256)
+* **[fix]**:
+    - [Radio 单选框](#/radio) 修复多个 radio-group name 有可能一样的问题 [#272](https://github.com/TencentBlueKing/bkui-vue2/issues/272)
+    - [Switcher 开关](#/switcher) Switcher 组件 size 属性默认值修改为 `normal` [#270](https://github.com/TencentBlueKing/bkui-vue2/issues/270)
+    - [Input 输入框](#/input) 修复数字文本框输入非法字符问题 [#269](https://github.com/TencentBlueKing/bkui-vue2/issues/269)
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 修复 dropdown-menu 高度的问题
+* **[update]**:
+    - [Divider 分割线](#/divider) divider 组件样式用 class 实现而不是行内样式 [#271](https://github.com/TencentBlueKing/bkui-vue2/issues/271)
+    - [Swiper 轮播图](#/swiper) 优化 swiper 计算高度、宽度的规则
+
+---
+
+### 2.4.9 {page=#/changelog}
+###### 2022.05.19
+
+* **[add]**:
+    - [Table 表格](#/table) 翻页事件 `page-change`，返回参数增加`每页条数`
+    - [Pagination 分页](#/pagination) 支持[跳转分页](#/pagination?anchor=tiao-zhuan-fen-ye)
+    - [Info 提示框](#/info-box) 新增 `closeFn`，用来单独配置[关闭的回调函数](#/info-box?anchor=guan-bi-icon-hui-diao-zi-ding-yi)，默认与 `cancelFn` 一致
+    - [Tab 选项卡](#/tab) 支持新增按钮前添加[自定义插槽内容](#/tab?anchor=xin-zeng-an-niu-qian-tian-jia-zi-ding-yi-cha-cao-nei-rong)
+* **[fix]**:
+    - [Spin 加载中](#/spin) spin 组件增加 default 类型
+    - [ResizeLayout 可拉伸布局](#/resize-layout) 修复拖动中设置了 disabled=true 不再触发 handleMouseMove 方法的问题 [#251](https://github.com/TencentBlueKing/bkui-vue2/issues/251)
+    - [TimePicker 时间选择器](#/time-picker) 修复时间组件支持失焦后生效的问题 [#235](https://github.com/TencentBlueKing/bkui-vue2/issues/235)
+    - [Loading 加载](#/loading) 修复 loading 指令出现 el.viewmodel.$mount 读取错误的问题 [#258](https://github.com/TencentBlueKing/bkui-vue2/issues/258)
+* **[update]**:
+    - [Select 下拉选框](#/select) 调整下拉框禁用时箭头颜色
+
+---
+
+### 2.4.8 {page=#/changelog}
+###### 2022.04.21
+
+* **[add]**:
+    - [DatePicker 日期选择器](#/date-picker) 新增 `cell-class` 配置项以支持自定义日期样式 [#229](https://github.com/TencentBlueKing/bkui-vue2/issues/229)
+    - [Table 表格](#/table) `bk-table-column` 增加 `tippy-options` 属性自定义配置表格的设置弹层 [#232](https://github.com/TencentBlueKing/bkui-vue2/issues/232)
+* **[fix]**:
+    - [Slider 滑动选择器](#/slider) 修复 min-value 设置为负值时无法正确渲染的问题 [#231](https://github.com/TencentBlueKing/bkui-vue2/issues/231)
+    - [TimePicker 时间选择器](#/time-picker) 修复 timer-picker 弹框偶发不会关闭的问题（页面存在多个 timer-picker 时 clickoutside 混乱的问题）
+* **[update]**:
+    - [Swiper 轮播图](#/swiper) 监听父容器高宽变化
+    - [VirtualScroll 虚拟滚动](#/virtual-scroll) 优化虚拟滚动折叠展开逻辑
+    - [Info 提示框](#/info-box) `maskClose`, `escClose` 默认值改为 `true`
+    - [Color 色彩](#/color), [Font 字体](#/font) 文档页面样式优化
+
+---
+
 ### 2.4.7 {page=#/changelog}
 ###### 2022.03.24
 

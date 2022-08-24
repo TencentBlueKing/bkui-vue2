@@ -30,6 +30,8 @@
   <div>
     <bk-search-select
       :data="demo7.data"
+      input-unfocus-clear
+      @input-click-outside="inputClickOutside"
       v-model="values">
     </bk-search-select>
   </div>
@@ -95,6 +97,11 @@ export default {
         ],
         values: []
       }
+    }
+  },
+  methods: {
+    inputClickOutside (a, b, c) {
+      console.error(a, b, c)
     }
   }
 }

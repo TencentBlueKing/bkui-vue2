@@ -50,14 +50,14 @@
 
       <template v-if="displayDataList.length">
         <ul class="content">
-          <li v-for="(item, index) in displayDataList"
-            @click.stop.prevent="leftClick(index)"
+          <li v-for="(item, index) in displayDataList" :class="[item.disabled ? 'is-disabled' : '']"
+            @click.stop.prevent="leftClick(index, item)"
             @mouseover.stop.prevent="leftMouseover(index)"
             @mouseleave.stop.prevent="leftMouseleave(index)" :key="index">
             <slot name="source-option" v-bind="item">
               <span class="content-text" v-bk-overflow-tips v-if="showOverflowTips">{{item[displayCode]}}</span>
               <span class="content-text" :title="item[displayCode]" v-else>{{item[displayCode]}}</span>
-              <span class="icon-wrapper" :class="[index === leftHoverIndex ? 'hover' : '']"><i class="bk-icon icon-arrows-right"></i></span>
+              <span class="icon-wrapper" v-if="!item.disabled" :class="[index === leftHoverIndex ? 'hover' : '']"><i class="bk-icon icon-arrows-right"></i></span>
             </slot>
           </li>
         </ul>
@@ -86,14 +86,14 @@
       </div>
       <template v-if="hasSelectedList.length">
         <ul class="content">
-          <li v-for="(item, index) in hasSelectedList"
-            @click.stop.prevent="rightClick(index)"
+          <li v-for="(item, index) in hasSelectedList" :class="[item.disabled ? 'is-disabled' : '']"
+            @click.stop.prevent="rightClick(index, item)"
             @mouseover.stop.prevent="rightMouseover(index)"
             @mouseleave.stop.prevent="rightMouseleave(index)" :key="index">
             <slot name="target-option" v-bind="item">
               <span class="content-text" v-bk-overflow-tips v-if="showOverflowTips">{{item[displayCode]}}</span>
               <span class="content-text" :title="item[displayCode]" v-else>{{item[displayCode]}}</span>
-              <span class="icon-wrapper" :class="[index === rightHoverIndex ? 'hover' : '']"><i class="bk-icon icon-close"></i></span>
+              <span class="icon-wrapper" v-if="!item.disabled" :class="[index === rightHoverIndex ? 'hover' : '']"><i class="bk-icon icon-close"></i></span>
             </slot>
           </li>
         </ul>
@@ -463,7 +463,9 @@ export default {
      */
     sortDataList (list, key, sortList) {
       const arr = sortList
-      return list.sort((a, b) => arr.indexOf(a[key]) - arr.indexOf(b[key]) >= 0)
+      return list.sort((a, b) => {
+        return arr.indexOf(a[key]) - arr.indexOf(b[key])
+      })
     },
 
     removeFromDataList (removeItem) {
@@ -483,6 +485,7 @@ export default {
 
       // 遍历左边列表（包括搜索后的列表）
       displayDataList.forEach(transferItem => {
+        if (transferItem.disabled) return
         hasSelectedList.push(transferItem)
         this.removeFromDataList(transferItem)
       })
@@ -508,10 +511,11 @@ export default {
      */
     allToLeft () {
       this.rightHoverIndex = -1
-      const hasSelectedList = this.hasSelectedList
+      const hasSelectedList = this.hasSelectedList.filter(i => !i.disabled)
       const dataList = this.dataList
       while (hasSelectedList.length) {
         const transferItem = hasSelectedList.shift()
+        this.hasSelectedList.splice(this.hasSelectedList.indexOf(transferItem), 1)
         dataList.push(transferItem)
         if (this.sortList.length === this.sourceList.length) {
           this.dataList = [...this.sortDataList(dataList, this.sortCode, this.sortList)]
@@ -532,7 +536,8 @@ export default {
      *
      * @param {number} index item 的索引
      */
-    leftClick (index) {
+    leftClick (index, item) {
+      if (item.disabled) return
       this.leftHoverIndex = -1
       const transferItem = this.displayDataList[index]
       const hasSelectedList = this.hasSelectedList
@@ -558,7 +563,8 @@ export default {
      *
      * @param {number} index item 的索引
      */
-    rightClick (index) {
+    rightClick (index, item) {
+      if (item.disabled) return
       this.rightHoverIndex = -1
       const transferItem = this.hasSelectedList.splice(index, 1)[0]
       const dataList = this.dataList

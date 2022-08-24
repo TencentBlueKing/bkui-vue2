@@ -814,7 +814,7 @@
 
 ### 设置功能 {page=#/table}
 
-:::demo 通过配置`bk-table-column`的`type`属性为`setting`即可开启此功能，组件内置了一个默认设置内容`bk-table-setting-content`
+:::demo 通过配置`bk-table-column`的`type`属性为`setting`即可开启此功能，组件内置了一个默认设置内容`bk-table-setting-content`，通过`tippy-options`属性可以自定义弹层的层级
 
 ```html
 <template>
@@ -828,7 +828,7 @@
                 :label="field.label"
                 :prop="field.id">
             </bk-table-column>
-            <bk-table-column type="setting">
+            <bk-table-column type="setting" :tippy-options="{ zIndex: 3000 }">
                 <bk-table-setting-content
                     :fields="setting.fields"
                     :selected="setting.selectedFields"
@@ -1458,7 +1458,7 @@ export default {
 | auto-scroll-to-top | Table 分页变化时，表格是否自动滚动到顶部 | Boolean | —— | false |
 | scroll-loading | 表格底部loading加载效果，可以配合表格scroll-end事件使用，isLoading属性控制底部加载显隐。其余属性可参考spin组件 | Object | —— | `{ isLoading: false, size: 'mini', theme: 'info', icon: 'circle-2-1', placement: 'right' }` |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-table` 上 | String | —— | —— |
-| virtual-render | 内置的虚拟滚动配置 | Boolean, Object | false / true / { virtual-render 配置 } | false |
+| virtual-render | 内置的虚拟滚动配置，启用时需同时配置height属性 | Boolean, Object | false / true / { virtual-render 配置 } | false |
 
 ### virtual-render 配置 {page=#/table}
 `virtual-render`支持简单配置 `true / false` 直接启用 / 禁用，如果需要进一步配置更多，请参考下面配置说明
@@ -1495,7 +1495,7 @@ export default {
 | current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
 | header-dragend | 当拖动表头改变了列的宽度的时候会触发该事件 | newWidth, oldWidth, column, event |
 | expand-change | 当用户对某一行展开或者关闭的时候会触发该事件 | row, expandedRows |
-| page-change | 当用户切换表格分页时会触发的事件 | newPage |
+| page-change | 当用户切换表格分页时会触发的事件 | newPage, pageSize |
 | page-limit-change | 当用户切换表格每页显示条数时会出发的事件 | limit |
 | scroll-end | 当表格滚动到底部时触发该事件 | —— |
 
@@ -1553,6 +1553,7 @@ export default {
 | before-expand-change | 行折叠状态发生变化前的回调函数，返回JavaScript中的falsy类型值时会阻止折叠状态变化 | Function({ row, column, $index })  | —— | —— |
 | before-select-change | 状态发生变化前的回调函数，返回false时会阻止勾选状态的变化 | Function(selected, { row, column, store, $index })  | —— | —— |
 | before-select-all-change | 全选状态发生变化前的回调函数，返回false时会阻止全选状态的变化 | Function(selected, { column, store })  | —— | —— |
+| tippy-options | type="setting"生效，更多的其他tippyjs参数参考[tippyjs参数](https://atomiks.github.io/tippyjs/v5/all-props/) | Object | —— | —— |
 
 
 ### bk-table-column 插槽 {page=#/table}
