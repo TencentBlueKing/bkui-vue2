@@ -91,7 +91,7 @@
     .bk-dialog-tool {
         min-height: 30px;
         position: relative;
-        
+
     }
 
     .bk-dialog-header {
@@ -103,7 +103,7 @@
             display: inline-block;
             width: 100%;
             font-size: 20px;
-            color: $newBlackColor2;
+            color: $newBlackColor1;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

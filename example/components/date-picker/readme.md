@@ -138,6 +138,10 @@
             getCellClass(cell) {
                 const hasPoint = Math.random() * 10 > 5
                 return hasPoint ? 'cell-x-Class' : ''
+            },
+            change (date) {
+                console.error(date)
+                console.error(this.initDateTime)
             }
         }
     }
@@ -230,7 +234,7 @@
 ```html
 <template>
     <div>
-        <bk-date-picker v-model="initDateTime" :placeholder="'选择日期时间'" :type="'datetime'"></bk-date-picker>
+        <bk-date-picker v-model="initDateTime" @change="change" :placeholder="'选择日期时间'" :type="'datetime'"></bk-date-picker>
     </div>
 </template>
 <script>
@@ -243,6 +247,12 @@
         data () {
             return {
                 initDateTime: new Date()
+            }
+        },
+        methods: {
+            change (date) {
+                console.error(date)
+                console.error(this.initDateTime)
             }
         }
     }

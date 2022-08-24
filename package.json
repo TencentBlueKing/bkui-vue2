@@ -1,6 +1,6 @@
 {
   "name": "bk-magic-vue",
-  "version": "2.4.12",
+  "version": "2.4.13",
   "description": "基于蓝鲸 Magicbox 和 Vue 的前端组件库",
   "main": "dist/bk-magic-vue.min.js",
   "files": [
@@ -73,7 +73,6 @@
     "babel-loader": "~8.0.6",
     "babel-plugin-date-fns": "~0.2.1",
     "body-parser": "~1.19.0",
-    "caniuse-lite": "1.0.30000974",
     "cheerio": "~1.0.0-rc.3",
     "compression-webpack-plugin": "~3.0.0",
     "connect-history-api-fallback": "~1.6.0",

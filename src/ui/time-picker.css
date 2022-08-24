@@ -26,6 +26,22 @@
     }
 }
 
+.bk-time-picker-now {
+    border-top: 1px solid $newGreyColor1;
+    text-align: right;
+    clear: both;
+    background-color: $newGreyColor3;
+    height: 42px;
+    line-height: 41px;
+    font-size: 13px;
+    padding: 0 20px;
+    text-align: center;
+    a {
+        color: $newMainColor;
+        text-decoration: none;
+    }
+}
+
 .bk-time-picker-cells {
     /* min-width: 112px; */
     &:after {
@@ -43,7 +59,7 @@
         text-align: left;
         /* border-top: 1px solid #e4e7ed; */
         /* border-bottom: 1px solid #e4e7ed; */
-        background-color: rgba(58,132,255,.16);
+        background-color: $newMainColor3;
         mix-blend-mode: multiply;
         color: $newMainColor;
         pointer-events: none;
@@ -134,8 +150,8 @@
             font-size: 12px;
             position: relative;
             &:hover {
-                /* background-color: $newGreyColor2; */
-                color: $newMainColor;
+                background-color: $newGreyColor2;
+                /* color: $newMainColor; */
                 /* font-weight: 700; */
             }
         }
@@ -154,6 +170,9 @@
             /* background-color: $newMainColor3; */
             color: $newMainColor;
         }
+        .bk-time-picker-cells-cell-selected {
+            font-weight: 700;
+        }
 
         .bk-time-picker-cells-cell-focused {
             /* background-color: #f3f3f3; */
@@ -170,6 +189,11 @@
     font-size: 14px;
     font-weight: 700;
     color: $newBlackColor2;
+    .now-time {
+        font-weight: 400;
+        cursor: pointer;
+        margin-left: 3px;
+    }
 }
 .bk-time-picker-with-range .bk-picker-panel-body {
     /* min-width: 228px; */
