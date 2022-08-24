@@ -251,11 +251,14 @@ export default {
 
     bindWheelEvent () {
       const bindFunction = type => {
-        this.$refs[type].addEventListener('wheel', debounce(this.handleWheel, 32, type), { passive: true })
+        const el = this.$refs[type]
+        el && el.addEventListener('wheel', debounce(this.handleWheel, 32, type), { passive: true })
       }
-      bindFunction('hours')
-      bindFunction('minutes')
-      bindFunction('seconds')
+      this.$nextTick(() => {
+        bindFunction('hours')
+        bindFunction('minutes')
+        bindFunction('seconds')
+      })
     },
 
     typeItemHeight (type) {

@@ -13,6 +13,12 @@
                 initTimeRange1: ['00:00:00', '23:59:59'],
                 initTimeRange2: ['23:00:00', '10:00:00']
             }
+        },
+        methods: {
+            change (time) {
+                console.error(time)
+                console.error(this.initTime)
+            }
         }
     }
 </script>
@@ -30,7 +36,7 @@
 ```html
 <template>
     <div>
-        <bk-time-picker v-model="initTime" :placeholder="'选择时间'" transfer :ext-popover-cls="'custom-popover-cls'"></bk-time-picker>
+        <bk-time-picker v-model="initTime" :placeholder="'选择时间'" @change="change" transfer :ext-popover-cls="'custom-popover-cls'"></bk-time-picker>
     </div>
 </template>
 <script>
@@ -43,6 +49,12 @@
         data () {
             return {
                 initTime: '12:12:12'
+            }
+        },
+        methods: {
+            change (time) {
+                console.error(time)
+                console.error(this.initTime)
             }
         }
     }

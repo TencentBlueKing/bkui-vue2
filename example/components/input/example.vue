@@ -33,9 +33,8 @@
       Input 输入框更多示例
     </h2>
     <div class="example-item">
-      <bk-input v-model="value"
-        :type="'textarea'"
-        :maxlength="10000">
+      <bk-input v-model="value" precision="0"
+        :type="'number'">
       </bk-input>
 
       <!-- <bk-input type="number" :max="10" :min="-10" v-model="numberInputValue" precision="5"

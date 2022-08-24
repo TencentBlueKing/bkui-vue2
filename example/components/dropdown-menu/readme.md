@@ -92,9 +92,9 @@
             <li><a href="javascript:;" @click="triggerHandler">生产环境</a></li>
             <li><a href="javascript:;" @click="triggerHandler">预发布环境</a></li>
             <li><a href="javascript:;" @click="triggerHandler">测试环境</a></li>
-            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
-            <li><a href="javascript:;" @click="triggerHandler">开发环境</a></li>
-            <li><a href="javascript:;" @click="triggerHandler">调试环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">aaa</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">bbb</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">ccc</a></li>
         </ul>
     </bk-dropdown-menu>
 </template>
@@ -209,7 +209,7 @@
 
 ``` html
 <template>
-    <bk-dropdown-menu @show="largeDropdownShow" @hide="largeDropdownHide" ref="largeDropdown" :font-size="'medium'">
+    <bk-dropdown-menu @show="largeDropdownShow" trigger="click" @hide="largeDropdownHide" ref="largeDropdown" :font-size="'medium'">
         <div class="dropdown-trigger-btn" slot="dropdown-trigger">
             更多操作
         </div>
@@ -340,6 +340,13 @@
             <li><a href="javascript:;" @click="triggerHandler">生产环境</a></li>
             <li><a href="javascript:;" @click="triggerHandler">预发布环境</a></li>
             <li><a href="javascript:;" @click="triggerHandler">测试环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
+            <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
             <li><a href="javascript:;" @click="triggerHandler">正式环境</a></li>
         </ul>
     </bk-dropdown-menu>

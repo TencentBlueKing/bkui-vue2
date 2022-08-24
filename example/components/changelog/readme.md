@@ -4,6 +4,28 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.14-beta.1 {page=#/changelog}
+
+* **[add]**:
+    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
+    - [Card 卡片](#/card) 添加展开收起动画
+    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
+* **[update]**:
+    - 优化部分组件样式
+
+---
+
+### 2.4.13 {page=#/changelog}
+
+* **[add]**:
+    - [Transfer 穿梭框](#/transfer) 支持设置 disabled 状态
+* **[fix]**:
+    - [Input 输入框](#/input) 修复当不配置 `precision` 属性时无法输入小数点的问题
+    - [Transfer 穿梭框](#/transfer) 修复 Transfer 穿梭框组件设置排序不生效的问题
+    - [Select 下拉选框](#/select) bugfix: select 分组选中状态
+
+---
+
 ### 2.4.12 {page=#/changelog}
 ###### 2022.07.22
 
@@ -18,6 +40,7 @@
     - [Table 表格](#/table) `virtual-render` 属性配置说明补充
     - [Select 下拉选框](#/select) `id-key` 属性文档调整
 
+---
 
 ### 2.4.11 {page=#/changelog}
 ###### 2022.06.10
