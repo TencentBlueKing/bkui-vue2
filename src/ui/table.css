@@ -11,6 +11,8 @@ $tableCaretColor: #c0c4cc;
 $tablePrimaryColor: #409eff;
 $tableCurrentRowBackground: #ecf5ff;
 $tableInfoColor: #909399;
+$tableDarkHeader: #f0f1f5;
+$tableDarkHeaderHover: #eaebf0;
 
 .bk-table {
     white-space: normal;
@@ -33,8 +35,28 @@ $tableInfoColor: #909399;
         width: 100%;
         height: 1px;
         content: '';
-        background-color: $tableBorderColor;
+        background-color: transparent;
         z-index: 1;
+    }
+    &.bk-table-dark-header {
+        th {
+            background-color: $tableDarkHeader;
+            :hover {
+                background-color: $tableDarkHeaderHover
+            }
+        }
+    }
+    &.bk-table-custom-header {
+        --customHeaderColor: #000;
+        th {
+            background-color: var(--customHeaderColor);
+        }
+    }
+    &.bk-table-custom-header-hover {
+        --customHeaderColorHover: #fff;
+        th:hover {
+            background-color: var(--customHeaderColorHover)
+        }
     }
     thead {
         color: $fnMainColor;
@@ -251,6 +273,9 @@ $tableInfoColor: #909399;
 .bk-table-outer-border {
     border: $tableBorder;
     border-radius: 2px;
+    &:before {
+        background-color: $tableBorderColor;
+    }
     &:after {
         position: absolute;
         top: 0;

@@ -34,6 +34,9 @@
         'bk-table-striped': stripe,
         'bk-table-border': tableBorder || isGroup,
         'bk-table-outer-border': outerBorder,
+        'bk-table-dark-header': darkHeader,
+        'bk-table-custom-header': customHeaderColor,
+        'bk-table-custom-header-hover': customHeaderColorHover,
         'bk-table-linear': !(tableBorder || outerBorder || isGroup),
         'bk-table-row-border': tableRowBorder,
         'bk-table-col-border': tableColBorder,
@@ -48,7 +51,8 @@
       tableSize ? `bk-table-${ tableSize }` : '',
       extCls
     ]"
-    @mouseleave="handleMouseLeave($event)">
+    @mouseleave="handleMouseLeave($event)"
+    ref="bkTable">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div
       v-if="showHeader"
@@ -327,6 +331,18 @@ export default {
     fit: {
       type: Boolean,
       default: true
+    },
+    customHeaderColor: {
+      type: String,
+      default: ''
+    },
+    customHeaderColorHover: {
+      type: String,
+      default: ''
+    },
+    darkHeader: { // 深色表头模式
+      type: Boolean,
+      default: false
     },
     rowAutoHeight: {
       type: Boolean,
@@ -628,6 +644,7 @@ export default {
     this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
   },
   mounted () {
+    this.setHeaderStyle() // 配置表头css变量
     this.bindEvents()
     this.store.updateColumns()
     this.doLayout()
@@ -654,6 +671,12 @@ export default {
     if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener)
   },
   methods: {
+    setHeaderStyle () {
+      this.$nextTick(() => {
+        this.$refs.bkTable.style.setProperty('--customHeaderColor', this.customHeaderColor)
+        this.$refs.bkTable.style.setProperty('--customHeaderColorHover', this.customHeaderColorHover)
+      })
+    },
     setCurrentRow (row) {
       this.store.commit('setCurrentRow', row)
     },
