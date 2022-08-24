@@ -230,10 +230,7 @@ export default {
       type: String,
       default: 'normal'
     },
-    precision: {
-      type: Number,
-      default: 0
-    },
+    precision: Number,
     passwordIcon: {
       type: Array,
       default () {
@@ -483,7 +480,8 @@ export default {
 
       return outputAttr
     },
-    handleToFixed (defaultNumber, len) {
+    handleToFixed (defaultNumber, length) {
+      const len = parseInt(length, 10)
       // .123转为0.123
       const number = Number(defaultNumber)
       if (isNaN(number) || number >= Math.pow(10, 21)) {
@@ -598,11 +596,11 @@ export default {
         // . 号
         if (keyCode === 190) {
           // 保留小数位为 0，此时不允许输入 .
-          if (this.precision === 0) {
-            event.stopPropagation()
-            event.preventDefault()
-            return false
-          }
+          // if (this.precision === 0) {
+          //   event.stopPropagation()
+          //   event.preventDefault()
+          //   return false
+          // }
           if (String(value).trim()) {
             // 已经有一个 . 了，本次又输入的是 .
             if (value.indexOf('.') >= 0) {
