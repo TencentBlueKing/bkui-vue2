@@ -54,7 +54,7 @@ $tableDarkHeaderHover: #eaebf0;
     }
     &.bk-table-custom-header-hover {
         --customHeaderColorHover: #fff;
-        th:hover {
+        th .cell:hover {
             background-color: var(--customHeaderColorHover)
         }
     }
