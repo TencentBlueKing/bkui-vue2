@@ -46,6 +46,7 @@ const defaultOptions = {
   trigger: 'mouseenter focus',
   theme: 'dark',
   interactive: true,
+  boundary: 'window',
   content: '',
   allowHtml: false,
   extCls: ''
