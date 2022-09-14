@@ -4,7 +4,7 @@
 
 <div class="changelog-wrapper">
 
-### 2.4.14-beta.1 {page=#/changelog}
+### 2.4.15-beta.1 {page=#/changelog}
 
 * **[add]**:
     - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
@@ -12,6 +12,13 @@
     - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
 * **[update]**:
     - 优化部分组件样式
+
+---
+
+### 2.4.14 {page=#/changelog}
+
+* **[update]**:
+    - tooltips 配置
 
 ---
 
