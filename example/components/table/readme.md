@@ -276,11 +276,12 @@
         border-radius: 50%;
         text-align: center;
         font-size: 0;
+        color: #979BA5;
         cursor: pointer;
     }
     .dot-menu-trigger:hover {
         color: #3A84FF;
-        background-color: #DCDEE5;
+        background-color: #EBECF0;
     }
     .dot-menu-trigger:before {
         content: "";
@@ -478,11 +479,12 @@
         border-radius: 50%;
         text-align: center;
         font-size: 0;
+        color: #979BA5;
         cursor: pointer;
     }
     .dot-menu-trigger:hover {
         color: #3A84FF;
-        background-color: #DCDEE5;
+        background-color: #EBECF0;
     }
     .dot-menu-trigger:before {
         content: "";
@@ -667,7 +669,6 @@
             :size="size"
             :outer-border="false"
             :header-border="false"
-            :header-cell-style="{background: '#fff'}"
             :pagination="pagination"
             @page-change="handlePageChange">
             <bk-table-column type="selection" width="60"></bk-table-column>
@@ -1337,12 +1338,13 @@ export default {
         border-radius: 50%;
         text-align: center;
         font-size: 0;
+        color: #979BA5;
         cursor: pointer;
     }
 
     .dot-menu-trigger:hover {
         color: #3A84FF;
-        background-color: #DCDEE5;
+        background-color: #EBECF0;
     }
 
     .dot-menu-trigger:before {
