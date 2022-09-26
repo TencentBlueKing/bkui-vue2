@@ -125,7 +125,7 @@ export default {
     },
     defItemHoverBgColor: {
       get () {
-        const themeVals = ['linear-gradient(270deg,rgba(235,237,243,1) 0%,rgba(240,241,245,1) 100%)', 'linear-gradient(90deg,rgba(37,48,71,1) 0%,rgba(32,42,60,1) 100%)']
+        const themeVals = ['#EAEBF0', 'linear-gradient(90deg,rgba(37,48,71,1) 0%,rgba(32,42,60,1) 100%)']
         return !themeVals.includes(this.itemHoverBgColor) ? this.itemHoverBgColor : themeVals[+(this.navigationType === 'left-right')]
       }
     },
@@ -137,13 +137,13 @@ export default {
     },
     defItemActiveBgColor: {
       get () {
-        const themeVals = ['linear-gradient(90deg,rgba(63,135,255,1) 0%,rgba(58,132,255,1) 100%)', 'linear-gradient(90deg,rgba(63,135,255,1) 0%,rgba(58,132,255,1) 100%)']
+        const themeVals = ['#E1ECFF', 'linear-gradient(90deg,rgba(63,135,255,1) 0%,rgba(58,132,255,1) 100%)']
         return !themeVals.includes(this.itemActiveBgColor) ? this.itemActiveBgColor : themeVals[+(this.navigationType === 'left-right')]
       }
     },
     defItemActiveColor: {
       get () {
-        const themeVals = ['#FFFFFF', '#FFFFFF']
+        const themeVals = ['#3A84FF', '#FFFFFF']
         return !themeVals.includes(this.itemActiveColor) ? this.itemActiveColor : themeVals[+(this.navigationType === 'left-right')]
       }
     },
@@ -173,13 +173,13 @@ export default {
     },
     defItemActiveIconColor: {
       get () {
-        const themeVals = ['#FFFFFF', '#FFFFFF']
+        const themeVals = ['#3A84FF', '#FFFFFF']
         return !themeVals.includes(this.itemActiveIconColor) ? this.itemActiveIconColor : themeVals[+(this.navigationType === 'left-right')]
       }
     },
     defSubMenuOpenBgColor: {
       get () {
-        const themeVals = ['#F0F1F5', '#151D2C']
+        const themeVals = ['#F5F7FA', '#151D2C']
         return !themeVals.includes(this.subMenuOpenBgColor) ? this.subMenuOpenBgColor : themeVals[+(this.navigationType === 'left-right')]
       }
     },

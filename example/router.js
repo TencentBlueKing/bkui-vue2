@@ -115,6 +115,7 @@ const GridExample = () => import(/* webpackChunkName: 'grid' */'./components/gri
 const Directives = () => import(/* webpackChunkName: 'directives' */'./components/directives/readme.md')
 const Navigation = () => import(/* webpackChunkName: 'navigation' */'./components/navigation/readme.md')
 const NavigationExample = () => import(/* webpackChunkName: 'navigation-example' */'./components/navigation/demo')
+const NavigationExample1 = () => import(/* webpackChunkName: 'navigation-example1' */'./components/navigation/demo1')
 const SearchSelect = () => import(/* webpackChunkName: 'search-select' */'./components/search-select/readme.md')
 const SearchSelectExample = () => import(/* webpackChunkName: 'search-select-example' */'./components/search-select/example')
 const Rate = () => import(/* webpackChunkName: 'rate' */'./components/rate/readme.md')
@@ -582,6 +583,11 @@ const router = new VueRouter({
       name: 'navigation-example',
       path: '/navigation/example',
       component: NavigationExample
+    },
+    {
+      name: 'navigation-example1',
+      path: '/navigation/example1',
+      component: NavigationExample1
     },
     {
       name: 'searchselect',
