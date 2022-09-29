@@ -198,6 +198,10 @@ export default {
     const root = document.querySelector('html')
     removeClass(root, 'bk-sideslider-show')
     removeResizeListener(this.$refs.content, this.handleContentResize)
+    // 销毁后删除DOM节点
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
   },
   beforeDestroy () {
     this.isShow && this.popUid && popManager.hide(this.popUid)
