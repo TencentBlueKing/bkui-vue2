@@ -46,7 +46,7 @@
       </slot>
     </div>
     <template v-if="collapseActive">
-      <bk-transition name="collapse">
+      <bk-transition name="collapse" duration-time=".1.4s">
         <div class="bk-card-body">
           <slot></slot>
         </div>
