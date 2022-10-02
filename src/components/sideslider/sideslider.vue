@@ -173,6 +173,13 @@ export default {
         if (this.showMask) {
           this.generatePopUid()
         }
+
+        this.$nextTick(() => {
+          if (this.$refs.content) {
+            addResizeListener(this.$refs.content, this.handleContentResize)
+          }
+        })
+
         setTimeout(() => {
           this.$emit('shown')
         }, 200)
@@ -189,10 +196,6 @@ export default {
     }
   },
   mounted () {
-    if (this.$refs.content && this.showMask) {
-      this.generatePopUid()
-      addResizeListener(this.$refs.content, this.handleContentResize)
-    }
   },
   destroyed () {
     const root = document.querySelector('html')

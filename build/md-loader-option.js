@@ -43,6 +43,7 @@ const { slugify } = require('transliteration')
 const { strip } = require('./strip-tags')
 const { convert } = require('./util')
 const markdownItReplace = require('./markdown-it-replace')
+const markdownItGithubLink = require('./markdown-it-github-link')
 const markdownItHighlightjs = require('./md-highlight')
 
 const replaceLink = (link, env) => {
@@ -85,6 +86,7 @@ module.exports = {
   preventExtract: true,
   replaceLink,
   use: [
+    [markdownItGithubLink],
     [markdownItReplace, {
       replaceStr: 'bk-magic-vue'
     }],
@@ -166,10 +168,10 @@ module.exports = {
             ).replace(/(<[^>]*)=""(?=.*>)/g, '$1')
 
             return ``
-                            + `<code-block class="demo-box">`
-                            + `<div class="source" slot="source">${html}</div>`
-                            + descriptionHTML
-                            + `<div class="highlight" slot="highlight">`
+              + `<code-block class="demo-box">`
+              + `<div class="source" slot="source">${html}</div>`
+              + descriptionHTML
+              + `<div class="highlight" slot="highlight">`
           }
           return '</div></code-block>\n'
         }

@@ -5,251 +5,251 @@
     Vue.use(bkTooltips)
 
     export default {
-        components: {
-            bkTable,
-            bkTableColumn,
-            bkButton,
-            bkInput,
-            bkTableSettingContent,
-            bkPopover
-        },
-        data () {
-            const settingFields = [{
-                id: 'ip',
-                label: '名称/内网IP',
-                disabled: true
-            }, {
-                id: 'source',
-                label: '来源'
-            }, {
-                id: 'status',
-                label: '状态'
-            }, {
-                id: 'create_time',
-                label: '创建时间'
-            }, {
-                id: 'desc',
-                label: '描述'
-            }]
-            return {
-                bottomLoadingOptions: {
-                    size: 'small',
-                    isLoading: false
+      components: {
+        bkTable,
+        bkTableColumn,
+        bkButton,
+        bkInput,
+        bkTableSettingContent,
+        bkPopover
+      },
+      data () {
+        const settingFields = [{
+          id: 'ip',
+          label: '名称/内网IP',
+          disabled: true
+        }, {
+          id: 'source',
+          label: '来源'
+        }, {
+          id: 'status',
+          label: '状态'
+        }, {
+          id: 'create_time',
+          label: '创建时间'
+        }, {
+          id: 'desc',
+          label: '描述'
+        }]
+        return {
+          bottomLoadingOptions: {
+            size: 'small',
+            isLoading: false
+          },
+          size: 'small',
+          sourceFilters: [{ text: 'QQ', value: 'QQ' }, { text: '微信', value: '微信' }],
+          statusFilters: [{ text: '正常', value: '正常' }, { text: '创建中', value: '创建中' }],
+          data: [
+            {
+              ip: '192.168.0.1',
+              source: 'QQ',
+              status: '创建中',
+              create_time: '2018-05-25 15:02:24',
+              children: [
+                {
+                  name: '用户管理',
+                  count: '23',
+                  creator: 'person2',
+                  create_time: '2017-10-10 11:12',
+                  desc: '用户管理'
                 },
-                size: 'small',
-                sourceFilters: [{ text: 'QQ', value: 'QQ' }, { text: '微信', value: '微信' }],
-                statusFilters: [{ text: '正常', value: '正常' }, { text: '创建中', value: '创建中' }],
-                data: [
-                    {
-                        ip: '192.168.0.1',
-                        source: 'QQ',
-                        status: '创建中',
-                        create_time: '2018-05-25 15:02:24',
-                        children: [
-                            {
-                                name: '用户管理',
-                                count: '23',
-                                creator: 'person2',
-                                create_time: '2017-10-10 11:12',
-                                desc: '用户管理'
-                            },
-                            {
-                                name: '模块管理',
-                                count: '2',
-                                creator: 'person1',
-                                create_time: '2017-10-10 11:12',
-                                desc: '无数据测试'
-                            }
-                        ]
-                    },
-                    {
-                        ip: '192.168.0.2,192.168.0.27,192.168.0.22,192.168.0.23,192.168.0.212,192.168.0.213.192.168.0.214,192.168.0.215,192.168.0.216',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24',
-                        children: [
-                            {
-                                name: '用户管理',
-                                count: '23',
-                                creator: 'person2',
-                                create_time: '2017-10-10 11:12',
-                                desc: '用户管理'
-                            },
-                            {
-                                name: '模块管理',
-                                count: '2',
-                                creator: 'person1',
-                                create_time: '2017-10-10 11:12',
-                                desc: '无数据测试'
-                            }
-                        ]
-                    },
-                    {
-                        ip: '192.168.0.3',
-                        source: 'QQ',
-                        status: '创建中',
-                        create_time: '2018-05-25 15:02:24',
-                        children: [
-                            {
-                                name: '用户管理',
-                                count: '23',
-                                creator: 'person2',
-                                create_time: '2017-10-10 11:12',
-                                desc: '用户管理'
-                            },
-                            {
-                                name: '模块管理',
-                                count: '2',
-                                creator: 'person1',
-                                create_time: '2017-10-10 11:12',
-                                desc: '无数据测试'
-                            }
-                        ]
-                    }
-                ],
-                tableData: [
-                    {
-                        ip: '192.168.0.1',
-                        source: 'QQ',
-                        status: '创建中',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.2',
-                        source: '微信',
-                        status: '正常',
-                        create_time: '2018-05-25 15:02:24'
-                    },
-                    {
-                        ip: '192.168.0.3',
-                        source: 'QQ',
-                        status: '创建中',
-                        create_time: '2018-05-25 15:02:24'
-                    }
-                ],
-                longData: new Array(100).fill('').map((item, index) => ({
-                    ip: '192.168.0.1',
-                    source: 'QQ' + index,
-                    status: '创建中',
-                    create_time: '2018-05-25 15:02:24',
-                    desc: 'Table 的高度，默认为自动高度。如果 height 为 Number 类型，单位 px；如果 height 为 String 类型，则这个高度会设置为 Table 的 style.height 的值，Table 的高度会受控于外部样式。'
-                })),
-                pagination: {
-                    current: 1,
-                    count: 500,
-                    limit: 20
+                {
+                  name: '模块管理',
+                  count: '2',
+                  creator: 'person1',
+                  create_time: '2017-10-10 11:12',
+                  desc: '无数据测试'
+                }
+              ]
+            },
+            {
+              ip: '192.168.0.2,192.168.0.27,192.168.0.22,192.168.0.23,192.168.0.212,192.168.0.213.192.168.0.214,192.168.0.215,192.168.0.216',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24',
+              children: [
+                {
+                  name: '用户管理',
+                  count: '23',
+                  creator: 'person2',
+                  create_time: '2017-10-10 11:12',
+                  desc: '用户管理'
                 },
-                setting: {
-                    max: 3,
-                    fields: settingFields,
-                    selectedFields: settingFields.slice(0, 4),
-                    size: 'small'
+                {
+                  name: '模块管理',
+                  count: '2',
+                  creator: 'person1',
+                  create_time: '2017-10-10 11:12',
+                  desc: '无数据测试'
                 }
+              ]
+            },
+            {
+              ip: '192.168.0.3',
+              source: 'QQ',
+              status: '创建中',
+              create_time: '2018-05-25 15:02:24',
+              children: [
+                {
+                  name: '用户管理',
+                  count: '23',
+                  creator: 'person2',
+                  create_time: '2017-10-10 11:12',
+                  desc: '用户管理'
+                },
+                {
+                  name: '模块管理',
+                  count: '2',
+                  creator: 'person1',
+                  create_time: '2017-10-10 11:12',
+                  desc: '无数据测试'
+                }
+              ]
             }
-        },
-        methods: {
-            handleScrollToBottom() {
-                this.bottomLoadingOptions.isLoading = true
-                    setTimeout(() => {
-                        this.tableData = this.tableData.concat(this.tableData)
-                        this.bottomLoadingOptions.isLoading = false
-                }, 2000)
+          ],
+          tableData: [
+            {
+              ip: '192.168.0.1',
+              source: 'QQ',
+              status: '创建中',
+              create_time: '2018-05-25 15:02:24'
             },
-            clearSort(){
-                this.$refs.table.clearSort()
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            clearFilter(){
-                this.$refs.table.clearFilter()
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            handlePageLimitChange () {
-                console.log('handlePageLimitChange', arguments)
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            toggleTableSize () {
-                const size = ['small', 'medium', 'large']
-                const index = (size.indexOf(this.size) + 1) % 3
-                this.size = size[index]
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            handlePageChange (page) {
-                this.pagination.current = page
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            remove (row) {
-                const index = this.data.indexOf(row)
-                if (index !== -1) {
-                    this.data.splice(index, 1)
-                }
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            reset (row) {
-                row.status = '创建中'
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            renderHeader (h, data) {
-                const directive = {
-                    name: 'bkTooltips',
-                    content: '指定对标题或者专有词汇的补充说明，并可以说明“禁止”“注意”等要求性文字',
-                    placement: 'right'
-                }
-                return <a class="custom-header-cell" v-bk-tooltips={ directive }>{ data.column.label }</a>
+            {
+              ip: '192.168.0.2',
+              source: '微信',
+              status: '正常',
+              create_time: '2018-05-25 15:02:24'
             },
-            handleRowMouseEnter (index) {
-                console.info(`进入行：${index}`)
-            },
-            handleRowMouseLeave (index) {
-                console.info(`退出行：${index}`)
-            },
-            handleSettingChange ({ fields, size }) {
-                this.setting.size = size
-                this.setting.selectedFields = fields
-            },
-            sourceFilterMethod(value, row, column) {
-                const property = column.property
-                return row[property] === value
-            },
-            statusFilterMethod(value, row, column) {
-                const property = column.property
-                return row[property] === value
+            {
+              ip: '192.168.0.3',
+              source: 'QQ',
+              status: '创建中',
+              create_time: '2018-05-25 15:02:24'
             }
+          ],
+          longData: new Array(100).fill('').map((item, index) => ({
+            ip: '192.168.0.1',
+            source: 'QQ' + index,
+            status: '创建中',
+            create_time: '2018-05-25 15:02:24',
+            desc: 'Table 的高度，默认为自动高度。如果 height 为 Number 类型，单位 px；如果 height 为 String 类型，则这个高度会设置为 Table 的 style.height 的值，Table 的高度会受控于外部样式。'
+          })),
+          pagination: {
+            current: 1,
+            count: 500,
+            limit: 20
+          },
+          setting: {
+            max: 3,
+            fields: settingFields,
+            selectedFields: settingFields.slice(0, 4),
+            size: 'small'
+          }
         }
+      },
+      methods: {
+        handleScrollToBottom() {
+          this.bottomLoadingOptions.isLoading = true
+          setTimeout(() => {
+            this.tableData = this.tableData.concat(this.tableData)
+            this.bottomLoadingOptions.isLoading = false
+          }, 2000)
+        },
+        clearSort(){
+          this.$refs.table.clearSort()
+        },
+        clearFilter(){
+          this.$refs.table.clearFilter()
+        },
+        handlePageLimitChange () {
+          console.log('handlePageLimitChange', arguments)
+        },
+        toggleTableSize () {
+          const size = ['small', 'medium', 'large']
+          const index = (size.indexOf(this.size) + 1) % 3
+          this.size = size[index]
+        },
+        handlePageChange (page) {
+          this.pagination.current = page
+        },
+        remove (row) {
+          const index = this.data.indexOf(row)
+          if (index !== -1) {
+            this.data.splice(index, 1)
+          }
+        },
+        reset (row) {
+          row.status = '创建中'
+        },
+        renderHeader (h, data) {
+          const directive = {
+            name: 'bkTooltips',
+            content: '指定对标题或者专有词汇的补充说明，并可以说明“禁止”“注意”等要求性文字',
+            placement: 'right'
+          }
+          return <a class="custom-header-cell" v-bk-tooltips={ directive }>{ data.column.label }</a>
+        },
+        handleRowMouseEnter (index) {
+          console.info(`进入行：${index}`)
+        },
+        handleRowMouseLeave (index) {
+          console.info(`退出行：${index}`)
+        },
+        handleSettingChange ({ fields, size }) {
+          this.setting.size = size
+          this.setting.selectedFields = fields
+        },
+        sourceFilterMethod(value, row, column) {
+          const property = column.property
+          return row[property] === value
+        },
+        statusFilterMethod(value, row, column) {
+          const property = column.property
+          return row[property] === value
+        }
+      }
     }
 </script>
 
@@ -346,7 +346,7 @@
                 <template slot-scope="props">
                     <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
                     <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
-                    <bk-popover class="dot-menu" placement="bottom-start" theme="dot-menu light" trigger="click" :arrow="false" offset="15" :distance="0">
+                    <bk-popover class="dot-menu" placement="bottom-start" theme="dot-menu light" :trigger="props.$index % 2 === 0 ? 'click' : 'mouseenter'" :arrow="false" offset="15" :distance="0">
                         <span class="dot-menu-trigger"></span>
                         <ul class="dot-menu-list" slot="content">
                             <li class="dot-menu-item">导入</li>

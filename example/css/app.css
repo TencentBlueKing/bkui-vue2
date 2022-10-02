@@ -75,6 +75,14 @@ body {
             position: relative;
             top: 1px;
         }
+        .github-link {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
     }
 
     .table-of-contents {
