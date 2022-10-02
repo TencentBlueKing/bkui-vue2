@@ -44,7 +44,7 @@
 
 [[toc]]
 
-## Animate 内置动画
+## Transition 内置动画
 
 Magicbox提供了一些通用动画，可配合`transition`直接使用
 

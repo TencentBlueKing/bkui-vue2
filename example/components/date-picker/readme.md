@@ -662,6 +662,44 @@
 ```
 :::
 
+### 年选择器与月选择器 {page=#/date-picker}
+
+:::demo 通过 `type` 属性配置年选择器与月选择器
+
+```html
+<template>
+  <div>
+    <p class="mb5">年选择器</p>
+    <bk-date-picker type="year" v-model="initDateTime" @change="handleChange" />
+  </div>
+  <div>
+    <p class="mb5">月选择器</p>
+    <bk-date-picker type="month" v-model="initDateTime" @change="handleChange" />
+  </div>
+</template>
+<script>
+  import { bkDatePicker } from '{{BASE_LIB_NAME}}'
+
+  export default {
+    components: {
+      bkDatePicker
+    },
+    data () {
+      return {
+        initDateTime: new Date()
+      }
+    },
+    methods: {
+      handleChange (date) {
+        console.warn('handleChange', date)
+        this.value = date
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 属性 {page=#/date-picker}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|

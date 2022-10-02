@@ -252,6 +252,63 @@
 ```
 :::
 
+### 时间选择器禁用 {page=#/time-picker}
+
+:::demo 通过属性`disabled`配置禁用
+
+```html
+<template>
+    <div>
+        <bk-time-picker disabled v-model="initTime" :placeholder="'选择时间'"></bk-time-picker>
+    </div>
+</template>
+<script>
+    import { bkTimePicker } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTimePicker
+        },
+        data () {
+            return {
+                initTime: '12:12:12'
+            }
+        }
+    }
+</script>
+```
+:::
+
+### 不可选小时数，不可选分钟数，不可选分秒数 {page=#/time-picker}
+
+:::demo 通过属性 `disabled-hours`, `disabled-minutes`, `disabled-seconds` 配置不可选小时数，不可选分钟数，不可选分秒数
+
+```html
+<template>
+    <div>
+        <bk-time-picker v-model="initTime"
+          :disabled-hours="[1, 2, 3, 4, 5, 10, 15, 16, 17, 18]"
+          :disabled-minutes="[0, 5, 10, 15, 20, 25, 30, 35, 40 ,45, 50, 55]"
+          :disabled-seconds="[0, 4, 6, 10, 12, 16, 18, 22, 24, 28, 30, 24, 36, 40, 42, 46, 48, 52, 54]" />
+    </div>
+</template>
+<script>
+    import { bkTimePicker } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTimePicker
+        },
+        data () {
+            return {
+                initTime: '12:12:12'
+            }
+        }
+    }
+</script>
+```
+:::
+
 ### 属性 {page=#/time-picker}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
@@ -267,9 +324,9 @@
 | placeholder | 占位文案  | String | -- | '' |
 | open | 控制面板的显示与隐藏 | Boolean | true / false | false |
 | disabled | 是否禁用 | Boolean | true / false | false |
-| disabled-hours | 不可选小时数，数组中的小时数将为仅用状态| Array | -- | [] |
-| disabled-minutes| 不可选分钟数，数组中的分钟数将为仅用状态 | Array | -- | [] |
-| disabled-seconds| 不可选分秒数，数组中的秒数将为仅用状态 | Array | -- | [] |
+| disabled-hours | 不可选小时数，数组中的小时数将为禁用状态| Array | -- | [] |
+| disabled-minutes| 不可选分钟数，数组中的分钟数将为禁用状态 | Array | -- | [] |
+| disabled-seconds| 不可选分秒数，数组中的秒数将为禁用状态 | Array | -- | [] |
 | hide-disabled-options | 是否隐藏禁止选择的小时、分钟、秒 | Boolean | true / false | false |
 | font-size | 设置组件主体内容字体大小 | String | `normal`（12px），`medium`（14px），`large`（16px） | normal |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-date-picker` 上 | String | —— | —— |
