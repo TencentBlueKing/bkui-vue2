@@ -260,7 +260,7 @@ const router = new VueRouter({
       component: ColorPickerExample
     },
     {
-      name: 'componseFormItem',
+      name: 'composeFormItem',
       path: '/compose-form-item',
       component: ComposeFormItem
     },
@@ -325,13 +325,13 @@ const router = new VueRouter({
       component: SwitcherExample
     },
     {
-      name: 'tag',
-      path: '/tag',
+      name: 'tagInput',
+      path: '/tag-input',
       component: TagInput
     },
     {
-      name: 'tagExample',
-      path: '/tag/example',
+      name: 'tagInputExample',
+      path: '/tag-input/example',
       component: TagInputExample
     },
     {
@@ -340,12 +340,12 @@ const router = new VueRouter({
       component: Loading
     },
     {
-      name: 'sideSlider',
+      name: 'sideslider',
       path: '/sideslider',
       component: SideSlider
     },
     {
-      name: 'sideSliderExample',
+      name: 'sidesliderExample',
       path: '/sideslider/example',
       component: SideSliderExample
     },
@@ -590,13 +590,13 @@ const router = new VueRouter({
       component: NavigationExample1
     },
     {
-      name: 'searchselect',
-      path: '/searchselect',
+      name: 'searchSelect',
+      path: '/search-select',
       component: SearchSelect
     },
     {
-      name: 'searchselectExample',
-      path: '/searchselect/example',
+      name: 'searchSelectExample',
+      path: '/search-select/example',
       component: SearchSelectExample
     },
     {
@@ -679,8 +679,8 @@ const router = new VueRouter({
       component: Divider
     },
     {
-      name: 'tags',
-      path: '/tags',
+      name: 'tag',
+      path: '/tag',
       component: Tag
     }, {
       name: 'resize-layout',

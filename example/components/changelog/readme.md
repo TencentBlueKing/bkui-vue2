@@ -4,13 +4,42 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.4 {page=#/changelog}
+
+* **[update]**:
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 样式优化
+    - [Table 表格](#/table) 示例优化
+    - [TimePicker 时间选择器](#/time-picker) 新增示例
+    - [Sideslider 侧栏](#/sideslider) 示例优化
+    - 所有示例新增 github 文档链接地址
+
+---
+
+### 2.4.15-beta.3 {page=#/changelog}
+
+* **[add]**:
+    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
+    - [Card 卡片](#/card) 添加展开收起动画
+    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
+    - [Sideslider 侧栏](#/sideslider) Sideslider 侧栏销毁后删除 dom 节点
+* **[update]**:
+    - [Navigation 导航](#/navigation) 样式优化
+    - 优化部分组件样式
+
+---
+
 ### 2.4.15-beta.1 {page=#/changelog}
 
 * **[add]**:
     - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
     - [Card 卡片](#/card) 添加展开收起动画
     - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
 * **[update]**:
+    - [Navigation 导航](#/navigation) 样式优化
     - 优化部分组件样式
 
 ---

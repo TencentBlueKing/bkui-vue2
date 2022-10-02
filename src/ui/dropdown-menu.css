@@ -105,7 +105,7 @@
         text-decoration: none;
         white-space: nowrap;
         &:hover {
-          background-color: #eaf3ff;
+          background-color: $newGreyColor2;
           color: $newMainColor;
         }
       }
