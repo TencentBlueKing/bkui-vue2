@@ -156,7 +156,8 @@
                 clearable: true,
                 filterable: true,
                 disabled: true,
-                isRemote: true
+                isRemote: true,
+                maxWidth: 500
             }
         },
         methods: {
@@ -822,6 +823,87 @@
 ```
 :::
 
+### max-width  {page=#/cascade}
+
+:::demo 可以通过`max-width`设置弹出框最大宽度，通过弹出层滚动，避免弹出层级太多导致的样式问题
+
+```html
+<template>
+    <bk-cascade
+        v-model="value"
+        :list="list"
+        clearable
+        style="width: 250px;"
+        :max-width="500"
+        :ext-popover-cls="'custom-cls'">
+    </bk-cascade>
+    <script>
+        import { bkCascade } from '{{BASE_LIB_NAME}}'
+
+        export default {
+            components: {
+                bkCascade
+            },
+            data (s) {
+                return {
+                    value: [],
+                    list: [
+                        {
+                            id: 'hunan',
+                            name: '湖南',
+                            children: [
+                                {
+                                    id: 'changsha',
+                                    name: '长沙'
+                                },
+                                {
+                                    id: 'yueyang',
+                                    name: '岳阳'
+                                }
+                            ]
+                        }, {
+                            id: 'guangxi',
+                            name: '广西'
+                        }, {
+                            id: 'yunnan',
+                            name: '云南',
+                            children: [
+                                {
+                                    id: 'kunming',
+                                    name: '昆明',
+                                    children: [
+                                        {
+                                            id: 'wuhuaqu',
+                                            name: '五华区'
+                                        },
+                                        {
+                                            id: 'guanduqu',
+                                            name: '官渡区'
+                                        },
+                                        {
+                                            id: 'xishanqu',
+                                            name: '西山区'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 0,
+                                    name: '大理'
+                                },
+                                {
+                                    id: '',
+                                    name: '玉溪'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    </script>
+</template>
+```
+:::
 
 ### bk-cascade 级联选框属性 {page=#/cascade}
 
