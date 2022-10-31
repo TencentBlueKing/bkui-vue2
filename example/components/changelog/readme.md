@@ -4,43 +4,29 @@
 
 <div class="changelog-wrapper">
 
-### 2.4.15-beta.4 {page=#/changelog}
+### 2.5.1 {page=#/changelog}
+###### 2022.11.01
 
+* **[breaking]**:
+    - **Vue 更新至 2.7.x**
+* **[add]**:
+    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
+    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
+    - [Card 卡片](#/card) 添加展开收起动画
+    - [Tag 标签](#/tag) 抛出 click 事件，允许在组件上支持监听 click 事件 [#319](https://github.com/TencentBlueKing/bkui-vue2/issues/319)
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
+    - [Sideslider 侧栏](#/sideslider) Sideslider 侧栏销毁后删除 dom 节点
+    - [Cascade 级联选框](#/cascade) 修复当层级过多宽度超过其上方的下拉框时，展示错误的问题 [#293](https://github.com/TencentBlueKing/bkui-vue2/issues/293)
+    - [Select 下拉选框](#/select) 修复配置了 allow-create 和搜索框，就会自动聚焦到搜索框上的问题 [#298](https://github.com/TencentBlueKing/bkui-vue2/issues/298)
 * **[update]**:
+    - [Navigation 导航](#/navigation) 样式优化
     - [DropdownMenu 下拉菜单](#/dropdown-menu) 样式优化
     - [Table 表格](#/table) 示例优化
     - [TimePicker 时间选择器](#/time-picker) 新增示例
     - [Sideslider 侧栏](#/sideslider) 示例优化
+    - 优化部分组件样式
     - 所有示例新增 github 文档链接地址
-
----
-
-### 2.4.15-beta.3 {page=#/changelog}
-
-* **[add]**:
-    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
-    - [Card 卡片](#/card) 添加展开收起动画
-    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
-* **[fix]**:
-    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
-    - [Sideslider 侧栏](#/sideslider) Sideslider 侧栏销毁后删除 dom 节点
-* **[update]**:
-    - [Navigation 导航](#/navigation) 样式优化
-    - 优化部分组件样式
-
----
-
-### 2.4.15-beta.1 {page=#/changelog}
-
-* **[add]**:
-    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
-    - [Card 卡片](#/card) 添加展开收起动画
-    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
-* **[fix]**:
-    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
-* **[update]**:
-    - [Navigation 导航](#/navigation) 样式优化
-    - 优化部分组件样式
 
 ---
 

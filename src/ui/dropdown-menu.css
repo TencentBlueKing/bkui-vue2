@@ -63,12 +63,14 @@
     &::-webkit-scrollbar {
       width: 4px;
       /* background-color: lighten(#e6e9ea, 80%); */
-      background-color: #e6e9ea;
+      /* background-color: #e6e9ea; */
+      background-color: transparent;
     }
     &::-webkit-scrollbar-thumb {
       height: 5px;
       border-radius: 2px;
-      background-color: color(#e6e9ea lightness(80%));
+      /* background-color: color(#e6e9ea lightness(80%)); */
+      background-color: $newGreyColor1;
     }
 
     &.is-show {
