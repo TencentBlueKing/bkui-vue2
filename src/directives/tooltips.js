@@ -74,6 +74,11 @@ const createTippy = (el, binding) => {
   const value = binding.value
   const options = { ...defaultOptions }
 
+  // allowHtml 兼容之前
+  if (value.allowHtml || value.allowHTML) {
+    value.allowHTML = true
+  }
+
   if (typeof value === 'object') {
     Object.assign(options, value)
   } else {
@@ -91,15 +96,13 @@ const createTippy = (el, binding) => {
     options.theme = 'light'
   }
 
-  if (options.allowHtml) {
+  if (options.allowHTML) {
     const selector = options.content
     if (selector instanceof Vue) {
       options.content = selector.$el
     } else if (typeof selector === 'string') {
-      const element = document.querySelector(selector)
-      if (element) {
-        options.content = element
-      }
+      const element = document.createElement('div')
+      element.innerHTML = selector
     }
   }
 
