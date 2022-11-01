@@ -19,6 +19,7 @@
     - [Sideslider 侧栏](#/sideslider) Sideslider 侧栏销毁后删除 dom 节点
     - [Cascade 级联选框](#/cascade) 修复当层级过多宽度超过其上方的下拉框时，展示错误的问题 [#293](https://github.com/TencentBlueKing/bkui-vue2/issues/293)
     - [Select 下拉选框](#/select) 修复配置了 allow-create 和搜索框，就会自动聚焦到搜索框上的问题 [#298](https://github.com/TencentBlueKing/bkui-vue2/issues/298)
+    - [Tooltips 工具提示 （指令）](#/tooltips) 修复 tooltip allowHTML 配置单词拼错的问题
 * **[update]**:
     - [Navigation 导航](#/navigation) 样式优化
     - [DropdownMenu 下拉菜单](#/dropdown-menu) 样式优化
