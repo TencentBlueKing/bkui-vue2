@@ -22,12 +22,12 @@
                 ],
                 rtxValue: [1, 5, 7],
                 list: [
-                    { service_code: 'pipeline', service_name: '流水线' },
+                    { service_code: 'pipeline', service_name: '流水线', disabled: true },
                     { service_code: 'codecc', service_name: '代码检查' },
                     { service_code: 'bcs', service_name: '容器服务' },
                     { service_code: 'artifactory', service_name: '版本仓库' },
                     { service_code: 'ticket', service_name: '凭证管理' },
-                    { service_code: 'code', service_name: '代码库' },
+                    { service_code: 'code', service_name: '代码库', disabled: true },
                     { service_code: 'experience', service_name: '版本体验' },
                     { service_code: 'environment', service_name: '环境管理' }
                 ],
@@ -132,12 +132,12 @@
         data() {
             return {
                 list: [
-                    { service_code: 'pipeline', service_name: '流水线' },
+                    { service_code: 'pipeline', service_name: '流水线', disabled: true },
                     { service_code: 'codecc', service_name: '代码检查' },
                     { service_code: 'bcs', service_name: '容器服务' },
                     { service_code: 'artifactory', service_name: '版本仓库' },
                     { service_code: 'ticket', service_name: '凭证管理' },
-                    { service_code: 'code', service_name: '代码库' },
+                    { service_code: 'code', service_name: '代码库', disabled: true },
                     { service_code: 'experience', service_name: '版本体验' },
                     { service_code: 'environment', service_name: '环境管理' }
                 ]
@@ -185,12 +185,12 @@
                 title: ['服务列表', '已选服务'],
                 emptyContent: ['无数据', '未选择任何服务'],
                 list: [
-                    { service_code: 'pipeline', service_name: '流水线' },
+                    { service_code: 'pipeline', service_name: '流水线', disabled: true },
                     { service_code: 'codecc', service_name: '代码检查' },
                     { service_code: 'bcs', service_name: '容器服务' },
                     { service_code: 'artifactory', service_name: '版本仓库' },
                     { service_code: 'ticket', service_name: '凭证管理' },
-                    { service_code: 'code', service_name: '代码库' },
+                    { service_code: 'code', service_name: '代码库', disabled: true },
                     { service_code: 'experience', service_name: '版本体验' },
                     { service_code: 'environment', service_name: '环境管理' }
                 ],
@@ -573,7 +573,7 @@
 | sort-key | 排序所依据的 key | String | —— | —— |
 | searchable | 是否允许左侧搜索（以display-key来匹配） | Boolean | —— | false |
 | sortable | 是否设置排序 | Boolean | —— | false |
-| source-list | 穿梭框数据源(必传) | Array | —— | —— |
+| source-list | 穿梭框数据源(必传)(可使用disabled禁用某条数据记录的选择操作) | Array | —— | —— |
 | target-list | 已选择的数据 | Array | —— | [] |
 | always-show-close | 是否一直显示关闭icon | Boolean | —— | true |
 | show-overflow-tips | 文本溢出时，是否使用气泡显示全部内容 | Boolean | —— | false |

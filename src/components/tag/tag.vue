@@ -112,6 +112,8 @@ export default {
     handleClick (e) {
       if (this.checkable) {
         this.$emit('change', !this.checked)
+      } else {
+        this.$emit('click')
       }
     }
   }

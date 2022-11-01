@@ -44,6 +44,9 @@
         padding: 0 10px 0 30px;
         color: $newBlackColor2;
         cursor: pointer;
+        &:hover {
+          border: 1px solid $newBlackColor3;
+        }
         &.only-bottom-border {
             border-color: transparent transparent $newGreyColor transparent;
             &:focus {

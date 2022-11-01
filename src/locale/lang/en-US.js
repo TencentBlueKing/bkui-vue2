@@ -52,7 +52,8 @@ export default {
       hour: 'Hour',
       min: 'Minute',
       sec: 'Second',
-      toNow: 'Now'
+      toNow: 'Now',
+      now: 'Now'
     },
     dialog: {
       ok: 'OK',

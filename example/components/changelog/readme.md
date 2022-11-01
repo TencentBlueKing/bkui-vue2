@@ -4,6 +4,51 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.1 {page=#/changelog}
+###### 2022.11.01
+
+* **[breaking]**:
+    - **Vue 更新至 2.7.x**
+* **[add]**:
+    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
+    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
+    - [Card 卡片](#/card) 添加展开收起动画
+    - [Tag 标签](#/tag) 抛出 click 事件，允许在组件上支持监听 click 事件 [#319](https://github.com/TencentBlueKing/bkui-vue2/issues/319)
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
+    - [Sideslider 侧栏](#/sideslider) Sideslider 侧栏销毁后删除 dom 节点
+    - [Cascade 级联选框](#/cascade) 修复当层级过多宽度超过其上方的下拉框时，展示错误的问题 [#293](https://github.com/TencentBlueKing/bkui-vue2/issues/293)
+    - [Select 下拉选框](#/select) 修复配置了 allow-create 和搜索框，就会自动聚焦到搜索框上的问题 [#298](https://github.com/TencentBlueKing/bkui-vue2/issues/298)
+    - [Tooltips 工具提示 （指令）](#/tooltips) 修复 tooltip allowHTML 配置单词拼错的问题
+* **[update]**:
+    - [Navigation 导航](#/navigation) 样式优化
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 样式优化
+    - [Table 表格](#/table) 示例优化
+    - [TimePicker 时间选择器](#/time-picker) 新增示例
+    - [Sideslider 侧栏](#/sideslider) 示例优化
+    - 优化部分组件样式
+    - 所有示例新增 github 文档链接地址
+
+---
+
+### 2.4.14 {page=#/changelog}
+
+* **[update]**:
+    - tooltips 配置
+
+---
+
+### 2.4.13 {page=#/changelog}
+
+* **[add]**:
+    - [Transfer 穿梭框](#/transfer) 支持设置 disabled 状态
+* **[fix]**:
+    - [Input 输入框](#/input) 修复当不配置 `precision` 属性时无法输入小数点的问题
+    - [Transfer 穿梭框](#/transfer) 修复 Transfer 穿梭框组件设置排序不生效的问题
+    - [Select 下拉选框](#/select) bugfix: select 分组选中状态
+
+---
+
 ### 2.4.12 {page=#/changelog}
 ###### 2022.07.22
 
@@ -18,6 +63,7 @@
     - [Table 表格](#/table) `virtual-render` 属性配置说明补充
     - [Select 下拉选框](#/select) `id-key` 属性文档调整
 
+---
 
 ### 2.4.11 {page=#/changelog}
 ###### 2022.06.10

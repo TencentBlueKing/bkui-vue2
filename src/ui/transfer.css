@@ -83,6 +83,11 @@
                     background-color: #eef6fe;
                     color: $newMainColor;
                 }
+                &.is-disabled {
+                    cursor: not-allowed;
+                    color: $newGreyColor;
+                    background-color: #fff;
+                }
                 .content-text {
                     flex: 1;
                     overflow: hidden;

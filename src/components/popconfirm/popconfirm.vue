@@ -59,10 +59,6 @@ export default {
   },
   mixins: [locale.mixin],
   props: {
-    tirgger: {
-      type: String,
-      default: 'mouseenter focus'
-    },
     title: {
       type: String
     },
