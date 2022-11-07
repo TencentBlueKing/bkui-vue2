@@ -4,11 +4,19 @@
 
 <div class="changelog-wrapper">
 
+
+### 2.5.2 {page=#/changelog}
+
+* **[fix]**:
+    - [Tooltips 工具提示 （指令）](#/tooltips) 修复配置 allowHTML 为 true 时，content 属性配置为 DOM Selector 的问题
+
+---
+
 ### 2.5.1 {page=#/changelog}
 ###### 2022.11.01
 
 * **[breaking]**:
-    - **Vue 更新至 2.7.x**
+    - **Vue 更新至 2.7.x。如项目中 Vue 依赖版本小于 2.7.x，则需安装 bk-magic-vue@2.4.15-beta.7**
 * **[add]**:
     - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
     - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
