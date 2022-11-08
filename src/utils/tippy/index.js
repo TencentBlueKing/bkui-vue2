@@ -59,7 +59,7 @@ var isIOS = isBrowser && /iPhone|iPad|iPod/.test(navigator.platform) && !window.
 
 var defaultProps = {
   a11y: true,
-  allowHTML: false,
+  allowHTML: true,
   animateFill: true,
   animation: 'shift-away',
   appendTo: function appendTo() {

@@ -101,8 +101,15 @@ const createTippy = (el, binding) => {
     if (selector instanceof Vue) {
       options.content = selector.$el
     } else if (typeof selector === 'string') {
-      const element = document.createElement('div')
-      element.innerHTML = selector
+      try {
+        const element = document.querySelector(selector)
+        if (element) {
+          options.content = element
+        }
+      } catch (e) {
+        const element = document.createElement('div')
+        element.innerHTML = selector
+      }
     }
   }
 
