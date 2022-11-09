@@ -2,8 +2,11 @@
 
 ## 更新日志
 
-<div class="changelog-wrapper">
+<bk-alert type="info">
+  <div slot="title" style="font-weight: 700; font-size: 14px; color: #333;">如项目中 Vue 依赖版本小于 2.7，则需安装 bk-magic-vue@vue2.5-latest</div>
+</bk-alert>
 
+<div class="changelog-wrapper">
 
 ### 2.5.2 {page=#/changelog}
 
@@ -16,7 +19,7 @@
 ###### 2022.11.01
 
 * **[breaking]**:
-    - **Vue 更新至 2.7.x。如项目中 Vue 依赖版本小于 2.7.x，则需安装 bk-magic-vue@2.4.15-beta.7**
+    - **Vue 更新至 2.7.x。如项目中 Vue 依赖版本小于 2.7，则需安装 bk-magic-vue@vue2.5-latest**
 * **[add]**:
     - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
     - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
@@ -1198,15 +1201,17 @@
 
 </div>
 <script>
+    import { getActualTop } from '../../../src/utils/util'
+    import { bkAlert } from '@'
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual'
     }
     else {
         window.onunload= () => window.scrollTo(0, 0)
     }
-    import { getActualTop } from '../../../src/utils/util'
     export default {
         components: {
+          bkAlert
         },
         data () {
             return {
