@@ -638,6 +638,25 @@ export default {
           event.preventDefault()
           this.handleNumberDelete(event)
         }
+
+        if (document.getSelection().type !== 'Range') {
+          // 修复 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的情况
+          if (value.substring(target.selectionStart, target.selectionEnd + 1) === '-') {
+            const keyCodeList = [
+              48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
+              96, 97, 98, 99, 100, 101, 102, 103, 104, 105, // 0-9 Numpad
+              189, // -
+              109, // - Numpad
+              190, // .
+              110 // . Numpad
+            ]
+            if (keyCodeList.indexOf(keyCode) > -1) {
+              event.stopPropagation()
+              event.preventDefault()
+              return false
+            }
+          }
+        }
       }
 
       this.$emit('keydown', value, event)

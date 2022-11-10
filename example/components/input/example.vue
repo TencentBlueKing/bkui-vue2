@@ -33,7 +33,7 @@
       Input 输入框更多示例
     </h2>
     <div class="example-item">
-      <bk-input v-model="value" precision="0"
+      <bk-input v-model="value" :precision="0"
         :type="'number'">
       </bk-input>
 
