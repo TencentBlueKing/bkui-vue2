@@ -8,7 +8,15 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.1 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题
+
+---
+
 ### 2.5.2 {page=#/changelog}
+###### 2022.11.06
 
 * **[fix]**:
     - [Tooltips 工具提示 （指令）](#/tooltips) 修复配置 allowHTML 为 true 时，content 属性配置为 DOM Selector 的问题
