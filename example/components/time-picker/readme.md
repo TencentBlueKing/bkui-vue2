@@ -17,7 +17,7 @@
         methods: {
             change (time) {
                 console.error(time)
-                console.error(this.initTime)
+                console.error('initTime', this.initTime)
             }
         }
     }
