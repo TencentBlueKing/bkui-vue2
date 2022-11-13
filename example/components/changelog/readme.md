@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.14 {page=#/changelog}
+
+* **[fix]**:
+    - [TimePicker 时间选择器](#/time-picker) 修复编辑后，值没有更新的问题
+
+---
+
 ### 2.4.14-beta.1 {page=#/changelog}
 
 * **[add]**:
