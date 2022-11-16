@@ -508,6 +508,9 @@ export default {
       if (shouldEmitInput) {
         this.$emit('input', now)
       }
+    },
+    visualValue (val) {
+      this.focusedTime.time = this.internalValue.map(extractTime)
     }
   },
   mounted () {

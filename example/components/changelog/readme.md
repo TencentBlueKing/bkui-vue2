@@ -8,6 +8,14 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.2 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 windows 系统下， 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题
+    - [TimePicker 时间选择器](#/time-picker) 修复编辑后，值没有更新的问题
+
+---
+
 ### 2.5.3-beta.1 {page=#/changelog}
 
 * **[fix]**:
