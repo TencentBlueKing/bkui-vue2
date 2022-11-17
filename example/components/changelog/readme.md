@@ -8,6 +8,42 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.7 {page=#/changelog}
+
+* **[fix]**:
+    - directives tooltips 的 allowHTML 默认配置改为 true，为了兼容之前 allowHtml 默认为 false 但是 tippy 中配置 allowHTML 为 true 的情况
+
+---
+
+### 2.5.3-beta.6 {page=#/changelog}
+
+* **[feat]**:
+    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 alt, ctrl, meta
+
+---
+
+### 2.5.3-beta.5 {page=#/changelog}
+
+* **[feat]**:
+    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 shift
+
+---
+
+### 2.5.3-beta.4 {page=#/changelog}
+
+* **[feat]**:
+    - [Input 输入框](#/input) 数字输入框不允许输入拼音
+
+---
+
+### 2.5.3-beta.2 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 windows 系统下， 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题
+    - [TimePicker 时间选择器](#/time-picker) 修复编辑后，值没有更新的问题
+
+---
+
 ### 2.5.3-beta.1 {page=#/changelog}
 
 * **[fix]**:
