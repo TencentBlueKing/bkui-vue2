@@ -8,6 +8,27 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.6 {page=#/changelog}
+
+* **[feat]**:
+    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 alt, ctrl, meta
+
+---
+
+### 2.5.3-beta.5 {page=#/changelog}
+
+* **[feat]**:
+    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 shift
+
+---
+
+### 2.5.3-beta.4 {page=#/changelog}
+
+* **[feat]**:
+    - [Input 输入框](#/input) 数字输入框不允许输入拼音
+
+---
+
 ### 2.5.3-beta.2 {page=#/changelog}
 
 * **[fix]**:
