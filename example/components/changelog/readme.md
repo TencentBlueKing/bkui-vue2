@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.7 {page=#/changelog}
+
+* **[fix]**:
+    - directives tooltips 的 allowHTML 默认配置改为 true，为了兼容之前 allowHtml 默认为 false 但是 tippy 中配置 allowHTML 为 true 的情况
+
+---
+
 ### 2.5.3-beta.6 {page=#/changelog}
 
 * **[feat]**:
