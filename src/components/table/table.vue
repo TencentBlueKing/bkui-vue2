@@ -673,8 +673,10 @@ export default {
   methods: {
     setHeaderStyle () {
       this.$nextTick(() => {
-        this.$refs.bkTable.style.setProperty('--customHeaderColor', this.customHeaderColor)
-        this.$refs.bkTable.style.setProperty('--customHeaderColorHover', this.customHeaderColorHover)
+        if (this.$refs.bkTable) {
+          this.$refs.bkTable.style.setProperty('--customHeaderColor', this.customHeaderColor)
+          this.$refs.bkTable.style.setProperty('--customHeaderColorHover', this.customHeaderColorHover)
+        }
       })
     },
     setCurrentRow (row) {
