@@ -140,7 +140,7 @@
     </bk-input>
   */
 import emitter from '@/mixins/emitter'
-import locale from '@tencent/bk-magic-vue/lib/locale'
+import locale from 'bk-magic-vue/lib/locale'
 import { getStyle } from '@/utils/dom'
 
 // const toString = Object.prototype.toString
