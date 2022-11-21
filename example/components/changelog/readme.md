@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.8 {page=#/changelog}
+
+* **[fix]**:
+    - [Table 表格](#/table) 修复 setHeaderStyle 方法获取 bkTable 为空的问题
+
+---
+
 ### 2.5.3-beta.7 {page=#/changelog}
 
 * **[fix]**:
