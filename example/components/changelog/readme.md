@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.17 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 locale 的引入问题
+
+---
+
 ### 2.4.15-beta.16 {page=#/changelog}
 
 * **[fix]**:
