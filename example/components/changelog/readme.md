@@ -4,6 +4,16 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.16 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 windows 系统下， 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题
+    - [Input 输入框](#/input) 数字输入框不允许输入拼音
+    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 shift, alt, ctrl, meta
+    - [Table 表格](#/table) 修复 setHeaderStyle 方法获取 bkTable 为空的问题
+
+---
+
 ### 2.4.15-beta.15 {page=#/changelog}
 
 * **[fix]**:
