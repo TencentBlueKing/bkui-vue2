@@ -737,7 +737,7 @@ export default {
       //   event.preventDefault()
       //   return false
       // }
-      if (this.isOnComposition) {
+      if (this.inputType === 'number' && this.isOnComposition) {
         return
       }
       this.$nextTick(() => {

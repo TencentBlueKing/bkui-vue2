@@ -9,7 +9,7 @@
         },
         data () {
             return {
-                value: '',
+                value: 'wwww',
                 date: '2018-10-01',
                 searchText: '测试',
                 isDropdownShow: false,
@@ -85,7 +85,7 @@
         },
         data () {
             return {
-                value: ''
+                value: 'wwww'
             }
         }
     }
