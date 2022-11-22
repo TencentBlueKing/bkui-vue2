@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.9 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 非数字输入框输入问题
+
+---
+
 ### 2.5.3-beta.8 {page=#/changelog}
 
 * **[fix]**:
