@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.3-beta.10 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 数字输入框输入 `-` 后失去焦点后，如果设置了最小值，值变为最小值，没有设置最小值，值变为 0
+
+---
+
 ### 2.5.3-beta.9 {page=#/changelog}
 
 * **[fix]**:
