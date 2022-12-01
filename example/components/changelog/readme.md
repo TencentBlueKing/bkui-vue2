@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.20 {page=#/changelog}
+
+* **[fix]**:
+    - [TagInput 标签输入框](#/tag-input) 修复 `allow-create` 配置，输入空格也会创建 tag 的问题
+
+---
+
 ### 2.4.15-beta.19 {page=#/changelog}
 
 * **[fix]**:
