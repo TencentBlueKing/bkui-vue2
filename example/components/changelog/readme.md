@@ -8,7 +8,14 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.3-beta.10 {page=#/changelog}
+### 2.5.3-beta.12 {page=#/changelog}
+
+* **[fix]**:
+    - [TagInput 标签输入框](#/tag-input) 修复 `allow-create` 配置，输入空格也会创建 tag 的问题
+
+---
+
+### 2.5.3-beta.11 {page=#/changelog}
 
 * **[fix]**:
     - [Input 输入框](#/input) 数字输入框输入 `-` 后失去焦点后，如果设置了最小值，值变为最小值，没有设置最小值，值变为 0

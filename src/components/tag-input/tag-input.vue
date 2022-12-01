@@ -833,7 +833,7 @@ export default {
           ) {
             this.handlerResultSelect(this.renderList[this.focusItemIndex], 'select')
             this.showList = false
-          } else if (this.allowCreate) {
+          } else if (this.allowCreate && this.curInputValue.trim()) {
             event.preventDefault()
             const tag = this.curInputValue
             this.handlerResultSelect(tag, 'custom')
