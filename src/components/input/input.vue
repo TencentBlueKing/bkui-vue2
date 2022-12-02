@@ -679,13 +679,12 @@ export default {
     handlerBlur (event) {
       let value = event.target.value
       if (/^number$/i.test(this.type) && value !== '') {
+        if (isNaN(value)) {
+          value = this.min === Number.MIN_SAFE_INTEGER ? 0 : this.min
+        }
         if (value !== '' && /^-?\d*(.\d*)?$/i.test(value)) {
-          if (value === '-') {
-            value = this.min === Number.MIN_SAFE_INTEGER ? 0 : this.min
-          } else {
-            if (value > this.max || value < this.min) {
-              value = this.getCurrentNumberValue()
-            }
+          if (value > this.max || value < this.min) {
+            value = this.getCurrentNumberValue()
           }
         }
         if (typeof this.precision !== 'undefined') {

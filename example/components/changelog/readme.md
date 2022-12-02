@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.21 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) 数字输入框粘贴非数字的情况处理
+
+---
+
 ### 2.4.15-beta.20 {page=#/changelog}
 
 * **[fix]**:
