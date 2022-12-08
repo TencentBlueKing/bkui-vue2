@@ -181,7 +181,9 @@ export default {
       rotateRight: '向右旋转',
       fullScreen: '适应屏幕',
       original: '快速回到 1：1'
-
+    },
+    versionDetail: {
+      currentTagText: '当前版本'
     }
   }
 }

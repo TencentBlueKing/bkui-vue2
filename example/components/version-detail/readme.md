@@ -24,7 +24,7 @@
                         date: '2020.04.24'
                     },
                     {
-                        title: 'V3.2.0',
+                        title: 'V3.1.9',
                         date: '2020.04.23'
                     },
                     {
@@ -239,11 +239,13 @@
 | maxLeftWidth | 左侧栏的最大宽度 | Number | —— | 500 |
 | versionTitleName | 左侧栏版本数据版本标题对应的字段名 | String | —— | title |
 | versionSubTitleName | 左侧栏版本数据版本副标题对应的字段名 | String | —— | date |
+| defaultActive | 默认选中的版本，不设置时会使用currentVersion | String | —— | —— |
 
 ### 事件 {page=#/version-detail}
 | 事件名称 | 说明 | 回调参数 |
 |------|------|------|
 | change | 组件弹窗显示值改变时触发 | show: boolean |
+| selected | 选择版本时触发 | index, versionItem |
 
 ### 插槽 {page=#/version-detail}
 | 插槽名称 | 说明 |
