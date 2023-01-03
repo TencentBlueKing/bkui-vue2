@@ -1,174 +1,174 @@
 <script>
-    import { bkDatePicker } from '@'
+  import { bkDatePicker } from '@'
 
-    export default {
-        components: {
-            bkDatePicker
-        },
-        data () {
-            return {
-                value: '',
-                open: false,
-                initDateTime: new Date(),
-                initDateTimeRange: [new Date(), new Date()],
-                initDateTimeRange4UpToNow: [],
-                options: {
-                    shortcuts: [
-                        {
-                            text: '今天',
-                            value () {
-                                const end = new Date()
-                                const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
-                                return [start, end]
-                            },
-                            onClick: picker => {
-                                console.log(picker)
-                            }
-                        },
-                        {
-                            text: '近7天',
-                            value () {
-                                const end = new Date()
-                                const start = new Date()
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-                                return [start, end]
-                            }
-                        },
-                        {
-                            text: '近15天',
-                            value () {
-                                const end = new Date()
-                                const start = new Date()
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
-                                return [start, end]
-                            }
-                        },
-                        {
-                            text: '近30天',
-                            value () {
-                                const end = new Date()
-                                const start = new Date()
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-                                return [start, end]
-                            }
-                        }
-                    ]
-                },
-                shortcuts: [
-                    {
-                        text: '今天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
-                            return [start, end]
-                        },
-                        onClick: picker => {
-                            console.log(picker)
-                        }
-                    },
-                    {
-                        text: '近7天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-                            return [start, end]
-                        }
-                    },
-                    {
-                        text: '近15天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
-                            return [start, end]
-                        }
-                    },
-                    {
-                        text: '近30天',
-                        value () {
-                            const end = new Date()
-                            const start = new Date()
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-                            return [start, end]
-                        }
-                    }
-                ],
-                timePickerOptions: {
-                    disabledHours: [1, 2, 3, 4, 5, 10],
-                    disabledMinutes: [1, 2, 3, 4, 5, 10],
-                    disabledSeconds: [10, 10, 20],
-                    hideDisabledOptions: true
-                }
+  export default {
+    components: {
+      bkDatePicker
+    },
+    data () {
+      return {
+        value: '',
+        open: false,
+        initDateTime: new Date(),
+        initDateTimeRange: [new Date(), new Date()],
+        initDateTimeRange4UpToNow: [],
+        options: {
+          shortcuts: [
+            {
+              text: '今天',
+              value () {
+                const end = new Date()
+                const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
+                return [start, end]
+              },
+              onClick: picker => {
+                console.log(picker)
+              }
+            },
+            {
+              text: '近7天',
+              value () {
+                const end = new Date()
+                const start = new Date()
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+                return [start, end]
+              }
+            },
+            {
+              text: '近15天',
+              value () {
+                const end = new Date()
+                const start = new Date()
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
+                return [start, end]
+              }
+            },
+            {
+              text: '近30天',
+              value () {
+                const end = new Date()
+                const start = new Date()
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+                return [start, end]
+              }
             }
+          ]
         },
-        methods: {
-            handleClick () {
-                this.open = !this.open
+        shortcuts: [
+          {
+            text: '今天',
+            value () {
+              const end = new Date()
+              const start = new Date(end.getFullYear(), end.getMonth(), end.getDate())
+              return [start, end]
             },
-            handleChange (date) {
-                console.warn('handleChange', date)
-                this.value = date
-            },
-            handleOk () {
-                console.log('handleOK')
-                this.open = false
-            },
-            change4UpToNow (date, type) {
-                console.log('change4UpToNow change', date, type)
-            },
-            openChange4UpToNow (state) {
-                console.log('openChange4UpToNow openChange', state)
-            },
-            pickSuccess4UpToNow () {
-                console.log('pickSuccess4UpToNow pickSuccess')
-            },
-            changeTest (date, type) {
-                console.log('changeTest change', date, type)
-            },
-            openChangeTest (state) {
-                console.log('openChangeTest openChange', state)
-            },
-            pickSuccessTest () {
-                console.log('pickSuccessTest pickSuccess')
-            },
-            shortcutChange (value, index) {
-                console.log('shortcutChange', value, index)
-            },
-            getCellClass(cell) {
-                const hasPoint = Math.random() * 10 > 5
-                return hasPoint ? 'cell-x-Class' : ''
-            },
-            change (date) {
-                console.error(date)
-                console.error(this.initDateTime)
+            onClick: picker => {
+              console.log(picker)
             }
+          },
+          {
+            text: '近7天',
+            value () {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              return [start, end]
+            }
+          },
+          {
+            text: '近15天',
+            value () {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 15)
+              return [start, end]
+            }
+          },
+          {
+            text: '近30天',
+            value () {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              return [start, end]
+            }
+          }
+        ],
+        timePickerOptions: {
+          disabledHours: [1, 2, 3, 4, 5, 10],
+          disabledMinutes: [1, 2, 3, 4, 5, 10],
+          disabledSeconds: [10, 10, 20],
+          hideDisabledOptions: true
         }
-    }
-</script>
-<style lang="postcss">
-    .custom-footer-wrapper {
-        color: red;
-    }
-    .custom-footer {
-        text-align: center;
-    }
-
-    .cell-x-Class {
-      position: relative;
-      &::after {
-        content: '';
-        height: 5px;
-        background: red;
-        position: absolute;
-        left: 15px;
-        /* right: 5px; */
-        bottom: 2px;
-        border-radius: 50%;
-        border: solid 1px red;
-        width: 5px;
+      }
+    },
+    methods: {
+      handleClick () {
+        this.open = !this.open
+      },
+      handleChange (date) {
+        console.warn('handleChange', date)
+        this.value = date
+      },
+      handleOk () {
+        console.log('handleOK')
+        this.open = false
+      },
+      change4UpToNow (date, type) {
+        console.log('change4UpToNow change', date, type)
+      },
+      openChange4UpToNow (state) {
+        console.log('openChange4UpToNow openChange', state)
+      },
+      pickSuccess4UpToNow () {
+        console.log('pickSuccess4UpToNow pickSuccess')
+      },
+      changeTest (date, type) {
+        console.log('changeTest change', date, type)
+      },
+      openChangeTest (state) {
+        console.log('openChangeTest openChange', state)
+      },
+      pickSuccessTest () {
+        console.log('pickSuccessTest pickSuccess')
+      },
+      shortcutChange (value, index) {
+        console.log('shortcutChange', value, index)
+      },
+      getCellClass(cell) {
+        const hasPoint = Math.random() * 10 > 5
+        return hasPoint ? 'cell-x-Class' : ''
+      },
+      change (date) {
+        console.error(date)
+        console.error(this.initDateTime)
       }
     }
+  }
+</script>
+<style lang="postcss">
+  .custom-footer-wrapper {
+    color: red;
+  }
+  .custom-footer {
+    text-align: center;
+  }
+
+  .cell-x-Class {
+    position: relative;
+    &::after {
+      content: '';
+      height: 5px;
+      background: red;
+      position: absolute;
+      left: 15px;
+      /* right: 5px; */
+      bottom: 2px;
+      border-radius: 50%;
+      border: solid 1px red;
+      width: 5px;
+    }
+  }
 </style>
 
 [[toc]]
@@ -183,9 +183,16 @@
 
 ```html
 <template>
-    <div>
-        <bk-date-picker class="mr15" v-model="initDateTime" cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'"></bk-date-picker>
-    </div>
+  <div>
+    <bk-date-picker class="mr15" v-model="initDateTime" cellClass="null" :placeholder="'选择日期'" :ext-popover-cls="'custom-popover-cls'">
+      <div slot="header" style="height: 100px">
+        我是自定义 header
+      </div>
+      <div slot="footer" style="height: 100px">
+        我是自定义 footer
+      </div>
+    </bk-date-picker>
+  </div>
 </template>
 <script>
     import { bkDatePicker } from '{{BASE_LIB_NAME}}'

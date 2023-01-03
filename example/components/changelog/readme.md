@@ -8,89 +8,22 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.3-beta.14 {page=#/changelog}
+### 2.5.3 {page=#/changelog}
+###### 2023.01.05
 
 * **[add]**:
-    - [版本更新明细业务组件](#/version-detail) 增加 markdown 渲染模式
-    - [版本更新明细业务组件](#/version-detail) 支持指定默认选中的版本
-
----
-
-### 2.5.3-beta.13 {page=#/changelog}
-
+    - [版本更新明细业务组件](#/version-detail) 增加 markdown 渲染模式；支持指定默认选中的版本
+    - [Input 输入框](#/input) 数字输入框不允许输入拼音以及特殊字符 alt, ctrl, meta, shift
+    - [TagInput 标签输入框](#/tag-input) 新增 `free-paste` 配置。配置此属性后，可随意粘贴内容至 tag-input，粘贴后点击回车，粘贴的内容会自动生成标签 [#355](https://github.com/TencentBlueKing/bkui-vue2/issues/355)
 * **[fix]**:
-    - [Input 输入框](#/input) 数字输入框粘贴非数字的情况处理
-
----
-
-### 2.5.3-beta.12 {page=#/changelog}
-
-* **[fix]**:
-    - [TagInput 标签输入框](#/tag-input) 修复 `allow-create` 配置，输入空格也会创建 tag 的问题
-
----
-
-### 2.5.3-beta.11 {page=#/changelog}
-
-* **[fix]**:
+    - [Input 输入框](#/input) 修复 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题以及数字输入框粘贴非数字的情况处理
     - [Input 输入框](#/input) 数字输入框输入 `-` 后失去焦点后，如果设置了最小值，值变为最小值，没有设置最小值，值变为 0
-
----
-
-### 2.5.3-beta.9 {page=#/changelog}
-
-* **[fix]**:
     - [Input 输入框](#/input) 非数字输入框输入问题
-
----
-
-### 2.5.3-beta.8 {page=#/changelog}
-
-* **[fix]**:
+    - [TagInput 标签输入框](#/tag-input) 修复 `allow-create` 配置，输入空格也会创建 tag 的问题
     - [Table 表格](#/table) 修复 setHeaderStyle 方法获取 bkTable 为空的问题
-
----
-
-### 2.5.3-beta.7 {page=#/changelog}
-
-* **[fix]**:
-    - directives tooltips 的 allowHTML 默认配置改为 true，为了兼容之前 allowHtml 默认为 false 但是 tippy 中配置 allowHTML 为 true 的情况
-
----
-
-### 2.5.3-beta.6 {page=#/changelog}
-
-* **[feat]**:
-    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 alt, ctrl, meta
-
----
-
-### 2.5.3-beta.5 {page=#/changelog}
-
-* **[feat]**:
-    - [Input 输入框](#/input) 数字输入框不允许输入特殊字符 shift
-
----
-
-### 2.5.3-beta.4 {page=#/changelog}
-
-* **[feat]**:
-    - [Input 输入框](#/input) 数字输入框不允许输入拼音
-
----
-
-### 2.5.3-beta.2 {page=#/changelog}
-
-* **[fix]**:
-    - [Input 输入框](#/input) 修复 windows 系统下， 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题
     - [TimePicker 时间选择器](#/time-picker) 修复编辑后，值没有更新的问题
-
----
-
-### 2.5.3-beta.1 {page=#/changelog}
-
-* **[fix]**:
-    - [Input 输入框](#/input) 修复 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题
+    - [Table 表格](#/table) clear filter method not working
+    - directives tooltips 的 allowHTML 默认配置改为 true，为了兼容之前 allowHtml 默认为 false 但是 tippy 中配置 allowHTML 为 true 的情况
 
 ---
 
