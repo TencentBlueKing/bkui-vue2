@@ -48,7 +48,7 @@ const defaultOptions = {
   interactive: true,
   boundary: 'window',
   content: '',
-  allowHTML: false,
+  allowHTML: true,
   extCls: ''
 }
 

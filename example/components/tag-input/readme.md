@@ -159,7 +159,7 @@
         },
         methods: {
             change (tags) {
-                alert(tags)
+                console.log(tags)
             },
             select () {
 
@@ -458,7 +458,8 @@
         :placeholder="placeholder"
         :list="list"
         :allow-create="allowCreate"
-        :has-delete-icon="hasDeleteIcon">
+        :has-delete-icon="hasDeleteIcon"
+        @change="change">
     </bk-tag-input>
 </template>
 <script>
@@ -485,6 +486,11 @@
                     { id: 'taibei', name: '台北' },
                     { id: 'haikou', name: '海口' }
                 ]
+            }
+        },
+        methods: {
+            change (tags) {
+                console.log(tags)
             }
         }
     }
@@ -1216,6 +1222,7 @@
 | tpl | 自定义下拉列表模板 | Function | —— | —— |
 | tag-tpl | 自定义标签模板 | Function | —— | —— |
 | paste-fn | 批量粘贴处理文本返回格式 | Function | —— | —— |
+| free-paste | 是否支持粘贴。配置此属性后，可随意粘贴内容至 tag-input，粘贴后输入回车，粘贴的内容会自动生成标签 | Boolean | —— | —— |
 | left-space | 文字与左边框距离 | Number | —— | 0 |
 | trigger | 搜索列表触发展示方式，默认是输入关键字搜索时展示，也可以获取焦点是展示（用在数据量少的时候） | String | 'search' / 'focus' | 'search' |
 | filter-callback | 过滤函数，参数 `(filterVal, filterKey, data)`，分别表示当前过滤的文本、当前数据使用的 key、所有数据，方便使用者根据自己的逻辑来筛选数据 | Function | —— | —— |
