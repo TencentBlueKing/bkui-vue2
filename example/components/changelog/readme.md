@@ -28,7 +28,6 @@
 ---
 
 ### 2.5.2 {page=#/changelog}
-###### 2022.11.06
 
 * **[fix]**:
     - [Tooltips 工具提示 （指令）](#/tooltips) 修复配置 allowHTML 为 true 时，content 属性配置为 DOM Selector 的问题
