@@ -198,10 +198,10 @@
           }, 2000)
         },
         clearSort(){
-          this.$refs.table.clearSort()
+          this.$refs.filterTable.clearSort()
         },
         clearFilter(){
-          this.$refs.table.clearFilter()
+          this.$refs.filterTable.clearFilter()
         },
         handlePageLimitChange () {
           console.log('handlePageLimitChange', arguments)
@@ -1055,7 +1055,7 @@
             <bk-button @click="clearSort">清空排序条件</bk-button>
             <bk-button @click="clearFilter">清空过滤条件</bk-button>
         </div>
-        <bk-table :data="data" ref="table">
+        <bk-table :data="data" ref="filterTable">
             <bk-table-column type="selection" width="60"></bk-table-column>
             <bk-table-column label="名称/内网IP" prop="ip" sortable></bk-table-column>
             <bk-table-column label="来源" prop="source"
@@ -1156,10 +1156,10 @@ export default {
     },
     methods: {
         clearSort () {
-            this.$refs.table.clearSort()
+            this.$refs.filterTable.clearSort()
         },
         clearFilter () {
-            this.$refs.table.clearFilter()
+            this.$refs.filterTable.clearFilter()
         },
         sourceFilterMethod (value, row, column) {
             const property = column.property

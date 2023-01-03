@@ -600,7 +600,7 @@ class TableStore {
     if (!keys.length) return
 
     keys.forEach(key => {
-      panels[key].filteredValue = []
+      panels[key].handleReset()
     })
 
     states.filters = {}
