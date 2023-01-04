@@ -1,3 +1,4 @@
+
 <!--
  * Tencent is pleased to support the open source community by making
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) available.
@@ -67,8 +68,11 @@
           </div>
         </div>
         <div class="bk-version-right" :style="{ height: dialog.height + 'px' }">
-          <slot :detail="versionDetail">
-            {{versionDetail}}
+          <slot :detail="logContent">
+            <div v-if="mdMode" class="markdown-theme-style" v-html="logContent"></div>
+            <template v-else>
+              {{ logContent }}
+            </template>
           </slot>
         </div>
       </div>
@@ -76,9 +80,11 @@
   </bk-dialog>
 </template>
 <script>
+import { marked } from 'marked/lib/marked.esm.js'
 import bkOverflowTips from '../../directives/overflow-tips'
 import bkloading from '../loading/directive'
 import BkDialog from '../dialog'
+
 export default {
   name: 'bk-version-detail',
   components: {
@@ -105,6 +111,11 @@ export default {
     finished: {
       type: Boolean,
       default: true
+    },
+    // 是否用markdown格式渲染
+    mdMode: {
+      type: Boolean,
+      default: false
     },
     // 获取日志标题列表数据接口
     getVersionList: {
@@ -152,6 +163,14 @@ export default {
       active: 0,
       loading: false,
       unWatchShow: null
+    }
+  },
+  computed: {
+    logContent () {
+      if (this.mdMode) {
+        return marked.parse(this.versionDetail)
+      }
+      return this.versionDetail
     }
   },
   mounted () {

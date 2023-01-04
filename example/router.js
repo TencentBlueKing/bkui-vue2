@@ -115,6 +115,7 @@ const GridExample = () => import(/* webpackChunkName: 'grid' */'./components/gri
 const Directives = () => import(/* webpackChunkName: 'directives' */'./components/directives/readme.md')
 const Navigation = () => import(/* webpackChunkName: 'navigation' */'./components/navigation/readme.md')
 const NavigationExample = () => import(/* webpackChunkName: 'navigation-example' */'./components/navigation/demo')
+const NavigationExample1 = () => import(/* webpackChunkName: 'navigation-example1' */'./components/navigation/demo1')
 const SearchSelect = () => import(/* webpackChunkName: 'search-select' */'./components/search-select/readme.md')
 const SearchSelectExample = () => import(/* webpackChunkName: 'search-select-example' */'./components/search-select/example')
 const Rate = () => import(/* webpackChunkName: 'rate' */'./components/rate/readme.md')
@@ -259,7 +260,7 @@ const router = new VueRouter({
       component: ColorPickerExample
     },
     {
-      name: 'componseFormItem',
+      name: 'composeFormItem',
       path: '/compose-form-item',
       component: ComposeFormItem
     },
@@ -324,13 +325,13 @@ const router = new VueRouter({
       component: SwitcherExample
     },
     {
-      name: 'tag',
-      path: '/tag',
+      name: 'tagInput',
+      path: '/tag-input',
       component: TagInput
     },
     {
-      name: 'tagExample',
-      path: '/tag/example',
+      name: 'tagInputExample',
+      path: '/tag-input/example',
       component: TagInputExample
     },
     {
@@ -339,12 +340,12 @@ const router = new VueRouter({
       component: Loading
     },
     {
-      name: 'sideSlider',
+      name: 'sideslider',
       path: '/sideslider',
       component: SideSlider
     },
     {
-      name: 'sideSliderExample',
+      name: 'sidesliderExample',
       path: '/sideslider/example',
       component: SideSliderExample
     },
@@ -584,13 +585,18 @@ const router = new VueRouter({
       component: NavigationExample
     },
     {
-      name: 'searchselect',
-      path: '/searchselect',
+      name: 'navigation-example1',
+      path: '/navigation/example1',
+      component: NavigationExample1
+    },
+    {
+      name: 'searchSelect',
+      path: '/search-select',
       component: SearchSelect
     },
     {
-      name: 'searchselectExample',
-      path: '/searchselect/example',
+      name: 'searchSelectExample',
+      path: '/search-select/example',
       component: SearchSelectExample
     },
     {
@@ -673,8 +679,8 @@ const router = new VueRouter({
       component: Divider
     },
     {
-      name: 'tags',
-      path: '/tags',
+      name: 'tag',
+      path: '/tag',
       component: Tag
     }, {
       name: 'resize-layout',

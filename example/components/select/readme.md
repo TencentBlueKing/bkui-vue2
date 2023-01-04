@@ -4,173 +4,175 @@
     Vue.use(bkSelect)
     let seed = 0
     export default {
-        components: {
-            bkOption,
-            bkOptionGroup,
-            bkBigTree,
-            bkStar
-        },
-        data () {
-            const options = Array(30).fill(0).map((_, index) => {
-                return {
-                    id: index,
-                    name: 'Option-' + index,
-                    collection: Math.round(Math.random())
-                }
-            })
-            return {
-                options: options,
-                hoverId: -1,
-                value: 3,
-                multipleValue: [1],
-                groupValue: ['1-1'],
-                list: [
-                    { id: 1, name: '爬山' },
-                    { id: 2, name: '跑步' },
-                    { id: 3, name: '打球' },
-                    { id: 4, name: '跳舞' },
-                    { id: 5, name: '健身' },
-                    { id: 6, name: '骑车' },
-                    { id: 7, name: 'k8s' },
-                    { id: 8, name: 'K8S' },
-                    { id: 9, name: 'mesos' },
-                    { id: 10, name: 'MESOS' }
-                ],
-                virtualList: new Array(10000).fill(1).map((a, b) => ({ key: b, display: b })),
-                groupList: [
-                    {
-                        id: 1,
-                        name: '爬山',
-                        showCollapse: true,
-                        isCollapse: true,
-                        children: [
-                            { id: '1-1', name: '爬山-1' },
-                            { id: '1-2', name: '爬山-2' }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        name: '跑步',
-                        showCollapse: true,
-                        isCollapse: false,
-                        children: [
-                            { id: '2-1', name: '跑步-1' },
-                            { id: '2-2', name: '跑步-2' }
-                        ]
-                    },
-                    {
-                        id: 3,
-                        name: '骑车',
-                        showCollapse: true,
-                        readonly: true,
-                        children: [
-                            { id: '3-1', name: '骑车-1' },
-                            { id: '3-2', name: '骑车-2' }
-                        ]
-                    }
-                ],
-                selectValue: ['node-3'],
-                treeData: this.getNodes(null, 2, 3),
-                bottomLoadingOptions: {
-                   size: 'mini',
-                   isLoading: false
-                }
+      components: {
+        bkOption,
+        bkOptionGroup,
+        bkBigTree,
+        bkStar
+      },
+      data () {
+        const options = Array(30).fill(0).map((_, index) => {
+          return {
+            id: index,
+            name: 'Option-' + index,
+            collection: Math.round(Math.random())
+          }
+        })
+        return {
+          value2: '',
+          options: options,
+          hoverId: -1,
+          value: 3,
+          multipleValue: [1],
+          groupValue: ['1-1'],
+          list: [
+            { id: 1, name: '爬山' },
+            { id: 2, name: '跑步' },
+            { id: 3, name: '打球' },
+            { id: 4, name: '跳舞' },
+            { id: 5, name: '健身' },
+            { id: 6, name: '骑车' },
+            { id: 7, name: 'k8s' },
+            { id: 8, name: 'K8S' },
+            { id: 9, name: 'mesos' },
+            { id: 10, name: 'MESOS' }
+        ],
+          virtualList: new Array(10000).fill(1).map((a, b) => ({ key: b, display: b })),
+          groupList: [
+            {
+              id: 1,
+              name: '爬山',
+              showCollapse: true,
+              isCollapse: true,
+              children: [
+                { id: '1-1', name: '爬山-1' },
+                { id: '1-2', name: '爬山-2' }
+              ]
+            },
+            {
+              id: 2,
+              name: '跑步',
+              showCollapse: true,
+              isCollapse: false,
+              children: [
+                { id: '2-1', name: '跑步-1' },
+                { id: '2-2', name: '跑步-2' }
+              ]
+            },
+            {
+              id: 3,
+              name: '骑车',
+              showCollapse: true,
+              readonly: true,
+              children: [
+                { id: '3-1', name: '骑车-1' },
+                { id: '3-2', name: '骑车-2' }
+              ]
             }
-        },
-        methods: {
-            handleMouseEnter (id) {
-                this.hoverId = id
-            },
-            handleMouseLeave () {
-                this.hoverId = -1
-            },
-            handleCollection (option) {
-                option.collection = option.collection > 0 ? 0 : 1
-            },
-            handleToggle () {
-                // 收藏置顶
-                this.options = this.options.sort((pre, next) => {
-                    return next.collection - pre.collection
-                })
-            },
-            handleGroupCollapse (isCollapse) {
-                console.log('isCollapse', isCollapse)
-            },
-            handleCreate () {
-                this.list.push({
-                    id: Math.random(),
-                    name: `新增项-${this.list.length}`
-                })
-            },
-            handleDeleteOption (deleteOption) {
-                this.list = this.list.filter(option => option !== deleteOption)
-            },
-            getNodes (parent, childCount, deep) {
-                const nodes = []
-                for (let i = 0; i < childCount; i++) {
-                    const node = {
-                        id: `node-${seed}`,
-                        level: parent ? parent.level + 1 : 0,
-                        name: `node-name-${seed++}`
-                    }
-                    if (node.level < deep) {
-                        node.children = this.getNodes(node, childCount, deep)
-                    }
-                    nodes.push(node)
-                }
-                return nodes
-            },
-            remote (keyword) {
-                this.$refs.tree && this.$refs.tree.filter(keyword)
-            },
-            handleCheckChange (id, checked) {
-                this.selectValue = [...id]
-            },
-            handleValuesChange (options) {
-                this.$refs.tree && this.$refs.tree.setChecked(options.id, { emitEvent: true, checked: false })
-            },
-            handleClear() {
-                this.$refs.tree && this.$refs.tree.removeChecked({ emitEvent: false })
-            },
-            handleScrollToBottom() {
-                this.bottomLoadingOptions.isLoading = true
-                setTimeout(() => {
-                    this.list.push(
-                       { id: '11', name: '爬山-2' }
-                    )
-                    this.bottomLoadingOptions.isLoading = false
-                }, 2000)
-            }
+          ],
+          selectValue: ['node-3'],
+          treeData: this.getNodes(null, 2, 3),
+          bottomLoadingOptions: {
+            size: 'mini',
+            isLoading: false
+          },
+          allowCreateValues: [1]
         }
+      },
+      methods: {
+          handleMouseEnter (id) {
+              this.hoverId = id
+          },
+          handleMouseLeave () {
+              this.hoverId = -1
+          },
+          handleCollection (option) {
+              option.collection = option.collection > 0 ? 0 : 1
+          },
+          handleToggle () {
+              // 收藏置顶
+              this.options = this.options.sort((pre, next) => {
+                  return next.collection - pre.collection
+              })
+          },
+          handleGroupCollapse (isCollapse) {
+              console.log('isCollapse', isCollapse)
+          },
+          handleCreate () {
+              this.list.push({
+                  id: Math.random(),
+                  name: `新增项-${this.list.length}`
+              })
+          },
+          handleDeleteOption (deleteOption) {
+              this.list = this.list.filter(option => option !== deleteOption)
+          },
+          getNodes (parent, childCount, deep) {
+              const nodes = []
+              for (let i = 0; i < childCount; i++) {
+                  const node = {
+                      id: `node-${seed}`,
+                      level: parent ? parent.level + 1 : 0,
+                      name: `node-name-${seed++}`
+                  }
+                  if (node.level < deep) {
+                      node.children = this.getNodes(node, childCount, deep)
+                  }
+                  nodes.push(node)
+              }
+              return nodes
+          },
+          remote (keyword) {
+              this.$refs.tree && this.$refs.tree.filter(keyword)
+          },
+          handleCheckChange (id, checked) {
+              this.selectValue = [...id]
+          },
+          handleValuesChange (options) {
+              this.$refs.tree && this.$refs.tree.setChecked(options.id, { emitEvent: true, checked: false })
+          },
+          handleClear() {
+              this.$refs.tree && this.$refs.tree.removeChecked({ emitEvent: false })
+          },
+          handleScrollToBottom() {
+              this.bottomLoadingOptions.isLoading = true
+              setTimeout(() => {
+                  this.list.push(
+                      { id: '11', name: '爬山-2' }
+                  )
+                  this.bottomLoadingOptions.isLoading = false
+              }, 2000)
+          }
+      }
     }
 </script>
 
 <style lang="postcss">
-    .custom-option .icon-close {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 3px;
-        font-size: 26px;
-        width: 26px;
-        height: 26px;
-        line-height: 26px;
-        text-align: center;
-    }
-    .custom-option:hover .icon-close {
-        display: block;
-    }
-    .icon-plus-circle {
-        display: inline-block;
-        vertical-align: -1px;
-        font-size: 12px;
-        margin-right: 4px;
-    }
-    .select-collection {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.custom-option .icon-close {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 3px;
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+}
+.custom-option:hover .icon-close {
+  display: block;
+}
+.icon-plus-circle {
+  display: inline-block;
+  vertical-align: -1px;
+  font-size: 12px;
+  margin-right: 4px;
+}
+.select-collection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 </style>
 
 [[toc]]
@@ -187,7 +189,10 @@
 
 ```html
 <template>
-    <bk-select :disabled="false" v-model="value" style="width: 250px;"
+    <bk-select
+        :disabled="false"
+        v-model="value"
+        style="width: 250px;"
         ext-cls="select-custom"
         ext-popover-cls="select-popover-custom"
         searchable>
@@ -1228,6 +1233,67 @@
 ```
 :::
 
+### 创建自定义选项 {page=#/select}
+
+::: demo 可以配置 `allow-create` 属性开启自定义选项，多选模式下需要开启 `display-tag` 属性才会生效
+
+```html
+<template>
+    <div style="display: flex">
+        <bk-select style="width: 250px;" v-model="value" searchable clearable allow-create>
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+        <bk-select style="width: 250px;"
+            class="ml10"
+            v-model="allowCreateValues"
+            multiple
+            searchable
+            display-tag
+            allow-create>
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+    </div>
+</template>
+<script>
+    import { bkSelect, bkOption } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkSelect,
+            bkOption
+        },
+        data () {
+            return {
+                allowCreateValues: [1],
+                value: '',
+                list: [
+                    { id: 1, name: '爬山' },
+                    { id: 2, name: '跑步' },
+                    { id: 3, name: '打球' },
+                    { id: 4, name: '跳舞' },
+                    { id: 5, name: '健身' },
+                    { id: 6, name: '骑车' },
+                    { id: 7, name: 'k8s' },
+                    { id: 8, name: 'K8S' },
+                    { id: 9, name: 'mesos' },
+                    { id: 10, name: 'MESOS' }
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
 ### bk-select 下拉选框属性 {page=#/select}
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
@@ -1243,11 +1309,13 @@
 | placeholder | 未选择数据时的占位 | String | —— | 请选择 |
 | disabled | 是否禁用 | Boolean | —— | false |
 | allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
+| allow-enter  | 是否允许按`enter`键，根据搜索结果确定选择值  | Boolean | —— | true |
 | readonly | 是否只读 | Boolean | —— | false |
 | size | 尺寸 | String | `large` `small` | —— |
 | loading | 是否加载中 | Boolean | —— | false |
 | clearable | 是否允许清空 | Boolean | —— | true |
 | searchable | 是否显示搜索框 | Boolean | —— | false |
+| searchable-min-count | 在显示搜索框的情况下，下拉列表数量大于等于该值时才显示搜索框 | Number | —— | 0 |
 | search-ignore-case | 搜索选项时是否忽略大小写 | Boolean | —— | true |
 | popover-min-width | 设置下拉列表的最小宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
 | popover-width | 设置下拉列表的宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
@@ -1263,7 +1331,7 @@
 | enable-virtual-scroll | 是否开启虚拟滚动 | Boolean | —— | false |
 | virtual-scroll-render | 虚拟滚动内容的render,参数分别为数据和 createElement 函数 | Function | —— | —— |
 | list | 开启虚拟滚动的时候需要传入的数据列表 | Array | —— | —— |
-| id-Key | 虚拟滚动数据，值的key值 | String | —— | id |
+| id-key | 虚拟滚动数据，值的key值 | String | —— | id |
 | display-key | 虚拟滚动数据，显示字段的key值 | String | —— | name |
 | item-height | 虚拟滚动单行元素的高度 | Number | —— | 32 |
 | show-empty| 是否展示空数据的提示 | Boolean | —— | true |
@@ -1290,7 +1358,7 @@
 |---|---|
 | —— | 默认作用域插槽，用以自定义下拉列表展示格式, 作用域插槽参数为 `{option, optionIndex, group, groupIndex}` |
 | extension | 固定在下拉列表最后的内容 |
-| trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性
+| trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性 |
 
 ### bk-option 下拉框选项属性 {page=#/select}
 **（使用 v-for 添加选项时，如果有动态数据，请勿使用 index 作为 key 进行绑定，这将会引起更新错误）**

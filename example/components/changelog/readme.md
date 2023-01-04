@@ -2,7 +2,116 @@
 
 ## 更新日志
 
+<bk-alert type="info">
+  <div slot="title" style="font-weight: 700; font-size: 14px; color: #333;">如项目中 Vue 依赖版本小于 2.7，则需安装 bk-magic-vue@vue2.5-latest</div>
+</bk-alert>
+
 <div class="changelog-wrapper">
+
+### 2.5.3 {page=#/changelog}
+###### 2023.01.05
+
+* **[add]**:
+    - [版本更新明细业务组件](#/version-detail) 增加 [markdown 渲染模式](#/version-detail?anchor=markdown-xuan-ran)；支持指定默认选中的版本
+    - [Input 输入框](#/input) 数字输入框不允许输入拼音以及特殊字符 alt, ctrl, meta, shift
+    - [TagInput 标签输入框](#/tag-input) 新增 `free-paste` 配置。配置此属性后，可随意粘贴内容至 tag-input，粘贴后点击回车，粘贴的内容会自动生成标签 [#355](https://github.com/TencentBlueKing/bkui-vue2/issues/355)
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的问题以及数字输入框粘贴非数字的情况处理
+    - [Input 输入框](#/input) 数字输入框输入 `-` 后失去焦点后，如果设置了最小值，值变为最小值，没有设置最小值，值变为 0
+    - [Input 输入框](#/input) 非数字输入框输入问题
+    - [TagInput 标签输入框](#/tag-input) 修复 `allow-create` 配置，输入空格也会创建 tag 的问题
+    - [Table 表格](#/table) 修复 setHeaderStyle 方法获取 bkTable 为空的问题
+    - [TimePicker 时间选择器](#/time-picker) 修复编辑后，值没有更新的问题
+    - [Table 表格](#/table) clear filter method not working
+    - directives tooltips 的 allowHTML 默认配置改为 true，为了兼容之前 allowHtml 默认为 false 但是 tippy 中配置 allowHTML 为 true 的情况
+
+---
+
+### 2.5.2 {page=#/changelog}
+###### 2022.11.07
+
+* **[fix]**:
+    - [Tooltips 工具提示 （指令）](#/tooltips) 修复配置 allowHTML 为 true 时，content 属性配置为 DOM Selector 的问题
+
+---
+
+### 2.5.1 {page=#/changelog}
+###### 2022.11.01
+
+* **[breaking]**:
+    - **Vue 更新至 2.7.x。如项目中 Vue 依赖版本小于 2.7，则需安装 bk-magic-vue@vue2.5-latest**
+* **[add]**:
+    - [TimePicker 时间选择器](#/time-picker) 新增 `此刻`，便于快速选择当前时间
+    - [Table 表格](#/table) 添加深色表头、自定义表头配色等属性
+    - [Card 卡片](#/card) 添加展开收起动画
+    - [Tag 标签](#/tag) 抛出 click 事件，允许在组件上支持监听 click 事件 [#319](https://github.com/TencentBlueKing/bkui-vue2/issues/319)
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 小型分页器，页码跳转限制输入整数
+    - [Sideslider 侧栏](#/sideslider) Sideslider 侧栏销毁后删除 dom 节点
+    - [Cascade 级联选框](#/cascade) 修复当层级过多宽度超过其上方的下拉框时，展示错误的问题 [#293](https://github.com/TencentBlueKing/bkui-vue2/issues/293)
+    - [Select 下拉选框](#/select) 修复配置了 allow-create 和搜索框，就会自动聚焦到搜索框上的问题 [#298](https://github.com/TencentBlueKing/bkui-vue2/issues/298)
+    - [Tooltips 工具提示 （指令）](#/tooltips) 修复 tooltip allowHTML 配置单词拼错的问题
+* **[update]**:
+    - [Navigation 导航](#/navigation) 样式优化
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 样式优化
+    - [Table 表格](#/table) 示例优化
+    - [TimePicker 时间选择器](#/time-picker) 新增示例
+    - [Sideslider 侧栏](#/sideslider) 示例优化
+    - 优化部分组件样式
+    - 所有示例新增 github 文档链接地址
+
+---
+
+### 2.4.14 {page=#/changelog}
+
+* **[update]**:
+    - tooltips 配置
+
+---
+
+### 2.4.13 {page=#/changelog}
+
+* **[add]**:
+    - [Transfer 穿梭框](#/transfer) 支持设置 disabled 状态
+* **[fix]**:
+    - [Input 输入框](#/input) 修复当不配置 `precision` 属性时无法输入小数点的问题
+    - [Transfer 穿梭框](#/transfer) 修复 Transfer 穿梭框组件设置排序不生效的问题
+    - [Select 下拉选框](#/select) bugfix: select 分组选中状态
+
+---
+
+### 2.4.12 {page=#/changelog}
+###### 2022.07.22
+
+* **[add]**:
+    - [SearchSelect 查询选择器](#/searchselect) 新增 `input-unfocus-clear` 属性及 `input-click-outside` 事件，支持失焦时清空输入框内容
+    - [Select 下拉选框](#/select) 新增 `searchable-min-count` 属性，支持配置当选项数量超过一定数量时才会（默认 0 个）显示搜索框，仅在开启搜索时生效
+* **[fix]**:
+    - [Input 输入框](#/input) 修复 type 为 number 时数字小键盘输入不生效问题 [#287](https://github.com/TencentBlueKing/bkui-vue2/issues/287)
+    - [Slider 滑动选择器](#/slider) 修复 `min-value`, `max-value` 输入框问题
+* **[update]**:
+    - [Table 表格](#/table) 移除 `showPaginationInfo` 属性并兼容已有逻辑
+    - [Table 表格](#/table) `virtual-render` 属性配置说明补充
+    - [Select 下拉选框](#/select) `id-key` 属性文档调整
+
+---
+
+### 2.4.11 {page=#/changelog}
+###### 2022.06.10
+
+* **[add]**:
+    - [Select 下拉选框](#/select) 新增 `allow-enter` 属性，用户在输入框输入关键词后，按下 enter 直接选择搜索结果，默认为 `true` [#273](https://github.com/TencentBlueKing/bkui-vue2/issues/273)
+    - [Select 下拉选框](#/select) 新增[创建自定义选项](#/select?anchor=chuang-jian-zi-ding-yi-xuan-xiang) [#256](https://github.com/TencentBlueKing/bkui-vue2/issues/256)
+* **[fix]**:
+    - [Radio 单选框](#/radio) 修复多个 radio-group name 有可能一样的问题 [#272](https://github.com/TencentBlueKing/bkui-vue2/issues/272)
+    - [Switcher 开关](#/switcher) Switcher 组件 size 属性默认值修改为 `normal` [#270](https://github.com/TencentBlueKing/bkui-vue2/issues/270)
+    - [Input 输入框](#/input) 修复数字文本框输入非法字符问题 [#269](https://github.com/TencentBlueKing/bkui-vue2/issues/269)
+    - [DropdownMenu 下拉菜单](#/dropdown-menu) 修复 dropdown-menu 高度的问题
+* **[update]**:
+    - [Divider 分割线](#/divider) divider 组件样式用 class 实现而不是行内样式 [#271](https://github.com/TencentBlueKing/bkui-vue2/issues/271)
+    - [Swiper 轮播图](#/swiper) 优化 swiper 计算高度、宽度的规则
+
+---
 
 ### 2.4.9 {page=#/changelog}
 ###### 2022.05.19
@@ -1112,15 +1221,17 @@
 
 </div>
 <script>
+    import { getActualTop } from '../../../src/utils/util'
+    import { bkAlert } from '@'
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual'
     }
     else {
         window.onunload= () => window.scrollTo(0, 0)
     }
-    import { getActualTop } from '../../../src/utils/util'
     export default {
         components: {
+          bkAlert
         },
         data () {
             return {

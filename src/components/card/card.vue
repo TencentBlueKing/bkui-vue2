@@ -46,9 +46,11 @@
       </slot>
     </div>
     <template v-if="collapseActive">
-      <div class="bk-card-body">
-        <slot></slot>
-      </div>
+      <bk-transition name="collapse" duration-time=".1.4s">
+        <div class="bk-card-body">
+          <slot></slot>
+        </div>
+      </bk-transition>
       <div class="bk-card-foot" v-if="showFoot">
         <slot name="footer"></slot>
       </div>
@@ -57,10 +59,12 @@
 </template>
 <script>
 import bkInput from '../input/input.vue'
+import bkTransition from '../transition/transition.vue'
 export default {
   name: 'bk-card',
   components: {
-    bkInput
+    bkInput,
+    bkTransition
   },
   props: {
     /** 卡片标题 */

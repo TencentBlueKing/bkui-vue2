@@ -1,20 +1,20 @@
 <script>
-    import { bkAffix, bkButton } from '@'
+  import { bkAffix, bkButton } from '@'
 
-    export default {
-        components: {
-            bkAffix,
-            bkButton
-        },
-        methods: {
-            change(status) {
-                this.$bkMessage({
-                    message: '当前状态' + status,
-                    offsetY: 80
-                })
-            }
-        }
+  export default {
+    components: {
+      bkAffix,
+      bkButton
+    },
+    methods: {
+      change(status) {
+        this.$bkMessage({
+          message: '当前状态' + status,
+          offsetY: 80
+        })
+      }
     }
+  }
 </script>
 <style>
     #affix-demo.scrollable-container {

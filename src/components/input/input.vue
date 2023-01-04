@@ -75,6 +75,8 @@
           @blur="handlerBlur"
           @input="handlerInput"
           @paste="handlerPaste"
+          @compositionstart="handlerCompositionstart"
+          @compositionend="handlerCompositionend"
         />
         <template v-if="/^number$/i.test(type) && !disabled && !readonly">
           <span class="input-number-option" v-if="showControls">
@@ -285,7 +287,21 @@ export default {
       inputSize: this.size,
       inputPasswordIcon: this.passwordIcon,
       inputRightPadding: '10px',
-      iconAreaSizeObserver: null
+      iconAreaSizeObserver: null,
+      // 数字输入框中允许输入的键盘按钮的 keyCode 集合
+      validKeyCodeList: [
+        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
+        96, 97, 98, 99, 100, 101, 102, 103, 104, 105, // 0-9 Numpad
+        8, // backspace
+        189, // -
+        109, // - Numpad
+        190, // .
+        110, // . Numpad
+        38, 40, 37, 39, // up down left right
+        46, // del
+        9 // tab
+      ],
+      isOnComposition: false
     }
   },
   computed: {
@@ -453,6 +469,8 @@ export default {
             max: this.max
           }
           Object.assign(outputAttr, defaultAttr, numberAttr)
+          // 不使用 input type="number"
+          outputAttr.type = 'text'
           break
         case 'textarea':
           const txtAttr = { rows: this.rows }
@@ -465,7 +483,8 @@ export default {
 
       return outputAttr
     },
-    handleToFixed (defaultNumber, len) {
+    handleToFixed (defaultNumber, length) {
+      const len = parseInt(length, 10)
       // .123转为0.123
       const number = Number(defaultNumber)
       if (isNaN(number) || number >= Math.pow(10, 21)) {
@@ -564,7 +583,87 @@ export default {
       this.$emit('keypress', value, event)
     },
     handlerKeydown (event) {
-      const value = event.target.value
+      // const value = event.target.value
+      const keyCode = event.keyCode
+      const target = event.currentTarget
+      const value = target.value
+
+      if (this.inputType === 'number') {
+        // 键盘按下不允许的按钮
+        if (this.validKeyCodeList.indexOf(keyCode) < 0
+          || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey
+        ) {
+          event.stopPropagation()
+          event.preventDefault()
+          return false
+        }
+
+        // . 号
+        if (keyCode === 190) {
+          // 保留小数位为 0，此时不允许输入 .
+          // if (this.precision === 0) {
+          //   event.stopPropagation()
+          //   event.preventDefault()
+          //   return false
+          // }
+          if (String(value).trim()) {
+            // 已经有一个 . 了，本次又输入的是 .
+            if (value.indexOf('.') >= 0) {
+              event.stopPropagation()
+              event.preventDefault()
+              return false
+            }
+          }
+        }
+
+        // - 号
+        if (event.keyCode === 189) {
+          if (String(value).trim()) {
+            // 已经有一个 - 了，本次又输入的是 -
+            if (value.indexOf('-') >= 0) {
+              event.stopPropagation()
+              event.preventDefault()
+              return false
+            }
+            // 只有开头位置能出现 - 号
+            if (document.getSelection().type !== 'Range') {
+              if (target.selectionEnd !== 0) {
+                event.stopPropagation()
+                event.preventDefault()
+                return false
+              }
+            }
+          }
+        }
+
+        if (keyCode === 38) {
+          event.preventDefault()
+          this.handleNumberAdd(event)
+        } else if (keyCode === 40) {
+          event.preventDefault()
+          this.handleNumberDelete(event)
+        }
+
+        if (document.getSelection().type !== 'Range') {
+          // 修复 输入 `-1234` 后光标移动到 `-` 号前面再次输入数字的情况
+          if (value.indexOf('-') === 0 && target.selectionStart === 0) {
+            const keyCodeList = [
+              48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
+              96, 97, 98, 99, 100, 101, 102, 103, 104, 105, // 0-9 Numpad
+              189, // -
+              109, // - Numpad
+              190, // .
+              110 // . Numpad
+            ]
+            if (keyCodeList.indexOf(keyCode) > -1) {
+              event.stopPropagation()
+              event.preventDefault()
+              return false
+            }
+          }
+        }
+      }
+
       this.$emit('keydown', value, event)
     },
     handlerFocus (event) {
@@ -580,13 +679,16 @@ export default {
     handlerBlur (event) {
       let value = event.target.value
       if (/^number$/i.test(this.type) && value !== '') {
+        if (isNaN(value)) {
+          value = this.min === Number.MIN_SAFE_INTEGER ? 0 : this.min
+        }
         if (value !== '' && /^-?\d*(.\d*)?$/i.test(value)) {
           if (value > this.max || value < this.min) {
             value = this.getCurrentNumberValue()
           }
         }
         if (typeof this.precision !== 'undefined') {
-          value = this.toPrecision(Number(value), this.precision, true)
+          value = this.toPrecision(parseFloat(value), this.precision, true)
         } else {
           value = Number(value)
         }
@@ -619,12 +721,35 @@ export default {
 
       return ''
     },
+    handlerCompositionstart (e) {
+      this.isOnComposition = true
+    },
+    handlerCompositionend (e) {
+      // this.isOnComposition = false
+      if (this.inputType === 'number' && this.isOnComposition) {
+        e.target.value = this.curValue
+        this.isOnComposition = false
+        this.handlerInput(e)
+      }
+    },
     handlerInput (event) {
-      const value = event.target.value
-      this.setCurValue(value)
-      this.$emit('input', value, event)
-      this.$emit('change', value, event)
-      this.dispatch('bk-form-item', 'form-change')
+      // if (this.isOnComposition) {
+      //   event.target.value = this.curValue
+      //   this.isOnComposition = false
+      //   event.stopPropagation()
+      //   event.preventDefault()
+      //   return false
+      // }
+      if (this.inputType === 'number' && this.isOnComposition) {
+        return
+      }
+      this.$nextTick(() => {
+        const value = event.target.value
+        this.setCurValue(value)
+        this.$emit('input', value, event)
+        this.$emit('change', value, event)
+        this.dispatch('bk-form-item', 'form-change')
+      })
     },
     handlerClear (event) {
       this.curValue = ''

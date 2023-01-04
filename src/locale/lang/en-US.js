@@ -52,7 +52,8 @@ export default {
       hour: 'Hour',
       min: 'Minute',
       sec: 'Second',
-      toNow: 'Now'
+      toNow: 'Now',
+      now: 'Now'
     },
     dialog: {
       ok: 'OK',
@@ -183,6 +184,9 @@ export default {
       original: 'original size',
       prev: 'prev',
       next: 'next'
+    },
+    versionDetail: {
+      currentTagText: 'Current'
     }
   }
 }

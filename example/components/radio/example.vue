@@ -55,6 +55,28 @@
         <bk-radio :label="'value18'">18</bk-radio>
         <bk-radio :label="'value19'">19</bk-radio>
       </bk-radio-group>
+      <bk-radio-group v-model="value">
+        <bk-radio :label="'value0'">0</bk-radio>
+        <bk-radio :label="'value1'">1</bk-radio>
+        <bk-radio :label="'value2'">2</bk-radio>
+        <bk-radio :label="'value3'">3</bk-radio>
+        <bk-radio :label="'value4'">4</bk-radio>
+        <bk-radio :label="'value5'">5</bk-radio>
+        <bk-radio :label="'value6'">6</bk-radio>
+        <bk-radio :label="'value7'">7</bk-radio>
+        <bk-radio :label="'value8'">8</bk-radio>
+        <bk-radio :label="'value9'">9</bk-radio>
+        <bk-radio :label="'value10'">10</bk-radio>
+        <bk-radio :label="'value11'">11</bk-radio>
+        <bk-radio :label="'value12'">12</bk-radio>
+        <bk-radio :label="'value13'">13</bk-radio>
+        <bk-radio :label="'value14'">14</bk-radio>
+        <bk-radio :label="'value15'">15</bk-radio>
+        <bk-radio :label="'value16'">16</bk-radio>
+        <bk-radio :label="'value17'">17</bk-radio>
+        <bk-radio :label="'value18'">18</bk-radio>
+        <bk-radio :label="'value19'">19</bk-radio>
+      </bk-radio-group>
     </div>
   </section>
 </template>

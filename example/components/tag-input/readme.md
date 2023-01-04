@@ -159,7 +159,7 @@
         },
         methods: {
             change (tags) {
-                alert(tags)
+                console.log(tags)
             },
             select () {
 
@@ -265,7 +265,7 @@
 
 常用于对标签列表的填写、关键字的输入
 
-### 基础用法 {page=#/tag}
+### 基础用法 {page=#/tag-input}
 
 :::demo 可以通过 `bk-tag-input` 来使用组件，其中 `list` 属性为下拉选择列表选项
 
@@ -307,7 +307,7 @@
 ```
 :::
 
-### hover 时才显示 clear 按钮 {page=#/tag}
+### hover 时才显示 clear 按钮 {page=#/tag-input}
 
 :::demo 设置 `show-clear-only-hover` 为`true`，则其 clear 按钮在 hover 时才会显示。 可以比较与上一例子交互的不同之处
 
@@ -349,7 +349,7 @@
 </script>
 ```
 :::
-### 多个字段搜索 {page=#/tag}
+### 多个字段搜索 {page=#/tag-input}
 
 :::demo 可以通过设置 `search-key` 为数组，搜索时匹配多个字段
 
@@ -403,7 +403,7 @@
 ```
 :::
 
-### 触发方式 {page=#/tag}
+### 触发方式 {page=#/tag-input}
 
 :::demo 可以通过配置`trigger`来设置下拉框的显示方式，有`focus`（获焦点时显示）,`search`（搜索时显示）两种
 
@@ -447,7 +447,7 @@
 ```
 :::
 
-### 支持输入自定义标签 {page=#/tag}
+### 支持输入自定义标签 {page=#/tag-input}
 
 :::demo 可以通过 `allow-create` 属性来输入自定义标签，按 Enter 键结束；其中 `has-delete-icon` 设置可显示标签删除按钮
 
@@ -458,7 +458,8 @@
         :placeholder="placeholder"
         :list="list"
         :allow-create="allowCreate"
-        :has-delete-icon="hasDeleteIcon">
+        :has-delete-icon="hasDeleteIcon"
+        @change="change">
     </bk-tag-input>
 </template>
 <script>
@@ -486,13 +487,18 @@
                     { id: 'haikou', name: '海口' }
                 ]
             }
+        },
+        methods: {
+            change (tags) {
+                console.log(tags)
+            }
         }
     }
 </script>
 ```
 :::
 
-### 支持输入后失焦点自动匹配 {page=#/tag}
+### 支持输入后失焦点自动匹配 {page=#/tag-input}
 
 :::demo 可以通过 `allow-auto-match` 属性来配置输入时失焦点后，如果完全匹配则自动选中，如果自定义则自动输入
 
@@ -539,7 +545,7 @@
 :::
 
 
-### 更多自定义配置 {page=#/tag}
+### 更多自定义配置 {page=#/tag-input}
 
 :::demo 通过 `save-key` 属性定义选中选项保存的 key 值，自定义 `display-key` 属性为选中项展示的名称，`search-key` 属性为搜索索引，`tpl` 自定义下拉列表展示
 
@@ -594,7 +600,7 @@
 ```
 :::
 
-### 带分组 {page=#/tag}
+### 带分组 {page=#/tag-input}
 
 :::demo 可以通过配置`use-group`来启用分组功能， 数据源必须加上`children`的配置
 
@@ -653,7 +659,7 @@
 ```
 :::
 
-### 带tooltip {page=#/tag}
+### 带tooltip {page=#/tag-input}
 
 :::demo 可以通过配置`tooltip-key`来让选中的标签在鼠标移上去时显示提示文案
 
@@ -753,7 +759,7 @@
 :::
 
 
-### 禁用状态 {page=#/tag}
+### 禁用状态 {page=#/tag-input}
 
 :::demo 可以通过 `disabled` 属性来禁用组件
 
@@ -794,7 +800,7 @@
 :::
 
 
-### 回调事件 {page=#/tag}
+### 回调事件 {page=#/tag-input}
 
 :::demo 当发生改变时提供 `change` 事件
 
@@ -847,7 +853,7 @@
 ```
 :::
 
-### 综合例子（多选） {page=#/tag}
+### 综合例子（多选） {page=#/tag-input}
 
 :::demo 可以通过传`tpl`方法来自定义下拉列表展示，通过`tagTpl`方法来自定义标签展示，可以通过配置`use-group`来启用分组功能， 数据源必须加上`children`的配置，通过`trigger`配置是否在获取焦点时展示搜索列表
 
@@ -1019,7 +1025,7 @@
 ```
 :::
 
-### 综合例子（单选） {page=#/tag}
+### 综合例子（单选） {page=#/tag-input}
 
 :::demo 可以通过传`tpl`方法来自定义下拉列表展示，通过`tagTpl`方法来自定义标签展示，可以通过配置`use-group`来启用分组功能， 数据源必须加上`children`的配置，通过`trigger`配置是否在获取焦点时展示搜索列表
 
@@ -1194,7 +1200,7 @@
 :::
 
 
-### 属性 {page=#/tag}
+### 属性 {page=#/tag-input}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
 | list | 下拉菜单所需的数据列表 | Array | —— | [] |
@@ -1216,6 +1222,7 @@
 | tpl | 自定义下拉列表模板 | Function | —— | —— |
 | tag-tpl | 自定义标签模板 | Function | —— | —— |
 | paste-fn | 批量粘贴处理文本返回格式 | Function | —— | —— |
+| free-paste | 是否支持粘贴。配置此属性后，可随意粘贴内容至 tag-input，粘贴后输入回车，粘贴的内容会自动生成标签 | Boolean | —— | —— |
 | left-space | 文字与左边框距离 | Number | —— | 0 |
 | trigger | 搜索列表触发展示方式，默认是输入关键字搜索时展示，也可以获取焦点是展示（用在数据量少的时候） | String | 'search' / 'focus' | 'search' |
 | filter-callback | 过滤函数，参数 `(filterVal, filterKey, data)`，分别表示当前过滤的文本、当前数据使用的 key、所有数据，方便使用者根据自己的逻辑来筛选数据 | Function | —— | —— |
@@ -1225,7 +1232,7 @@
 | create-tag-validator | 自定义标签校验函数，返回 boolean，参数`(tag)`，tag表示当前输入值，在自定义标签时，可以自定义添加标签的校验 |
 | show-clear-only-hover | 是否在只有 hover 的时候才显示 clear 清除按钮 | Boolean | —— | false |
 
-### 事件 {page=#/tag}
+### 事件 {page=#/tag-input}
 | 事件名称 | 说明 | 回调参数 |
 |------|------|------|
 | change | 数据发生变化时回调函数 | tags |

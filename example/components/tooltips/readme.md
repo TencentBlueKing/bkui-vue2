@@ -199,7 +199,7 @@
 
 [[toc]]
 
-## Tooltips 工具提示 （指令）
+## Tooltips 工具提示（指令）
 
 当鼠标指向页面元素时给出简单的提示
 
@@ -564,5 +564,5 @@
 | onHidden | tip 消失完成的回调函数 | Function | -- | -- |
 | extCls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.tippy-popper` 上 | String | —— | —— |
 | disabled | 是否禁用tooltips | Boolean | —— | —— |
-| allowHtml | 确定是否将内容字符串解析为HTML而不是文本 | Boolean | `true` / `false` | false |
+| allowHTML | 确定是否将内容字符串解析为HTML而不是文本 | Boolean | `true` / `false` | false |
 

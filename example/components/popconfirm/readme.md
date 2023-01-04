@@ -53,6 +53,7 @@
     <bk-popconfirm
         title="确认删除该脚本？"
         content="删除操作无法撤回，请谨慎操作！"
+        width="288"
         @confirm="confirm">
         <bk-button>删除</bk-button>
     </bk-popconfirm>
@@ -83,7 +84,8 @@
 <template>
     <bk-popconfirm
         content="删除结果数据时，将同时删除该结果数据下的所有样本曲线，请确认！"
-        width="280"
+        width="288"
+        trigger="click"
         @confirm="confirm">
         <bk-button>删除</bk-button>
     </bk-popconfirm>
@@ -112,11 +114,11 @@
 :::demo 自定义`slot`可以处理更复杂的样式。
 ```html
 <template>
-    <bk-popconfirm trigger="click" :ext-cls="'asadsadsads'" width="280">
+    <bk-popconfirm trigger="click" :ext-cls="'asadsadsads'" width="288">
         <div slot="content">
             <div class="demo-custom">
                 <i class="bk-icon icon-info-circle-shape pr5 content-icon"></i>
-                <div class="content-text">删除结果数据时，将同时删除该结果数据下的所有样本曲线！</div>
+                <div class="content-text">确认要删除这个文件夹？</div>
             </div>
         </div>
         <bk-button>删除</bk-button>

@@ -173,6 +173,13 @@ export default {
         if (this.showMask) {
           this.generatePopUid()
         }
+
+        this.$nextTick(() => {
+          if (this.$refs.content) {
+            addResizeListener(this.$refs.content, this.handleContentResize)
+          }
+        })
+
         setTimeout(() => {
           this.$emit('shown')
         }, 200)
@@ -189,15 +196,15 @@ export default {
     }
   },
   mounted () {
-    if (this.$refs.content && this.showMask) {
-      this.generatePopUid()
-      addResizeListener(this.$refs.content, this.handleContentResize)
-    }
   },
   destroyed () {
     const root = document.querySelector('html')
     removeClass(root, 'bk-sideslider-show')
     removeResizeListener(this.$refs.content, this.handleContentResize)
+    // 销毁后删除DOM节点
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
   },
   beforeDestroy () {
     this.isShow && this.popUid && popManager.hide(this.popUid)

@@ -29,7 +29,10 @@
 <template>
   <div class="bk-picker-panel-body-wrapper" @mousedown.prevent>
     <div class="bk-picker-panel-body" :style="{ width: `${width}px` }">
-      <div class="bk-time-picker-header" v-if="showDate">{{visibleDate}}</div>
+      <div class="bk-time-picker-header" v-if="showDate">
+        {{visibleDate}}
+        <a href="javascript: void(0);" @click="setTimeToNow" class="now-time">{{t('bk.datePicker.now')}}</a>
+      </div>
       <div class="bk-picker-panel-content">
         <time-spinner
           ref="timeSpinner"
@@ -45,6 +48,9 @@
           @change="handleChange"
           @pick-click="handlePickClick"></time-spinner>
       </div>
+      <div class="bk-time-picker-now" v-if="!showDate">
+        <a href="javascript: void(0);" @click="setTimeToNow">{{t('bk.datePicker.now')}}</a>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +58,7 @@
 <script>
 import fecha from '@/utils/fecha'
 import { initTime, mergeDateHMS } from '@/utils/date'
+import locale from 'bk-magic-vue/lib/locale'
 import TimeSpinner from '../base/time-spinner.vue'
 import timeMixins from '../time-mixins'
 import panelMixins from './panel-mixins'
@@ -59,7 +66,7 @@ import panelMixins from './panel-mixins'
 export default {
   name: 'TimePickerPanel',
   components: { TimeSpinner },
-  mixins: [timeMixins, panelMixins],
+  mixins: [timeMixins, panelMixins, locale.mixin],
   props: {
     disabledDate: {
       type: Function,
@@ -151,6 +158,18 @@ export default {
       if (emit) {
         this.$emit('pick', newDate, true, 'time')
       }
+    },
+    setTimeToNow () {
+      const hours = new Date().getHours()
+      const minutes = new Date().getMinutes()
+      const seconds = new Date().getSeconds()
+
+      const newDate = new Date(this.date)
+      newDate.setHours(hours)
+      newDate.setMinutes(minutes)
+      newDate.setSeconds(seconds)
+
+      this.$emit('pick', newDate, true, 'time')
     }
   }
 }

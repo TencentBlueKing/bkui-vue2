@@ -51,7 +51,8 @@ export default {
       hour: '时',
       min: '分',
       sec: '秒',
-      toNow: '至今'
+      toNow: '至今',
+      now: '此刻'
     },
     dialog: {
       ok: '确定',
@@ -180,7 +181,9 @@ export default {
       rotateRight: '向右旋转',
       fullScreen: '适应屏幕',
       original: '快速回到 1：1'
-
+    },
+    versionDetail: {
+      currentTagText: '当前版本'
     }
   }
 }

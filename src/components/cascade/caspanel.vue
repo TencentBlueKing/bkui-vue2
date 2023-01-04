@@ -175,6 +175,7 @@ export default {
     cascadeClick (item) {
       if (this.trigger !== 'click' && item.children && item.children.length) return
       this.handleItem(item, false)
+      this.dispatch('bkCascade', 'on-cascade-click')
     },
     cascadeHover (item) {
       if (this.trigger === 'hover' && item.children && item.children.length) {

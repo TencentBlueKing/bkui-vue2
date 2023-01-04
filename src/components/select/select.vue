@@ -71,11 +71,14 @@
       <i :class="['bk-select-prefix-icon', prefixIcon]" v-if="prefixIcon"></i>
       <slot name="trigger" v-bind="$props">
         <bk-select-tag v-if="multiple && displayTag"
-          :width-limit="isTagWidthLimit"></bk-select-tag>
+          :width-limit="isTagWidthLimit"
+          ref="bkSelectTag"
+          @create-tag="handleCreateTag"></bk-select-tag>
         <template v-else>
           <input
-            v-if="allowCreate"
+            v-if="allowCreate && !multiple"
             class="bk-select-name"
+            ref="createInput"
             @change="handleInputChange"
             :class="fontSizeCls"
             :value="selectedName || value"
@@ -90,7 +93,7 @@
       <div slot="content" class="bk-select-dropdown-content"
         :class="[popoverCls, extPopoverCls]"
         :style="popoverStyle">
-        <div class="bk-select-search-wrapper" v-if="searchable">
+        <div class="bk-select-search-wrapper" v-if="showSearch">
           <i class="left-icon bk-icon icon-search"></i>
           <input class="bk-select-search-input"
             :class="fontSizeCls"
@@ -98,6 +101,7 @@
             type="text"
             :placeholder="localSearchPlaceholder"
             v-model="searchValue"
+            @keydown.enter="ensureSearch"
             @keydown.tab="handleClose"
             @keydown.esc.stop.prevent="handleClose">
         </div>
@@ -113,6 +117,12 @@
               ref="selectAllOption"
               v-if="multiple && showSelectAll && !searchValue">
             </bk-option-all>
+            <bk-option v-for="item in allowCreateData"
+              :key="item.id"
+              :id="item.id"
+              :name="item.name"
+              v-show="false">
+            </bk-option>
             <bk-virtual-scroll ref="virtualScroll"
               :item-height="itemHeight"
               class="bk-virtual-select"
@@ -133,7 +143,7 @@
           <div class="bk-select-empty" :class="fontSizeCls" v-if="!options.length">
             {{ emptyText || t('bk.select.dataEmpty') }}
           </div>
-          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="searchable && unmatchedCount === options.length">
+          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="showSearch && unmatchedCount === options.length">
             {{ emptyText || t('bk.select.searchEmpty') }}
           </div>
         </template>
@@ -159,6 +169,7 @@ import virtualOption from './virtual-option'
 import { dropdownMarginBottom } from '@/ui/variable'
 import { debounce } from '@/utils/util'
 import bkSpin from '@/components/spin'
+import bkOption from './option.vue'
 
 export default {
   name: 'bk-select',
@@ -168,7 +179,8 @@ export default {
     bkSelectTag,
     bkVirtualScroll,
     virtualOption,
-    bkSpin
+    bkSpin,
+    bkOption
   },
   directives: {
     bkloading: bkLoading
@@ -206,10 +218,18 @@ export default {
       default: true
     },
     allowCreate: Boolean,
+    allowEnter: {
+      type: Boolean,
+      default: true
+    },
     disabled: Boolean,
     readonly: Boolean,
     loading: Boolean,
     searchable: Boolean,
+    searchableMinCount: {
+      type: Number,
+      default: 0
+    },
     searchIgnoreCase: {
       type: Boolean,
       default: true
@@ -334,7 +354,8 @@ export default {
       autoUpdate: false,
       renderPopoverOptions: {},
       popoverDistance: 10 + parseInt(dropdownMarginBottom),
-      optionList: null
+      optionList: null,
+      allowCreateData: []
     }
   },
   computed: {
@@ -411,6 +432,9 @@ export default {
         icon: 'circle-2-1',
         placement: 'right'
       }, this.scrollLoading)
+    },
+    showSearch () {
+      return this.searchable && this.options.length >= this.searchableMinCount
     }
   },
   watch: {
@@ -450,6 +474,9 @@ export default {
     selected (value, oldValue) {
       if (this.shouldUpdate || this.autoUpdate) {
         this.setSelectedOptions()
+      }
+      if (this.allowCreate && this.displayTag && this.multiple && Array.isArray(value)) {
+        this.allowCreateData = this.allowCreateData.filter(item => value.includes(item.id))
       }
       this.$emit('input', value)
       this.$emit('change', value, oldValue)
@@ -571,7 +598,7 @@ export default {
       const popover = this.getPopoverInstance()
       popover.set({
         onShown: () => {
-          if (this.searchable && !this.allowCreate) {
+          if (this.showSearch) {
             this.$refs.searchInput.focus()
           }
         }
@@ -585,7 +612,6 @@ export default {
       this.focus = false
     },
     handleInputChange (e) {
-      console.log(e.target.value)
       const value = e.target.value
       this.$emit('input', value)
       this.$emit('change', value, this.value)
@@ -618,6 +644,7 @@ export default {
       this.$nextTick(() => {
         this.$emit('selected', this.selected, this.selectedOptions)
       })
+      this.focusTagInput()
     },
     unselectOption (option) {
       if (this.multiple) {
@@ -703,6 +730,52 @@ export default {
       this.close()
       this.$refs.bkSelect && this.$refs.bkSelect.focus()
     },
+    ensureSearch () {
+      if (!this.allowEnter) {
+        return false
+      }
+      let option = {}
+      this.options.some((item) => {
+        // 根据unmatched，过滤的列表值确定筛选不对,所以根据name重新查找
+        const searchValue = this.searchValue
+        let data = item
+        if (item.$options) {
+          data = item.$options.propsData
+        }
+        const name = data.name
+        if (typeof name === 'string' && this.searchWithPinyin) {
+          const pinyinList = pinyin.parse(name).map(v => {
+            if (v.type === 2) {
+              return v.target.toLowerCase()
+            }
+            return v.target
+          })
+          const pinyinStr = pinyinList.reduce((res, cur) => res + cur[0], '')
+          if (pinyinList.join('').indexOf(searchValue) !== -1 || pinyinStr.indexOf(searchValue) !== -1) {
+            option = data
+            return true
+          }
+          return pinyinList.join('').indexOf(searchValue) !== -1 || pinyinStr.indexOf(searchValue) !== -1
+        } else {
+          if (`${name}`.includes(this.searchValue)) {
+            option = data
+            return true
+          }
+        }
+        return false
+      })
+      if (option) {
+        if (this.multiple && this.selected.includes(option.id)) {
+          return false
+        }
+        this.selectOption(option)
+      } else {
+        if (this.allowCreate) {
+          this.$refs.createInput.value = this.searchValue
+          this.handleInputChange({ target: { value: this.searchValue } })
+        }
+      }
+    },
     handleTabRemove (options) {
       this.$emit('tab-remove', options)
     },
@@ -715,6 +788,20 @@ export default {
       if (optionList.scrollHeight - (optionList.clientHeight + optionList.scrollTop) < 30) {
         this.$emit('scroll-end', true)
       }
+    },
+    handleCreateTag (value) {
+      if (!value
+        || this.optionsMap[value]
+        || this.allowCreateData.find(item => item.id === value)) return
+
+      this.allowCreateData.push({
+        id: value,
+        name: value
+      })
+      this.selected.push(value)
+    },
+    focusTagInput () {
+      this.$refs.bkSelectTag && this.$refs.bkSelectTag.focusInput()
     }
   }
 }

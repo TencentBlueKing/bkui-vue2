@@ -1,45 +1,44 @@
-<!--
- * Tencent is pleased to support the open source community by making
- * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) available.
- *
- * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
- *
- * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) is licensed under the MIT License.
- *
- * License for 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition):
- *
- *
- * Terms of the MIT License:
- * ---------------------------------------------------
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
- * to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
- * the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
- * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE.
--->
-
 <template>
   <section>
     <h2>
       <i href="javascript:void(0)" class="back-icon bk-icon icon-arrows-left" @click="back"></i>
       Tooltips 工具提示 （指令实现）更多示例
     </h2>
-    <!-- <div class="example-item">
-            <a class="bk-text-danger f14" v-bk-tooltips="config">长内容</a>
-        </div> -->
     <div class="example-item">
+      <a class="bk-text-danger f14" v-bk-tooltips="config">长内容</a>
+    </div>
+    <!-- <div class="example-item">
       <bk-button disabled v-bk-tooltips="'禁用提示'">
         删除
       </bk-button>
+    </div> -->
+    <div class="example-item">
+      <bk-button
+        v-bk-tooltips="{ content: '<div style=\'color: red\'>asdasd</div>', allowHTML: false }">
+        allowHTML - false
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button
+        v-bk-tooltips="{ content: '<div style=\'color: red\'>asdasd</div>', allowHTML: true }">
+        allowHTML - true
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button
+        v-bk-tooltips="{ content: '<div style=\'color: red\'>asdasd</div>', allowHTML: true, html: '<div style=\'color: green\'>配置了 html 属性，content、allowHTML 均不会生效</div>' }">
+        html 配置优先级最高
+      </bk-button>
+    </div>
+    <div class="example-item">
+      <bk-button
+        v-bk-tooltips="{ content: '#aaaccc', allowHTML: true, theme: 'light' }">
+        content 为 DOM Selector
+      </bk-button>
+    </div>
 
+    <div id="aaaccc">
+      <p style="height: 20px; background-color: #ffe8c3; color: #3a84ff">我是 div</p>
     </div>
   </section>
 </template>
@@ -57,11 +56,12 @@ export default {
   data () {
     return {
       config: {
+        allowHTML: true,
         // content: '提示信息',
         // showOnInit: true,
         // placements: ['left']
         content: 'light 主题',
-        html: '<div style="color:red">12312</div>',
+        // html: '<div style="color:red">12312</div>',
         theme: 'light',
         onShow: this.onShow,
         onShown: this.onShown,

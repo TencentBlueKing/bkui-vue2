@@ -1,17 +1,27 @@
 @import './variable.css';
 
-:root {
+.bk-dropdown-menu {
   --font-size: 12px;
-  .medium-font {
+  &.medium-font {
     --font-size: 14px;
   }
 
-  .large-font {
+  &.large-font {
     --font-size: 16px;
   }
-}
 
-.bk-dropdown-menu {
+  &.medium-font,
+  &.large-font {
+    .bk-dropdown-list {
+      > li {
+        > a {
+          height: 36px;
+          line-height: 37px;
+        }
+      }
+    }
+  }
+
   display: inline-block;
   position: relative;
   &.disabled, &.disabled * {
@@ -37,7 +47,7 @@
 
   .bk-dropdown-content {
     background: $defaultColor;
-    padding: 5px 0;
+    padding: 4px 0;
     margin: 0;
     z-index: $dropdownMenuZIndex;
     border-radius: 2px;
@@ -45,7 +55,7 @@
     box-sizing: border-box;
     transition: visibility 0s, max-height 200ms linear;
     visibility: hidden;
-    box-shadow: 0 2px 6px rgba(51,60,72,0.1);
+    box-shadow: 0 2px 6px rgba(51, 60, 72, 0.1);
     text-align: left;
     display: inline-block;
     overflow-x: hidden;
@@ -53,12 +63,14 @@
     &::-webkit-scrollbar {
       width: 4px;
       /* background-color: lighten(#e6e9ea, 80%); */
-      background-color: color(#e6e9ea lightness(80%));
+      /* background-color: #e6e9ea; */
+      background-color: transparent;
     }
     &::-webkit-scrollbar-thumb {
       height: 5px;
       border-radius: 2px;
-      background-color: #e6e9ea;
+      /* background-color: color(#e6e9ea lightness(80%)); */
+      background-color: $newGreyColor1;
     }
 
     &.is-show {
@@ -95,7 +107,7 @@
         text-decoration: none;
         white-space: nowrap;
         &:hover {
-          background-color: #eaf3ff;
+          background-color: $newGreyColor2;
           color: $newMainColor;
         }
       }

@@ -30,10 +30,7 @@
   <section
     ref="swiper"
     :class="['bk-swiper-home', extCls]"
-    :style="{
-      width: `${realWidth}px`,
-      height: `${realHeight}px`
-    }"
+    :style="swiperStyle"
     v-if="sourceList.length"
   >
     <hgroup :style="{ width: `${swiperMainWith}px`, transform: `translateX(${imageTransfer}px)` }"
@@ -163,6 +160,17 @@ export default {
       const indexMove = this.realWidth * this.currentIndex
       const imageMove = indexMove - this.mouseDistance
       return -imageMove
+    },
+
+    swiperStyle () {
+      const swiperStyle = {}
+      if (this.realWidth > 0) {
+        swiperStyle.width = `${this.realWidth}px`
+      }
+      if (this.realHeight > 0) {
+        swiperStyle.height = `${this.realHeight}px`
+      }
+      return swiperStyle
     }
   },
 
@@ -186,7 +194,9 @@ export default {
   },
 
   mounted () {
-    this.initStatus()
+    setTimeout(() => {
+      this.initStatus()
+    })
   },
 
   beforeDestroy () {
@@ -195,9 +205,24 @@ export default {
 
   methods: {
     calcSize () {
+      console.log(this)
+      const swiperSize = getElementSize(this.$refs.swiper)
       const swiperParentSize = getElementSize(this.$refs.swiper && this.$refs.swiper.parentElement)
-      this.realWidth = +this.width > 0 ? this.width : swiperParentSize.width || 600
-      this.realHeight = +this.height > 0 ? this.height : swiperParentSize.height || 300
+      // 优先级：width属性 > swiper css > 父容器 css
+      this.realWidth = +this.width > 0
+        ? this.width
+        : (
+          swiperSize.width > 0
+            ? swiperSize.width
+            : swiperParentSize.width
+        )
+      this.realHeight = +this.height > 0
+        ? this.height
+        : (
+          swiperSize.height > 25
+            ? swiperSize.height
+            : swiperParentSize.height
+        )
     },
 
     initStatus () {

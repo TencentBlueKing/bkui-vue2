@@ -30,7 +30,7 @@
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 
-export default {
+module.exports = {
   // 文档页面分组数据，groupId 为分组标题，components 为当前组内的组件
   groups: [
     {
@@ -91,7 +91,7 @@ export default {
         },
         {
           id: 'transition',
-          name: 'Transition 过度动画'
+          name: 'Transition 内置动画'
         }
       ]
     },
@@ -189,7 +189,7 @@ export default {
           name: 'TimePicker 时间选择器'
         },
         {
-          id: 'tag',
+          id: 'tagInput',
           name: 'TagInput 标签输入框'
         },
         {
@@ -197,8 +197,8 @@ export default {
           name: 'Upload 文件上传'
         },
         {
-          'id': 'searchselect',
-          'name': 'SearchSelect 查询选择器'
+          id: 'searchSelect',
+          name: 'SearchSelect 查询选择器'
         },
         {
           id: 'slider',
@@ -213,7 +213,7 @@ export default {
           name: 'Rate 评分'
         },
         {
-          id: 'componseFormItem',
+          id: 'composeFormItem',
           name: 'ComposeFormItem 表单项组合'
         },
         {
@@ -247,7 +247,7 @@ export default {
         },
         {
           id: 'swiper',
-          name: 'Swiper 轮播'
+          name: 'Swiper 轮播图'
         },
         {
           id: 'pagination',
@@ -278,7 +278,7 @@ export default {
           name: 'Table 表格'
         },
         {
-          id: 'tags',
+          id: 'tag',
           name: 'Tag 标签'
         },
         {
@@ -324,7 +324,7 @@ export default {
         },
         {
           id: 'tooltips',
-          name: 'Tooltips 工具提示'
+          name: 'Tooltips 工具提示（指令）'
         },
         {
           id: 'popover',
@@ -339,7 +339,7 @@ export default {
           name: 'Dialog 对话框'
         },
         {
-          id: 'sideSlider',
+          id: 'sideslider',
           name: 'Sideslider 侧栏'
         },
         {

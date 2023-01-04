@@ -46,8 +46,9 @@ const defaultOptions = {
   trigger: 'mouseenter focus',
   theme: 'dark',
   interactive: true,
+  boundary: 'window',
   content: '',
-  allowHtml: false,
+  allowHTML: true,
   extCls: ''
 }
 
@@ -73,6 +74,11 @@ const createTippy = (el, binding) => {
   const value = binding.value
   const options = { ...defaultOptions }
 
+  // allowHtml 兼容之前
+  if (value.allowHtml || value.allowHTML) {
+    value.allowHTML = true
+  }
+
   if (typeof value === 'object') {
     Object.assign(options, value)
   } else {
@@ -90,14 +96,19 @@ const createTippy = (el, binding) => {
     options.theme = 'light'
   }
 
-  if (options.allowHtml) {
+  if (options.allowHTML) {
     const selector = options.content
     if (selector instanceof Vue) {
       options.content = selector.$el
     } else if (typeof selector === 'string') {
-      const element = document.querySelector(selector)
-      if (element) {
-        options.content = element
+      try {
+        const element = document.querySelector(selector)
+        if (element) {
+          options.content = element
+        }
+      } catch (e) {
+        const element = document.createElement('div')
+        element.innerHTML = selector
       }
     }
   }
@@ -138,7 +149,7 @@ const bkTooltips = {
         el.tippyInstance = createTippy(el, binding)
       } else {
         // TODO: 暂时先这样处理，如果是 html 那么再次实例化，如果不实例化只是更新 html 内容的话，那么第一次绑定的事件会消失
-        if (typeof value === 'object' && binding.value.allowHtml) {
+        if (typeof value === 'object' && (binding.value.allowHtml || binding.value.allowHTML)) {
           el.tippyInstance = createTippy(el, binding)
         } else {
           el._tippy.setContent(content)

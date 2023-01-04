@@ -1111,6 +1111,7 @@
 | input-type | 输入框类型 | String | text/number | text |
 | clearable | 是否允许清空 | Boolean | —— | false |
 | validate-message | 校验提示文本 | String | —— | '' |
+| input-unfocus-clear | 当单元格失去焦点时是否清除输入框的内容 | Boolean | —— | false |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.search-select-wrap` 上 | String | —— | —— |
 
 ### 事件 {page=#/searchselect}
@@ -1121,6 +1122,7 @@
 | input-cut | 当用户剪切内容时触发的事件 | event |
 | input-click | 当用户点击input时触发的事件 | event |
 | input-focus | 当单元格获取焦点时触发该事件 | event |
+| input-click-outside | 当单元格失去焦点时触发该事件 | event |
 | menu-select | 当选择父列表项时触发该事件 | item, index |
 | menu-child-select | 当选择子列表项时触发该事件 | item, index |
 | change | 当输入内容发生变化时触发该事件 | list |
