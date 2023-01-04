@@ -35,7 +35,8 @@
       :version-list="versionList"
       :version-detail="versionDetail"
       :get-version-detail="handleGetVersionDetail"
-      :get-version-list="handleGetVersionList">
+      :get-version-list="handleGetVersionList"
+      @change="handleChange">
       <template slot-scope="content">
         <div v-if="content.detail">
           <h1>【{{content.detail}}】版本更新明细</h1>
@@ -46,6 +47,20 @@
       </template>
     </bk-version-detail>
     <bk-button @click="show = !show" theme="primary">点击查看日志详情</bk-button>
+    <div class="example-item">
+      <bk-version-detail
+        :current-version="2"
+        :finished="finished"
+        :show.sync="mdShow"
+        :md-mode="true"
+        :version-list="versionList"
+        :version-detail="versionDetail"
+        :get-version-detail="handleGetMdDetail"
+        :get-version-list="handleGetVersionList"
+        @change="handleChange">
+      </bk-version-detail>
+      <bk-button @click="mdShow = !mdShow" theme="primary">查看markdown格式日志</bk-button>
+    </div>
   </div>
 </template>
 <script>
@@ -59,6 +74,7 @@ export default {
     return {
       finished: false,
       show: false,
+      mdShow: false,
       versionDetail: '',
       versionList: [
         {
@@ -138,6 +154,19 @@ export default {
           resolve()
         }, 1000)
       })
+    },
+    handleGetMdDetail (v) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          this.versionDetail = `# ${v.title}更新日志\n- 【新增】内置\` ES6+\` 语言转义能力增强\n- 【新增】任务通知中心\n- 【新增】控制台新增命令 cleanAppCache\n- 【更新】上传时版本号推荐\n- 【新增】云开发云调用快速启动模板\n- 【新增】插件增加工具回退时的保护机制\n- 【优化】素材管理，不再维护的提示\n- 【新增】体验评分支持“iPhone X兼容”检验规则\n- 【新增】sitemap，控制台显示当前页面是否索引\n- 【更新】project.config.json 中新增设置 uploadWithSourceMap\n- 【新增】createUDPSocket bindUDPSocket 改为同步接口\n- 【新增】代码保护默认打开\n- 【新增】增加设置是否工具启动默认打开项目\n- 【新增】代码保护默认打开\n- 【新增】增加设置是否工具启动默认打开项目`
+          resolve()
+        }, 1000)
+      })
+    },
+    handleChange (val) {
+      if (!val) {
+        this.versionDetail = ''
+      }
     }
   }
 }

@@ -12,7 +12,7 @@
 ###### 2023.01.05
 
 * **[add]**:
-    - [版本更新明细业务组件](#/version-detail) 增加 markdown 渲染模式；支持指定默认选中的版本
+    - [版本更新明细业务组件](#/version-detail) 增加 [markdown 渲染模式](#/version-detail?anchor=markdown-xuan-ran)；支持指定默认选中的版本
     - [Input 输入框](#/input) 数字输入框不允许输入拼音以及特殊字符 alt, ctrl, meta, shift
     - [TagInput 标签输入框](#/tag-input) 新增 `free-paste` 配置。配置此属性后，可随意粘贴内容至 tag-input，粘贴后点击回车，粘贴的内容会自动生成标签 [#355](https://github.com/TencentBlueKing/bkui-vue2/issues/355)
 * **[fix]**:
@@ -28,6 +28,7 @@
 ---
 
 ### 2.5.2 {page=#/changelog}
+###### 2022.11.07
 
 * **[fix]**:
     - [Tooltips 工具提示 （指令）](#/tooltips) 修复配置 allowHTML 为 true 时，content 属性配置为 DOM Selector 的问题
