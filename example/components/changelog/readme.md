@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.1 {page=#/changelog}
+
+* **[add]**:
+    - [版本更新明细业务组件](#/version-detail) 支持指定默认选中的版本
+
+---
+
 ### 2.5.3 {page=#/changelog}
 ###### 2023.01.05
 
