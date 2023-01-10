@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.2 {page=#/changelog}
+
+* **[add]**:
+    - [Tab 选项卡](#/tab) 新增色块样式
+
+---
+
 ### 2.5.4-beta.1 {page=#/changelog}
 
 * **[add]**:
