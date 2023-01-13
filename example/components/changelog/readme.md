@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.3 {page=#/changelog}
+
+* **[fix]**:
+    - [DatePicker 日期选择器](#/date-picker) 修复点击 header slot, footer slot 中的 input 文本框后，弹层关闭的问题
+
+---
+
 ### 2.5.4-beta.2 {page=#/changelog}
 
 * **[add]**:
