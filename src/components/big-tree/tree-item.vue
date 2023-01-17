@@ -55,7 +55,7 @@
       <span class="node-checkbox"
         v-if="props.node.hasCheckbox"
         :class="{
-          'is-disabled': props.node.disabled || props.node.disabledCheck,
+          'is-disabled': props.node.disabled || props.node.disableCheck,
           'is-checked': props.node.checked,
           'is-indeterminate': props.node.indeterminate
         }"

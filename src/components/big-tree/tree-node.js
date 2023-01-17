@@ -152,12 +152,12 @@ export default class TreeNode {
   /**
    * 是否禁用 checkbox
    */
-  get disabledCheck () {
+  get disableCheck () {
     return this.state.disableCheck
   }
 
-  set disabledCheck (disabledCheck) {
-    this.setState('disabledCheck', disabledCheck)
+  set disableCheck (disableCheck) {
+    this.setState('disableCheck', disableCheck)
   }
 
   get collapseIcon () {

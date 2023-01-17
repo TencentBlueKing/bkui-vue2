@@ -559,7 +559,7 @@ export default {
         const ids = convertToArray(nodeId)
         const nodes = ids.map(id => this.getNodeById(id)).filter(node => !!node)
         nodes.forEach(node => {
-          node.disabledCheck = mergeOptions.disabled
+          node.disableCheck = mergeOptions.disabled
         })
         if (mergeOptions.emitEvent) {
           this.$emit('disable-check-change', nodes.length > 1 ? nodes : nodes[0])
@@ -668,7 +668,7 @@ export default {
       })
     },
     handleNodeCheck (node) {
-      if (node.disabled || node.disabledCheck) {
+      if (node.disabled || node.disableCheck) {
         return false
       }
       this.setChecked(node.id, {
