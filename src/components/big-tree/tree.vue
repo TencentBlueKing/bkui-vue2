@@ -668,7 +668,7 @@ export default {
       })
     },
     handleNodeCheck (node) {
-      if (node.disabled || node.handleNodeCheck) {
+      if (node.disabled || node.disabledCheck) {
         return false
       }
       this.setChecked(node.id, {
