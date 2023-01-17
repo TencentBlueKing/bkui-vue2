@@ -549,6 +549,25 @@ export default {
         console.warn(e.message)
       }
     },
+    setDisableCheck (nodeId, options = {}) {
+      try {
+        const mergeOptions = {
+          disabled: true,
+          emitEvent: false,
+          ...options
+        }
+        const ids = convertToArray(nodeId)
+        const nodes = ids.map(id => this.getNodeById(id)).filter(node => !!node)
+        nodes.forEach(node => {
+          node.disableCheck = mergeOptions.disabled
+        })
+        if (mergeOptions.emitEvent) {
+          this.$emit('disable-check-change', nodes.length > 1 ? nodes : nodes[0])
+        }
+      } catch (e) {
+        console.warn(e.message)
+      }
+    },
     handleCalculateLine () {
       this.calculateTimer && clearTimeout(this.calculateTimer)
       if (this.needsCalculateNodes.length) {
@@ -649,7 +668,7 @@ export default {
       })
     },
     handleNodeCheck (node) {
-      if (node.disabled) {
+      if (node.disabled || node.disableCheck) {
         return false
       }
       this.setChecked(node.id, {
