@@ -4,174 +4,175 @@
     Vue.use(bkSelect)
     let seed = 0
     export default {
-        components: {
-            bkOption,
-            bkOptionGroup,
-            bkBigTree,
-            bkStar
-        },
-        data () {
-            const options = Array(30).fill(0).map((_, index) => {
-                return {
-                    id: index,
-                    name: 'Option-' + index,
-                    collection: Math.round(Math.random())
-                }
-            })
-            return {
-                options: options,
-                hoverId: -1,
-                value: 3,
-                multipleValue: [1],
-                groupValue: ['1-1'],
-                list: [
-                    { id: 1, name: '爬山' },
-                    { id: 2, name: '跑步' },
-                    { id: 3, name: '打球' },
-                    { id: 4, name: '跳舞' },
-                    { id: 5, name: '健身' },
-                    { id: 6, name: '骑车' },
-                    { id: 7, name: 'k8s' },
-                    { id: 8, name: 'K8S' },
-                    { id: 9, name: 'mesos' },
-                    { id: 10, name: 'MESOS' }
-                ],
-                virtualList: new Array(10000).fill(1).map((a, b) => ({ key: b, display: b })),
-                groupList: [
-                    {
-                        id: 1,
-                        name: '爬山',
-                        showCollapse: true,
-                        isCollapse: true,
-                        children: [
-                            { id: '1-1', name: '爬山-1' },
-                            { id: '1-2', name: '爬山-2' }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        name: '跑步',
-                        showCollapse: true,
-                        isCollapse: false,
-                        children: [
-                            { id: '2-1', name: '跑步-1' },
-                            { id: '2-2', name: '跑步-2' }
-                        ]
-                    },
-                    {
-                        id: 3,
-                        name: '骑车',
-                        showCollapse: true,
-                        readonly: true,
-                        children: [
-                            { id: '3-1', name: '骑车-1' },
-                            { id: '3-2', name: '骑车-2' }
-                        ]
-                    }
-                ],
-                selectValue: ['node-3'],
-                treeData: this.getNodes(null, 2, 3),
-                bottomLoadingOptions: {
-                   size: 'mini',
-                   isLoading: false
-                },
-                allowCreateValues: [1]
+      components: {
+        bkOption,
+        bkOptionGroup,
+        bkBigTree,
+        bkStar
+      },
+      data () {
+        const options = Array(30).fill(0).map((_, index) => {
+          return {
+            id: index,
+            name: 'Option-' + index,
+            collection: Math.round(Math.random())
+          }
+        })
+        return {
+          value2: '',
+          options: options,
+          hoverId: -1,
+          value: 3,
+          multipleValue: [1],
+          groupValue: ['1-1'],
+          list: [
+            { id: 1, name: '爬山' },
+            { id: 2, name: '跑步' },
+            { id: 3, name: '打球' },
+            { id: 4, name: '跳舞' },
+            { id: 5, name: '健身' },
+            { id: 6, name: '骑车' },
+            { id: 7, name: 'k8s' },
+            { id: 8, name: 'K8S' },
+            { id: 9, name: 'mesos' },
+            { id: 10, name: 'MESOS' }
+        ],
+          virtualList: new Array(10000).fill(1).map((a, b) => ({ key: b, display: b })),
+          groupList: [
+            {
+              id: 1,
+              name: '爬山',
+              showCollapse: true,
+              isCollapse: true,
+              children: [
+                { id: '1-1', name: '爬山-1' },
+                { id: '1-2', name: '爬山-2' }
+              ]
+            },
+            {
+              id: 2,
+              name: '跑步',
+              showCollapse: true,
+              isCollapse: false,
+              children: [
+                { id: '2-1', name: '跑步-1' },
+                { id: '2-2', name: '跑步-2' }
+              ]
+            },
+            {
+              id: 3,
+              name: '骑车',
+              showCollapse: true,
+              readonly: true,
+              children: [
+                { id: '3-1', name: '骑车-1' },
+                { id: '3-2', name: '骑车-2' }
+              ]
             }
-        },
-        methods: {
-            handleMouseEnter (id) {
-                this.hoverId = id
-            },
-            handleMouseLeave () {
-                this.hoverId = -1
-            },
-            handleCollection (option) {
-                option.collection = option.collection > 0 ? 0 : 1
-            },
-            handleToggle () {
-                // 收藏置顶
-                this.options = this.options.sort((pre, next) => {
-                    return next.collection - pre.collection
-                })
-            },
-            handleGroupCollapse (isCollapse) {
-                console.log('isCollapse', isCollapse)
-            },
-            handleCreate () {
-                this.list.push({
-                    id: Math.random(),
-                    name: `新增项-${this.list.length}`
-                })
-            },
-            handleDeleteOption (deleteOption) {
-                this.list = this.list.filter(option => option !== deleteOption)
-            },
-            getNodes (parent, childCount, deep) {
-                const nodes = []
-                for (let i = 0; i < childCount; i++) {
-                    const node = {
-                        id: `node-${seed}`,
-                        level: parent ? parent.level + 1 : 0,
-                        name: `node-name-${seed++}`
-                    }
-                    if (node.level < deep) {
-                        node.children = this.getNodes(node, childCount, deep)
-                    }
-                    nodes.push(node)
-                }
-                return nodes
-            },
-            remote (keyword) {
-                this.$refs.tree && this.$refs.tree.filter(keyword)
-            },
-            handleCheckChange (id, checked) {
-                this.selectValue = [...id]
-            },
-            handleValuesChange (options) {
-                this.$refs.tree && this.$refs.tree.setChecked(options.id, { emitEvent: true, checked: false })
-            },
-            handleClear() {
-                this.$refs.tree && this.$refs.tree.removeChecked({ emitEvent: false })
-            },
-            handleScrollToBottom() {
-                this.bottomLoadingOptions.isLoading = true
-                setTimeout(() => {
-                    this.list.push(
-                       { id: '11', name: '爬山-2' }
-                    )
-                    this.bottomLoadingOptions.isLoading = false
-                }, 2000)
-            }
+          ],
+          selectValue: ['node-3'],
+          treeData: this.getNodes(null, 2, 3),
+          bottomLoadingOptions: {
+            size: 'mini',
+            isLoading: false
+          },
+          allowCreateValues: [1]
         }
+      },
+      methods: {
+          handleMouseEnter (id) {
+              this.hoverId = id
+          },
+          handleMouseLeave () {
+              this.hoverId = -1
+          },
+          handleCollection (option) {
+              option.collection = option.collection > 0 ? 0 : 1
+          },
+          handleToggle () {
+              // 收藏置顶
+              this.options = this.options.sort((pre, next) => {
+                  return next.collection - pre.collection
+              })
+          },
+          handleGroupCollapse (isCollapse) {
+              console.log('isCollapse', isCollapse)
+          },
+          handleCreate () {
+              this.list.push({
+                  id: Math.random(),
+                  name: `新增项-${this.list.length}`
+              })
+          },
+          handleDeleteOption (deleteOption) {
+              this.list = this.list.filter(option => option !== deleteOption)
+          },
+          getNodes (parent, childCount, deep) {
+              const nodes = []
+              for (let i = 0; i < childCount; i++) {
+                  const node = {
+                      id: `node-${seed}`,
+                      level: parent ? parent.level + 1 : 0,
+                      name: `node-name-${seed++}`
+                  }
+                  if (node.level < deep) {
+                      node.children = this.getNodes(node, childCount, deep)
+                  }
+                  nodes.push(node)
+              }
+              return nodes
+          },
+          remote (keyword) {
+              this.$refs.tree && this.$refs.tree.filter(keyword)
+          },
+          handleCheckChange (id, checked) {
+              this.selectValue = [...id]
+          },
+          handleValuesChange (options) {
+              this.$refs.tree && this.$refs.tree.setChecked(options.id, { emitEvent: true, checked: false })
+          },
+          handleClear() {
+              this.$refs.tree && this.$refs.tree.removeChecked({ emitEvent: false })
+          },
+          handleScrollToBottom() {
+              this.bottomLoadingOptions.isLoading = true
+              setTimeout(() => {
+                  this.list.push(
+                      { id: '11', name: '爬山-2' }
+                  )
+                  this.bottomLoadingOptions.isLoading = false
+              }, 2000)
+          }
+      }
     }
 </script>
 
 <style lang="postcss">
-    .custom-option .icon-close {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 3px;
-        font-size: 26px;
-        width: 26px;
-        height: 26px;
-        line-height: 26px;
-        text-align: center;
-    }
-    .custom-option:hover .icon-close {
-        display: block;
-    }
-    .icon-plus-circle {
-        display: inline-block;
-        vertical-align: -1px;
-        font-size: 12px;
-        margin-right: 4px;
-    }
-    .select-collection {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.custom-option .icon-close {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 3px;
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+}
+.custom-option:hover .icon-close {
+  display: block;
+}
+.icon-plus-circle {
+  display: inline-block;
+  vertical-align: -1px;
+  font-size: 12px;
+  margin-right: 4px;
+}
+.select-collection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 </style>
 
 [[toc]]
@@ -1246,11 +1247,11 @@
                 :name="option.name">
             </bk-option>
         </bk-select>
-        <bk-select style="width: 250px;" 
-            class="ml10" 
-            v-model="allowCreateValues" 
-            multiple 
-            searchable 
+        <bk-select style="width: 250px;"
+            class="ml10"
+            v-model="allowCreateValues"
+            multiple
+            searchable
             display-tag
             allow-create>
             <bk-option v-for="option in list"

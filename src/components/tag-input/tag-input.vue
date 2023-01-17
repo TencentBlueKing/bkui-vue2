@@ -211,6 +211,10 @@ export default {
     tpl: Function,
     tagTpl: Function,
     pasteFn: Function,
+    freePaste: {
+      type: Boolean,
+      default: false
+    },
     filterCallback: {
       type: Function,
       default: null
@@ -657,6 +661,14 @@ export default {
       event.preventDefault()
 
       const value = event.clipboardData.getData('text')
+
+      if (this.freePaste) {
+        this.curInputValue = this.curInputValue + value
+        const charLen = this.getCharLength(value)
+        this.$refs.input.style.width = (charLen * this.INPUT_MIN_WIDTH) + 'px'
+        return
+      }
+
       const valArr = this.pasteFn ? this.pasteFn(value) : this.defaultPasteFn(value)
       let tags = []
 
@@ -833,7 +845,7 @@ export default {
           ) {
             this.handlerResultSelect(this.renderList[this.focusItemIndex], 'select')
             this.showList = false
-          } else if (this.allowCreate) {
+          } else if (this.allowCreate && this.curInputValue.trim()) {
             event.preventDefault()
             const tag = this.curInputValue
             this.handlerResultSelect(tag, 'custom')
