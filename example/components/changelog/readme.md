@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.4 {page=#/changelog}
+
+* **[fix]**:
+    - [Big Tree 大树](#/big-tree) 增加单独禁用checkbox选项
+
+---
+
 ### 2.5.4-beta.3 {page=#/changelog}
 
 * **[fix]**:
