@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.5 {page=#/changelog}
+
+* **[fix]**:
+    - [Big Tree 大树](#/big-tree) 修复搜索时连线的计算问题
+
+---
+
 ### 2.5.4-beta.4 {page=#/changelog}
 
 * **[fix]**:
