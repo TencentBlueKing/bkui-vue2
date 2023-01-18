@@ -630,7 +630,6 @@ export default {
           if (matched) {
             node.parent && (node.parent.expanded = true)
             matchedNodes.push(node)
-          } else {
             node.recalculateLinkLine()
           }
         })
