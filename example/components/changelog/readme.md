@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.6 {page=#/changelog}
+
+* **[fix]**:
+    - [DatePicker 日期选择器](#/date-picker) 修复没有头部和底部插槽时，去获取 length 报错，导致点击非组件区域，弹窗无法关闭点击的问题
+
+---
+
 ### 2.5.4-beta.5 {page=#/changelog}
 
 * **[fix]**:

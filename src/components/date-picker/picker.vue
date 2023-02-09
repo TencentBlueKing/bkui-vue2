@@ -570,14 +570,18 @@ export default {
         }
 
         const { header: headerSlots, footer: footerSlots } = this.$slots
-        for (let i = 0; i < headerSlots.length; i++) {
-          if (headerSlots[i].elm.contains(e.target)) {
-            return
+        if (headerSlots) {
+          for (let i = 0; i < headerSlots.length; i++) {
+            if (headerSlots[i].elm.contains(e.target)) {
+              return
+            }
           }
         }
-        for (let i = 0; i < footerSlots.length; i++) {
-          if (footerSlots[i].elm.contains(e.target)) {
-            return
+        if (footerSlots) {
+          for (let i = 0; i < footerSlots.length; i++) {
+            if (footerSlots[i].elm.contains(e.target)) {
+              return
+            }
           }
         }
 
