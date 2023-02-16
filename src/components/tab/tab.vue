@@ -28,7 +28,7 @@
 
 <template>
   <div :style="tabStyle"
-    :class="['bk-tab', tabPosition === 'top' ? `bk-tab-${type}` : `position-${tabPosition}`, extCls]">
+    :class="tabClass">
     <div class="bk-tab-header"
       :style="headerStyle"
       ref="tabHeader"
@@ -289,6 +289,18 @@ export default {
     visiblePanels () {
       return this.panelInstance.filter(panel => panel.visible)
     },
+    tabClass () {
+      const arr = ['bk-tab', this.extCls]
+      if (this.tabPosition === 'top') {
+        arr.push(`bk-tab-${this.type}`)
+      } else {
+        arr.push(`position-${this.tabPosition}`)
+        if (this.type === 'card-tab') {
+          arr.push(`bk-tab-vertical-tab`)
+        }
+      }
+      return arr
+    },
     tabStyle () {
       if (this.isSidePosition) {
         const paddingValue = 21
@@ -300,6 +312,11 @@ export default {
     },
     headerStyle () {
       if (this.tabPosition === 'top') {
+        if (this.type === 'card-tab') {
+          return {
+            height: `${this.labelHeight}px`
+          }
+        }
         const diffValue = this.type === 'border-card' ? 2 : 1
         return {
           height: `${this.labelHeight}px`,
@@ -315,6 +332,9 @@ export default {
       return this.panelInstance.length < 1
     },
     hasActiveBar () {
+      if (this.type === 'card-tab') {
+        return false
+      }
       return (this.type === 'unborder-card' || this.isSidePosition) && !this.isEmpty
     },
     tabLabelListStyle () {
