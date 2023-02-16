@@ -48,7 +48,7 @@ const defaultOptions = {
   interactive: true,
   boundary: 'window',
   content: '',
-  allowHTML: true,
+  allowHTML: false,
   extCls: ''
 }
 
@@ -74,12 +74,12 @@ const createTippy = (el, binding) => {
   const value = binding.value
   const options = { ...defaultOptions }
 
-  // allowHtml 兼容之前
-  if (value.allowHtml || value.allowHTML) {
-    value.allowHTML = true
-  }
-
   if (typeof value === 'object') {
+    // allowHtml 兼容之前
+    if ('allowHtml' in value || 'allowHTML' in value) {
+      value.allowHTML = true
+    }
+
     Object.assign(options, value)
   } else {
     options.content = value
