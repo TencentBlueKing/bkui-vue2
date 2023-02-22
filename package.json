@@ -1,6 +1,6 @@
 {
   "name": "bk-magic-vue",
-  "version": "2.5.4-beta.6",
+  "version": "2.5.4-beta.7",
   "description": "基于蓝鲸 Magicbox 和 Vue 的前端组件库",
   "main": "dist/bk-magic-vue.min.js",
   "files": [
