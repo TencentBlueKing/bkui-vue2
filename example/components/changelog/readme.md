@@ -8,7 +8,7 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.4-beta.7 {page=#/changelog}
+### 2.5.4-beta.8 {page=#/changelog}
 
 * **[fix]**:
     - 去除 tippy will-change 影响
