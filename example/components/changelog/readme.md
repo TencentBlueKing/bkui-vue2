@@ -11,6 +11,13 @@
 ### 2.5.4-beta.7 {page=#/changelog}
 
 * **[fix]**:
+    - 去除 tippy will-change 影响
+
+---
+
+### 2.5.4-beta.7 {page=#/changelog}
+
+* **[fix]**:
     - [Sideslider 侧栏](#/sideslider) 修复在 `.bk-sideslider-content` 容器内，不使用此容器的滚动而是单独使用自己的 dom 元素滚动失败的问题
 
 ---
