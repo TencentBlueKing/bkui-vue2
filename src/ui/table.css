@@ -535,7 +535,6 @@ $tableDarkHeaderHover: #eaebf0;
 }
 .bk-table-empty-text {
     padding: 60px 0;
-    width: 50%;
     color: $fnMainColor;
     .bk-table-empty-icon {
         font-size: 65px;
