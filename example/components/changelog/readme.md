@@ -8,6 +8,35 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.8 {page=#/changelog}
+
+* **[fix]**:
+    - [Sideslider 侧栏](#/sideslider) 修复在 `.bk-sideslider-content` 容器内，不使用此容器的滚动而是单独使用自己的 dom 元素滚动失败的问题
+
+---
+
+
+### 2.5.4-beta.6 {page=#/changelog}
+
+* **[fix]**:
+    - [DatePicker 日期选择器](#/date-picker) 修复没有头部和底部插槽时，去获取 length 报错，导致点击非组件区域，弹窗无法关闭点击的问题
+
+---
+
+### 2.5.4-beta.5 {page=#/changelog}
+
+* **[fix]**:
+    - [Big Tree 大树](#/big-tree) 修复搜索时连线的计算问题
+
+---
+
+### 2.5.4-beta.4 {page=#/changelog}
+
+* **[fix]**:
+    - [Big Tree 大树](#/big-tree) 增加单独禁用checkbox选项
+
+---
+
 ### 2.5.4-beta.3 {page=#/changelog}
 
 * **[fix]**:

@@ -176,7 +176,7 @@ export default {
 
         this.$nextTick(() => {
           if (this.$refs.content) {
-            addResizeListener(this.$refs.content, this.handleContentResize)
+            addResizeListener(this.$refs.content, this.handleContentResize, false)
           }
         })
 
