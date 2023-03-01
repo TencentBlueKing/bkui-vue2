@@ -104,7 +104,6 @@
             <bk-exception type="empty" scene="part">
               <div>{{ emptyText || t('bk.table.emptyText') }}</div>
             </bk-exception>
-            <!-- <i class="bk-table-empty-icon bk-icon icon-empty"></i> -->
           </slot>
         </span>
       </div>
