@@ -764,7 +764,7 @@ export default {
         }
         return false
       })
-      if (option) {
+      if (option && Object.keys(option).length !== 0) {
         if (this.multiple && this.selected.includes(option.id)) {
           return false
         }

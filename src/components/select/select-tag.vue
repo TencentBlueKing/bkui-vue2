@@ -42,7 +42,7 @@
       :class="{ 'width-limit-tag': select.isTagWidthLimit }"
       v-for="option in select.selectedOptions"
       :key="option.id">
-      <span>{{option.name}}</span>
+      <span v-bk-overflow-tips>{{option.name}}</span>
       <i class="bk-icon icon-close" @click="handleRemoveSelected($event, option)"></i>
     </div>
     <input v-if="select.allowCreate"
@@ -55,8 +55,12 @@
 </template>
 
 <script>
+import bkOverflowTips from '../../directives/overflow-tips'
 export default {
   inject: ['select'],
+  directives: {
+    bkOverflowTips
+  },
   data () {
     return {
       overflowTagNode: null,
