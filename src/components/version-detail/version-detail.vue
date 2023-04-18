@@ -49,7 +49,7 @@
               <slot name="item" :version="{ item, index }">
                 <span class="item-title" v-bk-overflow-tips="{ content: item[versionTitleName], placement: 'right' }">{{item[versionTitleName]}}</span>
                 <span class="item-date">{{item[versionSubTitleName]}}</span>
-                <span v-if="item[versionTitleName] === currentVersion" class="item-current"> {{ '当前版本' }} </span>
+                <span v-if="item[versionTitleName] === currentVersion" class="item-current"> {{ t('bk.versionDetail.currentVersion') }} </span>
               </slot>
             </li>
             <li class="left-list-loading border-after"
@@ -76,11 +76,14 @@
   </bk-dialog>
 </template>
 <script>
+import locale from 'bk-magic-vue/lib/locale'
 import bkOverflowTips from '../../directives/overflow-tips'
 import bkloading from '../loading/directive'
 import BkDialog from '../dialog'
+
 export default {
   name: 'bk-version-detail',
+  mixins: [locale.mixin],
   components: {
     BkDialog
   },

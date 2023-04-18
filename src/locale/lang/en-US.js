@@ -184,6 +184,9 @@ export default {
       original: 'original size',
       prev: 'prev',
       next: 'next'
+    },
+    versionDetail: {
+      currentVersion: 'Current'
     }
   }
 }

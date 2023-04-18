@@ -182,6 +182,9 @@ export default {
       fullScreen: '适应屏幕',
       original: '快速回到 1：1'
 
+    },
+    versionDetail: {
+      currentVersion: '当前版本'
     }
   }
 }
