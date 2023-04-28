@@ -8,6 +8,26 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.4-beta.9 {page=#/changelog}
+
+* **[add]**:
+    - [Select 下拉选框](#/select) 模式新增 tooltips
+    - [TagInput 标签输入框](#/tag-input) 模式新增 tooltips
+* **[update]**:
+    - [Exception 异常提示](#/exception) 图片替换
+* **[fix]**:
+    - [Select 下拉选框](#/select) 防止在搜索时使用回车选择到不存在的元素
+
+---
+
+### 2.5.4-beta.8 {page=#/changelog}
+
+* **[fix]**:
+    - [Sideslider 侧栏](#/sideslider) 修复在 `.bk-sideslider-content` 容器内，不使用此容器的滚动而是单独使用自己的 dom 元素滚动失败的问题
+
+---
+
+
 ### 2.5.4-beta.6 {page=#/changelog}
 
 * **[fix]**:
