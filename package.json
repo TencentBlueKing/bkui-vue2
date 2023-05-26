@@ -1,6 +1,6 @@
 {
   "name": "bk-magic-vue",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "基于蓝鲸 Magicbox 和 Vue 的前端组件库",
   "main": "dist/bk-magic-vue.min.js",
   "files": [
@@ -58,7 +58,7 @@
     "@babel/register": "~7.4.4",
     "@babel/runtime": "~7.4.5",
     "@babel/runtime-corejs2": "~7.4.5",
-    "@blueking/magicbox-header": "^1.1.49",
+    "@blueking/magicbox-header": "~1.1.57",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@vue/babel-helper-vue-jsx-merge-props": "~1.0.0",

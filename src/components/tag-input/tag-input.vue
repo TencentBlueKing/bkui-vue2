@@ -116,13 +116,15 @@ import bkLoading from '@/components/loading/directive'
 import emitter from '@/mixins/emitter'
 import bkPopover from '@/components/popover'
 import bkTooltips from '@/directives/tooltips'
+import bkOverflowTips from '../../directives/overflow-tips'
 
 export default {
   name: 'bk-tag-input',
   components: { listRender, tagRender, bkPopover },
   directives: {
     bkloading: bkLoading,
-    bkTooltips: bkTooltips
+    bkTooltips: bkTooltips,
+    bkOverflowTips
   },
   mixins: [locale.mixin, emitter],
   props: {

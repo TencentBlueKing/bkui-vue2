@@ -50,7 +50,7 @@
               <slot name="item" :version="{ item, index }">
                 <span class="item-title" v-bk-overflow-tips="{ content: item[versionTitleName], placement: 'right' }">{{item[versionTitleName]}}</span>
                 <span class="item-date">{{item[versionSubTitleName]}}</span>
-                <span v-if="item[versionTitleName] === currentVersion" class="item-current"> {{ '当前版本' }} </span>
+                <span v-if="item[versionTitleName] === currentVersion" class="item-current"> {{ currentTagText || t('bk.versionDetail.currentTagText') }} </span>
               </slot>
             </li>
             <li class="left-list-loading border-after"
@@ -69,7 +69,7 @@
         </div>
         <div class="bk-version-right" :style="{ height: dialog.height + 'px' }">
           <slot :detail="logContent">
-            <div v-if="mdMode" class="markdown-theme-style" v-html="logContent"></div>
+            <div v-if="mdMode" class="bk-version-markdown-theme" v-html="logContent"></div>
             <template v-else>
               {{ logContent }}
             </template>
@@ -84,6 +84,7 @@ import { marked } from 'marked/lib/marked.esm.js'
 import bkOverflowTips from '../../directives/overflow-tips'
 import bkloading from '../loading/directive'
 import BkDialog from '../dialog'
+import locale from 'bk-magic-vue/lib/locale'
 
 export default {
   name: 'bk-version-detail',
@@ -94,6 +95,7 @@ export default {
     bkOverflowTips,
     bkloading
   },
+  mixins: [locale.mixin],
   props: {
     // 是否显示
     show: Boolean,
@@ -146,6 +148,14 @@ export default {
     versionSubTitleName: {
       type: String,
       default: 'date'
+    },
+    defaultActive: {
+      type: String,
+      default: ''
+    },
+    currentTagText: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -166,6 +176,11 @@ export default {
     }
   },
   computed: {
+    defaultActiveIndex () {
+      const activeVersion = this.defaultActive || this.currentVersion
+      const index = this.versionList.findIndex(item => item[this.versionTitleName] === activeVersion)
+      return index === -1 ? 0 : index
+    },
     logContent () {
       if (this.mdMode) {
         return marked.parse(this.versionDetail)
@@ -236,7 +251,7 @@ export default {
           while (!this.finished && (this.dialog.height - 40) > this.versionList.length * 55) {
             typeof this.getVersionList === 'function' && await this.getVersionList()
           }
-          await this.handleItemClick()
+          await this.handleItemClick(this.defaultActiveIndex)
         }
         this.loading = false
       }
@@ -261,6 +276,7 @@ export default {
       this.loading = true
       typeof this.getVersionDetail === 'function' && await this.getVersionDetail(this.versionList[v]).catch(_ => false)
       this.loading = false
+      this.$emit('selected', v, this.versionList[v])
     }
   }
 }

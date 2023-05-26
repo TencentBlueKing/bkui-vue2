@@ -86,7 +86,14 @@
                             style: { color: 'red' }
                         })
                     },
-                    { tag: '等待mark审批' }
+                    {
+                        tag: '等待mark审批',
+                        color: 'blue',
+                        icon: this.$createElement('i', {
+                            class: 'bk-icon icon-circle-2-1 icon-loading',
+                            style: { color: 'blue' }
+                        })
+                    }
                 ],
                 customIconList2: [
                     {
@@ -170,6 +177,16 @@
     .timeline-custom-title {
         font-size: 12px;
         cursor: pointer;
+    }
+    .icon-loading {
+        display: inline-block;
+        animation: loadingCircle 1s infinite linear;
+        font-size: 12px;
+    }
+    @keyframes loadingCircle {
+        100% {
+            transform: rotate(360deg);
+        }
     }
 </style>
 
@@ -328,7 +345,14 @@
                             style: { color: 'red' }
                         })
                     },
-                    { tag: '等待mark审批' }
+                    {
+                        tag: '等待mark审批',
+                        color: 'blue',
+                        icon: this.$createElement('i', {
+                            class: 'bk-icon icon-circle-2-1 icon-loading',
+                            style: { color: 'blue' }
+                        })
+                    }
                 ],
                 customIconList2: [
                     {
@@ -357,13 +381,23 @@
 </script>
 <style lang="postcss">
     .timeline-update-time {
-        font-size: 12px;
+        font-size: 14px;
         color: #979ba5;
     }
     .timeline-content {
         p {
             margin-top: 0;
             margin-bottom: 8px;
+        }
+    }
+    .icon-loading {
+        display: inline-block;
+        animation: loadingCircle 1s infinite linear;
+        font-size: 12px;
+    }
+    @keyframes loadingCircle {
+        100% {
+            transform: rotate(360deg);
         }
     }
 </style>

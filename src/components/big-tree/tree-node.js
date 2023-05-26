@@ -58,6 +58,7 @@ export default class TreeNode {
       checked: false,
       expanded: tree.defaultExpandAll,
       disabled: false,
+      disableCheck: false,
       visible: true,
       matched: true,
       loading: false,
@@ -148,6 +149,17 @@ export default class TreeNode {
     return showCheckbox
   }
 
+  /**
+   * 是否禁用 checkbox
+   */
+  get disableCheck () {
+    return this.state.disableCheck
+  }
+
+  set disableCheck (disableCheck) {
+    this.setState('disableCheck', disableCheck)
+  }
+
   get collapseIcon () {
     return this.icon.collapse
   }
@@ -193,7 +205,7 @@ export default class TreeNode {
   }
 
   get checkable () {
-    if (this.disabled) {
+    if (this.disabled || this.disableCheck) {
       return false
     }
     if (this.tree.inSearch && this.tree.checkOnlyAvailableStrictly) {

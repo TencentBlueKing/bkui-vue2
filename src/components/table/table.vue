@@ -101,8 +101,9 @@
         }">
         <span class="bk-table-empty-text">
           <slot name="empty">
-            <i class="bk-table-empty-icon bk-icon icon-empty"></i>
-            <div>{{ emptyText || t('bk.table.emptyText') }}</div>
+            <bk-exception type="empty" scene="part">
+              <div>{{ emptyText || t('bk.table.emptyText') }}</div>
+            </bk-exception>
           </slot>
         </span>
       </div>
@@ -296,6 +297,7 @@ import TableHeader from './table-header'
 import TableFooter from './table-footer'
 import BkPagination from '../pagination'
 import locale from 'bk-magic-vue/lib/locale'
+import bkException from '../exception'
 
 let tableIdSeed = 1
 
@@ -306,7 +308,8 @@ export default {
     TableFooter,
     TableBody,
     BkPagination,
-    BkSpin
+    BkSpin,
+    bkException
   },
   directives: {
     Mousewheel
