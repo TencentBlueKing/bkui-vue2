@@ -62,7 +62,7 @@ module.exports = {
         {
           id: 'bkui',
           name: '蓝鲸前端开发脚手架',
-          extraLink: 'https://bk.tencent.com/docs/document/5.1/19/583'
+          extraLink: 'https://bk.tencent.com/docs/document/7.0/250/46110'
         }
       ]
     },

@@ -8,65 +8,27 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.4-beta.9 {page=#/changelog}
+### 2.5.4 {page=#/changelog}
+###### 2023.05.26
 
 * **[add]**:
+    - [Timeline 时间轴](#/timeline) 文档中添加节点 loading 效果
     - [Select 下拉选框](#/select) 模式新增 tooltips
     - [TagInput 标签输入框](#/tag-input) 模式新增 tooltips
-* **[update]**:
-    - [Exception 异常提示](#/exception) 图片替换
-* **[fix]**:
-    - [Select 下拉选框](#/select) 防止在搜索时使用回车选择到不存在的元素
-
----
-
-### 2.5.4-beta.8 {page=#/changelog}
-
-* **[fix]**:
-    - [Sideslider 侧栏](#/sideslider) 修复在 `.bk-sideslider-content` 容器内，不使用此容器的滚动而是单独使用自己的 dom 元素滚动失败的问题
-
----
-
-
-### 2.5.4-beta.6 {page=#/changelog}
-
-* **[fix]**:
-    - [DatePicker 日期选择器](#/date-picker) 修复没有头部和底部插槽时，去获取 length 报错，导致点击非组件区域，弹窗无法关闭点击的问题
-
----
-
-### 2.5.4-beta.5 {page=#/changelog}
-
-* **[fix]**:
-    - [Big Tree 大树](#/big-tree) 修复搜索时连线的计算问题
-
----
-
-### 2.5.4-beta.4 {page=#/changelog}
-
-* **[fix]**:
-    - [Big Tree 大树](#/big-tree) 增加单独禁用checkbox选项
-
----
-
-### 2.5.4-beta.3 {page=#/changelog}
-
-* **[fix]**:
-    - [DatePicker 日期选择器](#/date-picker) 修复点击 header slot, footer slot 中的 input 文本框后，弹层关闭的问题
-
----
-
-### 2.5.4-beta.2 {page=#/changelog}
-
-* **[add]**:
+    - [Big Tree 大树](#/big-tree) 增加单独禁用 checkbox 选项
     - [Tab 选项卡](#/tab) 新增色块样式
-
----
-
-### 2.5.4-beta.1 {page=#/changelog}
-
-* **[add]**:
     - [版本更新明细业务组件](#/version-detail) 支持指定默认选中的版本
+* **[fix]**:
+    - [Tooltips 工具提示 （指令）](#/tooltips) 修复 tooltips 在鼠标经过显示后，鼠标滚轮滚动页面，tooltips 不会消失的问题
+    - 修复 value 是字符串时，allowHtml 属性找不到报错的问题
+    - [Select 下拉选框](#/select) 防止在搜索时使用回车选择到不存在的元素
+    - [Sideslider 侧栏](#/sideslider) 修复在 `.bk-sideslider-content` 容器内，不使用此容器的滚动而是单独使用自己的 dom 元素滚动失败的问题
+    - [DatePicker 日期选择器](#/date-picker) 修复没有头部和底部插槽时，去获取 length 报错，导致点击非组件区域，弹窗无法关闭点击的问题
+    - [DatePicker 日期选择器](#/date-picker) 修复点击 header slot, footer slot 中的 input 文本框后，弹层关闭的问题
+    - [Big Tree 大树](#/big-tree) 修复搜索时连线的计算问题
+* **[update]**:
+    - [版本更新明细业务组件](#/version-detail) 版本日志样式调整，示例按照规范更新
+    - [Exception 异常提示](#/exception) 图片替换
 
 ---
 
@@ -1219,7 +1181,7 @@
 ###### 2019.06.26
 
 * **[add]**:
-    - <a href="https://docs.bk.tencent.com/blueapps/bkui/introduction.html" target="_blank">蓝鲸前端开发脚手架</a>
+    - <a href="https://bk.tencent.com/docs/document/7.0/250/46110" target="_blank">蓝鲸前端开发脚手架</a>
 * **[fix]**:
     - [Table 表格](#/table) 修复边框缺失问题
     - [Tree 树组件](#/tree) 修复 tree 组件父节点不能设置禁用的问题
