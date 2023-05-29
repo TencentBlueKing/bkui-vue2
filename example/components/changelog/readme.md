@@ -8,7 +8,8 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.5-beta.1 {page=#/changelog}
+### 2.5.5 {page=#/changelog}
+###### 2023.05.29
 
 * **[fix]**:
     - 修复 tooltip 弹层中无法滚动的问题
