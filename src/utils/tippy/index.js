@@ -910,12 +910,13 @@ function createTippy(reference, collectionProps) {
     }
   });
 
-  // 在 tooltips 上禁用鼠标滚轮默认事件
-  addWheelListener(popper, function (event) {
-    const ev = event || window.event
-    ev.stopPropagation && ev.stopPropagation()
-    ev.preventDefault && ev.preventDefault()
-  }, false)
+  // 在 tooltips 上禁用鼠标滚轮默认事件（禁止后，下拉框等使用到 tooltip 渲染弹层的组件无法滚动）
+  // addWheelListener(popper, function (event) {
+  //   console.error(popper);
+  //   const ev = event || window.event
+  //   ev.stopPropagation && ev.stopPropagation()
+  //   ev.preventDefault && ev.preventDefault()
+  // }, false)
 
   return instance;
   /* ======================= 🔒 Private methods 🔒 ======================= */
