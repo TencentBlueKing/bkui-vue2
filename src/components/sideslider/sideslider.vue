@@ -29,7 +29,7 @@
 <template>
   <transition name="slide">
     <article :data-transfer="transfer" v-transfer-dom class="bk-sideslider" :class="extCls" :style="{ zIndex: localZIndex }" v-if="isShow" @mousedown.self="handleQuickClose">
-      <section class="bk-sideslider-wrapper" :class="[{ left: direction === 'left', right: direction === 'right' }]" :style="{ width: width + 'px' }">
+      <section class="bk-sideslider-wrapper" :class="[{ left: direction === 'left', right: direction === 'right' }]" :style="{ width: calcWidth }">
         <div class="bk-sideslider-header">
           <div class="bk-sideslider-closer" @click="handleClose" :style="{ float: calcDirection }">
             <i class="bk-icon" :class="'icon-angle-' + direction"></i>
@@ -102,7 +102,7 @@ export default {
       default: true
     },
     width: {
-      type: Number,
+      type: [String, Number],
       default: 400
     },
     beforeClose: {
@@ -156,6 +156,12 @@ export default {
     }
   },
   computed: {
+    calcWidth () {
+      if (/^\d+$/.test(this.width)) {
+        return `${this.width}px`
+      }
+      return this.width
+    },
     calcDirection () {
       return this.direction === 'left' ? 'right' : 'left'
     }
