@@ -69,7 +69,7 @@
         </div>
         <div class="bk-version-right" :style="{ height: dialog.height + 'px' }">
           <slot :detail="logContent">
-            <div v-if="mdMode" class="markdown-theme-style" v-html="logContent"></div>
+            <div v-if="mdMode" class="bk-version-markdown-theme" v-html="logContent"></div>
             <template v-else>
               {{ logContent }}
             </template>
