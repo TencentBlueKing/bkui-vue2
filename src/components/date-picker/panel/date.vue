@@ -73,6 +73,7 @@
       </div>
       <div class="bk-picker-panel-content">
         <!-- eslint-disable-next-line vue/require-component-is -->
+        <!-- {{ pickerTable }}--{{dates}}--{{selectionMode}} -->
         <component
           :is="pickerTable"
           v-if="currentView !== 'time'"

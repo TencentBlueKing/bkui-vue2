@@ -8,6 +8,20 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.6-beta.2 {page=#/changelog}
+
+* **[add]**:
+    - 添加 isMaskShown 方法，用于检测当前页面遮罩是否弹出
+
+---
+
+### 2.5.6-beta.1 {page=#/changelog}
+
+* **[fix]**:
+    - [Sideslider 侧栏](#/sideslider) 修复侧边栏宽度仅支持数字的问题
+
+---
+
 ### 2.5.5 {page=#/changelog}
 ###### 2023.05.29
 
