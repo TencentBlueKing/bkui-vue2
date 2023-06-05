@@ -29,12 +29,12 @@
 <template>
   <div id="app">
     <app-header
-      :root-domain="'tencent.com'"
-      :login-url="'https://login.bk.tencent.com'"
-      :avatar-host="'https://q1.qlogo.cn'"
-      :less-code-url="'https://github.com/TencentBlueKing/bk-lesscode/blob/master/readme.md'"
-      :design-url="'https://bkdesign.bk.tencent.com/'"
-      :region="'tencent'">
+      root-domain="tencent.com"
+      login-url="https://login.bk.tencent.com"
+      avatar-host="https://q1.qlogo.cn"
+      less-code-url="https://github.com/TencentBlueKing/bk-lesscode/blob/master/readme.md"
+      design-url="https://bkdesign.bk.tencent.com"
+      region="tencent">
     </app-header>
     <div class="app-container">
       <div class="app-side-nav">
