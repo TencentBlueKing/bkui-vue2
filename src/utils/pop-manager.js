@@ -178,6 +178,13 @@ import { uuid } from '@/utils/util'
             instance.ins.remove()
           }
         }
+      },
+      isMaskShown: function () {
+        const mask = document.querySelector('[data-bkpop-mask]')
+        if (mask) {
+          return mask.classList.contains('show-active')
+        }
+        return false
       }
     }
 
