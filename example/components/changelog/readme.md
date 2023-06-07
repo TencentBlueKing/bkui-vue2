@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.6-beta.3 {page=#/changelog}
+
+* **[fix]**:
+    - [SearchSelect 查询选择器](#/searchselect) 修复 window 系统中，中文输入法的情况下，输入后直接回车数据展示问题
+
+---
+
 ### 2.5.6-beta.2 {page=#/changelog}
 
 * **[add]**:
