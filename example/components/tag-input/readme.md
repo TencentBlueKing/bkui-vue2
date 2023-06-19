@@ -11,6 +11,7 @@
         },
         data () {
             return {
+                dnyamicList: [],
                 allowCreate: true,
                 hasDeleteIcon: true,
                 maxData: 5,
@@ -29,6 +30,7 @@
                 placeholder: '请输入城市',
                 tag1: ['shenzhen'],
                 tags: ['shenzhen', 'guangzhou'],
+                dynamicTags: [],
                 tagsWithDisabled: [],
                 tagList: ['3-1', '3-2'],
                 sports: [],
@@ -158,6 +160,15 @@
             }
         },
         methods: {
+            inputHandle(value) {
+                const common = ['@qq.com', '@gmail.com', '@126.com']
+                if (value) {
+                    this.dnyamicList = common.map(item => ({id: `${value}${item}`, name: `${value}${item}` }));
+                    return;
+                }
+                this.dnyamicList = []
+                
+            },
             change (tags) {
                 console.log(tags)
             },
@@ -274,7 +285,8 @@
     <bk-tag-input
         :placeholder="placeholder"
         v-model="tags"
-        :list="list">
+        @inputchange="inputHandle"
+        :list="dnyamicList">
     </bk-tag-input>
     <p>请输入<code>州</code>来体验下搜索效果</p>
 </template>
@@ -300,6 +312,51 @@
                     { id: 'taibei', name: '台北' },
                     { id: 'haikou', name: '海口' }
                 ]
+            }
+        }
+    }
+</script>
+```
+:::
+
+### 动态列表提示 {page=#/tag-input}
+
+:::demo 可以通过 `inputchange`回调对list进行动态修改来实现动态提示的用法，比如常见邮箱提示
+
+```html
+<template>
+    <bk-tag-input
+        :placeholder="placeholder"
+        v-model="dynamicTags"
+        @inputchange="inputHandle"
+        :list="dnyamicList">
+    </bk-tag-input>
+    <p>请输入<code>邮箱地址</code>来体验下动态提示效果</p>
+</template>
+<script>
+    import { bkTagInput } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTagInput
+        },
+        data () {
+            return {
+                placeholder: '请输入邮箱',
+                dnyamicList: [],
+                dynamicTags: []
+            }
+        },
+        methods: {
+            inputHandle(value) {
+                // 存储常见的邮箱后缀
+                const common = ['@qq.com', '@gmail.com', '@126.com']
+                if (value) {
+                    this.dnyamicList = common.map(item => ({id: `${value}${item}`, name: `${value}${item}` }));
+                    return;
+                }
+                // 如果输入的值不存在，将动态列表清空
+                this.dnyamicList = []
             }
         }
     }
@@ -1240,3 +1297,4 @@
 | remove | 删除数据后的回调函数 | |
 | removeAll | 一键清空数据后的回调函数 | |
 | blur | 输入状态时失焦点的回调函数 | input, tags |
+| inputchange | 输入框input事件的回调函数 | value
