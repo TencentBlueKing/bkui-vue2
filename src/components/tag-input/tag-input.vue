@@ -624,30 +624,35 @@ export default {
       this.$refs.input.style.width = this.INPUT_MIN_WIDTH + 'px'
     },
     handleInput (event) {
-      if (this.maxData === -1 || this.maxData > this.tagList.length) {
-        const { value } = event.target
-        const charLen = this.getCharLength(value)
+      // 获取输入框的值
+      const { value } = event.target
+      this.$emit('inputchange', value)
+      // 在下一次DOM更新后执行回调函数, 以进行动态List的支持
+      this.$nextTick(() => {
+        if (this.maxData === -1 || this.maxData > this.tagList.length) {
+          const charLen = this.getCharLength(value)
 
-        this.cacheVal = value
-        if (charLen) {
-          this.isCanRemoveTag = false
-          this.filterData(value)
-          this.$refs.input.style.width = (charLen * this.INPUT_MIN_WIDTH) + 'px'
-        } else {
-          this.isCanRemoveTag = true
-          if (this.trigger === 'focus') {
-            this.filterData()
+          this.cacheVal = value
+          if (charLen) {
+            this.isCanRemoveTag = false
+            this.filterData(value)
+            this.$refs.input.style.width = (charLen * this.INPUT_MIN_WIDTH) + 'px'
+          } else {
+            this.isCanRemoveTag = true
+            if (this.trigger === 'focus') {
+              this.filterData()
+            }
           }
+        } else {
+          this.handleBlur()
+          this.curInputValue = ''
+          this.showList = false
         }
-      } else {
-        this.handleBlur()
-        this.curInputValue = ''
-        this.showList = false
-      }
 
-      this.isEdit = true
-      // 重置下拉菜单选中信息
-      this.focusItemIndex = this.allowCreate ? -1 : 0
+        this.isEdit = true
+        // 重置下拉菜单选中信息
+        this.focusItemIndex = this.allowCreate ? -1 : 0
+      })
     },
     handleFocus (event) {
       this.isCanRemoveTag = true
