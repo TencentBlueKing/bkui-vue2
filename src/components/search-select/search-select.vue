@@ -824,7 +824,7 @@ export default {
               }, false, needShowPopover)
             }
             resolve()
-          }, 0)
+          }, 10)
         }
       })
       needEmitKeyEnter && this.$emit('key-enter', e)

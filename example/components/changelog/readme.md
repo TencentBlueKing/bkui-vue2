@@ -8,6 +8,20 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.6 {page=#/changelog}
+###### 2023.06.21
+
+* **[add]**:
+    - [TagInput 标签输入框](#/tag-input): 添加动态列表的功能
+    - 添加 isMaskShown 方法，用于检测当前页面遮罩是否弹出
+* **[fix]**:
+    - [SearchSelect 查询选择器](#/searchselect) 修复 window 系统中，中文输入法的情况下，输入后直接回车数据展示问题
+    - [Sideslider 侧栏](#/sideslider) 修复侧边栏宽度仅支持数字的问题
+    - [ Table表格](#/table) 修复设置 fixed 属性时，页面宽度变化不能及时响应重新绘制的问题 [#387](https://github.com/TencentBlueKing/bkui-vue2/issues/387)
+    - [Button 基础按钮](#/button) 修复 outline 与 loading 同时为 true 时, loading 指示器不可见的问题 [#404](https://github.com/TencentBlueKing/bkui-vue2/issues/404)
+
+---
+
 ### 2.5.5 {page=#/changelog}
 ###### 2023.05.29
 
