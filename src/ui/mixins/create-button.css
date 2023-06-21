@@ -34,18 +34,41 @@
     }
 
     &.is-loading {
-        cursor: default;
+      cursor: default;
+      &:hover,
+      &.hover {
+          background-color: $color;
+          border-color: $color;
+          opacity: 1;
+      }
+      &:active,
+      &.active {
+          background-color: $color;
+          border-color: $color;
+      }
+      &.is-outline {
+        .bk-button-loading {
+          div {
+            background-color: $color;
+          }
+        }
         &:hover,
         &.hover {
-            background-color: $color;
-            border-color: $color;
-            opacity: 1;
+          .bk-button-loading {
+            div {
+              background-color: #fff;
+            }
+          }
         }
-        &:active,
-        &.active {
-            background-color: $color;
-            border-color: $color;
+        &.active,
+        &:active {
+          .bk-button-loading {
+            div {
+              background-color: #fff;
+            }
+          }
         }
+      }
     }
 
     &.is-outline {
