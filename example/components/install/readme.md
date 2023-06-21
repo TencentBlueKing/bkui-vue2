@@ -55,7 +55,7 @@
             </bk-popover>
         </div>
         <!-- 引入 Vue -->
-        <script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-5-y/vue/2.5.22/vue.js"></script>
         <!-- 引入 bk-magic-vue 组件库 -->
         <script src="https://magicbox.bk.tencent.com/static_api/v3/components_vue/2.0/bk-magic-vue.js"></script>
         <script type="text/javascript">

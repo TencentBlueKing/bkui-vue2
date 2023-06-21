@@ -124,6 +124,37 @@
         user
       </bk-button>
     </div>
+    <div class="example-item">
+      <bk-button theme="default" title="loading 按钮" :loading="true" :outline="true">
+        loading 按钮
+      </bk-button>
+      <div style="height: 30px" />
+      <bk-button theme="primary" title="loading 按钮" :loading="true" :outline="true">
+        loading 按钮
+      </bk-button>
+      <div style="height: 30px" />
+      <bk-button theme="success" title="loading 按钮" :loading="true" :outline="true">
+        loading 按钮
+      </bk-button>
+      <div style="height: 30px" />
+      <bk-button theme="warning" title="loading 按钮" :loading="true" :outline="true">
+        loading 按钮
+      </bk-button>
+      <div style="height: 30px" />
+      <bk-button theme="danger" title="loading 按钮" :loading="true" :outline="true">
+        loading 按钮
+      </bk-button>
+      <div style="height: 30px" />
+      <bk-button theme="primary" title="loading 按钮" :hover-theme="'warning'" :loading="true">
+        111
+      </bk-button>
+      <bk-button theme="primary" title="loading 按钮" :loading="true">
+        222
+      </bk-button>
+      <bk-button theme="primary" title="loading 按钮">
+        333
+      </bk-button>
+    </div>
   </section>
 </template>
 
