@@ -86,6 +86,7 @@ export default {
       icon: '',
       dismissable: true,
       verticalOffset: 0,
+      zIndex: 2500,
       horizonOffset: 0,
       visible: false,
       countID: null,
@@ -102,7 +103,8 @@ export default {
     },
     verticalStyle () {
       return {
-        top: `${this.verticalOffset}px`
+        top: `${this.verticalOffset}px`,
+        zIndex: this.zIndex
       }
     },
     tipsIcon () {
