@@ -39,7 +39,7 @@
       <slot>
         <div class="bk-option-content-default" :title="name">
           <template v-if="selectedStyle === 'checkbox' && select.multiple">
-            <bk-checkbox :value="isSelected">{{name}}</bk-checkbox>
+            <bk-checkbox :value="isSelected" class="bk-option-checkbox">{{name}}</bk-checkbox>
           </template>
           <template v-else>
             <i class="bk-option-icon bk-icon icon-check-1" v-if="select.multiple && isSelected"></i>
