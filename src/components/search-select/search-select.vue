@@ -240,6 +240,10 @@ export default {
     extCls: {
       type: String,
       default: ''
+    },
+    selectedStyle: {
+      type: String,
+      default: 'check' // check or checkbox
     }
   },
   data () {
@@ -382,23 +386,27 @@ export default {
     },
     initMenu () {
       if (!this.menuInstance) {
-        this.menuInstance = new Vue(SearchInputMenu).$mount()
+        this.menuInstance = new Vue(SearchInputMenu)
         this.menuInstance.condition = this.defaultCondition
         this.menuInstance.displayKey = this.displayKey
         this.menuInstance.primaryKey = this.primaryKey
+        this.menuInstance.selectedStyle = this.selectedStyle
         this.menuInstance.multiable = false
+        this.menuInstance.$mount()
         this.menuInstance.$on('select', this.handleMenuSelect)
         this.menuInstance.$on('select-conditon', this.handleSelectConditon)
       }
     },
     initChildMenu () {
-      this.menuChildInstance = new Vue(SearchInputMenu).$mount()
+      this.menuChildInstance = new Vue(SearchInputMenu)
       this.menuChildInstance.displayKey = this.displayKey
       this.menuChildInstance.primaryKey = this.primaryKey
+      this.menuChildInstance.selectedStyle = this.selectedStyle
       this.menuChildInstance.multiable = this.curItem.conditions && this.curItem.conditions.length ? false : (this.curItem.multiable || false)
       this.menuChildInstance.child = true
       this.menuChildInstance.remoteEmptyText = this.defaultRemoteEmptyText
       this.menuChildInstance.remoteLoadingText = this.defaultRemoteLoadingText
+      this.menuChildInstance.$mount()
       this.menuChildInstance.$on('select', this.handleMenuChildSelect)
       this.menuChildInstance.$on('select-check', this.handleSelectCheck)
       this.menuChildInstance.$on('select-enter', this.handleKeyEnter)
