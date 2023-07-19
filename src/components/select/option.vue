@@ -38,10 +38,15 @@
     <div class="bk-option-content">
       <slot>
         <div class="bk-option-content-default" :title="name">
-          <i class="bk-option-icon bk-icon icon-check-1" v-if="select.multiple && isSelected"></i>
-          <span class="bk-option-name" :class="select.fontSizeCls">
-            {{name}}
-          </span>
+          <template v-if="selectedStyle === 'checkbox' && select.multiple">
+            <bk-checkbox :value="isSelected">{{name}}</bk-checkbox>
+          </template>
+          <template v-else>
+            <i class="bk-option-icon bk-icon icon-check-1" v-if="select.multiple && isSelected"></i>
+            <span class="bk-option-name" :class="select.fontSizeCls">
+              {{name}}
+            </span>
+          </template>
         </div>
       </slot>
     </div>
@@ -49,8 +54,12 @@
 </template>
 
 <script>
+import BkCheckbox from '@/components/checkbox'
 export default {
   name: 'bk-option',
+  components: {
+    'bk-checkbox': BkCheckbox
+  },
   props: {
     id: {
       type: [String, Number],
@@ -78,6 +87,9 @@ export default {
     },
     lowerName () {
       return String(this.name).toLowerCase()
+    },
+    selectedStyle () {
+      return this.select.selectedStyle
     }
   },
   created () {
