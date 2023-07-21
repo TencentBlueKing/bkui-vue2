@@ -89,6 +89,52 @@
                     ellipsisLine: 2,
                     ellipsisCopy: true
                 })
+            },
+            handleAdvancedMessage () {
+                this.$bkMessage({
+                    message: {
+                    code: 10086,
+                    overview: '算法载入失败。',
+                    suggestion: '请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。',
+                    type: 'key-value',
+                    details: `{
+                          "code": "UNAUTHENTICATED",
+                          "message": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code1": "UNAUTHENTICATED",
+                          "message1": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code2": "UNAUTHENTICATED",
+                          "message2": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code3": "UNAUTHENTICATED",
+                          "message3": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code4": "UNAUTHENTICATED",
+                          "message4": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code5": "UNAUTHENTICATED",
+                          "message5": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code6": "UNAUTHENTICATED",
+                          "message6": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code7": "UNAUTHENTICATED",
+                          "message7": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code8": "UNAUTHENTICATED",
+                          "message8": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code9": "UNAUTHENTICATED",
+                          "message9": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code10": "UNAUTHENTICATED",
+                          "message10": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code81": "UNAUTHENTICATED",
+                          "message81": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code91": "UNAUTHENTICATED",
+                          "message91": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code101": "UNAUTHENTICATED",
+                          "message101": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)"
+                        }`,
+                    assistant: '',
+              },
+                    theme: 'error',
+                    offsetY: 80,
+                    ellipsisLine: 2,
+                    ellipsisCopy: true
+                })
+                
             }
         }
     }
@@ -353,7 +399,7 @@
 :::demo 内容超出被截断时显示复制按钮
 ```html
 <template>
-    <bk-button type="primary" @click="handleCopyMessage">内容超出被截断时显示复制按钮</bk-button>
+    <bk-button type="primary" @click="handleAdvancedMessage">内容超出被截断时显示复制按钮</bk-button>
 </template>
 
 <script>
@@ -386,6 +432,78 @@
     }
 </script>
 ```
+
+### 高阶用法
+
+:::demo 高阶用法
+```html
+<template>
+    <bk-button type="primary" @click="handleAdvancedMessage">高阶用法</bk-button>
+</template>
+
+<script>
+    import { bkButton } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkButton
+        },
+        data () {
+            return {
+                message: {
+                    code: 10086,
+                    overview: '算法载入失败。',
+                    suggestion: '请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。请确认文件内容是否正确，并和所选框架匹配。',
+                    type,
+                    details: `{
+                          "code": "UNAUTHENTICATED",
+                          "message": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code1": "UNAUTHENTICATED",
+                          "message1": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code2": "UNAUTHENTICATED",
+                          "message2": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code3": "UNAUTHENTICATED",
+                          "message3": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code4": "UNAUTHENTICATED",
+                          "message4": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code5": "UNAUTHENTICATED",
+                          "message5": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code6": "UNAUTHENTICATED",
+                          "message6": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code7": "UNAUTHENTICATED",
+                          "message7": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code8": "UNAUTHENTICATED",
+                          "message8": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code9": "UNAUTHENTICATED",
+                          "message9": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code10": "UNAUTHENTICATED",
+                          "message10": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code81": "UNAUTHENTICATED",
+                          "message81": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code91": "UNAUTHENTICATED",
+                          "message91": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)",
+                          "code101": "UNAUTHENTICATED",
+                          "message101": "用户未登录或登录态失效，请使用登录链接重新登录 (UNAUTHORIZED)"
+                        }`,
+                    assistant: '',
+              },
+            }
+        },
+        methods: {
+            handleCopyMessage () {
+                this.$bkMessage({
+                    message: this.message,
+                    theme: 'error',
+                    offsetY: 80,
+                    ellipsisLine: 2,
+                    ellipsisCopy: true
+                })
+            }
+        }
+    }
+</script>
+```
+
 :::
 ### 属性 {page=#/message}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
