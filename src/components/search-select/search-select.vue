@@ -283,18 +283,18 @@ export default {
     curItem () {
       return this.data.find(item => item[this.primaryKey] === this.menu.id) || {}
     },
-    childList () {
-      const ret = []
-      let i = 0
-      while (i < this.data.length) {
-        const item = this.data[i]
-        if (item.children && item.children.length) {
-          ret.push(...item.children)
-        }
-        i++
-      }
-      return ret
-    },
+    // childList () {
+    //   const ret = []
+    //   let i = 0
+    //   while (i < this.data.length) {
+    //     const item = this.data[i]
+    //     if (item.children && item.children.length) {
+    //       ret.push(...item.children)
+    //     }
+    //     i++
+    //   }
+    //   return ret
+    // },
     showItemPlaceholder () {
       return this.menu.active >= 0 && String(this.curItem.placeholder).length && this.input.value === this.curItem[this.displayKey] + this.explainCode
     }
@@ -522,6 +522,50 @@ export default {
         }
       }
     },
+    /**
+     *
+     * @param {string} v 当前输入框的值
+     * @returns {Array} 返回过滤后的推荐选择列表
+     */
+    getRecommendList (v) {
+      if (!this.data.length) return []
+      const list = []
+      let i = 0
+      const setItem = (parent, child) => {
+        const childKey = child ? child[this.primaryKey] : v
+        const childName = child ? child[this.displayKey] : v
+        return {
+          ...parent,
+          [this.displayKey]: parent[this.displayKey] + this.explainCode + childName,
+          [this.primaryKey]: parent[this.primaryKey] + this.explainCode + childKey,
+          recommendValue: {
+            [this.displayKey]: parent[this.displayKey],
+            [this.primaryKey]: parent[this.primaryKey],
+            values: [
+              {
+                [this.displayKey]: child ? child[this.displayKey] : v,
+                [this.primaryKey]: childKey
+              }
+            ]
+          }
+        }
+      }
+      while (i < this.data.length) {
+        const item = this.data[i]
+        i += 1
+        if (!item.children || !item.children.length) {
+          list.push(setItem(item))
+          continue
+        }
+        const childList = item.children.filter(child => child[this.displayKey].includes(v))
+        if (!childList.length) {
+          list.push(setItem(item))
+          continue
+        }
+        list.push(...childList.map(child => setItem(item, child)))
+      }
+      return list
+    },
     handleFilter (v) {
       let filterList = []
       if (!this.input.value.length || !~this.input.value.indexOf(this.explainCode)) {
@@ -529,13 +573,14 @@ export default {
           filterList = this.filterMenuMethod(this.data, v)
         } else {
           if (v.length) {
-            filterList = this.childList.filter(item => item[this.displayKey] && ~item[this.displayKey].indexOf(v))
-            if (filterList.length) {
-              let item = filterList[filterList.length - 1]
-              item = { ...item, isGroup: true }
-              filterList[filterList.length - 1] = item
-            }
-            filterList.push(...this.data.filter(item => item[this.displayKey] && ~item[this.displayKey].indexOf(v)))
+            filterList = this.getRecommendList(v)
+            // filterList = this.childList.filter(item => item[this.displayKey] && ~item[this.displayKey].indexOf(v))
+            // if (filterList.length) {
+            //   let item = filterList[filterList.length - 1]
+            //   item = { ...item, isGroup: true }
+            //   filterList[filterList.length - 1] = item
+            // }
+            // filterList.push(...this.data.filter(item => item[this.displayKey] && ~item[this.displayKey].indexOf(v)))
           } else {
             filterList = this.data
           }
@@ -678,6 +723,12 @@ export default {
       }
     },
     handleMenuSelect (item, index) {
+      if (item.recommendValue) {
+        this.input.value = item[this.displayKey]
+        this.updateInput(this.input.value)
+        this.handleEnter(this.input.value, item.recommendValue, false)
+        return
+      }
       const isChildClick = ~this.data.findIndex(set => set[this.primaryKey] === item[this.primaryKey])
       if (!isChildClick) {
         this.input.value = item[this.displayKey]
@@ -810,6 +861,7 @@ export default {
           this.handleInputFocus()
           resolve()
         } else {
+          e.preventDefault()
           setTimeout(() => {
             if (this.menu.id !== null) {
               let val = this.input.value.replace(this.curItem[this.displayKey] + this.explainCode, '')
