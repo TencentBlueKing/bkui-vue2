@@ -70,6 +70,10 @@
                 color: #3a84ff;
                 background-color: rgba(234, 243, 255, 0.7);
             }
+            .search-list-checkbox {
+                pointer-events: none;
+                margin-right: 6px;
+            }
         }
     }
     &-loading {

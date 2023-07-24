@@ -325,6 +325,10 @@ export default {
     scrollLoading: {
       type: Object,
       default: () => ({})
+    },
+    selectedStyle: {
+      type: String,
+      default: 'check' // check or checkbox
     }
   },
   provide () {

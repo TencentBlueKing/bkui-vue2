@@ -28,9 +28,13 @@
 
 <script>
 import locale from 'bk-magic-vue/lib/locale'
+import BkCheckbox from '@/components/checkbox'
 
 export default {
   name: 'bk-search-select-menu',
+  components: {
+    BkCheckbox
+  },
   mixins: [locale.mixin],
   props: {
     list: {
@@ -68,7 +72,11 @@ export default {
       type: String,
       require: true
     },
-    isChildCondition: Boolean
+    isChildCondition: Boolean,
+    selectedStyle: {
+      type: String,
+      default: 'check' // check or checkbox
+    }
   },
   data () {
     return {
@@ -102,7 +110,12 @@ export default {
         this.hasFocus = false
         this.handleDestroy()
       } else {
-        this.$refs[item[this.primaryKey]].style.display = this.checked[item[this.primaryKey]] ? 'none' : 'block'
+        if (this.selectedStyle === 'check') {
+          // 勾选模式
+          this.$refs[item[this.primaryKey]].style.display = this.checked[item[this.primaryKey]] ? 'none' : 'block'
+        } else {
+          this.$refs[item[this.primaryKey]].setLocalValue(!this.checked[item[this.primaryKey]])
+        }
         this.$emit('select-check', item, index)
       }
     },
@@ -111,8 +124,12 @@ export default {
     },
     setCheckValue (item, val) {
       const ref = this.$refs[item[this.primaryKey]]
-      if (ref) {
+      if (!ref) return
+
+      if (this.selectedStyle === 'check') {
         ref.style.display = this.checked[item[this.primaryKey]] ? 'none' : 'block'
+      } else {
+        ref.etLocalValue(!this.checked[item[this.primaryKey]])
       }
     },
     handleSelectEnter (e) {
@@ -152,9 +169,15 @@ export default {
       }
     },
     handleSelectCancel (e) {
-      Object.keys(this.checked).forEach(key => {
-        this.$refs[key] && (this.$refs[key].style.display = 'none')
-      })
+      if (this.selectedStyle === 'check') {
+        Object.keys(this.checked).forEach(key => {
+          this.$refs[key] && (this.$refs[key].style.display = 'none')
+        })
+      } else if (this.selectedStyle === 'checkbox') {
+        Object.keys(this.checked).forEach(key => {
+          this.$refs[key] && (this.$refs[key].setLocalValue(false))
+        })
+      }
       this.$emit('select-cancel', e)
     }
   },
@@ -174,7 +197,8 @@ export default {
       isCondition = false,
       isChildCondition = false,
       error = '',
-      hoverId
+      hoverId,
+      selectedStyle
     } = this
 
     if (error) {
@@ -210,6 +234,11 @@ export default {
       }
       return (
         <li class={{ 'bk-search-list-menu-item': true, 'is-group': !!item.isGroup, 'is-disabled': item.disabled, 'is-hover': !item.disabled && hoverId === id }}>
+          {
+            selectedStyle === 'checkbox'
+              ? <bk-checkbox class="search-list-checkbox" v-show={multiable && child && !isChildCondition} ref={id}></bk-checkbox>
+              : null
+          }
           <div {...events} class={{ 'item-name': true }}>
             {
               isFilter
@@ -217,8 +246,12 @@ export default {
                 : text
             }
           </div>
-          <span v-show={multiable && child && checked[text] && !isChildCondition} ref={id}
-            class={{ 'bk-icon icon-check-1 item-icon': true }}></span>
+          {
+            selectedStyle === 'check'
+              ? <span v-show={multiable && child && checked[text] && !isChildCondition} ref={id}
+              class={{ 'bk-icon icon-check-1 item-icon': true }}></span>
+              : null
+          }
         </li>
       )
     })
