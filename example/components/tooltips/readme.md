@@ -20,7 +20,7 @@
                     content: '鼠标移入显示移出消失，浮层不承载复杂文本和操作。'
                 },
                 htmlConfig: {
-                    allowHtml: true,
+                    allowHTML: true,
                     width: 240,
                     trigger: 'click',
                     theme: 'light',
@@ -400,7 +400,7 @@
             return {
                 seconds: 5,
                 htmlConfig: {
-                    allowHtml: true,
+                    allowHTML: true,
                     width: 240,
                     trigger: 'click',
                     theme: 'light',

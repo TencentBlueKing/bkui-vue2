@@ -134,7 +134,7 @@
                     ellipsisLine: 2,
                     ellipsisCopy: true
                 })
-                
+
             }
         }
     }
@@ -394,12 +394,12 @@
 
 
 
-### 内容超出被截断时显示复制按钮
+### 内容超出被截断时显示复制按钮 {page=#/message}
 
 :::demo 内容超出被截断时显示复制按钮
 ```html
 <template>
-    <bk-button type="primary" @click="handleAdvancedMessage">内容超出被截断时显示复制按钮</bk-button>
+    <bk-button type="primary" @click="handleCopyMessage">内容超出被截断时显示复制按钮</bk-button>
 </template>
 
 <script>
@@ -432,8 +432,9 @@
     }
 </script>
 ```
+:::
 
-### 高阶用法
+### 高阶用法 {page=#/message}
 
 :::demo 高阶用法
 ```html
