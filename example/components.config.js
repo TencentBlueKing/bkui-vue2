@@ -198,7 +198,7 @@ module.exports = {
         },
         {
           id: 'searchSelect',
-          name: 'SearchSelect 查询选择器'
+          name: 'Search 查询搜索'
         },
         {
           id: 'slider',

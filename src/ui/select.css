@@ -323,6 +323,9 @@ $disabledColor: #c4c6cc;
             font-size: var(--font-size);
             @mixin ellipsis 100%, inline-block;
         }
+        .bk-option-checkbox .bk-checkbox-text {
+            font-size: 12px;
+        }
     }
 }
 

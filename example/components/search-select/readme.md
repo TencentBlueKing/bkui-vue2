@@ -326,7 +326,7 @@
 
 [[toc]]
 
-## SearchSelect 查询选择器
+## Search 查询搜索
 功能组件，用于将搜索查询项集中在一个选择器中，搜索查询更加便捷、简单
 
 ### 基础使用 {page=#/searchselect}
@@ -336,6 +336,96 @@
 <template>
     <div>
         <bk-search-select clearable :show-popover-tag-change="true" :data="data" v-model="demo1.value"></bk-search-select>
+    </div>
+</template>
+
+<script>
+    import { bkSearchSelect } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        name: 'demo',
+        components: {
+            bkSearchSelect
+        },
+        data () {
+            return {
+                data: [
+                    {
+                        name: '实例状态',
+                        id: '1',
+                        multiable: true,
+                        children: [
+                            {
+                                name: '创建中',
+                                id: '1-2'
+                            },
+                            {
+                                name: '运行中',
+                                id: '1-3'
+                            },
+                            {
+                                name: '已关机',
+                                id: '1-4'
+                            }
+                        ]
+                    },
+                    {
+                        name: '实例业务',
+                        id: '2',
+                        children: [
+                            {
+                                name: '王者荣耀',
+                                id: '2-1'
+                            },
+                            {
+                                name: '刺激战场',
+                                id: '2-2'
+                            },
+                            {
+                                name: '绝地求生',
+                                id: '2-3'
+                            }
+                        ]
+                    },
+                    {
+                        name: 'IP地址',
+                        id: '3'
+                    },
+                    {
+                        name: '实例名',
+                        id: '4'
+                    },
+                    {
+                        name: '实例地址',
+                        id: '5'
+                    },
+                    {
+                        name: '测试六',
+                        id: '6'
+                    }
+                ],
+                demo1: {
+                    value: [{ name: 'hello world' }]
+                }
+            }
+        },
+        methods: {
+        }
+    }
+ </script>
+
+
+```
+
+:::
+
+### CheckBox模式 {page=#/searchselect}
+::: demo CheckBox模式
+
+``` html
+<template>
+    <div>
+        <bk-search-select selected-style="checkbox" clearable :show-popover-tag-change="true" :data="data" v-model="demo1.value"></bk-search-select>
     </div>
 </template>
 
@@ -1113,6 +1203,7 @@
 | validate-message | 校验提示文本 | String | —— | '' |
 | input-unfocus-clear | 当单元格失去焦点时是否清除输入框的内容 | Boolean | —— | false |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.search-select-wrap` 上 | String | —— | —— |
+| selected-style | 勾选模式 | String | check/checkbox | check |
 
 ### 事件 {page=#/searchselect}
 | 事件名称 | 说明 | 回调参数 |
