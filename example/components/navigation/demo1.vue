@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import { bkNavigation, bkNavigationMenu, bkNavigationMenuItem, bkSelect, bkOption, bkPopover, bkButton } from 'bk-magic-vue'
+import { bkNavigation, bkNavigationMenu, bkNavigationMenuItem, bkSelect, bkOption, bkPopover, bkButton } from '@'
 export default {
   name: 'monitor-navigation',
   components: {
