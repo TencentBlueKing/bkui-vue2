@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { bkSearchSelect } from 'bk-magic-vue'
+import { bkSearchSelect } from '@'
 
 export default {
   name: 'demo',

@@ -329,7 +329,7 @@
 ## Search 查询搜索
 功能组件，用于将搜索查询项集中在一个选择器中，搜索查询更加便捷、简单
 
-### 基础使用 {page=#/searchselect}
+### 基础使用 {page=#/search-select}
 ::: demo 基础使用
 
 ``` html
@@ -419,7 +419,7 @@
 
 :::
 
-### CheckBox模式 {page=#/searchselect}
+### CheckBox模式 {page=#/search-select}
 ::: demo CheckBox模式
 
 ``` html
@@ -509,7 +509,7 @@
 
 :::
 
-### 自定义过滤列表 {page=#/searchselect}
+### 自定义过滤列表 {page=#/search-select}
 ::: demo 自定义过滤列表
 
 ``` html
@@ -611,7 +611,7 @@
 
 :::
 
-### 远程加载列表 {page=#/searchselect}
+### 远程加载列表 {page=#/search-select}
 ::: demo 远程加载列表
 
 ``` html
@@ -736,7 +736,7 @@
 
 :::
 
-### 多选子列表 {page=#/searchselect}
+### 多选子列表 {page=#/search-select}
 ::: demo 多选子列表
 
 ``` html
@@ -830,7 +830,7 @@
 
 :::
 
-### 配置子项搜索条件 {page=#/searchselect}
+### 配置子项搜索条件 {page=#/search-select}
 ::: demo 配置子项搜索条件 此功能与multiable是互斥的 如果同时配置则multiable的权重将更大
 
 ``` html
@@ -968,7 +968,7 @@
 ```
 
 :::
-### 配置子项校验及自定义placeholder提示 {page=#/searchselect}
+### 配置子项校验及自定义placeholder提示 {page=#/search-select}
 ::: demo 配置子项校验及自定义placeholder提示，校验的信息既可以通过validate函数返回也可以通过validate-message属性传入或者通过validate插槽设置
 
 ``` html
@@ -1070,7 +1070,7 @@
 ```
 
 :::
-### 配置其他属性 {page=#/searchselect}
+### 配置其他属性 {page=#/search-select}
 ::: demo 配置其他属性
 
 ``` html
@@ -1169,7 +1169,7 @@
 
 :::
 
-### 属性 {page=#/searchselect}
+### 属性 {page=#/search-select}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
 | data | 显示的数据 | Array | —— | —— |
@@ -1205,7 +1205,7 @@
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.search-select-wrap` 上 | String | —— | —— |
 | selected-style | 勾选模式 | String | check/checkbox | check |
 
-### 事件 {page=#/searchselect}
+### 事件 {page=#/search-select}
 | 事件名称 | 说明 | 回调参数 |
 |------|------|------|
 | show-menu | 父列表显示时触发的事件 | menuInstance |
@@ -1223,7 +1223,7 @@
 | clear | 当用户点击清空时触发该事件 | event |
 | search | 当用户点击搜索图标时触发该事件 | event |
 
-### 方法 {page=#/searchselect}
+### 方法 {page=#/search-select}
 | 方法名 | 说明 | 参数 |
 |------|------|------|
 | getMenuInstance | 获取menu实例方法 | —— |
@@ -1231,7 +1231,7 @@
 | getInputInstance | 获取input框实例 | —— |
 
 
-### 插槽 {page=#/searchselect}
+### 插槽 {page=#/search-select}
 | 插槽名 | 说明 | 参数 |
 |------|------|------|
 | prefix | 输入框前插槽 | —— |
