@@ -1,44 +1,14 @@
-<!--
- * Tencent is pleased to support the open source community by making
- * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) available.
- *
- * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
- *
- * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) is licensed under the MIT License.
- *
- * License for 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition):
- *
- *
- * Terms of the MIT License:
- * ---------------------------------------------------
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
- * to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
- * the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
- * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE.
--->
-
 <template>
   <div>
     <bk-search-select
-      :data="demo7.data"
-      input-unfocus-clear
-      @input-click-outside="inputClickOutside"
-      v-model="values">
-    </bk-search-select>
+      :data="data2"
+      v-model="demo5.value"
+    ></bk-search-select>
   </div>
 </template>
 
 <script>
-import { bkSearchSelect } from '@'
+import { bkSearchSelect } from 'bk-magic-vue'
 
 export default {
   name: 'demo',
@@ -47,62 +17,113 @@ export default {
   },
   data () {
     return {
-      demo7: {
-        data: [
-          {
-            name: 'IP',
-            id: 'ip',
-            placeholder: '请输入格式xxx.xxx.xxx',
-            multiable: true,
-            validate (values, item) {
-              const validate = (values || []).reduce((ret, cur) => {
-                ret = ret && /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(cur.name)
-                return ret
-              }, true)
-
-              return !validate ? '格式错误: 请输入正确的IP格式' : true
+      data2: [
+        {
+          name: '实例状态',
+          id: '1',
+          multiable: true,
+          children: [
+            {
+              name: '创建中',
+              id: '1-2'
             },
-            children: [
-              {
-                name: '10.1.0.11',
-                id: '10.1.0.11'
-              },
-              {
-                name: '192.10.23.123',
-                id: '192.10.23.123'
-              },
-              {
-                name: '192.10.23.12',
-                id: '192.10.23.12'
-              }
-            ]
-          },
-          {
-            name: '告警状态',
-            id: 'status',
-            placeholder: '格式：0，1，2',
-            validate (v, item) {
-              console.info(v, item)
-              const validate = (v || []).reduce((ret, cur) => {
-                ret = ret && /^[0-2]$/.test(cur.name)
-                return ret
-              }, true)
-              return !validate ? '格式错误: 请输入0, 1, 2' : true
+            {
+              name: '运行中',
+              id: '1-3'
+            },
+            {
+              name: '已关机',
+              id: '1-4'
             }
-          },
-          {
-            name: 'test-3',
-            id: 'test-3'
-          }
-        ],
-        values: []
+          ]
+        },
+        {
+          name: '实例业务',
+          id: '2',
+          multiable: true,
+          children: [
+            {
+              name: '王者荣耀',
+              id: '2-1'
+            },
+            {
+              name: '刺激战场',
+              id: '2-2'
+            },
+            {
+              name: '绝地求生',
+              id: '2-3'
+            }
+          ],
+          conditions: [
+            {
+              name: '>',
+              id: '>'
+            },
+            {
+              name: '>=',
+              id: '>='
+            },
+            {
+              name: '<=',
+              id: '<='
+            },
+            {
+              name: '<',
+              id: '<'
+            },
+            {
+              name: '=',
+              id: '='
+            }
+          ]
+        },
+        {
+          name: 'IP地址',
+          id: '3'
+        },
+        {
+          name: '实例名',
+          id: '4'
+        },
+        {
+          name: '实例地址',
+          id: '5'
+        },
+        {
+          name: '使用率',
+          id: '6',
+          conditions: [
+            {
+              name: '>',
+              id: '>'
+            },
+            {
+              name: '>=',
+              id: '>='
+            },
+            {
+              name: '<=',
+              id: '<='
+            },
+            {
+              name: '<',
+              id: '<'
+            },
+            {
+              name: '=',
+              id: '='
+            }
+          ]
+        }
+      ],
+      demo5: {
+        value: []
       }
     }
   },
   methods: {
-    inputClickOutside (a, b, c) {
-      console.error(a, b, c)
-    }
+
   }
 }
 </script>

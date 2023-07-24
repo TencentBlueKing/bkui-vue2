@@ -326,7 +326,7 @@
 
 [[toc]]
 
-## SearchSelect 查询选择器
+## Search 查询搜索
 功能组件，用于将搜索查询项集中在一个选择器中，搜索查询更加便捷、简单
 
 ### 基础使用 {page=#/searchselect}
