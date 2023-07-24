@@ -367,11 +367,6 @@ export default {
         }
       }
     },
-    selectedName () {
-      if (this.filterable && !this.multiple) {
-        this.searchContent = this.selectedName
-      }
-    },
     list: {
       handler (newValue) {
         // watch list变化改变cascadeList的值
@@ -479,6 +474,13 @@ export default {
     if (this.isRemote) {
       this.filterable = false
     }
+    // 开启了filterable，单选下的display与srachContent是一样的。因此初始化要回填
+    if (this.filterable && !this.multiple) {
+      this.searchContent = this.selectedName
+      this.$nextTick(() => {
+        this.tippyInstance() // 回填不需要打开下拉，关闭
+      })
+    }
   },
   methods: {
     recurrenceNodes (list) {
@@ -538,6 +540,7 @@ export default {
         this.selectedList = []
         this.tmpSelected = []
         this.exposedId(this.currentList, oldId)
+        this.searchContent = ''
       }
       this.broadcast('bkCaspanel', 'on-clear')
       // 关闭下拉面板
