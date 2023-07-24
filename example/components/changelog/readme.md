@@ -8,6 +8,20 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.7 {page=#/changelog}
+###### 2023.07.24
+
+* **[add]**:
+    - [Select 下拉选框](#/select) 多选新增 [checkbox 模式](#/select?anchor=duo-xuan)
+    - [SearchSelect 查询选择器](#/searchselect) 新增 [checkbox 模式](#/search-select?anchor=checkbox-mo-shi)
+    - [SearchSelect 查询选择器](#/searchselect) 新增推荐搜索选择的功能
+    - [Message 消息提示](#/message) 支持[规范化高阶使用配置](#/message?anchor=gao-jie-yong-fa)
+    - [Message 消息提示](#/message) 支持自定义 z-index
+* **[fix]**:
+    - [Cascade 级联选框](#/cascade) 修复 filterable 和 check-any-level 卡死的问题 [#407](https://github.com/TencentBlueKing/bkui-vue2/issues/407)
+
+---
+
 ### 2.5.6 {page=#/changelog}
 ###### 2023.06.21
 

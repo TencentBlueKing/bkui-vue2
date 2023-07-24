@@ -34,22 +34,29 @@
       v-show="visible"
       @mouseenter="stopCountDown"
       @mouseleave="startCountDown">
-      <div class="bk-message-icon">
-        <i :class="['bk-icon', tipsIcon]"></i>
-      </div>
-      <div :class="['bk-message-content', { 'multi-ellipsis': multiEllipsis, 'ellipsis': singleEllipsis }]"
-        :style="ellipsisStyle"
-        ref="content">
-        <slot>{{message}}</slot>
-      </div>
-      <div :class="['bk-message-copy', { 'copied': copied }]"
-        v-if="showCopyText"
-        @click="copyContent">
-        {{localeCopyText}}
-      </div>
-      <div class="bk-message-close" v-if="dismissable">
-        <i :class="['bk-icon icon-close', showCopyText ? 'ml10' : 'ml30']" @click.stop="close"></i>
-      </div>
+      <template v-if="showAdvanced">
+        <message-advanced :message="message" :actions="actions" :tips-icon="tipsIcon"
+          @fix-message="handleFixMessage"
+          @close="close"></message-advanced>
+      </template>
+      <template v-else>
+        <div class="bk-message-icon">
+          <i :class="['bk-icon', tipsIcon]"></i>
+        </div>
+        <div :class="['bk-message-content', { 'multi-ellipsis': multiEllipsis, 'ellipsis': singleEllipsis }]"
+          :style="ellipsisStyle"
+          ref="content">
+          <slot>{{message}}</slot>
+        </div>
+        <div :class="['bk-message-copy', { 'copied': copied }]"
+          v-if="showCopyText"
+          @click="copyContent">
+          {{localeCopyText}}
+        </div>
+        <div class="bk-message-close" v-if="dismissable">
+          <i :class="['bk-icon icon-close', showCopyText ? 'ml10' : 'ml30']" @click.stop="close"></i>
+        </div>
+      </template>
     </div>
   </transition>
 </template>
@@ -67,6 +74,7 @@
  */
 import { copyText, checkOverflow } from '@/utils/util'
 import locale from 'bk-magic-vue/lib/locale'
+import MessageAdvanced from './advanced'
 
 const ICONS = {
   primary: 'icon-info-circle-shape',
@@ -77,6 +85,7 @@ const ICONS = {
 
 export default {
   name: 'bk-message',
+  components: { MessageAdvanced },
   mixins: [locale.mixin],
   data () {
     return {
@@ -86,6 +95,7 @@ export default {
       icon: '',
       dismissable: true,
       verticalOffset: 0,
+      zIndex: 2500,
       horizonOffset: 0,
       visible: false,
       countID: null,
@@ -93,7 +103,11 @@ export default {
       extCls: '',
       copied: false,
       ellipsisCopy: false,
-      showCopyText: false
+      showCopyText: false,
+      showAdvanced: false,
+      actions: [],
+      isFixed: false,
+      width: 560
     }
   },
   computed: {
@@ -102,7 +116,9 @@ export default {
     },
     verticalStyle () {
       return {
-        top: `${this.verticalOffset}px`
+        top: `${this.verticalOffset}px`,
+        width: `${this.width}px`,
+        zIndex: this.zIndex
       }
     },
     tipsIcon () {
@@ -127,18 +143,29 @@ export default {
     this.startCountDown()
   },
   methods: {
+    handleFixMessage (isFixed) {
+      this.isFixed = isFixed
+      console.log('handleFixMessage', isFixed)
+      if (isFixed) {
+        this.stopCountDown()
+      } else {
+        this.startCountDown()
+      }
+    },
     destroyEl () {
       this.$destroy()
       this.$el.parentNode && this.$el.parentNode.removeChild(this.$el)
     },
     startCountDown () {
-      if (this.delay > 0) {
+      if (this.delay > 0 && !this.isFixed) {
         this.countID = setTimeout(() => {
+          console.log('--Close')
           this.visible && this.close()
         }, this.delay)
       }
     },
     stopCountDown () {
+      console.log('--stopCountDown')
       clearTimeout(this.countID)
     },
     close () {

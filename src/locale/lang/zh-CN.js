@@ -172,7 +172,11 @@ export default {
     },
     message: {
       copy: '复制',
-      copied: '已复制'
+      copied: '已复制',
+      assistant: '助手',
+      details: '详情',
+      copySuccess: '复制成功',
+      copyFailed: '复制失败'
     },
     image: {
       zoomIn: '放大',

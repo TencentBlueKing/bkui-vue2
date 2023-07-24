@@ -324,6 +324,18 @@
         <bk-select style="width: 250px;margin-top: 10px;"
             searchable
             multiple
+            selected-style='checkbox'
+            v-model="multipleValue">
+            <bk-option v-for="option in list"
+                :key="option.id"
+                :id="option.id"
+                :name="option.name">
+            </bk-option>
+        </bk-select>
+
+        <bk-select style="width: 250px;margin-top: 10px;"
+            searchable
+            multiple
             display-tag
             :auto-height="false"
             v-model="multipleValue">
@@ -1338,6 +1350,7 @@
 | show-on-init | 是否在初始化的时候展示下拉列表 | Boolean | —— | false |
 | behavior | 风格设置(simplicity:简约 normal:正常) | String | 'normal'/'simplicity' | normal |
 | enable-scroll-load | 下拉列表是否支持滚动分页加载，配合scroll-end事件使用 | Boolean | true/false | false |
+| selected-style | 多选时勾选样式 | String | check/checkbox | check |
 | scroll-loading | 滚动分页loading状态，同spin组件的配置一样 | Object | —— | { isLoading: false, size: 'mini', theme: 'info', icon: 'circle-2-1', placement: 'right' } |
 
 

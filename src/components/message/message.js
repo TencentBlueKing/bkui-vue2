@@ -39,6 +39,7 @@ const messageList = []
 let seed = 0
 
 const BkMessage = function (config) {
+  const originConfig = typeof config === 'object' ? JSON.parse(JSON.stringify(config)) : config
   // 限制个数为 0 时，清除所有实例
   if (config.limit === 0) {
     BkMessage.batchClose()
@@ -76,12 +77,31 @@ const BkMessage = function (config) {
     data: config
   })
 
-  if (config.message !== null
-        && typeof config.message === 'object'
-        && config.message.hasOwnProperty('componentOptions')
+  if (originConfig.message !== null
+        && typeof originConfig.message === 'object'
+        && originConfig.message.hasOwnProperty('componentOptions')
   ) {
     instance.$slots.default = [config.message]
     instance.message = null
+  }
+
+  if (!originConfig.width) {
+    instance.width = 560
+  }
+
+  if (originConfig.message !== null
+    && typeof originConfig.message === 'object'
+    && !originConfig.message.hasOwnProperty('componentOptions')) {
+    instance.showAdvanced = true
+    instance.actions = originConfig.actions || []
+
+    if (!originConfig.width) {
+      instance.width = 800
+    }
+
+    if (!originConfig.delay) {
+      instance.delay = 8000
+    }
   }
 
   instance.id = instanceId
