@@ -1258,14 +1258,14 @@ function computeStyle(data, options) {
     styles[prefixedProperty] = `translate3d(${left}px, ${top}px, 0)`;
     styles[sideA] = 0;
     styles[sideB] = 0;
-    styles.willChange = 'transform';
+    // styles.willChange = 'transform';
   } else {
     // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
     const invertTop = sideA === 'bottom' ? -1 : 1;
     const invertLeft = sideB === 'right' ? -1 : 1;
     styles[sideA] = top * invertTop;
     styles[sideB] = left * invertLeft;
-    styles.willChange = `${sideA}, ${sideB}`;
+    // styles.willChange = `${sideA}, ${sideB}`;
   }
 
   // Attributes

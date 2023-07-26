@@ -315,6 +315,9 @@
     <bk-button theme="primary" title="反色按钮" :outline="true">
         反色按钮
     </bk-button>
+    <bk-button theme="primary" title="反色按钮" :outline="true" :loading="true">
+        反色按钮
+    </bk-button>
 </template>
 <script>
     import { bkButton } from '{{BASE_LIB_NAME}}'

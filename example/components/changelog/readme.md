@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.22 {page=#/changelog}
+
+* **[update]**:
+    - merge from 2.5.7
+
+---
+
 ### 2.4.15-beta.21 {page=#/changelog}
 
 * **[fix]**:

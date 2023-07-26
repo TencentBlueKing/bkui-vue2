@@ -16,7 +16,7 @@
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
-                type: ['card', 'border-card', 'unborder-card'],
+                type: ['card', 'card-tab', 'border-card', 'unborder-card', 'vertical-card'],
                 tabPositions: ['left', 'right', 'top'],
                 currentPosition: 'left',
                 currentType: 'card',
@@ -217,12 +217,12 @@
 
 ### 选项卡样式 {page=#/tab}
 
-:::demo 通过配置 `type` 属性，设置选项卡样式。支持的属性有 `card`, `border-card`, `unborder-card`, `vertical-card`
+:::demo 通过配置 `type` 属性，设置选项卡样式。支持的属性有 `card` ,`card-tab`, `border-card`, `unborder-card`, `vertical-card`
 
 ```html
 <template>
     <div>
-        <bk-button @click="toggleType">切换样式</bk-button>
+        <bk-button @click="toggleType">切换样式</bk-button> <span>{{this.currentType}}</span>
         <bk-tab :active.sync="active" :type="currentType" style="margin-top: 20px;">
             <bk-tab-panel
                 v-for="(panel, index) in panels"
@@ -250,14 +250,14 @@
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
-                type: ['card', 'border-card', 'unborder-card', 'vertical-card'],
+                type: ['card', 'card-tab', 'border-card', 'unborder-card', 'vertical-card'],
                 currentType: 'card'
             }
         },
         methods: {
             toggleType () {
                 const currentIndex = this.type.indexOf(this.currentType)
-                const nextIndex = (currentIndex + 1) % 3
+                const nextIndex = (currentIndex + 1) % this.type.length
                 this.currentType = this.type[nextIndex]
             }
         }
@@ -354,8 +354,8 @@
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
-                type: ['card', 'border-card', 'unborder-card', 'vertical-card'],
-                currentType: 'card'
+                type: ['card', 'card-tab', 'border-card', 'unborder-card', 'vertical-card'],
+                currentType: 'card-tab'
             }
         },
         methods: {
@@ -414,8 +414,8 @@
                     { name: 'deleted', label: '已归档加速任务', count: 40 }
                 ],
                 active: 'mission',
-                type: ['card', 'border-card', 'unborder-card', 'vertical-card'],
-                currentType: 'card'
+                type: ['card', 'card-tab', 'border-card', 'unborder-card', 'vertical-card'],
+                currentType: 'card-tab'
             }
         },
         methods: {
@@ -763,25 +763,25 @@ export default {
 :::
 
 ### bk-tab 选项卡属性 {page=#/tab}
-| 参数 | 说明 | 类型 | 可选值 | 默认值 |
-|------|------|------|------|------|
-| active | 当前显示的选项卡名称，支持`sync`修饰符 | —— | —— | —— |
-| type | 选项卡样式 | String | `card` / `border-card` / `unborder-card` | `border-card` |
-| tab-position | 选项卡位置 | String | `left` / `right` / `top` | `top` |
-| closable | 是否可关闭选项卡 | Boolean | `true` / `false` | `false` |
-| addable | 是否可新增选项卡 | Boolean | `true` / `false` | `false` |
-| sortable | 标签是否可拖拽排序 | Boolean | `true` / `false` | `false` |
-| sort-type | 标签拖拽排序的方式 | Boolean | `replace(交互位置)` / `insert(插入)` | `replace` |
-| label-height | 选项卡label的高度 | Number | —— | 50 |
-| scroll-step | 可滚动时，每次滚动的像素 | Number | —— | 200 |
-| before-toggle | 切换选项卡前的钩子函数, 支持异步函数 | Function(panelName, panelInstance) | —— | —— |
-| ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-tab` 上 | String | —— | —— |
-| validate-active | 是否校验ActiveName，true：如果active匹配不到，默认激活第一个Tab，触发tab-change；false：active匹配不到不显示 | Boolean | `true` / `false` | `true` |
-| show-header | 是否显示选项卡头部 | Boolean | `true` / `false` | `true` |
-| change-on-hover | 鼠标悬停tab时进行切换 | Boolean | `true` / `false` | `false` |
-| change-on-hover-delay | 鼠标悬停切换tab的延时，单位为毫秒 | Number | —— | `1000` |
-| active-bar | 当前选中激活样式，暂时只支持横排样式 | Object | —— | `{ position: 'bottom', height: '2px' }` |
-| add-show-next-right | 添加按钮是否显示在右边滚动按钮左边 | Boolean | —— | `false` |
+| 参数 | 说明 | 类型 | 可选值                                                   | 默认值 |
+|------|------|------|-------------------------------------------------------|------|
+| active | 当前显示的选项卡名称，支持`sync`修饰符 | —— | ——                                                    | —— |
+| type | 选项卡样式 | String | `card` / `card-tab` / `border-card` / `unborder-card` | `border-card` |
+| tab-position | 选项卡位置 | String | `left` / `right` / `top`                              | `top` |
+| closable | 是否可关闭选项卡 | Boolean | `true` / `false`                                      | `false` |
+| addable | 是否可新增选项卡 | Boolean | `true` / `false`                                      | `false` |
+| sortable | 标签是否可拖拽排序 | Boolean | `true` / `false`                                      | `false` |
+| sort-type | 标签拖拽排序的方式 | Boolean | `replace(交互位置)` / `insert(插入)`                        | `replace` |
+| label-height | 选项卡label的高度 | Number | ——                                                    | 50 |
+| scroll-step | 可滚动时，每次滚动的像素 | Number | ——                                                    | 200 |
+| before-toggle | 切换选项卡前的钩子函数, 支持异步函数 | Function(panelName, panelInstance) | ——                                                    | —— |
+| ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.bk-tab` 上 | String | ——                                                    | —— |
+| validate-active | 是否校验ActiveName，true：如果active匹配不到，默认激活第一个Tab，触发tab-change；false：active匹配不到不显示 | Boolean | `true` / `false`                                      | `true` |
+| show-header | 是否显示选项卡头部 | Boolean | `true` / `false`                                      | `true` |
+| change-on-hover | 鼠标悬停tab时进行切换 | Boolean | `true` / `false`                                      | `false` |
+| change-on-hover-delay | 鼠标悬停切换tab的延时，单位为毫秒 | Number | ——                                                    | `1000` |
+| active-bar | 当前选中激活样式，暂时只支持横排样式 | Object | ——                                                    | `{ position: 'bottom', height: '2px' }` |
+| add-show-next-right | 添加按钮是否显示在右边滚动按钮左边 | Boolean | ——                                                    | `false` |
 
 ### bk-tab 选项卡事件 {page=#/tab}
 | 事件名称 | 说明 | 回调参数 |

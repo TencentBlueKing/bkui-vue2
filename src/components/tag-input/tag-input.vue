@@ -116,13 +116,15 @@ import bkLoading from '@/components/loading/directive'
 import emitter from '@/mixins/emitter'
 import bkPopover from '@/components/popover'
 import bkTooltips from '@/directives/tooltips'
+import bkOverflowTips from '../../directives/overflow-tips'
 
 export default {
   name: 'bk-tag-input',
   components: { listRender, tagRender, bkPopover },
   directives: {
     bkloading: bkLoading,
-    bkTooltips: bkTooltips
+    bkTooltips: bkTooltips,
+    bkOverflowTips
   },
   mixins: [locale.mixin, emitter],
   props: {
@@ -211,6 +213,10 @@ export default {
     tpl: Function,
     tagTpl: Function,
     pasteFn: Function,
+    freePaste: {
+      type: Boolean,
+      default: false
+    },
     filterCallback: {
       type: Function,
       default: null
@@ -618,30 +624,35 @@ export default {
       this.$refs.input.style.width = this.INPUT_MIN_WIDTH + 'px'
     },
     handleInput (event) {
-      if (this.maxData === -1 || this.maxData > this.tagList.length) {
-        const { value } = event.target
-        const charLen = this.getCharLength(value)
+      // 获取输入框的值
+      const { value } = event.target
+      this.$emit('inputchange', value)
+      // 在下一次DOM更新后执行回调函数, 以进行动态List的支持
+      this.$nextTick(() => {
+        if (this.maxData === -1 || this.maxData > this.tagList.length) {
+          const charLen = this.getCharLength(value)
 
-        this.cacheVal = value
-        if (charLen) {
-          this.isCanRemoveTag = false
-          this.filterData(value)
-          this.$refs.input.style.width = (charLen * this.INPUT_MIN_WIDTH) + 'px'
-        } else {
-          this.isCanRemoveTag = true
-          if (this.trigger === 'focus') {
-            this.filterData()
+          this.cacheVal = value
+          if (charLen) {
+            this.isCanRemoveTag = false
+            this.filterData(value)
+            this.$refs.input.style.width = (charLen * this.INPUT_MIN_WIDTH) + 'px'
+          } else {
+            this.isCanRemoveTag = true
+            if (this.trigger === 'focus') {
+              this.filterData()
+            }
           }
+        } else {
+          this.handleBlur()
+          this.curInputValue = ''
+          this.showList = false
         }
-      } else {
-        this.handleBlur()
-        this.curInputValue = ''
-        this.showList = false
-      }
 
-      this.isEdit = true
-      // 重置下拉菜单选中信息
-      this.focusItemIndex = this.allowCreate ? -1 : 0
+        this.isEdit = true
+        // 重置下拉菜单选中信息
+        this.focusItemIndex = this.allowCreate ? -1 : 0
+      })
     },
     handleFocus (event) {
       this.isCanRemoveTag = true
@@ -657,6 +668,14 @@ export default {
       event.preventDefault()
 
       const value = event.clipboardData.getData('text')
+
+      if (this.freePaste) {
+        this.curInputValue = this.curInputValue + value
+        const charLen = this.getCharLength(value)
+        this.$refs.input.style.width = (charLen * this.INPUT_MIN_WIDTH) + 'px'
+        return
+      }
+
       const valArr = this.pasteFn ? this.pasteFn(value) : this.defaultPasteFn(value)
       let tags = []
 

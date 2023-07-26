@@ -791,3 +791,30 @@ url("fonts/iconcool.eot?#iefix") format("embedded-opentype");
 .icon-japanese:before {
 	content: "\e208";
 }
+.icon-date-fill:before {
+	content: "\e209";
+}
+.icon-time:before {
+	content: "\e20a";
+}
+.icon-data-line:before {
+	content: "\e20b";
+}
+.icon-qiehuan:before {
+	content: "\e20c";
+}
+.icon-loading-tubiao:before {
+	content: "\e20d";
+}
+.icon-weixin-pro:before {
+	content: "\e20f";
+}
+.icon-copy-shape:before {
+	content: "\e210";
+}
+.icon-fix-line:before {
+	content: "\e211";
+}
+.icon-fix-shape:before {
+	content: "\e212";
+}

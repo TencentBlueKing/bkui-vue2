@@ -325,6 +325,10 @@ export default {
     scrollLoading: {
       type: Object,
       default: () => ({})
+    },
+    selectedStyle: {
+      type: String,
+      default: 'check' // check or checkbox
     }
   },
   provide () {
@@ -764,7 +768,7 @@ export default {
         }
         return false
       })
-      if (option) {
+      if (option && Object.keys(option).length !== 0) {
         if (this.multiple && this.selected.includes(option.id)) {
           return false
         }

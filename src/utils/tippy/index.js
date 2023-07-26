@@ -29,7 +29,9 @@
 * (c) 2017-2019 atomiks
 * MIT License
 */
+
 import Popper from './popper.js';
+import { addWheelListener } from '../util.js';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -907,6 +909,15 @@ function createTippy(reference, collectionProps) {
       document.addEventListener('mousemove', debouncedOnMouseMove);
     }
   });
+
+  // 在 tooltips 上禁用鼠标滚轮默认事件（禁止后，下拉框等使用到 tooltip 渲染弹层的组件无法滚动）
+  // addWheelListener(popper, function (event) {
+  //   console.error(popper);
+  //   const ev = event || window.event
+  //   ev.stopPropagation && ev.stopPropagation()
+  //   ev.preventDefault && ev.preventDefault()
+  // }, false)
+
   return instance;
   /* ======================= 🔒 Private methods 🔒 ======================= */
 

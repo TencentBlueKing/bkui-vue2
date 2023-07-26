@@ -138,7 +138,7 @@ const createStyles = function () {
   }
 }
 
-export const addResizeListener = function (element, fn) {
+export const addResizeListener = function (element, fn, useCapture = true) {
   if (attachEvent) {
     element.attachEvent('onresize', fn)
   } else {
@@ -156,7 +156,7 @@ export const addResizeListener = function (element, fn) {
       element.appendChild(resizeTrigger)
 
       resetTrigger(element)
-      element.addEventListener('scroll', scrollListener, true)
+      element.addEventListener('scroll', scrollListener, useCapture)
 
       /* Listen for a css animation to detect element display/re-attach */
       if (animationStartEvent) {

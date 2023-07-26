@@ -95,7 +95,7 @@ export default {
   methods: {
     handleInputChange (event) {
       const $target = event.target
-      const value = Number($target.textContent)
+      const value = parseInt($target.textContent, 10)
       // 无效值不抛出事件
       if (!value || value < 1 || value > this.total || (value === this.current)) return
 

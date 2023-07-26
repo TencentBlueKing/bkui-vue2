@@ -56,8 +56,9 @@
                 flex: 1;
                 line-height: 32px;
                 &-filter {
-                    color: #313238;
+                    color: #3a84ff;
                     display: inline-block;
+                    font-weight: bold;
                 }
             }
             .item-icon {
@@ -69,6 +70,10 @@
                 cursor: pointer;
                 color: #3a84ff;
                 background-color: rgba(234, 243, 255, 0.7);
+            }
+            .search-list-checkbox {
+                pointer-events: none;
+                margin-right: 6px;
             }
         }
     }

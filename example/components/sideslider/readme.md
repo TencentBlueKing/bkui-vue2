@@ -143,6 +143,13 @@
         <bk-button :type="'primary'" @click="defaultSettings.isShow = true">默认配置</bk-button>
         <bk-sideslider :is-show.sync="defaultSettings.isShow" :quick-close="true">
             <div slot="content">
+                <div style="height: 1000px;"></div>
+            </div>
+            <div slot="footer">
+                <bk-button style="margin-left: 30px;" theme="primary" @click="handleSetHeight(true)">
+                    确定
+                </bk-button>
+                <bk-button theme="default" @click="handleSetHeight(false)">取消</bk-button>
             </div>
         </bk-sideslider>
     </div>

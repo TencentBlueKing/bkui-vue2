@@ -67,14 +67,14 @@
 }
 .bk-time-picker-cells-with-seconds {
     /* min-width: 168px; */
-    .bk-time-picker-cells-title-wrapper {
+    /* .bk-time-picker-cells-title-wrapper {
         .bk-time-picker-cells-title {
             &:nth-of-type(1),
             &:nth-of-type(2) {
                 @mixin dot 55px, 85px;
             }
         }
-    }
+    } */
 }
 .bk-time-picker-cells-title-wrapper {
     width: 100%;
@@ -85,16 +85,15 @@
         width: 33.33%;
         text-align: center;
         list-style: none;
-        color: $newBlackColor2;
-        font-weight: 700;
+        color: $newBlackColor3;
         font-size: 14px;
         position: relative;
         &.active {
             color: $newMainColor;
         }
-        &:nth-of-type(1) {
+        /* &:nth-of-type(1) {
             @mixin dot 55px, 133px;
-        }
+        } */
     }
 }
 .bk-time-picker-cells-list {
