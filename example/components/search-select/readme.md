@@ -326,10 +326,10 @@
 
 [[toc]]
 
-## SearchSelect 查询选择器
+## Search 查询搜索
 功能组件，用于将搜索查询项集中在一个选择器中，搜索查询更加便捷、简单
 
-### 基础使用 {page=#/searchselect}
+### 基础使用 {page=#/search-select}
 ::: demo 基础使用
 
 ``` html
@@ -419,7 +419,97 @@
 
 :::
 
-### 自定义过滤列表 {page=#/searchselect}
+### CheckBox模式 {page=#/search-select}
+::: demo CheckBox模式
+
+``` html
+<template>
+    <div>
+        <bk-search-select selected-style="checkbox" clearable :show-popover-tag-change="true" :data="data" v-model="demo1.value"></bk-search-select>
+    </div>
+</template>
+
+<script>
+    import { bkSearchSelect } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        name: 'demo',
+        components: {
+            bkSearchSelect
+        },
+        data () {
+            return {
+                data: [
+                    {
+                        name: '实例状态',
+                        id: '1',
+                        multiable: true,
+                        children: [
+                            {
+                                name: '创建中',
+                                id: '1-2'
+                            },
+                            {
+                                name: '运行中',
+                                id: '1-3'
+                            },
+                            {
+                                name: '已关机',
+                                id: '1-4'
+                            }
+                        ]
+                    },
+                    {
+                        name: '实例业务',
+                        id: '2',
+                        children: [
+                            {
+                                name: '王者荣耀',
+                                id: '2-1'
+                            },
+                            {
+                                name: '刺激战场',
+                                id: '2-2'
+                            },
+                            {
+                                name: '绝地求生',
+                                id: '2-3'
+                            }
+                        ]
+                    },
+                    {
+                        name: 'IP地址',
+                        id: '3'
+                    },
+                    {
+                        name: '实例名',
+                        id: '4'
+                    },
+                    {
+                        name: '实例地址',
+                        id: '5'
+                    },
+                    {
+                        name: '测试六',
+                        id: '6'
+                    }
+                ],
+                demo1: {
+                    value: [{ name: 'hello world' }]
+                }
+            }
+        },
+        methods: {
+        }
+    }
+ </script>
+
+
+```
+
+:::
+
+### 自定义过滤列表 {page=#/search-select}
 ::: demo 自定义过滤列表
 
 ``` html
@@ -521,7 +611,7 @@
 
 :::
 
-### 远程加载列表 {page=#/searchselect}
+### 远程加载列表 {page=#/search-select}
 ::: demo 远程加载列表
 
 ``` html
@@ -646,7 +736,7 @@
 
 :::
 
-### 多选子列表 {page=#/searchselect}
+### 多选子列表 {page=#/search-select}
 ::: demo 多选子列表
 
 ``` html
@@ -740,7 +830,7 @@
 
 :::
 
-### 配置子项搜索条件 {page=#/searchselect}
+### 配置子项搜索条件 {page=#/search-select}
 ::: demo 配置子项搜索条件 此功能与multiable是互斥的 如果同时配置则multiable的权重将更大
 
 ``` html
@@ -878,7 +968,7 @@
 ```
 
 :::
-### 配置子项校验及自定义placeholder提示 {page=#/searchselect}
+### 配置子项校验及自定义placeholder提示 {page=#/search-select}
 ::: demo 配置子项校验及自定义placeholder提示，校验的信息既可以通过validate函数返回也可以通过validate-message属性传入或者通过validate插槽设置
 
 ``` html
@@ -980,7 +1070,7 @@
 ```
 
 :::
-### 配置其他属性 {page=#/searchselect}
+### 配置其他属性 {page=#/search-select}
 ::: demo 配置其他属性
 
 ``` html
@@ -1079,7 +1169,7 @@
 
 :::
 
-### 属性 {page=#/searchselect}
+### 属性 {page=#/search-select}
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
 | data | 显示的数据 | Array | —— | —— |
@@ -1113,8 +1203,9 @@
 | validate-message | 校验提示文本 | String | —— | '' |
 | input-unfocus-clear | 当单元格失去焦点时是否清除输入框的内容 | Boolean | —— | false |
 | ext-cls | 配置自定义样式类名，传入的类会被加在组件最外层的 DOM `.search-select-wrap` 上 | String | —— | —— |
+| selected-style | 勾选模式 | String | check/checkbox | check |
 
-### 事件 {page=#/searchselect}
+### 事件 {page=#/search-select}
 | 事件名称 | 说明 | 回调参数 |
 |------|------|------|
 | show-menu | 父列表显示时触发的事件 | menuInstance |
@@ -1132,7 +1223,7 @@
 | clear | 当用户点击清空时触发该事件 | event |
 | search | 当用户点击搜索图标时触发该事件 | event |
 
-### 方法 {page=#/searchselect}
+### 方法 {page=#/search-select}
 | 方法名 | 说明 | 参数 |
 |------|------|------|
 | getMenuInstance | 获取menu实例方法 | —— |
@@ -1140,7 +1231,7 @@
 | getInputInstance | 获取input框实例 | —— |
 
 
-### 插槽 {page=#/searchselect}
+### 插槽 {page=#/search-select}
 | 插槽名 | 说明 | 参数 |
 |------|------|------|
 | prefix | 输入框前插槽 | —— |

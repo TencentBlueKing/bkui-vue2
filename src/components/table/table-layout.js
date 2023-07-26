@@ -131,16 +131,21 @@ class TableLayout {
     ) {
       return Vue.nextTick(() => this.updateElsHeight())
     }
-    const tableHeight = (this.tableHeight = this.table.$el.offsetHeight - this.paginationHeight)
-    const footerHeight = (this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0)
-    this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0)
-    this.fixedBodyHeight = this.scrollX ? this.bodyHeight - this.gutterWidth : this.bodyHeight
 
-    const noData = !this.table.data || this.table.data.length === 0
-    this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight
-    this.syncRowHeight()
-    this.updateScrollY()
-    this.notifyObservers('scrollable')
+    // setTimeout 0 for https://github.com/TencentBlueKing/bkui-vue2/issues/387
+    setTimeout(() => {
+      const tableHeight = (this.tableHeight = this.table.$el.offsetHeight - this.paginationHeight)
+      console.warn(`this.table.$el.offsetHeight: ${this.table.$el.offsetHeight} --- this.paginationHeight: ${this.paginationHeight} --- tableHeight: ${tableHeight}`)
+      const footerHeight = (this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0)
+      this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0)
+      this.fixedBodyHeight = this.scrollX ? this.bodyHeight - this.gutterWidth : this.bodyHeight
+
+      const noData = !this.table.data || this.table.data.length === 0
+      this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight
+      this.syncRowHeight()
+      this.updateScrollY()
+      this.notifyObservers('scrollable')
+    }, 0)
   }
 
   getFlattenColumns () {

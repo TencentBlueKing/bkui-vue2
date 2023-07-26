@@ -137,7 +137,7 @@ export default {
         for (let j = 0; j < this.list.length; j++) {
           if (valueList[i] === this.list[j].id) {
             this.handleItemFn(this.list[j], true)
-            valueList.splice(0, 1)
+            valueList.splice(i, 1)
             this.$nextTick(() => {
               this.broadcast('bkCaspanel', 'change-selected', {
                 idList: valueList
@@ -175,6 +175,7 @@ export default {
     cascadeClick (item) {
       if (this.trigger !== 'click' && item.children && item.children.length) return
       this.handleItem(item, false)
+      this.dispatch('bkCascade', 'on-cascade-click')
     },
     cascadeHover (item) {
       if (this.trigger === 'hover' && item.children && item.children.length) {

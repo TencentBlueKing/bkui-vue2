@@ -27,21 +27,30 @@
 -->
 
 <template>
-  <bk-tag-input
-    v-model="tag1"
-    :placeholder="placeholder"
-    :list="list"
-    :display-key="'name'"
-    :search-key="'id'"
-    :allow-create="allowCreate"
-    :has-delete-icon="hasDeleteIcon"
-    :filter-callback="filterCallback"
-    @change="change">
-  </bk-tag-input>
+  <div>
+    <bk-tag-input
+      v-model="tags"
+      :placeholder="placeholder"
+      :list="list"
+      :display-key="'name'"
+      :search-key="'id'"
+      :allow-create="allowCreate"
+      :paste-fn="pasteFn"
+      @change="change">
+    </bk-tag-input>
+    <div style="height: 20px"></div>
+    <bk-tag-input
+      v-model="tag1"
+      :list="list"
+      :has-delete-icon="hasDeleteIcon"
+      :allow-create="allowCreate"
+      :free-paste="true"
+      @change="change">
+    </bk-tag-input>
+  </div>
 </template>
 <script>
 import { bkTagInput } from '@'
-
 export default {
   components: {
     bkTagInput
@@ -49,39 +58,46 @@ export default {
   data () {
     return {
       placeholder: '请输入城市',
+      tags: ['shenzhen'],
+      list: [
+        { id: 'shenzhen', name: '深圳' },
+        { id: 'guangzhou', name: '广州' },
+        { id: 'beijing', name: '北京' },
+        { id: 'shanghai', name: '上海' },
+        { id: 'hangzhou', name: '杭州' },
+        { id: 'nanjing', name: '南京' },
+        { id: 'chognqing', name: '重庆' },
+        { id: 'taibei', name: '台北' },
+        { id: '111', name: '111' },
+        { id: '222', name: '222' },
+        { id: '333', name: '333' },
+        { id: 'haikou', name: '海口' }
+      ],
+      placeholder: '请输入城市',
       allowCreate: true,
       hasDeleteIcon: true,
-      tag1: [],
-      list: [
-        // { id: 'shenzhen', name: '深圳' },
-        // { id: 'guangzhou', name: '广州' },
-        // { id: 'beijing', name: '北京' },
-        // { id: 'shanghai', name: '上海' },
-        // { id: 'hangzhou', name: '杭州' },
-        // { id: 'nanjing', name: '南京' },
-        // { id: 'chognqing', name: '重庆' },
-        // { id: 'taibei', name: '台北' },
-        // { id: 'haikou', name: '海口' }
-      ]
+      tag1: ['shenzhen']
     }
   },
   methods: {
-    filterCallback (val, searchKey, data) {
-      return [
-        { id: 'sss', name: val + '--sss' },
-        { id: 'kkk', name: val + '--kkk' }
-      ]
-      // return new Promise((resolve, reject) => {
-      //     setTimeout(() => {
-      //         resolve([
-      //             { id: 'sadas', name: val + '--dd深圳' },
-      //             { id: 'kkk', name: val + '--ee广州' }
-      //         ])
-      //     }, 1000)
-      // })
-    },
     change (tags) {
       console.error(tags)
+    },
+    pasteFn (val) {
+      console.error(val)
+      // 粘贴的值需要在 tag-input 的 list 里存在，同时在这个 pasteFn 里要将粘贴的值转换为 tag-input 需要的数据结构
+      // 例如下面粘贴的是 222 333
+      // 111 222 333
+      const ret = val.split(' ').map(val => {
+        return {
+          id: val,
+          name: val
+        }
+      })
+      return ret
+    },
+    change (tags) {
+      console.log(tags)
     }
   }
 }

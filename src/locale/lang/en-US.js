@@ -173,7 +173,11 @@ export default {
     },
     message: {
       copy: 'copy',
-      copied: 'copied'
+      copied: 'copied',
+      assistant: 'Assistant',
+      details: 'Details',
+      copySuccess: 'Successfully',
+      copyFailed: 'Copy Failed'
     },
     image: {
       zoomIn: 'zoom in',
@@ -184,6 +188,9 @@ export default {
       original: 'original size',
       prev: 'prev',
       next: 'next'
+    },
+    versionDetail: {
+      currentTagText: 'Current'
     }
   }
 }

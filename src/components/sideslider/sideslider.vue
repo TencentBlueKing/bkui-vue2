@@ -29,7 +29,7 @@
 <template>
   <transition name="slide">
     <article :data-transfer="transfer" v-transfer-dom class="bk-sideslider" :class="extCls" :style="{ zIndex: localZIndex }" v-if="isShow" @mousedown.self="handleQuickClose">
-      <section class="bk-sideslider-wrapper" :class="[{ left: direction === 'left', right: direction === 'right' }]" :style="{ width: width + 'px' }">
+      <section class="bk-sideslider-wrapper" :class="[{ left: direction === 'left', right: direction === 'right' }]" :style="{ width: calcWidth }">
         <div class="bk-sideslider-header">
           <div class="bk-sideslider-closer" @click="handleClose" :style="{ float: calcDirection }">
             <i class="bk-icon" :class="'icon-angle-' + direction"></i>
@@ -102,7 +102,7 @@ export default {
       default: true
     },
     width: {
-      type: Number,
+      type: [String, Number],
       default: 400
     },
     beforeClose: {
@@ -156,6 +156,12 @@ export default {
     }
   },
   computed: {
+    calcWidth () {
+      if (/^\d+$/.test(this.width)) {
+        return `${this.width}px`
+      }
+      return this.width
+    },
     calcDirection () {
       return this.direction === 'left' ? 'right' : 'left'
     }
@@ -173,6 +179,13 @@ export default {
         if (this.showMask) {
           this.generatePopUid()
         }
+
+        this.$nextTick(() => {
+          if (this.$refs.content) {
+            addResizeListener(this.$refs.content, this.handleContentResize, false)
+          }
+        })
+
         setTimeout(() => {
           this.$emit('shown')
         }, 200)
@@ -189,15 +202,15 @@ export default {
     }
   },
   mounted () {
-    if (this.$refs.content && this.showMask) {
-      this.generatePopUid()
-      addResizeListener(this.$refs.content, this.handleContentResize)
-    }
   },
   destroyed () {
     const root = document.querySelector('html')
     removeClass(root, 'bk-sideslider-show')
     removeResizeListener(this.$refs.content, this.handleContentResize)
+    // 销毁后删除DOM节点
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
   },
   beforeDestroy () {
     this.isShow && this.popUid && popManager.hide(this.popUid)

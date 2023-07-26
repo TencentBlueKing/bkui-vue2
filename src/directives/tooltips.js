@@ -74,12 +74,12 @@ const createTippy = (el, binding) => {
   const value = binding.value
   const options = { ...defaultOptions }
 
-  // allowHtml 兼容之前
-  if (value.allowHtml || value.allowHTML) {
-    value.allowHTML = true
-  }
-
   if (typeof value === 'object') {
+    // allowHtml 兼容之前
+    if (value.allowHtml || value.allowHTML) {
+      value.allowHTML = true
+    }
+
     Object.assign(options, value)
   } else {
     options.content = value
@@ -149,7 +149,7 @@ const bkTooltips = {
         el.tippyInstance = createTippy(el, binding)
       } else {
         // TODO: 暂时先这样处理，如果是 html 那么再次实例化，如果不实例化只是更新 html 内容的话，那么第一次绑定的事件会消失
-        if (typeof value === 'object' && binding.value.allowHtml) {
+        if (typeof value === 'object' && (binding.value.allowHtml || binding.value.allowHTML)) {
           el.tippyInstance = createTippy(el, binding)
         } else {
           el._tippy.setContent(content)

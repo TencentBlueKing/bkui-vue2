@@ -96,13 +96,10 @@
       <div slot="content"
         :class="['bk-cascade-dropdown-content',extPopoverCls]"
         v-show="!disabled"
-        :style="{
-          width: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? defaultWidth : (scrollWidth * popoverWidth + 2)) + 'px'
-        }">
+        :style="dropdownContentStyle"
+        ref="refDropContentWrapper">
         <div class="bk-cascade-options"
-          :style="{
-            height: (((filterable && !!searchContent && filterableStatus && !searchList.length) || !cascadeList.length) ? 32 : scrollHeight) + 'px'
-          }">
+          :style="dropdownOptionsStyle">
           <div class="bk-cascade-panel"
             v-if="filterable && !!searchContent && filterableStatus">
             <ul class="bk-cascade-panel-ul" style="width: 100%">
@@ -129,6 +126,7 @@
           </div>
           <bk-caspanel
             v-show="!filterableStatus"
+            ref="refDropdownContent"
             :list="cascadeList"
             :trigger="trigger"
             :scroll-width="scrollWidth"
@@ -246,6 +244,10 @@ export default {
     extPopoverCls: {
       type: String,
       default: ''
+    },
+    maxWidth: {
+      type: [String, Number],
+      default: '100%'
     }
   },
   data () {
@@ -303,6 +305,24 @@ export default {
         childrenKey: 'children'
       }
       return Object.assign(nodeOptions, this.options)
+    },
+    dropdownContentWidth () {
+      return (((this.filterable && !!this.searchContent && this.filterableStatus && !this.searchList.length) || !this.cascadeList.length) ? this.defaultWidth : (this.scrollWidth * this.popoverWidth + 2))
+    },
+    dropdownContentStyle () {
+      const maxWidth = /^\d+$/.test(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth
+      const width = this.dropdownContentWidth + 'px'
+      return {
+        maxWidth,
+        width,
+        overflowX: 'auto'
+      }
+    },
+    dropdownOptionsStyle () {
+      return {
+        width: this.dropdownContentWidth - 2 + 'px',
+        height: (((this.filterable && !!this.searchContent && this.filterableStatus && !this.searchList.length) || !this.cascadeList.length) ? 32 : this.scrollHeight) + 'px'
+      }
     }
   },
   watch: {
@@ -345,11 +365,6 @@ export default {
           // 改变选框的选中态
           this.recursiveList(this.cascadeList, this.multipleCurrentList, 'search')
         }
-      }
-    },
-    selectedName () {
-      if (this.filterable && !this.multiple) {
-        this.searchContent = this.selectedName
       }
     },
     list: {
@@ -448,12 +463,23 @@ export default {
         this.popoverWidth += 1
       }
     })
+
+    this.$on('on-cascade-click', () => {
+      this.handleScrollToRight()
+    })
   },
   mounted () {
     this.initValue()
     // 暂时将远程加载中的搜索去掉
     if (this.isRemote) {
       this.filterable = false
+    }
+    // 开启了filterable，单选下的display与srachContent是一样的。因此初始化要回填
+    if (this.filterable && !this.multiple) {
+      this.searchContent = this.selectedName
+      this.$nextTick(() => {
+        this.tippyInstance() // 回填不需要打开下拉，关闭
+      })
     }
   },
   methods: {
@@ -514,6 +540,7 @@ export default {
         this.selectedList = []
         this.tmpSelected = []
         this.exposedId(this.currentList, oldId)
+        this.searchContent = ''
       }
       this.broadcast('bkCaspanel', 'on-clear')
       // 关闭下拉面板
@@ -752,6 +779,23 @@ export default {
           this.exposedId(this.currentList, oldVal)
           this.tippyInstance()
         }, 0)
+      }
+    },
+    handleScrollToRight () {
+      if (/^\d+(px|vh|vm|re?m)?$/.test(this.maxWidth)) {
+        if (this.$refs.refDropdownContent && this.$refs.refDropdownContent.$el) {
+          this.$nextTick(() => {
+            const wrapper = this.$refs.refDropContentWrapper
+            const target = this.$refs.refDropdownContent.$el
+            const scrollWidth = target.clientWidth
+            const parentWidth = wrapper.clientWidth
+            const left = scrollWidth > parentWidth ? scrollWidth - parentWidth : 0
+            wrapper.scrollTo({
+              top: 0,
+              left
+            })
+          })
+        }
       }
     },
     // 多选删除数据

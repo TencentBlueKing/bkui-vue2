@@ -27,125 +27,190 @@
 -->
 
 <template>
-  <bk-table class="my-table" ref="filterTable" :data="tableData" style="width: 100%"
-    auto-scroll-to-top
-    :max-height="400"
-    @page-change="handlePageChange"
-    @page-limit-change="handlePageLimitChange">
-    <bk-table-column type="expand" width="30" :before-expand-change="beforeExpand"></bk-table-column>
-    <bk-table-column prop="date" label="日期" sortable width="180" column-key="date"
-      :filters="dateFilters" :filter-method="filterHandler">
-    </bk-table-column>
-    <bk-table-column prop="name" label="姓名" width="180">
-    </bk-table-column>
-    <bk-table-column prop="address" label="地址" :formatter="formatter">
-    </bk-table-column>
-  </bk-table>
+  <div>
+    <bk-table :row-auto-height="true" style="margin-top: 15px;" :data="data" :size="size" :pagination="pagination"
+      @page-change="handlePageChange" @page-limit-change="handlePageLimitChange">
+      <bk-table-column type="selection" width="60" fixed="left"></bk-table-column>
+      <bk-table-column type="index" label="序列" width="60"></bk-table-column>
+      <bk-table-column label="名称/内网IP" width="130" prop="ip"></bk-table-column>
+      <bk-table-column label="来源" width="130" prop="source"></bk-table-column>
+      <bk-table-column label="状态" width="130" prop="status"></bk-table-column>
+      <bk-table-column label="创建时间" width="130" prop="create_time"></bk-table-column>
+      <bk-table-column label="操作" width="130" fixed="right">
+        <template slot-scope="props">
+          <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'"
+            @click="reset(props.row)">重置</bk-button>
+          <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
+          <bk-popover class="dot-menu" placement="bottom-start" theme="dot-menu light" trigger="click"
+            :arrow="false" offset="15" :distance="0">
+            <span class="dot-menu-trigger"></span>
+            <ul class="dot-menu-list" slot="content">
+              <li class="dot-menu-item">导入</li>
+              <li class="dot-menu-item">导出</li>
+            </ul>
+          </bk-popover>
+        </template>
+      </bk-table-column>
+    </bk-table>
+  </div>
 </template>
 <script>
-import { bkTable, bkTableColumn } from '@'
+import { bkTable, bkTableColumn, bkButton, bkPopover } from '@'
+
 export default {
   components: {
     bkTable,
-    bkTableColumn
+    bkTableColumn,
+    bkButton,
+    bkPopover
   },
   data () {
     return {
-      dateFilters: [
-        { text: '2016-05-01', value: '2016-05-01' },
-        { text: '2016-05-02', value: '2016-05-02' },
-        { text: '2016-05-03', value: '2016-05-03' },
-        { text: '2016-05-04', value: '2016-05-04' }
+      size: 'small',
+      data: [
+        {
+          ip: '192.168.0.1',
+          source: 'QQ',
+          status: '创建中',
+          create_time: '2018-05-25 15:02:24',
+          children: [
+            {
+              name: '用户管理',
+              count: '23',
+              creator: 'person2',
+              create_time: '2017-10-10 11:12',
+              desc: '用户管理'
+            },
+            {
+              name: '模块管理',
+              count: '2',
+              creator: 'person1',
+              create_time: '2017-10-10 11:12',
+              desc: '无数据测试'
+            }
+          ]
+        },
+        {
+          ip: '192.168.0.2',
+          source: '微信',
+          status: '正常',
+          create_time: '2018-05-25 15:02:24',
+          children: [
+            {
+              name: '用户管理',
+              count: '23',
+              creator: 'person2',
+              create_time: '2017-10-10 11:12',
+              desc: '用户管理'
+            },
+            {
+              name: '模块管理',
+              count: '2',
+              creator: 'person1',
+              create_time: '2017-10-10 11:12',
+              desc: '无数据测试'
+            }
+          ]
+        },
+        {
+          ip: '192.168.0.3',
+          source: 'QQ',
+          status: '创建中',
+          create_time: '2018-05-25 15:02:24',
+          children: [
+            {
+              name: '用户管理',
+              count: '23',
+              creator: 'person2',
+              create_time: '2017-10-10 11:12',
+              desc: '用户管理'
+            },
+            {
+              name: '模块管理',
+              count: '2',
+              creator: 'person1',
+              create_time: '2017-10-10 11:12',
+              desc: '无数据测试'
+            }
+          ]
+        }
       ],
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        tag: '家'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄',
-        tag: '公司'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄',
-        tag: '家'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        tag: '公司'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        tag: '公司'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        tag: '公司'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        tag: '公司'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        tag: '公司'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        tag: '公司'
-      }],
       pagination: {
         current: 1,
-        count: 100,
-        limit: 10,
-        small: false
+        count: 500,
+        limit: 20
       }
     }
   },
   methods: {
-    resetDateFilter () {
-      this.$refs.filterTable.clearFilter('date')
+    handlePageLimitChange () {
+      console.log('handlePageLimitChange', arguments)
     },
-    clearFilter () {
-      this.$refs.filterTable.clearFilter()
-    },
-    formatter (row, column) {
-      return row.address
-    },
-    filterTag (value, row) {
-      return row.tag === value
-    },
-    filterHandler (value, row, column) {
-      const property = column['property']
-      return row[property] === value
-    },
-    beforeExpand ({ row, $index }) {
-      return !!$index
+    toggleTableSize () {
+      const size = ['small', 'medium', 'large']
+      const index = (size.indexOf(this.size) + 1) % 3
+      this.size = size[index]
     },
     handlePageChange (page) {
       this.pagination.current = page
-    },
-    handlePageLimitChange (limit) {
-      this.pagination.current = 1
-      this.pagination.limit = limit
     }
   }
 }
 </script>
+
 <style lang="postcss">
-    .my-table {
-        th {
-            background-color: #f0f1f5;
-            /* background-color: #fafbfd; */
-        }
-    }
+  .dot-menu {
+      display: inline-block;
+      vertical-align: middle;
+  }
+
+  .tippy-tooltip.dot-menu-theme {
+      padding: 0;
+  }
+
+  .dot-menu-trigger {
+      display: block;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 0;
+      color: #979BA5;
+      cursor: pointer;
+  }
+
+  .dot-menu-trigger:hover {
+      color: #3A84FF;
+      background-color: #EBECF0;
+  }
+
+  .dot-menu-trigger:before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 -4px 0 currentColor, 0 4px 0 currentColor;
+  }
+
+  .dot-menu-list {
+      margin: 0;
+      padding: 5px 0;
+      min-width: 50px;
+      list-style: none;
+  }
+
+  .dot-menu-list .dot-menu-item {
+      padding: 0 10px;
+      font-size: 12px;
+      line-height: 26px;
+      cursor: pointer;
+
+      &:hover {
+          background-color: #eaf3ff;
+          color: #3a84ff;
+      }
+  }
 </style>

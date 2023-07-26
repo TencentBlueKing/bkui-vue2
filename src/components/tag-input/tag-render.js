@@ -46,7 +46,7 @@ export default {
     }
     return (
       <div class={parentClass}>
-        <span class={textClass}>{ct.props.node[ct.props.displayKey]}</span>
+        <span class={textClass} vBkOverflowTips>{ct.props.node[ct.props.displayKey]}</span>
       </div>
     )
   }

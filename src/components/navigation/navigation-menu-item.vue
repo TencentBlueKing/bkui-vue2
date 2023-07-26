@@ -126,6 +126,8 @@ export default {
         } else if ((this.parentMenu && this.parentMenu.collapse) || this.collapse) {
           return this.defSubMenuOpenBgColor
         }
+      } else if (this.parentMenu && this.mouseover) {
+        return this.rootMenu.defItemHoverBgColor
       }
       return ''
     },

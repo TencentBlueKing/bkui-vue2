@@ -172,7 +172,11 @@ export default {
     },
     message: {
       copy: '复制',
-      copied: '已复制'
+      copied: '已复制',
+      assistant: '助手',
+      details: '详情',
+      copySuccess: '复制成功',
+      copyFailed: '复制失败'
     },
     image: {
       zoomIn: '放大',
@@ -181,7 +185,9 @@ export default {
       rotateRight: '向右旋转',
       fullScreen: '适应屏幕',
       original: '快速回到 1：1'
-
+    },
+    versionDetail: {
+      currentTagText: '当前版本'
     }
   }
 }

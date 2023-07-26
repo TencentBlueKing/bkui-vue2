@@ -5,20 +5,20 @@
     width: 100%;
     position: relative;
     &-img {
-        width: 480px;
-        height: 240px;
         display: flex;
         align-items: center;
         justify-content: center;
-        &.part-img {
-            width: 120px;
-            height: 100px;
-        }
+
         .exception-image {
             object-fit: contain;
             display: block;
-            height: 100%;
+            height: 200px;
             vertical-align: middle;
+        }
+        &.part-img {
+            .exception-image{
+                height: 100px;
+            }
         }
     }
     &-text{

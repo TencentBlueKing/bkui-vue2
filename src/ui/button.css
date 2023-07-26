@@ -208,7 +208,7 @@
     outline: none;
     height: 22px;
     padding: 0;
-    
+
     .bk-loading-wrapper {
         display: inline-block;
     }
@@ -446,6 +446,10 @@
     text-decoration: none;
     transition: background-color ease 0.3s;
     min-width: 68px;
+
+    .bk-loading-wrapper {
+        opacity: 0;
+    }
 
     .bk-button-loading {
         width: 58px;

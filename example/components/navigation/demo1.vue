@@ -4,12 +4,11 @@
       <bk-button theme="primary" @click="handleChangeNav">切换导航类型：{{curNav.name}}</bk-button>
     </div>
     <bk-navigation
-      :header-title="nav.navId"
+      :header-title="nav.id"
       :side-title="nav.title"
       :default-open="false"
       :navigation-type="curNav.nav"
       :need-menu="curNav.needMenu"
-      :theme-color="themeColor['item-default-bg-color'] || undefined"
       @toggle="handleToggle">
       <template slot="header">
         <div class="monitor-navigation-header">
@@ -31,7 +30,7 @@
             <span class="header-title-icon">
               <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4756"><path d="M416 480h320v64H416l96 96-48 48-176-176 176-176 48 48-96 96z" p-id="4757"></path></svg>
             </span>
-            {{nav.navId}}
+            {{nav.id}}
           </div>
           <bk-select class="header-select" :class="{ 'is-left': curNav.nav === 'left-right' }" v-model="header.bizId" :clearable="false" searchable>
             <bk-option v-for="option in header.selectList"
@@ -42,7 +41,7 @@
           </bk-select>
           <bk-popover theme="light navigation-message" placement="bottom" :arrow="false" offset="0, 5" trigger="mouseenter" :tippy-options="{ 'hideOnClick': false }">
             <div class="header-mind" :class="{ 'is-left': curNav.nav === 'left-right' }">
-              <i class="bk-icon icon-chinese lang-icon"></i>
+              <span class="bk-icon icon-chinese lang-icon"></span>
             </div>
             <template slot="content">
               <ul class="monitor-navigation-admin">
@@ -105,39 +104,32 @@
       <template slot="menu">
         <bk-navigation-menu
           ref="menu"
-          @select="handleNavSelect"
-          :default-active="nav.navId"
-          :unique-opened="true"
+          @select="handleSelect"
+          :default-active="nav.id"
           :before-nav-change="beforeNavChange"
-          :toggle-active="nav.toggle"
-          v-bind="themeColor">
-          <bk-navigation-menu-group
-            v-for="item in nav.list2"
+          :toggle-active="nav.toggle">
+          <bk-navigation-menu-item
+            v-for="item in nav.list"
             :key="item.name"
-            :group-name="item.name">
-            <bk-navigation-menu-item
-              :key="child.name"
-              v-for="child in item.children"
-              :id="child.name"
-              :disabled="child.disabled"
-              :icon="child.icon"
-              :href="child.href"
-              :has-child="child.children && !!child.children.length"
-              :default-active="child.active">
-              <span>{{child.name}}</span>
-              <div slot="child">
-                <bk-navigation-menu-item
-                  :key="set.name"
-                  v-for="set in child.children"
-                  :id="set.name"
-                  :disabled="set.disabled"
-                  :href="set.href"
-                  :default-active="set.active">
-                  <span>{{set.name}}</span>
-                </bk-navigation-menu-item>
-              </div>
-            </bk-navigation-menu-item>
-          </bk-navigation-menu-group>
+            :has-child="item.children && !!item.children.length"
+            :group="item.group"
+            :icon="item.icon"
+            :disabled="item.disabled"
+            :url="item.url"
+            :id="item.name">
+            <span>{{item.name}}</span>
+            <div slot="child">
+              <bk-navigation-menu-item
+                :key="child.name"
+                v-for="child in item.children"
+                :id="child.name"
+                :disabled="child.disabled"
+                :icon="child.icon"
+                :default-active="child.active">
+                <span>{{child.name}}</span>
+              </bk-navigation-menu-item>
+            </div>
+          </bk-navigation-menu-item>
         </bk-navigation-menu>
       </template>
       <div class="monitor-navigation-content">
@@ -156,14 +148,13 @@
 </template>
 
 <script>
-import { bkNavigation, bkNavigationMenu, bkNavigationMenuItem, bkNavigationMenuGroup, bkSelect, bkOption, bkPopover, bkButton } from '@'
+import { bkNavigation, bkNavigationMenu, bkNavigationMenuItem, bkSelect, bkOption, bkPopover, bkButton } from '@'
 export default {
   name: 'monitor-navigation',
   components: {
     bkNavigation,
     bkNavigationMenu,
     bkNavigationMenuItem,
-    bkNavigationMenuGroup,
     bkSelect,
     bkOption,
     bkPopover,
@@ -190,85 +181,122 @@ export default {
         }
       ],
       nav: {
-        list2: [
+        list: [
           {
-            name: '计算资源',
+            name: '首页',
+            icon: 'icon-tree-application-shape',
+            url: '/overview/',
+            open: true,
             children: [
               {
-                name: '集群',
-                href: '/#/navigation/example',
-                icon: 'icon-tree-application-shape'
+                name: '首页一',
+                active: true
               },
               {
-                name: '节点',
-                href: '/',
-                icon: 'icon-tree-application-shape'
-              },
-              {
-                name: '服务',
-                href: '/',
-                icon: 'icon-tree-application-shape'
+                name: '首页二'
               }
             ]
           },
           {
-            name: '配置',
-            children: [
-              {
-                name: '模板集',
-                href: '/#/navigation/example',
-                active: true,
-                icon: 'icon-tree-application-shape'
-              },
-              {
-                name: '变量管理',
-                title: true,
-                href: '/3',
-                icon: 'icon-tree-application-shape'
-              },
-              {
-                name: 'Metric管理',
-                title: true,
-                href: '/4',
-                icon: 'icon-tree-application-shape'
-              }
-            ]
+            name: '测试页',
+            icon: 'icon-tree-group-shape',
+            url: '/bp/',
+            group: true
           },
           {
-            name: '其他配置',
+            name: '测试页二',
+            icon: 'icon-tree-module-shape',
+            url: '/component/',
+            disabled: true
+
+          },
+          {
+            name: '测试页三',
+            icon: 'icon-tree-process-shape',
+            url: '/uptime_check/summary/'
+          },
+          {
+            name: 'aaaa',
+            icon: 'icon-weixin-shape',
+            url: '/operation_monitor/'
+          },
+          {
+            name: '一级菜单',
+            icon: 'icon-tree-process-shape',
+            url: '/config/',
             children: [
               {
-                name: '模板设置',
-                active: true,
-                icon: 'icon-tree-application-shape',
+                name: '二级菜单1'
+              },
+              {
+                name: '二级菜单2',
                 children: [
                   {
-                    name: '测试页一'
+                    name: '监控配置22'
                   },
                   {
-                    name: '测试页二'
+                    name: '监控配置23'
                   },
                   {
-                    name: '测试页三'
+                    name: '监控配置24'
                   }
                 ]
               },
               {
-                name: '应用配置',
-                title: true,
-                href: '/3',
-                icon: 'icon-tree-application-shape'
+                name: '二级菜单3'
               },
               {
-                name: '网络',
-                title: true,
-                href: '/4',
-                icon: 'icon-tree-application-shape'
+                name: '二级菜单4'
+              },
+              {
+                name: '二级菜单5'
+              },
+              {
+                name: '二级菜单6'
+              },
+              {
+                name: '二级菜单7'
+              },
+              {
+                name: '二级菜单8'
+              },
+              {
+                name: '二级菜单9'
+              },
+              {
+                name: '二级菜单10'
               }
             ]
+          },
+          {
+            name: '保时捷',
+            icon: 'icon-clock-shape',
+            url: '/datasource/',
+            children: []
+          },
+          {
+            name: '阿斯顿马丁',
+            icon: 'icon-qq-shape',
+            url: '/event_center/list/'
+          },
+          {
+            name: '兰博基尼',
+            icon: 'icon-empty-shape',
+            url: '/biz_manage/'
+          },
+          {
+            name: '法拉利',
+            icon: 'icon-apps-shape',
+            url: '/dashboard/',
+            group: true
+          },
+          {
+            name: '测试',
+            icon: 'icon-weixin-shape',
+            url: '/blank/'
           }
         ],
-        navId: '集群',
+        id: '首页一',
         toggle: false,
         submenuActive: false,
         title: '蓝鲸测试平台'
@@ -411,26 +439,24 @@ export default {
     },
     curHeaderNav () {
       return this.header.list[this.header.active] || {}
-    },
-    themeColor () {
-      return this.curNav.nav === 'topss-bottom' ? {
-        'item-hover-bg-color': '#3a4561',
-        'item-hover-color': '#FFFFFF',
-        'item-active-bg-color': '#0083FF',
-        'item-active-color': '#FFFFFF',
-        'item-default-bg-color': '#2C354D',
-        'item-default-color': '#acb5c6',
-        'item-default-icon-color': '#acb5c6',
-        'item-child-icon-default-color': '#acb5c6;',
-        'item-child-icon-hover-color': '#acb5c6;',
-        'item-active-icon-color': '#FFFFFF',
-        'item-hover-icon-color': '#FFFFFF',
-        'item-child-icon-active-color': '#FFFFFF',
-        'sub-menu-open-bg-color': '#272F45'
-      } : {}
     }
   },
+  mounted () {
+    /* 以下代码是为了自适应例子父级的宽高而设置 */
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
+    /* 以上代码是为了自适应例子父级的宽高而设置 */
+  },
+  beforeDestroy () {
+    /* 以下代码是为了自适应例子父级的宽高而设置 */
+    window.removeEventListener('resize', this.handleResize)
+    /* 以上代码是为了自适应例子父级的宽高而设置 */
+  },
   methods: {
+    handleSelect (id, item) {
+      this.nav.id = id
+      console.info(`你选择了${id}`)
+    },
     handleNavSelect (id, item) {
       this.nav.navId = id
       console.info(`你选择了${id}`)
@@ -444,6 +470,20 @@ export default {
     },
     handleChangeNav () {
       this.navActive = (this.navActive + 1) % 3
+    },
+    handleResize (e) {
+      if (window.innerWidth > 1615) {
+        this.header.list.forEach(item => (item.show = true))
+      } else if (window.innerWidth > 1515) {
+        this.header.list[0].show = false
+      } else if (window.innerWidth > 1415) {
+        this.header.list[0].show = false
+        this.header.list[1].show = false
+      } else if (window.innerWidth > 1315) {
+        this.header.list[0].show = false
+        this.header.list[1].show = false
+        this.header.list[2].show = false
+      }
     }
   }
 }
@@ -453,401 +493,399 @@ export default {
 
 /* 以下样式是为了适应例子父级的宽高而设置 */
 .bk-navigation {
-    width:calc(100vw - 530px) !important;
-    height:calc(100vh - 140px) !important;
-    outline:1px solid #ebebeb;
+  width:calc(100vw - 530px) !important;
+  height:calc(100vh - 140px) !important;
+  outline:1px solid #ebebeb;
 }
 .bk-navigation .bk-navigation-wrapper {
-    height:calc(100vh - 252px)!important;
+  height:calc(100vh - 252px)!important;
 }
 /* 以上样式是为了适应例子父级的宽高而设置 */
 
 .monitor-navigation-header{
-  -webkit-box-flex:1;
-  -ms-flex:1;
-  flex:1;
-  overflow:hidden;
-  height:100%;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  font-size:14px;
+-webkit-box-flex:1;
+-ms-flex:1;
+flex:1;
+overflow:hidden;
+height:100%;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+font-size:14px;
 }
 .monitor-navigation-header .header-nav{
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  padding:0;
-  margin:0;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+padding:0;
+margin:0;
 }
 .monitor-navigation-header .header-nav-item{
-  list-style:none;
-  height:50px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  margin-right:40px;
-  color:#96A2B9;
-  min-width:56px
+list-style:none;
+height:50px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+margin-right:40px;
+color:#96A2B9;
+min-width:56px
 }
 .monitor-navigation-header .header-nav-item.item-active{
-  color:#FFFFFF !important;
+color:#FFFFFF !important;
 }
 .monitor-navigation-header .header-nav-item:hover{
-  cursor:pointer;
-  color:#D3D9E4;
+cursor:pointer;
+color:#D3D9E4;
 }
 .monitor-navigation-header .header-title{
-  color:#63656E;
-  font-size:16px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  margin-left:-6px;
+color:#63656E;
+font-size:16px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+margin-left:-6px;
 }
 .monitor-navigation-header .header-title-icon{
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  width:28px;
-  height:28px;
-  font-size:28px;
-  color:#3A84FF;
-  cursor:pointer;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+width:28px;
+height:28px;
+font-size:28px;
+color:#3A84FF;
+cursor:pointer;
 }
 .monitor-navigation-header .header-select{
-  width:240px;
-  margin-left:auto;
-  margin-right:34px;
-  border:none;
-  background:#252F43;
-  color:#D3D9E4;
-  -webkit-box-shadow:none;
-  box-shadow:none
+width:240px;
+margin-left:auto;
+margin-right:34px;
+border:none;
+background:#252F43;
+color:#D3D9E4;
+-webkit-box-shadow:none;
+box-shadow:none
 }
 .monitor-navigation-header .header-select.is-left{
-  background:#F0F1F5;
-  color:#63656E;
+background:#F0F1F5;
+color:#63656E;
 }
 .monitor-navigation-header .header-mind{
-  color:#768197;
-  font-size:16px;
-  position:relative;
-  height:32px;
-  width:32px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-  margin-right:8px
+color:#768197;
+font-size:16px;
+position:relative;
+height:32px;
+width:32px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+-webkit-box-pack:center;
+-ms-flex-pack:center;
+justify-content:center;
+margin-right:8px
 }
 .monitor-navigation-header .header-mind.is-left{
-  color:#63656E;
+color:#63656E;
 }
 .monitor-navigation-header .header-mind.is-left:hover{
-  color:#3A84FF;
-  background:#F0F1F5
+color:#3A84FF;
+background:#F0F1F5
 }
 .monitor-navigation-header .header-mind-mark{
-  position:absolute;
-  right:8px;
-  top:8px;
-  height:7px;
-  width:7px;
-  border:1px solid #27334C;
-  background-color:#EA3636;
-  border-radius:100%
+position:absolute;
+right:8px;
+top:8px;
+height:7px;
+width:7px;
+border:1px solid #27334C;
+background-color:#EA3636;
+border-radius:100%
 }
 .monitor-navigation-header .header-mind-mark.is-left{
-  border-color:#F0F1F5;
+border-color:#F0F1F5;
 }
 .monitor-navigation-header .header-mind:hover{
-  background:-webkit-gradient(linear,right top, left top,from(rgba(37,48,71,1)),to(rgba(38,50,71,1)));
-  background:linear-gradient(270deg,rgba(37,48,71,1) 0%,rgba(38,50,71,1) 100%);
-  border-radius:100%;
-  cursor:pointer;
-  color:#D3D9E4;
+background:-webkit-gradient(linear,right top, left top,from(rgba(37,48,71,1)),to(rgba(38,50,71,1)));
+background:linear-gradient(270deg,rgba(37,48,71,1) 0%,rgba(38,50,71,1) 100%);
+border-radius:100%;
+cursor:pointer;
+color:#D3D9E4;
 }
 .monitor-navigation-header .header-mind .lang-icon{
-  font-size:20px;
+font-size:20px;
 }
 .monitor-navigation-header .header-help{
-  color:#768197;
-  font-size:16px;
-  position:relative;
-  height:32px;
-  width:32px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-  margin-right:8px
+color:#768197;
+font-size:16px;
+position:relative;
+height:32px;
+width:32px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+-webkit-box-pack:center;
+-ms-flex-pack:center;
+justify-content:center;
+margin-right:8px
 }
 .monitor-navigation-header .header-help.is-left{
-  color:#63656E;
+color:#63656E;
 }
 .monitor-navigation-header .header-help.is-left:hover{
-  color:#3A84FF;
-  background:#F0F1F5
+color:#3A84FF;
+background:#F0F1F5
 }
 .monitor-navigation-header .header-help:hover{
-  background:-webkit-gradient(linear,right top, left top,from(rgba(37,48,71,1)),to(rgba(38,50,71,1)));
-  background:linear-gradient(270deg,rgba(37,48,71,1) 0%,rgba(38,50,71,1) 100%);
-  border-radius:100%;
-  cursor:pointer;
-  color:#D3D9E4;
+background:-webkit-gradient(linear,right top, left top,from(rgba(37,48,71,1)),to(rgba(38,50,71,1)));
+background:linear-gradient(270deg,rgba(37,48,71,1) 0%,rgba(38,50,71,1) 100%);
+border-radius:100%;
+cursor:pointer;
+color:#D3D9E4;
 }
 .monitor-navigation-header .header-user{
-  height:100%;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-  color:#96A2B9;
-  margin-left:8px;
+height:100%;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+-webkit-box-pack:center;
+-ms-flex-pack:center;
+justify-content:center;
+color:#96A2B9;
+margin-left:8px;
 }
 .monitor-navigation-header .header-user .bk-icon{
-  margin-left:5px;
-  font-size:12px;
+margin-left:5px;
+font-size:12px;
 }
 .monitor-navigation-header .header-user.is-left{
-  color:#63656E;
+color:#63656E;
 }
 .monitor-navigation-header .header-user.is-left:hover{
-  color:#3A84FF
+color:#3A84FF
 }
 .monitor-navigation-header .header-user:hover{
-  cursor:pointer;
-  color:#D3D9E4;
+cursor:pointer;
+color:#D3D9E4;
 }
 .monitor-navigation-content{
-  height:calc(100% - 54px);
-  background:#FFFFFF;
-  -webkit-box-shadow:0px 2px 4px 0px rgba(25,25,41,0.05);
-  box-shadow:0px 2px 4px 0px rgba(25,25,41,0.05);
-  border-radius:2px;
-  border:1px solid rgba(220,222,229,1);
+height:calc(100% - 84px);
+background:#FFFFFF;
+-webkit-box-shadow:0px 2px 4px 0px rgba(25,25,41,0.05);
+box-shadow:0px 2px 4px 0px rgba(25,25,41,0.05);
+border-radius:2px;
+border:1px solid rgba(220,222,229,1);
 }
-.monitor-navigation-footer {
-  display: flex;
-  width: 100%;
-  height: 52px;
-  font-size: 12px;
-  color: #63656e;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.footer-link {
-  margin-bottom: 6px;
-  color: #3480fe;
-}
-.footer-link a {
-  margin: 0 2px;
-  color: #3480fe;
-  cursor: pointer;
+.monitor-navigation-footer{
+height:52px;
+width:100%;
+margin:32px 0 0;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+-webkit-box-pack:center;
+-ms-flex-pack:center;
+justify-content:center;
+border-top:1px solid #DCDEE5;
+color:#63656E;
+font-size:12px;
 }
 .monitor-navigation-message{
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  -ms-flex-direction:column;
-  flex-direction:column;
-  width:360px;
-  background-color:#FFFFFF;
-  border:1px solid #E2E2E2;
-  border-radius:2px;
-  -webkit-box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
-  box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
-  color:#979BA5;
-  font-size:12px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-ms-flex-direction:column;
+flex-direction:column;
+width:360px;
+background-color:#FFFFFF;
+border:1px solid #E2E2E2;
+border-radius:2px;
+-webkit-box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
+box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
+color:#979BA5;
+font-size:12px;
 }
 .monitor-navigation-message .message-title{
-  -webkit-box-flex:0;
-  -ms-flex:0 0 48px;
-  flex:0 0 48px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  color:#313238;
-  font-size:14px;
-  padding:0 20px;
-  margin:0;
-  border-bottom:1px solid #F0F1F5;
+-webkit-box-flex:0;
+-ms-flex:0 0 48px;
+flex:0 0 48px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+color:#313238;
+font-size:14px;
+padding:0 20px;
+margin:0;
+border-bottom:1px solid #F0F1F5;
 }
 .monitor-navigation-message .message-list{
-  -webkit-box-flex:1;
-  -ms-flex:1;
-  flex:1;
-  max-height:450px;
-  overflow:auto;
-  margin:0;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  -ms-flex-direction:column;
-  flex-direction:column;
-  padding:0;
+-webkit-box-flex:1;
+-ms-flex:1;
+flex:1;
+max-height:450px;
+overflow:auto;
+margin:0;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-ms-flex-direction:column;
+flex-direction:column;
+padding:0;
 }
 .monitor-navigation-message .message-list-item{
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  width:100%;
-  padding:0 20px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+width:100%;
+padding:0 20px;
 }
 .monitor-navigation-message .message-list-item .item-message{
-  padding:13px 0;
-  line-height:16px;
-  min-height:42px;
-  -webkit-box-flex:1;
-  -ms-flex:1;
-  flex:1;
-  -ms-flex-wrap:wrap;
-  flex-wrap:wrap;
-  color:#63656E;
+padding:13px 0;
+line-height:16px;
+min-height:42px;
+-webkit-box-flex:1;
+-ms-flex:1;
+flex:1;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap;
+color:#63656E;
 }
 .monitor-navigation-message .message-list-item .item-date{
-  padding:13px 0;
-  margin-left:16px;
-  color:#979BA5;
+padding:13px 0;
+margin-left:16px;
+color:#979BA5;
 }
 .monitor-navigation-message .message-list-item:hover{
-  cursor:pointer;
-  background:#F0F1F5;
+cursor:pointer;
+background:#F0F1F5;
 }
 .monitor-navigation-message .message-footer{
-  -webkit-box-flex:0;
-  -ms-flex:0 0 42px;
-  flex:0 0 42px;
-  border-top:1px solid #F0F1F5;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-  color:#3A84FF;
+-webkit-box-flex:0;
+-ms-flex:0 0 42px;
+flex:0 0 42px;
+border-top:1px solid #F0F1F5;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+-webkit-box-pack:center;
+-ms-flex-pack:center;
+justify-content:center;
+color:#3A84FF;
 }
 .monitor-navigation-nav{
-  width:150px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  -ms-flex-direction:column;
-  flex-direction:column;
-  background:#FFFFFF;
-  border:1px solid #E2E2E2;
-  -webkit-box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
-  box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
-  padding:6px 0;
-  margin:0;
-  color:#63656E;
+width:150px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-ms-flex-direction:column;
+flex-direction:column;
+background:#FFFFFF;
+border:1px solid #E2E2E2;
+-webkit-box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
+box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
+padding:6px 0;
+margin:0;
+color:#63656E;
 }
 .monitor-navigation-nav .nav-item{
-  -webkit-box-flex:0;
-  -ms-flex:0 0 32px;
-  flex:0 0 32px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  padding:0 16px;
-  list-style:none;
+-webkit-box-flex:0;
+-ms-flex:0 0 32px;
+flex:0 0 32px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+padding:0 16px;
+list-style:none;
 }
 .monitor-navigation-nav .nav-item .lang-icon{
-  font-size:20px;
-  margin-right:6px;
+font-size:20px;
+margin-right:6px;
 }
 .monitor-navigation-nav .nav-item:hover{
-  color:#3A84FF;
-  cursor:pointer;
-  background-color:#F0F1F5;
+color:#3A84FF;
+cursor:pointer;
+background-color:#F0F1F5;
 }
 .monitor-navigation-admin{
-  width:170px #63656E;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  -ms-flex-direction:column;
-  flex-direction:column;
-  background:#FFFFFF;
-  border:1px solid #E2E2E2;
-  -webkit-box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
-  box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
-  padding:6px 0;
-  margin:0;
-  color:#63656E;
+width:170px #63656E;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-ms-flex-direction:column;
+flex-direction:column;
+background:#FFFFFF;
+border:1px solid #E2E2E2;
+-webkit-box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
+box-shadow:0px 3px 4px 0px rgba(64,112,203,0.06);
+padding:6px 0;
+margin:0;
+color:#63656E;
 }
 .monitor-navigation-admin .nav-item{
-  -webkit-box-flex:0;
-  -ms-flex:0 0 32px;
-  flex:0 0 32px;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  padding:0 16px;
-  list-style:none;
+-webkit-box-flex:0;
+-ms-flex:0 0 32px;
+flex:0 0 32px;
+display:-webkit-box;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-align:center;
+-ms-flex-align:center;
+align-items:center;
+padding:0 16px;
+list-style:none;
 }
 .monitor-navigation-admin .nav-item .lang-icon{
-  font-size:20px;
-  margin-right:6px;
+font-size:20px;
+margin-right:6px;
 }
 .monitor-navigation-admin .nav-item:hover{
-  color:#3A84FF;
-  cursor:pointer;
-  background-color:#F0F1F5;
+color:#3A84FF;
+cursor:pointer;
+background-color:#F0F1F5;
 }
 .tippy-popper .tippy-tooltip.navigation-message-theme{
-  padding:0;
-  border-radius:0;
-  -webkit-box-shadow:none;
-  box-shadow:none;
+padding:0;
+border-radius:0;
+-webkit-box-shadow:none;
+box-shadow:none;
 }
 </style>
