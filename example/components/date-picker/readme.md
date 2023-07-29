@@ -630,41 +630,41 @@
     </div>
 </template>
 <script>
-    import { bkDatePicker } from '{{BASE_LIB_NAME}}'
+  import { bkDatePicker } from '{{BASE_LIB_NAME}}'
 
-    export default {
-        components: {
-            bkDatePicker
-        },
-        data () {
-            return {
-                initDateTimeRange: [new Date(), new Date()]
-            }
-        },
-        methods: {
-            getCellClass (cell) {
-              const hasPoint = Math.random() * 10 > 5
-              return hasPoint ? 'cell-x-Class' : ''
-            }
-        }
-    }
-</script>
-<style lang="postcss">
-    .cell-x-Class {
-      position: relative;
-      &::after {
-        content: '';
-        height: 5px;
-        background: red;
-        position: absolute;
-        left: 15px;
-        /* right: 5px; */
-        bottom: 2px;
-        border-radius: 50%;
-        border: solid 1px red;
-        width: 5px;
+  export default {
+    components: {
+      bkDatePicker
+    },
+    data () {
+      return {
+        initDateTimeRange: [new Date(), new Date()]
+      }
+    },
+    methods: {
+      getCellClass (cell) {
+        const hasPoint = Math.random() * 10 > 5
+        return hasPoint ? 'cell-x-Class' : ''
       }
     }
+  }
+</script>
+<style lang="postcss">
+  .cell-x-Class {
+    position: relative;
+    &::after {
+      content: '';
+      height: 5px;
+      background: red;
+      position: absolute;
+      left: 15px;
+      /* right: 5px; */
+      bottom: 2px;
+      border-radius: 50%;
+      border: solid 1px red;
+      width: 5px;
+    }
+  }
 </style>
 ```
 :::
@@ -677,11 +677,11 @@
 <template>
   <div>
     <p class="mb5">年选择器</p>
-    <bk-date-picker type="year" v-model="initDateTime" @change="handleChange" />
+    <bk-date-picker type="year" v-model="initDateTime" @change="handleChange" :cell-class="getCellClass" />
   </div>
   <div>
     <p class="mb5">月选择器</p>
-    <bk-date-picker type="month" v-model="initDateTime" @change="handleChange" />
+    <bk-date-picker type="month" v-model="initDateTime" @change="handleChange" :cell-class="getCellClass" />
   </div>
 </template>
 <script>
@@ -700,10 +700,31 @@
       handleChange (date) {
         console.warn('handleChange', date)
         this.value = date
+      },
+      getCellClass (cell) {
+        const hasPoint = Math.random() * 10 > 5
+        return hasPoint ? 'cell-x-Class' : ''
       }
     }
   }
 </script>
+<style lang="postcss">
+  .cell-x-Class {
+    position: relative;
+    &::after {
+      content: '';
+      height: 5px;
+      background: red;
+      position: absolute;
+      left: 15px;
+      /* right: 5px; */
+      bottom: 2px;
+      border-radius: 50%;
+      border: solid 1px red;
+      width: 5px;
+    }
+  }
+</style>
 ```
 :::
 

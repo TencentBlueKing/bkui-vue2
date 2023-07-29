@@ -8,6 +8,15 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.1 {page=#/changelog}
+
+* **[add]**:
+    - [DatePicker 日期选择器](#/date-picker) 年/月选择器新增 `cell-class` 配置项以支持自定义日期样式
+* **[update]**:
+    - [Form 表单](#/form) 验证时错误信息样式调整
+
+---
+
 ### 2.5.7 {page=#/changelog}
 ###### 2023.07.24
 
