@@ -45,6 +45,7 @@
           </span>
         </div>
         <!-- eslint-disable-next-line vue/require-component-is -->
+        <!-- {{ leftPickerTable }}--{{ leftRealPickerType }} -->
         <component
           :is="leftPickerTable"
           v-if="currentView !== 'time'"
@@ -55,6 +56,7 @@
           :value="preSelecting.left ? [dates[0]] : dates"
           :focused-date="focusedDate"
           :cell-class="cellClass"
+          :real-picker-type="leftRealPickerType"
           @change-range="handleChangeRange"
           @pick="panelPickerHandlers.left"
           @pick-click="handlePickClick"
@@ -98,6 +100,7 @@
           :value="preSelecting.right ? [dates[dates.length - 1]] : dates"
           :focused-date="focusedDate"
           :cell-class="cellClass"
+          :real-picker-type="rightRealPickerType"
           @change-range="handleChangeRange"
           @pick="panelPickerHandlers.right"
           @pick-click="handlePickClick">
@@ -196,7 +199,9 @@ export default {
       rangeState: { from: this.value[0], to: this.value[1], selecting: minDate && !maxDate },
       currentView: this.selectionMode || 'range',
       leftPickerTable: `${this.selectionMode}-table`,
+      leftRealPickerType: this.selectionMode,
       rightPickerTable: `${this.selectionMode}-table`,
+      rightRealPickerType: this.selectionMode,
       leftPanelDate: leftPanelDate,
       rightPanelDate: new Date(leftPanelDate.getFullYear(), leftPanelDate.getMonth() + 1, 1),
       // 判断 range 中，第一次选的时间是否晚于当前时间
@@ -274,6 +279,12 @@ export default {
     },
     focusedDate (date) {
       this.setPanelDates(date || new Date())
+    },
+    leftPickerTable (val) {
+      this.leftRealPickerType = val.replace('-table', '')
+    },
+    rightPickerTable (val) {
+      this.rightRealPickerType = val.replace('-table', '')
     }
   },
   methods: {

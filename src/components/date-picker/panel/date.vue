@@ -164,13 +164,14 @@ export default {
   data () {
     const { selectionMode, value } = this
     const dates = value.slice().sort()
+    const pickerTable = this.getTableType(selectionMode)
 
     return {
       currentView: selectionMode || 'date',
-      pickerTable: this.getTableType(selectionMode),
+      pickerTable,
+      realPickerType: pickerTable.replace('-table', ''),
       dates: dates,
-      panelDate: this.startDate || dates[0] || new Date(),
-      realPickerType: this.getRealPickerType(selectionMode)
+      panelDate: this.startDate || dates[0] || new Date()
     }
   },
   computed: {
@@ -186,7 +187,6 @@ export default {
       const handler = (type) => {
         return () => {
           this.pickerTable = this.getTableType(type)
-          this.realPickerType = this.getRealPickerType(type)
         }
       }
 
@@ -221,7 +221,6 @@ export default {
     selectionMode (type) {
       this.currentView = type
       this.pickerTable = this.getTableType(type)
-      this.realPickerType = this.getRealPickerType(type)
     },
     focusedDate (date) {
       const isDifferentYear = date.getFullYear() !== this.panelDate.getFullYear()
@@ -231,13 +230,15 @@ export default {
           this.panelDate = date
         }
       }
+    },
+    pickerTable (val) {
+      this.realPickerType = val.replace('-table', '')
     }
   },
   methods: {
     reset () {
       this.currentView = this.selectionMode
       this.pickerTable = this.getTableType(this.currentView)
-      this.realPickerType = this.getRealPickerType(this.currentView)
     },
     changeYear (dir) {
       if (this.selectionMode === 'year' || this.pickerTable === 'year-table') {
@@ -249,9 +250,6 @@ export default {
     getTableType (currentView) {
       return currentView.match(/^time/) ? 'time-picker' : `${currentView}-table`
     },
-    getRealPickerType (currentView) {
-      return currentView.match(/^time/) ? 'time-picker' : `${currentView}`
-    },
     changeMonth (dir) {
       this.panelDate = siblingMonth(this.panelDate, dir)
     },
@@ -259,10 +257,8 @@ export default {
       this.panelDate = value
       if (this.pickerTable === 'year-table') {
         this.pickerTable = 'month-table'
-        this.realPickerType = 'month'
       } else {
         this.pickerTable = this.getTableType(this.currentView)
-        this.realPickerType = this.getRealPickerType(this.currentView)
       }
     },
     handlePick (value, type) {
