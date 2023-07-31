@@ -39,6 +39,12 @@ import mixin from './mixin'
 
 export default {
   mixins: [mixin],
+  props: {
+    realPickerType: {
+      type: String,
+      default: ''
+    }
+  },
   computed: {
     cells () {
       const cells = []
@@ -66,6 +72,7 @@ export default {
           && this.selectionMode === 'month'
         cell.selected = selectedDays.includes(day)
         cell.focused = day === focusedDate
+        cell.pickerType = this.realPickerType
         cells.push(cell)
       }
 

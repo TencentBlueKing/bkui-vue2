@@ -55,6 +55,12 @@ import mixin from './mixin'
 
 export default {
   mixins: [mixin, locale.mixin],
+  props: {
+    realPickerType: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {}
   },
@@ -101,7 +107,8 @@ export default {
           disabled: cell.date && disabledTestFn && disabledTestFn(new Date(time)),
           range: dateIsInCurrentMonth && isRange && isInRange(time, rangeStart, rangeEnd),
           start: dateIsInCurrentMonth && isRange && time === minDay,
-          end: dateIsInCurrentMonth && isRange && time === maxDay
+          end: dateIsInCurrentMonth && isRange && time === maxDay,
+          pickerType: this.realPickerType
         }
       }).cells.slice(0)
     }

@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.2 {page=#/changelog}
+
+* **[add]**:
+    - [DatePicker 日期选择器](#/date-picker) 年/月/日选择器 `cell-class` 配置回调函数参数增加 `pickerType` 属性，标识当前是什么类型的 picker
+
+---
+
 ### 2.5.8-beta.1 {page=#/changelog}
 
 * **[add]**:
