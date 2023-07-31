@@ -73,7 +73,7 @@
       </div>
       <div class="bk-picker-panel-content">
         <!-- eslint-disable-next-line vue/require-component-is -->
-        <!-- {{ pickerTable }}--{{dates}}--{{selectionMode}} -->
+        <!-- {{ pickerTable }}--{{dates}}--{{selectionMode}}--{{pickerType}}--{{ realPickerType }} -->
         <component
           :is="pickerTable"
           v-if="currentView !== 'time'"
@@ -83,6 +83,7 @@
           :disabled-date="disabledDate"
           :focused-date="focusedDate"
           :cell-class="cellClass"
+          :real-picker-type="realPickerType"
           @pick="panelPickerHandlers"
           @pick-click="handlePickClick"
         ></component>
@@ -168,7 +169,8 @@ export default {
       currentView: selectionMode || 'date',
       pickerTable: this.getTableType(selectionMode),
       dates: dates,
-      panelDate: this.startDate || dates[0] || new Date()
+      panelDate: this.startDate || dates[0] || new Date(),
+      realPickerType: this.getRealPickerType(selectionMode)
     }
   },
   computed: {
@@ -184,6 +186,7 @@ export default {
       const handler = (type) => {
         return () => {
           this.pickerTable = this.getTableType(type)
+          this.realPickerType = this.getRealPickerType(type)
         }
       }
 
@@ -218,6 +221,7 @@ export default {
     selectionMode (type) {
       this.currentView = type
       this.pickerTable = this.getTableType(type)
+      this.realPickerType = this.getRealPickerType(type)
     },
     focusedDate (date) {
       const isDifferentYear = date.getFullYear() !== this.panelDate.getFullYear()
@@ -233,6 +237,7 @@ export default {
     reset () {
       this.currentView = this.selectionMode
       this.pickerTable = this.getTableType(this.currentView)
+      this.realPickerType = this.getRealPickerType(this.currentView)
     },
     changeYear (dir) {
       if (this.selectionMode === 'year' || this.pickerTable === 'year-table') {
@@ -244,6 +249,9 @@ export default {
     getTableType (currentView) {
       return currentView.match(/^time/) ? 'time-picker' : `${currentView}-table`
     },
+    getRealPickerType (currentView) {
+      return currentView.match(/^time/) ? 'time-picker' : `${currentView}`
+    },
     changeMonth (dir) {
       this.panelDate = siblingMonth(this.panelDate, dir)
     },
@@ -251,8 +259,10 @@ export default {
       this.panelDate = value
       if (this.pickerTable === 'year-table') {
         this.pickerTable = 'month-table'
+        this.realPickerType = 'month'
       } else {
         this.pickerTable = this.getTableType(this.currentView)
+        this.realPickerType = this.getRealPickerType(this.currentView)
       }
     },
     handlePick (value, type) {
