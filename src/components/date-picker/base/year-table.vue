@@ -39,6 +39,12 @@ import mixin from './mixin'
 
 export default {
   mixins: [mixin],
+  props: {
+    realPickerType: {
+      type: String,
+      default: ''
+    }
+  },
   computed: {
     startYear () {
       return Math.floor(this.tableDate.getFullYear() / 10) * 10
@@ -65,6 +71,7 @@ export default {
         const day = clearHours(cell.date)
         cell.selected = selectedDays.includes(day)
         cell.focused = day === focusedDate
+        cell.pickerType = this.realPickerType
         cells.push(cell)
       }
 
