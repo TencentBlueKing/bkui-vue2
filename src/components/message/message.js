@@ -39,7 +39,16 @@ const messageList = []
 let seed = 0
 
 const BkMessage = function (config) {
-  const originConfig = typeof config === 'object' ? JSON.parse(JSON.stringify(config)) : config
+  const formatConfig = () => {
+    if (typeof config === 'object') {
+      if (config.message && !config.message.hasOwnProperty('componentOptions')) {
+        return JSON.parse(JSON.stringify(config))
+      }
+    }
+
+    return config
+  }
+  const originConfig = formatConfig()
   // 限制个数为 0 时，清除所有实例
   if (config.limit === 0) {
     BkMessage.batchClose()

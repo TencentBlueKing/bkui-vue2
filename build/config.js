@@ -41,7 +41,7 @@ module.exports = {
   },
   dev: {
     env: devEnv,
-    port: 8002,
+    port: 8006,
     proxyTable: {}
   }
 }
