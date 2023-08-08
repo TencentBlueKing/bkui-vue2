@@ -28,10 +28,11 @@
 
 <template>
   <section>
-    <bk-select searchable searchable-min-count="31" :multiple="multiple" v-model="value" :remote-method="remote" :display-tag="true" :tag-fixed-height="false">
-      <bk-option v-for="option in options"
+    <bk-select searchable searchable-min-count="31" :multiple="multiple" v-model="value" :remote-method="remote" :display-tag="true" :tag-fixed-height="false" selected-style="checkbox">
+      <bk-option v-for="(option, index) in options"
         :key="option.id"
-        v-bind="option">
+        v-bind="option"
+        :disabled="index === 2">
       </bk-option>
     </bk-select>
     <div style="border: 1px solid #333; margin-top: 5px;"></div>
