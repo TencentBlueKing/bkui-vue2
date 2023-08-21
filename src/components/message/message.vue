@@ -145,7 +145,6 @@ export default {
   methods: {
     handleFixMessage (isFixed) {
       this.isFixed = isFixed
-      console.log('handleFixMessage', isFixed)
       if (isFixed) {
         this.stopCountDown()
       } else {

@@ -186,16 +186,27 @@ export default {
       if (
         this.toolOperation.isDetailShow
         && typeof this.message === 'object'
-        && (this.message.type === MessageContentType.JSON || !this.message.type)
+        && !this.message.hasOwnProperty('componentOptions')
       ) {
-        const targetJson = this.parseJson(this.message.details)
-        const formatter = new JSONFormatter(targetJson)
-        setTimeout(() => {
-          if (this.$refs.refJsonContent) {
-            this.$refs.refJsonContent.innerHTML = ''
-            this.$refs.refJsonContent.append(formatter.render())
-          }
-        })
+        if (this.message.type === MessageContentType.JSON || !this.message.type) {
+          const targetJson = this.parseJson(this.message.details)
+          const formatter = new JSONFormatter(targetJson)
+          setTimeout(() => {
+            if (this.$refs.refJsonContent) {
+              this.$refs.refJsonContent.innerHTML = ''
+              this.$refs.refJsonContent.append(formatter.render())
+            }
+
+            this.copyMessage()
+          })
+        }
+        
+        if (this.message.type === MessageContentType.KEY_VALUE) {
+          setTimeout(() => {
+            this.copyMessage()
+            this.setCopyValueItems()
+          })
+        }
       }
     },
     fixMesage (e, isFix) {
@@ -214,34 +225,50 @@ export default {
 
       return targetJson
     },
-    copyMessage () {
-      if (this.isInstallClipboardJS) {
-        return
-      }
+    setCopyValueItems () {
+      const copyInstance = new ClipboardJS(this.$refs.refJsonContent.querySelectorAll('span.copy-value'), {
+        text: trigger => trigger.innerHTML
+      })
 
-      const copyInstance = new ClipboardJS(this.$refs.refCopyMsgDiv, {
-        text: () => this.message.details
-      });
-
+      this.registerCopyCallback(copyInstance)
+    },
+    registerCopyCallback (copyInstance, complete) {
       ['success', 'error'].forEach((theme) => {
-        copyInstance.on(theme, () => {
+        copyInstance.on(theme, (e) => {
+          console.log('registerCopyCallback theme', theme)
           const target = this.$refs.refCopyStatus
           this.copyStatus = theme
-          if (target) {
-            target.classList.remove(...['success', 'error', 'is-hidden'])
-            target.classList.add(...[theme, 'is-show'])
-            this.copyStatusTimer && clearTimeout(this.copyStatusTimer)
-            this.copyStatusTimer = setTimeout(() => {
-              target.classList.remove(...['is-show'])
-              target.classList.add(...['is-hidden'])
-            }, 2000)
-          }
-        })
-        this.isInstallClipboardJS = true
-        setTimeout(() => {
-          this.$refs.refCopyMsgDiv.click()
+          this.$nextTick(() => {
+            if (target) {
+              const { offsetLeft, offsetWidth, offsetTop } = e.trigger
+              target.classList.remove(...['success', 'error', 'is-hidden'])
+              target.classList.add(...[theme, 'is-show'])
+              const msgTree = e.trigger.closest('.message-tree')
+              const msgTreeScrollTop = msgTree ? msgTree.scrollTop : 0
+              const transX = offsetLeft + offsetWidth / 2 - 41
+              const transY = offsetTop - msgTreeScrollTop - 40
+              target.style.setProperty('transform', `translate(${transX}px, ${transY}px`)
+  
+              this.copyStatusTimer && clearTimeout(this.copyStatusTimer)
+              this.copyStatusTimer = setTimeout(() => {
+                target.classList.remove(...['is-show'])
+                target.classList.add(...['is-hidden'])
+              }, 2000)
+            }
+  
+            if (typeof complete === 'function') {
+              complete()
+            }
+          })
         })
       })
+    },
+    copyMessage () {
+      const copyInstance = new ClipboardJS(this.$refs.refCopyMsgDiv, {
+        text: () => this.message.details
+      })
+
+      this.registerCopyCallback(copyInstance)
     }
   },
   render (h) {
@@ -252,7 +279,7 @@ export default {
         return keys.map(key => (
           h('div', { class: 'message-row' }, [
             h('label', key),
-            target[key]
+            h('span', { class: 'copy-value' }, target[key])
           ])
         ))
       }
@@ -336,13 +363,13 @@ export default {
       ]),
       this.toolOperation.isDetailShow
         ? h('div', { class: 'message-detail' }, [
-          h('div', { class: 'message-copy', ref: 'refCopyMsgDiv', on: { click: this.copyMessage } }, [
-            h('span', { class: 'bk-icon icon-copy-shape' }),
-            h('div', { class: ['copy-status', this.copyStatus], ref: 'refCopyStatus' }, [
-              h('div', { class: 'inner' }, [
-                h('span', { class: [iconMap[this.copyStatus], this.copyStatus] }),
-                this.copyStatus === 'success' ? this.t('bk.message.copySuccess') : this.t('bk.message.copyFailed')
-              ])
+          h('div', { class: 'message-copy', ref: 'refCopyMsgDiv' }, [
+            h('span', { class: 'bk-icon icon-copy-shape' })
+          ]),
+          h('div', { class: ['copy-status', this.copyStatus], ref: 'refCopyStatus' }, [
+            h('div', { class: 'inner' }, [
+              h('span', { class: [iconMap[this.copyStatus], this.copyStatus] }),
+              this.copyStatus === 'success' ? this.t('bk.message.copySuccess') : this.t('bk.message.copyFailed')
             ])
           ]),
           h('div', { class: 'message-tree', ref: 'refJsonContent' }, [
