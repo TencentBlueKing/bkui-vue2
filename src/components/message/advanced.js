@@ -200,7 +200,7 @@ export default {
             this.copyMessage()
           })
         }
-        
+
         if (this.message.type === MessageContentType.KEY_VALUE) {
           setTimeout(() => {
             this.copyMessage()
@@ -248,14 +248,14 @@ export default {
               const transX = offsetLeft + offsetWidth / 2 - 41
               const transY = offsetTop - msgTreeScrollTop - 40
               target.style.setProperty('transform', `translate(${transX}px, ${transY}px`)
-  
+
               this.copyStatusTimer && clearTimeout(this.copyStatusTimer)
               this.copyStatusTimer = setTimeout(() => {
                 target.classList.remove(...['is-show'])
                 target.classList.add(...['is-hidden'])
               }, 2000)
             }
-  
+
             if (typeof complete === 'function') {
               complete()
             }

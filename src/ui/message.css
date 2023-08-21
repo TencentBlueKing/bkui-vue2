@@ -282,7 +282,7 @@
 
             .copy-value {
               padding: 0px 4px;
-            
+
               &:hover {
                 background: rgba(186, 188, 192, 0.2);
                 cursor: pointer;
