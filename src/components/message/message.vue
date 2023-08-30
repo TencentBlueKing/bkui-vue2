@@ -145,7 +145,6 @@ export default {
   methods: {
     handleFixMessage (isFixed) {
       this.isFixed = isFixed
-      console.log('handleFixMessage', isFixed)
       if (isFixed) {
         this.stopCountDown()
       } else {
@@ -159,13 +158,11 @@ export default {
     startCountDown () {
       if (this.delay > 0 && !this.isFixed) {
         this.countID = setTimeout(() => {
-          console.log('--Close')
           this.visible && this.close()
         }, this.delay)
       }
     },
     stopCountDown () {
-      console.log('--stopCountDown')
       clearTimeout(this.countID)
     },
     close () {

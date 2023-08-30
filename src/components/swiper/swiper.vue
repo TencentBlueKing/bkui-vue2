@@ -205,7 +205,6 @@ export default {
 
   methods: {
     calcSize () {
-      console.log(this)
       const swiperSize = getElementSize(this.$refs.swiper)
       const swiperParentSize = getElementSize(this.$refs.swiper && this.$refs.swiper.parentElement)
       // 优先级：width属性 > swiper css > 父容器 css
