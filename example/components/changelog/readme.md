@@ -8,6 +8,14 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.5 {page=#/changelog}
+
+* **[fix]**:
+    - [Message 消息提示](#/message) [规范化高阶使用配置](#/message?anchor=gao-jie-yong-fa) 问题修复
+    - [Select 下拉选框](#/select) 修复 checkbox 模式时 options 的 disabled 属性没有传递问题
+
+---
+
 ### 2.5.8-beta.3 {page=#/changelog}
 
 * **[update]**:
