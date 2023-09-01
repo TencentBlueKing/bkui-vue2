@@ -96,12 +96,18 @@ export default {
       copyStatusTimer: null
     }
   },
+  mounted () {
+    this.addMouseKeyEvent()
+  },
+  beforeDestroy () {
+    this.addMouseKeyEvent(true)
+  },
   computed: {
     defActionList () {
       return {
         [IMessageActionType.ASSISTANT]: {
           id: IMessageActionType.ASSISTANT,
-          icon: (h) => h('span', { class: 'bk-icon icon-weixin-pro' }),
+          icon: (h) => h('span', { class: 'bk-icon icon-assistant' }),
           text: () => this.t('bk.message.assistant'),
           onClick: (e) => this.handleHeplerClick(e)
         },
@@ -171,6 +177,19 @@ export default {
     }
   },
   methods: {
+    addMouseKeyEvent (remove = false) {
+      if (remove) {
+        document.removeEventListener('keydown', this.handleMouseKeyEvent)
+        return
+      }
+
+      document.addEventListener('keydown', this.handleMouseKeyEvent)
+    },
+    handleMouseKeyEvent (e) {
+      if (e.altKey && e.keyCode === 80) {
+        this.fixMesage(e)
+      }
+    },
     handleCloseClick () {
       this.$emit('close')
     },
