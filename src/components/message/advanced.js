@@ -263,9 +263,21 @@ export default {
         })
       })
     },
+    parseToString (value) {
+      let targetStr = value
+      if (typeof value === 'object') {
+        try {
+          targetStr = JSON.stringify(value)
+        } catch (e) {
+          console.error(`JSON.stringify Error: ${e}`)
+        }
+      }
+
+      return targetStr
+    },
     copyMessage () {
       const copyInstance = new ClipboardJS(this.$refs.refCopyMsgDiv, {
-        text: () => this.message.details
+        text: () => this.parseToString(this.message.details)
       })
 
       this.registerCopyCallback(copyInstance)
