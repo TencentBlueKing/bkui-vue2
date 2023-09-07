@@ -158,13 +158,11 @@ export default {
     startCountDown () {
       if (this.delay > 0 && !this.isFixed) {
         this.countID = setTimeout(() => {
-          console.log('--Close')
           this.visible && this.close()
         }, this.delay)
       }
     },
     stopCountDown () {
-      console.log('--stopCountDown')
       clearTimeout(this.countID)
     },
     close () {
