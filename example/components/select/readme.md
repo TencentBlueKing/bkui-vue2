@@ -1223,8 +1223,8 @@
                 ],
                 list2: [],
                 bottomLoadingOptions: {
-                   size: 'small',
-                   isLoading: true
+                   size: 'mini',
+                   isLoading: false
                 }
             }
         },
