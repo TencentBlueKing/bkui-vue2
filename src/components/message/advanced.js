@@ -174,6 +174,9 @@ export default {
       }
 
       return sortActionIdList.map(id => this.defActionList[id])
+    },
+    isDetailShow () {
+      return this.toolOperation.isDetailShow
     }
   },
   methods: {
@@ -199,11 +202,12 @@ export default {
       }
     },
     setDetailsShow (e, isShow) {
-      this.toolOperation.isDetailShow = isShow !== undefined ? isShow : !this.toolOperation.isDetailShow
-      this.fixMesage(e, this.toolOperation.isDetailShow)
+      this.toolOperation.isDetailShow = isShow !== undefined ? isShow : !this.isDetailShow
+      this.$emit('message-show', this.isDetailShow)
+      this.fixMesage(e, this.isDetailShow)
 
       if (
-        this.toolOperation.isDetailShow
+        this.isDetailShow
         && typeof this.message === 'object'
         && !this.message.hasOwnProperty('componentOptions')
       ) {
@@ -392,7 +396,7 @@ export default {
         ]),
         h('div', { class: 'tools' }, [renderMessageActions()])
       ]),
-      this.toolOperation.isDetailShow
+      this.isDetailShow
         ? h('div', { class: 'message-detail' }, [
           h('div', { class: 'message-copy', ref: 'refCopyMsgDiv' }, [
             h('span', { class: 'bk-icon icon-copy-shape' })
