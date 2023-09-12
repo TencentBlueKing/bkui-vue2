@@ -211,11 +211,12 @@ export default {
     current: {
       type: Number,
       default: 1,
-      required: true,
-      validator (val) {
-        const positiveInteger = /^[1-9]+[0-9]*]*$/
-        return positiveInteger.test(val)
-      }
+      required: true
+      // validator (val) {
+      //   // debugger
+      //   const positiveInteger = /^[1-9]+[0-9]*]*$/
+      //   return positiveInteger.test(val)
+      // }
     },
     limit: {
       type: Number,
@@ -399,8 +400,8 @@ export default {
     // 跳转
     handleJump () {
       this.$nextTick(() => {
-        let pageNum = Number(this.jumpPage)
-        if (pageNum < 1) {
+        let pageNum = parseInt(this.jumpPage, 10)
+        if (isNaN(pageNum) || pageNum < 1) {
           pageNum = 1
         }
         if (pageNum > this.total) {
