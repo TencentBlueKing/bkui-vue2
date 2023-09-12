@@ -36,6 +36,8 @@
       @mouseleave="startCountDown">
       <template v-if="showAdvanced">
         <message-advanced :message="message" :actions="actions" :tips-icon="tipsIcon"
+          ref="refMessageAdvanced"
+          @message-show="handleMessageShow"
           @fix-message="handleFixMessage"
           @close="close"></message-advanced>
       </template>
@@ -143,6 +145,9 @@ export default {
     this.startCountDown()
   },
   methods: {
+    handleMessageShow (isShow) {
+      this.$emit('message-show', isShow)
+    },
     handleFixMessage (isFixed) {
       this.isFixed = isFixed
       if (isFixed) {
