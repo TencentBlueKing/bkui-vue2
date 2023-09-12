@@ -61,15 +61,18 @@ const messageQueueMaker = new MessageQueueMaker()
 
 const MessageComponent = Vue.extend(Message)
 const getAdvanceMessageContainer = (parent = document.body) => {
+  const zIndexArr = messageList.map((message) => message.zIndex) || []
+  const maxZIndex = Math.max.apply(null, zIndexArr) || 2500
+
   let target = parent.querySelector('[data-msg-advanced-conmtainer]')
   if (!target) {
     target = document.createElement('div')
     target.setAttribute('data-msg-advanced-conmtainer', 'true')
     target.style.setProperty('position', 'fixed')
-
     parent.append(target)
   }
 
+  target.style.zIndex = maxZIndex
   target.style.setProperty('display', 'block')
   return target
 }
@@ -160,9 +163,6 @@ const BkMessage = function (config) {
   instance.dom = instance.$el
 
   const mountedElementToTarget = () => {
-    const target = instance.showAdvanced ? getAdvanceMessageContainer(document.body) : document.body
-    target.appendChild(instance.$el)
-
     messageList.forEach(item => {
       verticalOffset += parseInt(item.$el.offsetHeight) + parseInt(spacing)
     })
@@ -170,6 +170,9 @@ const BkMessage = function (config) {
     instance.horizonOffset = spacing
     instance.visible = true
     messageList.push(instance)
+
+    const target = instance.showAdvanced ? getAdvanceMessageContainer(document.body) : document.body
+    target.appendChild(instance.$el)
 
     if (instance.showAdvanced) {
       if (instance.$el) {
