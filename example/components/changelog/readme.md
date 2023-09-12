@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.10 {page=#/changelog}
+
+* **[fix]**:
+    - [Message 消息提示](#/message) 高阶模式容器 zIndex 问题修复
+
+---
+
 ### 2.5.8-beta.9 {page=#/changelog}
 
 * **[fix]**:
