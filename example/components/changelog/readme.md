@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.9 {page=#/changelog}
+
+* **[fix]**:
+    - [Pagination 分页](#/pagination) 修复跳转分页输入非整数时显示错误的问题
+
+---
+
 ### 2.5.8-beta.8 {page=#/changelog}
 
 * **[fix]**:
