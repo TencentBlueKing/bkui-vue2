@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.8 {page=#/changelog}
+
+* **[fix]**:
+    - [Message 消息提示](#/message) 高阶模式支持多开 & 互斥模式
+
+---
+
 ### 2.5.8-beta.5 {page=#/changelog}
 
 * **[fix]**:
