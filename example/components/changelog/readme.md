@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8-beta.11 {page=#/changelog}
+
+* **[add]**:
+    - [Message 消息提示](#/message) 高阶模式图钉增加取消快捷键
+
+---
+
 ### 2.5.8-beta.10 {page=#/changelog}
 
 * **[fix]**:
