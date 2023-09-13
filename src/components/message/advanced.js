@@ -189,8 +189,15 @@ export default {
       document.addEventListener('keydown', this.handleMouseKeyEvent)
     },
     handleMouseKeyEvent (e) {
-      if (e.altKey && e.keyCode === 80) {
-        this.fixMesage(e)
+      const { ctrlKey, altKey, keyCode } = e
+      const { isFix } = this.toolOperation
+      if (ctrlKey && altKey && keyCode === 80) {
+        isFix && this.fixMesage(e, false)
+        return
+      }
+    
+      if (altKey && keyCode === 80) {
+        !isFix && this.fixMesage(e, true)
       }
     },
     handleCloseClick () {
