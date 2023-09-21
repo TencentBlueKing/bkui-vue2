@@ -5,6 +5,7 @@
 $baseBackgroundColor: #f5f7fa;
 $tableBorderColor: #dfe0e5;
 $tableBorder: 1px solid $tableBorderColor;
+$tableResizeBorder: 1px solid #3785FF;
 $tableFixedBoxShadow: 0 0 10px rgba(0, 0, 0, .12);
 $tableBorderColorLighter: #ebeef5;
 $tableCaretColor: #c0c4cc;
@@ -409,6 +410,7 @@ $tableDarkHeaderHover: #eaebf0;
 
 .bk-table-header-wrapper,
 .bk-table-footer-wrapper {
+    position: relative;
     overflow: hidden;
     tbody td {
         background-color: $baseBackgroundColor;
@@ -505,8 +507,20 @@ $tableDarkHeaderHover: #eaebf0;
     top: 0;
     bottom: 0;
     width: 0;
-    border-left: $tableBorder;
+    border-left: $tableResizeBorder;
     z-index: 10;
+}
+
+.bk-table-column-resize-head {
+    position: absolute;
+    left: 200px;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: #3785FF;
+    z-index: 10;
+    transform: translateX(-50%);
+    pointer-events: none;
 }
 
 
