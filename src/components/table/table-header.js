@@ -117,6 +117,7 @@ export default {
         cellspacing="0"
         cellpadding="0"
         border="0">
+        <div class="bk-table-column-resize-head" data-resize-proxy-head style={ this.resizeStyle }></div>
         <colgroup>
           {
             this._l(this.columns, column => <col name={ column.id } />)
@@ -228,6 +229,9 @@ export default {
   },
 
   computed: {
+    resizeStyle () {
+      return this.isHeadResizeProxyShow ? {} : { display: 'none' }
+    },
     table () {
       return this.$parent
     },
@@ -474,6 +478,17 @@ export default {
       this.$parent.$emit('header-click', column, event)
     },
 
+    setColumnResizeLineStyle (isShow = false, position = { left: 0 }) {
+      const table = this.$parent
+      const tableEl = table.$el
+      const target = tableEl.querySelector('[data-resize-proxy-head]')
+
+      if (target) {
+        target.style.display = isShow ? 'block' : 'none'
+        target.style.left = position.left
+      }
+    },
+
     /**
      * header 鼠标右键事件处理
      */
@@ -491,7 +506,6 @@ export default {
         this.dragging = true
 
         this.$parent.resizeProxyVisible = true
-
         const table = this.$parent
         const tableEl = table.$el
         const tableLeft = tableEl.getBoundingClientRect().left
@@ -511,6 +525,8 @@ export default {
         const resizeProxy = table.$refs.resizeProxy
         resizeProxy.style.left = this.dragState.startLeft + 'px'
 
+        this.setColumnResizeLineStyle(true, { left: this.dragState.startLeft + 'px' })
+
         document.onselectstart = function () {
           return false
         }
@@ -523,6 +539,7 @@ export default {
           const proxyLeft = this.dragState.startLeft + deltaLeft
 
           resizeProxy.style.left = Math.max(minLeft, proxyLeft) + 'px'
+          this.setColumnResizeLineStyle(true, { left: Math.max(minLeft, proxyLeft) + 'px' })
         }
 
         const handleMouseUp = () => {
@@ -545,6 +562,7 @@ export default {
             this.dragState = {}
 
             table.resizeProxyVisible = false
+            this.setColumnResizeLineStyle()
           }
 
           document.removeEventListener('mousemove', handleMouseMove)
@@ -566,6 +584,9 @@ export default {
      * th mousemove 事件处理
      */
     handleMouseMove (event, column) {
+      const table = this.$parent
+      const tableEl = table.$el
+      const tableLeft = tableEl.getBoundingClientRect().left
       if (column.children && column.children.length > 0) return
       let target = event.target
       while (target && target.tagName !== 'TH') {
@@ -574,13 +595,14 @@ export default {
 
       if (!column || !column.resizable) return
 
-      // if (!this.dragging && this.border) {
       if (!this.dragging) {
         const rect = target.getBoundingClientRect()
 
         const bodyStyle = document.body.style
         if (rect.width > 12 && rect.right - event.pageX < 8) {
           bodyStyle.cursor = 'col-resize'
+          this.setColumnResizeLineStyle(true, { left: `${rect.right - tableLeft}px` })
+
           if (hasClass(target, 'is-sortable')) {
             target.style.cursor = 'col-resize'
           }
@@ -591,6 +613,7 @@ export default {
             target.style.cursor = 'pointer'
           }
           this.draggingColumn = null
+          this.setColumnResizeLineStyle()
         }
       }
     },
@@ -600,6 +623,7 @@ export default {
      */
     handleMouseOut () {
       document.body.style.cursor = ''
+      this.setColumnResizeLineStyle()
     },
 
     toggleOrder ({ order, sortOrders }) {
@@ -658,7 +682,8 @@ export default {
     return {
       draggingColumn: null,
       dragging: false,
-      dragState: {}
+      dragState: {},
+      isHeadResizeProxyShow: false
     }
   }
 }
