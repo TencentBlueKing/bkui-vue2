@@ -103,8 +103,8 @@
           ? inputPasswordIcon[0]
           : inputPasswordIcon[1]
       ]"></i>
-      <i @click.stop.prevent="handlerClear" class="bk-icon icon-close-circle-shape clear-icon ml5" v-if="showClearIcon"></i>
-      <i :class="['bk-icon', rightIcon]" v-else-if="rightIcon"></i>
+      <i v-if="showClearIcon" @click.stop.prevent="handlerClear" class="bk-icon icon-close-circle-shape clear-icon ml5 mr5"></i>
+      <i :class="['input-right-icon', 'bk-icon', rightIcon]" v-if="rightIcon"></i>
       <template v-if="type === 'text'">
         <p class="bk-limit-box ml5" style="position: static" v-show="showInputWordLimit">
           <span class="strong">{{ (curValue && curValue.length) || 0 }}</span
@@ -140,8 +140,8 @@
     </bk-input>
   */
 import emitter from '@/mixins/emitter'
-import locale from 'bk-magic-vue/lib/locale'
 import { getStyle } from '@/utils/dom'
+import locale from 'bk-magic-vue/lib/locale'
 
 // const toString = Object.prototype.toString
 
