@@ -171,7 +171,7 @@ export default {
       // 有动画效果，因此推迟发布事件
       const root = document.documentElement
       if (val) {
-        this.localZIndex = zIndexManager.nextTickIndex(2)
+        this.localZIndex = this.zIndex ? this.zIndex : zIndexManager.nextTickIndex(2)
         addClass(root, 'bk-sideslider-show')
         if (this.isScrollY()) {
           addClass(root, 'has-sideslider-padding')
