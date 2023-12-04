@@ -59,6 +59,9 @@
             cursor: pointer;
         }
     }
+    .btn-search-input {
+        display: flex;
+    }
 </style>
 
 [[toc]]
@@ -332,6 +335,21 @@
             v-model="value"
             @right-icon-click="handlerIconClick">
         </bk-input>
+        <div class="btn-search-input mt10">
+            <bk-input
+                clearable
+                :placeholder="'搜索'"
+            >
+            <span slot="append"></span>
+            </bk-input>
+            <bk-button
+                theme="primary"
+                style="margin-left: -2px; border-radius: 0 2px 2px 0"
+                @click="handlerIconClick"
+            >
+                搜索
+            </bk-button>
+        </div>
     </div>
 </template>
 <script>
@@ -357,6 +375,9 @@
 <style lang="postcss">
     .input-demo {
         width: 500px;
+    }
+    .btn-search-input {
+        display: flex;
     }
 </style>
 ```
