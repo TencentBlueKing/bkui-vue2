@@ -267,6 +267,10 @@ export default {
     showClearOnlyHover: {
       type: Boolean,
       default: false
+    },
+    allowNumberPaste: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -587,11 +591,14 @@ export default {
       const keyCode = event.keyCode
       const target = event.currentTarget
       const value = target.value
+      const isPaste = (event.ctrlKey || event.metaKey) && keyCode === 86
 
       if (this.inputType === 'number') {
-        // 键盘按下不允许的按钮
-        if (this.validKeyCodeList.indexOf(keyCode) < 0
-          || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey
+        // 非粘贴且键盘按下不允许的按钮
+        if (
+          !(this.allowNumberPaste && isPaste)
+          && (this.validKeyCodeList.indexOf(keyCode) < 0
+            || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
         ) {
           event.stopPropagation()
           event.preventDefault()

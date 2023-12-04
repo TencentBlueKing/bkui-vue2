@@ -709,6 +709,7 @@
 | show-word-limit | 是否显示输入字数统计，只在 `type = "text"` 或 `type = "textarea"` 时有效 | Boolean | true / false | —— |
 | behavior | 简约风格设置(simplicity:简约 normal:正常 type=textarea时不生效) | String | 'normal'/'simplicity' | normal |
 | show-clear-only-hover | 是否在只有 hover 的时候才显示 clear 清除按钮 | Boolean | —— | false |
+| allow-number-paste | 允许type为number时可粘贴 | Boolean | —— | false |
 
 ### 事件 {page=#/input}
 
