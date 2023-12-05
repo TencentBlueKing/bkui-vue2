@@ -173,7 +173,7 @@ export default {
       type: String,
       default: 'border-card',
       validator (val) {
-        return ['card', 'border-card', 'unborder-card', 'vertical-card'].includes(val)
+        return ['card', 'border-card', 'unborder-card', 'vertical-card', 'card-tab'].includes(val)
       }
     },
     tabPosition: {

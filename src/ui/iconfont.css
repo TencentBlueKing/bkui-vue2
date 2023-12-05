@@ -800,6 +800,12 @@ url("fonts/iconcool.eot?#iefix") format("embedded-opentype");
 .icon-data-line:before {
 	content: "\e20b";
 }
+.icon-arrow-up:before {
+	content: "\e213";
+}
+.icon-arrow-down:before {
+	content: "\e214";
+}
 .icon-qiehuan:before {
 	content: "\e20c";
 }
@@ -817,4 +823,13 @@ url("fonts/iconcool.eot?#iefix") format("embedded-opentype");
 }
 .icon-fix-shape:before {
 	content: "\e212";
+}
+.icon-arrow-left:before {
+	content: "\e215";
+}
+.icon-arrow-right:before {
+	content: "\e216";
+}
+.icon-assistant:before {
+	content: "\e217";
 }
