@@ -8,71 +8,24 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.8-beta.12 {page=#/changelog}
-
-* **[fix]**:
-    - [Tab 选项卡](#/tab) 修复 tab 组件 type 类型为 card-tab 一直抛 warn 问题
-* **[add]**:
-    - [Table表格](#/table) Column resize style update
-
----
-
-### 2.5.8-beta.11 {page=#/changelog}
-
-* **[add]**:
-    - [Message 消息提示](#/message) 高阶模式图钉增加取消快捷键
-
----
-
-### 2.5.8-beta.10 {page=#/changelog}
-
-* **[fix]**:
-    - [Message 消息提示](#/message) 高阶模式容器 zIndex 问题修复
-
----
-
-### 2.5.8-beta.9 {page=#/changelog}
-
-* **[fix]**:
-    - [Pagination 分页](#/pagination) 修复跳转分页输入非整数时显示错误的问题
-
----
-
-### 2.5.8-beta.8 {page=#/changelog}
-
-* **[fix]**:
-    - [Message 消息提示](#/message) 高阶模式支持多开 & 互斥模式
-
----
-
-### 2.5.8-beta.5 {page=#/changelog}
-
-* **[fix]**:
-    - [Message 消息提示](#/message) [规范化高阶使用配置](#/message?anchor=gao-jie-yong-fa) 问题修复
-    - [Select 下拉选框](#/select) 修复 checkbox 模式时 options 的 disabled 属性没有传递问题
-
----
-
-### 2.5.8-beta.3 {page=#/changelog}
-
-* **[update]**:
-    - [DatePicker 日期选择器](#/date-picker) 年/月/日选择器 `cell-class` 配置回调函数参数增加 `pickerType` 属性，标识当前是什么类型的 picker
-
----
-
-### 2.5.8-beta.2 {page=#/changelog}
-
-* **[add]**:
-    - [DatePicker 日期选择器](#/date-picker) 年/月/日选择器 `cell-class` 配置回调函数参数增加 `pickerType` 属性，标识当前是什么类型的 picker
-
----
-
-### 2.5.8-beta.1 {page=#/changelog}
+### 2.5.8 {page=#/changelog}
+###### 2023.12.05
 
 * **[add]**:
     - [DatePicker 日期选择器](#/date-picker) 年/月选择器新增 `cell-class` 配置项以支持自定义日期样式
-* **[update]**:
     - [Form 表单](#/form) 验证时错误信息样式调整
+    - [Message 消息提示](#/message) 高阶模式图钉增加取消快捷键
+    - [Table表格](#/table) Column resize style update
+    - [Table表格](#/table) 增加[合并行或列](#/table?anchor=he-bing-xing-huo-lie)示例
+* **[fix]**:
+    - [Message 消息提示](#/message) [规范化高阶使用配置](#/message?anchor=gao-jie-yong-fa) 问题修复
+    - [Select 下拉选框](#/select) 修复 checkbox 模式时 options 的 disabled 属性没有传递问题
+    - [Message 消息提示](#/message) 高阶模式支持多开 & 互斥模式
+    - [Pagination 分页](#/pagination) 修复跳转分页输入非整数时显示错误的问题
+    - [Message 消息提示](#/message) 高阶模式容器 zIndex 问题修复
+    - [Tab 选项卡](#/tab) 修复 tab 组件 type 类型为 card-tab 一直抛 warn 的问题
+* **[update]**:
+    - [DatePicker 日期选择器](#/date-picker) 年/月/日选择器 `cell-class` 配置回调函数参数增加 `pickerType` 属性，标识当前是什么类型的 picker
 
 ---
 
