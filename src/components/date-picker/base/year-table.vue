@@ -39,6 +39,12 @@ import mixin from './mixin'
 
 export default {
   mixins: [mixin],
+  props: {
+    realPickerType: {
+      type: String,
+      default: ''
+    }
+  },
   computed: {
     startYear () {
       return Math.floor(this.tableDate.getFullYear() / 10) * 10
@@ -65,6 +71,7 @@ export default {
         const day = clearHours(cell.date)
         cell.selected = selectedDays.includes(day)
         cell.focused = day === focusedDate
+        cell.pickerType = this.realPickerType
         cells.push(cell)
       }
 
@@ -72,6 +79,13 @@ export default {
     }
   },
   methods: {
+    getExternalCellClass (cell) {
+      if (typeof this.cellClass === 'function') {
+        return this.cellClass(cell)
+      }
+
+      return ''
+    },
     getCellCls (cell) {
       return [
         'bk-date-picker-cells-cell',
@@ -80,7 +94,8 @@ export default {
           'bk-date-picker-cells-cell-disabled': cell.disabled,
           // ['bk-date-picker-cells-cell-focused']: cell.focused,
           'bk-date-picker-cells-cell-range': cell.range && !cell.start && !cell.end
-        }
+        },
+        this.getExternalCellClass(cell)
       ]
     }
   }

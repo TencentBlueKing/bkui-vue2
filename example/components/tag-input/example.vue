@@ -73,7 +73,6 @@ export default {
         { id: '333', name: '333' },
         { id: 'haikou', name: '海口' }
       ],
-      placeholder: '请输入城市',
       allowCreate: true,
       hasDeleteIcon: true,
       tag1: ['shenzhen']
@@ -95,9 +94,6 @@ export default {
         }
       })
       return ret
-    },
-    change (tags) {
-      console.log(tags)
     }
   }
 }

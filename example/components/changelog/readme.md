@@ -4,6 +4,26 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.23 {page=#/changelog}
+
+* **[add]**:
+    - [DatePicker 日期选择器] 年/月选择器新增 `cell-class` 配置项以支持自定义日期样式
+    - [Form 表单] 验证时错误信息样式调整
+    - [Message 消息提示] 高阶模式图钉增加取消快捷键
+    - [Table表格] Column resize style update
+    - [Table表格] 增加[合并行或列]示例
+* **[fix]**:
+    - [Message 消息提示] [规范化高阶使用配置] 问题修复
+    - [Select 下拉选框] 修复 checkbox 模式时 options 的 disabled 属性没有传递问题
+    - [Message 消息提示] 高阶模式支持多开 & 互斥模式
+    - [Pagination 分页] 修复跳转分页输入非整数时显示错误的问题
+    - [Message 消息提示] 高阶模式容器 zIndex 问题修复
+    - [Tab 选项卡] 修复 tab 组件 type 类型为 card-tab 一直抛 warn 的问题
+* **[update]**:
+    - [DatePicker 日期选择器] 年/月/日选择器 `cell-class` 配置回调函数参数增加 `pickerType` 属性，标识当前是什么类型的 picker
+
+---
+
 ### 2.4.15-beta.22 {page=#/changelog}
 
 * **[update]**:

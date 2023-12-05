@@ -33,13 +33,64 @@
 import Vue from 'vue'
 import Message from './message.vue'
 
+class MessageQueueMaker {
+  constructor () {
+    this.timer = null
+    this.store = []
+    this.maskMap = new WeakMap()
+  }
+
+  appendMaker (fn) {
+    this.store.push(fn)
+    this.executeMaker()
+  }
+
+  executeMaker () {
+    this.timer && cancelAnimationFrame(this.timer)
+    this.timer = requestAnimationFrame(() => {
+      const fn = this.store.pop()
+      if (typeof fn === 'function') {
+        Reflect.apply(fn, this, [])
+        this.executeMaker()
+      }
+    })
+  }
+}
+
+const messageQueueMaker = new MessageQueueMaker()
+
 const MessageComponent = Vue.extend(Message)
+const getAdvanceMessageContainer = (parent = document.body) => {
+  const zIndexArr = messageList.map((message) => message.zIndex) || []
+  const maxZIndex = Math.max.apply(null, zIndexArr) || 2500
+
+  let target = parent.querySelector('[data-msg-advanced-conmtainer]')
+  if (!target) {
+    target = document.createElement('div')
+    target.setAttribute('data-msg-advanced-conmtainer', 'true')
+    target.style.setProperty('position', 'fixed')
+    parent.append(target)
+  }
+
+  target.style.zIndex = maxZIndex
+  target.style.setProperty('display', 'block')
+  return target
+}
 
 const messageList = []
 let seed = 0
 
 const BkMessage = function (config) {
-  const originConfig = typeof config === 'object' ? JSON.parse(JSON.stringify(config)) : config
+  const formatConfig = () => {
+    if (typeof config === 'object') {
+      if (config.message && !config.message.hasOwnProperty('componentOptions')) {
+        return JSON.parse(JSON.stringify(config))
+      }
+    }
+
+    return config
+  }
+  const originConfig = formatConfig()
   // 限制个数为 0 时，清除所有实例
   if (config.limit === 0) {
     BkMessage.batchClose()
@@ -110,15 +161,48 @@ const BkMessage = function (config) {
   instance.verticalOffset = 0
   instance.$mount()
   instance.dom = instance.$el
-  document.body.appendChild(instance.$el)
 
-  messageList.forEach(item => {
-    verticalOffset += parseInt(item.$el.offsetHeight) + parseInt(spacing)
-  })
-  instance.verticalOffset = verticalOffset
-  instance.horizonOffset = spacing
-  instance.visible = true
-  messageList.push(instance)
+  const mountedElementToTarget = () => {
+    messageList.forEach(item => {
+      verticalOffset += parseInt(item.$el.offsetHeight) + parseInt(spacing)
+    })
+    instance.verticalOffset = verticalOffset
+    instance.horizonOffset = spacing
+    instance.visible = true
+    messageList.push(instance)
+
+    const target = instance.showAdvanced ? getAdvanceMessageContainer(document.body) : document.body
+    target.appendChild(instance.$el)
+
+    if (instance.showAdvanced) {
+      if (instance.$el) {
+        target.style.setProperty('top', `${offsetY}px`)
+
+        target.style.setProperty('left', '50%')
+        target.style.setProperty('transform', 'translateX(-50%)')
+        instance.$el.style.setProperty('position', 'relative')
+        instance.$el.style.setProperty('margin-bottom', `${spacing}px`)
+        instance.verticalOffset = 0
+        instance.$on('message-show', isShow => {
+          if (isShow) {
+            messageList.forEach((item, i) => {
+              if (item.id !== instanceId && item.showAdvanced) {
+                if (item.$refs.refMessageAdvanced && item.$refs.refMessageAdvanced.isDetailShow) {
+                  item.$refs.refMessageAdvanced.setDetailsShow(null, false)
+                }
+              }
+            })
+          }
+        })
+      }
+    }
+  }
+
+  if (instance.showAdvanced) {
+    messageQueueMaker.appendMaker(mountedElementToTarget)
+  } else {
+    mountedElementToTarget()
+  }
 
   return instance
 }
@@ -141,11 +225,17 @@ BkMessage.close = function (id, configClose) {
 
     messageList.forEach((item, i) => {
       if (i > instanceIndex) {
-        item.verticalOffset -= (instance.dom.offsetHeight + instance.spacing)
+        const targetVal = item.verticalOffset - (instance.dom.offsetHeight + instance.spacing)
+        item.verticalOffset = targetVal > 0 ? targetVal : 0
       }
     })
 
     messageList.splice(instanceIndex, 1)
+
+    if (!messageList.some(msg => msg.showAdvanced)) {
+      const target = getAdvanceMessageContainer(document.body)
+      target.style.setProperty('display', 'none')
+    }
   }
 }
 // 批量清除实例

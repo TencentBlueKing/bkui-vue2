@@ -14,7 +14,7 @@
     </div> -->
     <div class="example-item">
       <bk-button
-        v-bk-tooltips="{ content: '<div style=\'color: red\'>asdasd</div>', allowHTML: false }">
+        v-bk-tooltips="{ content: '*', allowHTML: false }">
         allowHTML - false
       </bk-button>
     </div>
