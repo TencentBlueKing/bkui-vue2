@@ -253,7 +253,7 @@
   
         .message-tree {
           max-height: 480px;
-          padding: 14px 24px;
+          padding: 14px 32px;
           overflow: auto;
           background: #fff;
           border-radius: 2px;
@@ -279,87 +279,107 @@
                 content: ':';
               }
             }
+
+            .copy-value {
+              padding-left: 4px;
+
+              &:hover {
+                background: rgba(186, 188, 192, 0.2);
+                cursor: pointer;
+                border-radius: 2px;
+              }
+            }
           }
         }
   
         .message-copy {
           position: absolute;
-          top: 20px;
-          right: 40px;
-          font-size: 16px;
+          top: 0px;
+          right: 0px;
+          font-size: 18px;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          border-radius: 0 2px 0 6px;
           cursor: pointer;
+          justify-content: center;
+          background: #F5F7FA;
+          color: #9FA3AE;
   
           &:hover {
+            background: #F0F5FF;
             span {
               color: #3a84ff;
+              
             }
           }
-  
-          .copy-status {
-            display: none;
-            padding-bottom: 4px;
-  
-            .inner {
-              position: relative;
-              display: flex;
-              padding: 6px 8px;
-              font-size: 12px;
-              line-height: 20px;
-              color: #63656e;
-              background: #fff;
-              border: 1px solid #dcdee5;
-              box-shadow: 0 2px 6px 0 #0000001a;
-              align-items: center;
-  
-              span {
-                margin-right: 4px;
-              }
-  
-              &::after {
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                width: 8px;
-                height: 8px;
-                background: #fff;
-                border-color: #dcdee5;
-                border-style: solid;
-                border-width: 0px 1px 1px 0px;
-                content: '';
-                transform: translate(0, 4px) rotate(45deg);
-                box-shadow: 5px 3px 6px 0 #0000001a;
-                box-sizing: border-box;
-              }
+        }
+
+        .copy-status {
+          display: none;
+          padding-bottom: 4px;
+
+          .inner {
+            position: relative;
+            display: flex;
+            padding: 6px 8px;
+            font-size: 12px;
+            line-height: 20px;
+            color: #63656e;
+            background: #fff;
+            border: 1px solid #dcdee5;
+            box-shadow: 0 2px 6px 0 #0000001a;
+            align-items: center;
+
+            span {
+              margin-right: 4px;
             }
-  
-            &.success {
-              .inner {
-                span {
-                  color: #2dcb9d;
-                }
-              }
-            }
-  
-            &.error {
-              .inner {
-                span {
-                  color: #ea3636;
-                }
-              }
-            }
-  
-            &.is-show {
+
+            &::after {
               position: absolute;
-              top: 0;
-              left: 0;
-              display: inline-flex;
-              white-space: nowrap;
-              transform: translate(-50%, -100%);
+              bottom: 0;
+              left: 50%;
+              width: 8px;
+              height: 8px;
+              background: #fff;
+              border-color: #dcdee5;
+              border-style: solid;
+              border-width: 0px 1px 1px 0px;
+              content: '';
+              transform: translate(0, 4px) rotate(45deg);
+              box-shadow: 5px 3px 6px 0 #0000001a;
+              box-sizing: border-box;
             }
-  
-            &.is-hidden {
-              display: none;
+          }
+
+          &.success {
+            .inner {
+              span {
+                color: #2dcb9d;
+              }
             }
+          }
+
+          &.error {
+            .inner {
+              span {
+                color: #ea3636;
+              }
+            }
+          }
+
+          &.is-show {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-flex;
+            white-space: nowrap;
+          }
+
+          &.is-hidden {
+            top: -9999;
+            left: -9999;
           }
         }
       }

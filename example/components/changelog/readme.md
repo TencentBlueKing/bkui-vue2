@@ -8,6 +8,27 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.8 {page=#/changelog}
+###### 2023.12.05
+
+* **[add]**:
+    - [DatePicker 日期选择器](#/date-picker) 年/月选择器新增 `cell-class` 配置项以支持自定义日期样式
+    - [Form 表单](#/form) 验证时错误信息样式调整
+    - [Message 消息提示](#/message) 高阶模式图钉增加取消快捷键
+    - [Table表格](#/table) Column resize style update
+    - [Table表格](#/table) 增加[合并行或列](#/table?anchor=he-bing-xing-huo-lie)示例
+* **[fix]**:
+    - [Message 消息提示](#/message) [规范化高阶使用配置](#/message?anchor=gao-jie-yong-fa) 问题修复
+    - [Select 下拉选框](#/select) 修复 checkbox 模式时 options 的 disabled 属性没有传递问题
+    - [Message 消息提示](#/message) 高阶模式支持多开 & 互斥模式
+    - [Pagination 分页](#/pagination) 修复跳转分页输入非整数时显示错误的问题
+    - [Message 消息提示](#/message) 高阶模式容器 zIndex 问题修复
+    - [Tab 选项卡](#/tab) 修复 tab 组件 type 类型为 card-tab 一直抛 warn 的问题
+* **[update]**:
+    - [DatePicker 日期选择器](#/date-picker) 年/月/日选择器 `cell-class` 配置回调函数参数增加 `pickerType` 属性，标识当前是什么类型的 picker
+
+---
+
 ### 2.5.7 {page=#/changelog}
 ###### 2023.07.24
 
@@ -31,7 +52,7 @@
 * **[fix]**:
     - [SearchSelect 查询选择器](#/searchselect) 修复 window 系统中，中文输入法的情况下，输入后直接回车数据展示问题
     - [Sideslider 侧栏](#/sideslider) 修复侧边栏宽度仅支持数字的问题
-    - [ Table表格](#/table) 修复设置 fixed 属性时，页面宽度变化不能及时响应重新绘制的问题 [#387](https://github.com/TencentBlueKing/bkui-vue2/issues/387)
+    - [Table表格](#/table) 修复设置 fixed 属性时，页面宽度变化不能及时响应重新绘制的问题 [#387](https://github.com/TencentBlueKing/bkui-vue2/issues/387)
     - [Button 基础按钮](#/button) 修复 outline 与 loading 同时为 true 时, loading 指示器不可见的问题 [#404](https://github.com/TencentBlueKing/bkui-vue2/issues/404)
 
 ---

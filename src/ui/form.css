@@ -269,36 +269,36 @@
         input[type="url"],
         textarea,
         select {
-            border-color: $dangerColor;
-            color: $dangerColor;
+            border-color: $newRedColor;
+            color: $newRedColor;
 
             /*&::placeholder {
-                color: $dangerColor;
+                color: $newRedColor;
             }*/
         }
 
         .bk-textarea-wrapper {
-            border-color: $dangerColor;
+            border-color: $newRedColor;
         }
 
         .bk-tag-selector .bk-tag-input {
-            border-color: $dangerColor;
+            border-color: $newRedColor;
             /*.placeholder {
-                color: $dangerColor;
+                color: $newRedColor;
             }*/
         }
 
         .bk-form-tip {
             .bk-tip-text {
-                color: $dangerColor;
+                color: $newRedColor;
             }
         }
 
         .bk-select {
-            border-color: $dangerColor;
+            border-color: $newRedColor;
 
             /*&.is-default-trigger.is-unselected:before {
-                color: $dangerColor;
+                color: $newRedColor;
             }*/
         }
     }

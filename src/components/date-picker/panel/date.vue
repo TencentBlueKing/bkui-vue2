@@ -73,7 +73,7 @@
       </div>
       <div class="bk-picker-panel-content">
         <!-- eslint-disable-next-line vue/require-component-is -->
-        <!-- {{ pickerTable }}--{{dates}}--{{selectionMode}} -->
+        <!-- {{ pickerTable }}--{{dates}}--{{selectionMode}}--{{pickerType}}--{{ realPickerType }} -->
         <component
           :is="pickerTable"
           v-if="currentView !== 'time'"
@@ -83,6 +83,7 @@
           :disabled-date="disabledDate"
           :focused-date="focusedDate"
           :cell-class="cellClass"
+          :real-picker-type="realPickerType"
           @pick="panelPickerHandlers"
           @pick-click="handlePickClick"
         ></component>
@@ -163,10 +164,12 @@ export default {
   data () {
     const { selectionMode, value } = this
     const dates = value.slice().sort()
+    const pickerTable = this.getTableType(selectionMode)
 
     return {
       currentView: selectionMode || 'date',
-      pickerTable: this.getTableType(selectionMode),
+      pickerTable,
+      realPickerType: pickerTable.replace('-table', ''),
       dates: dates,
       panelDate: this.startDate || dates[0] || new Date()
     }
@@ -227,6 +230,9 @@ export default {
           this.panelDate = date
         }
       }
+    },
+    pickerTable (val) {
+      this.realPickerType = val.replace('-table', '')
     }
   },
   methods: {

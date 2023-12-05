@@ -59,6 +59,9 @@
             cursor: pointer;
         }
     }
+    .btn-search-input {
+        display: flex;
+    }
 </style>
 
 [[toc]]
@@ -332,6 +335,21 @@
             v-model="value"
             @right-icon-click="handlerIconClick">
         </bk-input>
+        <div class="btn-search-input mt10">
+            <bk-input
+                clearable
+                :placeholder="'搜索'"
+            >
+            <span slot="append"></span>
+            </bk-input>
+            <bk-button
+                theme="primary"
+                style="margin-left: -2px; border-radius: 0 2px 2px 0"
+                @click="handlerIconClick"
+            >
+                搜索
+            </bk-button>
+        </div>
     </div>
 </template>
 <script>
@@ -357,6 +375,9 @@
 <style lang="postcss">
     .input-demo {
         width: 500px;
+    }
+    .btn-search-input {
+        display: flex;
     }
 </style>
 ```
@@ -688,6 +709,7 @@
 | show-word-limit | 是否显示输入字数统计，只在 `type = "text"` 或 `type = "textarea"` 时有效 | Boolean | true / false | —— |
 | behavior | 简约风格设置(simplicity:简约 normal:正常 type=textarea时不生效) | String | 'normal'/'simplicity' | normal |
 | show-clear-only-hover | 是否在只有 hover 的时候才显示 clear 清除按钮 | Boolean | —— | false |
+| allow-number-paste | 允许type为number时可粘贴 | Boolean | —— | false |
 
 ### 事件 {page=#/input}
 
