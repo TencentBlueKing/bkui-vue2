@@ -186,10 +186,72 @@
             fields: settingFields,
             selectedFields: settingFields.slice(0, 4),
             size: 'small'
-          }
+          },
+          spanMethodData: [
+              {
+                  ip: '192.168.0.1',
+                  source: 'QQ',
+                  status: '创建中',
+                  create_time: '2018-05-25 15:02:24'
+              },
+              {
+                  ip: '192.168.0.2',
+                  source: '微信',
+                  status: '正常',
+                  create_time: '2018-05-25 15:02:24'
+              },
+              {
+                  ip: '192.168.0.2',
+                  source: '微信',
+                  status: '正常',
+                  create_time: '2018-05-25 15:02:24'
+              },
+              {
+                  ip: '192.168.0.2',
+                  source: '微信',
+                  status: '正常',
+                  create_time: '2018-05-25 15:02:24'
+              },
+              {
+                  ip: '192.168.0.2',
+                  source: '微信',
+                  status: '正常',
+                  create_time: '2018-05-25 15:02:24'
+              },
+              {
+                  ip: '192.168.0.2',
+                  source: '微信',
+                  status: '正常',
+                  create_time: '2018-05-25 15:02:24'
+              }
+          ]
         }
       },
       methods: {
+        arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+          if (rowIndex % 2 === 0) {
+            if (columnIndex === 0) {
+              return [1, 2];
+            } else if (columnIndex === 1) {
+              return [0, 0];
+            }
+          }
+        },
+        objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+          if (columnIndex === 0) {
+            if (rowIndex % 2 === 0) {
+              return {
+                rowspan: 2,
+                colspan: 1
+              };
+            } else {
+              return {
+                rowspan: 0,
+                colspan: 0
+              };
+            }
+          }
+        },
         handleScrollToBottom() {
           this.bottomLoadingOptions.isLoading = true
           setTimeout(() => {
@@ -1551,6 +1613,114 @@ export default {
                     this.tableData = this.tableData.concat(this.tableData)
                     this.bottomLoadingOptions.isLoading = false
                 }, 2000)
+            }
+        }
+    }
+</script>
+```
+:::
+
+### 合并行或列 {page=#/table}
+
+:::demo 配置`span-method`属性设置合并行或列
+
+```html
+
+<template>
+    <div>
+        <p>合并行</p>
+        <bk-table :data="spanMethodData" :span-method="arraySpanMethod" col-border>
+            <bk-table-column label="名称/内网IP" prop="ip"></bk-table-column>
+            <bk-table-column label="来源" prop="source"></bk-table-column>
+            <bk-table-column label="状态" prop="status"></bk-table-column>
+            <bk-table-column label="创建时间" prop="create_time"></bk-table-column>
+        </bk-table>
+    </div>
+    <div style="margin-top: 30px;">
+        <p>合并列</p>
+        <bk-table :data="spanMethodData" :span-method="objectSpanMethod" col-border>
+            <bk-table-column label="名称/内网IP" prop="ip"></bk-table-column>
+            <bk-table-column label="来源" prop="source"></bk-table-column>
+            <bk-table-column label="状态" prop="status"></bk-table-column>
+            <bk-table-column label="创建时间" prop="create_time"></bk-table-column>
+        </bk-table>
+    </div>
+</template>
+<script>
+    import {
+        bkTable,
+        bkTableColumn
+    } from '{{BASE_LIB_NAME}}'
+    export default {
+        components: {
+            bkTable,
+            bkTableColumn
+        },
+        data() {
+            return {
+                spanMethodData: [{
+                        ip: '192.168.0.1',
+                        source: 'QQ',
+                        status: '创建中',
+                        create_time: '2018-05-25 15:02:24'
+                    },
+                    {
+                        ip: '192.168.0.2',
+                        source: '微信',
+                        status: '正常',
+                        create_time: '2018-05-25 15:02:24'
+                    },
+                    {
+                        ip: '192.168.0.2',
+                        source: '微信',
+                        status: '正常',
+                        create_time: '2018-05-25 15:02:24'
+                    },
+                    {
+                        ip: '192.168.0.2',
+                        source: '微信',
+                        status: '正常',
+                        create_time: '2018-05-25 15:02:24'
+                    },
+                    {
+                        ip: '192.168.0.2',
+                        source: '微信',
+                        status: '正常',
+                        create_time: '2018-05-25 15:02:24'
+                    },
+                    {
+                        ip: '192.168.0.2',
+                        source: '微信',
+                        status: '正常',
+                        create_time: '2018-05-25 15:02:24'
+                    }
+                ]
+            }
+        },
+        methods: {
+            arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+                if (rowIndex % 2 === 0) {
+                    if (columnIndex === 0) {
+                        return [1, 2];
+                    } else if (columnIndex === 1) {
+                        return [0, 0];
+                    }
+                }
+            },
+            objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+                if (columnIndex === 0) {
+                    if (rowIndex % 2 === 0) {
+                        return {
+                            rowspan: 2,
+                            colspan: 1
+                        };
+                    } else {
+                        return {
+                            rowspan: 0,
+                            colspan: 0
+                        };
+                    }
+                }
             }
         }
     }

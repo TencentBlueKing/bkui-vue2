@@ -14,7 +14,8 @@
         data () {
             return {
                 defaultSettings: {
-                    isShow: false
+                    isShow: false,
+                    title: '更多参数配置'
                 },
                 customSettings: {
                     isShow: false,
@@ -141,7 +142,7 @@
 <template>
     <div>
         <bk-button :type="'primary'" @click="defaultSettings.isShow = true">默认配置</bk-button>
-        <bk-sideslider :is-show.sync="defaultSettings.isShow" :quick-close="true">
+        <bk-sideslider :is-show.sync="defaultSettings.isShow" :title="defaultSettings.title" :quick-close="true">
             <div slot="content">
                 <div style="height: 1000px;"></div>
             </div>
