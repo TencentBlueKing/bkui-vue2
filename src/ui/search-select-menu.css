@@ -55,6 +55,8 @@
             .item-name {
                 flex: 1;
                 line-height: 32px;
+                display: flex;
+                align-items: center;
                 &-filter {
                     color: #3a84ff;
                     display: inline-block;
