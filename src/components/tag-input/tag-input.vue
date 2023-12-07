@@ -659,6 +659,7 @@ export default {
       this.dispatch('bk-form-item', 'form-focus')
       this.popoverWidth = this.isSingleSelect ? this.bkTagSelector.clientWidth : this.contentWidth
       event.currentTarget.select()
+      this.$emit('focus', this.tagList)
     },
     handlePaste (event) {
       // 单选禁止复制粘贴，防止粘贴多个tag
