@@ -282,7 +282,7 @@
             }
 
             .copy-value {
-              padding: 0px 4px;
+              padding-left: 4px;
 
               &:hover {
                 background: rgba(186, 188, 192, 0.2);
@@ -295,14 +295,24 @@
 
         .message-copy {
           position: absolute;
-          top: 20px;
-          right: 40px;
-          font-size: 16px;
+          top: 0px;
+          right: 0px;
+          font-size: 18px;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          border-radius: 0 2px 0 6px;
           cursor: pointer;
+          justify-content: center;
+          background: #F5F7FA;
+          color: #9FA3AE;
 
           &:hover {
+            background: #F0F5FF;
             span {
               color: #3a84ff;
+
             }
           }
         }

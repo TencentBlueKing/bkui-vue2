@@ -234,12 +234,12 @@ export default {
       }
       return (
         <li class={{ 'bk-search-list-menu-item': true, 'is-group': !!item.isGroup, 'is-disabled': item.disabled, 'is-hover': !item.disabled && hoverId === id }}>
-          {
-            selectedStyle === 'checkbox'
-              ? <bk-checkbox class="search-list-checkbox" v-show={multiable && child && !isChildCondition} ref={id}></bk-checkbox>
-              : null
-          }
           <div {...events} class={{ 'item-name': true }}>
+            {
+              selectedStyle === 'checkbox'
+                ? <bk-checkbox class="search-list-checkbox" v-show={multiable && child && !isChildCondition} ref={id}></bk-checkbox>
+                : null
+            }
             {
               isFilter
                 ? <div>{pre}<span class={{ 'item-name-filter': true }}>{filter}</span>{next}</div>

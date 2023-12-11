@@ -163,6 +163,13 @@
             }
         }
     }
+
+    .input-right-icon {
+        cursor: pointer;
+        &:hover {
+            color: $primaryColor;
+        }
+    }
 }
 
 .bk-form-input,

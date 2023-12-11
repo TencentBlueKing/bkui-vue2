@@ -1296,5 +1296,6 @@
 | select | 选择数据后的回调函数 | |
 | remove | 删除数据后的回调函数 | |
 | removeAll | 一键清空数据后的回调函数 | |
+| focus | 输入获取焦点的回调函数 | tags |
 | blur | 输入状态时失焦点的回调函数 | input, tags |
 | inputchange | 输入框input事件的回调函数 | value

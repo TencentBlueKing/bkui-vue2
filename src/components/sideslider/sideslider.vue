@@ -36,7 +36,7 @@
           </div>
           <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 0 0 50px' : '0 0 0 30px' }">
             <slot name="header">
-              {{title || t('bk.sideslider.title')}}
+              <div class="title-content">{{title || t('bk.sideslider.title')}}</div>
             </slot>
           </div>
         </div>
