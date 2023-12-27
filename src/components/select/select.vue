@@ -94,16 +94,18 @@
         :class="[popoverCls, extPopoverCls]"
         :style="popoverStyle">
         <div class="bk-select-search-wrapper" v-if="showSearch">
-          <i class="left-icon bk-icon icon-search"></i>
-          <input class="bk-select-search-input"
-            :class="fontSizeCls"
-            ref="searchInput"
-            type="text"
-            :placeholder="localSearchPlaceholder"
-            v-model="searchValue"
-            @keydown.enter="ensureSearch"
-            @keydown.tab="handleClose"
-            @keydown.esc.stop.prevent="handleClose">
+          <slot name="search" v-bind="$props">
+            <i class="left-icon bk-icon icon-search"></i>
+            <input class="bk-select-search-input"
+              :class="fontSizeCls"
+              ref="searchInput"
+              type="text"
+              :placeholder="localSearchPlaceholder"
+              v-model="searchValue"
+              @keydown.enter="ensureSearch"
+              @keydown.tab="handleClose"
+              @keydown.esc.stop.prevent="handleClose">
+          </slot>
         </div>
         <div class="bk-options-wrapper"
           v-bkloading="{ isLoading: searchLoading }"
@@ -603,7 +605,7 @@ export default {
       popover.set({
         onShown: () => {
           if (this.showSearch) {
-            this.$refs.searchInput.focus()
+            this.$refs.searchInput && this.$refs.searchInput.focus()
           }
         }
       })

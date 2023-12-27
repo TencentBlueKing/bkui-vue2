@@ -1372,6 +1372,7 @@
 | —— | 默认作用域插槽，用以自定义下拉列表展示格式, 作用域插槽参数为 `{option, optionIndex, group, groupIndex}` |
 | extension | 固定在下拉列表最后的内容 |
 | trigger | 可用于自定义选框的触发者,作用域插槽参数为该组件的props中的属性 |
+| search | 可用于自定义搜索区域,作用域插槽参数为该组件的props中的属性 |
 
 ### bk-option 下拉框选项属性 {page=#/select}
 **（使用 v-for 添加选项时，如果有动态数据，请勿使用 index 作为 key 进行绑定，这将会引起更新错误）**
