@@ -8,6 +8,23 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.9-beta.2 {page=#/changelog}
+
+* **[add]**:
+    - [TagInput 标签输入框](#/tag-input) 支持 collapseTags
+    - [Select 下拉选框](#/select) 支持 search slot
+
+---
+
+### 2.5.9-beta.1 {page=#/changelog}
+
+* **[add]**:
+    - [TagInput 标签输入框](#/tag-input) 添加 focus 事件
+* **[fix]**:
+    - [Search 查询搜索](#/search-select) 修复 searchselect checkbox 模式下点击 checkbox 不会选中问题
+
+---
+
 ### 2.5.8 {page=#/changelog}
 ###### 2023.12.05
 

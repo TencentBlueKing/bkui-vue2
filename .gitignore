@@ -28,3 +28,6 @@ package-lock.json
 coverage
 yarn.lock
 .history
+
+
+pre-*-bkcodeai
