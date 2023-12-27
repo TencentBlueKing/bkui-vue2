@@ -27,7 +27,7 @@
 -->
 
 <template>
-  <div class="bk-tag-selector" :class="extCls" @click="focusInputer($event)" ref="bkTagSelector" @mouseenter="mouseEnterHandler" @mouseleave="hover = false">
+  <div class="bk-tag-selector" :class="[extCls, { resizing }]" @click="focusInputer($event)" ref="bkTagSelector" @mouseenter="mouseEnterHandler" @mouseleave="hover = false">
     <div :class="['bk-tag-input', { 'active': isEdit, 'disabled': disabled }]">
       <ul class="tag-list" :class="!localTagList.length ? 'no-item' : ''" ref="tagList" :style="{ 'margin-left': `${leftSpace}px` }">
         <li
@@ -35,9 +35,13 @@
           v-for="(tag, index) in localTagList"
           :key="tag[saveKey] !== undefined ? tag[saveKey] : index"
           @click="selectTag($event, tag)"
+          :style="{ display: (!resizing && enableCollapseTags && index >= overflowTagIndex) ? 'none' : '' }"
           v-bk-tooltips.light="{ boundary: 'window', content: tag[tooltipKey], disabled: !tooltipKey }">
           <tag-render :node="tag" :display-key="displayKey" :tpl="tagTpl" />
           <i class="bk-icon icon-close remove-key" @click.stop="handlerTagRemove(tag, index)" v-if="!disabled && hasDeleteIcon"></i>
+        </li>
+        <li class="key-node" v-if="enableCollapseTags && localTagList.length > overflowTagIndex">
+          <div class="tag"><span class="text">+{{ localTagList.length - overflowTagIndex }}</span></div>
         </li>
         <li ref="staffInput" id="staffInput" class="staff-input" v-show="isEdit" role="input">
           <input
@@ -257,6 +261,10 @@ export default {
     createTagValidator: {
       type: Function,
       default: null
+    },
+    collapseTags: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -288,7 +296,9 @@ export default {
       isSingleSelect: false,
       INPUT_MIN_WIDTH: 12,
       popoverWidth: 190,
-      hover: false
+      hover: false,
+      overflowTagIndex: null,
+      resizing: false
     }
   },
   computed: {
@@ -323,6 +333,10 @@ export default {
     },
     defaultPlaceholder () {
       return this.placeholder || this.t('bk.tagInput.placeholder')
+    },
+    enableCollapseTags () {
+      const isPopoverShown = this.popoverInstance && this.popoverInstance.instance && this.popoverInstance.instance.state.isShown
+      return !this.isEdit && this.collapseTags && this.overflowTagIndex && !isPopoverShown
     }
   },
   watch: {
@@ -352,22 +366,50 @@ export default {
     },
     maxData (val) {
       this.isSingleSelect = val === 1
+    },
+    collapseTags () {
+      if (this.execResizeHandler) {
+        this.execResizeHandler()
+      }
+    },
+    localTagList () {
+      if (this.execResizeHandler) {
+        this.execResizeHandler()
+      }
     }
   },
   created () {
     this.isSingleSelect = this.maxData === 1
     this.pageSize = this.maxResult
     this.getData()
+
+    this.execResizeHandler = async () => {
+      // resizing为true时使得所有tagitem可见确保overflow计算的正确性
+      this.resizing = true
+      await this.$nextTick(this.calcOverflowTagIndex)
+      this.resizing = false
+    }
   },
   mounted () {
     this.bkTagSelector = this.$refs.bkTagSelector
     this.popoverInstance = this.$refs['tagInputDropdown']
+
+    this.containerResizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === this.bkTagSelector) {
+          this.execResizeHandler()
+        }
+      }
+    })
+
+    this.containerResizeObserver.observe(this.bkTagSelector)
   },
   beforeDestroy () {
     this.isBeforeDestroy = true
     const selectorList = this.$refs.selectorList
     selectorList && selectorList.removeEventListener('scroll', this.scrollHandler)
     clearTimeout(this.timer)
+    this.containerResizeObserver.unobserve(this.bkTagSelector)
   },
   methods: {
     mouseEnterHandler () {
@@ -1135,6 +1177,25 @@ export default {
         const site = nodes[nodes.length - 1]
         this.insertAfter(this.$refs.staffInput, site)
       }
+    },
+    calcOverflowTagIndex () {
+      if (!this.collapseTags || !this.localTagList.length || !this.$refs.tagList) {
+        this.overflowTagIndex = null
+        return
+      }
+
+      const tagItems = Array.from(this.$refs.tagList.querySelectorAll('.key-node'))
+      const tagBreakIndex = tagItems.findIndex((currentTag, index) => {
+        if (index === 0) {
+          return false
+        }
+        const previousTag = tagItems[index - 1]
+        return previousTag.offsetTop !== currentTag.offsetTop
+      })
+
+      // -1往前多算一个，确保+数字能够与标签显示在同一行
+      const overflowTagIndex = tagBreakIndex > 0 ? tagBreakIndex - 1 : null
+      this.overflowTagIndex = overflowTagIndex
     }
   }
 }

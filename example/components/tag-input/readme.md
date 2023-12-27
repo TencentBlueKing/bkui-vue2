@@ -29,6 +29,21 @@
                 displayKey: 'label',
                 placeholder: '请输入城市',
                 tag1: ['shenzhen'],
+                tag2: [
+                  'shenzhen',
+                  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                  'cccccccccccccccccccccccccccccc',
+                  'dddddddddddddddddddddddddddd',
+                  'eeeeeeeeeeeeeeeeeeeeeeee',
+                  'ffffffffffffffffffff',
+                  'gggggggggggggggggg',
+                  'hhhhhhhhhhhhhhhhhh',
+                  'iiiiiiiiiiiiiiiiiiiiiiiii',
+                  'jjjjjjjjjjjjjjjjjjjjjjjj',
+                  'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+                  'lllllllllllllllllllllllllllllll'
+                ],
                 tags: ['shenzhen', 'guangzhou'],
                 dynamicTags: [],
                 tagsWithDisabled: [],
@@ -167,7 +182,7 @@
                     return;
                 }
                 this.dnyamicList = []
-                
+
             },
             change (tags) {
                 console.log(tags)
@@ -857,6 +872,74 @@
 :::
 
 
+### 折叠tags {page=#/tag-input}
+
+:::demo 通过 `collapseTags` 属性指定失焦是否折叠 tags
+
+```html
+<template>
+    <bk-tag-input
+        v-model="tag2"
+        :placeholder="placeholder"
+        :list="list"
+        :disabled="false"
+        :allow-create="allowCreate"
+        :has-delete-icon="hasDeleteIcon"
+        :collapse-tags="true"
+        @change="change">
+    </bk-tag-input>
+</template>
+<script>
+    import { bkTagInput } from '{{BASE_LIB_NAME}}'
+
+    export default {
+        components: {
+            bkTagInput
+        },
+        data () {
+            return {
+                placeholder: '请输入城市',
+                allowCreate: true,
+                hasDeleteIcon: true,
+                tag2: [
+                  'shenzhen',
+                  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                  'cccccccccccccccccccccccccccccc',
+                  'dddddddddddddddddddddddddddd',
+                  'eeeeeeeeeeeeeeeeeeeeeeee',
+                  'ffffffffffffffffffff',
+                  'gggggggggggggggggg',
+                  'hhhhhhhhhhhhhhhhhh',
+                  'iiiiiiiiiiiiiiiiiiiiiiiii',
+                  'jjjjjjjjjjjjjjjjjjjjjjjj',
+                  'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+                  'lllllllllllllllllllllllllllllll'
+                ],
+                list: [
+                    { id: 'shenzhen', name: '深圳' },
+                    { id: 'guangzhou', name: '广州' },
+                    { id: 'beijing', name: '北京' },
+                    { id: 'shanghai', name: '上海' },
+                    { id: 'hangzhou', name: '杭州' },
+                    { id: 'nanjing', name: '南京' },
+                    { id: 'chognqing', name: '重庆' },
+                    { id: 'taibei', name: '台北' },
+                    { id: 'haikou', name: '海口' }
+                ]
+            }
+        },
+        methods: {
+            change (tags) {
+                console.log(tags)
+            }
+        }
+    }
+</script>
+```
+:::
+
+
 ### 回调事件 {page=#/tag-input}
 
 :::demo 当发生改变时提供 `change` 事件
@@ -925,6 +1008,7 @@
         :search-key="'english_name'"
         :trigger="'focus'"
         :use-group="true"
+        :collapse-tags="true"
         :list="memberList"
         :tag-tpl="renderMemberTag"
         :tpl="renderMerberList">
@@ -1288,6 +1372,7 @@
 | allow-auto-match | 配置输入时失焦点后，如果完全匹配则自动选中，如果自定义则自动输入 | Boolean | —— | false |
 | create-tag-validator | 自定义标签校验函数，返回 boolean，参数`(tag)`，tag表示当前输入值，在自定义标签时，可以自定义添加标签的校验 |
 | show-clear-only-hover | 是否在只有 hover 的时候才显示 clear 清除按钮 | Boolean | —— | false |
+| collapse-tags | 失焦是否折叠 tags | Boolean | —— | false |
 
 ### 事件 {page=#/tag-input}
 | 事件名称 | 说明 | 回调参数 |
