@@ -6,8 +6,7 @@
     .bk-step {
         &.done {
             .bk-step-number,
-            .bk-step-icon,
-            .bk-step-text {
+            .bk-step-icon {
                 border-color: $theme;
                 color: $theme;
             }
@@ -23,6 +22,20 @@
             /* vertical */
             &::after {
                 background-image: linear-gradient($theme 50%, transparent 0%);
+            }
+
+            &:has(+ .current.bk-step-error) {
+                .bk-step-title,
+                .bk-step-indicator {
+                    &::after {
+                        background-image: linear-gradient(to right, $newRedColor 50%, transparent 0%);
+                    }
+                }
+            }
+            &:has(+ .current.bk-step-error) {
+                &::after {
+                    background-image: linear-gradient($newRedColor 50%, transparent 0%);
+                }
             }
         }
         &.current {
@@ -140,9 +153,11 @@
             }
         }
         &.done {
-            .bk-step-title,
-            .bk-step-description {
+            .bk-step-title {
                 color: $fnMainColor;
+            }
+            .bk-step-description {
+                color: #979ba5;
             }
         }
         &.current {
