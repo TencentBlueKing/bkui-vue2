@@ -104,6 +104,7 @@ $itemBackground: #F0F1F5;
     }
 }
 .bk-cascade-dropdown-content {
+    padding: 4px 0;
     border: 1px solid $newGreyColor1;
     border-radius: 2px;
     line-height: 32px;
