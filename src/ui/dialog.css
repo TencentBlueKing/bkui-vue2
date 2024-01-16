@@ -209,7 +209,7 @@
                 color: $newBlackColor2;
                 line-height: 1.5;
                 text-align: center;
-                word-break: break-all;
+                word-break: break-word;
             }
         }
         .bk-dialog-body {
