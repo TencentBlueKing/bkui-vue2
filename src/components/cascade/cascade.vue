@@ -55,7 +55,7 @@
       :distance="12"
       :on-show="handleDropdownShow"
       :on-hide="handleDropdownHide"
-      :tippy-options="popoverOptions">
+      :tippy-options="{ ...{ offset: '0 3' }, ...popoverOptions }">
       <template v-if="multiple">
         <div class="bk-cascade-name" :title="selectedName" v-if="limitOneLine">
           <span>{{selectedName}}</span>
