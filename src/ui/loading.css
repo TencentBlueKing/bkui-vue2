@@ -74,63 +74,12 @@
             left: 60px;
             animation-delay: 0.55s;
         }
-
-        &.bk-black {
-            .point1,
-            .point2,
-            .point3,
-            .point4{
-                background: #979ba5;
-            }
-        }
     }
 }
 
 /* 加载动画一，点状 */
 .bk-dot-loading,
 .bk-loading1 {
-    position: relative;
-    width: 75px;
-    height: 14px;
-    margin: auto;
-    display: inline-block;
-    .point {
-        position: absolute;
-        top: 0;
-        width: 14px;
-        height: 14px;
-        animation-name: scale-animate;
-        animation-duration: .8s;
-        animation-iteration-count: infinite;
-        animation-direction: normal;
-        transform: scale(.6);
-        border-radius: 19px;
-    }
-
-    .point1 {
-        background-color: #fd6154;
-        left: 0;
-        animation-delay: 0.1s;
-    }
-
-    .point2 {
-        background-color: #ffb726;
-        left: 20px;
-        animation-delay: 0.25s;
-    }
-
-    .point3 {
-        background-color: #4cd084;
-        left: 40px;
-        animation-delay: 0.4s;
-    }
-
-    .point4 {
-        background-color: #57a3f1;
-        left: 60px;
-        animation-delay: 0.55s;
-    }
-
     &.bk-size-mini {
         width: 30px;
 
@@ -226,151 +175,6 @@
     }
 }
 
-.bk-spin-loading,
-.bk-loading2 {
-    width: 39px;
-    height: 39px;
-    position: relative;
-    margin: auto;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.bk-spin-loading .rotate,
-.bk-loading2 .rotate {
-    position: absolute;
-    top: 77%;
-    right: 43%;
-    background-color: none;
-    background-color: #39424e\9\0;
-    width: 6px;
-    height: 8px;
-    transform-origin: 50% -10px;
-    border-radius: 8px;
-    transform: scale(0.4);
-    animation-name: fade;
-    animation-duration: 1.2s;
-    animation-iteration-count: infinite;
-    animation-direction: normal;
-}
-
-.bk-spin-loading.bk-spin-loading-success .rotate,
-.bk-loading2.bk-spin-loading-success .rotate {
-    background: #30d878\9\0;
-    animation-name: fadeSuccess;
-}
-
-.bk-spin-loading.bk-spin-loading-danger .rotate,
-.bk-loading2.bk-spin-loading-danger .rotate {
-    background: #ff5656\9\0;
-    animation-name: fadeDanger;
-}
-
-.bk-spin-loading.bk-spin-loading-warning .rotate,
-.bk-loading2.bk-spin-loading-warning .rotate {
-    background: #ffb400\9\0;
-    animation-name: fadeWarning;
-}
-
-.bk-spin-loading.bk-spin-loading-primary .rotate,
-.bk-loading2.bk-spin-loading-primary .rotate {
-    background: #3c96ff\9\0;
-    animation-name: fadePrimary;
-}
-
-.bk-spin-loading.bk-spin-loading-white .rotate,
-.bk-loading2.bk-spin-loading-white .rotate {
-    background: #fff\9\0;
-    animation-name: fadeWhite;
-}
-
-.bk-spin-loading .rotate1,
-.bk-loading2 .rotate1 {
-    animation-delay: 0.45s;
-    transform: rotate(-90deg);
-}
-
-.bk-spin-loading .rotate2,
-.bk-loading2 .rotate2 {
-    animation-delay: 0.6s;
-    transform: rotate(-45deg);
-}
-
-.bk-spin-loading .rotate3,
-.bk-loading2 .rotate3 {
-    animation-delay: 0.75s;
-    transform: rotate(0deg);
-}
-
-.bk-spin-loading .rotate4,
-.bk-loading2 .rotate4 {
-    animation-delay: 0.9s;
-    transform: rotate(45deg);
-}
-
-.bk-spin-loading .rotate5,
-.bk-loading2 .rotate5 {
-    animation-delay: 1.05s;
-    transform: rotate(90deg);
-}
-
-.bk-spin-loading .rotate6,
-.bk-loading2 .rotate6 {
-    animation-delay: 1.2s;
-    transform: rotate(135deg);
-}
-
-.bk-spin-loading .rotate7,
-.bk-loading2 .rotate7 {
-    animation-delay: 1.35s;
-    transform: rotate(180deg);
-}
-
-.bk-spin-loading .rotate8,
-.bk-loading2 .rotate8 {
-    animation-delay: 1.5s;
-    transform: rotate(-135deg);
-}
-
-.bk-spin-loading.bk-spin-loading-large,
-.bk-loading2.bk-spin-loading-large {
-    width: 69px;
-    height: 69px;
-}
-
-.bk-spin-loading.bk-spin-loading-large .rotate,
-.bk-loading2.bk-spin-loading-large .rotate {
-    width: 10px;
-    height: 14px;
-    transform-origin: 50% -18px;
-}
-
-.bk-spin-loading.bk-spin-loading-small,
-.bk-loading2.bk-spin-loading-small {
-    width: 27px;
-    height: 27px;
-}
-
-.bk-spin-loading.bk-spin-loading-small .rotate,
-.bk-loading2.bk-spin-loading-small .rotate {
-    width: 4px;
-    height: 5px;
-    transform-origin: 50% -7px;
-}
-
-.bk-spin-loading.bk-spin-loading-mini,
-.bk-loading2.bk-spin-loading-mini {
-    width: 16px;
-    height: 16px;
-}
-
-.bk-spin-loading.bk-spin-loading-mini .rotate,
-.bk-loading2.bk-spin-loading-mini .rotate {
-    width: 2px;
-    height: 3px;
-    transform-origin: 50% -4px;
-}
-
 @keyframes scale-animate {
     0% {
         transform: scale(1);
@@ -393,21 +197,23 @@
 
 .bk-spin-loading,
 .bk-loading2 {
-    width: 39px;
-    height: 39px;
+    width: 48px;
+    height: 48px;
     position: relative;
     margin: auto;
     display:inline-block;
     vertical-align: middle;
+    display: flex;
+    justify-content: center;
     .rotate {
         position: absolute;
-        top: 77%;
-        right: 43%;
-        background-color: none;
-        background-color: #39424e\9\0;
+        /* top: 77%; */
+        /* right: 43%; */
+        /* background-color: transparent; */
+        /* background-color: #39424e\9\0; */
         width: 6px;
         height: 8px;
-        transform-origin: 50% -10px;
+        transform-origin: 50% 24px;
         border-radius: 8px;
         transform: scale(0.4);
         animation-name: fade;
@@ -417,32 +223,32 @@
     }
     &.bk-spin-loading-success {
         .rotate {
-            background: #30d878\9\0;
+            /* background: #30d878; */
             animation-name: fadeSuccess;
         }
     }
     &.bk-spin-loading-danger {
         .rotate {
-            background:  #ff5656\9\0;
+            /* background:  #ff5656; */
             animation-name: fadeDanger;
         }
     }
     &.bk-spin-loading-warning {
         .rotate {
-            background: #ffb400\9\0;
+            /* background: #ffb400; */
             animation-name: fadeWarning;
         }
     }
     &.bk-spin-loading-primary {
         .rotate {
-            background: #3c96ff\9\0;
+            /* background-color: #3c96ff; */
             animation-name: fadePrimary;
         }
     }
 
     &.bk-spin-loading-white {
         .rotate {
-            background: #fff\9\0;
+            /* background: #fff; */
             animation-name: fadeWhite;
         }
     }
@@ -472,21 +278,23 @@
         @mixin create-rotate 1.5s, -135deg;
     }
     &.bk-spin-loading-large {
-        width: 69px;
-        height: 69px;
+        width: 68px;
+        height: 68px;
         .rotate {
             width: 10px;
-            height: 14px;
-            transform-origin: 50% -18px;
+            height: 12px;
+            border-radius: 12px;
+            transform-origin: 50% 34px;
         }
     }
     &.bk-spin-loading-small {
-        width: 27px;
-        height: 27px;
+        width: 32px;
+        height: 32px;
         .rotate {
             width: 4px;
             height: 5px;
-            transform-origin: 50% -7px;
+            border-radius: 5px;
+            transform-origin: 50% 16px;
         }
     }
     &.bk-spin-loading-mini {
@@ -495,7 +303,8 @@
         .rotate {
             width: 2px;
             height: 3px;
-            transform-origin: 50% -4px;
+            border-radius: 3px;
+            transform-origin: 50% 8px;
         }
     }
 }
@@ -506,7 +315,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 @-webkit-keyframes fade {
@@ -515,7 +324,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -525,7 +334,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -535,7 +344,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -545,7 +354,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -555,7 +364,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -565,7 +374,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -575,7 +384,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -585,7 +394,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -595,7 +404,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -605,7 +414,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -615,7 +424,7 @@
     }
 
     100%{
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -655,7 +464,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -665,7 +474,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -675,7 +484,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -685,7 +494,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -695,7 +504,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 
@@ -705,7 +514,7 @@
     }
 
     100% {
-        background-color: none;
+        background-color: transparent;
     }
 }
 

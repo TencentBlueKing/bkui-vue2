@@ -257,7 +257,7 @@
             <bk-form-item label="项目描述">
                 <bk-input type="textarea" v-model="formData.desc" placeholder="请输入描述"></bk-input>
             </bk-form-item>
-            <bk-form-item>
+            <bk-form-item style="margin-top: 32px;">
                 <bk-button style="margin-right: 3px;" theme="primary" title="提交" @click.stop.prevent="submitData">提交</bk-button>
                 <bk-button ext-cls="mr5" theme="default" title="取消">取消</bk-button>
             </bk-form-item>
@@ -382,7 +382,7 @@
             <bk-form-item label="日期">
                 <bk-date-picker placeholder="日期" :timer="false" v-model="formData.date"></bk-date-picker>
             </bk-form-item>
-            <bk-form-item>
+            <bk-form-item style="margin-left: 12px;">
                 <bk-button ext-cls="mr5" theme="primary" title="提交">搜索</bk-button>
             </bk-form-item>
         </bk-form>
@@ -423,7 +423,7 @@
         <bk-form :label-width="200" :model="formData" :rules="rules" ref="validateForm1">
             <bk-form-item label="项目名称" :required="true" :property="'name'">
                 <bk-input v-model="formData.name" placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
-                <p class="mt5 mb0 f12" slot="tip">ps: 输入admin可以体验下异步验证效果</p>
+                <p class="mb0 f12" style="margin-top: 2px;" slot="tip">ps: 输入admin可以体验下异步验证效果</p>
             </bk-form-item>
             <bk-form-item label="所属项目" :required="true" :property="'project'">
                 <bk-select v-model="formData.project" searchable multiple>
@@ -580,7 +580,7 @@
                 :property="'name'"
                 :error-display-type="'normal'">
                 <bk-input v-model="formData.name" placeholder="请输入3到10个以内的字符，不能为admin"></bk-input>
-                <p class="mt5 mb0 f12" slot="tip">ps: 输入admin可以体验下异步验证效果</p>
+                <p class="mb0 f12" style="margin-top: 2px;" slot="tip">ps: 输入admin可以体验下异步验证效果</p>
             </bk-form-item>
             <bk-form-item
                 label="所属项目"

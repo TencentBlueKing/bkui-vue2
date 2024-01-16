@@ -38,11 +38,11 @@
     justify-content: center;
     color: #3A84FF;
     font-size: 14px;
-    margin-top: 12px;
+    margin-top: 24px;
 }
 .exception-wrap .exception-wrap-item .text-wrap.text-part {
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 .exception-wrap .exception-wrap-item .text-subtitle {
     color: #979BA5;
@@ -126,7 +126,7 @@
     justify-content: center;
     color: #3A84FF;
     font-size: 14px;
-    margin-top: 12px;
+    margin-top: 24px;
 }
 .exception-wrap .exception-wrap-item .text-subtitle {
     color: #979BA5;
@@ -208,7 +208,7 @@
 }
 .exception-wrap .exception-wrap-item .text-wrap.text-part {
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 .exception-wrap .exception-wrap-item .text-subtitle {
     color: #979BA5;

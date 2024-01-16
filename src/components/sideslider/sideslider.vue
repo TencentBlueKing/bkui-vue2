@@ -34,13 +34,13 @@
           <div class="bk-sideslider-closer" @click="handleClose" :style="{ float: calcDirection }">
             <i class="bk-icon" :class="'icon-angle-' + direction"></i>
           </div>
-          <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 0 0 50px' : '0 0 0 30px' }">
+          <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 0 0 46px' : '0 0 0 24px' }">
             <slot name="header">
               <div class="title-content">{{title || t('bk.sideslider.title')}}</div>
             </slot>
           </div>
         </div>
-        <div class="bk-sideslider-content" ref="content" :style="{ maxHeight: $slots.footer ? 'calc(100vh - 114px)' : 'calc(100vh - 60px)' }">
+        <div class="bk-sideslider-content" ref="content" :style="{ maxHeight: $slots.footer ? 'calc(100vh - 100px)' : 'calc(100vh - 52px)' }">
           <slot name="content"></slot>
         </div>
         <div class="bk-sideslider-footer"

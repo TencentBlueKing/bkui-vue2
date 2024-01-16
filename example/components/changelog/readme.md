@@ -8,6 +8,15 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.9-beta.3 {page=#/changelog}
+
+* **[fix]**:
+    - 修复 [Rate 评分](#/rate), [Dialog 对话框](#/dialog), [Sideslider 侧栏](#/sideslider), [Popconfirm 弹出确认框](#/popconfirm), [Exception 异常提示](#/exception), [Popover 弹出框提示](#/popover), [Loading 加载](#/loading), [Progress 进度条](#/progress), [Cascade 级联选框](#/cascade), [Checkbox 多选框](#/checkbox), [Radio 单选框](#/radio), [Notify 通知提示](#/notify), [Form 表单](#/form), [Input 输入框](#/input), [Select 下拉选框](#/select), [Transfer 穿梭框](#/transfer), [Steps 步骤](#/steps), [Badge 标记](#/badge), [Rate 评分](#/rate) 样式规范问题
+* **[update]**:
+    - [Steps 步骤](#/steps) 错误与完成状态的样式优化
+
+---
+
 ### 2.5.9-beta.2 {page=#/changelog}
 
 * **[add]**:

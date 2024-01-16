@@ -86,7 +86,14 @@
 
 ```html
 <template>
-    <bk-rate :rate="showRate" :edit="false" :width="18" :height="18"></bk-rate>
+    small:
+    <bk-rate :rate.sync="showRate" :width="12" :height="12"></bk-rate>
+    default:
+    <bk-rate :rate.sync="showRate" :width="16" :height="16"></bk-rate>
+    large:
+    <bk-rate :rate.sync="showRate" :width="18" :height="18"></bk-rate>
+    huge:
+    <bk-rate :rate.sync="showRate" :width="24" :height="24"></bk-rate>
 </template>
 <script>
     import { bkRate } from '{{BASE_LIB_NAME}}'
@@ -94,14 +101,16 @@
         components: {
             bkRate
         },
-        data () {
+        data() {
             return {
-                showRate: 3.3
-            }
-        }
-    }
+                showRate: 3.3,
+                tooltips: [1, 2, 3, 4, 5],
+            };
+        },
+    };
 </script>
 ```
+
 :::
 
 ### 属性 {page=#/rate}

@@ -1,26 +1,29 @@
 @import './variable.css';
 
 .bk-rate-stars {
-    margin: 0;
-    padding: 0;
-    .bk-is-edit {
-        cursor: pointer;
+  margin: 0;
+  padding: 0;
+  .bk-is-edit {
+    cursor: pointer;
+  }
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  .bk-rate-star {
+    float: left;
+    margin-right: 3px;
+    enable-background: new 0 0 64 64;
+    fill: #c5c7d1;
+    &.bk-yellow {
+      fill: #ffb848;
     }
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
+    &.bk-rate-star-is-hover {
+      transform: scale(1.2);
     }
-    .bk-rate-star {
-        float: left;
-        margin-right: 3px;
-        enable-background: new 0 0 64 64;
-        fill: #c5c7d1;
-        &.bk-yellow {
-            fill: #ffb848;
-        }
-        &:last-child {
-            margin-right: 0;
-        }
+    &:last-child {
+      margin-right: 0;
     }
+  }
 }

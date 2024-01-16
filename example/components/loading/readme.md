@@ -1,9 +1,11 @@
 <script>
-    import { bkButton, bkLoading } from '@'
+    import { bkButton, bkLoading, bkRadioGroup, bkRadio } from '@'
     export default {
         components: {
             bkButton,
-            bkLoading
+            bkLoading,
+            bkRadioGroup,
+            bkRadio
         },
         directives: {
             bkloading: bkLoading.directive
@@ -12,7 +14,8 @@
             return {
                 basicLoading: true,
                 textLoading: true,
-                testDelayLoading: true
+                testDelayLoading: true,
+                size: 'small'
             }
         },
         methods: {
@@ -36,7 +39,7 @@
             },
             toggleLoading () {
                 this.testDelayLoading = !this.testDelayLoading
-            }
+            },
         }
     }
 </script>
@@ -47,6 +50,9 @@
         line-height: 300px;
         border: 1px solid #eee;
         text-align: center;
+    }
+    .bk-form-radio {
+        margin-right: 24px;
     }
 </style>
 
@@ -277,13 +283,19 @@
 ```
 :::
 
-### 配置 mode loading的显示形式 {page=#/loading}
+### 配置 mode loading 的显示形式 {page=#/loading}
 
 :::demo 配置 mode 为 `spin` 可使其以spin的形式显示。
 
 ```html
 <template>
-    <div class="test-dom" v-bkloading="{ isLoading: textLoading, opacity: 1, zIndex: 10, theme: 'primary', mode: 'spin' }">
+    <bk-radio-group v-model="size">
+      <bk-radio :value="'mini'">mini</bk-radio>
+      <bk-radio :value="'small'">small</bk-radio>
+      <bk-radio :value="'normal'">normal</bk-radio>
+      <bk-radio :value="'large'">large</bk-radio>
+    </bk-radio-group>
+    <div class="test-dom" v-bkloading="{ isLoading: textLoading, opacity: 1, zIndex: 10, theme: 'primary', mode: 'spin', size: size }">
         内容
     </div>
 </template>
@@ -292,7 +304,8 @@
     export default {
         data () {
             return {
-                textLoading: true
+                textLoading: true,
+                size: 'small'
             }
         }
     }
@@ -303,6 +316,9 @@
         line-height: 300px;
         border: 1px solid #eee;
         text-align: center;
+    }
+    .bk-form-radio {
+        margin-right: 24px;
     }
 </style>
 ```

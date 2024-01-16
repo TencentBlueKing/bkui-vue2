@@ -95,7 +95,7 @@
     }
 
     .bk-dialog-header {
-        padding: 3px 24px 24px 24px;
+        padding: 0 24px 8px 24px;
         line-height: 1.2;
         text-align: center;
         p,
@@ -129,7 +129,7 @@
     }
 
     .bk-dialog-body {
-        padding: 3px 24px 26px;
+        padding: 3px 24px 24px;
         font-size: 14px;
         line-height: 1.5;
         color: $newBlackColor2;
@@ -159,7 +159,7 @@
     }
 
     .bk-dialog-footer {
-        padding: 12px 24px 12px 24px;
+        padding: 7px 24px 7px 24px;
         background-color: $newGreyColor3;
         border-top: 1px solid $newGreyColor1;
         border-radius: 2px;

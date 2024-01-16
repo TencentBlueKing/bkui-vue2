@@ -12,10 +12,10 @@
         vertical-align: middle;
         text-align: center;
         &.bk-progress-small {
-            height:2px;
+            height: 4px;
         }
         &.bk-progress-normal {
-            height: 4px;
+            height: 8px;
         }
         &.bk-progress-large {
             height: 12px;

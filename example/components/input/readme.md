@@ -329,7 +329,7 @@
         </bk-input>
         <bk-input
             clearable
-            style="margin-top: 10px;"
+            style="margin-top: 8px;"
             :placeholder="'搜索'"
             :right-icon="'bk-icon icon-search'"
             v-model="value"
@@ -471,7 +471,7 @@
 <template>
     <div class="input-demo">
         <bk-input :placeholder="'日期'" :disabled="true" v-model="date"></bk-input>
-        <bk-input style="margin-top: 10px;" :placeholder="'搜索'" :readonly="true" v-model="searchText"></bk-input>
+        <bk-input style="margin-top: 8px;" :placeholder="'搜索'" :readonly="true" v-model="searchText"></bk-input>
     </div>
 </template>
 <script>
@@ -504,15 +504,15 @@
 <template>
     <div class="input-demo">
         <bk-input size="large" v-model="value"></bk-input>
-        <bk-input style="margin-top: 10px;" v-model="value"></bk-input>
-        <bk-input style="margin-top: 10px;" size="small" v-model="value"></bk-input>
+        <bk-input style="margin-top: 8px;" v-model="value"></bk-input>
+        <bk-input style="margin-top: 8px;" size="small" v-model="value"></bk-input>
 
-        <bk-input style="margin-top: 10px;" size="small" clearable v-model="value">
+        <bk-input style="margin-top: 8px;" size="small" clearable v-model="value">
             <template slot="prepend">
                 <div class="group-text">http://</div>
             </template>
         </bk-input>
-        <bk-input style="margin-top: 10px;" size="large" v-model="value" :right-icon="'bk-icon icon-search'" :clearable="true">
+        <bk-input style="margin-top: 8px;" size="large" v-model="value" :right-icon="'bk-icon icon-search'" :clearable="true">
             <template slot="prepend">
                 <div class="group-text">http://</div>
             </template>
@@ -520,7 +520,7 @@
                 <div class="group-text">.com</div>
             </template>
         </bk-input>
-        <bk-input style="margin-top: 10px;" size="large" v-model="value" :right-icon="'bk-icon icon-search'" :clearable="true" :font-size="'medium'">
+        <bk-input style="margin-top: 8px;" size="large" v-model="value" :right-icon="'bk-icon icon-search'" :clearable="true" :font-size="'medium'">
             <bk-dropdown-menu class="group-text" @show="dropdownShow" @hide="dropdownHide" ref="dropdown" slot="prepend" :font-size="'medium'">
                 <bk-button type="primary" slot="dropdown-trigger">
                     <span v-if="env === 1">测试环境</span>
@@ -539,8 +539,8 @@
             </template>
         </bk-input>
 
-        <bk-input style="margin-top: 10px;" type="number" size="small" v-model="numberInputValue"></bk-input>
-        <bk-input style="margin-top: 10px;" type="number" size="large" v-model="numberInputValue"></bk-input>
+        <bk-input style="margin-top: 8px;" type="number" size="small" v-model="numberInputValue"></bk-input>
+        <bk-input style="margin-top: 8px;" type="number" size="large" v-model="numberInputValue"></bk-input>
     </div>
 </template>
 <script>
@@ -613,7 +613,7 @@
         <bk-input v-model="value" :type="'password'" :native-attributes="nativeAttributes">
         </bk-input>
 
-        <bk-input v-model="value" style="margin-top: 10px;" :type="'password'" :native-attributes="nativeAttributes1">
+        <bk-input v-model="value" style="margin-top: 8px;" :type="'password'" :native-attributes="nativeAttributes1">
         </bk-input>
     </div>
     </form>

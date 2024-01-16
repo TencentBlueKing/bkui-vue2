@@ -74,7 +74,7 @@
     </bk-badge>
 
     <bk-badge class="mr40" :theme="'info'" :position="'bottom-right'">
-        <bk-button :theme="'primary'" :title="'位于右下角'">
+        <bk-button :theme="'default'" :title="'位于右下角'">
             位于右下角
         </bk-button>
     </bk-badge>
@@ -85,8 +85,8 @@
       </bk-button>
     </bk-badge>
 
-    <bk-badge class="mr40" :theme="'danger'" :position="'top-right'">
-        <bk-button :theme="'primary'" :title="'位于左下角'">
+    <bk-badge class="mr40" :theme="'danger'" :position="'top-left'">
+        <bk-button :theme="'primary'" :title="'位于左上角'">
              位于左下角
         </bk-button>
     </bk-badge>
@@ -298,12 +298,12 @@
         </bk-button>
     </bk-badge>
     <bk-badge class="mr40" :theme="'info'" val="提示消息">
-        <bk-button :theme="'primary'" :title="'消息'">
+        <bk-button :theme="'default'" :title="'消息'">
             消息
         </bk-button>
     </bk-badge>
     <bk-badge class="mr40" :theme="'success'" val="提示消息" val-length="8">
-        <bk-button :theme="'default'" :title="'消息'">
+        <bk-button :theme="'primary'" :title="'消息'">
             消息
         </bk-button>
     </bk-badge>
@@ -322,7 +322,7 @@
 :::
 
 
-### 配置Radius {page=#/badge}
+### 配置 Radius {page=#/badge}
 
 :::demo 配置参数 `radius`
 ```html
@@ -338,7 +338,7 @@
         </bk-button>
     </bk-badge>
     <bk-badge class="mr40" :theme="'info'" val="1" radius="100%">
-        <bk-button :theme="'primary'" :title="'消息'">
+        <bk-button :theme="'default'" :title="'消息'">
             圆形
         </bk-button>
     </bk-badge>
