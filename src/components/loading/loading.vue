@@ -58,7 +58,7 @@
             <div class="point point4"></div>
           </template>
         </div>
-        <div class="bk-loading-title">
+        <div v-if="title" class="bk-loading-title">
           <slot name="title">{{title}}</slot>
         </div>
       </div>
@@ -90,7 +90,7 @@
             <div class="point point4"></div>
           </template>
         </div>
-        <div class="bk-loading-title">
+        <div v-if="title" class="bk-loading-title">
           <slot name="title">{{title}}</slot>
         </div>
       </div>

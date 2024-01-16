@@ -26,11 +26,11 @@
         font-size: 14px;
         line-height: 24px;
         color: #63656e;
-        padding-bottom: 10px;
+        padding-bottom: 16px;
         .content-icon {
             color: #ea3636;
             position: absolute;
-            top: 20px;
+            top: 22px;
         }
         .content-text {
             display: inline-block;
@@ -137,11 +137,11 @@
         font-size: 14px;
         line-height: 24px;
         color: #63656e;
-        padding-bottom: 10px;
+        padding-bottom: 16px;
         .content-icon {
             color: #ea3636;
             position: absolute;
-            top: 20px;
+            top: 22px;
         }
         .content-text {
             display: inline-block;

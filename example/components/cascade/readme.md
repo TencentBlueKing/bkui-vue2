@@ -39,31 +39,7 @@
                             children: [
                                 {
                                     id: 'wuhuaqu',
-                                    name: '五华区',
-                                    children: [
-                                        {
-                                            id: '111',
-                                            name: '111',
-                                            children: [
-                                                {
-                                                    id: '222',
-                                                    name: '222',
-                                                    children: [
-                                                        {
-                                                            id: '333',
-                                                            name: '333',
-                                                            children: [
-                                                                {
-                                                                    id: '444',
-                                                                    name: '444'
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
+                                    name: '五华区'
                                 },
                                 {
                                     id: 'guanduqu',

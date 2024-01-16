@@ -69,36 +69,31 @@
     <div class="progress">
         <div>
             <div class="mb10">
+                small:
                 <bk-progress :size="'small'" :percent="0"></bk-progress>
             </div>
             <div class="mb10">
-                <bk-progress :size="'small'" :percent="0.28"></bk-progress>
+                normal:
+                <bk-progress :size="'normal'" :percent="0.28"></bk-progress>
             </div>
             <div class="mb10">
-                <bk-progress :size="'small'" :theme="'warning'" :percent="0.46"></bk-progress>
-            </div>
-            <div class="mb10">
-                <bk-progress :size="'small'" :theme="'danger'" :percent="0.73"></bk-progress>
-            </div>
-            <div class="mb10">
-                <bk-progress :size="'small'" :theme="'success'" :percent="0.9"></bk-progress>
+                large:
+                <bk-progress :size="'large'" :theme="'warning'" :percent="0.46"></bk-progress>
             </div>
         </div>
         <div>
+            <div>自定义</div>
             <div class="mb10">
-                <bk-progress :size="'large'" :percent="0"></bk-progress>
+                <bk-progress :stroke-width="2" :percent="0.76"></bk-progress>
             </div>
             <div class="mb10">
-                <bk-progress :size="'large'" :percent="0.28"></bk-progress>
+                <bk-progress :stroke-width="6" :percent="0.28"></bk-progress>
             </div>
             <div class="mb10">
-                <bk-progress :size="'large'" :theme="'warning'" :percent="0.46"></bk-progress>
+                <bk-progress :stroke-width="14" :theme="'warning'" :percent="0.46"></bk-progress>
             </div>
             <div class="mb10">
-                <bk-progress :size="'large'" :theme="'danger'" :percent="0.73"></bk-progress>
-            </div>
-            <div class="mb10">
-                <bk-progress :size="'large'" :theme="'success'" :percent="0.9"></bk-progress>
+                <bk-progress :stroke-width="20" :theme="'danger'" :percent="0.73"></bk-progress>
             </div>
         </div>
     </div>

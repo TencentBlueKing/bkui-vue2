@@ -37,7 +37,8 @@
       viewBox="0 0 64 64"
       v-bk-tooltips="{ content: tooltips[index], disabled: !tooltips[index] }"
       @click="chooseRate(index)"
-      @mouseenter="changeHover(index)"
+      @mouseenter="changeHover($event, index)"
+      @mouseleave="handleMouseLeave($event, index)"
     >
       <g transform="translate(-143.000000, -635.000000)">
         <g transform="translate(83.000000, 114.000000)">
@@ -100,11 +101,21 @@ export default {
       this.$emit('chooseRate', rate)
     },
 
-    changeHover (index) {
+    changeHover (e, index) {
       if (!this.edit) return
 
       const rate = index + 1
       this.$emit('changeHover', rate)
+
+      this.$nextTick(() => {
+        e.target.classList.add('bk-rate-star-is-hover')
+      })
+    },
+
+    handleMouseLeave (e, index) {
+      this.$nextTick(() => {
+        e.target.classList.remove('bk-rate-star-is-hover')
+      })
     }
   }
 }

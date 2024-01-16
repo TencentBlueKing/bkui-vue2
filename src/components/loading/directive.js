@@ -74,6 +74,9 @@ function toggle (el, options) {
   if (options.title) {
     el.$vm.title = options.title
   }
+  if (options.size) {
+    el.$vm.size = options.size
+  }
 }
 
 const bkLoading = {

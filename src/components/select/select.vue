@@ -62,7 +62,7 @@
       placement="bottom-start"
       theme="light bk-select-dropdown"
       animation="slide-toggle"
-      :offset="-1"
+      :offset="0"
       :distance="popoverDistance"
       :z-index="zIndex"
       :on-show="handleDropdownShow"

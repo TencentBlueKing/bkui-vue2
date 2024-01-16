@@ -12,7 +12,7 @@
         margin-left: -2px;
     }
     &.popconfirm-more {
-        padding: 10px;
+        padding: 12px 7px;
         .popconfirm-content {
             .title {
                 font-size: 14px;
@@ -23,7 +23,7 @@
                 font-size: 12px;
                 line-height: 20px;
                 color: #63656e;
-                padding-bottom: 10px;
+                padding-bottom: 16px;
             }
             .is-simple.content {
                 font-size: 14px;

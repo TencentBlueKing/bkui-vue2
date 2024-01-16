@@ -147,10 +147,10 @@
                 <div style="height: 1000px;"></div>
             </div>
             <div slot="footer">
-                <bk-button style="margin-left: 30px;" theme="primary" @click="handleSetHeight(true)">
+                <bk-button style="margin-left: 24px;" theme="primary" @click="handleSetHeight(true)">
                     确定
                 </bk-button>
-                <bk-button theme="default" @click="handleSetHeight(false)">取消</bk-button>
+                <bk-button style="margin-left: 4px;" theme="default" @click="handleSetHeight(false)">取消</bk-button>
             </div>
         </bk-sideslider>
     </div>
@@ -229,10 +229,10 @@
                 </div>
             </div>
             <div slot="footer">
-                <bk-button style="margin-left: 30px;" theme="primary" @click="handleSetHeight(true)">
+                <bk-button style="margin-left: 24px;" theme="primary" @click="handleSetHeight(true)">
                     设置内容高度1000px
                 </bk-button>
-                <bk-button theme="default" @click="handleSetHeight(false)">设置内容高度400px</bk-button>
+                <bk-button style="margin-left: 4px;" theme="default" @click="handleSetHeight(false)">设置内容高度400px</bk-button>
             </div>
         </bk-sideslider>
     </div>
