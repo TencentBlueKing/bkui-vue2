@@ -146,7 +146,7 @@
 
 ```html
 <template>
-    <bk-steps ext-cls="custom-icon" line-type="solid" :cur-step="2"></bk-steps>
+    <bk-steps ext-cls="custom-icon" line-type="solid" status="error" :cur-step="2"></bk-steps>
 </template>
 <script>
     import { bkSteps } from '{{BASE_LIB_NAME}}'
@@ -218,7 +218,7 @@
         <bk-row>
             <bk-col :span="4">
                 <div style="height: 200px;">
-                    <bk-steps ext-cls="custom-icon" direction="vertical"></bk-steps>
+                    <bk-steps ext-cls="custom-icon" direction="vertical" :cur-step="2" status="error"></bk-steps>
                 </div>
             </bk-col>
             <bk-col :span="4">
