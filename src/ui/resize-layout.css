@@ -1,7 +1,7 @@
 @import './variable.css';
 
 @define-mixin linear-gradient $direction {
-    background-image: linear-gradient(to $direction, transparent, transparent 2px, $newMainColor 2px, $newMainColor 3px, transparent 3px, transparent);
+    background-image: linear-gradient(to $direction, transparent, transparent 2px, $newMainColor 1px, $newMainColor 4px, transparent 3px, transparent);
 }
 
 .bk-resize-layout {
@@ -185,7 +185,7 @@
             width: 16px;
             height: 50px;
             line-height: 50px;
-            border-radius: 0px 12px 12px 0px;
+            border-radius: 0px 6px 6px 0px;
             background: #dcdee5;
             text-align: center;
             font-size: 20px;

@@ -92,7 +92,7 @@ $hoverBackground: #eaf3ff;
         }
     }
     .bk-page-jumper {
-        margin-left: 18px;
+        margin-left: 10px;
         display: inline-block;
         > span {
             font-size: 14px;

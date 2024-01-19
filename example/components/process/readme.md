@@ -131,7 +131,7 @@
                             status: false,
                         },
                         {
-                            content: createElement(bkLink, { props: { underline: true } }, '下载代码4'),
+                            content: createElement(bkLink, { class: 'custom-link', props: { underline: true } }, '下载代码4'),
                             status: false,
                         }
                     ]
@@ -349,6 +349,11 @@
         }
     }
 </script>
+<style>
+    .custom-link.bk-link .bk-link-text {
+        font-size: 12px;
+    }
+</style>
 
 [[toc]]
 
@@ -806,7 +811,7 @@
                             status: false,
                         },
                         {
-                            content: createElement(bkLink, { props: { underline: true } }, '下载代码4'),
+                            content: createElement(bkLink, { class: 'custom-link', props: { underline: true } }, '下载代码4'),
                             status: false,
                         }
                     ]
@@ -874,6 +879,11 @@
         }
     }
 </script>
+<style>
+    .custom-link.bk-link .bk-link-text {
+        font-size: 12px;
+    }
+</style>
 ```
 :::
 ### 属性 {page=#/process}

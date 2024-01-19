@@ -113,7 +113,7 @@
         }
         &.is-disabled,
         &[disabled] {
-            background-color: $defaultColor;
+            background-color: #faf9fd;
             border-color: $newGreyColor1;
             color: $newGreyColor;
             cursor: not-allowed;
@@ -377,15 +377,15 @@
     /* is-disabled 样式要放在 bk-primary bk-success bk-warning bk-danger 后面 */
     &.is-disabled,
     &[disabled] {
-        color: $newGreyColor1;
+        color: $newGreyColor;
         cursor: not-allowed;
         &:hover,
         &.hover {
-            color: $newGreyColor1;
+            color: $newGreyColor;
         }
         &:active,
         &.active {
-            color: $newGreyColor1;
+            color: $newGreyColor;
         }
     }
 

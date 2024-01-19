@@ -7,15 +7,15 @@ $primaryHoverColor: #699df4;
 $primaryDisabledColor: #a3c5fd;
 
 $successColor: #2dcb56;
-$successHoverColor: #45e35f;
+$successHoverColor: #44e360;
 $successDisabledColor: #94f5a4;
 
 $warningColor: #ff9c01;
-$warningHoverColor: #ffb848;
+$warningHoverColor: #ffb849;
 $warningDisabledColor: #ffd695;
 
 $dangerColor: #ea3636;
-$dangerHoverColor: #ff5656;
+$dangerHoverColor: #fe5657;
 $dangerDisabledColor: #fd9c9c;
 
 .bk-link {
@@ -53,6 +53,12 @@ $dangerDisabledColor: #fd9c9c;
         &:hover {
             color: $primaryHoverColor;
         }
+        &:active {
+            color: #1768ef;
+        }
+        &:visited {
+            color: $primaryHoverColor;
+        }
         &.is-disabled {
             color: $primaryDisabledColor;
         }
@@ -60,6 +66,12 @@ $dangerDisabledColor: #fd9c9c;
     &.is-success {
         color: $successColor;
         &:hover {
+            color: $successHoverColor;
+        }
+        &:active {
+            color: #1bb943;
+        }
+        &:visited {
             color: $successHoverColor;
         }
         &.is-disabled {
@@ -71,6 +83,12 @@ $dangerDisabledColor: #fd9c9c;
         &:hover {
             color: $warningHoverColor;
         }
+        &:active {
+            color: #eb9000;
+        }
+        &:visited {
+            color: $warningHoverColor;
+        }
         &.is-disabled {
             color: $warningDisabledColor;
         }
@@ -78,6 +96,12 @@ $dangerDisabledColor: #fd9c9c;
     &.is-danger {
         color: $dangerColor;
         &:hover {
+            color: $dangerHoverColor;
+        }
+        &:active {
+            color: #da2726;
+        }
+        &:visited {
             color: $dangerHoverColor;
         }
         &.is-disabled {

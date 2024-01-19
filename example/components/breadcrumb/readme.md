@@ -144,6 +144,9 @@
 <template>
     <bk-breadcrumb :back-router="{ path: '/' }">
         <bk-breadcrumb-item v-for="(item,index) in list" :key="index" :to="item.link">{{item.title}}</bk-breadcrumb-item>
+        <template slot="prefix">
+            <bk-icon type="arrows-left-circle" @click="goBack"></bk-icon>
+        </template>
     </bk-breadcrumb>
     <bk-breadcrumb>
         <bk-breadcrumb-item v-for="(item,index) in list" :key="index" :to="item.link">{{item.title}}</bk-breadcrumb-item>
