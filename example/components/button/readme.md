@@ -148,9 +148,9 @@
     <div class="mb15">
         <div class="bk-button-group">
             <bk-button @click="groupSetting1.selected = 'beijing'" :class="groupSetting1.selected === 'beijing' ? 'is-selected' : ''" size="small">北京</bk-button>
-            <bk-button @click="groupSetting1.selected = 'shanghai'" :class="groupSetting1.selected === 'shanghai' ? 'is-selected' : ''" size="small">上海</bk-button>
+            <bk-button @click="groupSetting1.selected = 'shanghai'" :disabled="true" :class="groupSetting1.selected === 'shanghai' ? 'is-selected' : ''" size="small">上海</bk-button>
             <bk-button @click="groupSetting1.selected = 'guangzhou'" :class="groupSetting1.selected === 'guangzhou' ? 'is-selected' : ''" size="small">广州</bk-button>
-            <bk-button @click="groupSetting1.selected = 'shenzhen'" :class="groupSetting1.selected === 'shenzhen' ? 'is-selected' : ''" size="small">深圳</bk-button>
+            <bk-button @click="groupSetting1.selected = 'shenzhen'" :disabled="true" size="small">深圳</bk-button>
             <bk-button @click="groupSetting1.selected = 'other'" :class="groupSetting1.selected === 'other' ? 'is-selected' : ''" size="small" icon-right="icon-angle-down">其它</bk-button>
         </div>
     </div>

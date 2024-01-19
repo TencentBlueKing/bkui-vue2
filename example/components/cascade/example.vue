@@ -341,6 +341,6 @@ export default {
 </script>
 <style lang="postcss">
 .bk-form-checkbox {
-  margin-right: 30px;
+  margin-right: 24px;
 }
 </style>

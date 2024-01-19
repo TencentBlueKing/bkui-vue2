@@ -8,6 +8,20 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.9-beta.5 {page=#/changelog}
+
+* **[fix]**:
+    - - 修复 [Breadcrumb 面包屑](#/breadcrumb), [Process 步骤](#/process), [ResizeLayout 可拉伸布局](#/resize-layout), [Link 文字链接](#/link), [Button 基础按钮](#/button), [Form 表单](#/form), [Table 表格](#/table), [Pagination 分页](#/pagination), [Tree 树](#/tree), [Card 卡片](#/card), [Notify 通知提示](#/notify), [Checkbox 多选框](#/checkbox), [Radio 单选框](#/radio) 样式规范问题
+
+---
+
+### 2.5.9-beta.4 {page=#/changelog}
+
+* **[update]**:
+    - [Info 提示框](#/info-box) subTitle 的 word-break 修改为 break-word
+
+---
+
 ### 2.5.9-beta.3 {page=#/changelog}
 
 * **[fix]**:

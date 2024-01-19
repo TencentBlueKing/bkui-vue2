@@ -103,6 +103,6 @@ export default {
 </script>
 <style lang="postcss">
     .bk-form-radio {
-        margin-right: 30px;
+        margin-right: 24px;
     }
 </style>

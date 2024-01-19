@@ -31,7 +31,7 @@
         box-sizing: border-box;
         list-style-type: none;
         text-align: left;
-        padding-left: 18px;
+        padding-left: 16px;
     }
     li {
         position: relative;
@@ -40,7 +40,7 @@
         list-style-type: none;
         text-align: left;
         &.leaf {
-            padding-left: 18px;
+            padding-left: 16px;
         }
     }
     .tree-drag-node {
@@ -76,7 +76,7 @@
         display: inline-block;
         font-size: 14px;
     }
-    
+
     /* checkbox */
     .bk-form-checkbox {
         position: relative;
@@ -100,7 +100,7 @@
             border-color: $newMainColor;
             background-color: $newMainColor;
             background-clip: content-box;
-            
+
             &::after {
                 content: '';
                 display: block;
@@ -163,7 +163,7 @@
         border-left: 1px dashed $borderColor;
         bottom: 50px;
         height: 100%;
-        left: -12px;
+        left: -10px;
         top: -11px;
         width: 1px;
     }

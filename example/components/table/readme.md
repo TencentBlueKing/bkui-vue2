@@ -406,8 +406,8 @@
             <bk-table-column label="创建时间" prop="create_time" ></bk-table-column>
             <bk-table-column label="操作" width="150">
                 <template slot-scope="props">
-                    <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
-                    <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
+                    <bk-button style="margin-right: 12px;" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
+                    <bk-button style="margin-right: 12px;" theme="primary" text @click="remove(props.row)">移除</bk-button>
                     <bk-popover class="dot-menu" placement="bottom-start" theme="dot-menu light" :trigger="props.$index % 2 === 0 ? 'click' : 'mouseenter'" :arrow="false" offset="15" :distance="0">
                         <span class="dot-menu-trigger"></span>
                         <ul class="dot-menu-list" slot="content">
@@ -607,8 +607,8 @@
         <bk-table-column label="创建时间" prop="create_time" ></bk-table-column>
         <bk-table-column label="操作" width="150">
             <template slot-scope="props">
-                <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
-                <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
+                <bk-button style="margin-right: 12px;" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
+                <bk-button style="margin-right: 12px;" theme="primary" text @click="remove(props.row)">移除</bk-button>
             </template>
         </bk-table-column>
     </bk-table>
@@ -741,8 +741,8 @@
             <bk-table-column label="创建时间" prop="create_time" ></bk-table-column>
             <bk-table-column label="操作" width="150">
                 <template slot-scope="props">
-                    <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
-                    <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
+                    <bk-button style="margin-right: 12px;" theme="primary" text :disabled="props.row.status === '创建中'" @click="reset(props.row)">重置</bk-button>
+                    <bk-button style="margin-right: 12px;" theme="primary" text @click="remove(props.row)">移除</bk-button>
                 </template>
             </bk-table-column>
         </bk-table>
@@ -1262,9 +1262,9 @@ export default {
             <bk-table-column label="创建时间" width="500" prop="create_time"></bk-table-column>
             <bk-table-column label="操作" width="150" fixed="right">
                 <template slot-scope="props">
-                    <bk-button class="mr10" theme="primary" text :disabled="props.row.status === '创建中'"
+                    <bk-button style="margin-right: 12px;" theme="primary" text :disabled="props.row.status === '创建中'"
                         @click="reset(props.row)">重置</bk-button>
-                    <bk-button class="mr10" theme="primary" text @click="remove(props.row)">移除</bk-button>
+                    <bk-button style="margin-right: 12px;" theme="primary" text @click="remove(props.row)">移除</bk-button>
                     <bk-popover class="dot-menu" placement="bottom-start" theme="dot-menu light" trigger="click"
                         :arrow="false" offset="15" :distance="0">
                         <span class="dot-menu-trigger"></span>

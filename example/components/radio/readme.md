@@ -43,10 +43,10 @@
 ``` html
 <template>
     <div>
-        <bk-radio-group v-model="demo1">
+        <bk-radio-group v-model="demo1" style="margin-bottom: 12px;">
             <bk-radio :value="'value1'">已选择</bk-radio>
             <bk-radio :value="'value2'" :disabled="true">未选择禁用</bk-radio>
-        </bk-radio-group><br>
+        </bk-radio-group>
         <bk-radio-group v-model="demo5">
             <bk-radio :value="'value1'">未选择</bk-radio>
             <bk-radio :value="'value2'" :disabled="true">已选择禁用</bk-radio>
