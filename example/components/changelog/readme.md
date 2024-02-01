@@ -11,7 +11,9 @@
 ### 2.5.9-beta.5 {page=#/changelog}
 
 * **[fix]**:
-    - - 修复 [Breadcrumb 面包屑](#/breadcrumb), [Process 步骤](#/process), [ResizeLayout 可拉伸布局](#/resize-layout), [Link 文字链接](#/link), [Button 基础按钮](#/button), [Form 表单](#/form), [Table 表格](#/table), [Pagination 分页](#/pagination), [Tree 树](#/tree), [Card 卡片](#/card), [Notify 通知提示](#/notify), [Checkbox 多选框](#/checkbox), [Radio 单选框](#/radio) 样式规范问题
+    - 修复 [Breadcrumb 面包屑](#/breadcrumb), [Process 步骤](#/process), [ResizeLayout 可拉伸布局](#/resize-layout), [Link 文字链接](#/link), [Button 基础按钮](#/button), [Form 表单](#/form), [Table 表格](#/table), [Pagination 分页](#/pagination), [Tree 树](#/tree), [Card 卡片](#/card), [Notify 通知提示](#/notify), [Checkbox 多选框](#/checkbox), [Radio 单选框](#/radio) 样式规范问题
+    - [ResizeLayout 可拉伸布局](#/resize-layout) 修复 ResizeLayout 组件收起功能失效的问题
+    - [DatePicker 日期选择器](#/date-picker) 修复 shortcuts 和 shortcutSelectedIndex 属性同时使用时报错的问题
 
 ---
 
