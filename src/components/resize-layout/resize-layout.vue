@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import { throttle } from 'throttle-debounce'
 import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
+import { throttle } from 'throttle-debounce'
 export default {
   name: 'bk-resize-layout',
   props: {
@@ -114,6 +114,7 @@ export default {
       asideContentVisible: true,
       minimized: false,
       limitMax: null,
+      asideStyleValue: this.initialDivide,
       state: {}
     }
   },
@@ -125,12 +126,9 @@ export default {
       return this.vertical ? 'width' : 'height'
     },
     computedAsideStyle () {
-      let divide = this.initialDivide
-      if (typeof divide === 'number') {
-        divide = `${divide}px`
-      }
+      const asideStyleValue = typeof this.asideStyleValue === 'number' ? `${this.asideStyleValue}px` : this.asideStyleValue
       return {
-        [this.computedStyleKey]: divide
+        [this.computedStyleKey]: asideStyleValue
       }
     },
     computedTriggerStyle () {
@@ -286,14 +284,14 @@ export default {
     },
     setupAsideAnimation () {
       const aside = this.$refs.aside
-      const asideRect = aside.getBoundingClientRect()
+      const previewStyleValue = aside.style[this.computedStyleKey]
       this.setupAsideListener(!this.collapsed)
       if (this.collapsed) {
-        aside.setAttribute(`data-${this.computedStyleKey}`, asideRect[this.computedStyleKey] + 'px')
-        aside.style[this.computedStyleKey] = '5px'
+        aside.setAttribute(`data-${this.computedStyleKey}`, previewStyleValue)
+        this.asideStyleValue = '5px'
       } else {
         this.asideContentVisible = true
-        aside.style[this.computedStyleKey] = aside.getAttribute(`data-${this.computedStyleKey}`)
+        this.asideStyleValue = aside.getAttribute(`data-${this.computedStyleKey}`)
       }
     },
     setupAsideListener (asideContentVisible) {
