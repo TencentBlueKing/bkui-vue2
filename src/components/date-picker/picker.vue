@@ -363,7 +363,7 @@ export default {
     if (this.shortcutSelectedIndex !== -1) {
       shortcut = this.shortcuts[this.shortcutSelectedIndex] || null
       if (shortcut) {
-        initialValue = shortcut.value()
+        initialValue = [shortcut.value()]
       }
     }
 
