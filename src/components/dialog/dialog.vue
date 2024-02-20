@@ -27,7 +27,7 @@
 -->
 
 <template>
-  <div style="position: absolute; top: -100000px; left: -100000px;" :data-transfer="transfer" v-transfer-dom>
+  <div style="position: absolute; top: -100000px; left: -100000px;" :data-transfer="transfer" v-transfer-dom :style="wrapStyles">
     <div
       ref="dialog_wrapper"
       class="bk-dialog-wrapper"
@@ -185,6 +185,7 @@ import scrollbarMixins from '@/mixins/scrollbar'
 // import { transferIndex, transferIncrease } from '@/utils/transfer-queue'
 import { addEvent, removeEvent, findChildComponents } from '@/utils/dom'
 import popManager from '@/utils/pop-manager.js'
+import mask from '@/utils/mask.js'
 import transferDom from '@/directives/transfer-dom'
 import zIndex from '@/mixins/z-index'
 import { uuid } from '@/utils/util'
@@ -584,7 +585,10 @@ export default {
           // 遮罩消失后执行 addScrollEffect
           this.removeScrollEffect()
         }, 300)
-        this.showMask && popManager.hide(this.popUid)
+        mask.hideMask({
+          el: this.$el,
+          showMask: this.showMask
+        })
       } else {
         // 遮罩出现前执行 addScrollEffect
         this.addScrollEffect()
@@ -606,15 +610,11 @@ export default {
           }
 
           this.dialogIndex = this.zIndex !== undefined ? this.zIndex : this.getLocalZIndex()
-          // 简单 hack，之后重构
-          if (this.showMask) {
-            const options = {
-              tplAction: 'keepAll',
-              zIndex: this.dialogIndex,
-              ignoreExistMask: this.ignoreExistMask
-            }
-            this.popUid = popManager.show(`bk-dialog-${this.uuid}`, this.$el, options)
-          }
+          mask.showMask({
+            el: this.$el,
+            showMask: this.showMask,
+            backgroundColor: 'rgba(0, 0, 0, 0.6)'
+          })
         })
       }
       this.$emit('value-change', val)
