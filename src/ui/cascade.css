@@ -104,7 +104,6 @@ $itemBackground: #F0F1F5;
     }
 }
 .bk-cascade-dropdown-content {
-    padding: 4px 0;
     border: 1px solid $newGreyColor1;
     border-radius: 2px;
     line-height: 32px;
@@ -211,9 +210,12 @@ $itemBackground: #F0F1F5;
 .bk-cascade-extension {
     font-size: 12px;
     padding: 0 16px;
-    border-radius:0px 0px 1px 1px;
+    border-radius: 0px 0px 1px 1px;
     border-top: 1px solid $newGreyColor1;
     background: $newGreyColor3;
+    i {
+        font-size: 12px;
+    }
     &:hover {
         background-color: #f0f1f5;
     }
@@ -255,6 +257,12 @@ $itemBackground: #F0F1F5;
             font-size: 20px;
             color: #979BA5;
 		}
+        &:first-of-type {
+            margin-top: 4px;
+        }
+        &:last-of-type {
+            margin-bottom: 4px;
+        }
 	}
 	.is-multiple {
 		background-color: #fff!important;
