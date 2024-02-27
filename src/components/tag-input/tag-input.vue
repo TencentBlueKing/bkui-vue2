@@ -40,7 +40,9 @@
           <tag-render :node="tag" :display-key="displayKey" :tpl="tagTpl" />
           <i class="bk-icon icon-close remove-key" @click.stop="handlerTagRemove(tag, index)" v-if="!disabled && hasDeleteIcon"></i>
         </li>
-        <li class="key-node" v-if="enableCollapseTags && localTagList.length > overflowTagIndex">
+        <li class="key-node"
+          v-bk-tooltips="{ content: collapseTooltip.join(', ') }"
+          v-if="enableCollapseTags && localTagList.length > overflowTagIndex">
           <div class="tag"><span class="text">+{{ localTagList.length - overflowTagIndex }}</span></div>
         </li>
         <li ref="staffInput" id="staffInput" class="staff-input" v-show="isEdit" role="input">
@@ -337,6 +339,14 @@ export default {
     enableCollapseTags () {
       const isPopoverShown = this.popoverInstance && this.popoverInstance.instance && this.popoverInstance.instance.state.isShown
       return !this.isEdit && this.collapseTags && this.overflowTagIndex && !isPopoverShown
+    },
+    collapseTooltip () {
+      return this.localTagList.reduce((acc, cur, curIndex) => {
+        if (this.overflowTagIndex !== null && curIndex >= this.overflowTagIndex) {
+          acc.push(cur[this.displayKey])
+        }
+        return acc
+      }, [])
     }
   },
   watch: {
