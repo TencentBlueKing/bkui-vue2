@@ -137,6 +137,13 @@
             }
         },
         methods: {
+            addCity() {
+                const id = Math.floor(Math.random() * 100)
+                this.list.push({
+                    id: id,
+                    name: 'City' +id
+                })
+            },
             handleChange (newValue, oldValue, selectList) {
                 console.log(newValue, oldValue, selectList)
             },
@@ -729,6 +736,100 @@
 ```
 :::
 
+### 扩展用法 {page=#/cascade}
+
+:::demo 使用 extension 插槽进行扩展
+
+```html
+<template>
+    <bk-cascade
+        v-model="value"
+        :list="list"
+        clearable
+        style="width: 250px;"
+        :ext-popover-cls="'custom-cls'"
+        @change="handleChange">
+        <div slot="extension" @click="addCity">
+            新增城市
+        </div>
+    </bk-cascade>
+    <script>
+        import { bkCascade } from '{{BASE_LIB_NAME}}'
+
+        export default {
+            components: {
+                bkCascade
+            },
+            data () {
+                return {
+                    value: [],
+                    list: [
+                        {
+                            id: 'hunan',
+                            name: '湖南',
+                            children: [
+                                {
+                                    id: 'changsha',
+                                    name: '长沙'
+                                },
+                                {
+                                    id: 'yueyang',
+                                    name: '岳阳'
+                                }
+                            ]
+                        }, {
+                            id: 'guangxi',
+                            name: '广西'
+                        }, {
+                            id: 'yunnan',
+                            name: '云南',
+                            children: [
+                                {
+                                    id: 'kunming',
+                                    name: '昆明',
+                                    children: [
+                                        {
+                                            id: 'wuhuaqu',
+                                            name: '五华区'
+                                        },
+                                        {
+                                            id: 'guanduqu',
+                                            name: '官渡区'
+                                        },
+                                        {
+                                            id: 'xishanqu',
+                                            name: '西山区'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 0,
+                                    name: '大理'
+                                },
+                                {
+                                    id: '',
+                                    name: '玉溪'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            methods: {
+                addCity() {
+                    const id = Math.floor(Math.random() * 100)
+                    this.list.push({
+                        id: id,
+                        name: 'City' +id
+                    })
+                }
+            }
+        }
+    </script>
+</template>
+```
+:::
+
 ### 动态加载  {page=#/cascade}
 
 :::demo 可以通过`is-remote`开启动态加载，并通过`remote-method`来设置加载数据源的方法。为了更准确的显示节点的状态，对节点数据添加`isLoading`的状态来控制节点是否需要远程加载
@@ -908,6 +1009,12 @@
 | popover-options | 透传至下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
 | ext-popover-cls | 配置自定义样式类名，传入的类会被加在下拉菜单的 DOM .bk-cascade-dropdown-content 上 | String | —— | —— |
 | max-width | 可以通过`max-width`设置弹出框最大宽度，通过弹出层滚动，避免弹出层级太多导致的样式问题 | String|Number | —— | 100% |
+
+### bk-cascade 插槽(slot) {page=#/select}
+
+| name | 说明 |
+|---|---|
+| extension | 固定在下拉列表最后的内容 |
 
 ### 事件 {page=#/cascade}
 

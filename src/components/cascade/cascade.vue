@@ -97,53 +97,60 @@
         :class="['bk-cascade-dropdown-content',extPopoverCls]"
         v-show="!disabled"
         :style="dropdownContentStyle"
-        ref="refDropContentWrapper">
-        <div class="bk-cascade-options"
-          :style="dropdownOptionsStyle">
-          <div class="bk-cascade-panel"
-            v-if="filterable && !!searchContent && filterableStatus">
-            <ul class="bk-cascade-panel-ul" style="width: 100%">
-              <li class="bk-option"
-                v-for="(item, index) in searchList"
-                :key="index"
-                @click.prevent.stop="handleSelectItem(item, index)"
-                :class="{
-                  'is-selected': item.isSelected,
-                  'is-disabled': item.disabled
-                }">
-                <div class="bk-option-content">
-                  <slot>
-                    <div class="bk-option-content-default" :title="item.name">
-                      <span class="bk-option-name">{{ item.name }}</span>
-                    </div>
-                  </slot>
-                </div>
-              </li>
-              <li class="bk-option-none" v-if="!searchList.length">
-                <span>{{ emptyText || t('bk.select.searchEmpty') }}</span>
-              </li>
-            </ul>
+        ref="refDropContentWrapper"
+      >
+        <div class="bk-cascade-options-wrapper">
+          <div class="bk-cascade-options" :style="dropdownOptionsStyle">
+            <div class="bk-cascade-panel" v-if="filterable && !!searchContent && filterableStatus">
+              <ul class="bk-cascade-panel-ul" style="width: 100%">
+                <li
+                  class="bk-option"
+                  v-for="(item, index) in searchList"
+                  :key="index"
+                  @click.prevent.stop="handleSelectItem(item, index)"
+                  :class="{
+                    'is-selected': item.isSelected,
+                    'is-disabled': item.disabled
+                  }"
+                >
+                  <div class="bk-option-content">
+                    <slot>
+                      <div class="bk-option-content-default" :title="item.name">
+                        <span class="bk-option-name">{{ item.name }}</span>
+                      </div>
+                    </slot>
+                  </div>
+                </li>
+                <li class="bk-option-none" v-if="!searchList.length">
+                  <span>{{ emptyText || t("bk.select.searchEmpty") }}</span>
+                </li>
+              </ul>
+            </div>
+            <bk-caspanel
+              v-show="!filterableStatus"
+              ref="refDropdownContent"
+              :list="cascadeList"
+              :trigger="trigger"
+              :scroll-width="scrollWidth"
+              :disabled="disabled"
+              :check-any-level="checkAnyLevel"
+              :filterable="filterable"
+              :multiple="multiple"
+              :is-remote="isRemote"
+              :remote-method="remoteMethod"
+              @updateSelectedList="updateSelectedList"
+            >
+              <template slot="option" slot-scope="{ node }">
+                <slot name="option" :node="node">{{ node.name }}</slot>
+              </template>
+              <template slot="prepend" slot-scope="{ node }">
+                <slot name="prepend" :node="node"></slot>
+              </template>
+            </bk-caspanel>
           </div>
-          <bk-caspanel
-            v-show="!filterableStatus"
-            ref="refDropdownContent"
-            :list="cascadeList"
-            :trigger="trigger"
-            :scroll-width="scrollWidth"
-            :disabled="disabled"
-            :check-any-level="checkAnyLevel"
-            :filterable="filterable"
-            :multiple="multiple"
-            :is-remote="isRemote"
-            :remote-method="remoteMethod"
-            @updateSelectedList="updateSelectedList">
-            <template slot="option" slot-scope="{ node }">
-              <slot name="option" :node="node">{{node.name}}</slot>
-            </template>
-            <template slot="prepend" slot-scope="{ node }">
-              <slot name="prepend" :node="node"></slot>
-            </template>
-          </bk-caspanel>
+        </div>
+        <div class="bk-cascade-extension" v-if="$slots.extension">
+          <slot name="extension"></slot>
         </div>
       </div>
     </bk-popover>
@@ -166,11 +173,11 @@ export default {
   props: {
     list: {
       type: Array,
-      default: () => ([])
+      default: () => []
     },
     value: {
       type: Array,
-      default: () => ([])
+      default: () => []
     },
     placeholder: {
       type: String,
@@ -282,12 +289,12 @@ export default {
     selectedName () {
       let label = []
       if (this.multiple) {
-        label = this.multipleSelectedList.map(item => item.name)
+        label = this.multipleSelectedList.map((item) => item.name)
       } else {
         if (!this.showCompleteName && this.selectedList.length) {
           label = [this.selectedList[this.selectedList.length - 1].name]
         } else {
-          label = this.selectedList.map(item => item.name)
+          label = this.selectedList.map((item) => item.name)
         }
       }
       return this.multiple ? label.join(' , ') : label.join(this.separator)
@@ -307,7 +314,9 @@ export default {
       return Object.assign(nodeOptions, this.options)
     },
     dropdownContentWidth () {
-      return (((this.filterable && !!this.searchContent && this.filterableStatus && !this.searchList.length) || !this.cascadeList.length) ? this.defaultWidth : (this.scrollWidth * this.popoverWidth + 2))
+      return (this.filterable && !!this.searchContent && this.filterableStatus && !this.searchList.length) || !this.cascadeList.length
+        ? this.defaultWidth
+        : this.scrollWidth * this.popoverWidth + 2
     },
     dropdownContentStyle () {
       const maxWidth = /^\d+$/.test(this.maxWidth) ? `${this.maxWidth}px` : this.maxWidth
@@ -321,7 +330,10 @@ export default {
     dropdownOptionsStyle () {
       return {
         width: this.dropdownContentWidth - 2 + 'px',
-        height: (((this.filterable && !!this.searchContent && this.filterableStatus && !this.searchList.length) || !this.cascadeList.length) ? 32 : this.scrollHeight) + 'px'
+        height:
+          ((this.filterable && !!this.searchContent && this.filterableStatus && !this.searchList.length) || !this.cascadeList.length
+            ? 32
+            : this.scrollHeight) + 'px'
       }
     }
   },
@@ -376,18 +388,20 @@ export default {
           this.recursiveList(this.cascadeList, this.multipleCurrentList, 'init')
           this.checkListStatus(this.multipleCurrentList)
           const newList = this.changeList()
-          this.multipleSelectedList = newList.filter(item => item.isSelected).map(item => {
-            return {
-              id: item.id,
-              name: item.name
-            }
-          })
+          this.multipleSelectedList = newList
+            .filter((item) => item.isSelected)
+            .map((item) => {
+              return {
+                id: item.id,
+                name: item.name
+              }
+            })
         } else {
           // 通过递归找到对应的项(如果不存在对应的项，则清空当前的数据)
           if (this.currentList.length) {
             let findStatus = false
             const checkInfo = (arr) => {
-              arr.forEach(itemArr => {
+              arr.forEach((itemArr) => {
                 if (itemArr.id === this.currentList[this.currentList.length - 1]) {
                   findStatus = true
                 }
@@ -424,7 +438,7 @@ export default {
         const oldIdList = JSON.parse(JSON.stringify(this.currentList))
         this.selectedList = this.tmpSelected
 
-        const newIdList = this.selectedList.map(item => item.id)
+        const newIdList = this.selectedList.map((item) => item.id)
 
         if (!fromInit) {
           this.currentList = newIdList
@@ -439,16 +453,16 @@ export default {
     this.$on('on-multiple-change', (params) => {
       const { checkAnyLevel, fromInit } = params
       this.selectedList = this.tmpSelected
-      const newIdList = this.selectedList.map(item => item.id)
+      const newIdList = this.selectedList.map((item) => item.id)
       if (!fromInit) {
         this.currentList = newIdList
       }
       // 多选触发cascade选中的状态
       if (!checkAnyLevel) {
-        this.cascadeList.forEach(item => {
+        this.cascadeList.forEach((item) => {
           if (item.children && item.children.length) {
-            item.isSelected = item.children.every(child => (child.isSelected || child.disabled))
-            item.isIndeterminate = item.children.some(child => (child.isIndeterminate || child.isSelected))
+            item.isSelected = item.children.every((child) => child.isSelected || child.disabled)
+            item.isIndeterminate = item.children.some((child) => child.isIndeterminate || child.isSelected)
           }
         })
       }
@@ -525,7 +539,7 @@ export default {
         this.exposedId(this.multipleCurrentList, oldId)
         // 递归修改选中和半选的状态
         const changeCheckStatus = (arr) => {
-          arr.forEach(item => {
+          arr.forEach((item) => {
             item.isSelected = false
             item.isIndeterminate = false
             if (item.children && item.children.length) {
@@ -624,11 +638,11 @@ export default {
     // 搜索功能
     getSearchList () {
       const selections = this.changeList()
-      this.searchList = selections.filter(item => {
+      this.searchList = selections.filter((item) => {
         return item.name && item.name.indexOf(this.searchContent) > -1
       })
       if (!this.multiple) {
-        this.searchList.forEach(item => {
+        this.searchList.forEach((item) => {
           item.isSelected = this.currentList.join(',') === item.id.join(',')
         })
       }
@@ -637,7 +651,7 @@ export default {
       const listInfo = JSON.parse(JSON.stringify(this.cascadeList))
       const selections = []
       const getSelections = (arr, id, name) => {
-        arr.forEach(item => {
+        arr.forEach((item) => {
           item.id = id ? id + this.separator + item.id : item.id
           item.name = name ? name + this.separator + item.name : item.name
 
@@ -683,27 +697,29 @@ export default {
       this.checkListStatus(this.value)
 
       const newList = this.changeList()
-      this.multipleSelectedList = newList.filter(item => item.isSelected).map(item => {
-        return {
-          id: item.id,
-          name: item.name
-        }
-      })
+      this.multipleSelectedList = newList
+        .filter((item) => item.isSelected)
+        .map((item) => {
+          return {
+            id: item.id,
+            name: item.name
+          }
+        })
     },
     recursiveList (arr, valueList, type) {
-      arr.forEach(arrItem => {
+      arr.forEach((arrItem) => {
         if (type === 'init') {
           this.$set(arrItem, 'isSelected', false)
           this.$set(arrItem, 'isIndeterminate', false)
         }
 
-        valueList.forEach(item => {
+        valueList.forEach((item) => {
           if (Array.isArray(item)) {
             if (item[item.length - 1] === arrItem.id) {
               arrItem.isSelected = true
             }
             if (!this.checkAnyLevel) {
-              item.forEach(child => {
+              item.forEach((child) => {
                 if (child === arrItem.id) {
                   arrItem.isIndeterminate = true
                 }
@@ -721,16 +737,16 @@ export default {
     checkListStatus (currentValue) {
       if (!this.checkAnyLevel) {
         const valueList = []
-        currentValue.forEach(item => {
+        currentValue.forEach((item) => {
           Array.isArray(item) && valueList.push(item.length)
         })
         const value = Math.max(...valueList)
         for (let i = 0; i <= value; i++) {
           const checkInfo = (arr) => {
-            arr.forEach(arrItem => {
+            arr.forEach((arrItem) => {
               if (arrItem.children && arrItem.children.length) {
-                arrItem.isSelected = arrItem.children.every(child => (child.isSelected || child.disabled))
-                arrItem.isIndeterminate = arrItem.children.some(child => (child.isIndeterminate || child.isSelected))
+                arrItem.isSelected = arrItem.children.every((child) => child.isSelected || child.disabled)
+                arrItem.isIndeterminate = arrItem.children.some((child) => child.isIndeterminate || child.isSelected)
                 checkInfo(arrItem.children)
               }
             })
@@ -753,10 +769,10 @@ export default {
             name: item.name
           })
         } else {
-          this.multipleCurrentList = this.multipleCurrentList.filter(node => {
+          this.multipleCurrentList = this.multipleCurrentList.filter((node) => {
             return node.join('/') !== item.id.join('/')
           })
-          this.multipleSelectedList = this.multipleSelectedList.filter(node => {
+          this.multipleSelectedList = this.multipleSelectedList.filter((node) => {
             return node.id.join('/') !== item.id.join('/')
           })
         }
@@ -804,12 +820,12 @@ export default {
         return
       }
       const oldId = JSON.parse(JSON.stringify(this.multipleCurrentList))
-      this.multipleCurrentList = this.multipleCurrentList.filter(itemInfo => itemInfo.join(',') !== item.id.join(','))
-      this.multipleSelectedList = this.multipleSelectedList.filter(itemInfo => itemInfo.id.join(',') !== item.id.join(','))
+      this.multipleCurrentList = this.multipleCurrentList.filter((itemInfo) => itemInfo.join(',') !== item.id.join(','))
+      this.multipleSelectedList = this.multipleSelectedList.filter((itemInfo) => itemInfo.id.join(',') !== item.id.join(','))
       const itemId = item.id[item.id.length - 1]
       // 同步数据的选中态
       const changeCheckStatus = (arr) => {
-        arr.forEach(item => {
+        arr.forEach((item) => {
           if (`${itemId}` === `${item.id}`) {
             item.isSelected = false
             item.isIndeterminate = false
@@ -833,5 +849,5 @@ export default {
 }
 </script>
 <style>
-  @import '../../ui/cascade.css';
+@import "../../ui/cascade.css";
 </style>
