@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.9-beta.8 {page=#/changelog}
+
+* **[fix]**:
+    - [Sideslider 侧栏](#/sideslider) z-index默认值修正
+
+---
+
 ### 2.5.9-beta.7 {page=#/changelog}
 
 * **[fix]**:
