@@ -706,19 +706,25 @@ export default {
           }
         })
     },
-    recursiveList (arr, valueList, type) {
+    recursiveList (arr, valueList, type, path = []) {
       arr.forEach((arrItem) => {
         if (type === 'init') {
           this.$set(arrItem, 'isSelected', false)
           this.$set(arrItem, 'isIndeterminate', false)
         }
 
+        // 更新path数组，添加当前节点的id
+        const newPath = path.concat(arrItem.id)
+
         valueList.forEach((item) => {
           if (Array.isArray(item)) {
-            if (item[item.length - 1] === arrItem.id) {
+            // 比较每一项是否和路径数组完全匹配
+            if (item.length === newPath.length && item.every((child, index) => child === newPath[index])) {
               arrItem.isSelected = true
             }
-            if (!this.checkAnyLevel) {
+
+            // 如果是中间状态的话，只匹配 item 中的一部分和路径的前缀
+            if (!this.checkAnyLevel && item.length > newPath.length && item.slice(0, newPath.length).every((child, index) => child === newPath[index])) {
               item.forEach((child) => {
                 if (child === arrItem.id) {
                   arrItem.isIndeterminate = true
@@ -729,7 +735,8 @@ export default {
         })
 
         if (arrItem.children && arrItem.children.length) {
-          this.recursiveList(arrItem.children, valueList, type)
+          // 传递当前路径到子节点
+          this.recursiveList(arrItem.children, valueList, type, newPath)
         }
       })
     },
