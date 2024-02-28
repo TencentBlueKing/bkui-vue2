@@ -75,7 +75,6 @@ import { addClass, removeClass } from '@/utils/util'
 import locale from 'bk-magic-vue/lib/locale'
 import { addResizeListener, removeResizeListener } from '@/utils/resize-events'
 import zIndexManager from '@/utils/z-index-manager.js'
-// import popManager from '@/utils/pop-manager.js'
 import transferDom from '@/directives/transfer-dom'
 import mask from '@/utils/mask.js'
 export default {
@@ -127,8 +126,7 @@ export default {
       default: ''
     },
     zIndex: {
-      type: [Number, String],
-      default: 'default'
+      type: [Number, String]
     },
 
     /**
@@ -139,11 +137,6 @@ export default {
       default: true
     },
     transfer: {
-      type: Boolean,
-      default: false
-    },
-
-    appendToBody: {
       type: Boolean,
       default: false
     }
@@ -176,9 +169,6 @@ export default {
         if (this.isScrollY()) {
           addClass(root, 'has-sideslider-padding')
         }
-        // if (this.showMask) {
-        //   this.generatePopUid()
-        // }
 
         this.$nextTick(() => {
           mask.showMask({
@@ -200,10 +190,6 @@ export default {
           el: this.$el,
           showMask: this.showMask
         })
-        // if (this.popUid) {
-        //   popManager.hide(this.popUid)
-        //   this.popUid = ''
-        // }
         setTimeout(() => {
           this.$emit('hidden')
         }, 200)
@@ -221,18 +207,7 @@ export default {
       this.$el.parentNode.removeChild(this.$el)
     }
   },
-  beforeDestroy () {
-    // this.isShow && this.popUid && popManager.hide(this.popUid)
-  },
   methods: {
-    // generatePopUid () {
-    //   this.popUid = popManager.show('bk-sideslider', this.$el, {
-    //     zIndex: this.localZIndex - 1,
-    //     tplAction: (this.multiInstance && 'keepAll') || 'onlyone',
-    //     appendToBody: this.transfer
-    //   })
-    // },
-
     isScrollY () {
       return document.documentElement.offsetHeight > document.documentElement.clientHeight
     },
