@@ -8,6 +8,21 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.9-beta.7 {page=#/changelog}
+
+* **[fix]**:
+    - [Cascade 级联选框](#/cascade) 修复叶子结点相同导致多选错误的问题
+
+---
+
+### 2.5.9-beta.6 {page=#/changelog}
+
+* **[add]**:
+    - [TagInput 标签输入框](#/tag-input) tooltips 展示被折叠的内容
+    - [Cascade 级联选框](#/cascade) 支持extension插槽
+
+---
+
 ### 2.5.9-beta.5 {page=#/changelog}
 
 * **[fix]**:
