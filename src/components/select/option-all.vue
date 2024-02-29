@@ -60,7 +60,9 @@ export default {
       return !this.enabledOptions.length
     },
     isAllSelected () {
-      return !this.enabledOptions.some(option => !option.isSelected)
+      // enableOptions 会根据 options 变化而重置，会使用 filter 方法过滤 disabled 的 option
+      // 因此可以把是否全选的依据设置为 selected 的长度是否等于 enableOptions 的长度
+      return this.select.selected.length === this.enabledOptions.length
     }
   },
   watch: {
