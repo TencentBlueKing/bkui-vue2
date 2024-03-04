@@ -12,6 +12,7 @@
 
 * **[fix]**:
     - [Timeline 时间轴](#/timeline) timeline组件自定义VNode内容不生效
+    - [Select 下拉选框](#/select) 修复虚拟滚动下”全选“逻辑失效的问题
 
 ---
 
