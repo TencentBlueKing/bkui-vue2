@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.9-beta.9 {page=#/changelog}
+
+* **[fix]**:
+    - [Timeline 时间轴](#/timeline) timeline组件自定义VNode内容不生效
+
+---
+
 ### 2.5.9-beta.8 {page=#/changelog}
 
 * **[fix]**:
