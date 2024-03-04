@@ -44,12 +44,14 @@
           <div :class="['bk-timeline-title', { 'has-event': !!$listeners['select'] }]" v-if="item.tag !== ''" @click="toggle(item)" v-html="item.tag"></div>
         </slot>
         <div class="bk-timeline-content" v-if="item.content">
-          <template v-if="isNode(item)">
-            <slot :name="'nodeContent' + index">{{nodeContent(item, index)}}</slot>
-          </template>
-          <template v-else>
-            <div v-html="item.content" :title="computedTitle(item.content)"></div>
-          </template>
+          <slot :name="`nodeContent${index}`" v-bind="item">
+            <template v-if="isNode(item)">
+              <content-vnode :content="item.content" />
+            </template>
+            <template v-else>
+              <div v-html="item.content" :title="computedTitle(item.content)"></div>
+            </template>
+          </slot>
         </div>
       </div>
     </li>
@@ -63,8 +65,14 @@ export default {
   components: {
     vnodeIcon: {
       functional: true,
-      render: (h, ctx) => {
-        return ctx.props.icon
+      render: (_, { props }) => {
+        return props.icon
+      }
+    },
+    ContentVnode: {
+      functional: true,
+      render: (_, { props }) => {
+        return props.content
       }
     }
   },
@@ -120,9 +128,6 @@ export default {
       } else {
         return false
       }
-    },
-    nodeContent (data, index) {
-      this.$slots[`nodeContent${index}`] = [data.content]
     },
     isBuiltinIcon (icon) {
       return typeof icon === 'string'
