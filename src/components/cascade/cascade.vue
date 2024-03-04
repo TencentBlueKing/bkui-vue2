@@ -32,16 +32,17 @@
       'is-focus': showCascade,
       'is-disabled': disabled,
       'is-unselected': isUnselected,
-      'is-default-trigger': !$scopedSlots.trigger
+      'is-default-trigger': !$scopedSlots.trigger,
+      'is-custom-trigger': $scopedSlots.trigger
     }"
     tabindex="0"
     :data-placeholder="placeContent"
     @keydown.enter.prevent="showTippyInstance"
     @keydown.tab="handleDropdownHide"
     @keydown.esc.stop.prevent="handleDropdownHide">
-    <i class="bk-cascade-angle bk-icon icon-angle-down"></i>
+    <i v-if="!$scopedSlots.trigger" class="bk-cascade-angle bk-icon icon-angle-down"></i>
     <i class="bk-cascade-clear bk-icon icon-close"
-      v-if="clearable && !disabled && selectedName"
+      v-if="clearable && !disabled && selectedName && !$scopedSlots.trigger"
       @click.prevent.stop="clearData">
     </i>
     <bk-popover
@@ -56,43 +57,45 @@
       :on-show="handleDropdownShow"
       :on-hide="handleDropdownHide"
       :tippy-options="{ ...{ offset: '0 3' }, ...popoverOptions }">
-      <template v-if="multiple">
-        <div class="bk-cascade-name" :title="selectedName" v-if="limitOneLine">
-          <span>{{selectedName}}</span>
-        </div>
-        <section v-else>
-          <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
-            <span v-for="(item, index) in multipleSelectedList"
-              :key="index"
-              class="bk-cascade-tag-item" style="padding-right: 18px;">
-              <span class="bk-cascade-item-name" :title="item.name">{{item.name}}</span>
-              <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
-                <i class="bk-icon icon-close"></i>
-              </a>
-            </span>
+      <slot name="trigger" :selected="selectedList" :is-show="showCascade">
+        <template v-if="multiple">
+          <div class="bk-cascade-name" :title="selectedName" v-if="limitOneLine">
+            <span>{{selectedName}}</span>
           </div>
-        </section>
-        <div class="bk-cascade-name" v-if="filterable">
+          <section v-else>
+            <div class="bk-cascade-tag-list" v-if="multipleSelectedList.length || !filterable">
+              <span v-for="(item, index) in multipleSelectedList"
+                :key="index"
+                class="bk-cascade-tag-item" style="padding-right: 18px;">
+                <span class="bk-cascade-item-name" :title="item.name">{{item.name}}</span>
+                <a href="javascript:void(0)" class="remove-key" @click.stop="removeTag(item, index)" tabindex="-1">
+                  <i class="bk-icon icon-close"></i>
+                </a>
+              </span>
+            </div>
+          </section>
+          <div class="bk-cascade-name" v-if="filterable">
+            <input
+              class="bk-cascade-search-input"
+              ref="searchInput"
+              type="text"
+              :placeholder="t('bk.select.searchPlaceholder')"
+              @input="handleSearchInput"
+              v-model="searchContent">
+          </div>
+        </template>
+        <div class="bk-cascade-name" :title="selectedName" v-else>
           <input
             class="bk-cascade-search-input"
             ref="searchInput"
             type="text"
             :placeholder="t('bk.select.searchPlaceholder')"
+            v-if="filterable"
             @input="handleSearchInput"
             v-model="searchContent">
+          <span v-else>{{selectedName}}</span>
         </div>
-      </template>
-      <div class="bk-cascade-name" :title="selectedName" v-else>
-        <input
-          class="bk-cascade-search-input"
-          ref="searchInput"
-          type="text"
-          :placeholder="t('bk.select.searchPlaceholder')"
-          v-if="filterable"
-          @input="handleSearchInput"
-          v-model="searchContent">
-        <span v-else>{{selectedName}}</span>
-      </div>
+      </slot>
       <div slot="content"
         :class="['bk-cascade-dropdown-content',extPopoverCls]"
         v-show="!disabled"
