@@ -43,6 +43,10 @@ $itemBackground: #F0F1F5;
         color: #c4c6cc;
         cursor: not-allowed;
     }
+    &.is-custom-trigger {
+        border: none;
+        box-shadow: none;
+    }
     &.is-readonly,
     &.is-loading {
         background-color: #fafafa;
