@@ -34,9 +34,9 @@
           <div class="bk-sideslider-closer" @click="handleClose" :style="{ float: calcDirection }">
             <i class="bk-icon" :class="'icon-angle-' + direction"></i>
           </div>
-          <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 0 0 46px' : '0 0 0 24px' }">
+          <div class="bk-sideslider-title" :style="{ padding: calcDirection === 'left' ? '0 16px 0 46px' : '0 0 0 24px' }">
             <slot name="header">
-              <div class="title-content">{{title || t('bk.sideslider.title')}}</div>
+              <div class="title-content" :title="titleContent">{{titleContent}}</div>
             </slot>
           </div>
         </div>
@@ -157,6 +157,9 @@ export default {
     },
     calcDirection () {
       return this.direction === 'left' ? 'right' : 'left'
+    },
+    titleContent () {
+      return this.title || this.t('bk.sideslider.title')
     }
   },
   watch: {
