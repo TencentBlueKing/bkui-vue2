@@ -61,7 +61,7 @@
       </div>
     </template>
     <template v-else>
-      <div :class="[`bk-input-${type}`]">
+      <div :class="[`bk-input-${type}`]" ref="inputWrapper" v-bk-tooltips="inputTooltips">
         <input
           ref="input"
           :class="['bk-form-input', inputSizeCls, { 'only-bottom-border': behavior === 'simplicity' }]"
@@ -141,12 +141,16 @@
   */
 import emitter from '@/mixins/emitter'
 import { getStyle } from '@/utils/dom'
+import bkTooltips from '@/directives/tooltips'
 import locale from 'bk-magic-vue/lib/locale'
 
 // const toString = Object.prototype.toString
 
 export default {
   name: 'bk-input',
+  directives: {
+    bkTooltips
+  },
   mixins: [emitter, locale.mixin],
   props: {
     type: {
@@ -271,6 +275,10 @@ export default {
     allowNumberPaste: {
       type: Boolean,
       default: false
+    },
+    showOverflowTooltips: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -292,6 +300,9 @@ export default {
       inputPasswordIcon: this.passwordIcon,
       inputRightPadding: '10px',
       iconAreaSizeObserver: null,
+      inputResizeObserver: null,
+      isInputOverflow: false,
+      inputClientWidth: null,
       // 数字输入框中允许输入的键盘按钮的 keyCode 集合
       validKeyCodeList: [
         48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
@@ -384,6 +395,13 @@ export default {
         return `bk-input-${this.inputSize}`
       }
       return ''
+    },
+    inputTooltips () {
+      return {
+        content: this.curValue,
+        disabled: !this.showOverflowTooltips || this.type === 'password' || !this.isInputOverflow,
+        width: this.inputClientWidth && this.inputClientWidth
+      }
     }
   },
   watch: {
@@ -392,6 +410,8 @@ export default {
         this.setCurValue(val)
         // 格式化Number类型的默认值，小数点位数
         old === undefined && this.updateNumberValue(val)
+
+        this.setOverflow()
       },
       immediate: true
     },
@@ -430,12 +450,16 @@ export default {
       }
     }
     this.observerIconSize()
+    this.observerInputSize()
   },
   beforeDestroy () {
     this.iconAreaSizeObserver
       && typeof this.iconAreaSizeObserver.disconnect === 'function'
       && this.iconAreaSizeObserver.disconnect()
     this.iconAreaSizeObserver = null
+
+    this.inputResizeObserver && this.inputResizeObserver.disconnect()
+    this.inputResizeObserver = null
   },
   methods: {
     /** 观察右侧图表区域的宽度，动态修改input的padding-right属性 */
@@ -452,6 +476,30 @@ export default {
         })
         this.iconAreaSizeObserver.observe(element)
       }
+    },
+    observerInputSize () {
+      const element = this.$refs.input
+      if (!element) return
+      this.inputResizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.target === element) {
+            this.setOverflow()
+          }
+        }
+      })
+      this.inputResizeObserver.observe(element)
+    },
+    setOverflow () {
+      setTimeout(() => {
+        const inputEl = this.$refs.input
+        if (inputEl) {
+          this.isInputOverflow = inputEl.scrollWidth > inputEl.clientWidth + 2
+          if (inputEl.clientWidth !== this.inputClientWidth) {
+            this.$refs.inputWrapper._tippy && this.$refs.inputWrapper._tippy.destroy()
+          }
+          this.inputClientWidth = inputEl.clientWidth
+        }
+      })
     },
     getAttributeByType (type = '') {
       const defaultAttr = {

@@ -17,7 +17,8 @@
     transition-timing-function: cubic-bezier(.165, .84, .44, 1);
     max-width: calc(100% - 8px);
     pointer-events: none;
-    outline: 0
+    outline: 0;
+    overflow-wrap: break-word;
 }
 
 .tippy-popper[x-placement^=top] .tippy-backdrop {
