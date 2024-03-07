@@ -128,7 +128,7 @@
             <bk-virtual-scroll ref="virtualScroll"
               :item-height="itemHeight"
               class="bk-virtual-select"
-              :style="{ height: scrollHeight + 'px', width: '100%' }"
+              :style="{ height: virtualScrollHeight + 'px', width: '100%' }"
               @virtual-scroll-scroll-bar-mouse="virtualScrollScrollBarMouse"
               v-if="enableVirtualScroll">
               <template slot-scope="item">
@@ -365,6 +365,10 @@ export default {
     }
   },
   computed: {
+    virtualScrollHeight () {
+      const selectAllOptionHeight = 39
+      return this.showSelectAll ? this.scrollHeight - selectAllOptionHeight : this.scrollHeight
+    },
     selectedName () {
       if (this.selectedOptions) {
         if (this.multiple) {
