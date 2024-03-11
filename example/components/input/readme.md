@@ -171,7 +171,7 @@
 ``` html
 <template>
     <div class="input-demo">
-        <bk-input type="number" :max="1000" :min="-1000" :precision="precision" v-model="numberInputValue"></bk-input>
+        <bk-input type="number" :max="1000" :min="-1000" :initial-control-value="0" v-model="numberInputValue"></bk-input>
     </div>
 </template>
 <script>
@@ -710,7 +710,8 @@
 | behavior | 简约风格设置(simplicity:简约 normal:正常 type=textarea时不生效) | String | 'normal'/'simplicity' | normal |
 | show-clear-only-hover | 是否在只有 hover 的时候才显示 clear 清除按钮 | Boolean | —— | false |
 | allow-number-paste | 允许type为number时可粘贴 | Boolean | —— | false |
-| show-overflow-tooltips | 文本超出长度是否显示tooltips	 | Boolean | —— | false |
+| show-overflow-tooltips | 文本超出长度是否显示tooltips | Boolean | —— | false |
+| initial-control-value | 设置上下键调整数值时的起始值 | Number | —— | —— |
 
 ### 事件 {page=#/input}
 

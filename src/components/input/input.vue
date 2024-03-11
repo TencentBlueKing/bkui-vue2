@@ -279,7 +279,8 @@ export default {
     showOverflowTooltips: {
       type: Boolean,
       default: false
-    }
+    },
+    initialControlValue: Number
   },
   data () {
     return {
@@ -593,7 +594,9 @@ export default {
       }
     },
     handleNumberDelete (event) {
-      this.curValue === '' && (this.curValue = this.max)
+      if (this.curValue === '') {
+        this.curValue = this.initialControlValue === undefined ? this.max : Math.min(this.initialControlValue, this.max)
+      }
       const curNumberValue = Number(this.curValue)
       if (curNumberValue - 1 >= this.min) {
         const curLenAfterDot = (String(curNumberValue) || '').split('.')[1] || ''
@@ -608,7 +611,9 @@ export default {
       }
     },
     handleNumberAdd (event) {
-      this.curValue === '' && (this.curValue = this.min)
+      if (this.curValue === '') {
+        this.curValue = this.initialControlValue === undefined ? this.min : Math.max(this.initialControlValue, this.min)
+      }
       const curNumberValue = Number(this.curValue)
       if (curNumberValue <= this.max - 1) {
         const curLenAfterDot = (String(curNumberValue) || '').split('.')[1] || ''
