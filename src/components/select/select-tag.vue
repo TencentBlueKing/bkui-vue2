@@ -56,6 +56,8 @@
 
 <script>
 import bkOverflowTips from '../../directives/overflow-tips'
+import Tippy from '@/utils/tippy'
+
 export default {
   inject: ['select'],
   directives: {
@@ -64,6 +66,7 @@ export default {
   data () {
     return {
       overflowTagNode: null,
+      overflowTagTips: null,
       overflowTagIndex: null,
       newOptionName: ''
     }
@@ -145,6 +148,24 @@ export default {
     },
     setOverflowTagContent () {
       this.overflowTagNode.textContent = `+${this.select.selected.length - this.overflowTagIndex}`
+      
+      this.destroyTippy()
+      this.overflowTagTips = Tippy(this.overflowTagNode, {
+        duration: 0,
+        arrow: true,
+        size: 'small',
+        trigger: 'mouseenter focus',
+        theme: 'dark',
+        interactive: true,
+        boundary: 'window',
+        content: this.getOverflowTagTips(),
+        allowHTML: true,
+        extCls: ''
+      })
+    },
+    getOverflowTagTips () {
+      const data = this.select.selectedOptions.slice(this.overflowTagIndex, this.select.selectedOptions.length) || []
+      return data.map(option => option.name).join(',')
     },
     // 创建/获取溢出数字节点
     getOverflowTagNode () {
@@ -161,6 +182,12 @@ export default {
       if (this.overflowTagNode && this.overflowTagNode.parentNode === this.$el) {
         this.$el.removeChild(this.overflowTagNode)
       }
+      this.destroyTippy()
+    },
+    destroyTippy () {
+      if (!this.overflowTagTips) return
+      this.overflowTagTips.destroy()
+      this.overflowTagTips = null
     },
     // 创建自定义Tag
     handleCreateTag (e) {
