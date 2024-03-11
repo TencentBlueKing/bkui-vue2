@@ -171,7 +171,7 @@
 ``` html
 <template>
     <div class="input-demo">
-        <bk-input type="number" :max="1000" :min="-1000" :initial-control-value="0" v-model="numberInputValue"></bk-input>
+        <bk-input type="number" :max="1000" :min="-1000" :precision="precision" :initial-control-value="0" v-model="numberInputValue"></bk-input>
     </div>
 </template>
 <script>
