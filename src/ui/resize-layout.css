@@ -21,6 +21,15 @@
         }
     }
 
+    &-collapsible.bk-resize-layout-collapsed {
+        & > .bk-resize-layout-aside {
+            border: none !important;
+            &:after {
+                display: none;
+            }
+        }
+    }
+
     &-left {
         flex-direction: row;
 
