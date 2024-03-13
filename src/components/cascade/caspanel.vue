@@ -119,6 +119,10 @@ export default {
     },
     remoteMethod: {
       type: Function
+    },
+    allowDisabledExpand: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -183,7 +187,7 @@ export default {
       }
     },
     handleItem (item, fromInit = false) {
-      if (item.disabled) return
+      if (item.disabled && !this.allowDisabledExpand) return
 
       if (this.isRemote) {
         new Promise((resolve, reject) => {
@@ -236,7 +240,8 @@ export default {
         this.dispatch('bkCascade', 'on-id-change', {
           item: item,
           isLast: !(item.children && item.children.length),
-          checkAnyLevel: this.checkAnyLevel,
+          // 如果是 checkAnyLevl 但是不允许展开，则不会应该选中，即不会判定为任意级可选
+          checkAnyLevel: this.checkAnyLevel && !this.allowDisabledExpand,
           fromInit: fromInit
         })
       }

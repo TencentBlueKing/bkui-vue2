@@ -1094,6 +1094,7 @@
 | popover-options | 透传至下拉列表所在的popover组件的tippyOptions选项 | Object | —— | —— |
 | ext-popover-cls | 配置自定义样式类名，传入的类会被加在下拉菜单的 DOM .bk-cascade-dropdown-content 上 | String | —— | —— |
 | max-width | 可以通过`max-width`设置弹出框最大宽度，通过弹出层滚动，避免弹出层级太多导致的样式问题 | String|Number | —— | 100% |
+| allow-disabled-expand | 选项禁用是否允许展开下一级，默认不允许，非业务特殊情况不建议设置此配置，非常规交互 | Boolean | —— | false |
 
 ### bk-cascade 插槽(slot) {page=#/select}
 
