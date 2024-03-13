@@ -141,6 +141,7 @@
               :multiple="multiple"
               :is-remote="isRemote"
               :remote-method="remoteMethod"
+              :allow-disabled-expand="allowDisabledExpand"
               @updateSelectedList="updateSelectedList"
             >
               <template slot="option" slot-scope="{ node }">
@@ -258,6 +259,10 @@ export default {
     maxWidth: {
       type: [String, Number],
       default: '100%'
+    },
+    allowDisabledExpand: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
