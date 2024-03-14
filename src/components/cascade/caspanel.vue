@@ -68,6 +68,7 @@
       :multiple="multiple"
       :check-any-level="checkAnyLevel"
       :is-remote="isRemote"
+      :allow-disabled-expand="allowDisabledExpand"
       :remote-method="remoteMethod"
       @updateSelectedList="updateSelectedList">
       <template slot="option" slot-scope="{ node }">
@@ -240,8 +241,13 @@ export default {
         this.dispatch('bkCascade', 'on-id-change', {
           item: item,
           isLast: !(item.children && item.children.length),
-          // 如果是 checkAnyLevl 但是不允许展开，则不会应该选中，即不会判定为任意级可选
-          checkAnyLevel: this.checkAnyLevel && !this.allowDisabledExpand,
+          /**
+           *  原逻辑 disabled 会直接 return；
+           *  此处 checkAnyLevel 需要判断和处理：
+           *    如果没有配置 allowDisabledExpand，保持和原逻辑相同；
+           *    如果设置了 allowDisabledExpand，元素本身不能为 disabled，否则不能判定是 checkAnyLevle, 即禁用元素不允许选中
+           */
+          checkAnyLevel: this.checkAnyLevel && (!this.allowDisabledExpand || (this.allowDisabledExpand && !item.disabled)),
           fromInit: fromInit
         })
       }
