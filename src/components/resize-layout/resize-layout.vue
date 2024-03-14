@@ -32,6 +32,7 @@
     'bk-resize-layout',
     `bk-resize-layout-${placement}`,
     {
+      'bk-resize-layout-collapsible': collapsible,
       'bk-resize-layout-collapsed': collapsed,
       'bk-resize-layout-border': border
     }
@@ -288,7 +289,7 @@ export default {
       this.setupAsideListener(!this.collapsed)
       if (this.collapsed) {
         aside.setAttribute(`data-${this.computedStyleKey}`, previewStyleValue)
-        this.asideStyleValue = '5px'
+        this.asideStyleValue = this.collapsible ? '0' : '5px'
       } else {
         this.asideContentVisible = true
         this.asideStyleValue = aside.getAttribute(`data-${this.computedStyleKey}`)
