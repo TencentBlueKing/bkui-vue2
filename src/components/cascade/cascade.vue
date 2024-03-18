@@ -442,7 +442,7 @@ export default {
     this.$on('on-id-change', (params) => {
       const { isLast, checkAnyLevel, fromInit } = params
 
-      if (isLast || checkAnyLevel) {
+      if (isLast || checkAnyLevel || fromInit) {
         const oldIdList = JSON.parse(JSON.stringify(this.currentList))
         this.selectedList = this.tmpSelected
 
