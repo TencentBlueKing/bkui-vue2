@@ -30,9 +30,10 @@ const loopSetMaskStyle = (modal, show) => {
 }
 
 const showMask = (options) => {
-  if (!options.el) {
+  if (!options.el || options.showMask === false) {
     return
   }
+
   if (!instanceStore.has(options.el)) {
     const mask = appendMaskDiv(options.el)
     mask.style.setProperty('background-color', options.backgroundColor)
@@ -41,6 +42,10 @@ const showMask = (options) => {
       mask,
       referenceParent: activeModal
     })
+
+    if (typeof options.onClick === 'function') {
+      mask.addEventListener('click', options.onClick)
+    }
   }
 
   const mask = instanceStore.get(options.el).mask

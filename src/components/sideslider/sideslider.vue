@@ -177,7 +177,8 @@ export default {
           mask.showMask({
             el: this.$el,
             showMask: this.showMask,
-            backgroundColor: 'rgba(0, 0, 0, 0.6)'
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            onClick: this.handleQuickClose
           })
           if (this.$refs.content) {
             addResizeListener(this.$refs.content, this.handleContentResize, false)
