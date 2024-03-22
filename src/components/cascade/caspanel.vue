@@ -188,7 +188,7 @@ export default {
       }
     },
     handleItem (item, fromInit = false) {
-      if (item.disabled && !this.allowDisabledExpand) return
+      if (item.disabled && (!this.allowDisabledExpand || !item.children)) return
 
       if (this.isRemote) {
         new Promise((resolve, reject) => {
