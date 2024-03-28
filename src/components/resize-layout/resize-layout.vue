@@ -115,7 +115,7 @@ export default {
       asideContentVisible: true,
       minimized: false,
       limitMax: null,
-      asideStyleValue: this.initialDivide,
+      asideStyleValue: null,
       state: {}
     }
   },
@@ -145,6 +145,9 @@ export default {
       }
       return 0
     }
+  },
+  created () {
+    this.asideStyleValue = this.initialDivide
   },
   mounted () {
     this.setupLimit()
