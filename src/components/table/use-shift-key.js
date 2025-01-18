@@ -25,85 +25,85 @@
  */
 
 export default (props) => {
-    let isShiftKeyDown = false
-    const store = {
-      start: null,
-      end: null
-    }
+  let isShiftKeyDown = false
+  const store = {
+    start: null,
+    end: null
+  }
   
-    const handleKeyDown = (e) => {
-      if (e.key === 'Shift') {
-        isShiftKeyDown = true
-        document.body.style.userSelect = 'none'
-      }
-    }
-  
-    const handleKeyUp = (e) => {
-      if (e.key === 'Shift') {
-        isShiftKeyDown = false
-        document.body.style.userSelect = ''
-        clearStore()
-      }
-    }
-  
-    const setStartStore = (row, index) => {
-      store.start = { index, row }
-    }
-  
-    const setStore = (row, index) => {
-      if (!isShiftKeyDown) {
-        return false
-      }
-  
-      if (store.start === null && store.end === null) {
-        store.start = { index, row }
-        return false
-      }
-  
-      store.end = { index, row }
-      return true
-    }
-  
-    const clearStore = () => {
-      store.start = null
-      store.end = null
-    }
-  
-    const init = () => {
-      if (props.shiftMultiChecked) {
-        window.addEventListener('keydown', handleKeyDown)
-        window.addEventListener('keyup', handleKeyUp)
-      }
-    }
-  
-    const getStore = () => {
-      const { start, end } = store
-      const startRow = start.index < end.index ? start : end
-      const endRow = start.index < end.index ? end : start
-      return {
-        start: startRow,
-        end: endRow
-      }
-    }
-  
-    const onUnmounted = () => {
-      if (props.shiftMultiChecked) {
-        window.removeEventListener('keydown', handleKeyDown)
-        window.removeEventListener('keyup', handleKeyUp)
-        clearStore()
-      }
-    }
-  
-    const isShift = () => isShiftKeyDown
-  
-    return {
-      isShiftKeyDown,
-      setStartStore,
-      isShift,
-      onUnmounted,
-      setStore,
-      getStore,
-      clearStore,
-      init
+  const handleKeyDown = (e) => {
+    if (e.key === 'Shift') {
+      isShiftKeyDown = true
+      document.body.style.userSelect = 'none'
     }
   }
+  
+  const handleKeyUp = (e) => {
+    if (e.key === 'Shift') {
+      isShiftKeyDown = false
+      document.body.style.userSelect = ''
+      clearStore()
+    }
+  }
+  
+  const setStartStore = (row, index) => {
+    store.start = { index, row }
+  }
+  
+  const setStore = (row, index) => {
+    if (!isShiftKeyDown) {
+      return false
+    }
+  
+    if (store.start === null && store.end === null) {
+      store.start = { index, row }
+      return false
+    }
+  
+    store.end = { index, row }
+    return true
+  }
+  
+  const clearStore = () => {
+    store.start = null
+    store.end = null
+  }
+  
+  const init = () => {
+    if (props.shiftMultiChecked) {
+      window.addEventListener('keydown', handleKeyDown)
+      window.addEventListener('keyup', handleKeyUp)
+    }
+  }
+  
+  const getStore = () => {
+    const { start, end } = store
+    const startRow = start.index < end.index ? start : end
+    const endRow = start.index < end.index ? end : start
+    return {
+      start: startRow,
+      end: endRow
+    }
+  }
+  
+  const onUnmounted = () => {
+    if (props.shiftMultiChecked) {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+      clearStore()
+    }
+  }
+  
+  const isShift = () => isShiftKeyDown
+  
+  return {
+    isShiftKeyDown,
+    setStartStore,
+    isShift,
+    onUnmounted,
+    setStore,
+    getStore,
+    clearStore,
+    init
+  }
+}
