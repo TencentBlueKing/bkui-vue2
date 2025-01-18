@@ -29,7 +29,7 @@
  *
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
-
+require('web-streams-polyfill/polyfill')
 const path = require('path')
 const express = require('express')
 const webpack = require('webpack')

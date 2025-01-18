@@ -394,6 +394,7 @@
             :data="data"
             :size="size"
             :pagination="pagination"
+            :shift-multi-checked="true"
             @row-mouse-enter="handleRowMouseEnter"
             @row-mouse-leave="handleRowMouseLeave"
             @page-change="handlePageChange"
@@ -1251,7 +1252,7 @@ export default {
 
 <template>
     <div>
-        <bk-table :row-auto-height="true" style="margin-top: 15px;" :data="data" :size="size" :pagination="pagination"
+        <bk-table :row-auto-height="true" style="margin-top: 15px;" :data="data" :size="size" :pagination="pagination" 
             @row-mouse-enter="handleRowMouseEnter" @row-mouse-leave="handleRowMouseLeave"
             @page-change="handlePageChange" @page-limit-change="handlePageLimitChange">
             <bk-table-column type="selection" width="60" fixed="left"></bk-table-column>

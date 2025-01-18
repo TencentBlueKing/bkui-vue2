@@ -99,16 +99,25 @@ const forced = {
     },
     renderCell: function (h, { row, column, store, $index }) {
       const disabled = column.selectable ? !column.selectable.call(null, row, $index) : false
+      const beforeChange = () => {
+        if (store.table.shiftMulti.isShift()) {
+          return !store.isSelected(row)
+        }
+        return column.beforeSelectChange(store.isSelected(row), { row, column, store, $index })
+      }
       return <bk-checkbox
         checked={ store.isSelected(row) }
         disabled={ disabled }
-        before-change={ () => column.beforeSelectChange(store.isSelected(row), { row, column, store, $index }) }
+        before-change={ beforeChange }
         nativeOn-click={ async event => {
           event.stopPropagation()
+          // 阻止进一步冒泡
+          event.preventDefault()
+          event.stopImmediatePropagation()
           if (disabled) return
-          const result = await column.beforeSelectChange(store.isSelected(row),
-            { row, column, store, $index })
-          result !== false && store.commit('rowSelectedChanged', row)
+
+          const result = await beforeChange()
+          result !== false && store.commit('rowSelectedChanged', row, $index)
         } } ></bk-checkbox>
     },
     sortable: false,

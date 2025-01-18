@@ -28,7 +28,7 @@
 
 <template>
   <div>
-    <bk-table :row-auto-height="true" style="margin-top: 15px;" :data="data" :size="size" :pagination="pagination"
+    <bk-table :row-auto-height="true" style="margin-top: 15px;" :data="data" :size="size" :pagination="pagination" :shift-multi-checked="true"
       @page-change="handlePageChange" @page-limit-change="handlePageLimitChange">
       <bk-table-column type="selection" width="60" fixed="left"></bk-table-column>
       <bk-table-column type="index" label="序列" width="60"></bk-table-column>
