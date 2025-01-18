@@ -394,6 +394,7 @@
             :data="data"
             :size="size"
             :pagination="pagination"
+            :shift-multi-checked="true"
             @row-mouse-enter="handleRowMouseEnter"
             @row-mouse-leave="handleRowMouseLeave"
             @page-change="handlePageChange"
