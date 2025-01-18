@@ -298,6 +298,7 @@ import TableFooter from './table-footer'
 import BkPagination from '../pagination'
 import locale from 'bk-magic-vue/lib/locale'
 import bkException from '../exception'
+import shiftMultiSelect from './use-shift-key'
 
 let tableIdSeed = 1
 
@@ -438,6 +439,10 @@ export default {
     popoverOptions: {
       type: Object,
       default: () => ({})
+    },
+    shiftMultiChecked: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -453,6 +458,7 @@ export default {
       showHeader: this.showHeader
     })
     this.pagination.showTotalCount = !!this.showPaginationInfo
+    const shiftMulti = shiftMultiSelect(this)
     return {
       layout,
       store,
@@ -466,7 +472,8 @@ export default {
       // 是否拥有多级表头
       isGroup: false,
       scrollPosition: 'left',
-      scrollThrottle: false // 滚动节流，是否进入
+      scrollThrottle: false, // 滚动节流，是否进入
+      shiftMulti
     }
   },
   computed: {
@@ -645,6 +652,7 @@ export default {
   created () {
     this.tableId = 'bk-table-' + tableIdSeed++
     this.debouncedUpdateLayout = debounce(50, () => this.doLayout())
+    this.shiftMulti.init()
   },
   mounted () {
     this.setHeaderStyle() // 配置表头css变量
@@ -671,6 +679,7 @@ export default {
   },
   beforeDestroy () {
     this.$destroyed = true
+    this.shiftMulti.onUnmounted()
     if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener)
   },
   methods: {
