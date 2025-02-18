@@ -8,6 +8,14 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.1 {page=#/changelog}
+
+* **[fix]**:
+    - [Select 下拉选框](#/select) 修复select标签键入时input输入框宽度
+
+
+---
+
 ### 2.5.9 {page=#/changelog}
 ###### 2024.01.07
 
