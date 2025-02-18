@@ -50,6 +50,7 @@
       class="bk-select-tag-input"
       ref="inputRef"
       :placeholder="select.selectedOptions.length ? '' : select.localPlaceholder"
+      :style="inputStyle"
       @blur="handleCreateTag"
       @keyup.enter="handleCreateTag" />
   </div>
@@ -69,7 +70,28 @@ export default {
       overflowTagNode: null,
       overflowTagTips: null,
       overflowTagIndex: null,
-      newOptionName: ''
+      newOptionName: '',
+      canvasInstance: null,
+      canvasContext: null,
+      inputWidth: 0,
+      fontSize: null
+    }
+  },
+  computed: {
+    inputStyle () {
+      return {
+        width: `${this.inputWidth}px`
+      }
+    }
+  },
+  watch: {
+    newOptionName: {
+      immediate: true,
+      handler () {
+        if (this.select.allowCreate && this.$refs.inputRef) {
+          this.computeInputWidth()
+        }
+      }
     }
   },
   mounted () {
@@ -83,8 +105,32 @@ export default {
       }
     })
     this.$watch(() => this.select.selected, this.calcOverflow)
+    this.setCanvasContext()
+    this.computeInputWidth()
   },
   methods: {
+    setCanvasContext () {
+      if (!this.canvasInstance && this.select.allowCreate && this.$refs.inputRef) {
+        this.canvasInstance = document.createElement('canvas')
+        this.canvasContext = this.canvasInstance.getContext('2d')
+        const computedStyle = window.getComputedStyle(this.$refs.inputRef)
+        this.canvasContext.font = computedStyle.font
+        this.fontSize = parseInt(computedStyle.fontSize.replace('px', ''))
+      }
+    },
+    computeInputWidth () {
+      if (!this.select.allowCreate) {
+        return
+      }
+
+      if (this.canvasContext) {
+        this.inputWidth = this.canvasContext.measureText(this.newOptionName || '').width
+        return
+      }
+      
+      const INPUT_MIN_WIDTH = 12
+      this.inputWidth = this.newOptionName.length * (this.fontSize || INPUT_MIN_WIDTH)
+    },
     focusInput () {
       this.$refs.inputRef && this.$refs.inputRef.focus()
     },

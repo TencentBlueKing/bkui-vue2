@@ -499,6 +499,7 @@ $disabledColor: #c4c6cc;
 .bk-select-tag-input{
     height: 22px;
     max-width: 190px;
+    min-width: 2px;
     padding: 0;
     margin: 4px 5px 4px 0;
     overflow: hidden;
