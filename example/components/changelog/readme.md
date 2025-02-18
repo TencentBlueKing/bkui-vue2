@@ -4,6 +4,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.4.15-beta.24 {page=#/changelog}
+
+* **[add]**:
+    - [Table表格] 在支持vue2.6及更老版本的bkui-vue2中增加鼠标点击按住shift多选table select的功能
+
+---
+
 ### 2.4.15-beta.23 {page=#/changelog}
 
 * **[add]**:
