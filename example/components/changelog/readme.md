@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.2 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) input 数字类型支持复制
+
+
 ### 2.5.10-beta.1 {page=#/changelog}
 
 * **[fix]**:
