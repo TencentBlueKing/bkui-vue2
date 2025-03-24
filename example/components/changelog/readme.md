@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.3 {page=#/changelog}
+
+* **[fix]**:
+    - [Tab 选项卡](#/tab) 样式问题
+
+
 ### 2.5.10-beta.2 {page=#/changelog}
 
 * **[fix]**:
