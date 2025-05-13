@@ -31,10 +31,12 @@
     :class="{
       'is-selected': isSelected,
       'is-disabled': disabled,
-      'is-highlight': isHighlight
+      'is-highlight': isHighlight || select.activeOptionID === id
     }"
     v-show="!unmatched"
-    @click="handleOptionClick">
+    @click="handleOptionClick"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave">
     <div class="bk-option-content">
       <slot>
         <div class="bk-option-content-default" :title="name">
@@ -118,6 +120,12 @@ export default {
       if (!select.multiple) {
         select.close()
       }
+    },
+    handleMouseEnter () {
+      this.select.activeOptionID = this.id
+    },
+    handleMouseLeave () {
+      this.select.activeOptionID = ''
     }
   }
 }
