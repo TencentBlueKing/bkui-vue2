@@ -362,7 +362,9 @@ export default {
       renderPopoverOptions: {},
       popoverDistance: 10 + parseInt(dropdownMarginBottom),
       optionList: null,
-      allowCreateData: []
+      allowCreateData: [],
+      activeOptionID: undefined,
+      hasInitKeyDownEvent: false // fix: 修复popover show会触发多次问题
     }
   },
   computed: {
@@ -480,6 +482,7 @@ export default {
         } else {
           this.search()
         }
+        this.initActiveOptionID()
       }, 100)
     },
     selected (value, oldValue) {
@@ -616,11 +619,25 @@ export default {
       })
     },
     handleDropdownShow () {
+      if (!this.hasInitKeyDownEvent) {
+        // 注册键盘快捷键(show有时候会多次触发?)
+        document.addEventListener('keydown', this.handleDocumentKeydown)
+        setTimeout(() => {
+          // 初始化当前active的option
+          this.initActiveOptionID()
+          // 滚动到选中的option选项
+          this.scrollActiveOptionIntoView()
+        }, 50)
+        this.hasInitKeyDownEvent = true
+      }
+
       this.defaultWidth = this.$el.offsetWidth
       if (this.autoHeight) this.focus = true
     },
     handleDropdownHide () {
+      document.removeEventListener('keydown', this.handleDocumentKeydown)
       this.focus = false
+      this.hasInitKeyDownEvent = false
     },
     handleInputChange (e) {
       const value = e.target.value
@@ -813,6 +830,76 @@ export default {
     },
     focusTagInput () {
       this.$refs.bkSelectTag && this.$refs.bkSelectTag.focusInput()
+    },
+    isInViewPort (el, client) {
+      if (!el || !client) return true
+
+      const { top: elTop, bottom: elBottom } = el.getBoundingClientRect()
+      const { top: clientTop, bottom: clientBottom } = client.getBoundingClientRect()
+
+      return elTop >= clientTop && elBottom <= clientBottom
+    },
+    scrollActiveOptionIntoView () {
+      const optionsDom = this.$refs.optionList.querySelectorAll('.is-selected')
+      if (!optionsDom) return
+
+      optionsDom[0].scrollIntoView({
+        block: 'nearest'
+      })
+    },
+    initActiveOptionID () {
+      const firstSelectedID = Array.isArray(this.selected) ? this.selected[0] : this.selected
+      const option = this.optionsMap[firstSelectedID]
+      if (option && !option.disabled) {
+        this.activeOptionID = firstSelectedID
+      } else {
+        const option = this.options.find(option => !option.disabled) || {}
+        this.activeOptionID = option.id || ''
+      }
+    },
+    // 键盘上下键事件
+    handleDocumentKeydown (e) {
+      if (this.disabled || !this.options.length) return
+
+      const availableOptions = this.options.filter(option => !option.disabled)
+      const index = availableOptions.findIndex(option => option.id === this.activeOptionID)
+
+      switch (e.code) {
+        // 下一个option
+        case 'ArrowUp':
+        case 'ArrowDown': {
+          e.preventDefault() // 阻止滚动屏幕
+          e.stopPropagation()
+          this.$refs.searchInput && this.$refs.searchInput.blur()
+          let activeIndex = 0
+          if (e.code === 'ArrowDown') {
+            activeIndex = index >= availableOptions.length - 1 ? 0 : index + 1
+          } else {
+            activeIndex = index === 0 ? availableOptions.length - 1 : index - 1
+          }
+          if (availableOptions[activeIndex]
+            && availableOptions[activeIndex].$el
+            && !this.isInViewPort(availableOptions[activeIndex].$el, this.$refs.optionList)) {
+            availableOptions[activeIndex].$el.scrollIntoView({ block: 'nearest' })
+          }
+          this.activeOptionID = availableOptions[activeIndex].id
+          break
+        }
+        // 选择选项
+        case 'NumpadEnter':
+        case 'Enter': {
+          const { value } = e.target
+          // 搜索和创建的时候不触发enter事件
+          if ((this.allowCreate && value) || e.target === this.$refs.searchInput) return
+          const option = this.optionsMap[this.activeOptionID]
+          if (option.isSelected) {
+            this.unselectOption(option)
+          } else {
+            this.selectOption(option)
+          }
+          break
+        }
+      }
     }
   }
 }
