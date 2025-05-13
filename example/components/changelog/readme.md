@@ -10,6 +10,12 @@
 
 ### 2.5.10-beta.3 {page=#/changelog}
 
+* **[add]**:
+    - [Select 下拉选框](#/select) select 支持上下按键选择
+
+
+### 2.5.10-beta.3 {page=#/changelog}
+
 * **[fix]**:
     - [Tab 选项卡](#/tab) 样式问题
 
