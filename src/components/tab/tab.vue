@@ -218,14 +218,14 @@ export default {
     labelHeight: {
       type: Number,
       default: 50,
-      validator (val) {
-        // return val >= 42
-        if (val < 42) {
-          console.error('选项卡 label 的高度，最小值为 42')
-          return false
-        }
-        return true
-      }
+      // validator (val) {
+      //   // return val >= 42
+      //   if (val < 42) {
+      //     console.error('选项卡 label 的高度，最小值为 42')
+      //     return false
+      //   }
+      //   return true
+      // }
     },
     activeBar: {
       type: Object,
