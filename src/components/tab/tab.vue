@@ -128,7 +128,7 @@
               height: `${labelHeight - 1}px`,
               lineHeight: `${labelHeight}px`,
               right: (hasAddBtnSlot || addable)
-                ? `${addShowNextRight ? 0 : (addCustomRect.width || 40)}px`
+                ? `${addShowNextRight ? 0 : (addCustomRect.width || 42)}px`
                 : undefined
             }"
             ref="nextController"
@@ -573,9 +573,9 @@ export default {
                 tabLabel.classList.remove('simulate-border-bottom')
               }
 
-              this.activeBarStyle.width = `${tabLabelRect.width - 24}px`
+              this.activeBarStyle.width = `${tabLabelRect.width}px`
               this.activeBarStyle.height = this.activeBar.height
-              this.activeBarStyle.transform = `translateX(${tabLabel.offsetLeft + 12}px)`
+              this.activeBarStyle.transform = `translateX(${tabLabel.offsetLeft}px)`
               this.activeBarStyle.left = 0
               if (this.activeBar.position === 'top') {
                 this.activeBarStyle.top = '0px'

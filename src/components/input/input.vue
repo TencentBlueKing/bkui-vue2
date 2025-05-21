@@ -276,6 +276,10 @@ export default {
       type: Boolean,
       default: false
     },
+    allowNumberCopy: {
+      type: Boolean,
+      default: true
+    },
     showOverflowTooltips: {
       type: Boolean,
       default: false
@@ -653,11 +657,13 @@ export default {
       const target = event.currentTarget
       const value = target.value
       const isPaste = (event.ctrlKey || event.metaKey) && keyCode === 86
+      const isCopy = (event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'C')
 
       if (this.inputType === 'number') {
         // 非粘贴且键盘按下不允许的按钮
         if (
           !(this.allowNumberPaste && isPaste)
+          && !(this.allowNumberCopy && isCopy)
           && (this.validKeyCodeList.indexOf(keyCode) < 0
             || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
         ) {

@@ -141,6 +141,7 @@ $headerColor: $newBlackColor2;
 
     .bk-tab-scroll-controller {
         border-top: $border;
+        border-bottom: none;
 
         &.prev {
             border-left: $border;
@@ -148,6 +149,9 @@ $headerColor: $newBlackColor2;
             &.disabled {
                 border-right: none;
             }
+        }
+        &.next {
+            border-right: $border;
         }
     }
 
@@ -198,13 +202,16 @@ $headerColor: $newBlackColor2;
         .bk-tab-add-controller,
         .bk-tab-scroll-controller {
             border: none;
-            border-bottom: $border;
             background-color: #fff;
         }
 
         .bk-tab-label-list {
             .bk-tab-label-item {
+                padding: 0 16px;
                 border: none !important;
+                & ~ .bk-tab-label-item{
+                    margin-left: 8px;
+                }
             }
         }
     }
@@ -383,7 +390,6 @@ $headerColor: $newBlackColor2;
             top: 0;
             right: 0;
             border-bottom: $border;
-            border-left: $border;
 
             &.next-right {
                 right: 24px;
@@ -397,7 +403,6 @@ $headerColor: $newBlackColor2;
                 position: absolute;
                 top: 0;
                 right: 42px;
-                border-left: $border;
             }
 
             .bk-tab-add-controller {
@@ -534,7 +539,6 @@ $headerColor: $newBlackColor2;
             position: relative;
             display: inline-block;
             vertical-align: middle;
-            min-width: 100px;
             padding: 0 18px;
             border-right: $border;
             text-align: center;
@@ -642,6 +646,9 @@ $headerColor: $newBlackColor2;
     float: right;
     height: 42px;
     line-height: 42px;
+    &.has-setting{
+        border-left: $border;
+    }
 }
 
 .bk-tab-section {

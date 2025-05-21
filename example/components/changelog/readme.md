@@ -8,6 +8,32 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.3 {page=#/changelog}
+
+* **[add]**:
+    - [Select 下拉选框](#/select) select 支持上下按键选择
+
+
+### 2.5.10-beta.3 {page=#/changelog}
+
+* **[fix]**:
+    - [Tab 选项卡](#/tab) 样式问题
+
+
+### 2.5.10-beta.2 {page=#/changelog}
+
+* **[fix]**:
+    - [Input 输入框](#/input) input 数字类型支持复制
+
+
+### 2.5.10-beta.1 {page=#/changelog}
+
+* **[fix]**:
+    - [Select 下拉选框](#/select) 修复select标签键入时input输入框宽度
+
+
+---
+
 ### 2.5.9 {page=#/changelog}
 ###### 2024.01.07
 
