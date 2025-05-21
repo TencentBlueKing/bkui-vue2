@@ -8,7 +8,13 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.10-beta.3 {page=#/changelog}
+### 2.5.10-beta.5 {page=#/changelog}
+
+* **[add]**:
+    - [Tab 选项卡](#/tab) 移除labelHeight validator
+
+
+### 2.5.10-beta.4 {page=#/changelog}
 
 * **[add]**:
     - [Select 下拉选框](#/select) select 支持上下按键选择

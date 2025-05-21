@@ -217,7 +217,7 @@ export default {
     // tab label 高度，最小42px，默认50px
     labelHeight: {
       type: Number,
-      default: 50,
+      default: 50
       // validator (val) {
       //   // return val >= 42
       //   if (val < 42) {
