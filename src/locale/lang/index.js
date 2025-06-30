@@ -31,6 +31,7 @@
  */
 
 import enUS from 'bk-magic-vue/lib/locale/lang/en-US'
+import jaJP from 'bk-magic-vue/lib/locale/lang/ja-JP'
 import zhCN from 'bk-magic-vue/lib/locale/lang/zh-CN'
 
-export default { enUS, zhCN }
+export default { enUS, zhCN, jaJP }

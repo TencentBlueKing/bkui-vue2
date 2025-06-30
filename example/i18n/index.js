@@ -30,15 +30,17 @@
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 
+import { langPkg, locale } from '@'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import { locale, langPkg } from '@'
-import en from './lang/en.json'
 import cn from './lang/cn.json'
+import en from './lang/en.json'
+import ja from './lang/ja.json'
 
 const messages = {
   enUS: Object.assign(langPkg.enUS, en),
-  zhCN: Object.assign(langPkg.zhCN, cn)
+  zhCN: Object.assign(langPkg.zhCN, cn),
+  jaJP: Object.assign(langPkg.jaJP, ja)
 }
 
 Vue.use(VueI18n)
