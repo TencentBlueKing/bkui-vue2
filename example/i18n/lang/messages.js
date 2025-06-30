@@ -30,9 +30,10 @@
  * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 
-import en from './en.json'
-import cn from './cn.json'
 import { langPkg } from '@'
+import cn from './cn.json'
+import en from './en.json'
+import ja from './ja.json'
 
 console.error(langPkg)
 
@@ -40,5 +41,6 @@ export default {
   // en: Object.assign(langPkg.enUS, en),
   // 'zh_CN': Object.assign(langPkg.zhCN, cn)
   enUS: Object.assign(langPkg.enUS, en),
-  zhCN: Object.assign(langPkg.zhCN, cn)
+  zhCN: Object.assign(langPkg.zhCN, cn),
+  jaJP: Object.assign(langPkg.jaJP, ja)
 }
