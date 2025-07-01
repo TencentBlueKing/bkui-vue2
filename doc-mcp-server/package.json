@@ -1,0 +1,45 @@
+{
+  "name": "bkui-vue2-doc-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for BKUI Vue2 component documentation",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "stdio": "tsx src/stdio.ts",
+    "test": "tsx src/test.ts",
+    "agent-test": "tsx examples/agent-demo.ts"
+  },
+  "keywords": [
+    "mcp",
+    "server",
+    "bkui",
+    "vue2",
+    "components",
+    "documentation"
+  ],
+  "author": "Vincent Ko",
+  "license": "MIT",
+  "dependencies": {
+    "@mastra/core": "latest",
+    "@mastra/mcp": "latest",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "markdown-it": "^14.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@ai-sdk/openai": "^1.3.22",
+    "@types/fs-extra": "^11.0.4",
+    "@types/markdown-it": "^13.0.7",
+    "@types/node": "^20.10.6",
+    "dotenv": "^16.5.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
