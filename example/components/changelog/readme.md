@@ -8,6 +8,13 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.8 {page=#/changelog}
+
+* **[add]**:
+    - 支持日语国际化
+    - [Select 下拉选框](#/select) 修复scrollActiveOptionIntoView控制台报错问题
+
+
 ### 2.5.10-beta.7 {page=#/changelog}
 
 * **[add]**:
