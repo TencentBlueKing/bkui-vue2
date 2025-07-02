@@ -46,7 +46,8 @@ module.exports = {
     '^bk-magic-vue/lib/locale$': '<rootDir>/src/locale',
     '^bk-magic-vue/lib/locale/lang$': '<rootDir>/src/locale/lang',
     '^bk-magic-vue/lib/locale/lang/en-US$': '<rootDir>/src/locale/lang/en-US',
-    '^bk-magic-vue/lib/locale/lang/zh-CN$': '<rootDir>/src/locale/lang/en-US'
+    '^bk-magic-vue/lib/locale/lang/zh-CN$': '<rootDir>/src/locale/lang/zh-CN',
+    '^bk-magic-vue/lib/locale/lang/ja-JP$': '<rootDir>/src/locale/lang/ja-JP'
   },
   transform: {
     '^.+\\.js$': '<rootDir>/__test__/jest.babel.js',
