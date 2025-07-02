@@ -841,7 +841,7 @@ export default {
     },
     scrollActiveOptionIntoView () {
       const optionsDom = this.$refs.optionList.querySelectorAll('.is-selected')
-      if (!optionsDom) return
+      if (!optionsDom || !optionsDom.length) return
 
       optionsDom[0].scrollIntoView({
         block: 'nearest'
