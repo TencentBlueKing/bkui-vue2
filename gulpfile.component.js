@@ -147,6 +147,10 @@ const localeFileList = [
   {
     name: 'zh-CN',
     path: './src/locale/lang/zh-CN.js'
+  },
+  {
+    name: 'ja-JP',
+    path: './src/locale/lang/ja-JP.js'
   }
 ]
 
