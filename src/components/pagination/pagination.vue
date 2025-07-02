@@ -38,9 +38,20 @@
   ]">
     <pagination-total-count v-if="showTotalCount" />
     <div v-if="showLimit" :class="['bk-page-count',`bk-page-count-${realityLocation}`, small && 'bk-page-count-small']">
-      <template v-if="curLang === 'cn'">
-        <span>每页</span>
-        <bk-select placeholder="页数"
+      <template v-if="curLang === 'en'">
+        <bk-select :placeholder="t('bk.pagination.pages')"
+          :clearable="false"
+          v-model="realityLimit">
+          <bk-option v-for="(p, index) in limitListTmp"
+            :key="index"
+            :id="p.id"
+            :name="`${p.count}/page`">
+          </bk-option>
+        </bk-select>
+      </template>
+      <template v-else>
+        <span>{{ t('bk.pagination.perPage') }}</span>
+        <bk-select :placeholder="t('bk.pagination.pages')"
           :popover-options="popoverOptions"
           :clearable="false"
           :size="small ? 'small' : ''"
@@ -53,18 +64,7 @@
             :name="p.count">
           </bk-option>
         </bk-select>
-        <span>条</span>
-      </template>
-      <template v-else>
-        <bk-select placeholder="page"
-          :clearable="false"
-          v-model="realityLimit">
-          <bk-option v-for="(p, index) in limitListTmp"
-            :key="index"
-            :id="p.id"
-            :name="`${p.count}/page`">
-          </bk-option>
-        </bk-select>
+        <span>{{ t('bk.pagination.items') }}</span>
       </template>
     </div>
     <pagination-selection-count v-if="showSelectionCount" />
@@ -275,8 +275,8 @@ export default {
   computed: {
     curLang () {
       const l = locale.getCurLang().bk.lang
-      if (['zh', 'cn', 'zh-CN', 'zh-cn', 'zhCN', 'zhcn', 'zh-TW', 'zh-tw', 'zhTW', 'zhtw'].indexOf(l) > -1) {
-        return 'cn'
+      if (['en-US', 'en-us', 'en', 'us'].indexOf(1) > -1) {
+        return 'en'
       }
       return 'en'
     },

@@ -32,11 +32,8 @@
     `bk-page-total-count-${$parent.realityLocation}`,
     { 'bk-page-total-small': $parent.small }
   ]" v-if="$parent.showTotalCount">
-    <template v-if="$parent.curLang === 'cn'">
-      共计<span class="stress">{{$parent.count}}</span>条
-    </template>
-    <template v-else>
-      Total: <span class="stress">{{$parent.count}}</span> items
-    </template>
+    {{ t('bk.pagination.total') }}
+    <span class="stress">{{$parent.count}}</span>
+    {{ t('bk.pagination.items') }}
   </div>
 </template>

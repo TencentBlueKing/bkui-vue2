@@ -191,6 +191,13 @@ export default {
     },
     versionDetail: {
       currentTagText: 'Current'
+    },
+    pagination: {
+      total: 'Total',
+      perPage: 'Per Page',
+      items: 'items',
+      pages: 'Pages',
+      selected: 'Selected'
     }
   }
 }

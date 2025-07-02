@@ -28,11 +28,13 @@
 
 <template>
   <div :class="['bk-page-selection-count', `bk-page-selection-count-${$parent.realityLocation}`]">
-    <template v-if="$parent.curLang === 'cn'">
-      已选择<span class="count">{{$parent.selectionCount}}</span>条
+    <template v-if="$parent.curLang === 'en'">
+      <span class="count">{{$parent.selectionCount}}</span> item(s) selected
     </template>
     <template v-else>
-      <span class="count">{{$parent.selectionCount}}</span> item(s) selected
+      {{ t('bk.pagination.selected') }}
+      <span class="count">{{$parent.selectionCount}}</span>
+      {{ t('bk.pagination.items') }}
     </template>
   </div>
 </template>
