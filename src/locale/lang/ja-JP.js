@@ -188,6 +188,13 @@ export default {
     },
     versionDetail: {
       currentTagText: '現在のバージョン'
+    },
+    pagination: {
+      total: '合計',
+      perPage: '各ページ',
+      items: '本',
+      pages: 'ページ数',
+      selected: '選択済'
     }
   }
 }

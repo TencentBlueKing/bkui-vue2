@@ -188,6 +188,13 @@ export default {
     },
     versionDetail: {
       currentTagText: '当前版本'
+    },
+    pagination: {
+      total: '共计',
+      perPage: '每页',
+      items: '条',
+      pages: '页数',
+      selected: '已选择'
     }
   }
 }
