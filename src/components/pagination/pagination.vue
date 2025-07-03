@@ -278,7 +278,7 @@ export default {
       if (['en-US', 'en-us', 'en', 'us'].indexOf(1) > -1) {
         return 'en'
       }
-      return 'en'
+      return 'cn'
     },
     total () {
       return Math.ceil(this.count / this.realityLimit)
