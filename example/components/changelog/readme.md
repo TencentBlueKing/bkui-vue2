@@ -8,6 +8,18 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.10 {page=#/changelog}
+
+* **[add]**:
+    - 支持日语国际化
+
+
+### 2.5.10-beta.9 {page=#/changelog}
+
+* **[add]**:
+    - 支持日语国际化
+
+
 ### 2.5.10-beta.8 {page=#/changelog}
 
 * **[add]**:
