@@ -411,7 +411,7 @@ export default {
     },
     emitChange () {
       this.$nextTick(() => {
-        this.$emit('change', this.range ? [this.rangeMinValue, this.rangeMaxValue] : this.value)
+        this.$emit('change', this.range ? [this.rangeMinValue, this.rangeMaxValue] : this.firstValue)
       })
     },
     // 获取当前断点位置
