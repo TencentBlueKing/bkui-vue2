@@ -11,6 +11,12 @@
 ### 2.5.10-beta.10 {page=#/changelog}
 
 * **[add]**:
+    - [Slider 滑动选择器](#/slider) chang事件始终返回的初始值
+
+
+### 2.5.10-beta.10 {page=#/changelog}
+
+* **[add]**:
     - 支持日语国际化
 
 
