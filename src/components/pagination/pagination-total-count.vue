@@ -37,3 +37,10 @@
     {{ t('bk.pagination.items') }}
   </div>
 </template>
+
+<script>
+import locale from 'bk-magic-vue/lib/locale'
+export default {
+  mixins: [locale.mixin]
+}
+</script>
