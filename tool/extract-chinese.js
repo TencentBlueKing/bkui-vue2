@@ -52,7 +52,10 @@ const vueFiles = {}
 })(resolve(__dirname, '../src'))
 
 const JS_COMMENT_REG = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg
-const HTML_COMMENT_REG = /(<!--.*?-->)/mg
+
+// const HTML_COMMENT_REG = /(<!--.*?-->)/mg
+const HTML_COMMENT_REG = /(<!--[\s\S]*?-->)/mg
+
 const CHINESE_REG = /[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29\u{20000}-\u{2A6D6}\u{2A700}-\u{2B734}\u{2B740}-\u{2B81D}\u{2B820}-\u{2CEA1}\u{2CEB0}-\u{2EBE0}][^\s'"<]*/umg
 // const CHINESE_REG = /[\u4E00-\u9FA5\uf900-\ufa2d][^\s'"]*/umg
 
@@ -66,7 +69,15 @@ Object.keys(vueFiles).forEach(key => {
       ret[key][file] = []
     }
     const content = readFileSync(resolve(file), 'UTF-8')
-    const noCommentContent = content.replace(JS_COMMENT_REG, '').replace(HTML_COMMENT_REG, '')
+    // const noCommentContent = content.replace(JS_COMMENT_REG, '').replace(HTML_COMMENT_REG, '')
+
+    let noCommentContent = content
+    let previousContent
+    do {
+      previousContent = noCommentContent
+      noCommentContent = noCommentContent.replace(JS_COMMENT_REG, '').replace(HTML_COMMENT_REG, '')
+    } while (noCommentContent !== previousContent)
+
     // eslint-disable-next-line no-cond-assign
     while (match = CHINESE_REG.exec(noCommentContent)) {
       ret[key][file].push(match[0])
