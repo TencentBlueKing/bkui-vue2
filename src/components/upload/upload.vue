@@ -331,7 +331,11 @@ export default {
       return files.filter(file => {
         const { type, name } = file
         const extension = name.indexOf('.') > -1 ? `.${name.split('.').pop()}` : ''
-        const baseType = type.replace(/\/.*$/, '')
+
+        // const baseType = type.replace(/\/.*$/, '')
+        // 高效的字符串方法替代正则表达式，避免性能问题
+        const slashIndex = type.indexOf('/')
+        const baseType = slashIndex > -1 ? type.slice(0, slashIndex) : type
         return this.acceptTypes.split(',')
           .map(type => type.trim())
           .filter(type => type)
@@ -339,9 +343,15 @@ export default {
             if (/\..+$/.test(acceptedType)) {
               return extension === acceptedType
             }
-            if (/\/\*$/.test(acceptedType)) {
-              return baseType === acceptedType.replace(/\/\*$/, '')
+
+            // if (/\/\*$/.test(acceptedType)) {
+            //   return baseType === acceptedType.replace(/\/\*$/, '')
+            // }
+
+            if (acceptedType.endsWith('/*')) {
+              return baseType === acceptedType.slice(0, -2)
             }
+
             if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
               return type === acceptedType
             }

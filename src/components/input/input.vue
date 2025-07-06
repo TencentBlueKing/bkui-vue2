@@ -755,7 +755,8 @@ export default {
         if (isNaN(value)) {
           value = this.min === Number.MIN_SAFE_INTEGER ? 0 : this.min
         }
-        if (value !== '' && /^-?\d*(.\d*)?$/i.test(value)) {
+        // if (value !== '' && /^-?\d*(.\d*)?$/i.test(value)) {
+        if (value !== '' && /^-?\d*(?:\.\d*)?$/i.test(value)) {
           if (value > this.max || value < this.min) {
             value = this.getCurrentNumberValue()
           }
@@ -785,7 +786,8 @@ export default {
     getCurrentNumberValue (val = null) {
       val = val === null ? this.curValue : val
       let value = ''
-      if (val !== '' && /^-?\d*(.\d*)?$/i.test(val)) {
+      //   if (val !== '' && /^-?\d*(.\d*)?$/i.test(val)) {
+      if (val !== '' && /^-?\d*(?:\.\d*)?$/i.test(val)) {
         value = Number(val)
         value = value > this.max ? this.max : value
         value = value < this.min ? this.min : value
@@ -867,7 +869,8 @@ export default {
     },
 
     updateNumberValue (val) {
-      if (val !== '' && /^number$/i.test(this.type) && /^-?\d*(.\d*)?$/i.test(val)) {
+      // if (val !== '' && /^number$/i.test(this.type) && /^-?\d*(.\d*)?$/i.test(val)) {
+      if (val !== '' && /^number$/i.test(this.type) && /^-?\d*(?:\.\d*)?$/i.test(val)) {
         val = this.getCurrentNumberValue(val)
         this.curValue = typeof this.precision === 'number' ? this.toPrecision(
           Number(val),

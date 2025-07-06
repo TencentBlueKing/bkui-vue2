@@ -69,8 +69,22 @@ export default {
         extra_domains: [
           {
             validator: function (val) {
-              //   return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+;?)+$/.test(val)
-              return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?)+;?)+$/.test(val)
+              //   //   return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+;?)+$/.test(val)
+              //   return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?)+;?)+$/.test(val)
+
+              // 防止 ReDoS 攻击
+              if (val === '' || /^[\u65e0]$/.test(val)) {
+                return true
+              }
+
+              // 检查长度限制
+              if (val.length < 3 || val.length > 255) {
+                return false
+              }
+
+              // 更安全的域名验证逻辑
+              const domainPattern = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*;?$/
+              return domainPattern.test(val)
             },
             message: '域名格式不对',
             trigger: 'blur'
