@@ -143,12 +143,17 @@ export default {
       if (!this.titleAble) {
         return ''
       }
-      let previous
-      do {
-        previous = str
-        str = str.replace(/<[^>]+>/g, '')
-      } while (str !== previous)
-      return str
+
+      //   let previous
+      //   do {
+      //     previous = str
+      //     str = str.replace(/<[^>]+>/g, '')
+      //   } while (str !== previous)
+      //   return str
+
+      // 更安全的正则表达式，防止 ReDoS 攻击
+      // 限制匹配长度
+      return str.replace(/<[^>]{0,100}>/g, '')
     }
   }
 }
