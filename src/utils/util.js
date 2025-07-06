@@ -214,6 +214,9 @@ export function deepAssign (target, ...sources) {
   sourcesArray.forEach(source => {
     for (const key in source) {
       if (Object.prototype.hasOwnProperty.call(source, key)) {
+        if (key === '__proto__' || key === 'constructor') {
+          continue
+        }
         const targetValue = target[key]
         if (Array.isArray(targetValue)) {
           target[key].push(...(source[key] || []))

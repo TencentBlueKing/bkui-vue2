@@ -139,7 +139,16 @@ export default {
       return this.isBuiltinIcon(icon) || this.isVNodeIcon(icon)
     },
     computedTitle (str) {
-      return this.titleAble ? str.replace(/<[^>]+>/g, '') : ''
+      //   return this.titleAble ? str.replace(/<[^>]+>/g, '') : ''
+      if (!this.titleAble) {
+        return ''
+      }
+      let previous
+      do {
+        previous = str
+        str = str.replace(/<[^>]+>/g, '')
+      } while (str !== previous)
+      return str
     }
   }
 }

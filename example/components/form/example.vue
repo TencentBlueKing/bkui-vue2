@@ -59,7 +59,8 @@ export default {
         docker_hub: [
           {
             validator: function (val) {
-              return val === '' || /^(http(s)?:\/\/)\w+[^\s]+(\.[^\s]+){1,}$/.test(val)
+              //   return val === '' || /^(http(s)?:\/\/)\w+[^\s]+(\.[^\s]+){1,}$/.test(val)
+              return val === '' || /^(http(s)?:\/\/)\w+[^.\s]+(\.[^.\s]+)+$/.test(val)
             },
             message: '地址格式不对',
             trigger: 'blur'
@@ -68,7 +69,8 @@ export default {
         extra_domains: [
           {
             validator: function (val) {
-              return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+;?)+$/.test(val)
+              //   return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+;?)+$/.test(val)
+              return val === '' || /^[\u65e0]$|^(?=^.{3,255}$)([a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?)+;?)+$/.test(val)
             },
             message: '域名格式不对',
             trigger: 'blur'
