@@ -3,7 +3,7 @@
  * Tencent is pleased to support the open source community by making
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) available.
  *
- * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2025 Tencent.  All rights reserved.
  *
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) is licensed under the MIT License.
  *
@@ -28,7 +28,7 @@
 /**
  * @file message entry
  *
- * Copyright © 2012-2019 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
+ * Copyright © 2012-2025 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 import JSONFormatter from 'json-formatter-js'
 import ClipboardJS from 'clipboard'
@@ -195,7 +195,7 @@ export default {
         isFix && this.fixMesage(e, false)
         return
       }
-    
+
       if (altKey && keyCode === 80) {
         !isFix && this.fixMesage(e, true)
       }

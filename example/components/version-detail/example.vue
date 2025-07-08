@@ -2,7 +2,7 @@
  * Tencent is pleased to support the open source community by making
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) available.
  *
- * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2025 Tencent.  All rights reserved.
  *
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) is licensed under the MIT License.
  *
@@ -41,7 +41,7 @@
         <div v-if="content.detail" class="bk-version-markdown-theme">
           <h1>【{{content.detail}}】版本更新明细</h1>
           <div v-for="(group, index) in currentDetailList" :key="index">
-            <h3 >{{group.type}}</h3>
+            <h3>{{group.type}}</h3>
             <ul>
               <li v-for="(detail, dIndex) in group.detail" :key="dIndex">{{ detail }}</li>
             </ul>
@@ -141,32 +141,32 @@ export default {
             {
               type: '新增',
               detail: [
-                  '[新增] 内置 ES6+ 语言转义能力增强',
-                  '[新增] 任务通知中心',
-                  '[新增] 控制台新增命令 cleanAppCache',
-                  '[新增] 云开发云调用快速启动模板',
-                  '[新增] 插件增加工具回退时的保护机制'
+                '[新增] 内置 ES6+ 语言转义能力增强',
+                '[新增] 任务通知中心',
+                '[新增] 控制台新增命令 cleanAppCache',
+                '[新增] 云开发云调用快速启动模板',
+                '[新增] 插件增加工具回退时的保护机制'
               ]
             },
             {
-                type: '优化',
-                detail: [
-                    '[优化] 素材管理，不再维护的提示',
-                    '[优化] 任务通知中心',
-                    '[优化] 控制台新增命令 cleanAppCache',
-                    '[优化] 上传时版本号推荐',
-                    '[优化] project.config.json 中新增设置 uploadWithSourceMap'
-                ]
+              type: '优化',
+              detail: [
+                '[优化] 素材管理，不再维护的提示',
+                '[优化] 任务通知中心',
+                '[优化] 控制台新增命令 cleanAppCache',
+                '[优化] 上传时版本号推荐',
+                '[优化] project.config.json 中新增设置 uploadWithSourceMap'
+              ]
             },
             {
-                type: '修复',
-                detail: [
-                    '[修复] 体验评分“iPhone X兼容”检验规则',
-                    '[修复] sitemap，控制台显示当前页面是否索引',
-                    '[修复] createUDPSocket bindUDPSocket 改为同步接口',
-                    '[修复] 代码保护默认打开',
-                    '[修复] 工具启动默认打开项目',
-                ]
+              type: '修复',
+              detail: [
+                '[修复] 体验评分“iPhone X兼容”检验规则',
+                '[修复] sitemap，控制台显示当前页面是否索引',
+                '[修复] createUDPSocket bindUDPSocket 改为同步接口',
+                '[修复] 代码保护默认打开',
+                '[修复] 工具启动默认打开项目'
+              ]
             }
           ]
           resolve()
