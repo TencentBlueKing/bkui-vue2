@@ -2,7 +2,7 @@
  * Tencent is pleased to support the open source community by making
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) available.
  *
- * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2025 Tencent.  All rights reserved.
  *
  * 蓝鲸智云PaaS平台社区版 (BlueKing PaaS Community Edition) is licensed under the MIT License.
  *
@@ -127,7 +127,7 @@ export default {
         this.inputWidth = this.canvasContext.measureText(this.newOptionName || '').width
         return
       }
-      
+
       const INPUT_MIN_WIDTH = 12
       this.inputWidth = this.newOptionName.length * (this.fontSize || INPUT_MIN_WIDTH)
     },
@@ -195,7 +195,7 @@ export default {
     },
     setOverflowTagContent () {
       this.overflowTagNode.textContent = `+${this.select.selected.length - this.overflowTagIndex}`
-      
+
       this.destroyTippy()
       this.overflowTagTips = Tippy(this.overflowTagNode, {
         duration: 0,
