@@ -38,7 +38,7 @@ export default {
       selectDate: '日付を選択',
       selectTime: '時間を選択',
       clear: 'クリア',
-      ok: '確定',
+      ok: 'OK',
       weekdays: {
         sun: '日',
         mon: '月',
@@ -51,11 +51,11 @@ export default {
       hour: '時',
       min: '分',
       sec: '秒',
-      toNow: '今まで',
+      toNow: '現在まで',
       now: '今'
     },
     dialog: {
-      ok: '確定',
+      ok: 'OK',
       cancel: 'キャンセル'
     },
     exception: {
@@ -83,7 +83,7 @@ export default {
     select: {
       selectAll: 'すべて選択',
       pleaseselect: '選択してください',
-      searchPlaceholder: 'キーワードを入力して検索',
+      searchPlaceholder: 'キーワードを入力してください',
       dataEmpty: 'オプションがありません',
       searchEmpty: '一致するデータがありません'
     },
@@ -135,7 +135,7 @@ export default {
       remoteEmptyText: 'データがありません',
       remoteLoadingText: '読み込み中...',
       tips: '複数のキーワードは縦棒 "|" で区切ります',
-      ok: '確認',
+      ok: 'OK',
       cancel: 'キャンセル'
     },
     table: {
@@ -144,7 +144,7 @@ export default {
       setting: {
         title: 'テーブル設定',
         fields: {
-          title: 'フィールド表示設定',
+          title: '表示フィールド設定',
           subtitle: '（最大{max}項目）',
           selectAll: 'すべて選択'
         },
@@ -155,11 +155,11 @@ export default {
           large: '大'
         },
         options: {
-          ok: '確認',
+          ok: 'OK',
           cancel: 'キャンセル'
         }
       },
-      confirm: '確定',
+      confirm: 'OK',
       reset: 'リセット',
       all: 'すべて',
       filter: {
