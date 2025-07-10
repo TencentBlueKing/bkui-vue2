@@ -8,7 +8,13 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.10-beta.10 {page=#/changelog}
+### 2.5.10-beta.12 {page=#/changelog}
+
+* **[add]**:
+    - 日语国际化语言优化
+
+
+### 2.5.10-beta.11 {page=#/changelog}
 
 * **[add]**:
     - [Slider 滑动选择器](#/slider) chang事件始终返回的初始值
