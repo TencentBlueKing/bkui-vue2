@@ -30,6 +30,8 @@
  * Copyright © 2012-2025 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 
+import DOMPurify from 'dompurify'
+
 export default {
   name: 'render',
   functional: true,
@@ -48,9 +50,9 @@ export default {
     function highlightKeyword (value) {
       if (searchKeyword) {
         const keywordReg = new RegExp(`(${searchKeyword})`, 'i')
-        return value.replace(keywordReg, '<strong class="highlight-text">$1</strong>')
+        return DOMPurify.sanitize(value.replace(keywordReg, '<strong class="highlight-text">$1</strong>'))
       } else {
-        return value
+        return DOMPurify.sanitize(value)
       }
     }
 

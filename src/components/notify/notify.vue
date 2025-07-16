@@ -46,7 +46,7 @@
             :class="['bk-notify-content-text', { limitLine: limitLine > 0 }]"
             :style="contentStyle">
             <template v-if="!useHTMLString">{{message}}</template>
-            <span v-else v-html="message"></span>
+            <span v-else v-html="domPurify(message)"></span>
             <button
               v-if="showViewMore"
               class="showMoreBtn"
@@ -76,6 +76,7 @@
  * @param {Function} onClose 关闭回调函数
  */
 import locale from 'bk-magic-vue/lib/locale'
+import DOMPurify from 'dompurify'
 
 const ICONS = {
   primary: 'icon-info-circle-shape',
@@ -140,6 +141,9 @@ export default {
     this.startCountDown()
   },
   methods: {
+    domPurify (value) {
+      return DOMPurify.sanitize(value)
+    },
     destroyEl () {
       this.$destroy()
       this.$el.parentNode && this.$el.parentNode.removeChild(this.$el)

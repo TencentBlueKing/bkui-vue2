@@ -183,6 +183,7 @@
   },
   "dependencies": {
     "clipboard": "^2.0.11",
+    "dompurify": "^3.2.6",
     "highlight.js": "^10.7.2",
     "json-formatter-js": "^2.3.4",
     "marked": "4.2.12",
