@@ -41,7 +41,11 @@
       </div>
       <div class="bk-timeline-section">
         <slot :name="`title${index}`" v-bind="item">
-          <div :class="['bk-timeline-title', { 'has-event': !!$listeners['select'] }]" v-if="item.tag !== ''" @click="toggle(item)" v-html="item.tag"></div>
+          <div
+            :class="['bk-timeline-title', { 'has-event': !!$listeners['select'] }]"
+            v-if="item.tag !== ''"
+            @click="toggle(item)"
+            v-html="domPurify(item.tag)"></div>
         </slot>
         <div class="bk-timeline-content" v-if="item.content">
           <slot :name="`nodeContent${index}`" v-bind="item">
@@ -49,7 +53,7 @@
               <content-vnode :content="item.content" />
             </template>
             <template v-else>
-              <div v-html="item.content" :title="computedTitle(item.content)"></div>
+              <div v-html="domPurify(item.content)" :title="computedTitle(item.content)"></div>
             </template>
           </slot>
         </div>
@@ -59,6 +63,7 @@
 </template>
 <script>
 import { isVNode } from '@/utils/dom'
+import DOMPurify from 'dompurify'
 
 export default {
   name: 'bk-timeline',
@@ -97,6 +102,9 @@ export default {
     }
   },
   methods: {
+    domPurify (value) {
+      return DOMPurify.sanitize(value)
+    },
     toggle (item) {
       this.$emit('select', item)
     },
