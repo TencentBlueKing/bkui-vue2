@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.13 {page=#/changelog}
+
+* **[fix]**:
+    - bugfix(timeline | tag-input | tree | notify): html 字符串编码问题
+
+
 ### 2.5.10-beta.12 {page=#/changelog}
 
 * **[add]**:
