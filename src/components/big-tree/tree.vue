@@ -523,7 +523,7 @@ export default {
             checked: true,
             ...options
           }
-          const nodes = ids.map(id => this.getNodeById(id))
+          const nodes = ids.map(id => this.getNodeById(id)).filter(node => !!node)
           if (mergeOptions.beforeCheck && typeof this.beforeCheck === 'function') {
             const response = await this.beforeCheck(nodes.length > 1 ? nodes : nodes[0], mergeOptions.checked)
             if (!response) {
