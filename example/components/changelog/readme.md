@@ -11,6 +11,12 @@
 ### 2.5.10-beta.13 {page=#/changelog}
 
 * **[fix]**:
+    - [Big Tree 大树](#/big-tree) 调用setChecked实例方法传入一个不存节点 id 时缺少错误逻辑处理
+
+
+### 2.5.10-beta.13 {page=#/changelog}
+
+* **[fix]**:
     - bugfix(timeline | tag-input | tree | notify): html 字符串编码问题
 
 
