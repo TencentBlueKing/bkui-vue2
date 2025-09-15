@@ -8,7 +8,13 @@
 
 <div class="changelog-wrapper">
 
-### 2.5.10-beta.13 {page=#/changelog}
+### 2.5.10-beta.15 {page=#/changelog}
+
+* **[fix]**:
+    - [ResizeLayout 可拉伸布局](#/resize-layout): aside-bottom的时候把手位置异常
+
+
+### 2.5.10-beta.14 {page=#/changelog}
 
 * **[fix]**:
     - [Big Tree 大树](#/big-tree) 调用setChecked实例方法传入一个不存节点 id 时缺少错误逻辑处理
