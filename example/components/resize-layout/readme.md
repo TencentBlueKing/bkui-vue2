@@ -114,7 +114,10 @@
         </bk-resize-layout>
         <bk-resize-layout slot="main" placement="bottom" :border="false" style="height: 100%" :collapsible="true" :auto-minimize="true">
             <div slot="aside">aside-bottom</div>
-            <div slot="main">main-2</div>
+            <bk-resize-layout slot="main" placement="right" :border="false" style="height: 100%" :collapsible="true" :auto-minimize="true">
+                <div slot="aside">aside-right</div>
+                <div slot="main">main-3</div>
+            </bk-resize-layout>
         </bk-resize-layout>
     </bk-resize-layout>
 </template>
