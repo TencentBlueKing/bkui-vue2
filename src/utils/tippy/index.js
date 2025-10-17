@@ -507,6 +507,7 @@ function setInnerHTML(element, html) {
  */
 
 function setContent(contentEl, props) {
+  if (!contentEl) return;
   if (isRealElement(props.content)) {
     setInnerHTML(contentEl, '');
     contentEl.appendChild(props.content);

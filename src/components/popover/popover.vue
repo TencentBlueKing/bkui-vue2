@@ -187,9 +187,11 @@ export default {
     }
   },
   updated () {
-    this.instance.setContent(this.$refs.html)
-    if (this.instance.popperInstance) {
-      this.instance.popperInstance.update()
+    if (this.$refs.html) {
+      this.instance.setContent(this.$refs.html)
+      if (this.instance.popperInstance) {
+        this.instance.popperInstance.update()
+      }
     }
   },
   beforeDestroy () {
