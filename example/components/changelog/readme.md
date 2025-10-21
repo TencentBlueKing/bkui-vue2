@@ -8,10 +8,16 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.16 {page=#/changelog}
+
+* **[fix]**:
+    - [Popover 弹出框提示](#/popover) 修复通过refs获取dom元素，如dom未正确渲染时获取会返回null问题修复
+
+
 ### 2.5.10-beta.15 {page=#/changelog}
 
 * **[fix]**:
-    - [ResizeLayout 可拉伸布局](#/resize-layout): aside-bottom的时候把手位置异常
+    - [ResizeLayout 可拉伸布局](#/resize-layout) aside-bottom的时候把手位置异常
 
 
 ### 2.5.10-beta.14 {page=#/changelog}
@@ -23,7 +29,7 @@
 ### 2.5.10-beta.13 {page=#/changelog}
 
 * **[fix]**:
-    - bugfix(timeline | tag-input | tree | notify): html 字符串编码问题
+    - bugfix(timeline | tag-input | tree | notify) html 字符串编码问题
 
 
 ### 2.5.10-beta.12 {page=#/changelog}
