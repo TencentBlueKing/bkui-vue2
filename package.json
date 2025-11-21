@@ -190,6 +190,9 @@
     "spark-md5": "^3.0.2",
     "tinycolor2": "^1.4.1"
   },
+  "overrides": {
+    "json5": "^2.2.3"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
