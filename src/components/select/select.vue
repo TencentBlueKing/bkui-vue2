@@ -675,6 +675,12 @@ export default {
       this.focusTagInput()
     },
     unselectOption (option) {
+      // 移除允许创建的选项
+      const index = this.allowCreateData.findIndex(item => item.id === option.id)
+      if (this.allowCreate && index > -1) {
+        this.allowCreateData.splice(index, 1)
+        delete this.optionsMap[option.id]
+      }
       if (this.multiple) {
         if (!this.shouldUpdate) {
           this.selectedOptions = this.selectedOptions.filter(selectedOption => selectedOption.id !== option.id)
