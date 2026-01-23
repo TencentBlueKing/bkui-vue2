@@ -34,7 +34,7 @@ const { resolve } = require('path')
 const ora = require('ora')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const rm = require('rimraf')
+const { rimrafSync } = require('rimraf')
 const fse = require('fs-extra')
 
 const webpackConf = require('./webpack.example.conf')
@@ -44,11 +44,13 @@ process.env.NODE_ENV = 'example'
 const spinner = ora('building for example...')
 spinner.start()
 
-rm(resolve(__dirname, '../dist/example'), e => {
-  if (e) {
-    throw e
-  }
-  webpack(webpackConf, (err, stats) => {
+try {
+  rimrafSync(resolve(__dirname, '../dist/example'))
+} catch (e) {
+  throw e
+}
+
+webpack(webpackConf, (err, stats) => {
     spinner.stop()
     if (err) {
       throw err
@@ -80,4 +82,3 @@ rm(resolve(__dirname, '../dist/example'), e => {
       process.exit(1)
     })
   })
-})

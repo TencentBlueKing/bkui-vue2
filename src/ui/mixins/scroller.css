@@ -9,8 +9,8 @@
 
 @define-mixin scroller $backgroundColor: #dcdee5, $width: 6px {
     &::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+        width: $width;
+        height: $width;
     }
     &::-webkit-scrollbar-thumb {
         min-height: 24px;

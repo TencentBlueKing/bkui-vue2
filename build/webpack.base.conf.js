@@ -33,7 +33,7 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
-const friendlyFormatter = require('eslint-friendly-formatter')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const { assetsPath } = require('./util')
 
@@ -62,16 +62,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('build')],
-        exclude: /node_modules/,
-        options: {
-          formatter: friendlyFormatter
-        }
-      },
       {
         test: /\.vue$/,
         use: {
@@ -115,26 +105,38 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: assetsPath('images/[name].[hash:7].[ext]')
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024 // 10kb
+          }
+        },
+        generator: {
+          filename: assetsPath('images/[name].[hash:7][ext]')
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: assetsPath('fonts/[name].[hash:7].[ext]')
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024 // 10kb
           }
+        },
+        generator: {
+          filename: assetsPath('fonts/[name].[hash:7][ext]')
         }
       }
     ]
   },
   plugins: [
     new VueLoaderPlugin(),
+    new ESLintPlugin({
+      extensions: ['js', 'vue'],
+      context: resolve(__dirname, '..'),
+      files: ['src', 'build'],
+      exclude: ['node_modules']
+    }),
     new webpack.ContextReplacementPlugin(/brace\/mode$/, /^\.\/(json|python|sh|text)$/),
     new webpack.ContextReplacementPlugin(
       /highlight\.js\/lib\/languages$/,

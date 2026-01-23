@@ -32,27 +32,28 @@
 
 const { resolve } = require('path')
 const rollupVue = require('rollup-plugin-vue')
-const rollupResolve = require('rollup-plugin-node-resolve')
-const rollupBabel = require('rollup-plugin-babel')
-const rollupCommonjs = require('rollup-plugin-commonjs')
+const rollupResolve = require('@rollup/plugin-node-resolve').default
+const rollupBabel = require('@rollup/plugin-babel').default
+const rollupCommonjs = require('@rollup/plugin-commonjs')
 const rollupPostcss = require('rollup-plugin-postcss')
-const rollupAlias = require('rollup-plugin-alias')
+const rollupAlias = require('@rollup/plugin-alias')
 const rollupCleanup = require('rollup-plugin-cleanup')
-const rollupReplace = require('rollup-plugin-replace')
+const rollupReplace = require('@rollup/plugin-replace')
 
 const rollupCustomImage = require('./rollup-plugin-custom-image')
 
 const config = require('./config')
 module.exports = [
   rollupReplace({
-    exclude: 'node_modules/**',
+    preventAssignment: true,
     'process.env': JSON.stringify(config.build.env)
   }),
   rollupCustomImage(),
   rollupAlias({
-    resolve: ['.js', '.vue', '.css', '.svg', '.png', '/index.js'],
-    '@': resolve('src'),
-    'bk-magic-vue/lib': resolve('src')
+    entries: [
+      { find: '@', replacement: resolve('src') },
+      { find: 'bk-magic-vue/lib', replacement: resolve('src') }
+    ]
   }),
   rollupVue({
     // https://github.com/vuejs/rollup-plugin-vue/blob/master/docs/options.md
@@ -69,6 +70,7 @@ module.exports = [
     inject: false
   }),
   rollupBabel({
+    babelHelpers: 'runtime',
     babelrc: false,
     exclude: ['node_modules/**'],
     presets: [
@@ -91,20 +93,14 @@ module.exports = [
       '@babel/plugin-transform-async-to-generator',
       '@babel/plugin-transform-object-assign',
       'date-fns',
-      '@babel/plugin-proposal-object-rest-spread',
-      // 使用 external-helpers 插件，它允许 Rollup 在包的顶部只引用一次 “helpers”，
-      // 而不是每个使用它们的模块中都引用一遍（这是默认行为）。
-      '@babel/plugin-external-helpers',
       '@vue/babel-plugin-transform-vue-jsx',
       '@babel/plugin-syntax-jsx',
       '@babel/plugin-syntax-dynamic-import',
       ['@babel/plugin-transform-runtime', {
-        corejs: 2,
-        helpers: false
+        corejs: 3,
+        helpers: true
       }]
     ],
-    runtimeHelpers: true,
-    comments: true,
     extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue']
   }),
   rollupResolve({
@@ -112,12 +108,7 @@ module.exports = [
     browser: true,
     extensions: ['.js', '.vue']
   }),
-  rollupCommonjs({
-    namedExports: {
-      'node_modules/diff/dist/diff.js': ['createPatch']
-      //     'node_modules/popper.js/dist/umd/popper.js': ['Popper']
-    }
-  }),
+  rollupCommonjs(),
   rollupCleanup({
     comments: 'none'
   })

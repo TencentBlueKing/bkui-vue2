@@ -36,7 +36,7 @@ const presets = [
     '@babel/preset-env',
     {
       'modules': 'commonjs',
-      'corejs': 2,
+      'corejs': 3,
       'spec': true,
       'targets': {
         'browsers': ['> 1%', 'last 2 versions', 'not ie <= 8'],
@@ -50,7 +50,7 @@ const presets = [
 ]
 
 const plugins = [
-  '@babel/plugin-transform-runtime',
+  ['@babel/plugin-transform-runtime', { corejs: 3 }],
   '@babel/plugin-transform-async-to-generator',
   '@babel/plugin-transform-object-assign',
   '@babel/plugin-syntax-dynamic-import',
@@ -61,7 +61,7 @@ const plugins = [
 
 const comments = true
 
-module.exports = require('babel-jest').createTransformer({
+module.exports = require('babel-jest').default.createTransformer({
   presets,
   plugins,
   comments

@@ -35,7 +35,7 @@
 
 const gulp = require('gulp')
 const { rollup } = require('rollup')
-const { terser } = require('rollup-plugin-terser')
+const terser = require('@rollup/plugin-terser')
 const rollupCopy = require('rollup-plugin-copy')
 const rollupGzip = require('rollup-plugin-gzip').default
 const plugins = require('./build/rollup-plugin')

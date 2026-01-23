@@ -32,17 +32,20 @@
 
 const path = require('path')
 const fse = require('fs-extra')
-const npm = require('npm')
+const { execSync } = require('child_process')
 
 const manifestExist = fse.pathExistsSync(path.resolve(__dirname, '..', 'example', 'static', 'lib-manifest.json'))
 const bundleExist = fse.pathExistsSync(path.resolve(__dirname, '..', 'example', 'static', 'lib.bundle.js'))
 
-if (!(manifestExist & bundleExist)) {
-  npm.load({}, () => {
-    npm.run('dll', err => {
-      if (err) {
-        throw err
-      }
+if (!(manifestExist && bundleExist)) {
+  console.log('DLL files not found, building...')
+  try {
+    execSync('npm run dll', {
+      cwd: path.resolve(__dirname, '..'),
+      stdio: 'inherit'
     })
-  })
+  } catch (err) {
+    console.error('Failed to build DLL:', err.message)
+    process.exit(1)
+  }
 }
