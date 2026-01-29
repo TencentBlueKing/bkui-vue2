@@ -50,6 +50,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: '[name].js',
     publicPath: '/'
   },
+  // 优化开发体验
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+    runtimeChunk: true
+  },
   module: {
     rules: [
       {

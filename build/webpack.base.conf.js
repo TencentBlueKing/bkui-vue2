@@ -44,9 +44,21 @@ const mdLoaderOption = require('./md-loader-option')
 
 const hljsLanguageConfig = require('./hljs-language-config')
 
+const isDev = process.env.NODE_ENV === 'dev'
+
 module.exports = {
+  // 启用 Webpack 5 持久化缓存，大幅提升二次启动速度
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: resolve(__dirname, '../node_modules/.cache/webpack'),
+    buildDependencies: {
+      config: [__filename]
+    }
+  },
   watchOptions: {
-    ignored: /node_modules/
+    ignored: /node_modules/,
+    // 减少文件系统轮询频率
+    poll: false
   },
   resolve: {
     extensions: ['.js', '.vue'],
@@ -79,15 +91,13 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        include: [LIBRARY_ROOT, EXAMPLE_DIR],
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            include: LIBRARY_ROOT,
-            cacheDirectory: './webpack_cache/',
-            // 确保 JS 的转译应用到 node_modules 的 Vue 单文件组件
-            exclude: file => (
-              /node_modules/.test(file) && !/\.vue\.js/.test(file)
-            )
+            cacheDirectory: true,
+            cacheCompression: false
           }
         }
       },
@@ -131,11 +141,17 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    // 开发模式下使用缓存和异步检查，提升启动速度
     new ESLintPlugin({
       extensions: ['js', 'vue'],
       context: resolve(__dirname, '..'),
       files: ['src', 'build'],
-      exclude: ['node_modules']
+      exclude: ['node_modules'],
+      cache: true,
+      cacheLocation: resolve(__dirname, '../node_modules/.cache/.eslintcache'),
+      // 开发模式下只检查修改的文件，且不阻塞编译
+      lintDirtyModulesOnly: isDev,
+      threads: isDev
     }),
     new webpack.ContextReplacementPlugin(/brace\/mode$/, /^\.\/(json|python|sh|text)$/),
     new webpack.ContextReplacementPlugin(
