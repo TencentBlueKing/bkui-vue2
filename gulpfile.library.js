@@ -64,7 +64,8 @@ async function sourceLibrary () {
     exports: 'named',
     globals: {
       vue: 'Vue'
-    }
+    },
+    interop: 'auto'
   })
 }
 
@@ -108,7 +109,8 @@ async function minLibrary () {
     exports: 'named',
     globals: {
       vue: 'Vue'
-    }
+    },
+    interop: 'auto'
   })
 }
 
