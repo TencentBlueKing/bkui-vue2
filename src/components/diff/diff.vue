@@ -34,7 +34,7 @@
 
 <script>
 import { createPatch } from 'diff'
-import { Diff2Html } from 'diff2html'
+import * as Diff2Html from 'diff2html'
 import hljs from 'highlight.js/lib/core'
 
 // rollup v1 版本中支持 dynamic import 来做 code split，但是有几个问题，所以这里不使用 dynamic import
@@ -149,16 +149,14 @@ export default {
       }
       ]
       const dd = createPatch(...args)
-      const outStr = Diff2Html.getJsonFromDiff(dd, {
-        inputFormat: 'diff',
+      // diff2html v3 API: parse() 替代 getJsonFromDiff(), html() 替代 getPrettyHtml()
+      const diffJson = Diff2Html.parse(dd, {
         outputFormat: this.format,
-        showFiles: false,
         matching: 'lines'
       })
-      const html = Diff2Html.getPrettyHtml(outStr, {
-        inputFormat: 'json',
+      const html = Diff2Html.html(diffJson, {
         outputFormat: this.format,
-        showFiles: false,
+        drawFileList: false,
         matching: 'lines'
       })
       return htmlReplace(html)

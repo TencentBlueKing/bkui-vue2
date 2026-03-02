@@ -1,22 +1,23 @@
-$defaultColor: #63656e;
-$defaultHoverColor: #979ba5;
-$defaultDisabledColor: #dcdee5;
+/* link 组件专用变量，避免覆盖全局变量 */
+$linkDefaultColor: #63656e;
+$linkDefaultHoverColor: #979ba5;
+$linkDefaultDisabledColor: #dcdee5;
 
-$primaryColor: #3a84ff;
-$primaryHoverColor: #699df4;
-$primaryDisabledColor: #a3c5fd;
+$linkPrimaryColor: #3a84ff;
+$linkPrimaryHoverColor: #699df4;
+$linkPrimaryDisabledColor: #a3c5fd;
 
-$successColor: #2dcb56;
-$successHoverColor: #44e360;
-$successDisabledColor: #94f5a4;
+$linkSuccessColor: #2dcb56;
+$linkSuccessHoverColor: #44e360;
+$linkSuccessDisabledColor: #94f5a4;
 
-$warningColor: #ff9c01;
-$warningHoverColor: #ffb849;
-$warningDisabledColor: #ffd695;
+$linkWarningColor: #ff9c01;
+$linkWarningHoverColor: #ffb849;
+$linkWarningDisabledColor: #ffd695;
 
-$dangerColor: #ea3636;
-$dangerHoverColor: #fe5657;
-$dangerDisabledColor: #fd9c9c;
+$linkDangerColor: #ea3636;
+$linkDangerHoverColor: #fe5657;
+$linkDangerDisabledColor: #fd9c9c;
 
 .bk-link {
     display: inline-flex;
@@ -40,72 +41,72 @@ $dangerDisabledColor: #fd9c9c;
         font-size: 14px;
     }
     &.is-default {
-        color: $defaultColor;
+        color: $linkDefaultColor;
         &:hover {
-            color: $defaultHoverColor;
+            color: $linkDefaultHoverColor;
         }
         &.is-disabled {
-            color: $defaultDisabledColor;
+            color: $linkDefaultDisabledColor;
         }
     }
     &.is-primary {
-        color: $primaryColor;
+        color: $linkPrimaryColor;
         &:hover {
-            color: $primaryHoverColor;
+            color: $linkPrimaryHoverColor;
         }
         &:active {
             color: #1768ef;
         }
         &:visited {
-            color: $primaryHoverColor;
+            color: $linkPrimaryHoverColor;
         }
         &.is-disabled {
-            color: $primaryDisabledColor;
+            color: $linkPrimaryDisabledColor;
         }
     }
     &.is-success {
-        color: $successColor;
+        color: $linkSuccessColor;
         &:hover {
-            color: $successHoverColor;
+            color: $linkSuccessHoverColor;
         }
         &:active {
             color: #1bb943;
         }
         &:visited {
-            color: $successHoverColor;
+            color: $linkSuccessHoverColor;
         }
         &.is-disabled {
-            color: $successDisabledColor;
+            color: $linkSuccessDisabledColor;
         }
     }
     &.is-warning {
-        color: $warningColor;
+        color: $linkWarningColor;
         &:hover {
-            color: $warningHoverColor;
+            color: $linkWarningHoverColor;
         }
         &:active {
             color: #eb9000;
         }
         &:visited {
-            color: $warningHoverColor;
+            color: $linkWarningHoverColor;
         }
         &.is-disabled {
-            color: $warningDisabledColor;
+            color: $linkWarningDisabledColor;
         }
     }
     &.is-danger {
-        color: $dangerColor;
+        color: $linkDangerColor;
         &:hover {
-            color: $dangerHoverColor;
+            color: $linkDangerHoverColor;
         }
         &:active {
             color: #da2726;
         }
         &:visited {
-            color: $dangerHoverColor;
+            color: $linkDangerHoverColor;
         }
         &.is-disabled {
-            color: $dangerDisabledColor;
+            color: $linkDangerDisabledColor;
         }
     }
     &.is-disabled {

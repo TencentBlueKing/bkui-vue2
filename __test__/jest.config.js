@@ -34,6 +34,7 @@
 
 module.exports = {
   rootDir: '../',
+  testEnvironment: 'jsdom',
   setupFiles: ['<rootDir>/__test__/setup', 'jest-canvas-mock'],
   moduleFileExtensions: [
     'js',
@@ -51,7 +52,7 @@ module.exports = {
   },
   transform: {
     '^.+\\.js$': '<rootDir>/__test__/jest.babel.js',
-    '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',
+    '.*\\.(vue)$': '@vue/vue2-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$': 'jest-transform-stub'
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!popper.js)'],

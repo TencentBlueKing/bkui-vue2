@@ -80,7 +80,7 @@
   </bk-dialog>
 </template>
 <script>
-import { marked } from 'marked/lib/marked.esm.js'
+import { marked } from 'marked'
 import bkOverflowTips from '../../directives/overflow-tips'
 import bkloading from '../loading/directive'
 import BkDialog from '../dialog'

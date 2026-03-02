@@ -32,9 +32,8 @@
 
 const webpack = require('webpack')
 const { join, resolve } = require('path')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const config = require('./config')
 const baseWebpackConfig = require('./webpack.base.conf')
@@ -51,6 +50,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: '[name].js',
     publicPath: '/'
   },
+  // 优化开发体验
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+    runtimeChunk: true
+  },
   module: {
     rules: [
       {
@@ -63,11 +69,12 @@ const webpackConfig = merge(baseWebpackConfig, {
               importLoaders: 1
             }
           },
+          // 单阶段处理：在 postcss.config.js 中组合所有插件
           {
             loader: 'postcss-loader',
             options: {
-              config: {
-                path: resolve(__dirname, '..', 'postcss.config.js')
+              postcssOptions: {
+                config: resolve(__dirname, '..', 'postcss.config.js')
               }
             }
           }
@@ -75,7 +82,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     ]
   },
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env
@@ -88,15 +95,11 @@ const webpackConfig = merge(baseWebpackConfig, {
 
     new webpack.HotModuleReplacementPlugin(),
 
-    new webpack.NoEmitOnErrorsPlugin(),
-
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: join(__dirname, '../example/index.html'),
       inject: true
-    }),
-
-    new FriendlyErrorsPlugin()
+    })
   ]
 })
 

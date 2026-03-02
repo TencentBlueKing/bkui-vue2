@@ -27,11 +27,16 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module'
+    parser: '@babel/eslint-parser',
+    sourceType: 'module',
+    requireConfigFile: false,
+    babelOptions: {
+      presets: ['@babel/preset-env', '@vue/babel-preset-jsx']
+    }
   },
   env: {
-    browser: true
+    browser: true,
+    es2021: true
   },
   extends: [
     'plugin:vue/recommended',
@@ -187,6 +192,27 @@ module.exports = {
 
     'no-unused-vars': 'off',
 
+    // eslint-config-standard@17 新增的规则，关闭以保持旧版行为
+    'quote-props': 'off',
+    'dot-notation': 'off',
+    'multiline-ternary': 'off',
+    'no-prototype-builtins': 'off',
+    'no-async-promise-executor': 'off',
+    'no-case-declarations': 'off',
+    'no-misleading-character-class': 'off',
+    'no-multiple-empty-lines': 'off',
+    'array-callback-return': 'off',
+    'lines-between-class-members': 'off',
+    'no-void': 'off',
+    'object-curly-newline': 'off',
+    'quotes': 'off',
+    'object-shorthand': 'off',
+
+    // eslint-plugin-vue@7/9 新增的规则，暂时先全部关闭
+    'vue/multi-word-component-names': 'off',
+    'vue/valid-next-tick': 'off',
+    'vue/first-attribute-linebreak': 'off',
+
     // eslint-plugin-vue@7 新增的规则，暂时先全部关闭
     'vue/no-dupe-v-else-if': 'off',
     'vue/component-definition-name-casing': 'off',
@@ -314,7 +340,8 @@ module.exports = {
     'vue/no-boolean-default': 'off',
 
     // https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/no-confusing-v-for-v-if.md
-    'vue/no-confusing-v-for-v-if': 'error',
+    // 此规则在 eslint-plugin-vue@9 中已移除，功能由 vue/no-use-v-if-with-v-for 替代
+    // 'vue/no-confusing-v-for-v-if': 'error',
 
     // https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/no-dupe-keys.md
     // 二级属性名禁止重复

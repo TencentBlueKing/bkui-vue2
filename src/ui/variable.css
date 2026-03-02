@@ -171,6 +171,10 @@ $subBorderColor: #ddd;
 /* 滚动条背景色 */
 $scrollbarColor: #dde4eb;
 
+/********************** 其它变量 **********************/
+/* 下拉内容间距 */
+$dropdownMarginBottom: 4px;
+
 /********************** 层级管理 **********************/
 /* 下拉菜单层 */
 /* $dropdownMenuZIndex: 50; */

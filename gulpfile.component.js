@@ -205,8 +205,9 @@ async function sourceComponent () {
   const utilEntryNames = []
   utilFileList.forEach(entry => {
     if (entry.name !== 'js') {
-      config.input = entry.path
-      utilPromises.push(rollup(config))
+      // 为每个文件创建独立的配置，避免共享 input 导致构建错误
+      const utilConfig = { ...config, input: entry.path }
+      utilPromises.push(rollup(utilConfig))
       utilEntryNames.push(entry.name)
     }
   })
@@ -221,7 +222,9 @@ async function sourceComponent () {
         exports: 'named',
         globals: {
           vue: 'Vue'
-        }
+        },
+        // 处理 Vue 等外部依赖的 CommonJS/ESM 兼容性
+        interop: 'auto'
       })
     })
   } catch (e) {
@@ -232,8 +235,9 @@ async function sourceComponent () {
   const mixinsEntryNames = []
   mixinsFileList.forEach(entry => {
     if (entry.name !== 'js') {
-      config.input = entry.path
-      mixinsPromises.push(rollup(config))
+      // 为每个文件创建独立的配置，避免共享 input 导致构建错误
+      const mixinsConfig = { ...config, input: entry.path }
+      mixinsPromises.push(rollup(mixinsConfig))
       mixinsEntryNames.push(entry.name)
     }
   })
@@ -248,7 +252,8 @@ async function sourceComponent () {
         exports: 'named',
         globals: {
           vue: 'Vue'
-        }
+        },
+        interop: 'auto'
       })
     })
   } catch (e) {
@@ -259,8 +264,9 @@ async function sourceComponent () {
   const localeEntryNames = []
   localeFileList.forEach(entry => {
     if (entry.name !== 'js') {
-      config.input = entry.path
-      localePromises.push(rollup(config))
+      // 为每个文件创建独立的配置，避免共享 input 导致构建错误
+      const localeConfig = { ...config, input: entry.path }
+      localePromises.push(rollup(localeConfig))
       localeEntryNames.push(entry.name)
     }
   })
@@ -278,7 +284,8 @@ async function sourceComponent () {
         exports: 'named',
         globals: {
           vue: 'Vue'
-        }
+        },
+        interop: 'auto'
       })
     })
   } catch (e) {
@@ -289,8 +296,9 @@ async function sourceComponent () {
   const directiveEntryNames = []
   directiveFileList.forEach(entry => {
     if (entry.name !== 'js') {
-      config.input = entry.path
-      directivePromises.push(rollup(config))
+      // 为每个文件创建独立的配置，避免共享 input 导致构建错误
+      const directiveConfig = { ...config, input: entry.path }
+      directivePromises.push(rollup(directiveConfig))
       directiveEntryNames.push(entry.name)
     }
   })
@@ -305,7 +313,8 @@ async function sourceComponent () {
         exports: 'named',
         globals: {
           vue: 'Vue'
-        }
+        },
+        interop: 'auto'
       })
     })
   } catch (e) {
@@ -316,8 +325,9 @@ async function sourceComponent () {
   const componentEntryNames = []
   componentFileList.forEach(entry => {
     if (entry.name !== 'js') {
-      config.input = entry.path
-      componentPromises.push(rollup(config))
+      // 为每个文件创建独立的配置，避免共享 input 导致构建错误
+      const componentConfig = { ...config, input: entry.path }
+      componentPromises.push(rollup(componentConfig))
       componentEntryNames.push(entry.name)
     }
   })
@@ -332,7 +342,8 @@ async function sourceComponent () {
         exports: 'named',
         globals: {
           vue: 'Vue'
-        }
+        },
+        interop: 'auto'
       })
     })
   } catch (e) {

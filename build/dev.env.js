@@ -30,9 +30,9 @@
  * Copyright © 2012-2025 Tencent BlueKing. All Rights Reserved. 蓝鲸智云 版权所有
  */
 
-const merge = require('webpack-merge')
 const prodEnv = require('./prod.env')
 
-module.exports = merge(prodEnv, {
-  'NODE_ENV': JSON.stringify('dev')
-})
+module.exports = {
+  ...prodEnv,
+  'NODE_ENV': JSON.stringify('development')
+}

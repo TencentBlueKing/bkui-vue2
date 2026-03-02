@@ -32,12 +32,12 @@
 
 const { resolve, join } = require('path')
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const bundleAnalyzer = require('webpack-bundle-analyzer')
 
 const config = require('./config')
@@ -54,7 +54,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: resolve(__dirname, '../dist/example'),
     filename: assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: assetsPath('js/[name].[chunkhash].js'),
-    publicPath: './'
+    publicPath: './',
+    clean: true
   },
   module: {
     rules: [
@@ -71,8 +72,8 @@ const webpackConfig = merge(baseWebpackConfig, {
           {
             loader: 'postcss-loader',
             options: {
-              config: {
-                path: resolve(__dirname, '..', 'postcss.config.js')
+              postcssOptions: {
+                config: resolve(__dirname, '..', 'postcss.config.js')
               }
             }
           }
@@ -89,19 +90,13 @@ const webpackConfig = merge(baseWebpackConfig, {
         terserOptions: {
           compress: false,
           mangle: true,
-          output: {
+          format: {
             comments: false
           }
         },
-        cache: true,
-        parallel: true,
-        sourceMap: true
+        parallel: true
       }),
-      new OptimizeCSSPlugin({
-        cssProcessorOptions: {
-          safe: true
-        }
-      })
+      new CssMinimizerPlugin()
     ],
     splitChunks: {
       // 表示从哪些 chunks 里面提取代码，除了三个可选字符串值 initial、async、all 之外，还可以通过函数来过滤所需的 chunks
@@ -121,8 +116,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       maxInitialRequests: 3,
       // 名字中间的间隔符
       automaticNameDelimiter: '~',
-      // chunk 的名字，如果设成 true，会根据被提取的 chunk 自动生成
-      name: true,
       // 要切割成的每一个新 chunk 就是一个 cache group，缓存组会继承 splitChunks 的配置，但是 test, priorty 和 reuseExistingChunk 只能用于配置缓存组。
       // test: 和 CommonsChunkPlugin 里的 minChunks 非常像，用来决定提取哪些 module，可以接受字符串，正则表达式，或者函数
       //      函数的一个参数为 module，第二个参数为引用这个 module 的 chunk（数组）
@@ -174,18 +167,20 @@ const webpackConfig = merge(baseWebpackConfig, {
         removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true
-      },
-      // 如果打开 vendor 和 manifest 那么需要配置 chunksSortMode 保证引入 script 的顺序
-      chunksSortMode: 'dependency'
+      }
     }),
 
-    new CopyWebpackPlugin([
-      {
-        from: resolve(__dirname, '../example/static'),
-        to: 'example/static',
-        ignore: ['.*']
-      }
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: resolve(__dirname, '../example/static'),
+          to: 'example/static',
+          globOptions: {
+            ignore: ['.*']
+          }
+        }
+      ]
+    })
   ]
 })
 

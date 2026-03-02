@@ -27,7 +27,6 @@ dist.zip
 coverage
 yarn.lock
 .history
-
-
 pre-*-bkcodeai
 bkcodeai.json
+dev
