@@ -22,7 +22,7 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
-*/
+ */
 
 /**
  * @file info-box
@@ -80,41 +80,46 @@ const Info = function (opts = {}) {
   instance.zIndex = opts.zIndex || instance.zIndex
 
   if (isVNode(opts.subHeader)) {
-    instance.$slots[opts.type ? 'type-sub-header' : 'sub-header'] = opts.subHeader
+    instance.$slots[opts.type ? 'type-sub-header' : 'sub-header']
+      = opts.subHeader
   }
 
   if (isVNode(opts.header)) {
     instance.$slots[opts.type ? 'type-header' : 'header'] = opts.header
   }
 
-  instance.confirmFn = opts.confirmFn && typeof opts.confirmFn === 'function'
-    ? async () => {
-      instance.closeIcon = false
-      const res = await opts.confirmFn(instance)
-      instance.closeIcon = opts.closeIcon !== false
-      if (!res && typeof res !== 'undefined') {
-        return
+  instance.confirmFn
+    = opts.confirmFn && typeof opts.confirmFn === 'function'
+      ? async () => {
+        instance.closeIcon = false
+        const res = await opts.confirmFn(instance)
+        instance.closeIcon = opts.closeIcon !== false
+        if (!res && typeof res !== 'undefined') {
+          return
+        }
+        Info.close(id)
       }
-      Info.close(id)
-    } : () => {
-      Info.close(id)
-    }
+      : () => {
+        Info.close(id)
+      }
 
-  instance.cancelFn = opts.cancelFn && typeof opts.cancelFn === 'function'
-    ? opts.cancelFn
-    : () => {}
+  instance.cancelFn
+    = opts.cancelFn && typeof opts.cancelFn === 'function'
+      ? opts.cancelFn
+      : () => {}
 
-  instance.closeFn = opts.closeFn && typeof opts.closeFn === 'function'
-    ? opts.closeFn
-    : null
+  instance.closeFn
+    = opts.closeFn && typeof opts.closeFn === 'function' ? opts.closeFn : null
 
-  instance.afterLeaveFn = opts.afterLeaveFn && typeof opts.afterLeaveFn === 'function'
-    ? opts.afterLeaveFn
-    : () => {}
+  instance.afterLeaveFn
+    = opts.afterLeaveFn && typeof opts.afterLeaveFn === 'function'
+      ? opts.afterLeaveFn
+      : () => {}
 
-  instance.stateChangeFn = opts.stateChangeFn && typeof opts.stateChangeFn === 'function'
-    ? opts.stateChangeFn
-    : () => {}
+  instance.stateChangeFn
+    = opts.stateChangeFn && typeof opts.stateChangeFn === 'function'
+      ? opts.stateChangeFn
+      : () => {}
 
   instance.onClose = function () {
     Info.close(id, opts.onClose)
@@ -125,9 +130,12 @@ const Info = function (opts = {}) {
   if (container) {
     instance.ignoreExistMask = false
     if (typeof container !== 'string') {
-      ref = container instanceof Element
-        ? container
-        : (container instanceof Vue ? container.$el : document.querySelector(container))
+      ref
+        = container instanceof Element
+          ? container
+          : container instanceof Vue
+            ? container.$el
+            : document.querySelector(container)
     } else {
       const element = document.querySelector(container)
       if (element) {
@@ -143,6 +151,10 @@ const Info = function (opts = {}) {
 
   instance.$mount()
   instance.$dom = instance.$el
+
+  if (typeof opts.class === 'string') {
+    instance.$el.classList.add(opts.class)
+  }
 
   ref.appendChild(instance.$el)
   instancesList.push(instance)
