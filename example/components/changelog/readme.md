@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.17 {page=#/changelog}
+
+* **[fix]**:
+    - [Info 提示框](#/info-box) 支持自定义 class
+
+
 ### 2.5.10-beta.16 {page=#/changelog}
 
 * **[fix]**:
