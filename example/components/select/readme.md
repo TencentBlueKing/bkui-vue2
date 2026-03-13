@@ -142,6 +142,13 @@
                   )
                   this.bottomLoadingOptions.isLoading = false
               }, 2000)
+          },
+          handleSearchCreate(val) {
+              this.value = val
+              this.list.unshift({
+                id: val,
+                name: val,
+              })
           }
       }
     }
@@ -195,7 +202,9 @@
         style="width: 250px;"
         ext-cls="select-custom"
         ext-popover-cls="select-popover-custom"
-        searchable>
+        searchable
+        search-empty-create
+        @search-create="handleSearchCreate">
         <bk-option v-for="option in list"
             :key="option.id"
             :id="option.id"
@@ -1327,6 +1336,7 @@
 | loading | 是否加载中 | Boolean | —— | false |
 | clearable | 是否允许清空 | Boolean | —— | true |
 | searchable | 是否显示搜索框 | Boolean | —— | false |
+| search-empty-create | 是否允许在搜索无结果时直接输入 | Boolean | - | false |
 | searchable-min-count | 在显示搜索框的情况下，下拉列表数量大于等于该值时才显示搜索框 | Number | —— | 0 |
 | search-ignore-case | 搜索选项时是否忽略大小写 | Boolean | —— | true |
 | popover-min-width | 设置下拉列表的最小宽度, 默认的列表宽度跟组件保持一致 | Number | —— | —— |
@@ -1364,6 +1374,7 @@
 | clear | 清空已选项时调用 | oldValue |
 | tab-remove | 删除tab时触发 | options |
 | scroll-end | 下拉列表滚动到底部时触发（需enable-scroll-load为true） | -- |
+| search-create | 当 search-empty-create 为 True 且搜索结果为空时，按 enter 或者点击直接输入时触发 | String |
 
 ### bk-select 选项卡插槽(slot) {page=#/select}
 

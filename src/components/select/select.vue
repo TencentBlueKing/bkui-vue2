@@ -142,11 +142,17 @@
             </div>
           </ul>
         </div>
-        <template v-if="showEmpty">
+        <div class="bk-select-create-hint"
+          v-if="searchEmptyCreate && searchValue && isSearchResultEmpty"
+          @click="createBySearchValue">
+          <span>{{ t('bk.select.directInput') }}</span>
+          <div class="hint-value">"{{ searchValue }}"</div>
+        </div>
+        <template v-if="showEmpty && !searchEmptyCreate">
           <div class="bk-select-empty" :class="fontSizeCls" v-if="!options.length">
             {{ emptyText || t('bk.select.dataEmpty') }}
           </div>
-          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="showSearch && unmatchedCount === options.length">
+          <div class="bk-select-empty" :class="fontSizeCls" v-else-if="showSearch && isSearchResultEmpty">
             {{ emptyText || t('bk.select.searchEmpty') }}
           </div>
         </template>
@@ -309,6 +315,11 @@ export default {
       type: Boolean,
       default: true
     },
+    // 是否允许在搜索无结果时直接输入
+    searchEmptyCreate: {
+      type: Boolean,
+      default: false
+    },
     // 是否在初始化的时候展示下拉列表
     showOnInit: {
       type: Boolean,
@@ -448,6 +459,9 @@ export default {
     },
     showSearch () {
       return this.searchable && this.options.length >= this.searchableMinCount
+    },
+    isSearchResultEmpty () {
+      return this.options.length > 0 && this.unmatchedCount === this.options.length
     }
   },
   watch: {
@@ -804,6 +818,10 @@ export default {
         }
         this.selectOption(option)
       } else {
+        if (this.searchEmptyCreate) {
+          this.createBySearchValue()
+          return
+        }
         if (this.allowCreate) {
           this.$refs.createInput.value = this.searchValue
           this.handleInputChange({ target: { value: this.searchValue } })
@@ -906,6 +924,16 @@ export default {
           break
         }
       }
+    },
+    createBySearchValue () {
+      this.$emit('search-create', this.searchValue)
+      this.optionsMap[this.searchValue] = {
+        id: this.searchValue,
+        name: this.searchValue
+      }
+      this.activeOptionID = this.searchValue
+      this.selected = this.multiple ? [...this.selected, this.searchValue] : this.searchValue
+      this.searchValue = ''
     }
   }
 }

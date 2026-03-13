@@ -332,6 +332,25 @@ $disabledColor: #c4c6cc;
     }
 }
 
+.bk-select-create-hint {
+    padding: 0 14px;
+    font-size: var(--font-size);
+    background: #F5F7FA;
+    display: flex;
+    margin: 4px 0;
+    cursor: pointer;
+
+    .hint-value {
+        color: $newMainColor;
+        margin-left: 4px;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+    }
+}
+
 .bk-select-empty {
     padding: 0 10px;
     text-align: center;

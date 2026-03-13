@@ -85,7 +85,8 @@ export default {
       pleaseselect: '请选择',
       searchPlaceholder: '输入关键字搜索',
       dataEmpty: '暂无选项',
-      searchEmpty: '无匹配数据'
+      searchEmpty: '无匹配数据',
+      directInput: '直接输入'
     },
     sideslider: {
       title: '标题'

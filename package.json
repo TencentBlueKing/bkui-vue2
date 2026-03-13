@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dll": "node build/build-dll.js",
-    "dev": "node build/check-dll.js && cross-env NODE_ENV=dev node build/dev-server.js",
+    "dev": "node build/check-dll.js && cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=dev node build/dev-server.js",
     "clean": "rimraf dist && rimraf lib && npm run clean:css",
     "clean:css": "rimraf lib/ui",
     "build": "npm run clean && npm run build:css && npm run build:component && npm run build:library && npm run build:version",
@@ -208,6 +208,6 @@
     "attributes": "./bkui-vue2-helper/attributes.json"
   },
   "engines": {
-    "node": "<= 16.14"
+    "node": ">=18.0.0"
   }
 }
