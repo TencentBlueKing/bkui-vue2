@@ -86,7 +86,8 @@ export default {
       pleaseselect: 'Please select',
       searchPlaceholder: 'Input keyword to search',
       dataEmpty: 'No options',
-      searchEmpty: 'No matched data'
+      searchEmpty: 'No matched data',
+      directInput: 'Direct input'
     },
     sideslider: {
       title: 'Title'

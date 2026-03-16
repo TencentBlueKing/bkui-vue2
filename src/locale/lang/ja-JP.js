@@ -85,7 +85,8 @@ export default {
       pleaseselect: '選択してください',
       searchPlaceholder: 'キーワードを入力してください',
       dataEmpty: 'オプションがありません',
-      searchEmpty: '一致するデータがありません'
+      searchEmpty: '一致するデータがありません',
+      directInput: '直接入力'
     },
     sideslider: {
       title: 'タイトル'
