@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.18 {page=#/changelog}
+
+* **[fix]**:
+    - [Select 下拉选框](#/select) 搜索无结果时，支持自定义输入
+
+
 ### 2.5.10-beta.17 {page=#/changelog}
 
 * **[fix]**:
