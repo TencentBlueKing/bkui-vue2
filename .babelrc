@@ -20,7 +20,6 @@
         "@babel/plugin-transform-async-to-generator",
         "@babel/plugin-transform-object-assign",
         "@babel/plugin-syntax-dynamic-import",
-        "date-fns",
         "@vue/babel-plugin-transform-vue-jsx",
         "@babel/plugin-syntax-jsx"
     ],
