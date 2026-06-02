@@ -34,7 +34,7 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const bodyParser = require('body-parser')
-const proxyMiddleware = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const history = require('connect-history-api-fallback')
@@ -78,7 +78,7 @@ Object.keys(proxyTable).forEach(context => {
       target: options
     }
   }
-  app.use(proxyMiddleware(context, options))
+  app.use(context, createProxyMiddleware(options))
 })
 
 app.use(history({

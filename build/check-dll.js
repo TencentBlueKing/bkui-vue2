@@ -31,18 +31,23 @@
  */
 
 const path = require('path')
+const { spawnSync } = require('child_process')
 const fse = require('fs-extra')
-const npm = require('npm')
 
 const manifestExist = fse.pathExistsSync(path.resolve(__dirname, '..', 'example', 'static', 'lib-manifest.json'))
 const bundleExist = fse.pathExistsSync(path.resolve(__dirname, '..', 'example', 'static', 'lib.bundle.js'))
 
-if (!(manifestExist & bundleExist)) {
-  npm.load({}, () => {
-    npm.run('dll', err => {
-      if (err) {
-        throw err
-      }
-    })
+if (!(manifestExist && bundleExist)) {
+  const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm'
+  const result = spawnSync(npmCommand, ['run', 'dll'], {
+    cwd: path.resolve(__dirname, '..'),
+    stdio: 'inherit',
+    shell: false
   })
+
+  if (result.error) {
+    throw result.error
+  }
+
+  process.exit(result.status || 0)
 }
