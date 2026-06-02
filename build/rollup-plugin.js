@@ -90,7 +90,6 @@ module.exports = [
     plugins: [
       '@babel/plugin-transform-async-to-generator',
       '@babel/plugin-transform-object-assign',
-      'date-fns',
       '@babel/plugin-proposal-object-rest-spread',
       // 使用 external-helpers 插件，它允许 Rollup 在包的顶部只引用一次 “helpers”，
       // 而不是每个使用它们的模块中都引用一遍（这是默认行为）。
