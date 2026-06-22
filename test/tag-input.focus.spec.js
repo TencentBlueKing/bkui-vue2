@@ -6,7 +6,7 @@ const vm = require('vm')
 function loadTagInputComponent () {
   const filePath = path.resolve(__dirname, '../src/components/tag-input/tag-input.vue')
   const content = fs.readFileSync(filePath, 'utf8')
-  const scriptMatch = content.match(/<script>([\s\S]*?)<\/script>/)
+  const scriptMatch = content.match(/<script>([\s\S]*?)<\/script>/i)
 
   if (!scriptMatch) {
     throw new Error('Cannot find tag-input script block')
