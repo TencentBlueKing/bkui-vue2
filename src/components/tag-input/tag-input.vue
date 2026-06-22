@@ -169,6 +169,10 @@ export default {
       type: Number,
       default: -1
     },
+    keepSelectedTagOnFocus: {
+      type: Boolean,
+      default: false
+    },
     maxResult: {
       type: Number,
       default: 10
@@ -697,7 +701,10 @@ export default {
       this.$emit('inputchange', value)
       // 在下一次DOM更新后执行回调函数, 以进行动态List的支持
       this.$nextTick(() => {
-        if (this.maxData === -1 || this.maxData > this.tagList.length) {
+        if (this.maxData === -1
+          || this.maxData > this.tagList.length
+          || (this.isSingleSelect && this.keepSelectedTagOnFocus)
+        ) {
           const charLen = this.getCharLength(value)
 
           this.cacheVal = value
@@ -1119,11 +1126,15 @@ export default {
 
         if (this.isSingleSelect) {
           const [oldVal] = this.tagListCache
-          // 如果是单选，且input不为空，即保留了上次的结果则恢复
-          if (inputValue && inputValue === oldVal && this.localTagListCache.length) {
-            this.addTag(this.localTagListCache[0], 'select')
-          } else {
-            this.handlerChange('remove')
+          if (this.tagListCache.length) {
+            // 如果是单选，且input不为空，即保留了上次的结果则恢复
+            if (inputValue && inputValue === oldVal && this.localTagListCache.length) {
+              this.addTag(this.localTagListCache[0], 'select')
+            } else {
+              this.handlerChange('remove')
+            }
+            this.tagListCache = []
+            this.localTagListCache = []
           }
         } else if (this.allowAutoMatch && inputValue) {
           // 如果匹配，则自动选则
@@ -1155,7 +1166,7 @@ export default {
       clearTimeout(this.timer)
 
       // 如果是单选，在获取焦点时自动定位为当前值
-      if (this.isSingleSelect && this.tagList.length) {
+      if (this.isSingleSelect && this.tagList.length && !this.keepSelectedTagOnFocus) {
         this.tagListCache = [...this.tagList]
         this.localTagListCache = [...this.localTagList]
 
