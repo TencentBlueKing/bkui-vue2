@@ -741,6 +741,7 @@
       "clearable",
       "allow-create",
       "max-data",
+      "keep-selected-tag-on-focus",
       "use-group",
       "max-result",
       "content-width",

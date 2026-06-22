@@ -1406,6 +1406,7 @@
 | clearable | 是否允许清空 | Boolean | —— | true |
 | allow-create | 是否允许自定义标签输入 | Boolean | —— | false |
 | max-data | 是否限制可选个数，-1为不限制 | Number | —— | -1 |
+| keep-selected-tag-on-focus | 单选时，聚焦后是否保持已选标签展示 | Boolean | —— | false |
 | use-group | 是否显示分组 | Boolean | —— | false |
 | max-result | 下拉列表搜索结果显示个数，默认为 10 | Number | —— | 10 |
 | content-width | 自定义设置下拉弹框的宽度，单选会撑满因此失效 | Number | —— | 190 |

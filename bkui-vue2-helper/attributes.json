@@ -1139,6 +1139,7 @@
   "bk-tag-input/clearable": { "description": "是否允许清空", "default": "true" },
   "bk-tag-input/allow-create": { "description": "是否允许自定义标签输入", "default": "false" },
   "bk-tag-input/max-data": { "description": "是否限制可选个数，-1为不限制", "default": "-1" },
+  "bk-tag-input/keep-selected-tag-on-focus": { "description": "单选时，聚焦后是否保持已选标签展示", "default": "false" },
   "bk-tag-input/use-group": { "description": "是否显示分组", "default": "false" },
   "bk-tag-input/max-result": { "description": "下拉列表搜索结果显示个数，默认为 10", "default": "10" },
   "bk-tag-input/content-width": { "description": "自定义设置下拉弹框的宽度，单选会撑满因此失效", "default": "190" },
