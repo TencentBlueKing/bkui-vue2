@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.19 {page=#/changelog}
+
+* **[fix]**:
+    - [TagInput 标签输入框](#/tag-input): 支持单选聚焦时保持已选标签展示
+
+
 ### 2.5.10-beta.18 {page=#/changelog}
 
 * **[fix]**:
