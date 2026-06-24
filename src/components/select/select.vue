@@ -118,7 +118,8 @@
             :style="{ maxHeight: scrollHeight + 'px' }">
             <bk-option-all
               ref="selectAllOption"
-              v-if="multiple && showSelectAll && !searchValue">
+              v-if="multiple && showSelectAll && !searchValue"
+              :disabled="selectAllDisabled">
             </bk-option-all>
             <bk-option v-for="item in allowCreateData"
               :key="item.id"
@@ -206,6 +207,10 @@ export default {
     },
     multiple: Boolean,
     showSelectAll: Boolean,
+    selectAllDisabled: {
+      type: Boolean,
+      default: false
+    },
     scrollHeight: {
       type: Number,
       default: 216
