@@ -171,6 +171,7 @@ import bkLoading from '@/components/loading/directive'
 import locale from 'bk-magic-vue/lib/locale'
 import emitter from '@/mixins/emitter'
 import zIndex from '@/mixins/z-index'
+import zIndexManager from '@/utils/z-index-manager.js'
 import bkSelectTag from './select-tag.vue'
 import pinyin from '@/utils/pinyin'
 import bkVirtualScroll from '@/components/virtual-scroll'
@@ -647,6 +648,8 @@ export default {
 
       this.defaultWidth = this.$el.offsetWidth
       if (this.autoHeight) this.focus = true
+      // 确保下拉面板 z-index 不超过 tooltip 的 9999，保证 tooltip 层级高于面板
+      this.ensureDropdownZIndex()
     },
     handleDropdownHide () {
       document.removeEventListener('keydown', this.handleDocumentKeydown)
@@ -924,6 +927,24 @@ export default {
           break
         }
       }
+    },
+    /**
+     * @description 确保下拉面板 z-index 不超过 tooltip
+     * @NOTE tooltip 指令默认 z-index 为 9999，当下拉面板层级超过阈值时回退到 zIndexManager 基准值
+     * @see zIndexManager 基准值由全局弹窗管理器维护（默认 2000），若获取失败则使用默认值兜底
+     */
+    ensureDropdownZIndex () {
+      this.$nextTick(() => {
+        const popover = this.getPopoverInstance()
+        if (popover?.popper?.style?.zIndex) {
+          const popperZIndex = parseInt(popover.popper.style.zIndex)
+          if (!isNaN(popperZIndex) && popperZIndex >= 9999) {
+            const baseZIndex = zIndexManager.zIndex
+            // 确保 baseZIndex 为有效数字，否则使用默认值 2000
+            popover.popper.style.zIndex = typeof baseZIndex === 'number' && Number.isFinite(baseZIndex) ? baseZIndex : 2000
+          }
+        }
+      })
     },
     createBySearchValue () {
       this.$emit('search-create', this.searchValue)
