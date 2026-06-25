@@ -29,7 +29,7 @@
 <template>
   <li class="bk-option"
     :class="{
-      'is-disabled': disabled
+      'is-disabled': isDisabled
     }"
     @click="handleOptionClick">
     <div class="bk-option-content">
@@ -50,14 +50,21 @@ export default {
   name: 'bk-option-all',
   mixins: [locale.mixin],
   inject: ['select'],
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       enabledOptions: []
     }
   },
   computed: {
-    disabled () {
-      return !this.enabledOptions.length
+    isDisabled () {
+      // 优先使用外部传入的 disabled prop，其次如果所有选项都被禁用则自动禁用
+      return this.disabled || !this.enabledOptions.length
     },
     isAllSelected () {
       // enableOptions 会根据 options 变化而重置，会使用 filter 方法过滤 disabled 的 option
@@ -78,7 +85,7 @@ export default {
       this.enabledOptions = this.select.options.filter(option => !option.disabled)
     },
     handleOptionClick () {
-      if (this.disabled) {
+      if (this.isDisabled) {
         return false
       }
       if (this.isAllSelected) {
