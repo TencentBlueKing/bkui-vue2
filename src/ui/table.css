@@ -311,6 +311,20 @@ $tableDarkHeaderHover: #eaebf0;
     th.gutter:last-of-type {
         border-bottom: $tableBorder;
     }
+    .bk-table-body-wrapper {
+        &.is-scrolling-right,
+        &.is-scrolling-none {
+            ~.bk-table-fixed-right {
+                border-left: $tableBorder;
+            }
+        }
+        &.is-scrolling-left,
+        &.is-scrolling-none {
+            ~.bk-table-fixed {
+                border-right: $tableBorder;
+            }
+        }
+    }
 }
 
 .bk-table-hidden {
@@ -435,18 +449,6 @@ $tableDarkHeaderHover: #eaebf0;
     &.is-scrolling-right {
         ~.bk-table-fixed-right {
             box-shadow: none;
-        }
-    }
-    .bk-table-border {
-        &.is-scrolling-right {
-            ~.bk-table-fixed-right {
-                border-left: $tableBorder;
-            }
-        }
-        &.is-scrolling-left {
-            ~.bk-table-fixed {
-                border-right: $tableBorder;
-            }
         }
     }
 }
