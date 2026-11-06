@@ -35,7 +35,7 @@ export default {
   props: {
     headBackgroundColor: {
       type: String,
-      default: '#FAFBFD'
+      default: 'var(--bk-compose-form-item-neutral-09)'
     },
     tailBackgroundColor: String
   },

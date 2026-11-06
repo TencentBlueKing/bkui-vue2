@@ -31,7 +31,7 @@ $borderColor: #ded8d8;
                 right: 0;
                 &:hover {
                     cursor: pointer;
-                    color: $newMainColor;
+                    color: var(--bk-collapse-item-hover-brand-02);
                 }
             }
 
@@ -41,19 +41,19 @@ $borderColor: #ded8d8;
         cursor: pointer;
     }
     .bk-collapse-item-hover:hover {
-        color: $newMainColor;
+        color: var(--bk-collapse-item-hover-brand-02);
     }
     .bk-collapse-item-content {
         padding: 0px 10px;
     }
     .bk-collapse-item-detail {
-        color: $newBlackColor3;
+        color: var(--bk-collapse-item-neutral-03);
     }
     .collapse-transition {
         transition: .2s height ease-in-out, .2s padding-top ease-in-out, .2s padding-bottom ease-in-out
     }
     &.is-disabled {
-        color: $newGreyColor;
+        color: var(--bk-collapse-item-disabled-neutral-04);
         cursor: not-allowed;
         .bk-collapse-item-header {
             pointer-events: none;

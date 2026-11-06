@@ -14,11 +14,11 @@
     text-align: center;
     vertical-align: middle;
     font-size: $fnNormalSize;
-    background-color: $defaultColor;
-    border: 1px solid $newGreyColor;
-    border-radius: 2px;
+    background-color: var(--bk-button-neutral-10);
+    border: 1px solid var(--bk-button-neutral-04);
+    border-radius: var(--bk-button-radius-s);
     box-sizing: border-box;
-    color: $newBlackColor2;
+    color: var(--bk-button-neutral-02);
     text-decoration: none;
     transition: background-color ease 0.3s;
     min-width: 64px;
@@ -41,7 +41,7 @@
             border-radius: 100%;
             display: inline-block;
             vertical-align: middle;
-            background-color: $defaultColor;
+            background-color: var(--bk-button-neutral-10);
             animation: button-loading 1s infinite ease-in-out both;
             & + [class^="bounce"] {
                 margin-left: 4px;
@@ -103,56 +103,56 @@
     &.bk-default {
         &:hover,
         &.hover {
-            border-color: $newBlackColor3;
-            color: $newBlackColor2;
+            border-color: var(--bk-button-hover-neutral-03);
+            color: var(--bk-button-hover-neutral-02);
         }
         &:active,
         &.active {
-            border-color: $newMainColor;
-            color: $newMainColor;
+            border-color: var(--bk-button-active-brand-02);
+            color: var(--bk-button-active-brand-02);
         }
         &.is-disabled,
         &[disabled] {
-            background-color: #faf9fd;
-            border-color: $newGreyColor1;
-            color: $newGreyColor;
+            background-color: var(--bk-button-disabled-neutral-09);
+            border-color: var(--bk-button-disabled-neutral-05);
+            color: var(--bk-button-disabled-neutral-04);
             cursor: not-allowed;
         }
         &.is-loading {
             cursor: default;
             &:hover,
             &.hover {
-                background-color: $defaultColor;
-                border-color: $newGreyColor;
+                background-color: var(--bk-button-hover-neutral-10);
+                border-color: var(--bk-button-hover-neutral-04);
                 opacity: 1;
             }
             &:active,
             &.active {
-                background-color: $defaultColor;
-                border-color: $newGreyColor;
+                background-color: var(--bk-button-active-neutral-10);
+                border-color: var(--bk-button-active-neutral-04);
             }
         }
         .bk-button-loading {
             div {
-                background-color: $newBlackColor2;
+                background-color: var(--bk-button-neutral-02);
             }
         }
     }
 
     &.bk-primary {
-        @mixin create-button $newMainColor, $newMainColor1, $newMainColor4;
+        @mixin create-button var(--bk-button-primary-brand-02), var(--bk-button-primary-brand-03), var(--bk-button-primary-brand-01);
     }
 
     &.bk-success {
-        @mixin create-button $newGreenColor, $newGreenColor1, $newGreenColor4;
+        @mixin create-button var(--bk-button-success-success-02), var(--bk-button-success-success-03), var(--bk-button-success-success-01);
     }
 
     &.bk-warning {
-        @mixin create-button $newOrangeColor, $newOrangeColor1, $newOrangeColor4;
+        @mixin create-button var(--bk-button-warning-warning-02), var(--bk-button-warning-warning-03), var(--bk-button-warning-warning-01);
     }
 
     &.bk-danger {
-        @mixin create-button $newRedColor, $newRedColor1, $newRedColor4;
+        @mixin create-button var(--bk-button-danger-danger-02), var(--bk-button-danger-danger-03), var(--bk-button-danger-danger-01);
     }
 
     &.bk-button-small {
@@ -178,21 +178,21 @@
     &.is-outline {
         &.is-disabled,
         &[disabled] {
-            background-color: $defaultColor;
-            border-color: $newGreyColor1;
-            color: $newGreyColor;
+            background-color: var(--bk-button-disabled-neutral-10);
+            border-color: var(--bk-button-disabled-neutral-05);
+            color: var(--bk-button-disabled-neutral-04);
             cursor: not-allowed;
             &:hover,
             &.hover {
-                background-color: $defaultColor;
-                border-color: $newGreyColor1;
-                color: $newGreyColor;
+                background-color: var(--bk-button-disabled-hover-neutral-10);
+                border-color: var(--bk-button-disabled-hover-neutral-05);
+                color: var(--bk-button-disabled-hover-neutral-04);
             }
             &.active,
             &:active {
-                background-color: $defaultColor;
-                border-color: $newGreyColor1;
-                color: $newGreyColor;
+                background-color: var(--bk-button-disabled-active-neutral-10);
+                border-color: var(--bk-button-disabled-active-neutral-05);
+                color: var(--bk-button-disabled-active-neutral-04);
             }
         }
     }
@@ -203,7 +203,7 @@
     background: none;
     cursor: pointer;
     font-size: $fnNormalSize;
-    color: $newBlackColor2;
+    color: var(--bk-button-neutral-02);
     text-decoration: none;
     outline: none;
     height: 22px;
@@ -221,7 +221,7 @@
             height: 7px;
             border-radius: 100%;
             display: inline-block;
-            background-color: $defaultColor;
+            background-color: var(--bk-button-neutral-10);
             animation: button-loading 1.2s infinite ease-in-out both;
         }
         .bounce1 {
@@ -290,102 +290,102 @@
     &.bk-default {
         &:hover,
         &.hover {
-            border-color: $newBlackColor3;
-            color: $newBlackColor2;
+            border-color: var(--bk-button-hover-neutral-03);
+            color: var(--bk-button-hover-neutral-02);
         }
         &:active,
         &.active {
-            border-color: $newMainColor;
-            color: $newMainColor;
+            border-color: var(--bk-button-active-brand-02);
+            color: var(--bk-button-active-brand-02);
         }
         &.is-disabled,
         &[disabled] {
-            background-color: $defaultColor;
-            border-color: $newGreyColor1;
-            color: $newGreyColor;
+            background-color: var(--bk-button-disabled-neutral-10);
+            border-color: var(--bk-button-disabled-neutral-05);
+            color: var(--bk-button-disabled-neutral-04);
             cursor: not-allowed;
         }
         &.is-loading {
             cursor: default;
             &:hover,
             &.hover {
-                background-color: $defaultColor;
-                border-color: $newGreyColor;
+                background-color: var(--bk-button-hover-neutral-10);
+                border-color: var(--bk-button-hover-neutral-04);
                 opacity: 1;
             }
             &:active,
             &.active {
-                background-color: $defaultColor;
-                border-color: $newGreyColor;
+                background-color: var(--bk-button-active-neutral-10);
+                border-color: var(--bk-button-active-neutral-04);
             }
         }
         .bk-button-loading {
             div {
-                background-color: $newBlackColor2;
+                background-color: var(--bk-button-neutral-02);
             }
         }
     }
 
     &.bk-primary {
-        color: $newMainColor;
+        color: var(--bk-button-primary-brand-02);
         &:hover,
         &.hover {
-            color: $newMainColor1;
+            color: var(--bk-button-primary-hover-brand-03);
         }
         &:active,
         &.active {
-            color: $newMainColor4;
+            color: var(--bk-button-primary-active-brand-01);
         }
     }
 
     &.bk-success {
-        color: $newGreenColor;
+        color: var(--bk-button-success-success-02);
         &:hover,
         &.hover {
-            color: $newGreenColor1;
+            color: var(--bk-button-success-hover-success-03);
         }
         &:active,
         &.active {
-            color: $newGreenColor4;
+            color: var(--bk-button-success-active-success-01);
         }
     }
 
     &.bk-warning {
-        color: $newOrangeColor;
+        color: var(--bk-button-warning-warning-02);
         &:hover,
         &.hover {
-            color: $newOrangeColor1;
+            color: var(--bk-button-warning-hover-warning-03);
         }
         &:active,
         &.active {
-            color: $newOrangeColor4;
+            color: var(--bk-button-warning-active-warning-01);
         }
     }
 
     &.bk-danger {
-        color: $newRedColor;
+        color: var(--bk-button-danger-danger-02);
         &:hover,
         &.hover {
-            color: $newRedColor1;
+            color: var(--bk-button-danger-hover-danger-03);
         }
         &:active,
         &.active {
-            color: $newRedColor4;
+            color: var(--bk-button-danger-active-danger-01);
         }
     }
 
     /* is-disabled 样式要放在 bk-primary bk-success bk-warning bk-danger 后面 */
     &.is-disabled,
     &[disabled] {
-        color: $newGreyColor;
+        color: var(--bk-button-disabled-neutral-04);
         cursor: not-allowed;
         &:hover,
         &.hover {
-            color: $newGreyColor;
+            color: var(--bk-button-disabled-hover-neutral-04);
         }
         &:active,
         &.active {
-            color: $newGreyColor;
+            color: var(--bk-button-disabled-active-neutral-04);
         }
     }
 
@@ -406,21 +406,21 @@
     &.is-outline {
         &.is-disabled,
         &[disabled] {
-            background-color: $defaultColor;
-            border-color: $newGreyColor1;
-            color: $newGreyColor;
+            background-color: var(--bk-button-disabled-neutral-10);
+            border-color: var(--bk-button-disabled-neutral-05);
+            color: var(--bk-button-disabled-neutral-04);
             cursor: not-allowed;
             &:hover,
             &.hover {
-                background-color: $defaultColor;
-                border-color: $newGreyColor1;
-                color: $newGreyColor;
+                background-color: var(--bk-button-disabled-hover-neutral-10);
+                border-color: var(--bk-button-disabled-hover-neutral-05);
+                color: var(--bk-button-disabled-hover-neutral-04);
             }
             &.active,
             &:active {
-                background-color: $defaultColor;
-                border-color: $newGreyColor1;
-                color: $newGreyColor;
+                background-color: var(--bk-button-disabled-active-neutral-10);
+                border-color: var(--bk-button-disabled-active-neutral-05);
+                color: var(--bk-button-disabled-active-neutral-04);
             }
         }
     }
@@ -438,11 +438,11 @@
     text-align: center;
     vertical-align: middle;
     font-size: $fnNormalSize;
-    background-color: $defaultColor;
-    border: 1px solid $newGreyColor;
-    border-radius: 2px;
+    background-color: var(--bk-button-neutral-10);
+    border: 1px solid var(--bk-button-neutral-04);
+    border-radius: var(--bk-button-radius-s);
     box-sizing: border-box;
-    color: $newBlackColor2;
+    color: var(--bk-button-neutral-02);
     text-decoration: none;
     transition: background-color ease 0.3s;
     min-width: 68px;
@@ -459,7 +459,7 @@
             height: 6px;
             border-radius: 100%;
             display: inline-block;
-            background-color: $newBlackColor2;
+            background-color: var(--bk-button-neutral-02);
             animation: button-loading 1s infinite ease-in-out both;
         }
         .bounce1 {
@@ -523,19 +523,19 @@
     }
 
     &.bk-primary {
-        @mixin create-button-hover $newMainColor, $newMainColor4;
+        @mixin create-button-hover var(--bk-button-primary-brand-02), var(--bk-button-primary-brand-01);
     }
 
     &.bk-success {
-        @mixin create-button-hover $newGreenColor, $newGreenColor4;
+        @mixin create-button-hover var(--bk-button-success-success-02), var(--bk-button-success-success-01);
     }
 
     &.bk-warning {
-        @mixin create-button-hover $newOrangeColor, $newOrangeColor4;
+        @mixin create-button-hover var(--bk-button-warning-warning-02), var(--bk-button-warning-warning-01);
     }
 
     &.bk-danger {
-        @mixin create-button-hover $newRedColor, $newRedColor4;
+        @mixin create-button-hover var(--bk-button-danger-danger-02), var(--bk-button-danger-danger-01);
     }
 
     &.bk-button-small {
@@ -555,21 +555,21 @@
     &.is-outline {
         &.is-disabled,
         &[disabled] {
-            background-color: $defaultColor;
-            border-color: $newGreyColor1;
-            color: $newGreyColor;
+            background-color: var(--bk-button-disabled-neutral-10);
+            border-color: var(--bk-button-disabled-neutral-05);
+            color: var(--bk-button-disabled-neutral-04);
             cursor: not-allowed;
             &:hover,
             &.hover {
-                background-color: $defaultColor;
-                border-color: $newGreyColor1;
-                color: $newGreyColor;
+                background-color: var(--bk-button-disabled-hover-neutral-10);
+                border-color: var(--bk-button-disabled-hover-neutral-05);
+                color: var(--bk-button-disabled-hover-neutral-04);
             }
             &.active,
             &:active {
-                background-color: $defaultColor;
-                border-color: $newGreyColor1;
-                color: $newGreyColor;
+                background-color: var(--bk-button-disabled-active-neutral-10);
+                border-color: var(--bk-button-disabled-active-neutral-05);
+                color: var(--bk-button-disabled-active-neutral-04);
             }
         }
     }
@@ -599,17 +599,17 @@
     display: inline-block;
     .bk-button {
         margin: 0 0 0 -1px;
-        border-radius: 0;
+        border-radius: var(--bk-button-radius-none);
         &.hover,
         &:hover {
-            border-color: $newMainColor;
-            color: $newMainColor;
+            border-color: var(--bk-button-hover-brand-02);
+            color: var(--bk-button-hover-brand-02);
             position: relative;
             z-index: 1;
         }
         &.is-disabled:hover {
-            border-color: $newGreyColor1;
-            color: $newGreyColor;
+            border-color: var(--bk-button-disabled-hover-neutral-05);
+            color: var(--bk-button-disabled-hover-neutral-04);
             position: relative;
             z-index: 0;
         }
@@ -620,9 +620,9 @@
             border-radius: 0 2px 2px 0;
         }
         &.is-selected {
-            background-color: $newMainColor3;
-            border-color: $newMainColor;
-            color: $newMainColor;
+            background-color: var(--bk-button-selected-brand-06);
+            border-color: var(--bk-button-selected-brand-02);
+            color: var(--bk-button-selected-brand-02);
             position: relative;
             z-index: 1;
         }
@@ -637,7 +637,7 @@
 .bk-text-button {
     border: none;
     background: none;
-    color: $newMainColor;
+    color: var(--bk-button-brand-02);
     cursor: pointer;
     text-decoration: none;
     .bk-icon {
@@ -651,47 +651,47 @@
         margin-left: 15px;
     }
     &:hover {
-        color: $primaryHoverColor;
+        color: var(--bk-button-hover-brand-02);
         text-decoration: none;
     }
     &.is-disabled {
-        color: #e6e6e6 !important;
+        color: var(--bk-button-disabled-neutral-06) !important;
         cursor: not-allowed;
     }
     &.bk-default {
-        color: $fnMainColor;
+        color: var(--bk-button-neutral-02);
         &:hover {
             color: darken($fnMainColor, 10%);
         }
     }
     &.bk-info {
-        color: $newMainColor1;
+        color: var(--bk-button-info-brand-03);
         &:hover {
-            color: $infoHoverColor;
+            color: var(--bk-button-info-hover-brand-04);
         }
     }
     &.bk-primary {
-        color: $newMainColor;
+        color: var(--bk-button-primary-brand-02);
         &:hover {
-            color: $primaryHoverColor;
+            color: var(--bk-button-primary-hover-brand-02);
         }
     }
     &.bk-success {
-        color: $newGreenColor;
+        color: var(--bk-button-success-success-02);
         &:hover {
-            color: $successHoverColor;
+            color: var(--bk-button-success-hover-success-02);
         }
     }
     &.bk-warning {
-        color: $newOrangeColor;
+        color: var(--bk-button-warning-warning-02);
         &:hover {
-            color: $warningHoverColor;
+            color: var(--bk-button-warning-hover-warning-02);
         }
     }
     &.bk-danger {
-        color: $newRedColor;
+        color: var(--bk-button-danger-danger-02);
         &:hover {
-            color: $dangerHoverColor;
+            color: var(--bk-button-danger-hover-danger-02);
         }
     }
     .bk-icon {

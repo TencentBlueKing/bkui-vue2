@@ -37,42 +37,42 @@
         width: 100%;
         height: 32px;
         line-height: 32px;
-        border: 1px solid $newGreyColor;
+        border: 1px solid var(--bk-date-picker-neutral-04);
         font-size: var(--font-size);
-        border-radius: 2px;
+        border-radius: var(--bk-date-picker-radius-s);
         outline: none;
         padding: 0 10px 0 30px;
-        color: $newBlackColor2;
+        color: var(--bk-date-picker-neutral-02);
         cursor: pointer;
         &:hover {
-          border: 1px solid $newBlackColor3;
+          border: 1px solid var(--bk-date-picker-hover-neutral-03);
         }
         &.only-bottom-border {
-            border-color: transparent transparent $newGreyColor transparent;
+            border-color: transparent transparent var(--bk-date-picker-neutral-04) transparent;
             &:focus {
-                border-color: transparent transparent $newMainColor transparent;
+                border-color: transparent transparent var(--bk-date-picker-focus-brand-02) transparent;
                 box-shadow: none;
             }
             &[disabled],
             &.readonly {
-                border-color: transparent transparent $newGreyColor1 transparent;
+                border-color: transparent transparent var(--bk-date-picker-disabled-neutral-05) transparent;
             }
         }
         &:focus {
-            border: 1px solid $newMainColor;
+            border: 1px solid var(--bk-date-picker-focus-brand-02);
         }
         &::placeholder {
-            color: $newGreyColor;
+            color: var(--bk-date-picker-neutral-04);
         }
         &[disabled] {
-            color: $newGreyColor;
-            background-color: $newGreyColor3;
+            color: var(--bk-date-picker-disabled-neutral-04);
+            background-color: var(--bk-date-picker-disabled-neutral-09);
             cursor: not-allowed;
-            border-color: $newGreyColor;
+            border-color: var(--bk-date-picker-disabled-neutral-04);
         }
         &.readonly {
-            background-color: $newGreyColor3;
-            border-color: $newGreyColor;
+            background-color: var(--bk-date-picker-neutral-09);
+            border-color: var(--bk-date-picker-neutral-04);
         }
     }
     .clear-action {
@@ -80,11 +80,11 @@
         right: 10px;
         transform: translateY(-50%);
         top: 50%;
-        color: $newGreyColor;
+        color: var(--bk-date-picker-neutral-04);
         font-size: $iconSmallestSize;
         cursor: pointer;
         &:hover {
-            color: $newBlackColor3;
+            color: var(--bk-date-picker-hover-neutral-03);
         }
     }
     .icon-wrapper {
@@ -94,7 +94,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        color: $newGreyColor;
+        color: var(--bk-date-picker-neutral-04);
         background-color: transparent;
         cursor: pointer;
         &.disabled {
@@ -123,11 +123,11 @@
     overflow: auto;
     margin: $dropdownMarginBottom 0 0 0;
     padding: 5px 0 0 0;
-    background-color: $defaultColor;
+    background-color: var(--bk-date-picker-neutral-10);
     box-sizing: border-box;
-    border-radius: 2px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid $newGreyColor1;
+    border-radius: var(--bk-date-picker-radius-s);
+    box-shadow: var(--bk-date-picker-shadow);
+    border: 1px solid var(--bk-date-picker-neutral-05);
     position: absolute;
     z-index: 900;
 }
@@ -140,16 +140,16 @@
 }
 
 .bk-date-picker-footer-wrapper {
-    border-top: 1px solid #dcdee5;
+    border-top: 1px solid var(--bk-date-picker-neutral-05);
     clear: both;
-    background-color: #fafbfd;
-    color: #979ba5;
+    background-color: var(--bk-date-picker-neutral-09);
+    color: var(--bk-date-picker-neutral-03);
     font-size: 14px;
 }
 
 .bk-date-picker-top-wrapper {
     margin-top: -5px;
     clear: both;
-    color: #979ba5;
+    color: var(--bk-date-picker-neutral-03);
     font-size: 14px;
 }

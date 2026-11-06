@@ -1,0 +1,110 @@
+/* 第一层基础变量：颜色、圆角 */
+
+:root {
+    /* Brand color */
+    /* the main button's pressed state */
+    --bk-color-brand-01: #1768EF;
+    /* the main brand color, used for the main button's default state */
+    --bk-color-brand-02: #3A84FF;
+    /* the main button's hover state */
+    --bk-color-brand-03: #699DF4;
+    /* the link's disabled state and the strong border color, like the alert border */
+    --bk-color-brand-04: #A3C5FD;
+    /* the weak border color, like the message border */
+    --bk-color-brand-05: #CDDFFE;
+    /* the borderless background, like the tag background */
+    --bk-color-brand-06: #E1ECFF;
+    /* the bordered background, like the alert & message background */
+    --bk-color-brand-07: #F0F5FF;
+
+    /* Neutral color */
+    /* the strong text color, used for page titles, table titles, and other strong information */
+    --bk-color-neutral-01: #313238;
+    /* the standard text color, used for the main text */
+    --bk-color-neutral-02: #4D4F56;
+    /* the auxiliary text color, used for some extended information */
+    --bk-color-neutral-03: #979BA5;
+    /* the disabled text color, used for disabled text, form placeholder text, and form lines */
+    --bk-color-neutral-04: #C4C6CC;
+    /* the strong border, like table lines and card lines */
+    --bk-color-neutral-05: #DCDEE5;
+    /* the weak border, like the chart's axis lines */
+    --bk-color-neutral-06: #EAEBF0;
+    /* used for strong items, like table title backgrounds with stripes */
+    --bk-color-neutral-07: #F0F1F5;
+    /* used for the page background */
+    --bk-color-neutral-08: #F5F7FA;
+    /* used for weak items, like the table's stripe background or the table title background without stripes */
+    --bk-color-neutral-09: #FAFBFD;
+    /* used for the card background and container background */
+    --bk-color-neutral-10: #FFFFFF;
+
+    /* Success color */
+    /* the success button's pressed state */
+    --bk-color-success-01: #299E56;
+    /* the main success color, used for the success button's default state and some success icons */
+    --bk-color-success-02: #2CAF5E;
+    /* the success button's hover state */
+    --bk-color-success-03: #65C389;
+    /* the link's disabled state and the strong border color, like the alert border */
+    --bk-color-success-04: #A1E3BA;
+    /* the weak border color, like the message border */
+    --bk-color-success-05: #CBF0DA;
+    /* the borderless background, like the tag background */
+    --bk-color-success-06: #DAF6E5;
+    /* the bordered background, like the alert & message background */
+    --bk-color-success-07: #EBFAF0;
+
+    /* Danger color */
+    /* the danger button's pressed state */
+    --bk-color-danger-01: #E71818;
+    /* the main danger color, used for the danger button's default state and some danger icons */
+    --bk-color-danger-02: #EA3636;
+    /* the danger button's hover state */
+    --bk-color-danger-03: #FF5656;
+    /* the link's disabled state and the strong border color, like the alert border */
+    --bk-color-danger-04: #F8B4B4;
+    /* the weak border color, like the message border */
+    --bk-color-danger-05: #FFDDDD;
+    /* the borderless background, like the tag background */
+    --bk-color-danger-06: #FFEBEB;
+    /* the bordered background, like the alert & message background */
+    --bk-color-danger-07: #FFF0F0;
+
+    /* Warning color */
+    /* the warning button's pressed state */
+    --bk-color-warning-01: #E38B02;
+    /* the main warning color, used for the warning button's default state and some warning icons */
+    --bk-color-warning-02: #F59500;
+    /* the warning button's hover state */
+    --bk-color-warning-03: #F8B64F;
+    /* the link's disabled state and the strong border color, like the alert border */
+    --bk-color-warning-04: #F9D090;
+    /* the weak border color, like the message border */
+    --bk-color-warning-05: #FCE5C0;
+    /* the borderless background, like the tag background */
+    --bk-color-warning-06: #FDEED8;
+    /* the bordered background, like the alert & message background */
+    --bk-color-warning-07: #FDF4E8;
+
+    /* Shadow */
+    /* card at rest */
+    --bk-shadow-card: 0 2px 4px 0 rgba(25, 25, 41, 0.05);
+    /* card on hover */
+    --bk-shadow-card-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    /* dropdown panel */
+    --bk-shadow-dropdown: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    /* popover, dropdown menu, notify */
+    --bk-shadow-pop: 0 0 20px 0 rgba(0, 0, 0, 0.16);
+    /* dialog */
+    --bk-shadow-dialog: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+
+    /* Radius */
+    --bk-radius-none: 0;
+    --bk-radius-s: 2px;
+    --bk-radius-m: 4px;
+    --bk-radius-l: 6px;
+    --bk-radius-xl: 8px;
+    --bk-radius-xxl: 12px;
+    --bk-radius-full: 999px;
+}

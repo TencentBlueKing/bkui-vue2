@@ -15,6 +15,7 @@
     left: 0;
     margin: auto;
     background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--bk-loading-mask, rgba(255, 255, 255, 0.9));
     z-index: $loadingZIndex;
     .bk-loading-wrapper {
         text-align: center;
@@ -28,7 +29,7 @@
     &-title {
         text-align: center;
         font-size: 14px;
-        color: $fnMainColor;
+        color: var(--bk-loading-neutral-02);
         line-height: initial;
         margin-top: 5px;
     }
@@ -52,25 +53,25 @@
         }
 
         .point1 {
-            background-color: #fd6154;
+            background-color: var(--bk-loading-danger-03);
             left: 0;
             animation-delay: 0.1s;
         }
 
         .point2 {
-            background-color: #ffb726;
+            background-color: var(--bk-loading-warning-03);
             left: 20px;
             animation-delay: 0.25s;
         }
 
         .point3 {
-            background-color: #4cd084;
+            background-color: var(--bk-loading-success-03);
             left: 40px;
             animation-delay: 0.4s;
         }
 
         .point4 {
-            background-color: #57a3f1;
+            background-color: var(--bk-loading-brand-03);
             left: 60px;
             animation-delay: 0.55s;
         }
@@ -135,7 +136,7 @@
         .point2,
         .point3,
         .point4 {
-            background: #979ba5;
+            background: var(--bk-loading-neutral-03);
         }
     }
 
@@ -144,7 +145,7 @@
         .point2,
         .point3,
         .point4 {
-            background: $primaryColor;
+            background: var(--bk-loading-primary-brand-02);
         }
     }
 
@@ -153,7 +154,7 @@
         .point2,
         .point3,
         .point4 {
-            background: $dangerColor;
+            background: var(--bk-loading-danger-danger-03);
         }
     }
 
@@ -162,7 +163,7 @@
         .point2,
         .point3,
         .point4 {
-            background: $warningColor;
+            background: var(--bk-loading-warning-warning-03);
         }
     }
     &.bk-default {
@@ -170,7 +171,7 @@
         .point2,
         .point3,
         .point4 {
-            background: #979BA5;
+            background: var(--bk-loading-neutral-03);
         }
     }
 }
@@ -214,7 +215,7 @@
         width: 6px;
         height: 8px;
         transform-origin: 50% 24px;
-        border-radius: 8px;
+        border-radius: var(--bk-loading-radius-xl);
         transform: scale(0.4);
         animation-name: fade;
         animation-duration: 1.2s;
@@ -283,7 +284,7 @@
         .rotate {
             width: 10px;
             height: 12px;
-            border-radius: 12px;
+            border-radius: var(--bk-loading-radius-xxl);
             transform-origin: 50% 34px;
         }
     }
@@ -311,7 +312,7 @@
 
 @keyframes fade {
     0% {
-        background-color: #39424e;
+        background-color: var(--bk-loading-neutral-02);
     }
 
     100% {
@@ -320,7 +321,7 @@
 }
 @-webkit-keyframes fade {
     0% {
-        background-color: #39424e;
+        background-color: var(--bk-loading-neutral-02);
     }
 
     100% {
@@ -330,7 +331,7 @@
 
 @keyframes fadeSuccess {
     0% {
-        background-color: $successColor;
+        background-color: var(--bk-loading-success-02);
     }
 
     100% {
@@ -340,7 +341,7 @@
 
 @-webkit-keyframes fadeSuccess {
     0% {
-        background-color: $successColor;
+        background-color: var(--bk-loading-success-02);
     }
 
     100% {
@@ -350,7 +351,7 @@
 
 @keyframes fadePrimary {
     0% {
-        background-color: $primaryColor;
+        background-color: var(--bk-loading-brand-02);
     }
 
     100% {
@@ -360,7 +361,7 @@
 
 @-webkit-keyframes fadePrimary {
     0% {
-        background-color: $primaryColor;
+        background-color: var(--bk-loading-brand-02);
     }
 
     100% {
@@ -370,7 +371,7 @@
 
 @keyframes fadeDanger {
     0% {
-        background-color: $dangerColor;
+        background-color: var(--bk-loading-danger-03);
     }
 
     100% {
@@ -380,7 +381,7 @@
 
 @-webkit-keyframes fadeDanger {
     0% {
-        background-color: $dangerColor;
+        background-color: var(--bk-loading-danger-03);
     }
 
     100% {
@@ -390,7 +391,7 @@
 
 @keyframes fadeWarning {
     0% {
-        background-color: $warningColor;
+        background-color: var(--bk-loading-warning-03);
     }
 
     100% {
@@ -400,7 +401,7 @@
 
 @-webkit-keyframes fadeWarning {
     0% {
-        background-color: $warningColor;
+        background-color: var(--bk-loading-warning-03);
     }
 
     100% {
@@ -410,7 +411,7 @@
 
 @keyframes fadeWhite {
     0% {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bk-loading-neutral-10);
     }
 
     100% {
@@ -420,7 +421,7 @@
 
 @-webkit-keyframes fadeWhite {
     0%{
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bk-loading-neutral-10);
     }
 
     100%{
@@ -440,6 +441,7 @@
     left: 0;
     margin: auto;
     background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--bk-loading-mask, rgba(255, 255, 255, 0.9));
     z-index: $loadingZIndex;
     .bk-loading-wrapper {
         text-align: center;
@@ -452,7 +454,7 @@
     &-title {
         text-align: center;
         font-size: 14px;
-        color: $fnMainColor;
+        color: var(--bk-loading-neutral-02);
         line-height: initial;
         margin-top: 5px;
     }
@@ -460,7 +462,7 @@
 
 @keyframes fade {
     0% {
-        background-color: #39424e;
+        background-color: var(--bk-loading-neutral-02);
     }
 
     100% {
@@ -470,7 +472,7 @@
 
 @keyframes fadeSuccess {
     0% {
-        background-color: #30d878;
+        background-color: var(--bk-loading-success-03);
     }
 
     100% {
@@ -480,7 +482,7 @@
 
 @keyframes fadePrimary {
     0% {
-        background-color: #3c96ff;
+        background-color: var(--bk-loading-brand-02);
     }
 
     100% {
@@ -490,7 +492,7 @@
 
 @keyframes fadeDanger {
     0% {
-        background-color: #ff5656;
+        background-color: var(--bk-loading-danger-03);
     }
 
     100% {
@@ -500,7 +502,7 @@
 
 @keyframes fadeWarning {
     0% {
-        background-color: #ffb400;
+        background-color: var(--bk-loading-warning-02);
     }
 
     100% {
@@ -510,7 +512,7 @@
 
 @keyframes fadeWhite {
     0% {
-        background-color: white;
+        background-color: var(--bk-loading-neutral-10);
     }
 
     100% {

@@ -10,17 +10,17 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 0 0 5px;
-        border: 1px solid #c4c6cc;
+        border: 1px solid var(--bk-tag-input-neutral-04);
         min-height: 32px;
-        border-radius: 2px;
+        border-radius: var(--bk-tag-input-radius-s);
         font-size: 12px;
         position: relative;
         z-index: 1;
-        background: #fff;
+        background: var(--bk-tag-input-neutral-10);
         cursor: pointer;
         overflow: hidden;
         &.disabled {
-            background: $defaultHoverColor;
+            background: var(--bk-tag-input-disabled-neutral-09);
             cursor: not-allowed;
             .tag-list {
                 >li {
@@ -33,12 +33,12 @@
         }
         &.active {
             &:not(.fix-height) {
-                border-color: $newMainColor;
+                border-color: var(--bk-tag-input-active-brand-02);
             }
 
             &.fix-height {
                 .tag-list {
-                    border-color: $newMainColor;
+                    border-color: var(--bk-tag-input-active-brand-02);
                 }
             }
         }
@@ -47,8 +47,8 @@
             position: relative;
             border: 1px solid transparent;
             .tag-list {
-                background: #fff;
-                border: 1px solid #c4c6cc;
+                background: var(--bk-tag-input-neutral-10);
+                border: 1px solid var(--bk-tag-input-neutral-04);
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -63,15 +63,15 @@
             line-height: 30px;
             top: 0;
             left: 8px;
-            color: $newGreyColor;
+            color: var(--bk-tag-input-neutral-04);
         }
         .clear-icon {
             margin-right: 5px;
             cursor: pointer;
-            color: $newGreyColor;
+            color: var(--bk-tag-input-neutral-04);
             font-size: $iconSmallestSize;
             &:hover {
-                color: $newBlackColor3;
+                color: var(--bk-tag-input-hover-neutral-03);
             }
         }
         .input {
@@ -99,18 +99,18 @@
                 cursor: pointer;
                 position: relative;
                 margin: 4px 5px 4px 0;
-                border-radius: 2px;
+                border-radius: var(--bk-tag-input-radius-s);
                 float: left;
                 height: 22px;
                 overflow: hidden;
                 font-size: 0;
                 line-height: 0;
                 &.key-node {
-                    border: solid 1px #F0F1F5;
+                    border: solid 1px var(--bk-tag-input-neutral-07);
                 }
             }
             .key-node {
-                background: #F0F1F5;
+                background: var(--bk-tag-input-neutral-07);
                 .remove-key {
                     display: inline-block;
                 }
@@ -125,21 +125,21 @@
                 display: inline-block;
                 font-size: 18px;
                 text-align: center;
-                color: $fnMainColor;
+                color: var(--bk-tag-input-neutral-02);
                 display: none;
                 text-decoration: none;
             }
         }
         .tag {
             display: inline-block;
-            background-color: #F0F1F5;
-            color: $fnMainColor;
+            background-color: var(--bk-tag-input-neutral-07);
+            color: var(--bk-tag-input-neutral-02);
             font-size: 12px;
             border: none;
             vertical-align: middle;
             box-sizing: border-box;
             overflow: hidden;
-            border-radius: 2px;
+            border-radius: var(--bk-tag-input-radius-s);
             padding: 0 5px;
             height: 20px;
             line-height: 20px;
@@ -166,7 +166,7 @@
             .bk-button {
                 width: 50%;
                 margin: 0;
-                border-radius: 0;
+                border-radius: var(--bk-tag-input-radius-none);
                 border-width: 0;
                 border-top-width: 1px;
             }
@@ -184,12 +184,12 @@
         z-index: -1;
     }
     .highlight-text {
-        color: #3A84FF;
+        color: var(--bk-tag-input-brand-02);
     }
 }
 
 .highlight-text {
-    color: #3A84FF;
+    color: var(--bk-tag-input-brand-02);
 }
 
 .bk-select-dropdown {
@@ -200,7 +200,7 @@
 
 .tippy-tooltip.bk-select-dropdown-theme[data-size=small] {
     padding: 0;
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, .1);
+    box-shadow: var(--bk-tag-input-shadow);
     .tippy-arrow {
         display: none;
     }
@@ -216,15 +216,15 @@
         list-style: none;
         overflow-y: auto;
         padding: 6px 0;
-        border-radius: 2px;
-        background-color: #fff;
-        border: 1px solid #DCDEE5;
+        border-radius: var(--bk-tag-input-radius-s);
+        background-color: var(--bk-tag-input-neutral-10);
+        border: 1px solid var(--bk-tag-input-neutral-05);
     }
     .bk-selector-group-item {
         list-style: none;
         .group-name {
             font-size: 12px;
-            color: #979BA5;
+            color: var(--bk-tag-input-neutral-03);
             line-height: 32px;
             padding-left: 11px;
         }
@@ -238,35 +238,35 @@
     .bk-selector-list-item {
         position: relative;
         width: 100%;
-        border-left: $formBorderColor;
-        border-right: $formBorderColor;
-        background-color: #fff;
+        border-left: var(--bk-tag-input-neutral-04);
+        border-right: var(--bk-tag-input-neutral-04);
+        background-color: var(--bk-tag-input-neutral-10);
         cursor: pointer;
 
         &:first-child {
-            border-top: $formBorderColor;
+            border-top: var(--bk-tag-input-neutral-04);
         }
         &:last-child {
-            border-bottom: $formBorderColor;
+            border-bottom: var(--bk-tag-input-neutral-04);
         }
         &.bk-selector-selected {
-            background-color: #F4F6FA;
+            background-color: var(--bk-tag-input-selected-neutral-08);
 
             .selected-icon {
                 display: inline-block;
             }
         }
         &.bk-selector-actived {
-            background-color: #F4F6FA;
+            background-color: var(--bk-tag-input-neutral-08);
         }
         &:hover {
-            background-color: #EAF3FF;
+            background-color: var(--bk-tag-input-hover-brand-07);
         }
         &.disabled {
-            background: $defaultColor;
+            background: var(--bk-tag-input-disabled-neutral-10);
             cursor: not-allowed;
             .text {
-                color: $newGreyColor;
+                color: var(--bk-tag-input-disabled-neutral-04);
             }
         }
         .loading {
@@ -283,7 +283,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            color: $fnMainColor;
+            color: var(--bk-tag-input-neutral-02);
         }
         .bk-selector-tools {
             position: absolute;

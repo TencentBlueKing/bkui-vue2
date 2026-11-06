@@ -17,8 +17,8 @@
         }
 
         &.is-text {
-            border-color: #fff;
-            background-color: #fff;
+            border-color: var(--bk-create-label-neutral-10);
+            background-color: var(--bk-create-label-neutral-10);
             color: $color;
         }
     }

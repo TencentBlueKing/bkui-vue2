@@ -6,7 +6,7 @@
     .progress-bar {
         width: 100%;
         height: 4px;
-        background: #F0F1F5;
+        background: var(--bk-progress-neutral-07);
         border-radius:50px;
         position: relative;
         vertical-align: middle;
@@ -30,22 +30,22 @@
         border-radius: 50px;
         transition: width 0.5s ease;
         &.bk-primary {
-            background: $newMainColor;
+            background: var(--bk-progress-primary-brand-02);
         }
         &.bk-success {
-            background: $newGreenColor;
+            background: var(--bk-progress-success-success-02);
         }
         &.bk-warning {
-            background: $newOrangeColor;
+            background: var(--bk-progress-warning-warning-02);
         }
         &.bk-danger {
-            background: $dangerColor;
+            background: var(--bk-progress-danger-danger-03);
         }
     }
     .inner-text {
         width: 100%;
         text-align: center;
-        color: #fff;
+        color: var(--bk-progress-neutral-10);
         height: 100%;
     },
     .progress-text {

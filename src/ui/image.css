@@ -31,8 +31,8 @@
         justify-content: center;
         align-items: center;
         font-size: 24px;
-        background: $newGreyColor2;
-        color: $newGreyColor;
+        background: var(--bk-image-neutral-07);
+        color: var(--bk-image-neutral-04);
         vertical-align: middle;
         img{
             width: 100%;

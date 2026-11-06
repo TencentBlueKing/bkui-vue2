@@ -6,7 +6,7 @@
         display: inline-block;
         position: absolute;
         top: 9px;
-        background-color: #dcdee5;
+        background-color: var(--bk-popconfirm-neutral-05);
         width: 1px;
         height: 12px;
         margin-left: -2px;
@@ -16,13 +16,13 @@
         .popconfirm-content {
             .title {
                 font-size: 14px;
-                color: #313238;
+                color: var(--bk-popconfirm-neutral-01);
                 padding-bottom: 10px;
             }
             .content {
                 font-size: 12px;
                 line-height: 20px;
-                color: #63656e;
+                color: var(--bk-popconfirm-neutral-02);
                 padding-bottom: 16px;
             }
             .is-simple.content {
@@ -39,26 +39,26 @@
         button {
             background: transparent;
             border: transparent;
-            color: #3a84ff;
+            color: var(--bk-popconfirm-brand-02);
             margin-left: 4px;
 
             &:hover {
-                color: #699df4;
+                color: var(--bk-popconfirm-hover-brand-03);
             }
             &[type="button"] {
-                border-radius: 2px;
-                color: #63656e;
-                border: 1px solid #c4c6cc;
+                border-radius: var(--bk-popconfirm-radius-s);
+                color: var(--bk-popconfirm-neutral-02);
+                border: 1px solid var(--bk-popconfirm-neutral-04);
                 &:hover {
-                    border-color: #979ba5;
+                    border-color: var(--bk-popconfirm-hover-neutral-03);
                 }
                 &.primary {
-                    color: #fff;
-                    background: #3a84ff;
-                    border: #3a84ff;
+                    color: var(--bk-popconfirm-primary-neutral-10);
+                    background: var(--bk-popconfirm-primary-brand-02);
+                    border: var(--bk-popconfirm-primary-brand-02);
                     &:hover {
-                        background-color: #699df4;
-                        border-color: #699df4;
+                        background-color: var(--bk-popconfirm-primary-hover-brand-03);
+                        border-color: var(--bk-popconfirm-primary-hover-brand-03);
                     }
                 }
             }

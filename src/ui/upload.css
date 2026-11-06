@@ -9,18 +9,18 @@
         padding: 5px;
         height: 100px;
         width: 100px;
-        border: 1px solid $newGreyColor;
-        border-radius: 2px;
+        border: 1px solid var(--bk-upload-neutral-04);
+        border-radius: var(--bk-upload-radius-s);
         vertical-align: top;
         overflow: hidden;
         &:not(:last-child) {
             margin-right: 10px;
         }
         &.fail {
-            border-color: $newRedColor1;
+            border-color: var(--bk-upload-danger-03);
             .error-image-icon {
                 font-size: 28px;
-                color: $newBlackColor3;
+                color: var(--bk-upload-error-neutral-03);
             }
         }
         &:hover {
@@ -37,7 +37,7 @@
             padding: 36px 10px;
             font-size: 14px;
             text-align: center;
-            background: $defaultColor;
+            background: var(--bk-upload-neutral-10);
         }
         .fail-status {
             position: absolute;
@@ -48,18 +48,18 @@
             padding: 26px 10px;
             font-size: 14px;
             text-align: center;
-            background: $defaultColor;
+            background: var(--bk-upload-neutral-10);
             .error-pic {
                 font-size: 28px;
-                color: $newBlackColor3;
+                color: var(--bk-upload-error-neutral-03);
             }
             .reupload {
-                color: $newMainColor;
+                color: var(--bk-upload-brand-02);
             }
             .delete-file {
-                color: $newRedColor1;
+                color: var(--bk-upload-danger-03);
                 &:hover {
-                    color: $newRedColor1;
+                    color: var(--bk-upload-hover-danger-03);
                 }
             }
         }
@@ -72,7 +72,7 @@
             height: 98px;
             justify-content: center;
             align-items: center;
-            color: $defaultColor;
+            color: var(--bk-upload-neutral-10);
             background: rgba(0, 0, 0, .6);
             .fail-tips {
                 width: 100%;
@@ -83,12 +83,12 @@
             position: absolute;
             right: 0;
             top: 0;
-            color: $newGreyColor;
+            color: var(--bk-upload-neutral-04);
             font-size: 24px;
             cursor: pointer;
             z-index: 11;
             &:hover {
-                color: $defaultColor;
+                color: var(--bk-upload-hover-neutral-10);
             }
         }
     }
@@ -111,9 +111,9 @@
         .file-wrapper {
             width: 86px;
             height: 36px;
-            border: 1px solid rgba(196, 198, 204, 1);
+            border: 1px solid var(--bk-upload-neutral-04);
             opacity: 1;
-            border-radius: 2px;
+            border-radius: var(--bk-upload-radius-s);
             cursor: pointer;
             margin-bottom: 10px;
             position: relative;
@@ -148,33 +148,33 @@
             width: 100%;
             height: 80px;
             margin-bottom: 2px;
-            border-radius: 2px;
-            border: 1px dashed $newGreyColor;
+            border-radius: var(--bk-upload-radius-s);
+            border: 1px dashed var(--bk-upload-neutral-04);
             text-align: center;
             &:hover {
-                border-color: $newMainColor;
+                border-color: var(--bk-upload-hover-brand-02);
                 .upload-icon {
-                    color: $newMainColor;
+                    color: var(--bk-upload-hover-brand-02);
                 }
             }
             &:focus {
-                border-color: $newMainColor;
+                border-color: var(--bk-upload-focus-brand-02);
             }
             .upload-icon {
                 display: inline-block;
                 margin: 14px 0 2px;
                 font-size: 28px;
-                color: $newGreyColor;
+                color: var(--bk-upload-neutral-04);
             }
             .text-area {
                 margin: 0;
                 font-size: 12px;
             }
             .drop-upload {
-                color: $newBlackColor2;
+                color: var(--bk-upload-neutral-02);
             }
             .click-upload {
-                color: $newMainColor;
+                color: var(--bk-upload-brand-02);
             }
         }
     }
@@ -183,10 +183,10 @@
             display: inline-block;
             &:hover {
                 .upload-btn {
-                    color: $newMainColor;
-                    border-color: $newMainColor;
+                    color: var(--bk-upload-hover-brand-02);
+                    border-color: var(--bk-upload-hover-brand-02);
                     i {
-                        color: $newMainColor;
+                        color: var(--bk-upload-hover-brand-02);
                     }
                 }
                 .uploaded-status .mask {
@@ -195,20 +195,20 @@
             }
             &:focus {
                 .upload-btn {
-                    border-color: $newMainColor;
+                    border-color: var(--bk-upload-focus-brand-02);
                 }
             }
             .upload-btn {
                 padding: 28px 0;
                 width: 100px;
                 height: 100px;
-                border: 1px dashed $newGreyColor;
-                border-radius: 2px;
+                border: 1px dashed var(--bk-upload-neutral-04);
+                border-radius: var(--bk-upload-radius-s);
                 text-align: center;
                 i {
                     margin-bottom: 2px;
                     font-size: 20px;
-                    color: $newBlackColor3;
+                    color: var(--bk-upload-neutral-03);
                 }
             }
         }
@@ -217,31 +217,31 @@
         margin-top: 4px;
         height: 2px;
         border-radius: 1px;
-        background: $newGreyColor1;
+        background: var(--bk-upload-neutral-05);
         .progress-bar {
             height: 2px;
             width: 0%;
-            background: $newGreenColor;
+            background: var(--bk-upload-success-02);
             border-radius: 1px;
         }
         .uploading {
-            background: $newMainColor;
+            background: var(--bk-upload-brand-02);
         }
         .success {
-            background: $successColor;
+            background: var(--bk-upload-success-success-02);
         }
         .fail {
-            background: $newRedColor1;
+            background: var(--bk-upload-danger-03);
         }
     }
     .tip {
         margin: 5px 0 10px 0;
         font-size: 12px;
         text-align: left;
-        color: $newBlackColor2;
+        color: var(--bk-upload-neutral-02);
     }
     .isdrag {
-        border: 1px solid #0082ff;
+        border: 1px solid var(--bk-upload-brand-02);
     }
     .all-file {
         .file-item {
@@ -250,16 +250,16 @@
             margin-bottom: 10px;
             height: 60px;
             padding: 12px 10px;
-            border-radius: 2px;
-            border: 1px dashed $newGreyColor;
-            background: rgba(250, 251, 253, 1);
+            border-radius: var(--bk-upload-radius-s);
+            border: 1px dashed var(--bk-upload-neutral-04);
+            background: var(--bk-upload-neutral-09);
             &.file-item-fail {
-                border: 1px solid $newRedColor1;
+                border: 1px solid var(--bk-upload-danger-03);
                 background: rgba(254, 221, 220, 0.4);
                 .close-upload {
-                    color: $newRedColor1;
+                    color: var(--bk-upload-danger-03);
                     &:hover {
-                        color: $newRedColor1;
+                        color: var(--bk-upload-hover-danger-03);
                     }
                 }
             }
@@ -267,7 +267,7 @@
                 flex: 0 0 36px;
                 height: 36px;
                 width: 36px;
-                border-radius: 2px;
+                border-radius: var(--bk-upload-radius-s);
                 i {
                     font-size: 36px;
                 }
@@ -277,12 +277,12 @@
                 top: 0;
                 right: 0;
                 font-size: $iconLargeSize;
-                color: $newGreyColor;
+                color: var(--bk-upload-neutral-04);
                 cursor: pointer;
                 z-index: 1;
             }
             .close-upload:hover {
-                color: $fnMainColor;
+                color: var(--bk-upload-hover-neutral-02);
             }
             .file-info {
                 flex: 1;
@@ -310,7 +310,7 @@
                         padding-right: 40px;
                     }
                     .done {
-                        color: $newGreenColor;
+                        color: var(--bk-upload-info-success-02);
                     }
                 }
                 .error-msg {
@@ -321,7 +321,7 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     font-size: 12px;
-                    color: $newRedColor1;
+                    color: var(--bk-upload-error-danger-03);
                 }
             }
         }

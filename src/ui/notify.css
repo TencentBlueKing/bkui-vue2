@@ -7,10 +7,10 @@
     position: fixed;
     padding: 16px 24px 16px 24px;
     width: 360px;
-    background: rgba(255,255,255,1);
-    box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
-    border-radius: 2px;
-    border: 1px solid rgba(240,241,245,1);
+    background: var(--bk-notify-neutral-10);
+    box-shadow: var(--bk-notify-shadow);
+    border-radius: var(--bk-notify-radius-s);
+    border: 1px solid var(--bk-notify-neutral-07);
     z-index: $messageZIndex;
     transition: top .3s linear, bottom .3s linear;
     &.center {
@@ -20,22 +20,22 @@
 }
 .bk-notify-primary {
     .bk-notify-icon .bk-icon {
-        color: $newMainColor;
+        color: var(--bk-notify-primary-brand-02);
     }
 }
 .bk-notify-error {
     .bk-notify-icon .bk-icon {
-        color: $newRedColor;
+        color: var(--bk-notify-error-danger-02);
     }
 }
 .bk-notify-warning {
     .bk-notify-icon .bk-icon {
-        color: $newOrangeColor;
+        color: var(--bk-notify-warning-warning-02);
     }
 }
 .bk-notify-success {
     .bk-notify-icon .bk-icon {
-        color: $newGreenColor;
+        color: var(--bk-notify-success-success-02);
     }
 }
 
@@ -44,7 +44,7 @@
     flex-shrink: 0;
     margin-top: 1px;
     margin-right: 8px;
-    color: #ffffff;
+    color: var(--bk-notify-neutral-10);
     .bk-icon {
         display: block;
         width: 18px;
@@ -52,7 +52,7 @@
         line-height: 18px;
         font-size: 18px;
         text-align: center;
-        color: #ffffff;
+        color: var(--bk-notify-neutral-10);
         border-radius: 50%;
     }
 }
@@ -63,7 +63,7 @@
     line-height: 20px;
     font-size: 14px;
     text-align: left;
-    color: $newBlackColor2;
+    color: var(--bk-notify-neutral-02);
     background-color: inherit;
     word-break: break-all;
     .bk-notify-content-title {
@@ -84,7 +84,7 @@
             right: 0;
             bottom: 0;
             padding: 0 0 0 10px;
-            color: $newMainColor;
+            color: var(--bk-notify-brand-02);
             background-color: inherit;
             border: none;
             outline: none;
@@ -102,13 +102,13 @@
         width: 20px;
         height: 20px;
         line-height: 20px;
-        color: $newBlackColor3;
+        color: var(--bk-notify-neutral-03);
         font-size: $iconSmallSize;
         font-weight: bold;
         border-radius: 50%;
         cursor: pointer;
         &:hover {
-            background-color: $newGreyColor2;
+            background-color: var(--bk-notify-hover-neutral-07);
         }
     }
 }

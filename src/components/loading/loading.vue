@@ -38,7 +38,7 @@
       <div class="bk-loading-wrapper" v-show="isShow"
         :style="{
           renderZIndex,
-          backgroundColor: bgColor
+          backgroundColor: maskBackground
         }">
         <div :class="computedClass">
           <template v-if="isSpin">
@@ -69,7 +69,7 @@
       :style="{
         position: type,
         renderZIndex,
-        backgroundColor: bgColor
+        backgroundColor: maskBackground
       }">
       <div class="bk-loading-wrapper">
         <div :class="computedClass">
@@ -191,6 +191,11 @@ export default {
   computed: {
     isSpin () {
       return this.mode === 'spin'
+    },
+    maskBackground () {
+      const color = this.color.replace(/\s/gm, '').toLowerCase()
+      if (color === '#ffffff' && Number(this.opacity) === 0.9) return null
+      return this.bgColor
     },
     bgColor () {
       const color = this.color.replace(/\s/gm, '')

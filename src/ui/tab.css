@@ -1,11 +1,11 @@
 @import "./variable.css";
 
-$border: 1px solid $newGreyColor1;
+$border: 1px solid var(--bk-tab-neutral-05);
 $headerBackgroundColor: $newGreyColor3;
 $headerColor: $newBlackColor2;
 
 .bk-tab {
-    border-radius: 2px;
+    border-radius: var(--bk-tab-radius-s);
 }
 
 .bk-tab.bk-tab-border-card {
@@ -13,24 +13,24 @@ $headerColor: $newBlackColor2;
         height: 43px;
         border: $border;
         border-bottom: none;
-        background-color: $headerBackgroundColor;
+        background-color: var(--bk-tab-neutral-09);
         border-radius: 2px 2px 0 0;
     }
 
     > .bk-tab-header > .bk-tab-label-wrapper > .bk-tab-label-list {
         > .bk-tab-label-item.active {
-            background-color: #fff;
+            background-color: var(--bk-tab-active-neutral-10);
         }
     }
 }
 
 
 .bk-tab.bk-tab-card-tab {
-    border-radius: 4px;
+    border-radius: var(--bk-tab-radius-m);
 
     > .bk-tab-header {
         border: 0;
-        background: $newGreyColor2;
+        background: var(--bk-tab-neutral-07);
         border-radius: 4px 4px 0 0;
         overflow: hidden;
     }
@@ -50,7 +50,7 @@ $headerColor: $newBlackColor2;
         .bk-tab-add-controller,
         .bk-tab-scroll-controller {
             border: none;
-            background: $newGreyColor2;
+            background: var(--bk-tab-neutral-07);
         }
 
         .bk-tab-label-list {
@@ -67,7 +67,7 @@ $headerColor: $newBlackColor2;
                     margin-top: -8px;
                     width: 1px;
                     height: 16px;
-                    background: $newGreyColor;
+                    background: var(--bk-tab-neutral-04);
                 }
             }
 
@@ -87,12 +87,12 @@ $headerColor: $newBlackColor2;
                     margin-top: -8px;
                     width: 1px;
                     height: 16px;
-                    background: $newGreyColor;
+                    background: var(--bk-tab-active-neutral-04);
                 }
             }
 
             .active {
-                background: #fff;
+                background: var(--bk-tab-active-neutral-10);
                 border-radius: 4px 4px 0 0;
                 overflow: hidden;
 
@@ -125,7 +125,7 @@ $headerColor: $newBlackColor2;
 
         &.has-scroller {
             .bk-tab-label-list {
-                border-radius: 0;
+                border-radius: var(--bk-tab-radius-none);
             }
         }
     }
@@ -157,12 +157,12 @@ $headerColor: $newBlackColor2;
 
     .bk-tab-extension-controller, .bk-tab-add-controller {
         border-top: $border;
-        background-color: #fff;
+        background-color: var(--bk-tab-neutral-10);
     }
 
     > .bk-tab-header > .bk-tab-label-wrapper > .bk-tab-label-list {
         > .bk-tab-label-item.active {
-            background-color: #fff;
+            background-color: var(--bk-tab-active-neutral-10);
         }
     }
 }
@@ -177,7 +177,7 @@ $headerColor: $newBlackColor2;
         height: var(--activeBarHeight);
         width: var(--activeBarWidth);
         transform: var(--activeBarTransform);
-        background: $newMainColor;
+        background: var(--bk-tab-brand-02);
         transition: transform .3s cubic-bezier(.645, .045, .355, 1);
     }
 }
@@ -202,7 +202,7 @@ $headerColor: $newBlackColor2;
         .bk-tab-add-controller,
         .bk-tab-scroll-controller {
             border: none;
-            background-color: #fff;
+            background-color: var(--bk-tab-neutral-10);
         }
 
         .bk-tab-label-list {
@@ -256,7 +256,7 @@ $headerColor: $newBlackColor2;
 
     .bk-tab-header {
         height: auto;
-        background: #fff;
+        background: var(--bk-tab-neutral-10);
         padding: 10px 0;
 
         &:after, &:before {
@@ -266,7 +266,7 @@ $headerColor: $newBlackColor2;
             width: 1px;
             right: 0;
             top: 0;
-            background: $newGreyColor1;
+            background: var(--bk-tab-neutral-05);
         }
 
         &:after {
@@ -324,11 +324,11 @@ $headerColor: $newBlackColor2;
     &.bk-tab-vertical-tab{
         .bk-tab-header{
             padding: 0;
-            background: $newGreyColor2;
+            background: var(--bk-tab-neutral-07);
         }
         .bk-tab-label-wrapper {
             .active{
-                background: #fff;
+                background: var(--bk-tab-active-neutral-10);
             }
             &:after {
                display: none;
@@ -347,8 +347,8 @@ $headerColor: $newBlackColor2;
 .bk-tab-header {
     position: relative;
     height: 42px;
-    color: $headerColor;
-    background-image: linear-gradient(transparent 41px, $newGreyColor1 1px);
+    color: var(--bk-tab-neutral-02);
+    background-image: linear-gradient(transparent 41px, var(--bk-tab-neutral-05) 1px);
 }
 
 .bk-tab-label-wrapper {
@@ -456,12 +456,12 @@ $headerColor: $newBlackColor2;
         line-height: 41px;
         text-align: center;
         font-size: $iconNormalSize;
-        background-color: $headerBackgroundColor;
+        background-color: var(--bk-tab-neutral-09);
         cursor: pointer;
         z-index: 2;
 
         &:hover {
-            color: $newMainColor;
+            color: var(--bk-tab-hover-brand-02);
         }
 
         &.left-border {
@@ -476,7 +476,7 @@ $headerColor: $newBlackColor2;
         z-index: 2;
         vertical-align: middle;
         opacity: 1;
-        background-color: $headerBackgroundColor;
+        background-color: var(--bk-tab-neutral-09);
         border-bottom: $border;
     }
 
@@ -489,8 +489,8 @@ $headerColor: $newBlackColor2;
         line-height: 41px;
         text-align: center;
         font-size: $iconNormalSize;
-        background-color: $headerBackgroundColor;
-        box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+        background-color: var(--bk-tab-neutral-09);
+        box-shadow: var(--bk-tab-shadow);
         cursor: pointer;
         z-index: 1;
 
@@ -514,13 +514,13 @@ $headerColor: $newBlackColor2;
         }
 
         &:hover {
-            color: $newMainColor;
+            color: var(--bk-tab-hover-brand-02);
         }
 
         &.disabled {
             box-shadow: none;
             cursor: not-allowed;
-            color: $newGreyColor;
+            color: var(--bk-tab-disabled-neutral-04);
         }
     }
 
@@ -546,32 +546,32 @@ $headerColor: $newBlackColor2;
             cursor: pointer;
 
             &:not(.is-disabled):hover {
-                color: $newMainColor;
+                color: var(--bk-tab-disabled-hover-brand-02);
             }
 
             &.simulate-border-bottom {
                 padding: 0 10px;
 
                 .bk-tab-label {
-                    box-shadow: inset 0px -4px 0px -2px $newMainColor !important;
+                    box-shadow: inset 0px -4px 0px -2px var(--bk-tab-brand-02) !important;
                     padding: 0 8px;
                 }
             }
 
             &.simulate-border-right {
                 /* box-shadow: inset -4px 0px 0px -2px #3a84ff; */
-                border-right: 2px solid $newMainColor;
+                border-right: 2px solid var(--bk-tab-brand-02);
                 padding-right: 11px;
             }
 
             &.active {
                 /* background-color: #fff; */
-                color: $newMainColor;
+                color: var(--bk-tab-brand-02);
                 cursor: default;
             }
 
             &.is-disabled {
-                color: $newGreyColor;
+                color: var(--bk-tab-disabled-neutral-04);
                 cursor: not-allowed;
             }
 
@@ -581,7 +581,7 @@ $headerColor: $newBlackColor2;
             }
 
             &.is-dragenter {
-                background: $newGreyColor2;
+                background: var(--bk-tab-neutral-07);
             }
 
             &.is-unsortable {
@@ -611,7 +611,7 @@ $headerColor: $newBlackColor2;
                 width: 0;
                 height: 14px;
                 border-radius: 50%;
-                background-color: $newGreyColor;
+                background-color: var(--bk-tab-neutral-04);
                 overflow: hidden;
                 cursor: pointer;
 
@@ -623,7 +623,7 @@ $headerColor: $newBlackColor2;
                     left: 3px;
                     width: 8px;
                     height: 1px;
-                    background-color: #fff;
+                    background-color: var(--bk-tab-neutral-10);
                 }
 
                 &:before {
@@ -635,7 +635,7 @@ $headerColor: $newBlackColor2;
                 }
 
                 &:hover {
-                    background-color: $newBlackColor3;
+                    background-color: var(--bk-tab-hover-neutral-03);
                 }
             }
         }

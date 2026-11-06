@@ -18,7 +18,7 @@
     display: inline-block;
     width: 100%;
     display: block;
-    color: $newBlackColor2;
+    color: var(--bk-input-neutral-02);
 
     .bk-limit-box {
         position: absolute;
@@ -27,34 +27,34 @@
         font-size: 12px;
         margin: 0;
         padding: 0;
-        color: $newBlackColor3;
+        color: var(--bk-input-neutral-03);
         transform: scale(0.8, 0.8);
         .strong {
-            color: $newBlackColor2;
+            color: var(--bk-input-neutral-02);
         }
     }
 
      &.control-active {
         /*textarea是在wrapper层实现边框*/
         .bk-textarea-wrapper {
-            border-color: $newMainColor !important;
-            background-color: #fff !important;
+            border-color: var(--bk-input-brand-02) !important;
+            background-color: var(--bk-input-neutral-10) !important;
             &::placeholder {
-                color: $newGreyColor !important;
+                color: var(--bk-input-neutral-04) !important;
             }
         }
     }
 
     &.control-disable {
         .bk-textarea-wrapper {
-            background-color: $newGreyColor3;
+            background-color: var(--bk-input-neutral-09);
             cursor: not-allowed;
         }
     }
 
     &.control-prepend-group {
         display: flex;
-        background-color: #f2f4f8;
+        background-color: var(--bk-input-neutral-07);
 
         .bk-form-input,
         .bk-form-password,
@@ -77,19 +77,19 @@
         .bk-form-password,
         .bk-form-select,
         .bk-form-textarea {
-            border-radius: 0;
+            border-radius: var(--bk-input-radius-none);
         }
     }
     .group-box {
         vertical-align: middle;
         position: relative;
-        border: 1px solid $newGreyColor;
-        border-radius: 2px;
+        border: 1px solid var(--bk-input-neutral-04);
+        border-radius: var(--bk-input-radius-s);
         height: 32px;
 
         .group-text {
             @mixin ellipsis 200px;
-            color: $newBlackColor2;
+            color: var(--bk-input-neutral-02);
             padding: 0 15px;
             font-size: var(--font-size);
             vertical-align: middle;
@@ -101,7 +101,7 @@
                 .bk-button {
                     @mixin ellipsis 200px;
                     border: none;
-                    border-radius: 0;
+                    border-radius: var(--bk-input-radius-none);
                     height: 30px;
                     padding-right: 30px;
                     .bk-icon {
@@ -128,12 +128,12 @@
         font-size: $iconSmallerSize;
         top: 50%;
         transform: translateY(-50%);
-        color: $newGreyColor;
+        color: var(--bk-input-neutral-04);
         .clear-icon {
             cursor: pointer;
             font-size: $iconSmallestSize;
             &:hover {
-                color: $newBlackColor3;
+                color: var(--bk-input-hover-neutral-03);
             }
         }
         &.left-icon {
@@ -167,7 +167,7 @@
     .input-right-icon {
         cursor: pointer;
         &:hover {
-            color: $primaryColor;
+            color: var(--bk-input-hover-brand-02);
         }
     }
 }
@@ -179,13 +179,13 @@
     box-sizing: border-box;
     height: 32px;
     line-height: normal;
-    color: $newBlackColor2;
-    background-color: #fff;
-    border-radius: 2px;
+    color: var(--bk-input-neutral-02);
+    background-color: var(--bk-input-neutral-10);
+    border-radius: var(--bk-input-radius-s);
     width: 100%;
     font-size: var(--font-size);
     box-sizing: border-box;
-    border: 1px solid $newGreyColor;
+    border: 1px solid var(--bk-input-neutral-04);
     padding: 0 10px 0 8px;
     text-align: left;
     vertical-align: middle;
@@ -193,37 +193,37 @@
     resize:none;
     transition: border linear .2s;
     &.only-bottom-border {
-        border-color: transparent transparent $newGreyColor transparent;
+        border-color: transparent transparent var(--bk-input-neutral-04) transparent;
         &:focus {
-            border-color: transparent transparent $newMainColor transparent !important;
+            border-color: transparent transparent var(--bk-input-focus-brand-02) transparent !important;
             box-shadow: none;
         }
         &[disabled],
         &[readonly] {
-            border-color: transparent transparent $newGreyColor1 transparent !important;
+            border-color: transparent transparent var(--bk-input-disabled-neutral-05) transparent !important;
         }
     }
     &:focus {
-        border-color: $newMainColor !important;
-        background-color: #fff !important;
+        border-color: var(--bk-input-focus-brand-02) !important;
+        background-color: var(--bk-input-focus-neutral-10) !important;
         &::placeholder {
-            color: $newGreyColor !important;
+            color: var(--bk-input-focus-neutral-04) !important;
         }
     }
     &::placeholder {
-        color: $newGreyColor;
+        color: var(--bk-input-neutral-04);
     }
 
     &[readonly] {
-        background-color: $newGreyColor3 !important;
+        background-color: var(--bk-input-neutral-09) !important;
         cursor: default;
-        border-color: $newGreyColor1 !important;
+        border-color: var(--bk-input-neutral-05) !important;
     }
     &[disabled] {
         /* color: $formBorderColor; */
-        background-color: $newGreyColor3 !important;
+        background-color: var(--bk-input-neutral-09) !important;
         cursor: not-allowed;
-        border-color: $newGreyColor1 !important;
+        border-color: var(--bk-input-disabled-neutral-05) !important;
     }
 }
 
@@ -258,19 +258,19 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        background: #fff;
+        background: var(--bk-input-neutral-10);
 
         .number-option-item {
             flex: auto;
             width: 100%;
             max-height: 45%;
-            color: #979ba5;
+            color: var(--bk-input-neutral-03);
             font-size: $iconSmallSize;
             display: flex;
             align-items: center;
             justify-content: center;
             &:hover {
-                background: rgba(244, 246, 250, 1);
+                background: var(--bk-input-hover-neutral-08);
                 cursor: pointer;
             }
         }
@@ -278,8 +278,8 @@
 }
 
 .bk-textarea-wrapper {
-    border: 1px solid $newGreyColor;
-    border-radius: 2px;
+    border: 1px solid var(--bk-input-neutral-04);
+    border-radius: var(--bk-input-radius-s);
     .bk-form-textarea {
         border: none;
         height: auto;

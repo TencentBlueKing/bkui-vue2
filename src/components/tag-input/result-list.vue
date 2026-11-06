@@ -97,8 +97,8 @@ export default {
     right: 0;
     max-width: 190px;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    background-color: #fff;
+    border-radius: var(--bk-tag-input-radius-s);
+    background-color: var(--bk-tag-input-neutral-10);
     z-index: 100;
     overflow-y: hidden;
     padding: 6px 0;
@@ -115,22 +115,22 @@ export default {
     .bk-selector-list-item {
       position: relative;
       width: 100%;
-      border-left: $formBorderColor;
-      border-right: $formBorderColor;
-      background-color: #fff;
+      border-left: var(--bk-tag-input-neutral-04);
+      border-right: var(--bk-tag-input-neutral-04);
+      background-color: var(--bk-tag-input-neutral-10);
       cursor: pointer;
       &:first-child {
-        border-top: $formBorderColor;
+        border-top: var(--bk-tag-input-neutral-04);
       }
       &:last-child {
-        border-bottom: $formBorderColor;
+        border-bottom: var(--bk-tag-input-neutral-04);
       }
       &:hover {
-        background-color: #EAF3FF;
+        background-color: var(--bk-tag-input-hover-brand-07);
       }
       &.bk-selector-selected {
-        background-color: #F4F6FA;
-        color: $primaryColor;
+        background-color: var(--bk-tag-input-selected-neutral-08);
+        color: var(--bk-tag-input-selected-brand-02);
         .bk-selector-tools {
           display: block;
         }
@@ -149,7 +149,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: $fnMainColor;
+        color: var(--bk-tag-input-neutral-02);
       }
       .bk-selector-tools {
         position: absolute;

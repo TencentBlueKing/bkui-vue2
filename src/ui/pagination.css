@@ -46,19 +46,19 @@ $hoverBackground: #eaf3ff;
             margin-right: 20px;
         }
         .page-select-small {
-            border: 1px solid #f0f1f5;
-            background: #f0f1f5;
-            border-radius: 2px;
+            border: 1px solid var(--bk-pagination-neutral-07);
+            background: var(--bk-pagination-neutral-07);
+            border-radius: var(--bk-pagination-radius-s);
             box-shadow: none;
             &:hover {
-                background: #e1ecff;
+                background: var(--bk-pagination-hover-brand-06);
             }
         }
     }
     .bk-page-total-count {
         font-size: 12px;
         line-height: 36px;
-        color: #989dab;
+        color: var(--bk-pagination-neutral-03);
         &-right {
             float: right;
             margin-left: 12px;
@@ -69,7 +69,7 @@ $hoverBackground: #eaf3ff;
         }
         .stress {
             padding: 0 2px;
-            color: #3f4046;
+            color: var(--bk-pagination-neutral-01);
         }
     }
     .bk-page-total-small {
@@ -96,7 +96,7 @@ $hoverBackground: #eaf3ff;
         display: inline-block;
         > span {
             font-size: 14px;
-            color: #63656e;
+            color: var(--bk-pagination-neutral-02);
         }
     }
     &.bk-page-align {
@@ -136,7 +136,7 @@ $hoverBackground: #eaf3ff;
     &.bk-page-compact {
         .page-item {
             margin-right: -1px;
-            border-radius: 0;
+            border-radius: var(--bk-pagination-radius-none);
             &:hover {
                 position: relative;
                 z-index: 1;
@@ -173,7 +173,7 @@ $hoverBackground: #eaf3ff;
         font-size: 12px;
         margin-right: 4px;
         box-sizing: border-box;
-        border-radius: 2px;
+        border-radius: var(--bk-pagination-radius-s);
         overflow: hidden;
         &.page-omit {
             border: none;
@@ -188,30 +188,30 @@ $hoverBackground: #eaf3ff;
             height: 36px;
             padding: 0 4px;
             line-height: 34px;
-            border: 1px solid $newGreyColor;
-            color: $fnMainColor;
-            background: #fff;
+            border: 1px solid var(--bk-pagination-neutral-04);
+            color: var(--bk-pagination-neutral-02);
+            background: var(--bk-pagination-neutral-10);
             cursor: pointer;
             &:hover {
-                color: $newMainColor;
-                border-color: $newMainColor;
+                color: var(--bk-pagination-hover-brand-02);
+                border-color: var(--bk-pagination-hover-brand-02);
             }
         }
 
         &.cur-page {
             .page-button {
-                border-color: $newMainColor;
-                color: $newMainColor;
+                border-color: var(--bk-pagination-brand-02);
+                color: var(--bk-pagination-brand-02);
             }
         }
         &.disabled {
             .page-button {
-                border-color: $newGreyColor1;
+                border-color: var(--bk-pagination-disabled-neutral-05);
                 cursor: not-allowed;
-                color: $newGreyColor;
-                background-color: $newGreyColor3;
+                color: var(--bk-pagination-disabled-neutral-04);
+                background-color: var(--bk-pagination-disabled-neutral-09);
                 &:hover {
-                    color: $newGreyColor;
+                    color: var(--bk-pagination-disabled-hover-neutral-04);
                 }
             }
         }
@@ -223,7 +223,7 @@ $hoverBackground: #eaf3ff;
         line-height: 34px;
         display: inline-flex;
         align-items: center;
-        color: #63656E;
+        color: var(--bk-pagination-neutral-02);
         .btn-pre,
         .btn-next{
             display: flex;
@@ -234,12 +234,12 @@ $hoverBackground: #eaf3ff;
             font-size: 14px;
             cursor: pointer;
             transition: all .15s;
-            color: $newBlackColor3;
+            color: var(--bk-pagination-neutral-03);
             &:hover{
-                color: #3A84FF;
+                color: var(--bk-pagination-hover-brand-02);
             }
             &.disable{
-                color: #DCDEE5;
+                color: var(--bk-pagination-neutral-05);
                 cursor: not-allowed;
             }
             .bk-icon{
@@ -249,19 +249,19 @@ $hoverBackground: #eaf3ff;
         .jump-input-wrapper {
             display: flex;
             align-items: center;
-            background-color: #f0f1f5;
+            background-color: var(--bk-pagination-neutral-07);
             padding: 0 8px;
-            border-radius: 2px;
+            border-radius: var(--bk-pagination-radius-s);
             cursor: pointer;
-            border: 1px solid #f0f1f5;
+            border: 1px solid var(--bk-pagination-neutral-07);
             height: 24px;
             &:hover {
-                background-color: #e1ecff;
+                background-color: var(--bk-pagination-hover-brand-06);
             }
             &.focus {
-                background-color: $defaultColor;
-                border: 1px solid $newMainColor;
-                box-shadow: 0px 0px 4px rgba(58, 132, 255, 0.4);
+                background-color: var(--bk-pagination-neutral-10);
+                border: 1px solid var(--bk-pagination-brand-02);
+                box-shadow: 0px 0px 4px color-mix(in srgb, var(--bk-pagination-brand-02) 40%, transparent);
             }
         }
         .jump-input{
@@ -271,12 +271,12 @@ $hoverBackground: #eaf3ff;
             line-height: 16px;
             text-align: center;
             border: 0;
-            border-radius: 2px;
+            border-radius: var(--bk-pagination-radius-s);
             background-color: transparent;
             transition: all .15s;
             &:hover,
             &:focus{
-                border-color: #3A84FF;
+                border-color: var(--bk-pagination-hover-focus-brand-02);
             }
         }
         .page-total{
@@ -287,7 +287,7 @@ $hoverBackground: #eaf3ff;
             line-height: 16px;
             margin-left: 2px;
             &.focus {
-                color: $newGreyColor;
+                color: var(--bk-pagination-neutral-04);
             }
         }
     }
@@ -308,12 +308,12 @@ $hoverBackground: #eaf3ff;
       line-height: 32px;
       cursor: pointer;
       &:hover {
-          background-color: $hoverBackground;
-          color: $newMainColor;
+          background-color: var(--bk-pagination-hover-brand-07);
+          color: var(--bk-pagination-hover-brand-02);
       }
       &.is-selected {
-          background-color: $hoverBackground;
-          color: $newMainColor;
+          background-color: var(--bk-pagination-selected-brand-07);
+          color: var(--bk-pagination-selected-brand-02);
       }
   }
 }

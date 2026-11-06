@@ -1,13 +1,13 @@
 @import './variable.css';
 
 @define-mixin linear-gradient $direction {
-    background-image: linear-gradient(to $direction, transparent, transparent 2px, $newMainColor 1px, $newMainColor 4px, transparent 3px, transparent);
+    background-image: linear-gradient(to $direction, transparent, transparent 2px, var(--bk-resize-layout-brand-02) 1px, var(--bk-resize-layout-brand-02) 4px, transparent 3px, transparent);
 }
 
 .bk-resize-layout {
     display: flex;
     &-border {
-        border: 1px solid $newGreyColor1;
+        border: 1px solid var(--bk-resize-layout-neutral-05);
     }
     &-collapsed {
         & > .bk-resize-layout-aside {
@@ -34,7 +34,7 @@
         flex-direction: row;
 
         & > .bk-resize-layout-aside {
-            border-right: 1px solid $newGreyColor1;
+            border-right: 1px solid var(--bk-resize-layout-neutral-05);
             &:after {
                 right: 1px;
                 top: 50%;
@@ -62,7 +62,7 @@
         flex-direction: row-reverse;
 
         & > .bk-resize-layout-aside {
-            border-left: 1px solid $newGreyColor1;
+            border-left: 1px solid var(--bk-resize-layout-neutral-05);
             &:after {
                 left: 1px;
                 top: 50%;
@@ -91,7 +91,7 @@
         flex-direction: column;
 
         & > .bk-resize-layout-aside {
-            border-bottom: 1px solid $newGreyColor1;
+            border-bottom: 1px solid var(--bk-resize-layout-neutral-05);
             &:after {
                 bottom: 1px;
                 left: 50%;
@@ -121,7 +121,7 @@
         flex-direction: column-reverse;
 
         & > .bk-resize-layout-aside {
-            border-top: 1px solid $newGreyColor1;
+            border-top: 1px solid var(--bk-resize-layout-neutral-05);
             &:after {
                 top: 1px;
                 left: 50%;
@@ -155,7 +155,7 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            color: #c4c6cc;
+            color: var(--bk-resize-layout-neutral-04);
             background: currentColor;
             box-shadow: 0 4px 0 0 currentColor, 0 8px 0 0 currentColor, 0 -4px 0 0 currentColor, 0 -8px 0 0 currentColor;
         }
@@ -180,14 +180,14 @@
             &.right {
                 top: 0;
                 height: 100%;
-                border-left: 1px dashed $newMainColor;
+                border-left: 1px dashed var(--bk-resize-layout-brand-02);
             }
 
             &.top,
             &.bottom {
                 left: 0;
                 width: 100%;
-                border-top: 1px dashed $newMainColor;
+                border-top: 1px dashed var(--bk-resize-layout-brand-02);
             }
         }
         .bk-resize-collapse {
@@ -196,15 +196,15 @@
             height: 50px;
             line-height: 50px;
             border-radius: 0px 6px 6px 0px;
-            background: #dcdee5;
+            background: var(--bk-resize-layout-neutral-05);
             text-align: center;
             font-size: 20px;
-            color: #fff;
+            color: var(--bk-resize-layout-neutral-10);
             cursor: pointer;
             text-indent: -2px;
             z-index: 2;
             &:hover {
-                background: $newMainColor;
+                background: var(--bk-resize-layout-hover-brand-02);
             }
         }
     }

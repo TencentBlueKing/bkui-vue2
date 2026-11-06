@@ -240,7 +240,7 @@
             width: bodyWidth
           }">
         </table-body>
-        <div class="bk-table-bottom-loading" style="border-top: 1px solid #dfe0e5; bottom: 1px;" v-if="scrollEndLoading.isLoading"></div>
+        <div class="bk-table-bottom-loading" style="border-top: 1px solid var(--bk-table-neutral-05); bottom: 1px;" v-if="scrollEndLoading.isLoading"></div>
       </div>
       <div
         v-if="showSummary"

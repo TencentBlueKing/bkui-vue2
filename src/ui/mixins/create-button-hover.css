@@ -7,15 +7,15 @@
 
 @define-mixin create-button-hover $hover, $active {
     & {
-        background-color: $defaultColor;
-        border-color: $newGreyColor;
-        color: $newBlackColor2;
+        background-color: var(--bk-button-neutral-10);
+        border-color: var(--bk-button-neutral-04);
+        color: var(--bk-button-neutral-02);
     }
     &:hover,
     &.hover {
         background-color: $hover;
         border-color: $hover;
-        color: $defaultColor;
+        color: var(--bk-button-hover-neutral-10);
         opacity: 1;
     }
 
@@ -23,14 +23,14 @@
     &.active {
         background-color: $active;
         border-color: $active;
-        color: $defaultColor;
+        color: var(--bk-button-active-neutral-10);
     }
 
     &.is-disabled,
     &[disabled] {
-        background-color: $defaultColor;
-        border-color: $newGreyColor1;
-        color: $newGreyColor;
+        background-color: var(--bk-button-disabled-neutral-10);
+        border-color: var(--bk-button-disabled-neutral-05);
+        color: var(--bk-button-disabled-neutral-04);
         cursor: not-allowed;
     }
 
@@ -38,32 +38,32 @@
         cursor: default;
         &:hover,
         &.hover {
-            background-color: $defaultColor;
-            border-color: $newGreyColor;
+            background-color: var(--bk-button-hover-neutral-10);
+            border-color: var(--bk-button-hover-neutral-04);
             opacity: 1;
         }
         &:active,
         &.active {
-            background-color: $defaultColor;
-            border-color: $newGreyColor;
+            background-color: var(--bk-button-active-neutral-10);
+            border-color: var(--bk-button-active-neutral-04);
         }
     }
 
     &.is-outline {
         color: $hover;
         border-color: $hover;
-        background-color: $defaultColor;
+        background-color: var(--bk-button-neutral-10);
         &:hover,
         &.hover {
             background-color: $hover;
             border-color: $hover;
-            color: $defaultColor;
+            color: var(--bk-button-hover-neutral-10);
         }
         &.active,
         &:active {
             background-color: $active;
             border-color: $active;
-            color: $defaultColor;
+            color: var(--bk-button-active-neutral-10);
         }
     }
 }

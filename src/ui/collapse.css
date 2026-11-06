@@ -1,7 +1,7 @@
 @import './variable.css';
 
 .bk-collapse {
-    color: $fnMainColor;
+    color: var(--bk-collapse-neutral-02);
     .bk-collapse-header {
         padding: 10px;
         font-size: $fnNormalSize;
@@ -18,6 +18,6 @@
         padding: 5px 10px 20px 10px;
         will-change: all;
         font-size: $fnNormalSize;
-        color: $fnMainColor;
+        color: var(--bk-collapse-neutral-02);
     }
 }

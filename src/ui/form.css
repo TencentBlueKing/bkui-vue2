@@ -100,7 +100,7 @@
         float: left;
         font-size: 14px;
         font-weight: normal;
-        color: #63656E;
+        color: var(--bk-form-neutral-02);
         box-sizing: border-box;
         padding: 0 22px 0 0;
 
@@ -110,13 +110,13 @@
 
             .bk-icon {
                 cursor: pointer;
-                color: #979BA5;
+                color: var(--bk-form-neutral-03);
                 font-size: 16px;
             }
         }
 
         &.has-desc > span {
-            border-bottom: 1px dashed #979BA5;
+            border-bottom: 1px dashed var(--bk-form-neutral-03);
             cursor: pointer;
         }
     }
@@ -131,7 +131,7 @@
 
         .form-error-tip {
             font-size: 12px;
-            color: $newRedColor;
+            color: var(--bk-form-error-danger-02);
             line-height: 18px;
             margin: 2px 0 0 0;
         }
@@ -141,14 +141,14 @@
             z-index: 10;
             right: 8px;
             top: 8px;
-            color: $newRedColor;
+            color: var(--bk-form-danger-02);
             cursor: pointer;
             font-size: 16px;
         }
 
         >.bk-tip-text {
             font-size: 14px;
-            color: $fnMainColor;
+            color: var(--bk-form-neutral-02);
             margin: 10px 0 0 0;
         }
 
@@ -172,7 +172,7 @@
     }
 
     ::placeholder {
-        color: $fnMinorColor;
+        color: var(--bk-form-neutral-04);
     }
 
     &::after,
@@ -187,7 +187,7 @@
     input:-webkit-autofill,
     textarea:-webkit-autofill,
     select:-webkit-autofill {
-        background: #fff !important;
+        background: var(--bk-form-neutral-10) !important;
     }
 }
 
@@ -210,7 +210,7 @@
                 height: 8px;
                 line-height: 1;
                 content: '*';
-                color: #EA3636;
+                color: var(--bk-form-danger-02);
                 font-size: 12px;
                 position: absolute;
                 display: inline-block;
@@ -227,7 +227,7 @@
         input[type="password"],
         textarea,
         select {
-            background-color: #fafafa;
+            background-color: var(--bk-form-neutral-09);
         }
     }
 
@@ -237,7 +237,7 @@
         input[type="password"],
         textarea,
         select {
-            background-color: #fafafa;
+            background-color: var(--bk-form-disabled-neutral-09);
         }
     }
 
@@ -269,8 +269,8 @@
         input[type="url"],
         textarea,
         select {
-            border-color: $newRedColor;
-            color: $newRedColor;
+            border-color: var(--bk-form-danger-danger-02);
+            color: var(--bk-form-danger-danger-02);
 
             /*&::placeholder {
                 color: $newRedColor;
@@ -278,11 +278,11 @@
         }
 
         .bk-textarea-wrapper {
-            border-color: $newRedColor;
+            border-color: var(--bk-form-danger-danger-02);
         }
 
         .bk-tag-selector .bk-tag-input {
-            border-color: $newRedColor;
+            border-color: var(--bk-form-danger-danger-02);
             /*.placeholder {
                 color: $newRedColor;
             }*/
@@ -290,12 +290,12 @@
 
         .bk-form-tip {
             .bk-tip-text {
-                color: $newRedColor;
+                color: var(--bk-form-danger-danger-02);
             }
         }
 
         .bk-select {
-            border-color: $newRedColor;
+            border-color: var(--bk-form-danger-danger-02);
 
             /*&.is-default-trigger.is-unselected:before {
                 color: $newRedColor;
@@ -309,7 +309,7 @@
         input[type="password"],
         textarea,
         select {
-            border-color: $warningColor;
+            border-color: var(--bk-form-warning-warning-03);
         }
     }
 
@@ -319,7 +319,7 @@
         input[type="password"],
         textarea,
         select {
-            border-color: $successColor;
+            border-color: var(--bk-form-success-success-02);
         }
     }
 
@@ -331,7 +331,7 @@
     textarea.is-success {
         +.bk-form-tip {
             .bk-tip-text {
-                color: $successColor;
+                color: var(--bk-form-success-success-02);
             }
         }
     }
@@ -342,17 +342,17 @@
     input.is-danger,
     select.is-danger,
     textarea.is-danger {
-        border-color: $dangerColor;
-        background-color: #fff4f4;
-        color: $dangerColor;
+        border-color: var(--bk-form-danger-danger-03);
+        background-color: var(--bk-form-danger-danger-07);
+        color: var(--bk-form-danger-danger-03);
 
         &::placeholder {
-            color: $dangerColor;
+            color: var(--bk-form-danger-danger-03);
         }
 
         +.bk-form-tip {
             .bk-tip-text {
-                color: $dangerColor;
+                color: var(--bk-form-danger-danger-03);
             }
         }
     }
@@ -372,7 +372,7 @@
     .bk-tip-text {
         float: left;
         font-size: 14px;
-        color: $fnMainColor;
+        color: var(--bk-form-neutral-02);
         display: inline-block;
         padding: 0;
         margin: 0;

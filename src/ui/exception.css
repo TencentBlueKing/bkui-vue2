@@ -24,7 +24,7 @@
     }
     &-text{
         font-size: 24px;
-        color: #63656E;
+        color: var(--bk-exception-neutral-02);
         text-align: center;
         &.part-text {
             font-size: 14px;

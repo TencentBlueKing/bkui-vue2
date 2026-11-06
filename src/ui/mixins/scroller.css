@@ -7,7 +7,7 @@
  *      @mixin scroller green, 2px;
  */
 
-@define-mixin scroller $backgroundColor: #dcdee5, $width: 6px {
+@define-mixin scroller $backgroundColor: var(--bk-scroller-neutral-05), $width: 6px {
     &::-webkit-scrollbar {
         width: 6px;
         height: 6px;
