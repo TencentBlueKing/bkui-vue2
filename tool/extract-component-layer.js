@@ -535,7 +535,7 @@ function collectFromCss (css, vars, layer1, bucket, origin) {
             return
         }
         const kind = propKind(prop, value)
-        if (!kind || !SOLID_PROPS.has(prop) && kind !== 'gradient') return
+        if (!kind || (!SOLID_PROPS.has(prop) && kind !== 'gradient')) return
         if (!SOLID_PROPS.has(prop)) return
         findColorTokens(value).forEach(token => {
             if (/^(transparent|inherit|currentcolor|none|unset|initial)$/i.test(token)) return

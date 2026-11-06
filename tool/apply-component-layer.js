@@ -701,7 +701,7 @@ function transformVue (file, componentId, globalVars, session, exact, fill) {
         const rewritten = rewriteQuotedColors(withoutStyle, componentId, session, localVars, exact, fill)
         if (rewritten !== withoutStyle) {
             let built = ''
-            let styleRe = /<style[^>]*>[\s\S]*?<\/style>/gi
+            const styleRe = /<style[^>]*>[\s\S]*?<\/style>/gi
             let last = 0
             let styleMatch = styleRe.exec(output)
             while (styleMatch) {
@@ -767,7 +767,7 @@ function main () {
         fs.writeFileSync(outFile, defs)
         const variableFile = path.join(uiDir, 'variable.css')
         const variable = read(variableFile)
-        if (!variable.includes("./component-variable.css")) {
+        if (!variable.includes('./component-variable.css')) {
             fs.writeFileSync(variableFile, variable.replace(
                 "@import './global-variable.css';",
                 "@import './global-variable.css';\n@import './component-variable.css';"
