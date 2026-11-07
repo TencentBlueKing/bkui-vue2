@@ -117,7 +117,7 @@
     position: relative;
     height: 180px;
     .bk-color-picker-saturation-white {
-        background: linear-gradient(90deg, var(--bk-color-picker-neutral-10), hsla(0, 0%, 100%, 0));
+        background: linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
     }
     .bk-color-picker-saturation-black {
         background: linear-gradient(0deg, #000, transparent);

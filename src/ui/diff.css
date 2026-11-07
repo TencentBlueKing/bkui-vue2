@@ -66,12 +66,12 @@
   }
   &.dark {
     .d2h-diff-table {
-      background: var(--bk-diff-neutral-01);
+      background: #1d1d1d;
     }
     .d2h-file-side-diff {
       &:nth-child(n + 2) {
         .d2h-code-wrapper {
-          border-left-color: var(--bk-diff-neutral-01);
+          border-left-color: #313238;
         }
       }
     }
@@ -79,11 +79,11 @@
     .d2h-code-linenumber,
     .d2h-code-side-linenumber {
       font-size: 12px;
-      color: var(--bk-diff-neutral-03);
+      color: #8f8f89;
       border: none;
-      background: var(--bk-diff-neutral-01);
+      background: #212121;
       &.d2h-change {
-        background-color: var(--bk-diff-success-05);
+        background-color: #dfd;
       }
       &.d2h-emptyplaceholder {
         background: transparent;
@@ -105,17 +105,17 @@
       }
     }
     .d2h-emptyplaceholder {
-      background-color: var(--bk-diff-neutral-01) !important;
+      background-color: #292929 !important;
     }
     .hljs {
-      color: var(--bk-diff-neutral-03);
+      color: #979ba5;
     }
 
     .hljs-keyword,
     .hljs-literal,
     .hljs-symbol,
     .hljs-name {
-      color: var(--bk-diff-brand-02);
+      color: #3a84ff;
     }
     .hljs-link {
       color: #569cd6;
@@ -149,12 +149,12 @@
       color: #8f3aff;
     }
     .hljs-params {
-      color: var(--bk-diff-danger-02);
+      color: #ea3636;
     }
 
     .hljs-comment,
     .hljs-quote {
-      color: var(--bk-diff-neutral-02);
+      color: #63656e;
       font-style: italic;
     }
 
@@ -165,7 +165,7 @@
     .hljs-meta,
     .hljs-meta-keyword,
     .hljs-tag {
-      color: var(--bk-diff-neutral-03);
+      color: #9b9b9b;
     }
 
     .hljs-variable,
@@ -176,7 +176,7 @@
     .hljs-attr,
     .hljs-attribute,
     .hljs-builtin-name {
-      color: var(--bk-diff-warning-02);
+      color: #ff9c01;
     }
 
     .hljs-section {
@@ -201,7 +201,7 @@
     .hljs-selector-class,
     .hljs-selector-attr,
     .hljs-selector-pseudo {
-      color: var(--bk-diff-brand-02);
+      color: #3a84ff;
     }
 
     .hljs-addition {

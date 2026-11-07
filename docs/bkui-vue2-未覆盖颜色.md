@@ -152,7 +152,7 @@ diff、version-detail 上次 review 定为不在配色范围，下面仍会列�
 
 | 颜色            | 次数  | 对照    | 写法                       | 用在哪里                                                                                                                 | 替换颜色    |
 | ------------- | --- | ----- | ------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------- |
-| #BABCC0 / 20% | 1   | 底色无同色 | rgba(186, 188, 192, 0.2) | `src/ui/message.css:288` .bk-message-content.multi .message-detail .message-tree .message-row .copy-value:hover · 背景 | #FFFFFF |
+| #BABCC0 / 20% | 1   | 底色无同色 | rgba(186, 188, 192, 0.2) | `src/ui/message.css:288` .bk-message-content.multi .message-detail .message-tree .message-row .copy-value:hover · 背景 | #F0F1F5 |
 
 ### popover // 不处理
 

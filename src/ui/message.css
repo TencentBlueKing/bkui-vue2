@@ -118,7 +118,7 @@
         border-radius: 50%;
         cursor: pointer;
         &:hover {
-            background-color: var(--bk-message-hover-neutral-10);
+            background-color: var(--bk-message-hover-neutral-07);
         }
     }
 }
@@ -285,7 +285,7 @@
               padding-left: 4px;
 
               &:hover {
-                background: var(--bk-message-hover-neutral-10);
+                background: var(--bk-message-hover-neutral-07);
                 cursor: pointer;
                 border-radius: var(--bk-message-radius-s);
               }

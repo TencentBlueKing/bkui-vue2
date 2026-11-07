@@ -381,7 +381,7 @@
 | --bk-color-picker-color-6 | 无 | #FF0000 | 当前 red。gradient。例如 .bk-color-picker-hue。共 2 处 |
 | --bk-color-picker-color-7 | 无 | #FF00FF | 当前 #f0f。gradient。例如 .bk-color-picker-hue |
 | --bk-color-picker-color-8 | 无 | #FFFF00 | 当前 #ff0。gradient。例如 .bk-color-picker-hue |
-| --bk-color-picker-bg-2 | --bk-color-neutral-10 | #FFFFFF | 当前 #fff。gradient/bg。例如 .bk-color-picker-saturation.bk-color-picker-saturation-white、.bk-color-picker-hue.bk-color-picker-hue-pointer.bk-color-picker-hue-rectangle。共 2 处 |
+| --bk-color-picker-bg-2 | --bk-color-neutral-10 | #FFFFFF | 滑块手柄用 neutral-10。饱和度白渐变是取色蒙层，维持 #fff 到透明白，不进变量 |
 | --bk-color-picker-disabled-text-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。text。例如 .bk-color-picker.bk-color-picker-disabled.bk-color-picker-text、.bk-color-picker-disabled.bk-color-picker-icon.icon-angle-down。共 2 处 |
 | --bk-color-picker-disabled-border-color | --bk-color-neutral-05 | #DCDEE5 | 当前 $newGreyColor1。border。例如 .bk-color-picker.bk-color-picker-disabled |
 | --bk-color-picker-disabled-bg | --bk-color-neutral-09 | #FAFBFD | 当前 $newGreyColor3。bg。例如 .bk-color-picker.bk-color-picker-disabled |
@@ -535,35 +535,37 @@
 
 ## diff 差异对比
 
+暗色 `.bk-diff.dark` 的背景、分隔线和语法色维持原字面量，不引用浅色 neutral。浅色滚动条、注释和分栏线仍走组件变量。
+
 ### 颜色
 
 | 组件变量 | 引用的第一层变量 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | --bk-diff-bg | 无 | #144212 | 当前 #144212。bg。例如 .bk-diff.dark.hljs-addition |
-| --bk-diff-bg-2 | --bk-color-neutral-01 | #1D1D1D | 当前 #1d1d1d。bg。例如 .bk-diff.dark.d2h-diff-table。近似填入，显示变成 #313238 |
-| --bk-diff-bg-3 | --bk-color-neutral-01 | #212121 | 当前 #212121。bg。例如 .dark.d2h-code-linenumber.d2h-code-side-linenumber。近似填入，显示变成 #313238 |
-| --bk-diff-bg-4 | --bk-color-neutral-01 | #292929 | 当前 #292929。bg。例如 .bk-diff.dark.d2h-emptyplaceholder。近似填入，显示变成 #313238 |
+| --bk-diff-bg-2 | 无 | #1D1D1D | 暗色表格底，维持 #1d1d1d |
+| --bk-diff-bg-3 | 无 | #212121 | 暗色行号底，维持 #212121 |
+| --bk-diff-bg-4 | 无 | #292929 | 暗色空占位，维持 #292929 |
 | --bk-diff-bg-5 | 无 | #2D3324 | 当前 #2d3324。bg。例如 .bk-diff.dark.d2h-ins |
-| --bk-diff-border-color | --bk-color-neutral-01 | #313238 | 当前 #313238。border。例如 .dark.d2h-file-side-diff.d2h-code-wrapper |
-| --bk-diff-text-color | --bk-color-brand-02 | #3A84FF | 当前 #3a84ff。text。例如 .hljs-literal.hljs-symbol.hljs-name、.hljs-selector-class.hljs-selector-attr.hljs-selector-pseudo。共 2 处 |
+| --bk-diff-border-color | 无 | #313238 | 暗色分栏线，维持 #313238 |
+| --bk-diff-text-color | 无 | #3A84FF | 暗色语法色，维持 #3a84ff |
 | --bk-diff-bg-6 | 无 | #422321 | 当前 #422321。bg。例如 .bk-diff.dark.d2h-del |
 | --bk-diff-text-color-2 | 无 | #4EC9B0 | 当前 #4ec9b0。text。例如 .dark.hljs-built_in.hljs-type |
 | --bk-diff-text-color-3 | 无 | #569CD6 | 当前 #569cd6。text。例如 .bk-diff.dark.hljs-link |
 | --bk-diff-text-color-4 | 无 | #608B4E | 当前 #608b4e。text。例如 .bk-diff.dark.hljs-doctag |
-| --bk-diff-text-color-5 | --bk-color-neutral-02 | #63656E | 当前 #63656e。text。例如 .dark.hljs-comment.hljs-quote。近似填入，显示变成 #4D4F56 |
+| --bk-diff-text-color-5 | 无 | #63656E | 暗色注释，维持 #63656e |
 | --bk-diff-bg-7 | 无 | #660000 | 当前 #600。bg。例如 .bk-diff.dark.hljs-deletion |
 | --bk-diff-text-color-6 | 无 | #8F3AFF | 当前 #8f3aff。text。例如 .dark.hljs-string.hljs-meta-string、.hljs-function.hljs-title.hljs-formula。共 2 处 |
-| --bk-diff-text-color-7 | --bk-color-neutral-03 | #8F8F89 | 当前 #8f8f89。text。例如 .dark.d2h-code-linenumber.d2h-code-side-linenumber。近似填入，显示变成 #979BA5 |
-| --bk-diff-text-color-8 | --bk-color-neutral-03 | #979BA5 | 当前 #979ba5。text。例如 .bk-diff.dark.hljs |
+| --bk-diff-text-color-7 | 无 | #8F8F89 | 暗色行号字，维持 #8f8f89 |
+| --bk-diff-text-color-8 | 无 | #979BA5 | 暗色默认字，维持 #979ba5 |
 | --bk-diff-text-color-9 | 无 | #9A5334 | 当前 #9a5334。text。例如 .dark.hljs-regexp.hljs-template-tag |
-| --bk-diff-text-color-10 | --bk-color-neutral-03 | #9B9B9B | 当前 #9b9b9b。text。例如 .hljs-meta.hljs-meta-keyword.hljs-tag。近似填入，显示变成 #979BA5 |
+| --bk-diff-text-color-10 | 无 | #9B9B9B | 暗色 meta，维持 #9b9b9b |
 | --bk-diff-text-color-11 | 无 | #B8D7A3 | 当前 #b8d7a3。text。例如 .dark.hljs-number.hljs-class |
 | --bk-diff-text-color-12 | 无 | #BD63C5 | 当前 #bd63c5。text。例如 .dark.hljs-variable.hljs-template-variable |
 | --bk-diff-text-color-13 | --bk-color-neutral-04 | #C4C6CC | 当前 #c4c6cc。text。例如 .bk-diff.hljs-comment.hljs-quote |
-| --bk-diff-bg-8 | --bk-color-success-05 | #DDFFDD | 当前 #dfd。bg。例如 .d2h-code-linenumber.d2h-code-side-linenumber.d2h-change。近似填入，显示变成 #CBF0DA |
+| --bk-diff-bg-8 | 无 | #DDFFDD | 暗色变更行，维持 #dfd |
 | --bk-diff-bg-9 | --bk-color-neutral-06 | #E6E9EA | 当前 #e6e9ea。bg。例如 .bk-diff.d2h-file-diff、.bk-diff.d2h-file-side-diff。共 2 处。近似填入，显示变成 #EAEBF0 |
-| --bk-diff-text-color-14 | --bk-color-danger-02 | #EA3636 | 当前 #ea3636。text。例如 .bk-diff.dark.hljs-params |
-| --bk-diff-text-color-15 | --bk-color-warning-02 | #FF9C01 | 当前 #ff9c01。text。例如 .hljs-attr.hljs-attribute.hljs-builtin-name。近似填入，显示变成 #F59500 |
+| --bk-diff-text-color-14 | 无 | #EA3636 | 暗色参数，维持 #ea3636 |
+| --bk-diff-text-color-15 | 无 | #FF9C01 | 暗色属性名，维持 #ff9c01 |
 | --bk-diff-border-color-2 | --bk-color-neutral-10 | #FFFFFF | 当前 #fff。border。例如 .d2h-files-diff.d2h-file-side-diff.d2h-code-wrapper |
 
 ### 圆角
@@ -833,7 +835,7 @@
 | --bk-message-hover-text-color-2 | --bk-color-neutral-03 | #979BA5 | 当前 #979ba5。text。例如 .tools.tool.bk-message-close:hover、.tools.tool.close:hover。共 3 处 |
 | --bk-message-hover-bg | --bk-color-neutral-07 | #F0F1F5 | 当前 $newGreyColor2。bg。例如 .bk-message-close.bk-icon:hover |
 | --bk-message-hover-bg-2 | --bk-color-brand-07 | #F0F5FF | 当前 #F0F5FF。bg。例如 .multi.message-detail.message-copy:hover |
-| --bk-message-hover-bg-3 | 无 | rgba(186, 188, 192, 0.2) | 当前 rgba(186, 188, 192, 0.2)。bg。例如 .message-tree.message-row.copy-value:hover |
+| --bk-message-hover-bg-3 | --bk-color-neutral-07 | #F0F1F5 | 详情复制项 hover。原 rgba(186, 188, 192, 0.2)，评审改为 neutral-07，不用白色 |
 | --bk-message-primary-text-color | --bk-color-brand-02 | #3A84FF | 当前 $newMainColor。text。例如 .bk-message-primary.bk-message-icon.bk-icon |
 | --bk-message-primary-text-color-2 | --bk-color-brand-04 | #A3C5FD | 当前 $newMainColor2。text。例如 .bk-message-primary.bk-message-close.icon-close |
 | --bk-message-primary-border-color | --bk-color-brand-06 | #E1ECFF | 当前 $newMainColor3。border。例如 .bk-message-primary |
