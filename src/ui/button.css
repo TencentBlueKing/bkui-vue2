@@ -651,7 +651,7 @@
         margin-left: 15px;
     }
     &:hover {
-        color: var(--bk-button-hover-brand-02);
+        color: var(--bk-button-primary-hover-brand-03);
         text-decoration: none;
     }
     &.is-disabled {
@@ -661,7 +661,7 @@
     &.bk-default {
         color: var(--bk-button-neutral-02);
         &:hover {
-            color: darken($fnMainColor, 10%);
+            color: var(--bk-button-hover-neutral-01);
         }
     }
     &.bk-info {
@@ -673,25 +673,25 @@
     &.bk-primary {
         color: var(--bk-button-primary-brand-02);
         &:hover {
-            color: var(--bk-button-primary-hover-brand-02);
+            color: var(--bk-button-primary-hover-brand-03);
         }
     }
     &.bk-success {
         color: var(--bk-button-success-success-02);
         &:hover {
-            color: var(--bk-button-success-hover-success-02);
+            color: var(--bk-button-success-hover-success-03);
         }
     }
     &.bk-warning {
         color: var(--bk-button-warning-warning-02);
         &:hover {
-            color: var(--bk-button-warning-hover-warning-02);
+            color: var(--bk-button-warning-hover-warning-03);
         }
     }
     &.bk-danger {
         color: var(--bk-button-danger-danger-02);
         &:hover {
-            color: var(--bk-button-danger-hover-danger-02);
+            color: var(--bk-button-danger-hover-danger-03);
         }
     }
     .bk-icon {

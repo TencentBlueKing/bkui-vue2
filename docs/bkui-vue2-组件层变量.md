@@ -165,7 +165,7 @@
 | --bk-button-danger-disabled-color-2 | --bk-color-neutral-10 | #FFFFFF | 当前 $defaultColor。text/bg。例如 .bk-button.bk-danger.is-disabled、.bk-button-hover.bk-danger.is-disabled。共 2 处 |
 | --bk-button-danger-hover-border-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。border。例如 .bk-danger.is-loading.hover:hover |
 | --bk-button-danger-hover-color | --bk-color-danger-02 | #EA3636 | 当前 $newRedColor。bg/border。例如 .bk-danger.is-loading.hover:hover、.bk-danger.is-outline.hover:hover。共 8 处 |
-| --bk-button-danger-hover-text-color | --bk-color-danger-02 | #F72239 | 当前 $dangerHoverColor。text。例如 .bk-text-button.bk-danger:hover。近似填入，显示变成 #EA3636 |
+| --bk-button-danger-hover-text-color | --bk-color-danger-03 | #F72239 | 当前 $dangerHoverColor。text。例如 .bk-text-button.bk-danger:hover。改走 Danger-03，显示 #FF5656 |
 | --bk-button-danger-hover-color-2 | --bk-color-danger-03 | #FF5656 | 当前 $newRedColor1。bg/border/text。例如 .bk-button.bk-danger.hover:hover、.bk-button-text.bk-danger.hover:hover。共 3 处 |
 | --bk-button-danger-hover-color-3 | --bk-color-neutral-10 | #FFFFFF | 当前 #fff、$defaultColor。bg/text。例如 .is-outline.hover.bk-button-loading:hover、.bk-danger.is-outline.hover:hover。共 5 处 |
 | --bk-button-disabled-active-text-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。text。例如 .is-outline.is-disabled.active:active、.bk-button-text.is-disabled.active:active。共 4 处 |
@@ -179,13 +179,13 @@
 | --bk-button-disabled-text-color-2 | --bk-color-neutral-06 | #E6E6E6 | 当前 #e6e6e6。text。例如 .bk-text-button.is-disabled。近似填入，显示变成 #EAEBF0 |
 | --bk-button-disabled-bg | --bk-color-neutral-09 | #FAF9FD | 当前 #faf9fd。bg。例如 .bk-button.bk-default.is-disabled。近似填入，显示变成 #FAFBFD |
 | --bk-button-disabled-bg-2 | --bk-color-neutral-10 | #FFFFFF | 当前 $defaultColor。bg。例如 .bk-button.is-outline.is-disabled、.bk-button-text.bk-default.is-disabled。共 4 处 |
-| --bk-button-hover-text-color | --bk-color-brand-02 | #0082FF | 当前 $primaryHoverColor。text。例如 .bk-text-button:hover。近似填入，显示变成 #3A84FF |
+| --bk-button-hover-text-color | --bk-color-brand-03 | #0082FF | 当前 $primaryHoverColor。text。例如 .bk-text-button:hover。改走 Brand-03，显示 #699DF4。按钮组边框仍用 brand-02 |
 | --bk-button-hover-color | --bk-color-brand-02 | #3A84FF | 当前 $newMainColor。border/text。例如 .bk-button-group.bk-button.hover:hover。共 2 处 |
 | --bk-button-hover-text-color-2 | --bk-color-neutral-02 | #63656E | 当前 $newBlackColor2。text。例如 .bk-button.bk-default.hover:hover、.bk-button-text.bk-default.hover:hover。共 2 处。近似填入，显示变成 #4D4F56 |
 | --bk-button-hover-border-color | --bk-color-neutral-03 | #979BA5 | 当前 $newBlackColor3。border。例如 .bk-button.bk-default.hover:hover、.bk-button-text.bk-default.hover:hover。共 2 处 |
 | --bk-button-hover-border-color-2 | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。border。例如 .bk-default.is-loading.hover:hover。共 2 处 |
 | --bk-button-hover-bg | --bk-color-neutral-10 | #FFFFFF | 当前 $defaultColor。bg。例如 .bk-default.is-loading.hover:hover。共 2 处 |
-| --bk-button-hover-text-color-3 | 无 | darken(#63656E, 10%) | 当前 darken($fnMainColor, 10%)。text。例如 .bk-text-button.bk-default:hover |
+| --bk-button-hover-text-color-3 | --bk-color-neutral-01 | darken(#63656E, 10%) | 当前 darken($fnMainColor, 10%)。text。例如 .bk-text-button.bk-default:hover。改接 Neutral-01，显示 #313238，不再用 darken |
 | --bk-button-info-text-color | --bk-color-brand-03 | #699DF4 | 当前 $newMainColor1。text。例如 .bk-text-button.bk-info |
 | --bk-button-info-hover-text-color | --bk-color-brand-04 | #7AB9FA | 当前 $infoHoverColor。text。例如 .bk-text-button.bk-info:hover。近似填入，显示变成 #A3C5FD |
 | --bk-button-primary-color | --bk-color-brand-02 | #3A84FF | 当前 $newMainColor。bg/border/text。例如 .bk-button.bk-primary、.is-loading.is-outline.bk-button-loading。共 9 处 |
@@ -199,7 +199,7 @@
 | --bk-button-primary-disabled-text-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。text。例如 .bk-button-hover.bk-primary.is-disabled |
 | --bk-button-primary-disabled-color | --bk-color-neutral-05 | #DCDEE5 | 当前 $newGreyColor1。bg/border。例如 .bk-button.bk-primary.is-disabled、.bk-button-hover.bk-primary.is-disabled。共 3 处 |
 | --bk-button-primary-disabled-color-2 | --bk-color-neutral-10 | #FFFFFF | 当前 $defaultColor。text/bg。例如 .bk-button.bk-primary.is-disabled、.bk-button-hover.bk-primary.is-disabled。共 2 处 |
-| --bk-button-primary-hover-text-color | --bk-color-brand-02 | #0082FF | 当前 $primaryHoverColor。text。例如 .bk-text-button.bk-primary:hover。近似填入，显示变成 #3A84FF |
+| --bk-button-primary-hover-text-color | --bk-color-brand-03 | #0082FF | 当前 $primaryHoverColor。text。例如 .bk-text-button.bk-primary:hover。改走 Brand-03，显示 #699DF4 |
 | --bk-button-primary-hover-color | --bk-color-brand-02 | #3A84FF | 当前 $newMainColor。bg/border。例如 .bk-primary.is-loading.hover:hover、.bk-primary.is-outline.hover:hover。共 8 处 |
 | --bk-button-primary-hover-color-2 | --bk-color-brand-03 | #699DF4 | 当前 $newMainColor1。bg/border/text。例如 .bk-button.bk-primary.hover:hover、.bk-button-text.bk-primary.hover:hover。共 3 处 |
 | --bk-button-primary-hover-border-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。border。例如 .bk-primary.is-loading.hover:hover |
@@ -217,7 +217,7 @@
 | --bk-button-success-disabled-text-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。text。例如 .bk-button-hover.bk-success.is-disabled |
 | --bk-button-success-disabled-color | --bk-color-neutral-05 | #DCDEE5 | 当前 $newGreyColor1。bg/border。例如 .bk-button.bk-success.is-disabled、.bk-button-hover.bk-success.is-disabled。共 3 处 |
 | --bk-button-success-disabled-color-2 | --bk-color-neutral-10 | #FFFFFF | 当前 $defaultColor。text/bg。例如 .bk-button.bk-success.is-disabled、.bk-button-hover.bk-success.is-disabled。共 2 处 |
-| --bk-button-success-hover-text-color | --bk-color-success-02 | #00C873 | 当前 $successHoverColor。text。例如 .bk-text-button.bk-success:hover。近似填入，显示变成 #2CAF5E |
+| --bk-button-success-hover-text-color | --bk-color-success-03 | #00C873 | 当前 $successHoverColor。text。例如 .bk-text-button.bk-success:hover。改走 Success-03，显示 #65C389 |
 | --bk-button-success-hover-color | --bk-color-success-02 | #2DCB56 | 当前 $newGreenColor。bg/border。例如 .bk-success.is-loading.hover:hover、.bk-success.is-outline.hover:hover。共 8 处。近似填入，显示变成 #2CAF5E |
 | --bk-button-success-hover-color-2 | --bk-color-success-03 | #45E35F | 当前 $newGreenColor1。bg/border/text。例如 .bk-button.bk-success.hover:hover、.bk-button-text.bk-success.hover:hover。共 3 处。近似填入，显示变成 #65C389 |
 | --bk-button-success-hover-border-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。border。例如 .bk-success.is-loading.hover:hover |
@@ -234,7 +234,7 @@
 | --bk-button-warning-disabled-color | --bk-color-neutral-05 | #DCDEE5 | 当前 $newGreyColor1。bg/border。例如 .bk-button.bk-warning.is-disabled、.bk-button-hover.bk-warning.is-disabled。共 3 处 |
 | --bk-button-warning-disabled-color-2 | --bk-color-neutral-10 | #FFFFFF | 当前 $defaultColor。text/bg。例如 .bk-button.bk-warning.is-disabled、.bk-button-hover.bk-warning.is-disabled。共 2 处 |
 | --bk-button-warning-hover-border-color | --bk-color-neutral-04 | #C4C6CC | 当前 $newGreyColor。border。例如 .bk-warning.is-loading.hover:hover |
-| --bk-button-warning-hover-text-color | --bk-color-warning-02 | #FF9600 | 当前 $warningHoverColor。text。例如 .bk-text-button.bk-warning:hover。近似填入，显示变成 #F59500 |
+| --bk-button-warning-hover-text-color | --bk-color-warning-03 | #FF9600 | 当前 $warningHoverColor。text。例如 .bk-text-button.bk-warning:hover。改走 Warning-03，显示 #F8B64F |
 | --bk-button-warning-hover-color | --bk-color-warning-02 | #FF9C01 | 当前 $newOrangeColor。bg/border。例如 .bk-warning.is-loading.hover:hover、.bk-warning.is-outline.hover:hover。共 8 处。近似填入，显示变成 #F59500 |
 | --bk-button-warning-hover-color-2 | --bk-color-warning-03 | #FFB848 | 当前 $newOrangeColor1。bg/border/text。例如 .bk-button.bk-warning.hover:hover、.bk-button-text.bk-warning.hover:hover。共 3 处。近似填入，显示变成 #F8B64F |
 | --bk-button-warning-hover-color-3 | --bk-color-neutral-10 | #FFFFFF | 当前 #fff、$defaultColor。bg/text。例如 .is-outline.hover.bk-button-loading:hover、.bk-warning.is-outline.hover:hover。共 5 处 |
@@ -1824,7 +1824,7 @@
 
 | 组件变量 | 引用的第一层变量 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| --bk-virtual-render-bg | --bk-color-neutral-03 | #A0A0A0 | 当前 #a0a0a0。bg。例如 .bk-virtual-render.bk-scroll-x。近似填入，显示变成 #979BA5 |
+| --bk-virtual-render-bg | --bk-color-neutral-03 | #A0A0A0 | 当前 #a0a0a0。bg。scrollbar-color 与 webkit thumb 共用 Neutral-03，显示 #979BA5 |
 | --bk-virtual-render-bg-2 | --bk-color-neutral-05 | #DCDEE5 | 当前 #dcdee5。bg。例如 .bk-virtual-render.bk-scroll-y |
 
 ### 圆角

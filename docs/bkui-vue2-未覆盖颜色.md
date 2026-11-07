@@ -19,7 +19,6 @@ diff、version-detail 上次 review 定为不在配色范围，下面仍会列�
 | 组件 | 待匹配实色 | 漏接同色 | 透明色 | 阴影 | 颜色函数 |
 | --- | --- | --- | --- | --- | --- |
 | back-top | 0 | 0 | 0 | 1 | 0 |
-| button | 0 | 0 | 0 | 0 | 1 |
 | color-picker | 0 | 0 | 0 | 8 | 0 |
 | dialog | 0 | 0 | 2 | 0 | 0 |
 | diff | 11 | 0 | 0 | 0 | 1 |
@@ -45,7 +44,7 @@ diff、version-detail 上次 review 定为不在配色范围，下面仍会列�
 | virtual-scroll | 0 | 0 | 3 | 0 | 0 |
 | zoom-image | 0 | 0 | 1 | 0 | 0 |
 
-颜色都已经接上变量的组件：affix、alert、animate-number、badge、big-tree、breadcrumb、breadcrumb-item、card、cascade、checkbox、checkbox-group、col、collapse、collapse-item、common、compose-form-item、container、date-picker、divider、exception、form、form-item、icon、image、info-box、input、link、notify、option、option-group、overflow-tips、pagination、popconfirm、process、progress、radio、radio-button、radio-group、rate、reset、resize-layout、round-progress、row、select、slider、spin、star、steps、tab-panel、table-column、table-setting-content、timeline、transition、tree、virtual-render。
+颜色都已经接上变量的组件：affix、alert、animate-number、badge、big-tree、breadcrumb、breadcrumb-item、button、card、cascade、checkbox、checkbox-group、col、collapse、collapse-item、common、compose-form-item、container、date-picker、divider、exception、form、form-item、icon、image、info-box、input、link、notify、option、option-group、overflow-tips、pagination、popconfirm、process、progress、radio、radio-button、radio-group、rate、reset、resize-layout、round-progress、row、select、slider、spin、star、steps、tab-panel、table-column、table-setting-content、timeline、transition、tree、virtual-render。
 
 ## 需要你匹配的实色
 
@@ -267,7 +266,7 @@ diff、version-detail 上次 review 定为不在配色范围，下面仍会列�
 
 `darken()`、`lighten()`、`color()` 在构建时会算成固定颜色。
 
-共 15 条，出现 16 处。
+共 14 条，出现 15 处。
 
 ### tag
 
@@ -284,12 +283,6 @@ diff、version-detail 上次 review 定为不在配色范围，下面仍会列�
 | color(#EA3536 a(30%)) | 1 | 底色无同色 | $danger-color / 30% | `src/ui/tag.css:52` .bk-tag-danger · 边框 |
 | color(#FE9C00 a(10%)) | 1 | 底色无同色 | $warning-color / 10% | `src/ui/tag.css:49` .bk-tag-warning · 背景 |
 | color(#FE9C00 a(30%)) | 1 | 底色无同色 | $warning-color / 30% | `src/ui/tag.css:49` .bk-tag-warning · 边框 |
-
-### button
-
-| 颜色 | 次数 | 对照 | 写法 | 用在哪里 |
-| --- | --- | --- | --- | --- |
-| darken(#63656E, 10%) | 1 | 底色无同色 | darken($fnMainColor, 10%) | `src/ui/button.css:664` .bk-text-button.bk-default:hover · 文字 |
 
 ### diff
 

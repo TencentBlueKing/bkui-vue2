@@ -22,7 +22,7 @@
          
     &.bk-scroll-x {
       overflow-x: auto;
-      scrollbar-color: var(--bk-virtual-render-neutral-04) transparent;
+      scrollbar-color: var(--bk-virtual-render-neutral-03) transparent;
       scrollbar-width: thin;
       &::-webkit-scrollbar {
         height: 8px;

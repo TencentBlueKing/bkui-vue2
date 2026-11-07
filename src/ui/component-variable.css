@@ -53,7 +53,6 @@
     --bk-button-danger-danger-01: var(--bk-color-danger-01, #DB2626);
     --bk-button-danger-danger-02: var(--bk-color-danger-02, #EA3636);
     --bk-button-danger-danger-03: var(--bk-color-danger-03, #FF5656);
-    --bk-button-danger-hover-danger-02: var(--bk-color-danger-02, #F72239);
     --bk-button-danger-hover-danger-03: var(--bk-color-danger-03, #FF5656);
     --bk-button-disabled-active-neutral-04: var(--bk-color-neutral-04, #C4C6CC);
     --bk-button-disabled-active-neutral-05: var(--bk-color-neutral-05, #DCDEE5);
@@ -67,6 +66,7 @@
     --bk-button-disabled-neutral-09: var(--bk-color-neutral-09, #FAF9FD);
     --bk-button-disabled-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
     --bk-button-hover-brand-02: var(--bk-color-brand-02, #3A84FF);
+    --bk-button-hover-neutral-01: var(--bk-color-neutral-01, #4B4C53);
     --bk-button-hover-neutral-02: var(--bk-color-neutral-02, #63656E);
     --bk-button-hover-neutral-03: var(--bk-color-neutral-03, #979BA5);
     --bk-button-hover-neutral-04: var(--bk-color-neutral-04, #C4C6CC);
@@ -81,20 +81,17 @@
     --bk-button-primary-brand-01: var(--bk-color-brand-01, #2761DD);
     --bk-button-primary-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-button-primary-brand-03: var(--bk-color-brand-03, #699DF4);
-    --bk-button-primary-hover-brand-02: var(--bk-color-brand-02, #0082FF);
     --bk-button-primary-hover-brand-03: var(--bk-color-brand-03, #699DF4);
     --bk-button-radius-none: var(--bk-radius-none, 0);
     --bk-button-radius-s: var(--bk-radius-s, 2px);
     --bk-button-selected-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-button-selected-brand-06: var(--bk-color-brand-06, #E1ECFF);
     --bk-button-success-active-success-01: var(--bk-color-success-01, #1AB943);
-    --bk-button-success-hover-success-02: var(--bk-color-success-02, #00C873);
     --bk-button-success-hover-success-03: var(--bk-color-success-03, #45E35F);
     --bk-button-success-success-01: var(--bk-color-success-01, #1AB943);
     --bk-button-success-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-button-success-success-03: var(--bk-color-success-03, #45E35F);
     --bk-button-warning-active-warning-01: var(--bk-color-warning-01, #EB9000);
-    --bk-button-warning-hover-warning-02: var(--bk-color-warning-02, #FF9600);
     --bk-button-warning-hover-warning-03: var(--bk-color-warning-03, #FFB848);
     --bk-button-warning-warning-01: var(--bk-color-warning-01, #EB9000);
     --bk-button-warning-warning-02: var(--bk-color-warning-02, #FF9C01);
@@ -663,7 +660,6 @@
     --bk-version-detail-radius-l: var(--bk-radius-l, 6px);
     --bk-version-detail-radius-s: var(--bk-radius-s, 2px);
     --bk-virtual-render-neutral-03: var(--bk-color-neutral-03, #A0A0A0);
-    --bk-virtual-render-neutral-04: var(--bk-color-neutral-04, #A0A0A0);
     --bk-virtual-render-neutral-05: var(--bk-color-neutral-05, #DCDEE5);
     --bk-virtual-render-radius-xl: var(--bk-radius-xl, 8px);
     --bk-virtual-scroll-neutral-04: var(--bk-color-neutral-04, #A6A6A6);
