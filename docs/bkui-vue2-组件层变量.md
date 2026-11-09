@@ -485,13 +485,7 @@
 
 | 当前值 | 引用的第一层变量 | 位置 | 前文 |
 | --- | --- | --- | --- |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | fill="#c4c6cc" |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | <polygon fill="#c4c6cc" points="512,512 512,256 448,256 448,512 448,576 512,576 768,576 768,512" /> |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | fill="#c4c6cc" |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | <rect x="416" y="128" fill="#c4c6cc" width="192" height="64" /> |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | <rect x="288" y="96" fill="#c4c6cc" width="64" height="128" /> |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | <rect x="672" y="96" fill="#c4c6cc" width="64" height="128" /> |
-| #C4C6CC | --bk-color-neutral-04 | date-picker/picker.vue | fill="#c4c6cc" |
+| #C4C6CC | --bk-color-neutral-04 | date-picker.base.css .picker-icon | 图标 fill 用 CSS `currentColor`，颜色来自 `.icon-wrapper` 的 `--bk-date-picker-neutral-04`。不写在 SVG `fill` 展示属性上 |
 
 ## dialog 对话框
 
