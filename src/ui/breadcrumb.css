@@ -3,7 +3,7 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  color: $newBlackColor3;
+  color: var(--bk-breadcrumb-neutral-03);
   &::after {
     clear: both
   }
@@ -20,16 +20,16 @@
     &-inner {
       &.is-link, & a {
         text-decoration: none;
-        color: $fnMainColor;
+        color: var(--bk-breadcrumb-neutral-02);
         &:hover {
-          color: $primaryHoverColor;
+          color: var(--bk-breadcrumb-hover-brand-02);
           cursor: pointer;
         }
       }
     }
 
     &:last-child {
-      color: $newBlackColor3;
+      color: var(--bk-breadcrumb-neutral-03);
       .el-breadcrumb__inner,
       .el-breadcrumb__inner a {
         &, &:hover {
@@ -42,7 +42,7 @@
     }
   }
   &-goback {
-    color: $primaryHoverColor;
+    color: var(--bk-breadcrumb-brand-02);
     margin-right: 12px;
     cursor: pointer;
     & .icon-default {

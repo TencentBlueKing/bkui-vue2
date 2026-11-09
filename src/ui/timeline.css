@@ -40,7 +40,7 @@ $largeNodeSize: 15px;
 
     .bk-timeline-dot {
         position: relative;
-        border-left: 1px solid #d8d8d8;
+        border-left: 1px solid var(--bk-timeline-neutral-05);
         padding-left: 16px;
         padding-bottom: 24px;
         font-size: 0;
@@ -52,8 +52,8 @@ $largeNodeSize: 15px;
             box-sizing: border-box;
             width: $nodeSize;
             height: $nodeSize;
-            background: #fff;
-            border: 2px solid #d8d8d8;
+            background: var(--bk-timeline-neutral-10);
+            border: 2px solid var(--bk-timeline-neutral-05);
             border-radius: 50%;
             position: absolute;
             top: calc(($nodeSize + 1px) * -1);
@@ -67,7 +67,7 @@ $largeNodeSize: 15px;
 
         .bk-timeline-title {
             font-size: 14px;
-            color: #63656e;
+            color: var(--bk-timeline-neutral-02);
             padding-bottom: 10px;
             display: inline-block;
             margin-top: -3px;
@@ -80,7 +80,7 @@ $largeNodeSize: 15px;
             max-width: 300px;
             word-break: break-all;
             font-size: 14px;
-            color: #666;
+            color: var(--bk-timeline-neutral-02);
         }
         .bk-timeline-icon {
             .bk-timeline-icon-inner {
@@ -95,8 +95,8 @@ $largeNodeSize: 15px;
             box-sizing: border-box;
             width: $largeNodeSize;
             height: $largeNodeSize;
-            background: #fff;
-            border: 2px solid #d8d8d8;
+            background: var(--bk-timeline-neutral-10);
+            border: 2px solid var(--bk-timeline-neutral-05);
             border-radius: 50%;
             position: absolute;
             top: calc(($largeNodeSize + 1px) * -1);
@@ -137,18 +137,18 @@ $largeNodeSize: 15px;
     }
 
     /* color */
-    @mixin gen-color blue, $newMainColor;
-    @mixin gen-color red, $newRedColor;
-    @mixin gen-color green, #40c024;
-    @mixin gen-color yellow, $newOrangeColor;
-    @mixin gen-color gray, #d8d8d8;
+    @mixin gen-color blue, var(--bk-timeline-brand-02);
+    @mixin gen-color red, var(--bk-timeline-danger-02);
+    @mixin gen-color green, var(--bk-timeline-success-02);
+    @mixin gen-color yellow, var(--bk-timeline-warning-02);
+    @mixin gen-color gray, var(--bk-timeline-neutral-05);
 
     /* type */
-    @mixin gen-theme default, #999;
-    @mixin gen-theme primary, $newMainColor;
-    @mixin gen-theme warning, #ffb400;
-    @mixin gen-theme success, #30d878;
-    @mixin gen-theme danger, #ff5656;
+    @mixin gen-theme default, var(--bk-timeline-neutral-03);
+    @mixin gen-theme primary, var(--bk-timeline-brand-02);
+    @mixin gen-theme warning, var(--bk-timeline-warning-02);
+    @mixin gen-theme success, var(--bk-timeline-success-02);
+    @mixin gen-theme danger, var(--bk-timeline-danger-03);
 
     /* 嵌套 */
     .bk-timeline {

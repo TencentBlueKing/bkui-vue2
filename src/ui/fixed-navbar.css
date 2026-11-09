@@ -3,7 +3,7 @@
 .bk-fixed-navbar-wrapper {
     width: 52px;
     opacity: 1;
-    background: #ffffff;
+    background: var(--bk-fixed-navbar-neutral-10);
     padding: 22px 14px;
     border-radius: 26px;
     z-index: 999;
@@ -25,9 +25,9 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        color: $newBlackColor3;
+        color: var(--bk-fixed-navbar-neutral-03);
         &:hover {
-            color: $newMainColor;
+            color: var(--bk-fixed-navbar-hover-brand-02);
             cursor: pointer;
         }
         &:not(:last-of-type) {

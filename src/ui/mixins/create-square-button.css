@@ -6,16 +6,16 @@
  */
 
 @define-mixin create-square-button $color, $hover, $active {
-    background: #fafafa;
+    background: var(--bk-button-neutral-09);
     color: $color;
     &:hover,
     &.hover {
         background-color: $hover;
         border-color: $hover;
-        color: #fff;
+        color: var(--bk-button-hover-neutral-10);
         opacity: 1;
         .bk-text {
-            color: #fff;
+            color: var(--bk-button-hover-neutral-10);
             background-color: color($hover lightness(7%));
             border-color: color($hover lightness(7%));
         }
@@ -24,10 +24,10 @@
     &.active {
         background-color: $active;
         border-color: $active;
-        color: #fff;
+        color: var(--bk-button-active-neutral-10);
         opacity: 1;
         .bk-text {
-            color: #fff;
+            color: var(--bk-button-active-neutral-10);
             background-color: color($active lightness(10%));
             border-color: color($active lightness(10%));
         }

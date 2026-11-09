@@ -22,10 +22,10 @@
   .bk-divider-info {
     position: absolute;
     padding: 0 1.4em;
-    color: $newBlackColor1;
+    color: var(--bk-divider-info-neutral-01);
     top:50%;
     transform: translateY(-50%);
-    background-color: $defaultLightColor;
+    background-color: var(--bk-divider-info-neutral-10);
     &-left {
         left: 2em;
     }

@@ -21,16 +21,16 @@
     flex: 1;
     min-width: 200px;
     height: 400px;
-    background-color: #fff;
-    border-radius: 2px;
-    border: 1px solid $borderInlineColor;
+    background-color: var(--bk-transfer-neutral-10);
+    border-radius: var(--bk-transfer-radius-s);
+    border: 1px solid var(--bk-transfer-neutral-05);
     overflow: hidden;
 
     .slot-header {
       height: 43px;
       line-height: 43px;
-      background-color: $newGreyColor3;
-      border-bottom: 1px solid $borderInlineColor;
+      background-color: var(--bk-transfer-neutral-09);
+      border-bottom: 1px solid var(--bk-transfer-neutral-05);
       padding: 0 20px;
       position: relative;
       .slot-content {
@@ -40,18 +40,18 @@
     .header {
       height: 43px;
       line-height: 43px;
-      background-color: $newGreyColor3;
-      border-bottom: 1px solid $borderInlineColor;
+      background-color: var(--bk-transfer-neutral-09);
+      border-bottom: 1px solid var(--bk-transfer-neutral-05);
       padding: 0 20px;
       position: relative;
       span {
         position: absolute;
         right: 10px;
         font-size: 12px;
-        color: $newMainColor;
+        color: var(--bk-transfer-brand-02);
         cursor: pointer;
         &.disabled {
-          color: $newGreyColor;
+          color: var(--bk-transfer-disabled-neutral-04);
           cursor: not-allowed;
         }
       }
@@ -61,7 +61,7 @@
       position: relative;
       top: 40%;
       text-align: center;
-      color: $newGreyColor;
+      color: var(--bk-transfer-neutral-04);
       cursor: default;
     }
     .content {
@@ -80,13 +80,13 @@
         cursor: pointer;
         position: relative;
         &:hover {
-          background-color: #eef6fe;
-          color: $newMainColor;
+          background-color: var(--bk-transfer-hover-brand-07);
+          color: var(--bk-transfer-hover-brand-02);
         }
         &.is-disabled {
           cursor: not-allowed;
-          color: $newGreyColor;
-          background-color: #fff;
+          color: var(--bk-transfer-disabled-neutral-04);
+          background-color: var(--bk-transfer-disabled-neutral-10);
         }
         .content-text {
           flex: 1;
@@ -108,8 +108,8 @@
       }
       &::-webkit-scrollbar-thumb {
         height: 5px;
-        border-radius: 2px;
-        background-color: #e6e9ea;
+        border-radius: var(--bk-transfer-radius-s);
+        background-color: var(--bk-transfer-neutral-06);
       }
       .bk-icon {
         font-size: $iconNormalSize;
@@ -121,7 +121,7 @@
   }
 
   .transfer-search-input {
-    border-bottom: 1px solid #f0f1f5;
+    border-bottom: 1px solid var(--bk-transfer-neutral-07);
     margin-top: 6px;
 
     .bk-form-input {

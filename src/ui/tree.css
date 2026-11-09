@@ -47,7 +47,7 @@
         line-height: 32px;
         .tree-expanded-icon {
             position: relative;
-            color: #c0c4cc;
+            color: var(--bk-tree-neutral-04);
             cursor: pointer;
         }
         .tree-node {
@@ -70,7 +70,7 @@
         cursor: pointer;
     }
     .node-selected {
-        color: $newMainColor;
+        color: var(--bk-tree-selected-brand-02);
     }
     .node-icon {
         display: inline-block;
@@ -84,21 +84,21 @@
         vertical-align: middle;
         width: 14px;
         height: 14px;
-        border: 1px solid $newBlackColor3;
-        border-radius: 2px;
+        border: 1px solid var(--bk-tree-neutral-03);
+        border-radius: var(--bk-tree-radius-s);
 
         input[type=checkbox] {
             display: none;
         }
 
         &:focus {
-            border-color: $formBorderFocusColor;
+            border-color: var(--bk-tree-focus-brand-02);
             outline: none;
         }
 
         &--indeterminate {
-            border-color: $newMainColor;
-            background-color: $newMainColor;
+            border-color: var(--bk-tree-brand-02);
+            background-color: var(--bk-tree-brand-02);
             background-clip: content-box;
 
             &::after {
@@ -106,18 +106,18 @@
                 display: block;
                 width: 8px;
                 height: 2px;
-                background-color: #fff;
+                background-color: var(--bk-tree-neutral-10);
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                border-radius: 2px;
+                border-radius: var(--bk-tree-radius-s);
             }
         }
 
         &--checked {
-            border-color: $newMainColor;
-            background-color: $newMainColor;
+            border-color: var(--bk-tree-brand-02);
+            background-color: var(--bk-tree-brand-02);
             background-clip: border-box;
 
             &::after {
@@ -127,7 +127,7 @@
                 left: 3px;
                 width: 4px;
                 height: 8px;
-                border: 2px solid #fff;
+                border: 2px solid var(--bk-tree-neutral-10);
                 border-left: 0;
                 border-top: 0;
                 transform-origin: center;
@@ -136,16 +136,16 @@
         }
 
         &--disabled {
-            border-color: $newGreyColor1;
-            background-color: $newGreyColor1;
+            border-color: var(--bk-tree-disabled-neutral-05);
+            background-color: var(--bk-tree-disabled-neutral-05);
             cursor: not-allowed;
 
             &&--indeterminate ::after{
-                background-color: $newGreyColor3;
+                background-color: var(--bk-tree-disabled-neutral-09);
             }
 
             &&--checked ::after{
-                border-color: $newGreyColor3;
+                border-color: var(--bk-tree-disabled-neutral-09);
             }
         }
     }
@@ -160,7 +160,7 @@
         position: absolute;
         right: auto;
         border-width: 1px;
-        border-left: 1px dashed $borderColor;
+        border-left: 1px dashed var(--bk-tree-neutral-04);
         bottom: 50px;
         height: 100%;
         left: -10px;
@@ -173,7 +173,7 @@
         position: absolute;
         right: auto;
         border-width: 1px;
-        border-top: 1px dashed $borderColor;
+        border-top: 1px dashed var(--bk-tree-neutral-04);
         height: 20px;
         top: 16px;
         width: 12px;
@@ -187,7 +187,7 @@
         position: absolute;
         right: auto;
         border-width: 1px;
-        border-top: 1px dashed $borderColor;
+        border-top: 1px dashed var(--bk-tree-neutral-04);
         height: 20px;
         top: 15px;
         width: 24px;

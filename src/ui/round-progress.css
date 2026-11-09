@@ -23,7 +23,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -60%);
-        color: $fnMainColor;
+        color: var(--bk-round-progress-neutral-02);
     }
     .progress-background {
         transform: scale(0.9);

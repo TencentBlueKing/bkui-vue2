@@ -24,52 +24,52 @@
 
 /* 基础背景色 */
 .bk-bg-default {
-    background-color: $newGreyColor3;
+    background-color: var(--bk-common-neutral-09);
 }
 
 .bk-bg-primary {
-    background-color: $newMainColor;
+    background-color: var(--bk-common-primary-brand-02);
 }
 
 .bk-bg-warning {
-    background-color: $newOrangeColor;
+    background-color: var(--bk-common-warning-warning-02);
 }
 
 .bk-bg-danger {
-    background-color: $newRedColor;
+    background-color: var(--bk-common-danger-danger-02);
 }
 
 .bk-bg-success {
-    background-color: $newGreenColor;
+    background-color: var(--bk-common-success-success-02);
 }
 
 /* 基础字体色 */
 .bk-text-default {
-    color: $newBlackColor2;
+    color: var(--bk-common-neutral-02);
 }
 
 .bk-text-primary {
-    color: $newMainColor;
+    color: var(--bk-common-primary-brand-02);
 }
 
 .bk-text-warning {
-    color: $newOrangeColor;
+    color: var(--bk-common-warning-warning-02);
 }
 
 .bk-text-danger {
-    color: $newRedColor;
+    color: var(--bk-common-danger-danger-02);
 }
 
 .bk-text-success {
-    color: $newGreenColor;
+    color: var(--bk-common-success-success-02);
 }
 
 .bk-text-main {
-    color: $newBlackColor1;
+    color: var(--bk-common-neutral-01);
 }
 
 .bk-text-minor {
-    color: $newBlackColor3;
+    color: var(--bk-common-neutral-03);
 }
 
 /* 基础字体 */

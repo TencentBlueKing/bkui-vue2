@@ -7,7 +7,7 @@
         position: absolute;
         width: 2px;
         padding-top: 2px;
-        background-color: $newMainColor;
+        background-color: var(--bk-time-picker-brand-02);
         top: $top;
         left: $left;
         border-radius: 50%;
@@ -18,7 +18,7 @@
         position: absolute;
         width: 2px;
         padding-top: 2px;
-        background-color: $newMainColor;
+        background-color: var(--bk-time-picker-brand-02);
         top: calc($top + 5px);
         left: $left;
         border-radius: 50%;
@@ -27,17 +27,17 @@
 }
 
 .bk-time-picker-now {
-    border-top: 1px solid $newGreyColor1;
+    border-top: 1px solid var(--bk-time-picker-neutral-05);
     text-align: right;
     clear: both;
-    background-color: $newGreyColor3;
+    background-color: var(--bk-time-picker-neutral-09);
     height: 42px;
     line-height: 41px;
     font-size: 13px;
     padding: 0 20px;
     text-align: center;
     a {
-        color: $newMainColor;
+        color: var(--bk-time-picker-brand-02);
         text-decoration: none;
     }
 }
@@ -59,9 +59,9 @@
         text-align: left;
         /* border-top: 1px solid #e4e7ed; */
         /* border-bottom: 1px solid #e4e7ed; */
-        background-color: $newMainColor3;
+        background-color: var(--bk-time-picker-brand-06);
         mix-blend-mode: multiply;
-        color: $newMainColor;
+        color: var(--bk-time-picker-brand-02);
         pointer-events: none;
     }
 }
@@ -85,11 +85,11 @@
         width: 33.33%;
         text-align: center;
         list-style: none;
-        color: $newBlackColor3;
+        color: var(--bk-time-picker-neutral-03);
         font-size: 14px;
         position: relative;
         &.active {
-            color: $newMainColor;
+            color: var(--bk-time-picker-active-brand-02);
         }
         /* &:nth-of-type(1) {
             @mixin dot 55px, 133px;
@@ -145,21 +145,21 @@
             cursor: pointer;
             list-style: none;
             transition: background 0.2s ease-in-out;
-            color: $newBlackColor2;
+            color: var(--bk-time-picker-neutral-02);
             font-size: 12px;
             position: relative;
             &:hover {
-                background-color: $newGreyColor2;
+                background-color: var(--bk-time-picker-hover-neutral-07);
                 /* color: $newMainColor; */
                 /* font-weight: 700; */
             }
         }
         .bk-time-picker-cells-cell-disabled {
-            color: $newGreyColor;
+            color: var(--bk-time-picker-disabled-neutral-04);
             cursor: not-allowed;
             &:hover {
-                color: $newGreyColor;
-                background-color: #fff;
+                color: var(--bk-time-picker-disabled-hover-neutral-04);
+                background-color: var(--bk-time-picker-disabled-hover-neutral-10);
                 cursor: not-allowed;
             }
         }
@@ -167,7 +167,7 @@
         .bk-time-picker-cells-cell-selected,
         .bk-time-picker-cells-cell-selected:hover {
             /* background-color: $newMainColor3; */
-            color: $newMainColor;
+            color: var(--bk-time-picker-brand-02);
         }
         .bk-time-picker-cells-cell-selected {
             font-weight: 700;
@@ -184,10 +184,10 @@
     height: 46px;
     line-height: 46px;
     text-align: center;
-    border-bottom: 1px solid $newGreyColor1;
+    border-bottom: 1px solid var(--bk-time-picker-neutral-05);
     font-size: 14px;
     font-weight: 700;
-    color: $newBlackColor2;
+    color: var(--bk-time-picker-neutral-02);
     .now-time {
         font-weight: 400;
         cursor: pointer;
@@ -211,7 +211,7 @@
     bottom: 0;
     /* right: -2px; */
     right: -1px;
-    background: #e8eaec;
+    background: var(--bk-time-picker-neutral-06);
     z-index: 1;
 }
 .bk-time-picker-with-range .bk-picker-panel-content-right {
@@ -222,10 +222,10 @@
     left: 0;
 }
 .bk-time-picker-with-range .bk-time-picker-cells-list:first-child {
-    border-radius: 0;
+    border-radius: var(--bk-time-picker-radius-none);
 }
 .bk-time-picker-with-range .bk-time-picker-cells-list:last-child {
-    border-radius: 0;
+    border-radius: var(--bk-time-picker-radius-none);
 }
 .bk-time-picker-with-range.bk-time-picker-with-seconds .bk-picker-panel-body {
     /* min-width: 340px; */
@@ -249,10 +249,10 @@
     max-height: 200px;
 }
 .bk-picker-panel-content .bk-picker-panel-content .bk-time-picker-cells-list:first-child {
-    border-radius: 0;
+    border-radius: var(--bk-time-picker-radius-none);
 }
 .bk-picker-panel-content .bk-picker-panel-content .bk-time-picker-cells-list:last-child {
-    border-radius: 0;
+    border-radius: var(--bk-time-picker-radius-none);
 }
 .bk-picker-panel-content .bk-picker-panel-content .bk-time-picker-cells-list ul {
     padding: 0 0 168px 0;

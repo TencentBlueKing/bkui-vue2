@@ -45,13 +45,13 @@
         width: 11px;
         height: 4px;
         margin: 0 3px;
-        background: $fnMainColor;
-        border-radius: 2px;
+        background: var(--bk-swiper-neutral-02);
+        border-radius: var(--bk-swiper-radius-s);
         transition: width 0.525s;
         list-style-type: none;
         &.bk-current-index {
             width: 17px;
-            background: #c5c7d1;
+            background: var(--bk-swiper-neutral-04);
         }
     }
 }
@@ -70,8 +70,8 @@
         left: 11px;
         width: 10px;
         height: 10px;
-        border-left: 2px solid $defaultColor;
-        border-bottom: 2px solid $defaultColor;
+        border-left: 2px solid var(--bk-swiper-neutral-10);
+        border-bottom: 2px solid var(--bk-swiper-neutral-10);
     }
     &.bk-nav-prev {
         left: 14px;

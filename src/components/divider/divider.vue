@@ -66,7 +66,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#dcdee5'
+      default: 'var(--bk-divider-neutral-05)'
     },
     width: {
       type: Number,

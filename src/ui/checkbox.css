@@ -11,8 +11,8 @@
 
   &.is-indeterminate:not(.is-checked) {
     .bk-checkbox {
-      border-color: $newMainColor;
-      background-color: $newMainColor;
+      border-color: var(--bk-checkbox-checked-brand-02);
+      background-color: var(--bk-checkbox-checked-brand-02);
       background-clip: content-box;
       position: relative;
 
@@ -20,12 +20,12 @@
         content: '';
         width: 8px;
         height: 2px;
-        background: #fff;
+        background: var(--bk-checkbox-checked-neutral-10);
         position: absolute;
         top: 50%;
         left: 50%;
         margin-left: -4px;
-        border-radius: 2px;
+        border-radius: var(--bk-checkbox-radius-s);
         margin-top: -1px;
         display: inline-block;
       }
@@ -36,8 +36,8 @@
     cursor: not-allowed;
 
     .bk-checkbox {
-      border-color: $newGreyColor1;
-      background-color: $newGreyColor3;
+      border-color: var(--bk-checkbox-disabled-neutral-05);
+      background-color: var(--bk-checkbox-disabled-neutral-09);
     }
 
     /* .bk-checkbox-text {
@@ -47,15 +47,15 @@
 
   &.is-disabled.is-checked {
     .bk-checkbox {
-      border-color: $newGreyColor1;
-      background-color: $newGreyColor1;
+      border-color: var(--bk-checkbox-disabled-checked-neutral-05);
+      background-color: var(--bk-checkbox-disabled-checked-neutral-05);
     }
   }
 
   &.is-checked {
     .bk-checkbox {
-      border-color: $newMainColor;
-      background-color: $newMainColor;
+      border-color: var(--bk-checkbox-checked-brand-02);
+      background-color: var(--bk-checkbox-checked-brand-02);
       background-clip: border-box;
 
       &:after {
@@ -65,7 +65,7 @@
         left: 4px;
         width: 4px;
         height: 8px;
-        border: 2px solid #fff;
+        border: 2px solid var(--bk-checkbox-checked-neutral-10);
         border-left: 0;
         border-top: 0;
         transform-origin: center;
@@ -80,10 +80,10 @@
     vertical-align: middle;
     width: 16px;
     height: 16px;
-    border: 1px solid $newBlackColor3;
-    border-radius: 2px;
+    border: 1px solid var(--bk-checkbox-neutral-03);
+    border-radius: var(--bk-checkbox-radius-s);
     &:focus {
-      border-color: $formBorderFocusColor;
+      border-color: var(--bk-checkbox-focus-brand-02);
       outline: none;
     }
   }
@@ -93,6 +93,6 @@
     margin: 0 0 0 6px;
     vertical-align: middle;
     font-size: 14px;
-    color: $newBlackColor2;
+    color: var(--bk-checkbox-neutral-02);
   }
 }

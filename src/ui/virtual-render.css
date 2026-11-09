@@ -1,4 +1,6 @@
 
+@import './variable.css';
+
 .bk-virtual-render {
     position: relative;
 
@@ -20,15 +22,15 @@
          
     &.bk-scroll-x {
       overflow-x: auto;
-      scrollbar-color: #a0a0a0 transparent;
+      scrollbar-color: var(--bk-virtual-render-neutral-03) transparent;
       scrollbar-width: thin;
       &::-webkit-scrollbar {
         height: 8px;
         background-color: transparent;
       }
       &::-webkit-scrollbar-thumb {
-        border-radius: 8px;
-        background-color: #a0a0a0;
+        border-radius: var(--bk-virtual-render-radius-xl);
+        background-color: var(--bk-virtual-render-neutral-03);
       }
     }
     
@@ -39,8 +41,8 @@
         background-color: transparent;
       }
       &::-webkit-scrollbar-thumb {
-        border-radius: 8px;
-        background-color: #dcdee5;
+        border-radius: var(--bk-virtual-render-radius-xl);
+        background-color: var(--bk-virtual-render-neutral-05);
       }
     }
   }

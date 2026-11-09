@@ -1,3 +1,5 @@
+@import './variable.css';
+
 html,
 body {
     margin: 0;
@@ -274,7 +276,7 @@ input[type="search"]::-webkit-search-decoration {
  * Define consistent border, margin, and padding.
  */
 fieldset {
-    border: 1px solid #c0c0c0;
+    border: 1px solid var(--bk-reset-neutral-04);
     margin: 0 2px;
     padding: 0.35em 0.625em 0.75em;
 }

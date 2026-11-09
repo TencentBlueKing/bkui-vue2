@@ -9,10 +9,10 @@
     display: inline-block;
     vertical-align: middle;
     transition: all .4s ease;
-    background-color: $newGreyColor;
+    background-color: var(--bk-switcher-neutral-04);
     text-align: left;
     &:focus {
-        box-shadow:0px 0px 6px $newGreyColor;
+        box-shadow: 0px 0px 6px var(--bk-switcher-neutral-04);
     }
     &:after {
         left: 2px;
@@ -25,7 +25,7 @@
         transition: all .3s ease;
         position: absolute;
         cursor: pointer;
-        background: $defaultColor;
+        background: var(--bk-switcher-neutral-10);
         box-shadow: 0 0 3px rgba(0, 0, 0, .2)
     }
     &:not(.show-label):after {
@@ -57,7 +57,7 @@
         width: 30px;
         height: 28px;
         font-size: 12px;
-        color: $defaultColor;
+        color: var(--bk-switcher-neutral-10);
         transition: all ease 0.3s;
         font-weight: normal;
         display: none;
@@ -95,14 +95,14 @@
         }
     }
     &.is-checked {
-        background: $newGreenColor;
+        background: var(--bk-switcher-checked-success-02);
         &:focus {
-            box-shadow:0px 0px 6px $newGreenColor;
+            box-shadow: 0px 0px 6px var(--bk-switcher-checked-success-02);
         }
         &.primary {
-            background: $newMainColor;
+            background: var(--bk-switcher-primary-checked-brand-02);
             &:focus {
-                box-shadow:0px 0px 6px $newMainColor;
+                box-shadow: 0px 0px 6px var(--bk-switcher-primary-checked-brand-02);
             }
         }
         &:after {
@@ -125,38 +125,38 @@
         }
     }
     &.bk-switcher-outline {
-        background: $defaultColor;
-        border: 1px solid $newGreyColor;
+        background: var(--bk-switcher-neutral-10);
+        border: 1px solid var(--bk-switcher-neutral-04);
         &:after {
             width: 22px;
             height: 22px;
             box-shadow: none;
-            background-color: $newGreyColor;
+            background-color: var(--bk-switcher-neutral-04);
         }
         .switcher-label {
             height: 26px;
-            color: $newGreyColor;
+            color: var(--bk-switcher-neutral-04);
             margin-left: 24px;
         }
         &.is-checked {
-            border: 1px solid $newGreenColor;
+            border: 1px solid var(--bk-switcher-checked-success-02);
             &:after {
                 margin-left: -24px;
-                background-color: $newGreenColor;
+                background-color: var(--bk-switcher-checked-success-02);
             }
             .switcher-label {
-                color: $newGreenColor;
+                color: var(--bk-switcher-checked-success-02);
                 margin-left: 4px;
             }
         }
         &.is-disabled {
-            background-color: $defaultColor !important;
-            border-color: #eee !important;
+            background-color: var(--bk-switcher-disabled-neutral-10) !important;
+            border-color: var(--bk-switcher-disabled-neutral-07) !important;
             .switcher-label {
-                color: #eee;
+                color: var(--bk-switcher-disabled-neutral-07);
             }
             &:after {
-                background-color: #eee;
+                background-color: var(--bk-switcher-disabled-neutral-07);
             }
         }
         &.bk-switcher-large {
@@ -172,9 +172,9 @@
         }
     }
     &.bk-switcher-square {
-        border-radius: 2px;
+        border-radius: var(--bk-switcher-radius-s);
         &:after {
-            border-radius: 2px;
+            border-radius: var(--bk-switcher-radius-s);
         }
         .switcher-label {
             width: 35px;
@@ -184,7 +184,7 @@
         width: 42px;
         height: 24px;
         line-height: 22px;
-        border-radius: 12px;
+        border-radius: var(--bk-switcher-radius-xxl);
         &:after {
             width: 20px;
             height: 20px;

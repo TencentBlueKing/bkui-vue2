@@ -4,7 +4,7 @@
     /* width: 196px; */
     margin: 9px;
     white-space: normal;
-    color: $newBlackColor2;
+    color: var(--bk-date-picker-neutral-02);
     font-size: 12px;
     /* text-align: center; */
     span {
@@ -33,22 +33,22 @@
             line-height: 26px;
             text-align: center;
             margin: 3px;
-            color: $newBlackColor2;
+            color: var(--bk-date-picker-neutral-02);
         }
     }
 }
 
 .bk-date-picker-cells-cell:hover em {
     /* background-color: $newMainColor3; */
-    background-color: $newGreyColor2;
+    background-color: var(--bk-date-picker-neutral-07);
 }
 .bk-date-picker-cells-focused em {
-    box-shadow: 0 0 0 1px $newMainColor2 inset;
-    color: $newMainColor;
+    box-shadow: 0 0 0 1px var(--bk-date-picker-brand-04) inset;
+    color: var(--bk-date-picker-brand-02);
 }
 .bk-date-picker-cells-cell-prev-month em,
 .bk-date-picker-cells-cell-next-month em {
-    color: $newGreyColor;
+    color: var(--bk-date-picker-neutral-04);
 }
 
 .bk-date-picker-cells-cell-prev-month:hover em,
@@ -61,7 +61,7 @@ span.bk-date-picker-cells-cell-week-label:hover,
 span.bk-date-picker-cells-cell-disabled,
 span.bk-date-picker-cells-cell-disabled:hover {
     cursor: not-allowed;
-    color: $newGreyColor;
+    color: var(--bk-date-picker-disabled-hover-neutral-04);
 }
 
 span.bk-date-picker-cells-cell-week-label em,
@@ -75,13 +75,13 @@ span.bk-date-picker-cells-cell-disabled:hover em {
 
 span.bk-date-picker-cells-cell-disabled,
 span.bk-date-picker-cells-cell-disabled:hover {
-    background-color: $newGreyColor2;
+    background-color: var(--bk-date-picker-disabled-hover-neutral-07);
 }
 
 .bk-date-picker-cells-cell-today em {
     position: relative;
-    box-shadow: 0 0 0 1px $newMainColor2 inset;
-    color: $newMainColor;
+    box-shadow: 0 0 0 1px var(--bk-date-picker-brand-04) inset;
+    color: var(--bk-date-picker-brand-02);
 }
 
 .bk-date-picker-cells-cell-range {
@@ -89,8 +89,8 @@ span.bk-date-picker-cells-cell-disabled:hover {
     &:before {
         content: '';
         display: block;
-        background: $newMainColor3;
-        border-radius: 0;
+        background: var(--bk-date-picker-brand-06);
+        border-radius: var(--bk-date-picker-radius-none);
         border: 0;
         position: absolute;
         top: 0;
@@ -106,21 +106,21 @@ span.bk-date-picker-cells-cell-disabled:hover {
 
 .bk-date-picker-cells-cell-selected em,
 .bk-date-picker-cells-cell-selected:hover em {
-    background-color: $newMainColor;
-    color: $defaultColor;
-    box-shadow: 0 0 0 1px $newMainColor inset;
+    background-color: var(--bk-date-picker-hover-selected-brand-02);
+    color: var(--bk-date-picker-hover-selected-neutral-10);
+    box-shadow: 0 0 0 1px var(--bk-date-picker-brand-02) inset;
 }
 span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
-    background: $newGreyColor;
-    color: #f7f7f7;
+    background: var(--bk-date-picker-disabled-selected-neutral-04);
+    color: var(--bk-date-picker-disabled-selected-neutral-08);
 }
 .bk-date-picker-cells-cell-today.bk-date-picker-cells-cell-selected em:after {
-    background: #fff;
+    background: var(--bk-date-picker-selected-neutral-10);
 }
 
 .bk-date-picker-cells-cell-today.bk-date-picker-cells-cell-selected em,
 .bk-date-picker-cells-cell-today.bk-date-picker-cells-cell-selected em:hover {
-    box-shadow: 0 0 0 1px $newMainColor inset;
+    box-shadow: 0 0 0 1px var(--bk-date-picker-brand-02) inset;
 }
 
 .bk-date-picker-cells-year,
@@ -150,14 +150,14 @@ span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
     height: 46px;
     line-height: 46px;
     text-align: center;
-    border-bottom: 1px solid $newGreyColor1;
+    border-bottom: 1px solid var(--bk-date-picker-neutral-05);
     font-size: 14px;
     font-weight: 700;
-    color: $newBlackColor2;
+    color: var(--bk-date-picker-neutral-02);
     .bk-date-picker-header-label {
         cursor: pointer;
         &:hover {
-            color: $newMainColor;
+            color: var(--bk-date-picker-hover-brand-02);
         }
     }
     .up-to-now {
@@ -166,7 +166,7 @@ span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
         margin-left: 3px;
         &.disabled {
             cursor: not-allowed;
-            color: #c4c6cc;
+            color: var(--bk-date-picker-disabled-neutral-04);
         }
     }
 }
@@ -217,11 +217,11 @@ span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
     line-height: 46px;
     text-align: center;
     cursor: pointer;
-    color: $newBlackColor3;
+    color: var(--bk-date-picker-neutral-03);
     transition: color 0.2s ease-in-out;
 }
 .bk-picker-panel-icon-btn:hover {
-    color: #2d8cf0;
+    color: var(--bk-date-picker-hover-brand-03);
 }
 .bk-picker-panel-icon-btn i {
     font-size: $iconSmallSize;
@@ -246,11 +246,11 @@ span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
     position: absolute;
     top: 0;
     bottom: 0;
-    background-color: $newGreyColor3;
-    border-left: 1px solid $newGreyColor1;
+    background-color: var(--bk-date-picker-neutral-09);
+    border-left: 1px solid var(--bk-date-picker-neutral-05);
     overflow: auto;
     right: 0;
-    color: $newMainColor;
+    color: var(--bk-date-picker-brand-02);
     font-size: 14px;
     padding: 12px 0;
     .bk-picker-panel-shortcut {
@@ -266,7 +266,7 @@ span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
         text-overflow: ellipsis;
         white-space: nowrap;
         &:hover {
-            background-color: $newMainColor3;
+            background-color: var(--bk-date-picker-hover-brand-06);
         }
     }
 }
@@ -280,23 +280,23 @@ span.bk-date-picker-cells-cell-disabled.bk-date-picker-cells-cell-selected em {
     text-align: right;
     padding: 8px;
     clear: both; */
-    border-top: 1px solid $newGreyColor1;
+    border-top: 1px solid var(--bk-date-picker-neutral-05);
     text-align: right;
     clear: both;
-    background-color: $newGreyColor3;
+    background-color: var(--bk-date-picker-neutral-09);
     height: 42px;
     line-height: 41px;
     font-size: 14px;
     padding: 0 20px;
     a {
-        color: $newBlackColor3;
+        color: var(--bk-date-picker-neutral-03);
         &.confirm {
             margin-left: 10px;
-            color: $newMainColor;
+            color: var(--bk-date-picker-brand-02);
         }
         &[disabled] {
             cursor: not-allowed;
-            color: $newGreyColor;
+            color: var(--bk-date-picker-disabled-neutral-04);
         }
     }
     .bk-picker-confirm-time {

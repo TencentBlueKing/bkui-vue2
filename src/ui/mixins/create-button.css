@@ -9,7 +9,7 @@
     & {
         background: $color;
         border-color: $color;
-        color: $defaultColor;
+        color: var(--bk-button-neutral-10);
     }
 
     &:hover,
@@ -27,9 +27,9 @@
 
     &.is-disabled,
     &[disabled] {
-        background-color: $newGreyColor1;
-        border-color: $newGreyColor1;
-        color: $defaultColor;
+        background-color: var(--bk-button-disabled-neutral-05);
+        border-color: var(--bk-button-disabled-neutral-05);
+        color: var(--bk-button-disabled-neutral-10);
         cursor: not-allowed;
     }
 
@@ -56,7 +56,7 @@
         &.hover {
           .bk-button-loading {
             div {
-              background-color: #fff;
+              background-color: var(--bk-button-hover-neutral-10);
             }
           }
         }
@@ -64,7 +64,7 @@
         &:active {
           .bk-button-loading {
             div {
-              background-color: #fff;
+              background-color: var(--bk-button-active-neutral-10);
             }
           }
         }
@@ -74,18 +74,18 @@
     &.is-outline {
         color: $color;
         border-color: $color;
-        background-color: #fff;
+        background-color: var(--bk-button-neutral-10);
         &:hover,
         &.hover {
             background-color: $color;
             border-color: $color;
-            color: #fff;
+            color: var(--bk-button-hover-neutral-10);
         }
         &.active,
         &:active {
             background-color: $active;
             border-color: $active;
-            color: #fff;
+            color: var(--bk-button-active-neutral-10);
         }
     }
 

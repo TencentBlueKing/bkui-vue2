@@ -14,7 +14,7 @@
             width: 6px;
             height: 8px;
             transform-origin: 50% -10px;
-            border-radius: 8px;
+            border-radius: var(--bk-spin-radius-xl);
             transform: scale(0.4);
             animation-name: fadePrimary;
             animation-duration: 1.2s;
@@ -53,32 +53,32 @@
         }
         &.bk-spin-rotation-default-wait {
             .rotate {
-                background-color: $newGreyColor;
+                background-color: var(--bk-spin-neutral-04);
             }
         }
         &.bk-spin-rotation-primary-wait {
             .rotate {
-                background-color: $primaryColor;
+                background-color: var(--bk-spin-primary-brand-02);
             }
         }
         &.bk-spin-rotation-success-wait {
             .rotate {
-                background-color: $successColor;
+                background-color: var(--bk-spin-success-success-02);
             }
         }
         &.bk-spin-rotation-danger-wait {
             .rotate {
-                background-color: $dangerColor;
+                background-color: var(--bk-spin-danger-danger-03);
             }
         }
         &.bk-spin-rotation-warning-wait {
             .rotate {
-                background-color: $warningColor;
+                background-color: var(--bk-spin-warning-warning-03);
             }
         }
         &.bk-spin-rotation-info-wait {
             .rotate {
-                background-color: #63656e;
+                background-color: var(--bk-spin-info-neutral-02);
             }
         }
         .rotate1 {
@@ -158,7 +158,7 @@
         }
     }
     .bk-spin-icon {
-        color: $primaryColor;
+        color: var(--bk-spin-brand-02);
         font-size: 16px;
         animation: icon-loading 1.2s linear infinite;
         i {
@@ -169,22 +169,22 @@
         animation: none;
     }
     .bk-spin-icon-default {
-        color: $newGreyColor;
+        color: var(--bk-spin-neutral-04);
     }
     .bk-spin-icon-primary {
-        color: $primaryColor;
+        color: var(--bk-spin-primary-brand-02);
     }
     .bk-spin-icon-success {
-        color: $successColor;
+        color: var(--bk-spin-success-success-02);
     }
     .bk-spin-icon-warning {
-        color: $warningColor;
+        color: var(--bk-spin-warning-warning-03);
     }
     .bk-spin-icon-danger {
-        color: $dangerColor;
+        color: var(--bk-spin-danger-danger-03);
     }
     .bk-spin-icon-info {
-    	color: #979ba5;
+    	color: var(--bk-spin-info-neutral-03);
     }
     .bk-spin-icon-large {
         i {
@@ -209,7 +209,7 @@
     .bk-spin-title {
         text-align: center;
         font-size: 14px;
-        color: $fnMainColor;
+        color: var(--bk-spin-neutral-02);
         line-height: initial;
         max-width: 100%;
     }
@@ -240,7 +240,7 @@
 
 @keyframes fadeDefault{
     0% {
-        background-color: $newGreyColor;
+        background-color: var(--bk-spin-neutral-04);
     }
 
     100% {
@@ -250,7 +250,7 @@
 
 @keyframes fadePrimary {
     0% {
-        background-color: $primaryColor;
+        background-color: var(--bk-spin-brand-02);
     }
 
     100% {
@@ -260,7 +260,7 @@
 
 @keyframes fadeSuccess {
     0% {
-        background-color: $successColor;
+        background-color: var(--bk-spin-success-success-02);
     }
 
     100% {
@@ -270,7 +270,7 @@
 
 @keyframes fadeDanger {
     0% {
-        background-color: $dangerColor;
+        background-color: var(--bk-spin-danger-danger-03);
     }
 
     100% {
@@ -280,7 +280,7 @@
 
 @keyframes fadeWarning {
     0% {
-        background-color: $warningColor;
+        background-color: var(--bk-spin-warning-warning-03);
     }
 
     100% {
@@ -290,7 +290,7 @@
 
 @keyframes fadeInfo {
     0% {
-        background-color: #979ba5;
+        background-color: var(--bk-spin-neutral-03);
     }
 
     100% {

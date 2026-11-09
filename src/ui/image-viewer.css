@@ -33,7 +33,7 @@ $tipsColor:$newBlackColor3;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: $imgWrapTextColor;
+        color: var(--bk-image-viewer-neutral-04);
         background: rgba(0,0,0,0.70);
         > div {
             flex: 1;
@@ -51,7 +51,7 @@ $tipsColor:$newBlackColor3;
         }
         .quit-tips{
             font-size: 14px;
-            color: $tipsColor;
+            color: var(--bk-image-viewer-neutral-03);
         }
     }
 
@@ -65,12 +65,12 @@ $tipsColor:$newBlackColor3;
         opacity: .8;
         box-sizing: border-box;
         background-color: rgba(0, 0, 0, .3);
-        color: #DCDEE5;
+        color: var(--bk-image-viewer-neutral-05);
         user-select: none;
 
         &:hover {
             background-color: rgba(0, 0, 0, .4);
-            color: $defaultColor;
+            color: var(--bk-image-viewer-hover-neutral-10);
         }
     }
 
@@ -79,10 +79,10 @@ $tipsColor:$newBlackColor3;
         line-height: 48px;
         text-align: center;
         font-size: 32px;
-        color: #C4C6CC;
+        color: var(--bk-image-viewer-neutral-04);
         cursor: pointer;
         &:hover{
-            color: #fff;
+            color: var(--bk-image-viewer-hover-neutral-10);
         }
     }
 
@@ -101,7 +101,7 @@ $tipsColor:$newBlackColor3;
     &-error {
         text-align: center;
         font-size: 14px;
-        color: $newBlackColor1;
+        color: var(--bk-image-viewer-error-neutral-01);
 
         .bk-icon {
             font-size: 85px;
@@ -118,7 +118,7 @@ $tipsColor:$newBlackColor3;
         height: 44px;
         padding: 0 23px;
         background-color: $newBlackColor4;
-        border-color: $defaultLightColor;
+        border-color: var(--bk-image-viewer-neutral-10);
         border-radius: 22px;
         &:hover{
             background: rgba(0,0,0,.5);
@@ -129,7 +129,7 @@ $tipsColor:$newBlackColor3;
             height: 100%;
             text-align: justify;
             font-size: 23px;
-            color: $imgWrapTextColor;
+            color: var(--bk-image-viewer-neutral-04);
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -138,7 +138,7 @@ $tipsColor:$newBlackColor3;
                 cursor: pointer;
 
                 &:hover {
-                    color: $defaultLightColor;
+                    color: var(--bk-image-viewer-hover-neutral-10);
                 }
             }
 

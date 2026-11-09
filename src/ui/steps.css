@@ -28,13 +28,13 @@
         .bk-step-title,
         .bk-step-indicator {
           &::after {
-            background-image: linear-gradient(to right, $newRedColor 50%, transparent 0%);
+            background-image: linear-gradient(to right, var(--bk-steps-error-danger-02) 50%, transparent 0%);
           }
         }
       }
       &:has(+ .current.bk-step-error) {
         &::after {
-          background-image: linear-gradient($newRedColor 50%, transparent 0%);
+          background-image: linear-gradient(var(--bk-steps-error-danger-02) 50%, transparent 0%);
         }
       }
     }
@@ -44,7 +44,7 @@
       .bk-step-text {
         background-color: $theme;
         border-color: $theme;
-        color: #fff;
+        color: var(--bk-steps-neutral-10);
       }
     }
   }
@@ -83,7 +83,7 @@
       font-size: $iconSmallestSize;
     }
   }
-  @mixin get-theme $newMainColor;
+  @mixin get-theme var(--bk-steps-brand-02);
   .bk-step {
     flex: 1;
     position: relative;
@@ -98,12 +98,12 @@
       height: 24px;
       padding: 0;
       margin-right: 8px;
-      border: 1px solid #979ba5;
+      border: 1px solid var(--bk-steps-neutral-03);
       border-radius: 50%;
       line-height: 24px;
-      color: #979ba5;
+      color: var(--bk-steps-neutral-03);
       text-align: center;
-      background-color: #fff;
+      background-color: var(--bk-steps-neutral-10);
       z-index: 1;
       vertical-align: top;
     }
@@ -118,7 +118,7 @@
     .bk-step-title {
       display: inline-block;
       position: relative;
-      color: #63656e;
+      color: var(--bk-steps-neutral-02);
       font-size: 14px;
       word-break: break-all;
       padding-right: 16px;
@@ -127,7 +127,7 @@
     }
     .bk-step-description {
       font-size: 12px;
-      color: #979ba5;
+      color: var(--bk-steps-neutral-03);
       max-width: 140px;
       white-space: normal;
       @mixin ellipsis 140px, block;
@@ -154,10 +154,10 @@
     }
     &.done {
       .bk-step-title {
-        color: $fnMainColor;
+        color: var(--bk-steps-neutral-02);
       }
       .bk-step-description {
-        color: #979ba5;
+        color: var(--bk-steps-neutral-03);
       }
     }
     &.current {
@@ -168,32 +168,32 @@
       }
       .bk-step-title,
       .bk-step-description {
-        color: $fnMainColor;
+        color: var(--bk-steps-neutral-02);
       }
 
       &.bk-step-error {
         .bk-step-indicator {
-          background-color: $newRedColor1;
-          border-color: $newRedColor1;
+          background-color: var(--bk-steps-error-danger-03);
+          border-color: var(--bk-steps-error-danger-03);
         }
         .bk-step-title,
         .bk-step-description {
-          color: $newRedColor1;
+          color: var(--bk-steps-error-danger-03);
         }
       }
     }
   }
   &-info {
-    @mixin get-theme $infoColor;
+    @mixin get-theme var(--bk-steps-info-brand-04);
   }
   &-success {
-    @mixin get-theme $newGreenColor;
+    @mixin get-theme var(--bk-steps-success-success-02);
   }
   &-warning {
-    @mixin get-theme $newOrangeColor;
+    @mixin get-theme var(--bk-steps-warning-warning-02);
   }
   &-danger {
-    @mixin get-theme $newRedColor;
+    @mixin get-theme var(--bk-steps-danger-danger-02);
   }
 
   &-dashed {
@@ -201,7 +201,7 @@
       .bk-step-title,
       .bk-step-indicator {
         &::after {
-          background-image: linear-gradient(to right, $newGreyColor 50%, transparent 0%);
+          background-image: linear-gradient(to right, var(--bk-steps-neutral-04) 50%, transparent 0%);
           background-position: bottom;
           background-size: 6px 1px;
           background-repeat: repeat-x;
@@ -215,7 +215,7 @@
       .bk-step-title,
       .bk-step-indicator {
         &::after {
-          background-color: $newGreyColor;
+          background-color: var(--bk-steps-neutral-04);
         }
       }
     }
@@ -240,7 +240,7 @@
         top: 40px;
         height: 100%;
         width: 1px;
-        background-image: linear-gradient($newGreyColor 50%, transparent 0%);
+        background-image: linear-gradient(var(--bk-steps-neutral-04) 50%, transparent 0%);
         background-position: right;
         background-size: 1px 6px;
         background-repeat: repeat-y;

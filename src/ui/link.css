@@ -40,72 +40,72 @@ $dangerDisabledColor: #fd9c9c;
         font-size: 14px;
     }
     &.is-default {
-        color: $defaultColor;
+        color: var(--bk-link-neutral-02);
         &:hover {
-            color: $defaultHoverColor;
+            color: var(--bk-link-hover-neutral-03);
         }
         &.is-disabled {
-            color: $defaultDisabledColor;
+            color: var(--bk-link-disabled-neutral-05);
         }
     }
     &.is-primary {
-        color: $primaryColor;
+        color: var(--bk-link-primary-brand-02);
         &:hover {
-            color: $primaryHoverColor;
+            color: var(--bk-link-primary-hover-brand-03);
         }
         &:active {
-            color: #1768ef;
+            color: var(--bk-link-primary-active-brand-01);
         }
         &:visited {
-            color: $primaryHoverColor;
+            color: var(--bk-link-primary-brand-03);
         }
         &.is-disabled {
-            color: $primaryDisabledColor;
+            color: var(--bk-link-primary-disabled-brand-04);
         }
     }
     &.is-success {
-        color: $successColor;
+        color: var(--bk-link-success-success-02);
         &:hover {
-            color: $successHoverColor;
+            color: var(--bk-link-success-hover-success-03);
         }
         &:active {
-            color: #1bb943;
+            color: var(--bk-link-success-active-success-01);
         }
         &:visited {
-            color: $successHoverColor;
+            color: var(--bk-link-success-success-03);
         }
         &.is-disabled {
-            color: $successDisabledColor;
+            color: var(--bk-link-success-disabled-success-04);
         }
     }
     &.is-warning {
-        color: $warningColor;
+        color: var(--bk-link-warning-warning-02);
         &:hover {
-            color: $warningHoverColor;
+            color: var(--bk-link-warning-hover-warning-03);
         }
         &:active {
-            color: #eb9000;
+            color: var(--bk-link-warning-active-warning-01);
         }
         &:visited {
-            color: $warningHoverColor;
+            color: var(--bk-link-warning-warning-03);
         }
         &.is-disabled {
-            color: $warningDisabledColor;
+            color: var(--bk-link-warning-disabled-warning-04);
         }
     }
     &.is-danger {
-        color: $dangerColor;
+        color: var(--bk-link-danger-danger-02);
         &:hover {
-            color: $dangerHoverColor;
+            color: var(--bk-link-danger-hover-danger-03);
         }
         &:active {
-            color: #da2726;
+            color: var(--bk-link-danger-active-danger-01);
         }
         &:visited {
-            color: $dangerHoverColor;
+            color: var(--bk-link-danger-danger-03);
         }
         &.is-disabled {
-            color: $dangerDisabledColor;
+            color: var(--bk-link-danger-disabled-danger-04);
         }
     }
     &.is-disabled {

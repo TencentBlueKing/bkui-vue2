@@ -3,9 +3,9 @@
 @import './mixins/ellipsis.css';
 @import './mixins/scroller.css';
 $baseBackgroundColor: #f5f7fa;
-$tableBorderColor: #dfe0e5;
+$tableBorderColor: var(--bk-table-neutral-05);
 $tableBorder: 1px solid $tableBorderColor;
-$tableResizeBorder: 1px solid #3785FF;
+$tableResizeBorder: 1px solid var(--bk-table-brand-02);
 $tableFixedBoxShadow: 0 0 10px rgba(0, 0, 0, .12);
 $tableBorderColorLighter: #ebeef5;
 $tableCaretColor: #c0c4cc;
@@ -13,7 +13,7 @@ $tablePrimaryColor: #409eff;
 $tableCurrentRowBackground: #ecf5ff;
 $tableInfoColor: #909399;
 $tableDarkHeader: #f0f1f5;
-$tableDarkHeaderHover: #eaebf0;
+$tableDarkHeaderHover: var(--bk-table-neutral-06);
 
 .bk-table {
     white-space: normal;
@@ -25,7 +25,7 @@ $tableDarkHeaderHover: #eaebf0;
     max-width: 100%;
     font-size: 12px;
     /* color: $fnMainColor; */
-    color: #575961;
+    color: var(--bk-table-neutral-02);
     .bk-button-text {
         font-size: 12px;
     }
@@ -41,36 +41,36 @@ $tableDarkHeaderHover: #eaebf0;
     }
     &.bk-table-dark-header {
         th {
-            background-color: $tableDarkHeader;
+            background-color: var(--bk-table-neutral-07);
             .cell:hover {
-                background-color: $tableDarkHeaderHover
+                background-color: $tableDarkHeaderHover;
             }
         }
     }
     &.bk-table-custom-header {
-        --customHeaderColor: #000;
+        --customHeaderColor: var(--bk-table-neutral-01);
         th {
             background-color: var(--customHeaderColor);
         }
     }
     &.bk-table-custom-header-hover {
-        --customHeaderColorHover: #fff;
+        --customHeaderColorHover: var(--bk-table-neutral-10);
         th .cell:hover {
             background-color: var(--customHeaderColorHover)
         }
     }
     thead {
-        color: $fnMainColor;
+        color: var(--bk-table-neutral-02);
         font-weight: bold;
         &.is-group {
             th {
-                background-color: $baseBackgroundColor;
+                background-color: var(--bk-table-neutral-08);
             }
         }
     }
 
     tr {
-        background-color: #fff;
+        background-color: var(--bk-table-neutral-10);
         input[type="checkbox"] {
             margin: 0;
         }
@@ -149,9 +149,9 @@ $tableDarkHeaderHover: #eaebf0;
         overflow: hidden;
         user-select: none;
         /* background-color: $newGreyColor2; */
-        background-color: $newGreyColor3;
+        background-color: var(--bk-table-neutral-09);
         :hover {
-            background-color: $newGreyColor2;
+            background-color: var(--bk-table-hover-neutral-07);
         }
         >.cell {
             position: relative;
@@ -170,7 +170,7 @@ $tableDarkHeaderHover: #eaebf0;
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #ff4d51;
+            background: var(--bk-table-danger-03);
             margin-right: 5px;
             vertical-align: middle;
         }
@@ -181,7 +181,7 @@ $tableDarkHeaderHover: #eaebf0;
             word-wrap: normal;
             text-overflow: ellipsis;
             font-weight: normal;
-            color: #313238;
+            color: var(--bk-table-neutral-01);
         }
         .bk-table-column-filter-trigger {
             flex: 20px 0 0;
@@ -190,12 +190,12 @@ $tableDarkHeaderHover: #eaebf0;
             font-size: 14px;
             text-align: center;
             cursor: pointer;
-            color: #C4C6CC;
+            color: var(--bk-table-neutral-04);
             &.is-open {
-                color: #63656e;
+                color: var(--bk-table-neutral-02);
             }
             &.is-filtered {
-                color: #3a84ff;
+                color: var(--bk-table-brand-02);
             }
         }
         .bk-table-caret-wrapper {
@@ -215,21 +215,21 @@ $tableDarkHeaderHover: #eaebf0;
             border: solid 5px transparent;
             position: absolute;
             &.ascending {
-                border-bottom-color: $tableCaretColor;
+                border-bottom-color: var(--bk-table-neutral-04);
                 top: -1px;
             }
 
             &.descending {
-                border-top-color: $tableCaretColor;
+                border-top-color: var(--bk-table-neutral-04);
                 bottom: -1px;
             }
         }
         &.ascending .bk-table-sort-caret.ascending {
-            border-bottom-color: #3a84ff;
+            border-bottom-color: var(--bk-table-brand-02);
         }
 
         &.descending .bk-table-sort-caret.descending {
-            border-top-color: #3a84ff;
+            border-top-color: var(--bk-table-brand-02);
         }
     }
 
@@ -273,9 +273,9 @@ $tableDarkHeaderHover: #eaebf0;
 .bk-table-border,
 .bk-table-outer-border {
     border: $tableBorder;
-    border-radius: 2px;
+    border-radius: var(--bk-table-radius-s);
     &:before {
-        background-color: $tableBorderColor;
+        background-color: var(--bk-table-neutral-05);
     }
     &:after {
         position: absolute;
@@ -284,7 +284,7 @@ $tableDarkHeaderHover: #eaebf0;
         width: 1px;
         height: 100%;
         content: '';
-        background-color: $tableBorderColor;
+        background-color: var(--bk-table-neutral-05);
         z-index: 9;
     }
 }
@@ -324,7 +324,7 @@ $tableDarkHeaderHover: #eaebf0;
     left: 0;
     overflow: hidden;
     box-shadow: $tableFixedBoxShadow;
-    border-bottom: 1px solid $tableBorderColor;
+    border-bottom: 1px solid var(--bk-table-neutral-05);
     tr.bk-table-row-last {
         td.is-last {
             border-bottom: none;
@@ -340,7 +340,7 @@ $tableDarkHeaderHover: #eaebf0;
         position: absolute;
         top: 0;
         right: 0;
-        background-color: $baseBackgroundColor;
+        background-color: var(--bk-table-neutral-08);
         border-bottom: $tableBorder;
     }
     .bk-table-fixed-header-wrapper,
@@ -371,8 +371,8 @@ $tableDarkHeaderHover: #eaebf0;
     z-index: 3;
     tbody td {
         border-top: $tableBorder;
-        background-color: $baseBackgroundColor;
-        color: $fnMainColor;
+        background-color: var(--bk-table-neutral-08);
+        color: var(--bk-table-neutral-02);
     }
 }
 
@@ -413,8 +413,8 @@ $tableDarkHeaderHover: #eaebf0;
     position: relative;
     overflow: hidden;
     tbody td {
-        background-color: $baseBackgroundColor;
-        color: $fnMainColor;
+        background-color: var(--bk-table-neutral-08);
+        color: var(--bk-table-neutral-02);
     }
 }
 
@@ -473,11 +473,11 @@ $tableDarkHeaderHover: #eaebf0;
     .bk-table-body {
         tr.bk-table-row-striped {
             td {
-                background-color: #fafafa;
+                background-color: var(--bk-table-neutral-09);
             }
         }
         tr.current-row td {
-            background-color: $tableCurrentRowBackground;
+            background-color: var(--bk-table-brand-07);
         }
     }
 }
@@ -486,18 +486,18 @@ $tableDarkHeaderHover: #eaebf0;
     tr.bk-table-row.hover-row {
         > td {
             /* background-color: $newGreyColor2; */
-            background-color: #f5f7fa;
+            background-color: var(--bk-table-neutral-08);
         }
         &.bk-table-row-striped {
             &.current-row {
                 > td {
-                    background-color: $tableCurrentRowBackground;
+                    background-color: var(--bk-table-hover-brand-07);
                 }
             }
         }
     }
     tr.bk-table-row.current-row > td {
-        background-color: $tableCurrentRowBackground;
+        background-color: var(--bk-table-brand-07);
     }
 }
 
@@ -517,7 +517,7 @@ $tableDarkHeaderHover: #eaebf0;
     top: 0;
     bottom: 0;
     width: 6px;
-    background: #3785FF;
+    background: var(--bk-table-brand-02);
     z-index: 10;
     transform: translateX(-50%);
     pointer-events: none;
@@ -549,10 +549,10 @@ $tableDarkHeaderHover: #eaebf0;
 }
 .bk-table-empty-text {
     padding: 60px 0;
-    color: $fnMainColor;
+    color: var(--bk-table-neutral-02);
     .bk-table-empty-icon {
         font-size: 65px;
-        color: $fnMinorColor;
+        color: var(--bk-table-neutral-04);
     }
 }
 
@@ -566,7 +566,7 @@ $tableDarkHeaderHover: #eaebf0;
 .bk-table-expand-icon {
     position: relative;
     cursor: pointer;
-    color: #c4c6cc;
+    color: var(--bk-table-neutral-04);
     font-size: 12px;
     height: 20px;
     &-expanded > .bk-icon {
@@ -584,9 +584,9 @@ $tableDarkHeaderHover: #eaebf0;
 
 .bk-table .bk-table-body td.bk-table-expanded-cell {
     padding: 0 30px;
-    background-color: #fff;
+    background-color: var(--bk-table-neutral-10);
     &:hover {
-        background-color: #fff;
+        background-color: var(--bk-table-hover-neutral-10);
     }
     .bk-table:before {
         display: none;
@@ -646,7 +646,7 @@ td.bk-table-column-expand {
             font-size: 15px;
         }
         .bk-spin-title {
-            color: #979ba5;
+            color: var(--bk-table-neutral-03);
             font-size: 12px;
         }
     }
@@ -656,11 +656,11 @@ td.bk-table-column-expand {
     padding: 15px;
     margin-top: -1px;
     position: relative;
-    border-top: 1px solid $tableBorderColor;
+    border-top: 1px solid var(--bk-table-neutral-05);
 }
 
 .bk-table-column-setting {
-    border-left: 1px solid $tableBorderColor;
+    border-left: 1px solid var(--bk-table-neutral-05);
     .cell {
         padding: 0;
     }
@@ -671,10 +671,10 @@ td.bk-table-column-expand {
         height: 24px;
         line-height: 24px;
         font-size: 14px;
-        color: #979BA5;
+        color: var(--bk-table-neutral-03);
         cursor: pointer;
         &:hover {
-            color: #63656e;
+            color: var(--bk-table-hover-neutral-02);
         }
     }
 }
@@ -694,7 +694,7 @@ td.bk-table-column-expand {
         line-height: 32px;
         font-size:16px;
         font-weight: normal;
-        color: #313238;
+        color: var(--bk-table-neutral-01);
     }
     .setting-title {
         font-size: 14px;
@@ -702,11 +702,11 @@ td.bk-table-column-expand {
         margin: 0;
         .setting-subtitle {
             display: inline-block;
-            color: #979BA5;
+            color: var(--bk-table-neutral-03);
             font-size: 12px;
             text-indent: -8px;
             &.is-limit {
-                color: $dangerColor;
+                color: var(--bk-table-danger-03);
             }
         }
     }
@@ -743,8 +743,8 @@ td.bk-table-column-expand {
         line-height: 50px;
         font-size: 0;
         text-align: right;
-        background: #FAFBFD;
-        border-top: 1px solid #DCDEE5;
+        background: var(--bk-table-neutral-09);
+        border-top: 1px solid var(--bk-table-neutral-05);
     }
 }
 
@@ -753,14 +753,14 @@ td.bk-table-column-expand {
 }
 .bk-table-filter-panel {
     min-width: 70px;
-    background-color: #fff;
+    background-color: var(--bk-table-neutral-10);
     &.multiple {
         min-width: 100px;
     }
     .panel-search {
         display: flex;
         align-items: middle;
-        border-bottom: 1px solid #F0F1F5;
+        border-bottom: 1px solid var(--bk-table-neutral-07);
         .panel-search-icon {
             flex: 16px 0 0;
             margin: 0 5px 0 10px;
@@ -788,15 +788,15 @@ td.bk-table-column-expand {
             line-height: 26px;
             cursor: pointer;
             &:hover {
-                background-color: #eaf3ff;
-                color: #3a84ff;
+                background-color: var(--bk-table-hover-brand-07);
+                color: var(--bk-table-hover-brand-02);
             }
             &.is-selected {
-                background-color: #f4f6fa;
-                color: #3a84ff;
+                background-color: var(--bk-table-selected-neutral-08);
+                color: var(--bk-table-selected-brand-02);
             }
             &.is-disabled {
-                color: #c4c6cc;
+                color: var(--bk-table-disabled-neutral-04);
             }
             &.is-hidden {
                 display: none;
@@ -818,7 +818,7 @@ td.bk-table-column-expand {
     .panel-options {
         display: flex;
         height: 31px;
-        border-top: 1px solid #F0F1F5;
+        border-top: 1px solid var(--bk-table-neutral-07);
         align-items: center;
         justify-content: center;
         .panel-options-link {

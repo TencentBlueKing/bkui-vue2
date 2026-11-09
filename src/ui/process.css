@@ -24,15 +24,15 @@
         line-height: 24px;
         border-radius: 50%;
         text-align: center;
-        border: 1px solid $borderColor;
+        border: 1px solid var(--bk-process-neutral-04);
         font-size: 12px;
-        color: $fnMainColor;
+        color: var(--bk-process-neutral-02);
         text-decoration: none;
         &.active,
         &:hover {
-            color: #fff;
-            background: $newMainColor;
-            border-color: $newMainColor;
+            color: var(--bk-process-hover-active-neutral-10);
+            background: var(--bk-process-hover-active-brand-02);
+            border-color: var(--bk-process-hover-active-brand-02);
         }
     }
     > ul {
@@ -46,7 +46,7 @@
         padding: 0;
     }
     li {
-        background-color: $newGreyColor2;
+        background-color: var(--bk-process-neutral-07);
         display: table-cell;
         flex: 1;
         -ms-flex: 1;
@@ -57,7 +57,7 @@
         line-height: 24px;
         position: relative;
         font-size: 12px;
-        color: $fnMainColor;
+        color: var(--bk-process-neutral-02);
         i {
             display: none;
         }
@@ -84,7 +84,7 @@
             width: 0;
             height: 0;
             border: 12px solid;
-            border-color: transparent transparent transparent #fff;
+            border-color: transparent transparent transparent var(--bk-process-neutral-10);
             position: absolute;
             right: -25px;
             top: 0;
@@ -95,14 +95,14 @@
             width: 0;
             height: 0;
             border: 12px solid;
-            border-color: transparent transparent transparent $newGreyColor2;
+            border-color: transparent transparent transparent var(--bk-process-neutral-07);
             position: absolute;
             right: -23px;
             top: 0;
             z-index: 1;
         }
         .bk-process-step {
-            color: $fnMainColor;
+            color: var(--bk-process-neutral-02);
             font-size: 12px;
             dd {
                 margin: 0;
@@ -114,7 +114,7 @@
             .success {
                 i {
                     display: inline-block;
-                    color: $newGreenColor;
+                    color: var(--bk-process-success-success-02);
                 }
             }
             .steps-loading {
@@ -123,30 +123,30 @@
             }
             .step-item {
                 &.error {
-                    color: $newRedColor1;
+                    color: var(--bk-process-error-danger-03);
 
                     .bk-icon {
-                        color: $newRedColor1;
+                        color: var(--bk-process-error-danger-03);
                         vertical-align: -2px;
                     }
                 }
                 &.done {
                     .bk-icon {
-                        color: $newGreenColor;
+                        color: var(--bk-process-success-success-02);
                     }
                 }
             }
         }
 
         &.success {
-            background: $newGreenColor;
-            color: #fff;
+            background: var(--bk-process-success-success-02);
+            color: var(--bk-process-success-neutral-10);
             &::after {
-                border-color: transparent transparent transparent $newGreenColor;
+                border-color: transparent transparent transparent var(--bk-process-success-success-02);
             }
             & .bk-process-step {
                 i {
-                    color: $newGreenColor;
+                    color: var(--bk-process-success-success-02);
                 }
             }
             i {
@@ -155,10 +155,10 @@
         }
 
         &.status-error {
-            background: $newRedColor1;
-            color: #fff;
+            background: var(--bk-process-error-danger-03);
+            color: var(--bk-process-error-neutral-10);
             &::after {
-                border-color: transparent transparent transparent $newRedColor1;
+                border-color: transparent transparent transparent var(--bk-process-error-danger-03);
             }
             .bk-process-item > .bk-icon {
                 display: inline-block;
@@ -170,10 +170,10 @@
             }
         }
         &.status-done {
-            background: $newGreenColor;
-            color: #fff;
+            background: var(--bk-process-success-success-02);
+            color: var(--bk-process-neutral-10);
             &::after {
-                border-color: transparent transparent transparent $newGreenColor;
+                border-color: transparent transparent transparent var(--bk-process-success-success-02);
             }
             .bk-process-item > .bk-icon {
                 display: inline-block;
@@ -206,10 +206,10 @@
         }
 
         &.current {
-            background: $newMainColor;
-            color: #fff;
+            background: var(--bk-process-brand-02);
+            color: var(--bk-process-neutral-10);
             &::after {
-                border-color: transparent transparent transparent $newMainColor;
+                border-color: transparent transparent transparent var(--bk-process-brand-02);
             }
             >.bk-spin-loading {
                 vertical-align: -3px;

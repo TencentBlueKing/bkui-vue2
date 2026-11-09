@@ -26,7 +26,7 @@
     .bk-big-tree-empty {
         text-align: center;
         font-size: 14px;
-        color: #63656e;
+        color: var(--bk-big-tree-neutral-02);
     }
     &--small {
         .bk-big-tree-node .node-content {
@@ -59,7 +59,7 @@ $nodeIconMarginRight: 8px;
             position: absolute;
             width: calc(var(--padding) - 8px);
             height: 0;
-            border-bottom: 1px dashed #c3cdd7;
+            border-bottom: 1px dashed var(--bk-big-tree-neutral-04);
             left: calc(($triggerWidth/2) - var(--padding));
             top: 15px;
             z-index: 1;
@@ -71,7 +71,7 @@ $nodeIconMarginRight: 8px;
             left: calc($triggerWidth / 2);
             width: 0;
             height: calc(var(--line) * 1px - 8px);
-            border-left: 1px dashed #c3cdd7;
+            border-left: 1px dashed var(--bk-big-tree-neutral-04);
             content: "";
             pointer-events: none;
             z-index: 1;
@@ -86,16 +86,16 @@ $nodeIconMarginRight: 8px;
         }
     }
     &:hover {
-        background-color: #f1f7ff;
+        background-color: var(--bk-big-tree-hover-brand-07);
     }
     &.is-selected {
-        background-color: #e1ecff;
+        background-color: var(--bk-big-tree-selected-brand-06);
         .node-icon {
-            color: #fff;
-            background-color: #3a84ff;
+            color: var(--bk-big-tree-selected-neutral-10);
+            background-color: var(--bk-big-tree-selected-brand-02);
         }
         .node-content {
-            color: #3a84ff;
+            color: var(--bk-big-tree-selected-brand-02);
         }
     }
     &.is-leaf {
@@ -123,10 +123,10 @@ $nodeIconMarginRight: 8px;
             line-height: $triggerHeight;
             text-align: center;
             font-size: 12px;
-            color: #979ba5;
+            color: var(--bk-big-tree-neutral-03);
             z-index: 2;
             &:hover {
-                color: #63656e;
+                color: var(--bk-big-tree-hover-neutral-02);
             }
         }
         .node-checkbox {
@@ -135,11 +135,11 @@ $nodeIconMarginRight: 8px;
             width: 16px;
             height: 16px;
             margin: 0 $nodeIconMarginRight 0 0;
-            border: 1px solid #979ba5;
-            border-radius: 2px;
+            border: 1px solid var(--bk-big-tree-neutral-03);
+            border-radius: var(--bk-big-tree-radius-s);
             &.is-checked {
-                border-color: #3a84ff;
-                background-color: #3a84ff;
+                border-color: var(--bk-big-tree-checked-brand-02);
+                background-color: var(--bk-big-tree-checked-brand-02);
                 background-clip: border-box;
                 &:after {
                     content: "";
@@ -148,24 +148,24 @@ $nodeIconMarginRight: 8px;
                     left: 4px;
                     width: 4px;
                     height: 8px;
-                    border: 2px solid #fff;
+                    border: 2px solid var(--bk-big-tree-checked-neutral-10);
                     border-left: 0;
                     border-top: 0;
                     transform-origin: center;
                     transform: rotate(45deg) scaleY(1);
                 }
                 &.is-disabled {
-                    background-color: #dcdee5;
+                    background-color: var(--bk-big-tree-disabled-checked-neutral-05);
                 }
             }
             &.is-disabled {
-                border-color: #dcdee5;
+                border-color: var(--bk-big-tree-disabled-neutral-05);
                 cursor: not-allowed;
             }
             &.is-indeterminate {
                 border-width: 7px 4px;
-                border-color: #3a84ff;
-                background-color: #fff;
+                border-color: var(--bk-big-tree-brand-02);
+                background-color: var(--bk-big-tree-neutral-10);
                 background-clip: content-box;
                 &:after {
                     visibility: hidden;

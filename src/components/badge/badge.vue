@@ -171,8 +171,8 @@ export default {
     badgeStyle () {
       const isRadius = this.radius !== undefined && /^\d+(%|px|em|rem|vh|vw)?$/.test(this.radius)
       const _radius = (isRadius && /^\d+$/.test(this.radius) && `${this.radius}px`) || this.radius
-      const style = (this.icon && { color: this.theme || '', borderColor: 'transparent', backgroundColor: '#fff' }) || {
-        color: this.hexTheme ? '#fff' : '',
+      const style = (this.icon && { color: this.theme || '', borderColor: 'transparent', backgroundColor: 'var(--bk-badge-neutral-10)' }) || {
+        color: this.hexTheme ? 'var(--bk-badge-neutral-10)' : '',
         backgroundColor: this.hexTheme ? this.theme : '',
         borderColor: this.hexTheme ? this.theme : '',
         borderWidth: this.dot ? '1px' : '2px'

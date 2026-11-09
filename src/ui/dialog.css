@@ -57,7 +57,7 @@
             position: absolute;
             .bk-dialog-content {
                 width: 100%;
-                border-radius: 0;
+                border-radius: var(--bk-dialog-radius-none);
                 position: absolute;
                 top: 0;
                 bottom: 0;
@@ -103,7 +103,7 @@
             display: inline-block;
             width: 100%;
             font-size: 20px;
-            color: $newBlackColor1;
+            color: var(--bk-dialog-neutral-01);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -132,16 +132,16 @@
         padding: 3px 24px 24px;
         font-size: 14px;
         line-height: 1.5;
-        color: $newBlackColor2;
+        color: var(--bk-dialog-neutral-02);
     }
 
     .bk-dialog-content {
         position: relative;
-        background-color: $defaultColor;
+        background-color: var(--bk-dialog-neutral-10);
         border: 0;
-        border-radius: 2px;
+        border-radius: var(--bk-dialog-radius-s);
         background-clip: padding-box;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: var(--bk-dialog-shadow);
         &.bk-dialog-content-no-mask {
             pointer-events: auto;
         }
@@ -160,9 +160,9 @@
 
     .bk-dialog-footer {
         padding: 7px 24px 7px 24px;
-        background-color: $newGreyColor3;
-        border-top: 1px solid $newGreyColor1;
-        border-radius: 2px;
+        background-color: var(--bk-dialog-neutral-09);
+        border-top: 1px solid var(--bk-dialog-neutral-05);
+        border-radius: var(--bk-dialog-radius-s);
         .footer-wrapper {
             font-size: 0;
             button {
@@ -179,7 +179,7 @@
         z-index: 1;
         cursor: pointer;
         position: absolute;
-        color: $newBlackColor3;
+        color: var(--bk-dialog-neutral-03);
         top: 5px;
         right: 5px;
         width: 26px;
@@ -190,7 +190,7 @@
         font-weight: 700;
         font-size: $iconNormalSize;
         &:hover {
-            background-color: $newGreyColor2;
+            background-color: var(--bk-dialog-hover-neutral-07);
         }
     }
 
@@ -206,7 +206,7 @@
             }
             .bk-dialog-header-inner {
                 font-size: 14px;
-                color: $newBlackColor2;
+                color: var(--bk-dialog-info-neutral-02);
                 line-height: 1.5;
                 text-align: center;
                 word-break: break-word;
@@ -218,9 +218,9 @@
         .bk-dialog-footer {
             text-align: center;
             padding: 0 65px 33px;
-            background-color: #fff;
+            background-color: var(--bk-dialog-info-neutral-10);
             border: none;
-            border-radius: 0;
+            border-radius: var(--bk-dialog-radius-none);
             button {
                 min-width: 88px;
             }
@@ -238,7 +238,7 @@
             padding: 8px 24px 15px;
             font-size: 14px;
             line-height: 1.5;
-            color: $newBlackColor2;
+            color: var(--bk-dialog-info-neutral-02);
             text-align: center;
             &.loading {
                 padding: 3px 24px 15px;
@@ -257,7 +257,7 @@
                 display: inline-block;
                 width: 100%;
                 font-size: 20px;
-                color: $newBlackColor1;
+                color: var(--bk-dialog-info-neutral-01);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -281,7 +281,7 @@
                 display: inline-block;
                 width: 100%;
                 font-size: 14px;
-                color: $newBlackColor2;
+                color: var(--bk-dialog-info-neutral-02);
                 line-height: 1.5;
                 margin: 0;
                 text-align: center;
@@ -299,21 +299,21 @@
                 height: 42px;
                 line-height: 42px;
                 font-size: 36px;
-                color: #fff;
+                color: var(--bk-dialog-success-neutral-10);
                 border-radius: 50%;
             }
             &.bk-dialog-warning {
-                background-color: $newOrangeColor3;
-                color: $newOrangeColor;
+                background-color: var(--bk-dialog-warning-warning-05);
+                color: var(--bk-dialog-warning-warning-02);
                 font-size: 26px;
             }
             &.bk-dialog-error {
-                background-color: $newRedColor3;
-                color: $newRedColor;
+                background-color: var(--bk-dialog-error-danger-05);
+                color: var(--bk-dialog-error-danger-02);
             }
             &.bk-dialog-success {
-                background-color: #e5f6ea;
-                color: #3fc06d;
+                background-color: var(--bk-dialog-success-success-07);
+                color: var(--bk-dialog-success-success-02);
             }
         }
     }

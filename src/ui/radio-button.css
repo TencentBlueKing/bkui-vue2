@@ -14,14 +14,14 @@
     cursor: pointer;
     &:first-child {
         .bk-radio-button-text {
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 2px;
+            border-top-left-radius: var(--bk-radio-button-radius-s);
+            border-bottom-left-radius: var(--bk-radio-button-radius-s);
         }
     }
     &:last-child {
         .bk-radio-button-text {
-            border-top-right-radius: 2px;
-            border-bottom-right-radius: 2px;
+            border-top-right-radius: var(--bk-radio-button-radius-s);
+            border-bottom-right-radius: var(--bk-radio-button-radius-s);
         }
     }
     &:nth-child(n+2) {
@@ -37,14 +37,14 @@
         &:checked+.bk-radio-button-text {
             position: relative;
             z-index: 1;
-            background: #E1ECFF;
-            color: $newMainColor;
+            background: var(--bk-radio-button-checked-brand-06);
+            color: var(--bk-radio-button-checked-brand-02);
             border-color: currentColor;
         }
         &:disabled+.bk-radio-button-text {
             position: relative;
-            color: $newGreyColor1;
-            background: rgba(250, 251, 253, 1);
+            color: var(--bk-radio-button-disabled-neutral-05);
+            background: var(--bk-radio-button-disabled-neutral-09);
             border-color: currentColor;
             border-left: none;
         }
@@ -60,17 +60,17 @@
         text-align: center;
         vertical-align: middle;
         font-size: 14px;
-        background-color: #fff;
-        border: 1px solid $newGreyColor;
-        border-radius: 0;
+        background-color: var(--bk-radio-button-neutral-10);
+        border: 1px solid var(--bk-radio-button-neutral-04);
+        border-radius: var(--bk-radio-button-radius-none);
         box-sizing: border-box;
-        color: #63656e;
+        color: var(--bk-radio-button-neutral-02);
         text-decoration: none;
         transition: background-color .3s ease;
         min-width: 68px;
     }
     &:focus {
-        box-shadow: 0 0 2px 2px $formBorderFocusColor;
+        box-shadow: 0 0 2px 2px var(--bk-radio-button-focus-brand-02);
         outline: none;
         position:relative;
         z-index:2;

@@ -23,7 +23,7 @@
     .bk-date-picker .bk-date-picker-editor,
     .bk-tag-input,
     .bk-search-select {
-        border-radius: 0;
+        border-radius: var(--bk-compose-form-item-radius-none);
     }
 
     .bk-form-control.control-active,
@@ -51,8 +51,8 @@
         .bk-tag-input,
         .bk-search-select {
             margin-left: 0;
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;
+            border-top-right-radius: var(--bk-compose-form-item-radius-none);
+            border-bottom-right-radius: var(--bk-compose-form-item-radius-none);
         }
     }
     .bk-compose-form-item-tail {
@@ -66,8 +66,8 @@
         &.bk-tag-input,
         .bk-tag-input,
         .bk-search-select {
-            border-top-right-radius: 2px;
-            border-bottom-right-radius: 2px;
+            border-top-right-radius: var(--bk-compose-form-item-radius-s);
+            border-bottom-right-radius: var(--bk-compose-form-item-radius-s);
         }
     }
 }

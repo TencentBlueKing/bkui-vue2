@@ -45,7 +45,7 @@
         </div>
         <div class="bk-sideslider-footer"
           v-if="$slots.footer"
-          :style="{ borderTopColor: !needBorder ? 'transparent' : '#dcdee5', backgroundColor: !needBorder ? '#fafbfd' : '#ffffff' }">
+          :style="{ borderTopColor: !needBorder ? 'transparent' : 'var(--bk-sideslider-neutral-05)', backgroundColor: !needBorder ? 'var(--bk-sideslider-neutral-09)' : 'var(--bk-sideslider-neutral-10)' }">
           <slot name="footer"></slot>
         </div>
       </section>

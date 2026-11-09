@@ -12,11 +12,11 @@ $itemBackground: #F0F1F5;
 
 .bk-cascade {
     position: relative;
-    border: 1px solid $newGreyColor;
-    border-radius: 2px;
+    border: 1px solid var(--bk-cascade-neutral-04);
+    border-radius: var(--bk-cascade-radius-s);
     line-height: 30px;
     font-size: 12px;
-    color: $newBlackColor2;
+    color: var(--bk-cascade-neutral-02);
     cursor: pointer;
     &.is-default-trigger.is-unselected:before {
         position: absolute;
@@ -24,23 +24,23 @@ $itemBackground: #F0F1F5;
         content: attr(data-placeholder);
         left: 11px;
         top: 0;
-        color: $fnMinorColor;
+        color: var(--bk-cascade-selected-neutral-04);
         pointer-events: none;
     }
     &.is-focus {
-        border-color: $newMainColor;
-        box-shadow:0px 0px 4px rgba(58, 132, 255, 0.4);
+        border-color: var(--bk-cascade-focus-brand-02);
+        box-shadow: 0px 0px 4px color-mix(in srgb, var(--bk-cascade-focus-brand-02) 40%, transparent);
         .bk-cascade-angle {
             transform: rotate(-180deg);
         }
     }
     &:focus {
-        border-color: $newMainColor;
-        box-shadow:0px 0px 4px rgba(58, 132, 255, 0.4);
+        border-color: var(--bk-cascade-focus-brand-02);
+        box-shadow: 0px 0px 4px color-mix(in srgb, var(--bk-cascade-focus-brand-02) 40%, transparent);
     }
     &.is-disabled {
-        background-color: #fafafa;
-        color: #c4c6cc;
+        background-color: var(--bk-cascade-disabled-neutral-09);
+        color: var(--bk-cascade-disabled-neutral-04);
         cursor: not-allowed;
     }
     &.is-custom-trigger {
@@ -49,7 +49,7 @@ $itemBackground: #F0F1F5;
     }
     &.is-readonly,
     &.is-loading {
-        background-color: #fafafa;
+        background-color: var(--bk-cascade-neutral-09);
         cursor: default;
     }
     &:hover {
@@ -68,7 +68,7 @@ $itemBackground: #F0F1F5;
         position: absolute;
         right: 2px;
         top: 4px;
-        color: #979ba5;
+        color: var(--bk-cascade-neutral-03);
         font-size: $iconNormalSize;
         transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
         pointer-events: none;
@@ -81,18 +81,18 @@ $itemBackground: #F0F1F5;
         width: 14px;
         height: 14px;
         line-height: 14px;
-        background-color: #c4c6cc;
+        background-color: var(--bk-cascade-neutral-04);
         border-radius: 50%;
         text-align: center;
         font-size: $iconSmallestSize;
-        color: #fff;
+        color: var(--bk-cascade-neutral-10);
         z-index: 100;
         &:before {
             display: block;
             transform: scale(.7);
         }
         &:hover {
-            background-color: #979ba5;
+            background-color: var(--bk-cascade-hover-neutral-03);
         }
     }
     .bk-cascade-name {
@@ -108,11 +108,11 @@ $itemBackground: #F0F1F5;
     }
 }
 .bk-cascade-dropdown-content {
-    border: 1px solid $newGreyColor1;
-    border-radius: 2px;
+    border: 1px solid var(--bk-cascade-neutral-05);
+    border-radius: var(--bk-cascade-radius-s);
     line-height: 32px;
-    background: #fff;
-    color: $fnMainColor;
+    background: var(--bk-cascade-neutral-10);
+    color: var(--bk-cascade-neutral-02);
     overflow: hidden;
 }
 .bk-cascade-search-input {
@@ -125,7 +125,7 @@ $itemBackground: #F0F1F5;
     outline: 0;
     cursor: text;
     &::-webkit-input-placeholder {
-      color: $fnMinorColor;
+      color: var(--bk-cascade-neutral-04);
     }
 }
 .bk-cascade-options {
@@ -137,18 +137,18 @@ $itemBackground: #F0F1F5;
         .bk-option {
             &:hover,
             &.is-highlight {
-                background-color: $hoverBackground;
+                background-color: var(--bk-cascade-hover-brand-07);
             }
             &.is-selected {
-                background-color: $selectedBackground;
+                background-color: var(--bk-cascade-selected-neutral-08);
             }
         }
     }
     .bk-option-group {
         .bk-option-group-name {
             margin: 0 16px;
-            border-bottom: 1px solid $newGreyColor1;
-            color: $newBlackColor3;
+            border-bottom: 1px solid var(--bk-cascade-neutral-05);
+            color: var(--bk-cascade-neutral-03);
         }
     }
     .bk-group-options {
@@ -164,23 +164,23 @@ $itemBackground: #F0F1F5;
         cursor: pointer;
         &:hover,
         &.is-highlight {
-            color: $newMainColor;
-            background-color: $hoverBackground;
+            color: var(--bk-cascade-hover-brand-02);
+            background-color: var(--bk-cascade-hover-brand-07);
         }
         &.is-disabled {
-            color: #c4c6cc;
+            color: var(--bk-cascade-disabled-neutral-04);
             cursor: not-allowed;
-            background-color: $disabledBackground;
+            background-color: var(--bk-cascade-disabled-neutral-10);
         }
         &.is-selected {
-            color: $newMainColor;
-            background-color: $selectedBackground;
+            color: var(--bk-cascade-selected-brand-02);
+            background-color: var(--bk-cascade-selected-neutral-08);
         }
         &.is-selected.is-disabled {
-            background-color: $disabledBackground;
-            color: $disabledColor;
+            background-color: var(--bk-cascade-disabled-selected-neutral-10);
+            color: var(--bk-cascade-disabled-selected-neutral-04);
             .bk-option-icon {
-                color: $disabledColor;
+                color: var(--bk-cascade-disabled-selected-neutral-04);
             }
         }
     }
@@ -199,7 +199,7 @@ $itemBackground: #F0F1F5;
             position: absolute;
             right: 12px;
             top: 12px;
-            color: $newMainColor;
+            color: var(--bk-cascade-brand-02);
             font-size: 12px;
             font-weight: bold;
         }
@@ -215,19 +215,19 @@ $itemBackground: #F0F1F5;
     font-size: 12px;
     padding: 0 16px;
     border-radius: 0px 0px 1px 1px;
-    border-top: 1px solid $newGreyColor1;
-    background: $newGreyColor3;
+    border-top: 1px solid var(--bk-cascade-neutral-05);
+    background: var(--bk-cascade-neutral-09);
     i {
         font-size: 12px;
     }
     &:hover {
-        background-color: #f0f1f5;
+        background-color: var(--bk-cascade-hover-neutral-07);
     }
 }
 
 .tippy-tooltip.bk-cascade-dropdown-theme[data-size=small] {
     padding: 0;
-    box-shadow: 0 3px 9px 0 rgba(0,0,0,.1);
+    box-shadow: var(--bk-cascade-shadow);
     .tippy-arrow {
         display: none;
     }
@@ -250,7 +250,7 @@ $itemBackground: #F0F1F5;
 		@mixin scroller;
 	}
 	.bk-cascade-border {
-		border-right: 1px solid #DCDEE5;
+		border-right: 1px solid var(--bk-cascade-neutral-05);
 	}
 	.bk-option {
 		position: relative;
@@ -259,7 +259,7 @@ $itemBackground: #F0F1F5;
 			top: 6px;
 			right: 5px;
             font-size: 20px;
-            color: #979BA5;
+            color: var(--bk-cascade-neutral-03);
 		}
         &:first-of-type {
             margin-top: 4px;
@@ -269,7 +269,7 @@ $itemBackground: #F0F1F5;
         }
 	}
 	.is-multiple {
-		background-color: #fff!important;
+		background-color: var(--bk-cascade-neutral-10)!important;
 	}
 }
 .bk-option-none {
@@ -277,7 +277,7 @@ $itemBackground: #F0F1F5;
     font-size: 12px;
     line-height: 32px;
     text-align: center;
-    color: #63656E;
+    color: var(--bk-cascade-neutral-02);
 }
 .bk-cascade-search {
 	height: calc(100% - 36px);
@@ -302,28 +302,28 @@ $itemBackground: #F0F1F5;
         cursor: pointer;
         position: relative;
         margin: 0 6px 5px 0;
-        border-radius: 2px;
+        border-radius: var(--bk-cascade-radius-s);
         float: left;
         height: 22px;
         line-height: 22px;
         overflow: hidden;
-        background-color: $itemBackground;
+        background-color: var(--bk-cascade-neutral-07);
         &:hover {
-            background-color: #dcdee5;
+            background-color: var(--bk-cascade-hover-neutral-05);
             .remove-key {
-                color: $fnMainColor;
+                color: var(--bk-cascade-hover-neutral-02);
             }
         }
     }
     .bk-cascade-item-name {
         display: inline-block;
-        color: $fnMainColor;
+        color: var(--bk-cascade-neutral-02);
         font-size: 12px;
         border: none;
         vertical-align: middle;
         box-sizing: border-box;
         overflow: hidden;
-        border-radius: 2px;
+        border-radius: var(--bk-cascade-radius-s);
         padding: 0 5px;
         min-height: 21px;
         line-height: 19px;
@@ -343,7 +343,7 @@ $itemBackground: #F0F1F5;
         display: inline-block;
         text-align: center;
         .icon-close {
-            color: #979ba5;
+            color: var(--bk-cascade-neutral-03);
             position: absolute;
             top: 0;
             left: 0;
@@ -357,12 +357,12 @@ $itemBackground: #F0F1F5;
 .bk-button-icon-loading {
     position: relative;
     top: 2px;
-    color: #3A84FF;
+    color: var(--bk-cascade-brand-02);
     .loading {
         width: 14px;
         height: 14px;
         border: 2px solid;
-        border-right-color: #ffffff;
+        border-right-color: var(--bk-cascade-neutral-10);
         border-radius: 50%;
         animation: button-icon-loading 1s linear infinite;
         margin: -7px auto 0;

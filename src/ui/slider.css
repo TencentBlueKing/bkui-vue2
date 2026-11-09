@@ -7,18 +7,18 @@
     .bk-slider-runway {
         width: 100%;
         height: 4px;
-        background: #dcdee5;
+        background: var(--bk-slider-neutral-05);
         position: relative;
         cursor: pointer;
         vertical-align: middle;
         opacity: 1;
-        border-radius: 2px;
+        border-radius: var(--bk-slider-radius-s);
         .bk-slider-bar {
             height: 4px;
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
             position: absolute;
-            background: #3a84ff;
+            background: var(--bk-slider-brand-02);
             &.vertical {
                 width: 4px;
             }
@@ -27,7 +27,7 @@
             }
         }
         .disable {
-            background: #979ba5;
+            background: var(--bk-slider-neutral-03);
         }
         .bk-slider-labels {
             position: relative;
@@ -73,7 +73,7 @@
         height: 4px;
         width: 4px;
         border-radius: 100%;
-        background-color: #fff;
+        background-color: var(--bk-slider-neutral-10);
         transform: translateX(-50%);
         &.vertical {
             left: 2px;
@@ -121,19 +121,19 @@
     .slider-button {
         width: 12px;
         height: 12px;
-        border: 2px solid $newMainColor;
+        border: 2px solid var(--bk-slider-brand-02);
         border-radius: 50%;
-        background-color: #fff;
+        background-color: var(--bk-slider-neutral-10);
         transition: .2s;
         user-select: none;
         &-disable {
-            border: 2px solid #979ba5;
+            border: 2px solid var(--bk-slider-neutral-03);
         }
         &:hover {
-            box-shadow: 0px 0px 0px 4px rgba(58, 132, 255, 0.30);
+            box-shadow: 0px 0px 0px 4px color-mix(in srgb, var(--bk-slider-brand-02) 30%, transparent);
         }
         &:focus {
-            box-shadow: 0px 0px 10px 0px rgba(58, 132, 255, 0.9);
+            box-shadow: 0px 0px 10px 0px color-mix(in srgb, var(--bk-slider-brand-02) 90%, transparent);
         }
     }
     .slider-button-label {

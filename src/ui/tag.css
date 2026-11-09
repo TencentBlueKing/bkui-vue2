@@ -16,7 +16,7 @@ $border-color: #dcdee5;
 }
 
 .bk-tag {
-    @mixin theme-color $default-color, $border-color, $font-color, 10%, 60%;
+    @mixin theme-color $default-color, $border-color, var(--bk-tag-neutral-02), 10%, 60%;
     display: inline-block;
     font-size: 12px;
     padding: 0 10px;
@@ -40,34 +40,34 @@ $border-color: #dcdee5;
     cursor: pointer;
 }
 .bk-tag-success {
-    @mixin theme-color $success-color, $success-color, $success-color, 10%, 30%;
+    @mixin theme-color $success-color, $success-color, var(--bk-tag-success-success-01), 10%, 30%;
 }
 .bk-tag-info {
-    @mixin theme-color $info-color, $info-color, $info-color, 10%, 30%;
+    @mixin theme-color $info-color, $info-color, var(--bk-tag-info-brand-02), 10%, 30%;
 }
 .bk-tag-warning {
-    @mixin theme-color $warning-color, $warning-color, $warning-color, 10%, 30%;
+    @mixin theme-color $warning-color, $warning-color, var(--bk-tag-warning-warning-02), 10%, 30%;
 }
 .bk-tag-danger {
-    @mixin theme-color $danger-color, $danger-color, $danger-color, 10%, 30%;
+    @mixin theme-color $danger-color, $danger-color, var(--bk-tag-danger-danger-02), 10%, 30%;
 }
 /** 填充式 */
 .bk-tag-filled {
-    color: $base-color;
+    color: var(--bk-tag-neutral-10);
     &.bk-tag {
-        background: $default-color;
+        background: var(--bk-tag-neutral-03);
     }
     &.bk-tag-success {
-        background: $success-color;
+        background: var(--bk-tag-success-success-01);
     }
     &.bk-tag-info {
-        background: $info-color;
+        background: var(--bk-tag-info-brand-02);
     }
     &.bk-tag-warning {
-        background: $warning-color;
+        background: var(--bk-tag-warning-warning-02);
     }
     &.bk-tag-danger {
-        background: $danger-color;
+        background: var(--bk-tag-danger-danger-02);
     }
 }
 /** 描边式 */
@@ -88,11 +88,11 @@ $border-color: #dcdee5;
     }
 }
 .bk-tag-check {
-    background: $info-color;
-    color: $base-color;
+    background: var(--bk-tag-brand-02);
+    color: var(--bk-tag-neutral-10);
     &:hover {
-        color: $base-color;
+        color: var(--bk-tag-hover-neutral-10);
         opacity: 1;
-        background: $info-color;
+        background: var(--bk-tag-hover-brand-02);
     }
 }

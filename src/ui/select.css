@@ -37,28 +37,28 @@ $disabledColor: #c4c6cc;
 
 .bk-select {
     position: relative;
-    border: 1px solid $newGreyColor;
-    border-radius: 2px;
+    border: 1px solid var(--bk-select-neutral-04);
+    border-radius: var(--bk-select-radius-s);
     line-height: 30px;
-    color: $newBlackColor2;
+    color: var(--bk-select-neutral-02);
     cursor: pointer;
 
     font-size: var(--font-size);
     &:focus {
-        border-color: #3a84ff;
+        border-color: var(--bk-select-focus-brand-02);
     }
     &.only-bottom-border {
-        border-color: transparent transparent $newGreyColor transparent;
+        border-color: transparent transparent var(--bk-select-neutral-04) transparent;
         &.is-focus {
-            border-color: transparent transparent $newMainColor transparent;
+            border-color: transparent transparent var(--bk-select-focus-brand-02) transparent;
             box-shadow: none;
         }
         &.is-disabled {
-            border-color: transparent transparent #dcdee5 transparent;
+            border-color: transparent transparent var(--bk-select-disabled-neutral-05) transparent;
         }
         &.is-readonly,
         &.is-loading {
-            border-color: transparent transparent $newGreyColor1 transparent;
+            border-color: transparent transparent var(--bk-select-neutral-05) transparent;
         }
     }
     &.is-default-trigger.is-unselected:before {
@@ -67,13 +67,13 @@ $disabledColor: #c4c6cc;
         content: attr(data-placeholder);
         left: 10px;
         top: 0;
-        color: $fnMinorColor;
+        color: var(--bk-select-selected-neutral-04);
         pointer-events: none;
     }
     &.is-default-trigger.is-unselected {
         &.is-disabled:before,
         &.is-readonly:before {
-            color: $formBorderColor;
+            color: var(--bk-select-disabled-selected-neutral-04);
         }
     }
     &.has-prefix-icon {
@@ -85,26 +85,26 @@ $disabledColor: #c4c6cc;
         }
     }
     &.is-focus {
-        border-color: $newMainColor;
-        box-shadow:0px 0px 4px rgba(58, 132, 255, 0.4);
+        border-color: var(--bk-select-focus-brand-02);
+        box-shadow: 0px 0px 4px color-mix(in srgb, var(--bk-select-focus-brand-02) 40%, transparent);
         .bk-select-angle {
             transform: rotate(-180deg);
         }
     }
     &.is-disabled {
-        background-color: #fafbfd;
+        background-color: var(--bk-select-disabled-neutral-09);
         /* color: #c4c6cc; */
         cursor: not-allowed;
-        border-color: #dcdee5;
+        border-color: var(--bk-select-disabled-neutral-05);
         .bk-select-angle {
-            color: #c4c6cc;
+            color: var(--bk-select-disabled-neutral-04);
         }
     }
     &.is-readonly,
     &.is-loading {
-        background-color: #fafafa;
+        background-color: var(--bk-select-neutral-09);
         cursor: default;
-        border: 1px solid $newGreyColor1;
+        border: 1px solid var(--bk-select-neutral-05);
     }
     &:hover {
         .bk-select-clear {
@@ -126,7 +126,7 @@ $disabledColor: #c4c6cc;
         position: absolute;
         right: 2px;
         top: 4px;
-        color: #979ba5;
+        color: var(--bk-select-neutral-03);
         font-size: $iconNormalSize;
         transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
         pointer-events: none;
@@ -139,9 +139,9 @@ $disabledColor: #c4c6cc;
         text-align: center;
         font-size: $iconSmallestSize;
         z-index: 100;
-        color: #c4c6cc;
+        color: var(--bk-select-neutral-04);
         &:hover {
-            color: #979ba5;
+            color: var(--bk-select-hover-neutral-03);
         }
     }
     .bk-select-prefix-icon {
@@ -161,7 +161,7 @@ $disabledColor: #c4c6cc;
            outline: none;
         }
         &.allow-create::-webkit-input-placeholder {
-           color: $fnMinorColor;
+           color: var(--bk-select-neutral-04);
         }
     }
     .bk-tooltip.bk-select-dropdown {
@@ -172,11 +172,11 @@ $disabledColor: #c4c6cc;
     }
 }
 .bk-select-dropdown-content {
-    border: 1px solid $newGreyColor1;
-    border-radius: 2px;
+    border: 1px solid var(--bk-select-neutral-05);
+    border-radius: var(--bk-select-radius-s);
     line-height: 32px;
-    background: #fff;
-    color: $fnMainColor;
+    background: var(--bk-select-neutral-10);
+    color: var(--bk-select-neutral-02);
     overflow: hidden;
 }
 .bk-select-search-wrapper {
@@ -185,7 +185,7 @@ $disabledColor: #c4c6cc;
     .left-icon {
         position: absolute;
         font-size: 16px;
-        color: $newBlackColor3;
+        color: var(--bk-select-neutral-03);
         top: 50%;
         transform: translateY(-50%);
         left: 10px;
@@ -196,12 +196,12 @@ $disabledColor: #c4c6cc;
     height: 32px;
     padding: 0 10px 0 30px;
     border: none;
-    border-bottom: 1px solid $newGreyColor1;
+    border-bottom: 1px solid var(--bk-select-neutral-05);
     font-size: var(--font-size);
     outline: 0;
     cursor: text;
     &::-webkit-input-placeholder {
-      color: $fnMinorColor;
+      color: var(--bk-select-neutral-04);
     }
 }
 .bk-options {
@@ -214,11 +214,11 @@ $disabledColor: #c4c6cc;
     &.bk-options-single {
         .bk-option {
             &.is-selected {
-                background-color: $selectedBackground;
+                background-color: var(--bk-select-selected-neutral-08);
             }
             &:hover,
             &.is-highlight {
-                background-color: $hoverBackground;
+                background-color: var(--bk-select-hover-brand-07);
             }
         }
     }
@@ -226,8 +226,8 @@ $disabledColor: #c4c6cc;
         .bk-option-group-name {
             margin: 0 16px;
             font-size: var(--font-size);
-            border-bottom: 1px solid $newGreyColor1;
-            color: $newBlackColor3;
+            border-bottom: 1px solid var(--bk-select-neutral-05);
+            color: var(--bk-select-neutral-03);
             position: relative;
 
             &.is-collapse {
@@ -269,24 +269,24 @@ $disabledColor: #c4c6cc;
         position: relative;
         cursor: pointer;
         &.is-selected {
-            color: $newMainColor;
-            background-color: $selectedBackground;
+            color: var(--bk-select-selected-brand-02);
+            background-color: var(--bk-select-selected-neutral-08);
         }
         &:hover,
         &.is-highlight {
-            color: $newMainColor;
-            background-color: $hoverBackground;
+            color: var(--bk-select-hover-brand-02);
+            background-color: var(--bk-select-hover-brand-07);
         }
         &.is-disabled {
-            color: #c4c6cc;
+            color: var(--bk-select-disabled-neutral-04);
             cursor: not-allowed;
-            background-color: $disabledBackground;
+            background-color: var(--bk-select-disabled-neutral-10);
         }
         &.is-selected.is-disabled {
-            background-color: $disabledBackground;
-            color: $disabledColor;
+            background-color: var(--bk-select-disabled-selected-neutral-10);
+            color: var(--bk-select-disabled-selected-neutral-04);
             .bk-option-icon {
-                color: $disabledColor;
+                color: var(--bk-select-disabled-selected-neutral-04);
             }
         }
         &:first-child {
@@ -302,7 +302,7 @@ $disabledColor: #c4c6cc;
     .bk-virtual-select .bk-min-nav-slide {
         width: 6px;
         border-radius: 3px;
-        background-color: #dcdee5;
+        background-color: var(--bk-select-neutral-05);
     }
     .bk-option-content {
         position: relative;
@@ -314,7 +314,7 @@ $disabledColor: #c4c6cc;
             position: absolute;
             right: 12px;
             top: 4px;
-            color: $newMainColor;
+            color: var(--bk-select-brand-02);
             font-size: $iconLargerSize;
             font-weight: normal;
             ~ .bk-option-name {
@@ -335,13 +335,13 @@ $disabledColor: #c4c6cc;
 .bk-select-create-hint {
     padding: 0 14px;
     font-size: var(--font-size);
-    background: #F5F7FA;
+    background: var(--bk-select-neutral-08);
     display: flex;
     margin: 4px 0;
     cursor: pointer;
 
     .hint-value {
-        color: $newMainColor;
+        color: var(--bk-select-brand-02);
         margin-left: 4px;
         flex: 1;
         overflow: hidden;
@@ -361,19 +361,19 @@ $disabledColor: #c4c6cc;
     font-size: var(--font-size);
     padding: 0 16px;
     border-radius: 0px 0px 1px 1px;
-    border-top: 1px solid $newGreyColor1;
-    background: $newGreyColor3;
+    border-top: 1px solid var(--bk-select-neutral-05);
+    background: var(--bk-select-neutral-09);
     i {
         font-size: var(--extension-size);
     }
     &:hover {
-        background-color: #f0f1f5;
+        background-color: var(--bk-select-hover-neutral-07);
     }
 }
 
 .tippy-tooltip.bk-select-dropdown-theme[data-size=small] {
     padding: 0;
-    box-shadow: 0 3px 9px 0 rgba(0,0,0,.1);
+    box-shadow: var(--bk-select-shadow);
     .tippy-arrow {
         display: none;
     }
@@ -456,10 +456,10 @@ $disabledColor: #c4c6cc;
     }
     &.is-available {
         .bk-select-tag:hover {
-            background-color: #DCDEE5;
+            background-color: var(--bk-select-hover-neutral-05);
         }
         .icon-close:hover {
-            color: #63656E;
+            color: var(--bk-select-hover-neutral-02);
         }
     }
     &.has-prefix-icon {
@@ -472,14 +472,14 @@ $disabledColor: #c4c6cc;
         margin: 0 6px 0 0;
         padding: 0 2px 0 5px;
         align-items: center;
-        background: #f0f1f5;
-        border-radius: 2px;
+        background: var(--bk-select-neutral-07);
+        border-radius: var(--bk-select-radius-s);
         font-size: var(--font-size);
         .icon-close {
             margin-left: 5px;
             flex: 18px 0 0;
             font-size: 18px;
-            color: #979BA5;
+            color: var(--bk-select-neutral-03);
         }
         &.width-limit-tag {
             @mixin ellipsis 140px, inline-flex;
@@ -497,7 +497,7 @@ $disabledColor: #c4c6cc;
         line-height: 22px;
         font-size: var(--font-size);
         text-align: center;
-        background: #f0f1f5;
+        background: var(--bk-select-neutral-07);
         & ~ .bk-select-tag {
             visibility: hidden;
             pointer-events: none;
@@ -525,6 +525,6 @@ $disabledColor: #c4c6cc;
     border: none;
     outline: none;
     &::-webkit-input-placeholder {
-      color: $fnMinorColor;
+      color: var(--bk-select-neutral-04);
     }
 }

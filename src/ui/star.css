@@ -15,9 +15,9 @@
     float: left;
     margin-right: 3px;
     enable-background: new 0 0 64 64;
-    fill: #c5c7d1;
+    fill: var(--bk-star-neutral-04);
     &.bk-yellow {
-      fill: #ffb848;
+      fill: var(--bk-star-warning-03);
     }
     &.bk-rate-star-is-hover {
       transform: scale(1.2);

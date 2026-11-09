@@ -7,55 +7,55 @@
     position: fixed;
     left: 50%;
     padding: 10px 15px;
-    background: $newMainColor5;
-    border: 1px solid $newMainColor3;
-    border-radius: 2px;
-    box-shadow: 0px 2px 4px 0px rgba(16, 37, 74, 0.1);
+    background: var(--bk-message-brand-07);
+    border: 1px solid var(--bk-message-brand-06);
+    border-radius: var(--bk-message-radius-s);
+    box-shadow: var(--bk-message-shadow);
     z-index: $messageZIndex;
     transform: translateX(-50%);
     transition: top .3s linear;
 }
 .bk-message-primary {
-    background: $newMainColor5;
-    border-color: $newMainColor3;
+    background: var(--bk-message-primary-brand-07);
+    border-color: var(--bk-message-primary-brand-06);
     .bk-message-icon .bk-icon {
-        color: $newMainColor;
+        color: var(--bk-message-primary-brand-02);
     }
     .bk-message-close .icon-close {
-        color: $newMainColor2;
+        color: var(--bk-message-primary-brand-04);
     }
 }
 .bk-message-error {
-    background: $newRedColor5;
-    border-color: $newRedColor3;
-    box-shadow: 0px 2px 4px 0px rgba(86, 34, 34, 0.1);
+    background: var(--bk-message-error-danger-06);
+    border-color: var(--bk-message-error-danger-05);
+    box-shadow: var(--bk-message-error-shadow);
     .bk-message-icon .bk-icon {
-        color: $newRedColor;
+        color: var(--bk-message-error-danger-02);
     }
     .bk-message-close .icon-close {
-        color: $newRedColor2;
+        color: var(--bk-message-error-danger-04);
     }
 }
 .bk-message-warning {
-    background: $newOrangeColor5;
-    border-color: $newOrangeColor3;
-    box-shadow: 0px 2px 4px 0px rgba(75, 51, 13, 0.1);
+    background: var(--bk-message-warning-warning-07);
+    border-color: var(--bk-message-warning-warning-05);
+    box-shadow: var(--bk-message-warning-shadow);
     .bk-message-icon .bk-icon {
-        color: $newOrangeColor;
+        color: var(--bk-message-warning-warning-02);
     }
     .bk-message-close .icon-close {
-        color: $newOrangeColor2;
+        color: var(--bk-message-warning-warning-04);
     }
 }
 .bk-message-success {
-    background: #f2fff4;
-    border-color: $newGreenColor3;
-    box-shadow: 0px 2px 4px 0px rgba(16, 68, 29, 0.1);
+    background: var(--bk-message-success-success-07);
+    border-color: var(--bk-message-success-success-05);
+    box-shadow: var(--bk-message-success-shadow);
     .bk-message-icon .bk-icon {
-        color: $newGreenColor;
+        color: var(--bk-message-success-success-02);
     }
     .bk-message-close .icon-close {
-        color: $newGreenColor2;
+        color: var(--bk-message-success-success-04);
     }
 }
 
@@ -64,7 +64,7 @@
     flex-shrink: 0;
     margin-top: 1px;
     margin-right: 10px;
-    color: #ffffff;
+    color: var(--bk-message-neutral-10);
     .bk-icon {
         display: block;
         width: 18px;
@@ -72,7 +72,7 @@
         line-height: 18px;
         font-size: $iconSmallerSize;
         text-align: center;
-        color: #ffffff;
+        color: var(--bk-message-neutral-10);
         border-radius: 50%;
     }
 }
@@ -86,7 +86,7 @@
     line-height: 20px;
     font-size: 14px;
     text-align: left;
-    color: $newBlackColor2;
+    color: var(--bk-message-neutral-02);
     word-break: break-all;
     &.ellipsis {
         overflow: hidden;
@@ -112,13 +112,13 @@
         width: 20px;
         height: 20px;
         line-height: 20px;
-        color: $newBlackColor3;
+        color: var(--bk-message-neutral-03);
         font-size: 18px;
         font-weight: bold;
         border-radius: 50%;
         cursor: pointer;
         &:hover {
-            background-color: $newGreyColor2;
+            background-color: var(--bk-message-hover-neutral-07);
         }
     }
 }
@@ -126,14 +126,14 @@
 .bk-message-copy {
     font-size: 14px;
     align-self: flex-end;
-    color: $newMainColor;
+    color: var(--bk-message-brand-02);
     cursor: pointer;
     margin-left: 5px;
     line-height: 20px;
 }
 
 .bk-message-copy.copied {
-    color: $newBlackColor3;
+    color: var(--bk-message-neutral-03);
     cursor: default;
 }
 
@@ -191,15 +191,15 @@
 
 
               &:hover {
-                color: #979ba5;
+                color: var(--bk-message-hover-neutral-03);
                 i {
-                   color: #979ba5;
+                   color: var(--bk-message-hover-neutral-03);
                 }
               }
 
               i {
                 margin-left: 0;
-                color: #c4c6cc;
+                color: var(--bk-message-neutral-04);
               }
             }
 
@@ -212,34 +212,34 @@
 
             &:not(.fix) {
               span {
-                color: #3a84ff;
+                color: var(--bk-message-brand-02);
               }
             }
 
             &.fix {
               &.fixed {
                 span {
-                  color: #3a84ff;
+                  color: var(--bk-message-brand-02);
                 }
               }
 
               span {
-                color: #979ba5;
+                color: var(--bk-message-neutral-03);
               }
 
               &:hover {
                 span {
-                  color: #3a84ff;
+                  color: var(--bk-message-hover-brand-02);
                 }
               }
             }
 
             &.close {
               span {
-                color: #c4c6cc;
+                color: var(--bk-message-neutral-04);
 
                 &:hover {
-                  color: #979ba5;
+                  color: var(--bk-message-hover-neutral-03);
                 }
               }
             }
@@ -256,14 +256,14 @@
           min-height: 300px;
           padding: 14px 24px;
           overflow: auto;
-          background: #fff;
-          border-radius: 2px;
+          background: var(--bk-message-neutral-10);
+          border-radius: var(--bk-message-radius-s);
 
           .message-row {
             display: inline-flex;
             font-size: 14px;
             line-height: 34px;
-            color: #313238;
+            color: var(--bk-message-neutral-01);
 
             label {
               display: inline-block;
@@ -271,7 +271,7 @@
               min-width: 94px;
               margin-right: 8px;
               overflow: hidden;
-              color: #63656e;
+              color: var(--bk-message-neutral-02);
               text-align: right;
               text-overflow: ellipsis;
               white-space: nowrap;
@@ -285,9 +285,9 @@
               padding-left: 4px;
 
               &:hover {
-                background: rgba(186, 188, 192, 0.2);
+                background: var(--bk-message-hover-neutral-07);
                 cursor: pointer;
-                border-radius: 2px;
+                border-radius: var(--bk-message-radius-s);
               }
             }
           }
@@ -305,13 +305,13 @@
           border-radius: 0 2px 0 6px;
           cursor: pointer;
           justify-content: center;
-          background: #F5F7FA;
-          color: #9FA3AE;
+          background: var(--bk-message-neutral-08);
+          color: var(--bk-message-neutral-03);
 
           &:hover {
-            background: #F0F5FF;
+            background: var(--bk-message-hover-brand-07);
             span {
-              color: #3a84ff;
+              color: var(--bk-message-hover-brand-02);
 
             }
           }
@@ -327,9 +327,9 @@
             padding: 6px 8px;
             font-size: 12px;
             line-height: 20px;
-            color: #63656e;
-            background: #fff;
-            border: 1px solid #dcdee5;
+            color: var(--bk-message-neutral-02);
+            background: var(--bk-message-neutral-10);
+            border: 1px solid var(--bk-message-neutral-05);
             box-shadow: 0 2px 6px 0 #0000001a;
             align-items: center;
 
@@ -343,8 +343,8 @@
               left: 50%;
               width: 8px;
               height: 8px;
-              background: #fff;
-              border-color: #dcdee5;
+              background: var(--bk-message-neutral-10);
+              border-color: var(--bk-message-neutral-05);
               border-style: solid;
               border-width: 0px 1px 1px 0px;
               content: '';
@@ -357,7 +357,7 @@
           &.success {
             .inner {
               span {
-                color: #2dcb9d;
+                color: var(--bk-message-success-success-02);
               }
             }
           }
@@ -365,7 +365,7 @@
           &.error {
             .inner {
               span {
-                color: #ea3636;
+                color: var(--bk-message-error-danger-02);
               }
             }
           }

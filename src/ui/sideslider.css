@@ -21,7 +21,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        background-color: #fff;
+        background-color: var(--bk-sideslider-neutral-10);
         overflow-y: auto;
         pointer-events: all;
         &.left {
@@ -36,7 +36,7 @@
     &-header {
         width: 100%;
         height: 52px;
-        background: #FFFFFF;
+        background: var(--bk-sideslider-neutral-10);
         &:before,
         &:after {
             content: '';
@@ -51,9 +51,9 @@
         width: 30px;
         height: 52px;
         line-height: 52px;
-        background-color: #3a84ff;
+        background-color: var(--bk-sideslider-brand-02);
         text-align: center;
-        color: #fff;
+        color: var(--bk-sideslider-neutral-10);
         cursor: pointer;
         font-size: $iconLargeSize;
         span {
@@ -64,10 +64,10 @@
     &-title {
         height: 52px;
         line-height: 52px;
-        border-bottom: 1px solid #DCDEE5;
+        border-bottom: 1px solid var(--bk-sideslider-neutral-05);
         font-size: 16px;
         /* font-weight: bold; */
-        color: $newBlackColor1;
+        color: var(--bk-sideslider-neutral-01);
         .title-content {
           overflow: hidden;
           text-overflow: ellipsis;
@@ -81,8 +81,8 @@
         width: 100%;
         height: 48px;
         /* border-top: 1px solid transparent; */
-        border-top: 1px solid #dcdee5;
-        background-color: #fff;
+        border-top: 1px solid var(--bk-sideslider-neutral-05);
+        background-color: var(--bk-sideslider-neutral-10);
         display: flex;
         align-items: center;
     }

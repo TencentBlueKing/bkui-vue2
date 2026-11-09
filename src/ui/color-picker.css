@@ -5,10 +5,10 @@
     display: inline-flex;
     align-content: center;
     height: 32px;
-    border-radius: 2px;
-    border: 1px solid $newGreyColor;
+    border-radius: var(--bk-color-picker-radius-s);
+    border: 1px solid var(--bk-color-picker-neutral-04);
     transition: border .2s, box-shadow .2s;
-    color: $newBlackColor2;
+    color: var(--bk-color-picker-neutral-02);
     cursor: pointer;
     outline: none;
     &.bk-color-picker-show-value {
@@ -45,11 +45,11 @@
         }
     }
     &:hover, &:focus {
-        border-color: $newMainColor;
+        border-color: var(--bk-color-picker-hover-focus-brand-02);
         transition: border .2s;
     }
     &.bk-color-picker-show-dropdown {
-        border-color: $newMainColor;
+        border-color: var(--bk-color-picker-brand-02);
         box-shadow: 0 0 0 2px rgba(45, 140, 240, .2);
         transition: border .2s, box-shadow .2s;
         .icon-angle-down {
@@ -58,14 +58,14 @@
         }
     }
     &.bk-color-picker-disabled {
-        border-color: $newGreyColor1;
-        background-color: $newGreyColor3;
+        border-color: var(--bk-color-picker-disabled-neutral-05);
+        background-color: var(--bk-color-picker-disabled-neutral-09);
         cursor: not-allowed;
         .bk-color-picker-text {
-            color: $newGreyColor;
+            color: var(--bk-color-picker-disabled-neutral-04);
         }
         .bk-color-picker-icon .icon-angle-down {
-            color: $newGreyColor;
+            color: var(--bk-color-picker-disabled-neutral-04);
         }
     }
     .bk-color-picker-color {
@@ -76,7 +76,7 @@
             width: 18px;
             height: 18px;
             font-size: 18px;
-            color: $newGreyColor;
+            color: var(--bk-color-picker-neutral-04);
             box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
         }
     }
@@ -87,7 +87,7 @@
         margin-left: 6px;
         line-height: 20px;
         font-size: 14px;
-        color: $newBlackColor2;
+        color: var(--bk-color-picker-neutral-02);
         span {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -103,7 +103,7 @@
             position: absolute;
             right: 4px;
             font-size: 20px;
-            color: $newBlackColor3;
+            color: var(--bk-color-picker-neutral-03);
             transition: transform .3s;
         }
     }
@@ -146,7 +146,7 @@
             margin-top: 1px;
             border-radius: 1px;
             box-shadow: 0 0 2px rgba(0, 0, 0, .6);
-            background: #fff;
+            background: var(--bk-color-picker-neutral-10);
             cursor: pointer;
             transform: translateX(-2px);
         }
@@ -157,7 +157,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    color: $newBlackColor2;
+    color: var(--bk-color-picker-neutral-02);
     .bk-color-picker-input-hex .bk-color-picker-input-part .bk-color-picker-input-value {
         width: 70px;
     }
@@ -172,18 +172,18 @@
         .bk-color-picker-input-value {
             width: 32px;
             height: 22px;
-            border: 1px solid $newGreyColor;
-            border-radius: 2px;
+            border: 1px solid var(--bk-color-picker-neutral-04);
+            border-radius: var(--bk-color-picker-radius-s);
             padding: 0 4px;
             line-height: 16px;
             transition: border .2s;
             outline: none;
             &:focus {
-                border-color: $newMainColor;
+                border-color: var(--bk-color-picker-focus-brand-02);
                 transition: border .2s;
             }
             &.error {
-                border-color: $newRedColor;
+                border-color: var(--bk-color-picker-error-danger-02);
             }
             &::-webkit-outer-spin-button,
             &::-webkit-inner-spin-button {
@@ -200,7 +200,7 @@
 }
 .bk-color-picker-recommend-container {
     padding: 6px;
-    border-top: 1px solid $newGreyColor2;
+    border-top: 1px solid var(--bk-color-picker-neutral-07);
     .bk-color-picker-recommend {
         display: flex;
         flex-wrap: wrap;
@@ -255,7 +255,7 @@
         width: 2px;
         height: calc(100% - 2px);
         border-radius: 1px;
-        background: #ea3536;
+        background: var(--bk-color-picker-danger-02);
         transform: rotate(45deg);
     }
 }

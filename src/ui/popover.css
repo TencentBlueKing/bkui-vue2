@@ -41,7 +41,7 @@
 }
 
 .tippy-popper[x-placement^=top] .tippy-arrow {
-    border-top: 8px solid #333;
+    border-top: 8px solid var(--bk-popover-neutral-01);
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
     bottom: -7px;
@@ -164,7 +164,7 @@
 }
 
 .tippy-popper[x-placement^=bottom] .tippy-arrow {
-    border-bottom: 8px solid #333;
+    border-bottom: 8px solid var(--bk-popover-neutral-01);
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
     top: -7px;
@@ -287,7 +287,7 @@
 }
 
 .tippy-popper[x-placement^=left] .tippy-arrow {
-    border-left: 8px solid #333;
+    border-left: 8px solid var(--bk-popover-neutral-01);
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     right: -7px;
@@ -396,7 +396,7 @@
 }
 
 .tippy-popper[x-placement^=right] .tippy-arrow {
-    border-right: 8px solid #333;
+    border-right: 8px solid var(--bk-popover-neutral-01);
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     left: -7px;
@@ -488,8 +488,8 @@
 
 .tippy-tooltip {
     position: relative;
-    color: #fff;
-    border-radius: 4px;
+    color: var(--bk-popover-neutral-10);
+    border-radius: var(--bk-popover-radius-m);
     font-size: .9rem;
     padding: .3rem .6rem;
     text-align: left;
@@ -536,13 +536,13 @@
 .tippy-roundarrow {
     width: 18px;
     height: 7px;
-    fill: #333;
+    fill: var(--bk-popover-neutral-01);
     pointer-events: none
 }
 
 .tippy-backdrop {
     position: absolute;
-    background-color: #333;
+    background-color: var(--bk-popover-neutral-01);
     border-radius: 50%;
     width: calc(110% + 2rem);
     left: 50%;
@@ -573,9 +573,9 @@
 
 
 .tippy-tooltip.light-theme {
-    color: #26323d;
-    box-shadow: 0px 0px 6px 0px rgba(220, 222, 229, 1);
-    background-color: #fff;
+    color: var(--bk-popover-neutral-01);
+    box-shadow: 0px 0px 6px 0px var(--bk-popover-neutral-05);
+    background-color: var(--bk-popover-neutral-10);
 }
 .tippy-tooltip.light-theme:before{
     content: '';
@@ -617,11 +617,11 @@
 }
 
 .tippy-tooltip.light-theme .tippy-backdrop {
-    background-color: #fff
+    background-color: var(--bk-popover-neutral-10)
 }
 
 .tippy-tooltip.light-theme .tippy-roundarrow {
-    fill: #fff
+    fill: var(--bk-popover-neutral-10)
 }
 
 .tippy-tooltip.light-theme[data-animatefill] {
@@ -630,10 +630,10 @@
 
 /* light-border-theme */
 .tippy-tooltip.light-border-theme {
-    color: #26323d;
-    box-shadow: 0px 0px 6px 0px rgba(220, 222, 229, 1);
-    background-color: #fff;
-    border: 1px solid #dcdee5;
+    color: var(--bk-popover-neutral-01);
+    box-shadow: 0px 0px 6px 0px var(--bk-popover-neutral-05);
+    background-color: var(--bk-popover-neutral-10);
+    border: 1px solid var(--bk-popover-neutral-05);
 }
 .tippy-tooltip.light-border-theme:before{
     content: '';
@@ -651,7 +651,7 @@
     z-index: -2;
     width: 11px;
     height: 11px;
-    border: 1px solid #dcdee5;
+    border: 1px solid var(--bk-popover-neutral-05);
     box-shadow: inherit;
     background: inherit;
     transform-origin: center center;
@@ -675,11 +675,11 @@
 }
 
 .tippy-tooltip.light-border-theme .tippy-backdrop {
-    background-color: #fff
+    background-color: var(--bk-popover-neutral-10)
 }
 
 .tippy-tooltip.light-border-theme .tippy-roundarrow {
-    fill: #fff
+    fill: var(--bk-popover-neutral-10)
 }
 
 .tippy-tooltip.light-border-theme[data-animatefill] {

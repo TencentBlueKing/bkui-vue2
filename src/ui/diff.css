@@ -19,8 +19,8 @@
       background-color: color(transparent lightness(80%));
     }
     &::-webkit-scrollbar-thumb {
-      border-radius: 2px;
-      background-color: #e6e9ea;
+      border-radius: var(--bk-diff-radius-s);
+      background-color: var(--bk-diff-neutral-06);
     }
   }
   .d2h-files-diff {
@@ -29,7 +29,7 @@
       flex: 1 1 50%;
       &:nth-child(n + 2) {
         .d2h-code-wrapper {
-          border-left: 1px solid #fff;
+          border-left: 1px solid var(--bk-diff-neutral-10);
         }
       }
       .d2h-code-side-linenumber {
@@ -55,13 +55,13 @@
       background-color: color(transparent lightness(80%));
     }
     &::-webkit-scrollbar-thumb {
-      border-radius: 2px;
-      background-color: #e6e9ea;
+      border-radius: var(--bk-diff-radius-s);
+      background-color: var(--bk-diff-neutral-06);
     }
   }
   .hljs-comment,
   .hljs-quote {
-    color: #c4c6cc;
+    color: var(--bk-diff-neutral-04);
     font-style: italic;
   }
   &.dark {

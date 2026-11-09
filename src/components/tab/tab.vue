@@ -320,7 +320,7 @@ export default {
         const diffValue = this.type === 'border-card' ? 2 : 1
         return {
           height: `${this.labelHeight}px`,
-          backgroundImage: `linear-gradient(transparent ${this.labelHeight - diffValue}px, #dcdee5 1px)`
+          backgroundImage: `linear-gradient(transparent ${this.labelHeight - diffValue}px, var(--bk-tab-neutral-05) 1px)`
         }
       }
       return {}
