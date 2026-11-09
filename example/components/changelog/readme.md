@@ -8,6 +8,12 @@
 
 <div class="changelog-wrapper">
 
+### 2.5.10-beta.20 {page=#/changelog}
+
+* **[add]**:
+    - 接入两层颜色和圆角 CSS 变量
+
+
 ### 2.5.10-beta.19 {page=#/changelog}
 
 * **[fix]**:
