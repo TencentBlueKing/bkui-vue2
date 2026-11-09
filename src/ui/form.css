@@ -141,7 +141,7 @@
             z-index: 10;
             right: 8px;
             top: 8px;
-            color: var(--bk-form-danger-02);
+            color: var(--bk-form-danger-danger-02);
             cursor: pointer;
             font-size: 16px;
         }
@@ -210,7 +210,7 @@
                 height: 8px;
                 line-height: 1;
                 content: '*';
-                color: var(--bk-form-danger-02);
+                color: var(--bk-form-danger-danger-02);
                 font-size: 12px;
                 position: absolute;
                 display: inline-block;

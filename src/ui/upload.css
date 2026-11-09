@@ -221,7 +221,7 @@
         .progress-bar {
             height: 2px;
             width: 0%;
-            background: var(--bk-upload-success-02);
+            background: var(--bk-upload-success-success-02);
             border-radius: 1px;
         }
         .uploading {

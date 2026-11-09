@@ -132,7 +132,7 @@
                 }
                 &.done {
                     .bk-icon {
-                        color: var(--bk-process-success-02);
+                        color: var(--bk-process-success-success-02);
                     }
                 }
             }
@@ -170,10 +170,10 @@
             }
         }
         &.status-done {
-            background: var(--bk-process-success-02);
+            background: var(--bk-process-success-success-02);
             color: var(--bk-process-neutral-10);
             &::after {
-                border-color: transparent transparent transparent var(--bk-process-success-02);
+                border-color: transparent transparent transparent var(--bk-process-success-success-02);
             }
             .bk-process-item > .bk-icon {
                 display: inline-block;

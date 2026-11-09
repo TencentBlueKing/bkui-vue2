@@ -37,10 +37,10 @@
      &.control-active {
         /*textarea是在wrapper层实现边框*/
         .bk-textarea-wrapper {
-            border-color: var(--bk-input-brand-02) !important;
-            background-color: var(--bk-input-neutral-10) !important;
+            border-color: var(--bk-input-focus-brand-02) !important;
+            background-color: var(--bk-input-focus-neutral-10) !important;
             &::placeholder {
-                color: var(--bk-input-neutral-04) !important;
+                color: var(--bk-input-focus-neutral-04) !important;
             }
         }
     }

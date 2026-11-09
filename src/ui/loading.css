@@ -53,13 +53,13 @@
         }
 
         .point1 {
-            background-color: var(--bk-loading-danger-03);
+            background-color: var(--bk-loading-danger-danger-03);
             left: 0;
             animation-delay: 0.1s;
         }
 
         .point2 {
-            background-color: var(--bk-loading-warning-03);
+            background-color: var(--bk-loading-warning-warning-03);
             left: 20px;
             animation-delay: 0.25s;
         }
@@ -371,7 +371,7 @@
 
 @keyframes fadeDanger {
     0% {
-        background-color: var(--bk-loading-danger-03);
+        background-color: var(--bk-loading-danger-danger-03);
     }
 
     100% {
@@ -381,7 +381,7 @@
 
 @-webkit-keyframes fadeDanger {
     0% {
-        background-color: var(--bk-loading-danger-03);
+        background-color: var(--bk-loading-danger-danger-03);
     }
 
     100% {
@@ -391,7 +391,7 @@
 
 @keyframes fadeWarning {
     0% {
-        background-color: var(--bk-loading-warning-03);
+        background-color: var(--bk-loading-warning-warning-03);
     }
 
     100% {
@@ -401,7 +401,7 @@
 
 @-webkit-keyframes fadeWarning {
     0% {
-        background-color: var(--bk-loading-warning-03);
+        background-color: var(--bk-loading-warning-warning-03);
     }
 
     100% {
@@ -492,7 +492,7 @@
 
 @keyframes fadeDanger {
     0% {
-        background-color: var(--bk-loading-danger-03);
+        background-color: var(--bk-loading-danger-danger-03);
     }
 
     100% {

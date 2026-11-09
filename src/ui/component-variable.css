@@ -229,7 +229,6 @@
     --bk-fixed-navbar-hover-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-fixed-navbar-neutral-03: var(--bk-color-neutral-03, #979BA5);
     --bk-fixed-navbar-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
-    --bk-form-danger-02: var(--bk-color-danger-02, #EA3636);
     --bk-form-danger-danger-02: var(--bk-color-danger-02, #EA3636);
     --bk-form-danger-danger-03: var(--bk-color-danger-03, #FF5656);
     --bk-form-danger-danger-07: var(--bk-color-danger-07, #FFF4F4);
@@ -250,7 +249,6 @@
     --bk-image-viewer-neutral-04: var(--bk-color-neutral-04, #C4C6CC);
     --bk-image-viewer-neutral-05: var(--bk-color-neutral-05, #DCDEE5);
     --bk-image-viewer-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
-    --bk-input-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-input-disabled-neutral-05: var(--bk-color-neutral-05, #DCDEE5);
     --bk-input-focus-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-input-focus-neutral-04: var(--bk-color-neutral-04, #C4C6CC);
@@ -292,7 +290,6 @@
     --bk-link-warning-warning-03: var(--bk-color-warning-03, #FFB849);
     --bk-loading-brand-02: var(--bk-color-brand-02, #3C96FF);
     --bk-loading-brand-03: var(--bk-color-brand-03, #57A3F1);
-    --bk-loading-danger-03: var(--bk-color-danger-03, #FF5656);
     --bk-loading-danger-danger-03: var(--bk-color-danger-03, #FF5656);
     --bk-loading-neutral-02: var(--bk-color-neutral-02, #39424E);
     --bk-loading-neutral-03: var(--bk-color-neutral-03, #979BA5);
@@ -303,7 +300,6 @@
     --bk-loading-radius-xxl: var(--bk-radius-xxl, 12px);
     --bk-loading-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-loading-warning-02: var(--bk-color-warning-02, #FFB400);
-    --bk-loading-warning-03: var(--bk-color-warning-03, #FFB848);
     --bk-loading-warning-warning-03: var(--bk-color-warning-03, #FFB848);
     --bk-message-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-message-brand-06: var(--bk-color-brand-06, #E1ECFF);
@@ -391,7 +387,6 @@
     --bk-process-neutral-04: var(--bk-color-neutral-04, #C3CDD7);
     --bk-process-neutral-07: var(--bk-color-neutral-07, #F0F1F5);
     --bk-process-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
-    --bk-process-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-process-success-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
     --bk-process-success-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-progress-danger-danger-03: var(--bk-color-danger-03, #FF5656);
@@ -483,7 +478,6 @@
     --bk-slider-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
     --bk-slider-radius-s: var(--bk-radius-s, 2px);
     --bk-spin-brand-02: var(--bk-color-brand-02, #3C96FF);
-    --bk-spin-danger-03: var(--bk-color-danger-03, #FF5656);
     --bk-spin-danger-danger-03: var(--bk-color-danger-03, #FF5656);
     --bk-spin-info-neutral-02: var(--bk-color-neutral-02, #63656E);
     --bk-spin-info-neutral-03: var(--bk-color-neutral-03, #979BA5);
@@ -492,9 +486,7 @@
     --bk-spin-neutral-04: var(--bk-color-neutral-04, #C4C6CC);
     --bk-spin-primary-brand-02: var(--bk-color-brand-02, #3C96FF);
     --bk-spin-radius-xl: var(--bk-radius-xl, 8px);
-    --bk-spin-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-spin-success-success-02: var(--bk-color-success-02, #2DCB56);
-    --bk-spin-warning-03: var(--bk-color-warning-03, #FFB848);
     --bk-spin-warning-warning-03: var(--bk-color-warning-03, #FFB848);
     --bk-star-neutral-04: var(--bk-color-neutral-04, #C5C7D1);
     --bk-star-warning-03: var(--bk-color-warning-03, #FFB848);
@@ -643,7 +635,6 @@
     --bk-upload-neutral-09: var(--bk-color-neutral-09, #FAFBFD);
     --bk-upload-neutral-10: var(--bk-color-neutral-10, #FFFFFF);
     --bk-upload-radius-s: var(--bk-radius-s, 2px);
-    --bk-upload-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-upload-success-success-02: var(--bk-color-success-02, #2DCB56);
     --bk-version-detail-brand-02: var(--bk-color-brand-02, #3A84FF);
     --bk-version-detail-brand-03: var(--bk-color-brand-03, #699DF4);

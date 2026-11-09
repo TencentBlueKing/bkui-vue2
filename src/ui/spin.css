@@ -260,7 +260,7 @@
 
 @keyframes fadeSuccess {
     0% {
-        background-color: var(--bk-spin-success-02);
+        background-color: var(--bk-spin-success-success-02);
     }
 
     100% {
@@ -270,7 +270,7 @@
 
 @keyframes fadeDanger {
     0% {
-        background-color: var(--bk-spin-danger-03);
+        background-color: var(--bk-spin-danger-danger-03);
     }
 
     100% {
@@ -280,7 +280,7 @@
 
 @keyframes fadeWarning {
     0% {
-        background-color: var(--bk-spin-warning-03);
+        background-color: var(--bk-spin-warning-warning-03);
     }
 
     100% {
