@@ -47,7 +47,16 @@ const Info = function (opts = {}) {
     }
   }
 
-  const instance = new InfoBoxConstructor()
+  const userConfirmFn = typeof opts.confirmFn === 'function' ? opts.confirmFn : null
+  const isThenable = val => val && typeof val.then === 'function'
+  const confirmLoading = Boolean(opts.confirmLoading)
+    || (userConfirmFn && userConfirmFn.constructor && userConfirmFn.constructor.name === 'AsyncFunction')
+
+  const instance = new InfoBoxConstructor({
+    propsData: {
+      confirmLoading
+    }
+  })
 
   instance.id = id
   instance.name = 'bk-info-box'
@@ -55,8 +64,7 @@ const Info = function (opts = {}) {
   if (opts.width) {
     instance.width = opts.width
   }
-  // 当 confirmFn 为异步函数时确定按钮自动 loading
-  instance.confirmLoading = Boolean(opts.confirmLoading)
+  instance.confirmLoading = confirmLoading
   // 显示/隐藏
   instance.value = true
   // 标题
@@ -88,20 +96,47 @@ const Info = function (opts = {}) {
     instance.$slots[opts.type ? 'type-header' : 'header'] = opts.header
   }
 
-  instance.confirmFn
-    = opts.confirmFn && typeof opts.confirmFn === 'function'
-      ? async () => {
-        instance.closeIcon = false
-        const res = await opts.confirmFn(instance)
-        instance.closeIcon = opts.closeIcon !== false
-        if (!res && typeof res !== 'undefined') {
-          return
-        }
-        Info.close(id)
+  instance.confirmFn = () => {
+    const startLoading = () => {
+      instance.buttonLoading = true
+      instance.closeIcon = false
+    }
+    const stopLoading = () => {
+      instance.buttonLoading = false
+      instance.closeIcon = opts.closeIcon !== false
+    }
+    const handleResult = (res) => {
+      if (!res && typeof res !== 'undefined') {
+        return res
       }
-      : () => {
-        Info.close(id)
+      Info.close(id)
+      return res
+    }
+
+    if (!userConfirmFn) {
+      Info.close(id)
+      return
+    }
+
+    if (instance.confirmLoading) {
+      startLoading()
+    }
+
+    try {
+      const res = userConfirmFn(instance)
+      if (isThenable(res)) {
+        startLoading()
+        return Promise.resolve(res).then(handleResult).catch((e) => {
+          console.warn(e)
+        }).finally(stopLoading)
       }
+      handleResult(res)
+      stopLoading()
+    } catch (e) {
+      console.warn(e)
+      stopLoading()
+    }
+  }
 
   instance.cancelFn
     = opts.cancelFn && typeof opts.cancelFn === 'function'

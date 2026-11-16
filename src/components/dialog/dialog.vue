@@ -870,37 +870,40 @@ export default {
      */
     okHandler (e) {
       // 防止在loading状态中多次触发
-      if (this.loading) return false
+      if (this.loading || this.buttonLoading) return false
 
       // 先执行confirm，用户可以在confirm里设计loading状态等处理
       this.$emit('confirm')
 
-      // 在下个tick微任务去做后续处理
-      this.$nextTick(async () => {
-        if (this.loading) {
+      if (this.loading) {
+        this.buttonLoading = true
+        return
+      }
+
+      if (typeof this.confirmFn === 'function') { // 用于 info-box
+        if (this.confirmLoading) {
           this.buttonLoading = true
-        } else {
-          if (typeof this.confirmFn === 'function') { // 用于 info-box
-            if (this.confirmLoading) {
-              try {
-                this.buttonLoading = true
-                await this.confirmFn(this)
-              } catch (e) {
-                console.warn(e)
-              } finally {
-                this.buttonLoading = false
-              }
-            } else {
-              this.confirmFn(this)
-            }
-          } else {
-            if (this.autoClose) {
-              this.visible = false
-              this.$emit('input', false)
-            }
-          }
         }
-      })
+        this.$nextTick(async () => {
+          try {
+            const result = this.confirmFn(this)
+            if (result && typeof result.then === 'function') {
+              this.buttonLoading = true
+              await result
+            }
+          } catch (e) {
+            console.warn(e)
+          } finally {
+            this.buttonLoading = false
+          }
+        })
+        return
+      }
+
+      if (this.autoClose) {
+        this.visible = false
+        this.$emit('input', false)
+      }
     }
   }
 }
